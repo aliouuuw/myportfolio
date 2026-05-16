@@ -1,14 +1,16 @@
 ---
-title: "Everest Finance — operational systems"
-titleFr: "Everest Finance — systèmes opérationnels"
-summary: "Placeholder case study: consolidating website, CRM, and customer app into one operational spine."
-summaryFr: "Étude de cas placeholder : consolidation du site, du CRM et de l’app client sur une colonne vertébrale opérationnelle."
+title: "Everest Finance — consolidating three surfaces into one operational system"
+titleFr: "Everest Finance — consolider trois surfaces en un système opérationnel"
+summary: "Solo technical operator consolidating a public website, internal CRM, and customer-facing app into a coherent fintech operational spine."
+summaryFr: "Opérateur technique solo consolidant un site web public, un CRM interne et une application client en une colonne vertébrale opérationnelle fintech."
 role: "Solo technical operator"
 domain: "Fintech operations"
 stack:
   - "TypeScript"
   - "Next.js"
-  - "Internal CRM"
+  - "React Native"
+  - "Node.js"
+  - "PostgreSQL"
 date: "2026-05"
 featured: true
 confidential: true
@@ -16,22 +18,118 @@ confidential: true
 
 ## Context
 
-This file exists to validate the MDX pipeline. Replace with the full eight-section case study from `docs/portfolio-plan.md` §9.
+I joined Everest Finance as the sole technical operator, reporting directly to the CEO. Everest is a Senegalese fintech company serving retail clients in the UEMOA zone. My mandate: take three disconnected digital surfaces — a public website, an internal CRM, and a customer-facing app called Sama Naffa — and turn them into a single coherent operational system.
+
+There is no engineering team. No legacy codebase to inherit. No dedicated DevOps function. The constraint is straightforward: one person, three products, a CEO who needs velocity, and a regulatory environment that does not tolerate sloppiness with financial data.
+
+My prior experience at BankingBook Analytics — building open banking APIs for UEMOA markets — gave me familiarity with the regulatory landscape. My time at ERGOBIT deploying Odoo ERP modules taught me how operational tools fail when they're built in isolation. Both experiences shaped how I approached this engagement.
 
 ## Problem
 
-Operational tools lived in separate surfaces without a single narrative for the business.
+When I arrived, Everest's digital presence was fragmented in a way that created real operational pain:
+
+- The **public website** was a static marketing page with no connection to the product. It couldn't communicate what Everest actually does for its clients.
+- The **internal CRM** was a patchwork of spreadsheets and ad-hoc tools. The team had no single view of customer status, no structured workflow for onboarding, and no audit trail.
+- **Sama Naffa**, the customer-facing app, existed as a concept with partial implementation. Clients had no self-service interface for their accounts.
+
+The deeper problem was not that these surfaces were incomplete — it's that they were evolving independently. Three separate mental models, three separate data assumptions, no shared schema. Every new feature risked creating inconsistency between what the website promised, what the CRM tracked, and what clients actually experienced.
+
+For a fintech handling real money in a regulated market, that kind of drift is not technical debt — it's operational risk.
 
 ## Approach
 
-Consolidate workflows, standardize interfaces, and ship incrementally with tight feedback loops.
+I made a few early architecture decisions that constrain the system in useful ways:
 
-## What shipped (placeholder)
+- **Single TypeScript stack across all surfaces.** The website, the CRM admin interface, and the Sama Naffa web client all run on Next.js. The mobile layer uses React Native. Shared types and validation logic live in a common package.
+- **PostgreSQL as the single source of truth.** One relational database with a schema designed around business entities (accounts, transactions, workflows) rather than UI screens. Each surface reads from and writes to the same data model.
+- **Incremental delivery, surface by surface.** I shipped the public website first (lowest risk, fastest feedback), then the CRM (highest internal leverage), then hardened Sama Naffa. Each phase informed the next.
+- **Convention over configuration.** Rather than building a bespoke framework, I adopted strict conventions: file structure mirrors domain concepts, API routes follow REST semantics, state management uses server components where possible.
+- **AI-native development workflow.** Agent-ready repository structure, architecture decision records for every non-trivial choice, automated linting and type checking as the primary quality gate.
 
-- Public web surface
-- Internal CRM
-- Customer-facing app hardening
+The tradeoff I accepted: this approach is slower at the start. Setting up shared infrastructure for one person feels over-engineered until the second and third surfaces benefit from it. I bet that the compounding returns would justify the upfront investment.
+
+## System diagram
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    Shared Infrastructure                  │
+│  ┌───────────────────────────────────────────────────┐  │
+│  │         PostgreSQL (single source of truth)        │  │
+│  └──────────────┬──────────────────┬─────────────────┘  │
+│                 │                  │                      │
+│  ┌──────────────▼───┐  ┌──────────▼────────┐           │
+│  │   API Layer       │  │  Shared Types &    │           │
+│  │   (Node.js)       │  │  Validation Logic  │           │
+│  └──┬─────┬─────┬───┘  └──────────────────-─┘           │
+│     │     │     │                                        │
+└─────┼─────┼─────┼───────────────────────────────────────┘
+      │     │     │
+┌─────▼──┐ ┌▼─────────┐ ┌──▼──────────────┐
+│ Public  │ │ Internal  │ │  Sama Naffa     │
+│ Website │ │ CRM       │ │  (Web + Mobile) │
+│ Next.js │ │ Next.js   │ │  Next.js + RN   │
+└─────────┘ └───────────┘ └─────────────────┘
+```
+
+The key insight: all three surfaces consume the same API layer and share type definitions. A change to the account data model propagates consistently. The CRM cannot show a field that Sama Naffa doesn't know about.
+
+## What shipped
+
+**Public website (live):**
+- Company presentation with clear product messaging
+- Responsive, performant, SEO-ready
+- Built as the proving ground for the shared component library
+
+**Internal CRM (deployed internally):**
+- Customer management with structured onboarding workflows
+- Transaction tracking and status dashboards
+- Role-based access for the operations team
+- Audit logging for compliance requirements
+
+**Sama Naffa — customer app (in hardening):**
+- Account overview and transaction history
+- Self-service operations for common client actions
+- Push notification infrastructure
+- React Native mobile client sharing business logic with the web version
+
+**Cross-cutting:**
+- Shared TypeScript type definitions across all surfaces
+- CI pipeline with automated type checking and linting
+- Architecture decision records for all non-trivial choices
+- Deployment automation for each surface independently
+
+## Technical depth
+
+The most interesting technical challenge has been managing state consistency across three frontends backed by one database. In a team environment, you'd solve this with dedicated backend engineers owning the API contract. As a solo operator, I needed a different approach.
+
+I settled on a pattern where the database schema is the contract. Shared Zod schemas validate data at the API boundary, and those same schemas generate TypeScript types consumed by all three frontends. When I add a field to the account model, the type system forces me to handle it everywhere. This eliminates an entire class of drift bugs that would otherwise accumulate silently.
+
+The CRM presented a different challenge: operational workflows. A customer onboarding process has states, transitions, and side effects (send an email, flag for review, update a ledger). I implemented this as a lightweight state machine in the API layer rather than encoding workflow logic in the frontend. The CRM UI renders current state and available transitions — it doesn't decide what transitions are valid. This means the same workflow logic could be exposed through Sama Naffa or triggered via API integration without duplicating business rules.
+
+For the mobile layer, the decision to use React Native was pragmatic: it lets me share validation logic and API client code with the web surfaces. I'm not building a consumer app competing on UX polish — I'm building an operational tool where correctness and reliability matter more than animation smoothness.
 
 ## Outcome
 
-In progress. This summary will be updated when the case study is publication-ready.
+As of mid-2026, the system is in a mixed state:
+
+- **Public website:** Live and serving its purpose. It communicates what Everest does and funnels interested parties toward contact.
+- **Internal CRM:** Deployed and in active daily use by the operations team. Onboarding workflows are functioning. The team has visibility they didn't have before.
+- **Sama Naffa:** In hardening phase. Core functionality works, but I'm stress-testing edge cases around transaction flows before wider client rollout.
+
+This is not a finished project. It's a system that's been designed to evolve without accumulating the kind of fragmentation that created the original problem. The architecture supports adding new surfaces (a partner portal, a reporting dashboard) without rethinking the foundation.
+
+The honest assessment: I underestimated the time cost of being the sole operator across all three surfaces simultaneously. Context-switching between "marketing site polish" and "financial transaction correctness" imposes real cognitive overhead. The shared infrastructure investment has paid off — but it didn't eliminate the fundamental challenge of one person holding the entire system in their head.
+
+## Lessons
+
+**What I'd do differently:**
+
+- **Ship the CRM first, not the website.** The website was psychologically easier to ship, but the CRM generated more learning about the real data model. Starting with the CRM would have given me better shared schemas earlier.
+- **Invest in automated testing sooner.** I relied heavily on TypeScript's type system as a correctness guarantee. It catches structural errors but misses behavioral bugs. A proper test suite for the workflow state machine would have saved debugging time.
+- **Document the "why" more aggressively.** Architecture decision records help, but I still find myself re-deriving decisions I made three months ago. The solo operator context makes institutional memory fragile — it's all in one head.
+
+**What worked well:**
+
+- The single-database, shared-types approach has been the right call. Drift between surfaces is the failure mode I was most worried about, and the architecture makes it structurally difficult.
+- Incremental delivery kept stakeholder confidence high. The CEO saw tangible progress at each phase rather than waiting for a big reveal.
+- AI-assisted development workflows meaningfully increased my throughput. Agent-ready repo structure, clear conventions, and automated quality gates let me delegate implementation details while retaining architectural control.
