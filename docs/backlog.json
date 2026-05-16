@@ -54,13 +54,16 @@
           "id": "T004",
           "title": "MDX content pipeline",
           "desc": "Set up MDX processing for content/work/ and content/writing/. Create utility functions to read frontmatter and render MDX. Create the case study template frontmatter structure. Add one placeholder MDX file to validate the pipeline.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T001"],
           "files": [
             "lib/mdx.ts",
-            "content/work/.gitkeep",
+            "content/work/everest-finance.mdx",
             "content/writing/.gitkeep",
-            "components/mdx-components.tsx"
+            "components/mdx-components.tsx",
+            "app/[locale]/work/[slug]/page.tsx",
+            "package.json",
+            "bun.lock"
           ],
           "verify": "bun run build && bun run lint"
         },
