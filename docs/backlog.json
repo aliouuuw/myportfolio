@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-16T23:35:00Z",
+  "updated": "2026-05-16T23:38:00Z",
   "phases": [
     {
       "id": "P0",
@@ -320,7 +320,7 @@
           "id": "T022",
           "title": "B1: ClassificationStamp component",
           "desc": "Create components/classification-stamp.tsx: a dark-fill capsule label (--ink-primary bg, canvas text), mono 9px ALL CAPS, tight letter-spacing. Props: label (string). Never color-coded — always dark. Used on case cards, case reports, about, contact pages. Add aria-label with full text. See design-shape-v3.md §7.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T018"],
           "files": [
             "components/classification-stamp.tsx"
