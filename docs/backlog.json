@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-16T23:38:00Z",
+  "updated": "2026-05-16T23:40:00Z",
   "phases": [
     {
       "id": "P0",
@@ -331,7 +331,7 @@
           "id": "T023",
           "title": "B2: CaseFileCard component",
           "desc": "Create components/case-file-card.tsx using MetalPanel (interactive prop for specular). Card contains: file reference number (CF-001, etc.) mono top-left, ClassificationStamp, serif title, one-line domain + date in mono, one-sentence summary, status chip (ACTIVE/SHIPPED/ARCHIVED — accent/muted/tertiary color). Entire card is an <article> wrapping a Next.js Link. Magnetic lift animation on hover (translateY -2px + shadow, 400ms ease-out-expo). 44px min touch target.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T017", "T022"],
           "files": [
             "components/case-file-card.tsx",
