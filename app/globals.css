@@ -1,26 +1,229 @@
 @import "tailwindcss";
 
+/**
+ * Design System — Premium Fintech Aesthetic (Revolut/Secfi/Letter.co blend)
+ *
+ * Base: Letter/Secfi calmness (warm white, serious typography, lots of air)
+ * Accents: Revolut metallic precision (hairline borders, metallic cards)
+ * Typography: Inter (UI/sans), Lora (serif/long-form), Tabular figures everywhere
+ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Base backgrounds — warm white, lots of air */
+  --color-canvas: #FCFBF9;
+  --color-canvas-elevated: #F8F7F5;
+  --color-canvas-subtle: #F0EFEA;
+
+  /* Text colors — near-black ink */
+  --color-ink-primary: #0A0D12;
+  --color-ink-secondary: #464C54;
+  --color-ink-tertiary: #828994; /* Brushed-steel cool gray */
+  --color-ink-muted: #C2C6CC;
+
+  /* Accent — deep ink-blue */
+  --color-accent: #1A2230;
+  --color-accent-hover: #0A0D12;
+  --color-accent-subtle: rgba(26, 34, 48, 0.08);
+
+  /* Borders — hairline precision, NO SHADOWS (except the physical card) */
+  --color-border: rgba(10, 13, 18, 0.08);
+  --color-border-strong: rgba(10, 13, 18, 0.16);
+
+  /* System */
+  --color-success: #166534;
+  --color-error: #991b1b;
+  --color-warning: #92400e;
+
+  /* Typography scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+
+  /* Line heights */
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75; /* Increased for more air */
+  --leading-loose: 2;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-canvas: var(--color-canvas);
+  --color-canvas-elevated: var(--color-canvas-elevated);
+  --color-canvas-subtle: var(--color-canvas-subtle);
+
+  --color-ink-primary: var(--color-ink-primary);
+  --color-ink-secondary: var(--color-ink-secondary);
+  --color-ink-tertiary: var(--color-ink-tertiary);
+  --color-ink-muted: var(--color-ink-muted);
+
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-accent-subtle: var(--color-accent-subtle);
+
+  --color-border: var(--color-border);
+  --color-border-strong: var(--color-border-strong);
+
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
 }
 
+/* Dark mode — deep cool black */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --color-canvas: #0A0D12;
+    --color-canvas-elevated: #11161D;
+    --color-canvas-subtle: #05070A;
+
+    --color-ink-primary: #F8F7F5;
+    --color-ink-secondary: #A1A7B0;
+    --color-ink-tertiary: #6E7580;
+    --color-ink-muted: #3D444D;
+
+    --color-accent: #828994; /* Brushed steel */
+    --color-accent-hover: #B0B5BD;
+    --color-accent-subtle: rgba(130, 137, 148, 0.12);
+
+    --color-border: rgba(255, 255, 255, 0.08);
+    --color-border-strong: rgba(255, 255, 255, 0.16);
   }
 }
 
+/* Base styles */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-canvas);
+  color: var(--color-ink-primary);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  font-variant-numeric: tabular-nums; /* Tabular figures everywhere */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography utilities */
+.font-serif {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+.font-sans {
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Editorial typography for long-form content */
+.prose-editorial {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--color-ink-secondary);
+}
+
+.prose-editorial p + p {
+  margin-top: 1.5rem;
+}
+
+/* Signature Metallic Card - Dark Revolut Metal style */
+.card-metallic {
+  background: linear-gradient(145deg, #1A2230 0%, #0A0D12 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.6s ease;
+  box-shadow: 0 4px 24px -8px rgba(10, 13, 18, 0.1);
+  color: #F8F7F5; /* Force light text on dark card */
+}
+
+/* Metallic grain */
+.card-metallic::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Subtle sheen sweep on hover */
+.card-metallic::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.12) 45%,
+    rgba(255, 255, 255, 0.12) 55%,
+    transparent 80%
+  );
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 0.4s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card-metallic:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px -8px rgba(10, 13, 18, 0.3);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.card-metallic:hover::before {
+  opacity: 1;
+  transform: translateX(100%);
+}
+
+.card-metallic > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Card specific typography overrides to ensure legibility on dark background */
+.card-metallic .card-category {
+  color: #828994; /* Brushed steel */
+}
+.card-metallic .card-title {
+  color: #F8F7F5;
+}
+.card-metallic .card-desc {
+  color: #A1A7B0;
+}
+
+/* Hairline divider */
+.hairline {
+  height: 1px;
+  background: var(--color-border);
+  width: 100%;
+}
+
+.hairline-strong {
+  height: 1px;
+  background: var(--color-border-strong);
+  width: 100%;
+}
+
+/* Focus states */
+:focus-visible {
+  outline: 1px solid var(--color-ink-primary);
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-ink-muted);
+  color: var(--color-ink-primary);
 }

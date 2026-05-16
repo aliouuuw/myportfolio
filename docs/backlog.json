@@ -26,7 +26,7 @@
           "id": "T002",
           "title": "Design system — typography, colors, Tailwind config",
           "desc": "Define the premium fintech color palette (warm off-white, deep ink, metallic accent) and typography scale in Tailwind/CSS. Set up font imports (one sans for UI, one serif for long-form). Establish CSS custom properties for the theme.",
-          "status": "pending",
+          "status": "done",
           "deps": [],
           "files": [
             "app/globals.css",

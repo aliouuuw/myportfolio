@@ -4,13 +4,59 @@
     "description": "Portfolio — systèmes logiciels opérationnels pour la fintech et les entreprises à forte charge opérationnelle."
   },
   "HomePage": {
-    "headline": "Pour commencer, modifiez page.tsx.",
-    "introLead": "Vous cherchez un point de départ ou plus d’instructions ? Consultez les",
-    "introTemplates": "modèles",
-    "introOr": "ou le",
-    "introLearning": "centre",
-    "introTrail": "d’apprentissage.",
-    "deployCta": "Déployer",
-    "docsCta": "Documentation"
+    "hero": {
+      "greeting": "Aliou Wade",
+      "role": "Ingénieur Systèmes Produit",
+      "tagline": "Je conçois des systèmes logiciels opérationnels pour la fintech et les entreprises à forte charge opérationnelle.",
+      "description": "Actuellement responsable technique chez Everest Finance, où je consolide sites web, CRM et applications clients en systèmes cohérents.",
+      "ctaWork": "Voir les études de cas",
+      "ctaContact": "Me contacter"
+    },
+    "caseStudies": {
+      "title": "Travaux sélectionnés",
+      "subtitle": "Trois études de cas phares de ma phase actuelle.",
+      "everest": {
+        "title": "Everest Finance",
+        "category": "Opérations Fintech",
+        "description": "Consolidation du site web, du CRM interne et de l'application Sama Naffa en un système opérationnel unifié."
+      },
+      "odooToolkit": {
+        "title": "Odoo Testing Toolkit",
+        "category": "Open Source",
+        "description": "Kit de tests d'acceptation pour les migrations Odoo 18 avec Robot Framework et Playwright."
+      },
+      "eduplan": {
+        "title": "EduPlan",
+        "category": "Systèmes Éducatifs",
+        "description": "Logiciel de gestion scolaire construit à partir des leçons d'un déploiement CMS léger."
+      }
+    },
+    "howIWork": {
+      "title": "Comment je travaille",
+      "items": [
+        {
+          "title": "Focus opérationnel",
+          "description": "Je me spécialise dans les outils internes, les systèmes d'administration et l'automatisation des workflows — le logiciel qui fait tourner les entreprises."
+        },
+        {
+          "title": "Workflows IA-natifs",
+          "description": "Je conçois des dépôts agent-ready et j'utilise l'ingénierie assistée par IA pour avancer plus vite sans sacrifier la qualité."
+        },
+        {
+          "title": "Contexte ouest-africain",
+          "description": "Basé à Dakar, je construis des systèmes adaptés aux réalités opérationnelles — multilingues, parfois hors ligne, et critiques pour le business."
+        }
+      ]
+    },
+    "writing": {
+      "title": "Derniers écrits",
+      "subtitle": "Notes techniques sur le logiciel opérationnel, l'ingénierie IA-native et la pensée systémique.",
+      "cta": "Lire tous les essais"
+    },
+    "contact": {
+      "title": "Construisons ensemble",
+      "description": "Je suis actuellement concentré sur la consolidation des systèmes chez Everest Finance, mais je suis ouvert aux conversations stratégiques sur le logiciel opérationnel.",
+      "cta": "Démarrer une conversation"
+    }
   }
 }
