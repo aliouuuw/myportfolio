@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-16",
+  "updated": "2026-05-16T19:53:00Z",
   "phases": [
     {
       "id": "P0",
@@ -92,11 +92,13 @@
           "id": "T006",
           "title": "Case study page template — /work and /work/[slug]",
           "desc": "Create the /work listing page and /work/[slug] dynamic route that renders MDX case studies. Follow the 8-section case study template from portfolio-plan.md §9.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T004", "T005"],
           "files": [
             "app/[locale]/work/page.tsx",
-            "app/[locale]/work/[slug]/page.tsx"
+            "app/[locale]/work/[slug]/page.tsx",
+            "messages/en.json",
+            "messages/fr.json"
           ],
           "verify": "bun run build && bun run lint"
         },
