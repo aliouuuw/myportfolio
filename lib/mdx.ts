@@ -13,6 +13,9 @@ const ROOT = process.cwd();
 export const WORK_CONTENT_DIR = path.join(ROOT, "content", "work");
 export const WRITING_CONTENT_DIR = path.join(ROOT, "content", "writing");
 
+/** Supported locales */
+export const DEFAULT_LOCALE = "en";
+
 /** Case study frontmatter — portfolio-plan.md §9 */
 export type CaseStudyFrontmatter = {
   title: string;
@@ -92,6 +95,94 @@ export function parseEssayFrontmatter(raw: unknown): EssayFrontmatter {
   };
 }
 
+/** Get the localized file path for a work case study */
+export function getLocalizedWorkPath(slug: string, locale: string): string {
+  // Try new structure: content/work/{slug}/{locale}.mdx
+  return path.join(WORK_CONTENT_DIR, slug, `${locale}.mdx`);
+}
+
+/** Get the localized file path for a writing essay */
+export function getLocalizedWritingPath(slug: string, locale: string): string {
+  // Try new structure: content/writing/{slug}/{locale}.mdx
+  return path.join(WRITING_CONTENT_DIR, slug, `${locale}.mdx`);
+}
+
+/** Get the legacy file path (for backwards compatibility) */
+export function getLegacyWorkPath(slug: string): string {
+  return path.join(WORK_CONTENT_DIR, `${slug}.mdx`);
+}
+
+export function getLegacyWritingPath(slug: string): string {
+  return path.join(WRITING_CONTENT_DIR, `${slug}.mdx`);
+}
+
+/** Check if a file exists */
+async function fileExists(filePath: string): Promise<boolean> {
+  try {
+    await fs.access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/** List all work slugs from the new directory structure */
+async function listWorkSlugsFromDirs(): Promise<string[]> {
+  try {
+    const entries = await fs.readdir(WORK_CONTENT_DIR, { withFileTypes: true });
+    const slugs: string[] = [];
+
+    for (const entry of entries) {
+      if (entry.isDirectory()) {
+        // Check if it has at least one .mdx file
+        const subDir = path.join(WORK_CONTENT_DIR, entry.name);
+        try {
+          const files = await fs.readdir(subDir);
+          if (files.some((f) => f.endsWith(".mdx"))) {
+            slugs.push(entry.name);
+          }
+        } catch {
+          // Ignore errors for individual directories
+        }
+      }
+    }
+
+    return slugs;
+  } catch {
+    return [];
+  }
+}
+
+/** List all writing slugs from the new directory structure */
+async function listWritingSlugsFromDirs(): Promise<string[]> {
+  try {
+    const entries = await fs.readdir(WRITING_CONTENT_DIR, {
+      withFileTypes: true,
+    });
+    const slugs: string[] = [];
+
+    for (const entry of entries) {
+      if (entry.isDirectory()) {
+        // Check if it has at least one .mdx file
+        const subDir = path.join(WRITING_CONTENT_DIR, entry.name);
+        try {
+          const files = await fs.readdir(subDir);
+          if (files.some((f) => f.endsWith(".mdx"))) {
+            slugs.push(entry.name);
+          }
+        } catch {
+          // Ignore errors for individual directories
+        }
+      }
+    }
+
+    return slugs;
+  } catch {
+    return [];
+  }
+}
+
+/** List slugs from legacy flat structure */
 async function listMdxSlugs(dir: string): Promise<string[]> {
   let entries;
   try {
@@ -104,21 +195,97 @@ async function listMdxSlugs(dir: string): Promise<string[]> {
     .map((e) => e.name.replace(/\.mdx$/, ""));
 }
 
+/** Get all work slugs (combines new directory structure and legacy) */
 export async function getWorkSlugs(): Promise<string[]> {
-  return listMdxSlugs(WORK_CONTENT_DIR);
+  const dirSlugs = await listWorkSlugsFromDirs();
+  const legacySlugs = await listMdxSlugs(WORK_CONTENT_DIR);
+
+  // Combine and deduplicate
+  const allSlugs = new Set([...dirSlugs, ...legacySlugs]);
+  return Array.from(allSlugs).sort();
 }
 
+/** Get all writing slugs (combines new directory structure and legacy) */
 export async function getWritingSlugs(): Promise<string[]> {
-  return listMdxSlugs(WRITING_CONTENT_DIR);
+  const dirSlugs = await listWritingSlugsFromDirs();
+  const legacySlugs = await listMdxSlugs(WRITING_CONTENT_DIR);
+
+  // Combine and deduplicate
+  const allSlugs = new Set([...dirSlugs, ...legacySlugs]);
+  return Array.from(allSlugs).sort();
+}
+
+/** Resolve work file path with fallback to legacy structure */
+async function resolveWorkFilePath(
+  slug: string,
+  locale: string,
+): Promise<string> {
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) {
+    throw new Error(`Invalid slug: ${slug}`);
+  }
+
+  // Try new structure first: content/work/{slug}/{locale}.mdx
+  const localizedPath = getLocalizedWorkPath(slug, locale);
+  if (await fileExists(localizedPath)) {
+    return localizedPath;
+  }
+
+  // Fall back to default locale if requested locale doesn't exist
+  if (locale !== DEFAULT_LOCALE) {
+    const defaultPath = getLocalizedWorkPath(slug, DEFAULT_LOCALE);
+    if (await fileExists(defaultPath)) {
+      return defaultPath;
+    }
+  }
+
+  // Fall back to legacy structure: content/work/{slug}.mdx
+  const legacyPath = getLegacyWorkPath(slug);
+  if (await fileExists(legacyPath)) {
+    return legacyPath;
+  }
+
+  // Return the localized path even if it doesn't exist, so we get a proper error
+  return localizedPath;
+}
+
+/** Resolve writing file path with fallback to legacy structure */
+async function resolveWritingFilePath(
+  slug: string,
+  locale: string,
+): Promise<string> {
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) {
+    throw new Error(`Invalid slug: ${slug}`);
+  }
+
+  // Try new structure first: content/writing/{slug}/{locale}.mdx
+  const localizedPath = getLocalizedWritingPath(slug, locale);
+  if (await fileExists(localizedPath)) {
+    return localizedPath;
+  }
+
+  // Fall back to default locale if requested locale doesn't exist
+  if (locale !== DEFAULT_LOCALE) {
+    const defaultPath = getLocalizedWritingPath(slug, DEFAULT_LOCALE);
+    if (await fileExists(defaultPath)) {
+      return defaultPath;
+    }
+  }
+
+  // Fall back to legacy structure: content/writing/{slug}.mdx
+  const legacyPath = getLegacyWritingPath(slug);
+  if (await fileExists(legacyPath)) {
+    return legacyPath;
+  }
+
+  // Return the localized path even if it doesn't exist, so we get a proper error
+  return localizedPath;
 }
 
 export async function readWorkFrontmatter(
   slug: string,
+  locale: string = DEFAULT_LOCALE,
 ): Promise<CaseStudyFrontmatter> {
-  if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) {
-    throw new Error(`Invalid slug: ${slug}`);
-  }
-  const filePath = path.join(WORK_CONTENT_DIR, `${slug}.mdx`);
+  const filePath = await resolveWorkFilePath(slug, locale);
   const raw = await fs.readFile(filePath, "utf8");
   const { data } = matter(raw);
   return parseCaseStudyFrontmatter(data);
@@ -126,11 +293,9 @@ export async function readWorkFrontmatter(
 
 export async function readWritingFrontmatter(
   slug: string,
+  locale: string = DEFAULT_LOCALE,
 ): Promise<EssayFrontmatter> {
-  if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) {
-    throw new Error(`Invalid slug: ${slug}`);
-  }
-  const filePath = path.join(WRITING_CONTENT_DIR, `${slug}.mdx`);
+  const filePath = await resolveWritingFilePath(slug, locale);
   const raw = await fs.readFile(filePath, "utf8");
   const { data } = matter(raw);
   return parseEssayFrontmatter(data);
@@ -155,24 +320,24 @@ async function compileMdxFile<T>(
   return { content, frontmatter };
 }
 
-export async function compileWorkBySlug(slug: string): Promise<{
+export async function compileWorkBySlug(
+  slug: string,
+  locale: string = DEFAULT_LOCALE,
+): Promise<{
   content: ReactElement;
   frontmatter: CaseStudyFrontmatter;
 }> {
-  if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) {
-    throw new Error(`Invalid slug: ${slug}`);
-  }
-  const filePath = path.join(WORK_CONTENT_DIR, `${slug}.mdx`);
+  const filePath = await resolveWorkFilePath(slug, locale);
   return compileMdxFile(filePath, parseCaseStudyFrontmatter);
 }
 
-export async function compileWritingBySlug(slug: string): Promise<{
+export async function compileWritingBySlug(
+  slug: string,
+  locale: string = DEFAULT_LOCALE,
+): Promise<{
   content: ReactElement;
   frontmatter: EssayFrontmatter;
 }> {
-  if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) {
-    throw new Error(`Invalid slug: ${slug}`);
-  }
-  const filePath = path.join(WRITING_CONTENT_DIR, `${slug}.mdx`);
+  const filePath = await resolveWritingFilePath(slug, locale);
   return compileMdxFile(filePath, parseEssayFrontmatter);
 }

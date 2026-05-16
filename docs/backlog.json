@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-16T20:00:00Z",
+  "updated": "2026-05-16T20:15:00Z",
   "phases": [
     {
       "id": "P0",
@@ -158,6 +158,61 @@
             "app/robots.ts",
             "app/[locale]/layout.tsx",
             "app/opengraph-image.tsx"
+          ],
+          "verify": "bun run build && bun run lint"
+        }
+      ]
+    },
+    {
+      "id": "P3",
+      "title": "Review fixes & real content",
+      "tasks": [
+        {
+          "id": "T011",
+          "title": "Review fixes — honeypot, i18n validation, real contact info",
+          "desc": "Fix review blockers: contact form honeypot spam protection, i18n validation error messages, real contact info from translations, about hero text moved to i18n.",
+          "status": "done",
+          "deps": ["T009", "T008"],
+          "files": [
+            "components/contact-form.tsx",
+            "app/api/contact/route.ts",
+            "app/[locale]/contact/page.tsx",
+            "app/[locale]/about/page.tsx",
+            "messages/en.json",
+            "messages/fr.json"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T012",
+          "title": "Everest Finance — real case study content",
+          "desc": "Replace placeholder everest-finance.mdx with the full 8-section case study (Context, Problem, Approach, System diagram, What shipped, Technical depth, Outcome, Lessons). 1200–2500 words, bilingual frontmatter, confidential/anonymized where needed.",
+          "status": "done",
+          "deps": ["T006"],
+          "files": [
+            "content/work/everest-finance.mdx"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T013",
+          "title": "Odoo Testing Toolkit — case study content",
+          "desc": "Create content/work/odoo-testing-toolkit.mdx with the full 8-section case study. 600–900 words (supporting case). Bilingual frontmatter.",
+          "status": "done",
+          "deps": ["T006"],
+          "files": [
+            "content/work/odoo-testing-toolkit.mdx"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T014",
+          "title": "First essay — content/writing",
+          "desc": "Write one technical essay for content/writing/. Topic: operational software, AI-native workflows, or systems thinking. 800–1500 words. Bilingual frontmatter.",
+          "status": "done",
+          "deps": ["T007"],
+          "files": [
+            "content/writing/"
           ],
           "verify": "bun run build && bun run lint"
         }

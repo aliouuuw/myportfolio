@@ -1,4 +1,8 @@
 {
+  "common": {
+    "close": "Close",
+    "menu": "Menu"
+  },
   "Metadata": {
     "title": "Aliou Wade",
     "description": "Portfolio — operational software systems for fintech and operations-heavy businesses."
@@ -131,6 +135,11 @@
       "emailRequired": "A valid email is required.",
       "messageRequired": "Message is required."
     }
+  },
+  "NotFoundPage": {
+    "title": "Page not found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "backToHome": "← Back to home"
   },
   "Footer": {
     "tagline": "Product systems engineering for fintech and operations-heavy teams.",

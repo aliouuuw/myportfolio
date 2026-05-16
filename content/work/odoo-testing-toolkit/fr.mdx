@@ -1,0 +1,96 @@
+---
+title: "Odoo 18 Acceptance Testing Toolkit — bringing test discipline to ERP migrations"
+titleFr: "Toolkit de tests d'acceptance Odoo 18 — apporter la discipline de test aux migrations ERP"
+summary: "A Robot Framework + Playwright starter kit for structured acceptance testing of Odoo 18 migrations, built during production ERP work at ERGOBIT."
+summaryFr: "Un starter kit Robot Framework + Playwright pour les tests d'acceptance structurés des migrations Odoo 18, construit pendant un travail ERP en production chez ERGOBIT."
+role: "Software engineer"
+domain: "ERP / QA"
+stack:
+  - "Robot Framework"
+  - "Playwright"
+  - "Python"
+  - "Odoo 18"
+  - "Azure DevOps"
+date: "2024-07"
+featured: true
+confidential: false
+---
+
+## Contexte
+
+J'ai rejoint ERGOBIT à Dakar comme ingénieur logiciel. ERGOBIT est un intégrateur Odoo desservant des clients sénégalais dans la fiscalité, les ressources humaines et la comptabilité — le type de domaines opérationnels où une mauvaise configuration ERP a des conséquences financières immédiates.
+
+Mon travail se divisait en deux pistes : construire des modules ERP et BI personnalisés pour les clients, et gérer les migrations Odoo 18. Le travail de module était substantiel — une automatisation comptable pour Africa GreenTec qui a éliminé environ 80% de la saisie manuelle et traitait plus de 10 000 enregistrements quotidiennement. Mais c'est le travail de migration qui a exposé une lacune que je ne pouvais pas ignorer.
+
+## Problème
+
+Les migrations Odoo sont des événements à haut risque et faible confiance. Vous déplacez une opération commerciale entière — facturation, paie, inventaire, workflows RH — d'une version majeure à une autre. Les modules cassent. Les champs personnalisés disparaissent. Les automatisations de workflow cessent de se déclencher. Et l'approche standard pour valider tout cela est manuelle : un consultant fonctionnel clique à travers les écrans, vérifie visuellement les données, et déclare que c'est bon.
+
+Cela fonctionne jusqu'à ce que ça ne fonctionne plus. Les régressions passent parce que personne ne se souvient de vérifier le cas limite dans le workflow de bon de commande. Un rapport personnalisé qui fonctionnait dans Odoo 16 retourne silencieusement de mauvais chiffres dans Odoo 18. Le temps que quelqu'un s'en aperçoive, le client a opéré sur de mauvaises données.
+
+Le problème plus profond est culturel. Les intégrateurs ERP ne sont pas des ateliers logiciels — la discipline de test ne fait pas partie du workflow. Il n'y a pas de pipeline CI, pas de suite de régression, pas de façon structurée de dire "cette migration est validée selon ces critères." Chaque migration est un nouvel acte de foi.
+
+## Approche
+
+J'ai construit un starter kit conçu pour rendre le testing d'acceptance structuré le chemin de moindre résistance pour les migrations Odoo. Les décisions d'architecture étaient délibérées :
+
+- **Robot Framework pour les tests keyword-driven.** L'abstraction keyword de Robot Framework permet aux consultants fonctionnels de lire et éventuellement contribuer aux définitions de tests sans écrire de Python. Un cas de test se lit comme une checklist : "Naviguer vers Commande Client, Créer Nouvelle Commande, Vérifier Calcul Total." C'était non-négociable — le toolkit devait être accessible au-delà de l'équipe d'ingénierie.
+- **Playwright pour l'automatisation du navigateur.** Le client web Odoo est une application single-page complexe. Playwright gère le rendu dynamique, l'attente et la gestion d'état avec lesquels des outils plus simples luttent. Il nous donne aussi une couverture multi-navigateurs sans infrastructure supplémentaire.
+- **Séparation smoke vs. validation complète.** Les suites smoke tournent en moins de deux minutes et attrapent les défaillances catastrophiques — peut-on se connecter, les modules core se chargent-ils, les items de menu existent-ils. Les suites de validation complète exercent les workflows métier end-to-end. Cette séparation permet aux équipes de lancer des tests smoke à chaque déploiement et de réserver la validation complète pour les jalons.
+- **Documentation de guidelines de sélecteurs.** La structure DOM d'Odoo n'est pas stable d'une version à l'autre. J'ai écrit des guidelines pour l'équipe sur comment construire des sélecteurs résilients — préférer les attributs de données et les rôles ARIA plutôt que les classes CSS, éviter le XPath attaché à la profondeur DOM. C'est de la stratégie de maintenance déguisée en documentation.
+
+## Diagramme du système
+
+```
+┌──────────────────────────────────────────────┐
+│           Pipeline CI Azure DevOps           │
+│  ┌────────────────────────────────────────┐  │
+│  │        Robot Framework Runner          │  │
+│  │  ┌──────────┐  ┌───────────────────┐  │  │
+│  │  │  Smoke   │  │  Validation       │  │  │
+│  │  │ (9 min)  │  │    Complète       │  │  │
+│  │  │          │  │    (39 tests)     │  │  │
+│  │  └────┬─────┘  └────────┬──────────┘  │  │
+│  │       └────────┬────────┘             │  │
+│  │                ▼                      │  │
+│  │         Navigateur Playwright         │  │
+│  └────────────────┬───────────────────-──┘  │
+│                   ▼                          │
+│          Instance Odoo 18                    │
+└──────────────────────────────────────────────┘
+```
+
+## Ce qui a été livré
+
+- **39 tests dans 9 suites** couvrant les modules Odoo core — ventes, achats, facturation, inventaire, RH et workflows comptables
+- **Suite de tests smoke** pour la validation rapide post-déploiement
+- **Document de guidelines de sélecteurs** établissant les conventions d'équipe pour des sélecteurs navigateur maintenables
+- **Pipeline CI/CD sur Azure DevOps** qui lance la suite complète sur les branches de migration, réduisant les interventions de validation manuelle d'environ 80%
+- Le toolkit a été utilisé en production pour un engagement de migration Odoo 18
+
+## Profondeur technique
+
+L'architecture keyword de Robot Framework était la bonne couche d'abstraction pour ce problème. Chaque fichier de test se lit comme un scénario d'acceptance structuré écrit en langage quasi-naturel, mais en dessous, les keywords se résolvent en librairies Python qui pilotent Playwright. J'ai organisé les keywords en trois couches : keywords métier ("Créer Commande Client"), keywords de navigation ("Naviguer vers Module"), et keywords d'assertion ("Vérifier Valeur Champ"). Ce layering signifie qu'un changement à l'interface Odoo nécessite de mettre à jour les keywords de navigation, pas de réécrire chaque test.
+
+La stratégie de sélecteurs mérite sa propre note. Odoo rend son interface à travers un framework OWL avec des noms de classes générés dynamiquement. Les sélecteurs construits sur les noms de classes cassent d'une version à l'autre — exactement le scénario contre lequel vous essayez de tester. J'ai établi une convention d'utilisation des attributs `data-field`, `name` et des rôles ARIA comme sélecteurs primaires, avec les sélecteurs de classes CSS uniquement comme fallbacks avec des commentaires explicites les marquant comme fragiles. Le document de guidelines de sélecteurs est devenu l'un des artefacts les plus référencés de l'équipe.
+
+## Résultat
+
+Le toolkit a été utilisé dans une migration Odoo 18 en production chez ERGOBIT. Il a attrapé des régressions que la validation manuelle aurait manquées — spécifiquement autour des champs calculés dans les modules comptables qui retournaient un comportement d'arrondi différent dans la nouvelle version.
+
+Le pipeline CI a transformé le workflow de déploiement. Avant le toolkit, un cycle de validation de migration prenait une journée entière de clics manuels. Avec la suite automatisée, l'équipe obtient un signal pass/fail en moins de quinze minutes et peut concentrer l'attention manuelle sur les échecs qui comptent.
+
+Je maintiens une relation forte avec le leadership d'ERGOBIT. Le toolkit est un candidat pour l'extraction et l'open-sourcing avec leur permission — il résout un problème que chaque intégrateur Odoo affronte mais que peu adressent systématiquement.
+
+## Leçons
+
+**Ce que je referais différemment :**
+
+- **Commencer avec les critères d'acceptance avant d'écrire du code de test.** J'ai commencé par automatiser les workflows évidents et ai rempli les critères après. Commencer avec une matrice d'acceptance formelle — signée par les consultants fonctionnels — aurait produit une meilleure couverture et une adhésion plus rapide.
+- **Impliquer les consultants fonctionnels dès le premier jour.** L'approche keyword-driven était conçue pour leur participation, mais j'ai construit la première version seul et l'ai présentée. Co-créer les suites initiales aurait fait remonter des cas limites de domaine que j'ai manqués et aurait construit l'appropriation plus tôt.
+
+**Ce qui a bien fonctionné :**
+
+- L'abstraction keyword de Robot Framework a véritablement baissé la barrière pour les non-ingénieurs de comprendre ce que les tests font. Cela compte plus que les chiffres de couverture de test quand vous essayez de changer la relation d'une équipe avec le testing.
+- La séparation smoke/validation complète a donné à l'équipe un point d'entrée à faible friction. Lancer une suite smoke de deux minutes après chaque déploiement est devenu une habitude avant même que la suite de validation complète soit terminée.
+- Investir dans les guidelines de sélecteurs a payé des rendements composés. Chaque nouveau test écrit par l'équipe suivait les conventions, et la fragilité liée aux sélecteurs a significativement diminué comparé aux prototypes précoces.

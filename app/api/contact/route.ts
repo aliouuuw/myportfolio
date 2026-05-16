@@ -1,15 +1,12 @@
 import { Resend } from "resend";
+import { z } from "zod";
 
-interface ContactBody {
-  name: string;
-  email: string;
-  message: string;
-  website?: string; // honeypot field
-}
-
-function isValidEmail(value: string): boolean {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-}
+const contactSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address"),
+  message: z.string().min(1, "Message is required"),
+  website: z.string().optional(), // honeypot field
+});
 
 export async function POST(request: Request): Promise<Response> {
   let body: unknown;
@@ -19,19 +16,18 @@ export async function POST(request: Request): Promise<Response> {
     return Response.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const { name, email, message, website } = body as ContactBody;
+  // Validate with Zod
+  const result = contactSchema.safeParse(body);
+  if (!result.success) {
+    const errorMessages = result.error.issues.map((issue) => issue.message).join("; ");
+    return Response.json({ error: errorMessages }, { status: 400 });
+  }
+
+  const { name, email, message, website } = result.data;
 
   // Honeypot check: if filled, silently accept without processing (don't reveal it's a honeypot)
   if (website?.trim()) {
     return Response.json({ ok: true });
-  }
-
-  if (!name?.trim() || !email?.trim() || !message?.trim()) {
-    return Response.json({ error: "All fields are required." }, { status: 400 });
-  }
-
-  if (!isValidEmail(email)) {
-    return Response.json({ error: "Invalid email address." }, { status: 400 });
   }
 
   const apiKey = process.env.RESEND_API_KEY;

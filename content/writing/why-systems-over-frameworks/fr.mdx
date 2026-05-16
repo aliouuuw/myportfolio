@@ -1,0 +1,68 @@
+---
+title: "Why I stopped building frameworks and started shipping systems"
+titleFr: "Pourquoi j'ai arrêté de construire des frameworks pour livrer des systèmes"
+summary: "A reflection on the shift from building abstract infrastructure to shipping operational software that businesses actually depend on."
+summaryFr: "Une réflexion sur le passage de la construction d'infrastructure abstraite à la livraison de logiciels opérationnels dont les entreprises dépendent réellement."
+date: "2026-05"
+---
+
+Il existe une forme particulière de productivité qui ressemble au progrès mais ne produit rien. Vous la reconnaissez aux artefacts : une CLI qui bootstrappe des projets que personne n'a demandés, une abstraction de routing qui gère des cas limites que vous n'avez pas encore rencontrés, une librairie de validation élégante et inutilisée. J'ai passé des années dans ce mode. Je construisais des frameworks.
+
+Je ne veux pas dire des frameworks au sens propre — je ne concurrençais pas Next.js ou Rails. Je veux dire l'habitude de chercher l'abstraction avant de chercher l'utilisateur. L'instinct de résoudre le cas général avant le cas spécifique. De construire l'outil qui construit la chose, au lieu de construire la chose.
+
+Cet essai parle de pourquoi j'ai arrêté, et de ce qui l'a remplacé.
+
+## L'instinct framework
+
+Au début de ma carrière, chaque nouveau projet déclenchait le même réflexe : avant d'écrire la logique métier, je concevais l'infrastructure autour. Un système de composants réutilisables avant le premier écran. Une couche de gestion d'état personnalisée avant la première interaction. Une abstraction API avant le premier endpoint.
+
+Le raisonnement semblait solide. Si je construisais bien la fondation, tout le reste serait plus rapide. Et parfois c'était le cas — pendant les deux premières semaines. Puis les besoins changeaient, ou l'abstraction ne correspondait pas à un vrai cas d'usage, ou je n'avais simplement plus l'énergie de maintenir une plomberie que seul moi comprenais.
+
+BocalBun est l'exemple le plus clair. Je construisais un toolkit de développement — un framework pour le scaffolding, le testing et le déploiement d'applications Bun. L'architecture était propre. L'expérience développeur était soignée. Et après des mois de travail, j'ai pris la décision délibérée d'arrêter.
+
+Pas parce que cela a échoué. Parce que j'ai regardé ce qu'il faudrait pour le rendre véritablement utile à d'autres personnes, et comparé cela à ce que je pourrais accomplir en appliquant la même énergie à un logiciel qu'une entreprise attendait. Le calcul était clair. BocalBun était intellectuellement satisfaisant. Il ne créait de valeur pour personne.
+
+Arrêter m'a semblé du gaspillage à l'époque. En rétrospective, c'était la décision la plus productive que j'ai prise cette année-là.
+
+## Le tournant
+
+Ce qui a changé mon orientation n'était pas un article de blog ou une conférence. C'était de travailler au sein de vraies entreprises et de voir ce qui compte réellement pour les gens qui paient pour du logiciel.
+
+Chez ERGOBIT, je déployais des modules ERP Odoo pour des entreprises qui avaient besoin que leurs opérations fonctionnent demain, pas le trimestre prochain. Ce n'étaient pas des projets greenfield avec de la place pour l'élégance architecturale. C'étaient des environnements désordonnés où un toolkit de testing qui attrapait les régressions avant déploiement valait plus que toute abstraction que je pourrais concevoir. Alors j'ai construit ce toolkit. Ce n'était pas glamour. Il n'avait pas de landing page. Mais il empêchait de vraies défaillances dans des systèmes de production dont de vraies entreprises dépendaient.
+
+Chez Everest Finance, la leçon s'est précisée davantage. J'ai rejoint comme opérateur technique solo pour une fintech sénégalaise avec trois surfaces numériques déconnectées : un site web public, un CRM interne et une application client. La tentation était énorme — trois produits, un ingénieur, cela appelle sûrement un framework unificateur ?
+
+Pas du tout. Cela appelait un système. Un schéma de base de données partagé. Des définitions de types cohérentes. Un pipeline de déploiement qui fonctionnait pour chaque surface indépendamment. La différence est subtile mais importante : un framework est quelque chose qu'on construit pour que le travail futur soit plus facile. Un système est quelque chose qui fonctionne aujourd'hui et peut être étendu demain. J'avais besoin du second.
+
+## Ce que signifie "livrer des systèmes"
+
+Quand je dis que je livre des systèmes maintenant, je veux dire quelque chose de spécifique. Je veux dire un logiciel qui :
+
+- **A des utilisateurs qui en dépendent.** Le CRM Everest est utilisé quotidiennement par une équipe d'opérations traitant de vraies transactions financières. S'il tombe, les gens le remarquent en quelques minutes, pas des mois.
+- **Résout un problème métier, pas un problème technique.** Le toolkit de testing ERGOBIT n'existait pas parce que le testing est intéressant. Il existait parce que les déploiements échouaient et que les clients perdaient confiance.
+- **Peut être opéré par quelqu'un d'autre que son créateur.** Un framework que je construis pour moi-même peut être aussi idiosyncratique que je veux. Un système dont une entreprise dépend doit être lisible, documenté et prévisible.
+- **Priorise la correction plutôt que l'élégance.** En fintech, une transaction qui se traite incorrectement n'est pas un bug — c'est un incident de conformité. Le code qui la gère doit être ennuyeux et correct, pas malin et compact.
+
+Ce n'est pas une prescription universelle. Les frameworks comptent. L'infrastructure open source compte. Mais pour moi, à ce stade, le travail à plus fort levier est le logiciel opérationnel sur lequel les entreprises tournent. Pas parce que c'est plus noble, mais parce que c'est là que mon jugement se compose le plus vite.
+
+## Le compromis dont personne ne parle
+
+Construire des frameworks ressemble au progrès parce que c'en est — sur un problème qu'on a choisi. Vous contrôlez le scope. Vous contrôlez les critères de succès. Vous pouvez toujours rendre l'abstraction un peu plus élégante, l'API un peu plus ergonomique. Il n'y a pas de fonction de forçage externe vous disant que c'est fini.
+
+Les systèmes n'offrent pas ce confort. Un CRM est fini quand l'équipe des opérations peut onboarder un client sans vous appeler. Un toolkit de testing est fini quand les déploiements cessent d'échouer. La définition du succès appartient à quelqu'un d'autre, et ce quelqu'un d'autre ne se soucie pas de votre architecture.
+
+C'est le compromis : les frameworks vous donnent la propriété intellectuelle. Les systèmes vous donnent la responsabilité opérationnelle. J'ai trouvé que la responsabilité produit un meilleur ingénierie que la propriété. Quand quelqu'un dépend de votre code fonctionnant correctement à 2h du matin, vous prenez des décisions de design différentes que quand vous optimisez pour l'expérience développeur dans un README.
+
+## L'enseignement pratique
+
+Si vous reconnaissez le pattern que je décris — la tendance à construire l'infrastructure avant de construire la chose — voici ce que j'ai appris :
+
+**Demandez qui attend.** Si personne n'attend ce que vous construisez, vous construisez probablement un framework. C'est bien si c'est intentionnel. C'est coûteux si c'est une habitude.
+
+**Mesurez en déploiements, pas en commits.** Je traçais autrefois ma productivité par la quantité de code que j'écrivais. Maintenant je la mesure par ce qui est livré et qui l'utilise. La corrélation entre ces deux métriques est plus faible que vous ne l'imagineriez.
+
+**Traitez l'arrêt comme une compétence.** La décision d'arrêter BocalBun n'était pas un échec de discipline. C'était la discipline. Savoir quand un investissement ne va pas payer — et rediriger cette énergie — est aussi important que de savoir bien construire.
+
+Je construis encore des outils pour moi-même. J'apprécie toujours l'abstraction. Mais j'ai appris à traiter cette impulsion comme un signal pour vérifier si je résous un vrai problème ou juste un problème confortable. La plupart du temps, le vrai problème est moins élégant et plus précieux.
+
+C'est le changement. Pas du construire au ne pas construire, mais du construire pour le plaisir de construire au construire parce que quelqu'un a besoin que cela fonctionne.

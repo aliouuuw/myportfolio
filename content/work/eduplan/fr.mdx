@@ -1,0 +1,137 @@
+---
+title: "EduPlan — school operations software from CMS lessons"
+titleFr: "EduPlan — logiciel de gestion scolaire tiré des leçons d'un CMS"
+summary: "Building school operations software informed by a lightweight CMS deployment, with lessons about scope discipline and operational reality."
+summaryFr: "Construction d'un logiciel de gestion scolaire informé par un déploiement CMS léger, avec des leçons sur la discipline de scope et la réalité opérationnelle."
+role: "Solo technical operator"
+domain: "Education systems"
+stack:
+  - "TypeScript"
+  - "Next.js"
+  - "PostgreSQL"
+  - "Internal tooling"
+date: "2025-08"
+featured: true
+confidential: false
+---
+
+## Contexte
+
+J'ai construit le site web de l'école Les Hirondelles à Dakar. C'était un système de gestion de contenu simple — un déploiement léger qui permettait à l'école de mettre à jour les actualités, publier des événements et gérer sa présence publique sans dépendance technique. Le projet s'est terminé dans les délais, et l'école avait ce dont elle avait besoin.
+
+Mais la relation ne s'est pas arrêtée au lancement. Je suis resté en contact avec le réseau scolaire, et un pattern est apparu. Les mêmes points de douleur opérationnels revenaient sans cesse : la période d'inscription était chaotique, les dossiers des élèves vivaient dans des feuilles de calcul inconsistantes, le suivi des présences nécessitait une réconciliation manuelle, et la communication avec les parents se fragmentait entre des groupes WhatsApp et des paperoles envoyées avec les enfants. Le site web résolvait le problème public. Les opérations internes restaient sous-desservies.
+
+J'avais déjà la confiance de la direction de l'école et une visibilité sur leur façon de travailler. Ce contexte opérationnel — voir l'écart entre ce que le site web délivrait et ce avec quoi le personnel luttait encore — est devenu le fondement d'EduPlan.
+
+## Problème
+
+Les écoles fonctionnent avec des outils fragmentés. Ce n'est pas qu'elles manquent de logiciels — c'est que les logiciels ne forment pas un système cohérent :
+
+- **La gestion des inscriptions** se fait via des formulaires papier, des appels téléphoniques et des feuilles de calcul éparpillées. Il n'y a pas de vue unique de qui a postulé, qui s'est inscrit et qui s'est désinscrit.
+- **Les dossiers des élèves** s'accumulent dans des formats inconsistants d'une année scolaire à l'autre. L'historique d'un élève nécessite de fouiller dans des classeurs et des documents d'archives.
+- **La communication avec les parents** se fragmente entre des groupes WhatsApp, des SMS groupés et des paperoles envoyées avec les enfants. Il n'y a pas de trace d'audit, pas de confirmation de livraison, pas de canal unifié.
+- **Les rapports pour les autorités** nécessitent un collage manuel des chiffres d'inscription, des statistiques de présence et des répartitions démographiques. Les mêmes données existent à cinq endroits différents, dans cinq formats différents.
+
+Le problème plus profond est la dérive opérationnelle. Chaque année scolaire, les processus ad-hoc accumulés créent un peu plus de friction. Le personnel développe des contournements. Le savoir vit dans des têtes individuelles plutôt que dans la mémoire institutionnelle. Et quand quelqu'un part, il emporte le contexte opérationnel avec lui.
+
+La plupart des solutions logicielles pour l'éducation essaient de tout résoudre à la fois — des systèmes ERP complets avec des modules pour chaque fonction imaginable. Les écoles les achètent, en implémentent une fraction des fonctionnalités, et opèrent autour des lacunes. Je voulais essayer l'approche opposée : commencer étroit, résoudre un problème opérationnel correctement, et construire vers l'extérieur basé sur l'usage réel.
+
+## Approche
+
+Le déploiement CMS m'a appris quelque chose sur la discipline de scope. En construisant le site web, j'avais des limites claires : contenu public, workflows simples, pas de complexité d'authentification au-delà de l'accès admin. Ces contraintes ont rendu le projet livrable. EduPlan applique la même discipline aux opérations scolaires.
+
+Le premier module se concentrait sur les inscriptions et les dossiers des élèves — la colonne vertébrale opérationnelle dont tout le reste dépend. Sans des données d'inscription propres, les rapports échouent. Sans des dossiers d'élèves consistants, la communication faiblit. J'ai choisi cela comme fondation parce que toutes les autres opérations scolaires en découlent.
+
+Décisions d'architecture clés :
+
+- **Application web mono-locataire.** Chaque école a sa propre instance isolée avec un schéma de base de données dédié. Cela maintient les frontières de données propres et simplifie le modèle mental pour les administrateurs scolaires qui ne pensent pas en termes d'"isolation de locataire".
+- **PostgreSQL comme cœur opérationnel.** Données relationnelles avec contraintes appropriées, clés étrangères et validation au niveau de la base. Les écoles ont besoin d'intégrité des données plus que de flexibilité.
+- **Amélioration progressive plutôt que déploiement massif.** Commencer avec les inscriptions et les dossiers. Ajouter les fonctionnalités de communication après que le cœur soit stable. Différer le suivi des présences et la gestion des notes jusqu'à ce qu'il y ait une preuve opérationnelle que la fondation fonctionne.
+- **Design responsive mobile-first.** Le personnel accède au système depuis des téléphones aussi souvent que depuis des ordinateurs. L'interface fonctionne sur les petits écrans sans application mobile séparée.
+- **Chemins d'import pour les données legacy.** La plupart des écoles ont des années de dossiers dans des feuilles de calcul. Un processus d'import structuré leur permet de migrer les données historiques sans tout ressaisir.
+
+## Diagramme du système
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                     EduPlan Web App                      │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │
+│  │  Inscriptions│  │   Dossiers   │  │   Tableau    │  │
+│  │   Module     │  │   Élèves     │  │   de bord    │  │
+│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘  │
+│         │                 │                  │          │
+│         └─────────────────┼──────────────────┘          │
+│                           ▼                             │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │              Base de données PostgreSQL           │  │
+│  │  ┌──────────┐  ┌──────────┐  ┌──────────────┐  │  │
+│  │  │ Élèves   │  │Familles  │  │Inscriptions  │  │  │
+│  │  └──────────┘  └──────────┘  └──────────────┘  │  │
+│  └──────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────┘
+                           │
+                    ┌──────▼──────┐
+                    │   Personnel │
+                    │   Scolaire  │
+                    └─────────────┘
+```
+
+L'architecture est intentionnellement simple. Pas de complexité microservices, pas de défi de synchronisation temps réel, pas de problème de systèmes distribués à résoudre. Le défi technique réside dans la modélisation des données pour les contextes éducatifs — gérer les transitions d'années scolaires, gérer les relations familiales, suivre les changements de statut d'inscription — pas dans la sophistication de l'infrastructure.
+
+## Ce qui a été livré
+
+**Module de gestion des inscriptions (pilote déployé) :**
+- Formulaires de candidature en ligne pour les familles prospectives
+- Workflow de révision des candidatures avec suivi du statut
+- Confirmation d'inscription et génération de contrat
+- Gestion des listes d'attente pour les niveaux surchargés
+
+**Système de dossiers des élèves :**
+- Profil de base de l'élève avec historique scolaire
+- Cartographie des relations familiales (parents, tuteurs, contacts d'urgence)
+- Pièces jointes pour dossiers médicaux, autorisations, correspondance
+- Import de données depuis des feuilles de calcul legacy avec validation
+
+**Tableau de bord de reporting basique :**
+- Statistiques d'inscription par niveau et année scolaire
+- Répartitions démographiques pour les rapports administratifs
+- Export de données pour les soumissions aux autorités
+
+**Infrastructure opérationnelle :**
+- Accès basé sur les rôles (personnel admin, enseignants, rôles en lecture seule)
+- Journal d'audit pour les changements d'inscription et mises à jour de dossiers
+- Politiques de sauvegarde automatisée et de rétention des données
+
+C'est un déploiement en phase pilote. Le système est en usage actif aux Hirondelles pour la gestion des inscriptions et les dossiers des élèves, avec une expansion prévue vers des fonctionnalités de communication avec les parents basée sur les retours de la première année scolaire d'opération.
+
+## Profondeur technique
+
+Le défi technique le plus intéressant dans les opérations scolaires est le modèle de données pour le temps scolaire. Un élève existe en relation avec les années scolaires, les niveaux et le statut d'inscription — mais ces relations changent. Un élève qui s'inscrit en première année en 2023 passe en deuxième année en 2024, mais son dossier historique doit préserver le niveau dans lequel il était chaque année.
+
+J'ai modélisé cela avec une séparation entre "élève" (la personne, stable dans le temps) et "inscription" (la relation avec une année scolaire et un niveau spécifiques). La table d'inscription capture academicYear, gradeLevel et status — permettant à un élève d'avoir plusieurs enregistrements d'inscription qui représentent sa progression dans l'école.
+
+Les relations familiales ajoutent un autre défi de modélisation. Un élève peut avoir deux parents, un tuteur et des contacts d'urgence. Chaque contact a besoin de ses propres préférences de communication et permissions d'accès. J'ai choisi une approche normalisée : une table contacts pour les individus, une table relationships liant les contacts aux élèves avec type et priorité, et une table family_groups pour les ménages qui partagent des adresses et la responsabilité de facturation.
+
+Le multi-tenancy est géré au niveau du schéma plutôt qu'au niveau des lignes. Chaque instance scolaire a son propre schéma de base de données avec une séparation complète des tables. Cela échange une certaine complexité opérationnelle (gestion de multiples schémas) contre des garanties d'isolation des données et des modèles mentaux simplifiés. Les administrateurs scolaires ne voient jamais de colonnes "tenant_id" ou n'ont besoin de comprendre que leurs données vivent dans une base de données partagée.
+
+L'architecture modulaire anticipe l'expansion future. Chaque domaine de fonctionnalités (inscriptions, dossiers, communication, présences) a des limites internes propres. Ajouter un portail parents ne nécessite pas de toucher à la logique d'inscription. Ajouter des fonctionnalités de notification SMS se branche sur l'infrastructure existante de contacts et relations.
+
+## Résultat
+
+EduPlan est actuellement en déploiement pilote à l'école Les Hirondelles. Le module d'inscription a géré la saison d'inscription 2025-2026, traitant environ 80 candidatures et gérant la transition de la candidature à la confirmation d'inscription.
+
+La boucle de feedback avec le personnel scolaire a été essentielle. Les hypothèses initiales sur le workflow — particulièrement autour de la révision des candidatures et de la gestion des listes d'attente — ont nécessité des ajustements une fois que le vrai personnel d'admissions a commencé à utiliser le système. La discipline de livrer un ensemble de fonctionnalités étroit d'abord a permis que ces ajustements se fassent pendant que la base de code était encore assez petite pour être refactorisée rapidement.
+
+Le chemin vers l'avant implique un déploiement plus large au sein du réseau scolaire. Plusieurs autres écoles du groupe ont exprimé leur intérêt après avoir vu les résultats du pilote. L'architecture mono-locataire signifie que chaque nouvelle école nécessite un déploiement frais, mais signifie aussi que les frontières de données restent propres et que la personnalisation pour les besoins individuels des écoles reste possible.
+
+## Leçons
+
+**Les logiciels opérationnels nécessitent une présence opérationnelle.** Je n'aurais pas pu concevoir un système d'inscription utile sans observer comment le personnel d'admissions de l'école travaillait réellement. Les modèles de feuilles de calcul qu'ils utilisaient, les appels téléphoniques qu'ils faisaient, les exceptions qu'ils géraient — cette réalité opérationnelle a formé le logiciel plus que n'importe quel document de spécifications abstrait.
+
+**La discipline CMS s'applique aux outils internes.** Les mêmes principes qui ont rendu le projet web réussi — limites de scope claires, livraison incrémentale, tests utilisateurs avec du vrai contenu — s'appliquent aux logiciels opérationnels. La différence est que les outils internes ont des utilisateurs qui sont captifs et occupés, pas choisis et évaluateurs. Cela rend le feedback utilisateur à la fois plus honnête et plus ancré dans la réalité opérationnelle.
+
+**Le contrôle de scope est plus dur que l'expansion de scope.** Il y a toujours une pression pour ajouter "juste une fonctionnalité de plus" avant le lancement. Résister à cette pression — livrer la gestion des inscriptions sans suivi des présences, les dossiers sans bulletins — nécessite la confiance que la fondation est solide. Cette confiance vient de la validation opérationnelle, pas de la preuve technique.
+
+**Les écoles ont besoin de portabilité des données plus que de sophistication des données.** La fonctionnalité la plus valorisée dans les retours précoces n'était pas une capacité individuelle — c'était la capacité d'exporter tout vers Excel. Le personnel scolaire a besoin de posséder ses données, les manipuler dans des outils familiers, et produire des rapports pour les autorités dans le format que ces autorités exigent. La capacité d'export n'est pas une réflexion tardive ; c'est un besoin fondamental.
+
+EduPlan représente une approche différente du logiciel éducatif : partir de la réalité opérationnelle, construire incrémentalement basé sur l'usage, et prioriser l'intégrité et la portabilité des données plutôt que l'étendue des fonctionnalités. C'est au début du cycle de vie, mais la fondation est assez solide pour supporter l'expansion à venir.

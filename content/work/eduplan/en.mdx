@@ -1,0 +1,137 @@
+---
+title: "EduPlan — school operations software from CMS lessons"
+titleFr: "EduPlan — logiciel de gestion scolaire tiré des leçons d'un CMS"
+summary: "Building school operations software informed by a lightweight CMS deployment, with lessons about scope discipline and operational reality."
+summaryFr: "Construction d'un logiciel de gestion scolaire informé par un déploiement CMS léger, avec des leçons sur la discipline de scope et la réalité opérationnelle."
+role: "Solo technical operator"
+domain: "Education systems"
+stack:
+  - "TypeScript"
+  - "Next.js"
+  - "PostgreSQL"
+  - "Internal tooling"
+date: "2025-08"
+featured: true
+confidential: false
+---
+
+## Context
+
+I built the website for Les Hirondelles school in Dakar. It was a straightforward content management system — a lightweight deployment that let the school update news, publish events, and manage their public presence without technical dependency. The project completed on time, and the school had what they needed.
+
+But the relationship didn't end at launch. I stayed in conversation with the school network, and a pattern emerged. The same operational pain points kept surfacing: enrollment season was chaos, student records lived in inconsistent spreadsheets, attendance tracking required manual reconciliation, and parent communication fragmented across WhatsApp groups and paper notices. The website solved the public-facing problem. The internal operations remained underserved.
+
+I had existing trust with the school leadership and visibility into how they actually worked. That operational context — seeing the gap between what the website delivered and what the staff still struggled with — became the foundation for EduPlan.
+
+## Problem
+
+Schools run on fragmented tools. It's not that they lack software — it's that the software doesn't form a coherent system:
+
+- **Enrollment management** happens through paper forms, phone calls, and scattered spreadsheets. There's no single view of who applied, who enrolled, and who withdrew.
+- **Student records** accumulate in inconsistent formats across academic years. A student's history requires hunting through file cabinets and legacy documents.
+- **Parent communication** fragments across WhatsApp groups, SMS blasts, and paper notices sent home with children. There's no audit trail, no delivery confirmation, no unified channel.
+- **Reporting for authorities** requires manual collation of enrollment numbers, attendance statistics, and demographic breakdowns. The same data exists in five different places, in five different formats.
+
+The deeper problem is operational drift. Every school year, the accumulated ad-hoc processes create a little more friction. Staff develop workarounds. Knowledge lives in individual heads rather than institutional memory. And when someone leaves, they take the operational context with them.
+
+Most education software solutions try to solve everything at once — full ERP systems with modules for every conceivable function. Schools buy them, implement a fraction of the features, and operate around the gaps. I wanted to try the opposite approach: start narrow, solve one operational problem well, and build outward based on actual usage.
+
+## Approach
+
+The CMS deployment taught me something about scope discipline. When building the website, I had clear boundaries: public content, simple workflows, no authentication complexity beyond admin access. Those constraints made the project shippable. EduPlan applies the same discipline to school operations.
+
+The first module focused on enrollment and student records — the operational spine that everything else depends on. Without clean enrollment data, reporting fails. Without consistent student records, communication falters. I chose this as the foundation because every other school operation branches from it.
+
+Key architecture decisions:
+
+- **Single-tenant web application.** Each school gets its own isolated instance with dedicated database schema. This keeps data boundaries clean and simplifies the mental model for school administrators who don't think in terms of "tenant isolation."
+- **PostgreSQL as the operational core.** Relational data with proper constraints, foreign keys, and validation at the database level. Schools need data integrity more than they need flexibility.
+- **Progressive enhancement over big-bang deployment.** Start with enrollment and records. Add communication features after the core is stable. Defer attendance tracking and grade management until there's operational proof that the foundation works.
+- **Mobile-first responsive design.** Staff access the system from phones as often as desktops. The interface works on small screens without a separate mobile app.
+- **Import pathways for legacy data.** Most schools have years of records in spreadsheets. A structured import process lets them migrate historical data without re-keying everything.
+
+## System diagram
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                     EduPlan Web App                      │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │
+│  │  Enrollment  │  │   Student    │  │   Reporting  │  │
+│  │   Module     │  │   Records    │  │   Dashboard  │  │
+│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘  │
+│         │                 │                  │          │
+│         └─────────────────┼──────────────────┘          │
+│                           ▼                             │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │              PostgreSQL Database                  │  │
+│  │  ┌──────────┐  ┌──────────┐  ┌──────────────┐  │  │
+│  │  │ Students │  │Families  │  │Enrollments   │  │  │
+│  │  └──────────┘  └──────────┘  └──────────────┘  │  │
+│  └──────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────┘
+                           │
+                    ┌──────▼──────┐
+                    │   School    │
+                    │   Staff     │
+                    └─────────────┘
+```
+
+The architecture is intentionally boring. There's no microservice complexity, no real-time synchronization challenge, no distributed systems problem to solve. The technical challenge lies in data modeling for educational contexts — handling academic year transitions, managing family relationships, tracking enrollment status changes — not in infrastructure sophistication.
+
+## What shipped
+
+**Enrollment management module (pilot deployed):**
+- Online application forms for prospective families
+- Application review workflow with status tracking
+- Enrollment confirmation and contract generation
+- Waiting list management for oversubscribed grades
+
+**Student records system:**
+- Core student profile with academic history
+- Family relationship mapping (parents, guardians, emergency contacts)
+- Document attachment for medical records, permissions, correspondence
+- Data import from legacy spreadsheets with validation
+
+**Basic reporting dashboard:**
+- Enrollment statistics by grade and academic year
+- Demographic breakdowns for administrative reporting
+- Data export for authority submissions
+
+**Operational infrastructure:**
+- Role-based access (admin staff, teachers, read-only roles)
+- Audit logging for enrollment changes and record updates
+- Automated backup and data retention policies
+
+This is a pilot-stage deployment. The system is in active use at Les Hirondelles for enrollment management and student records, with planned expansion to parent communication features based on feedback from the first academic year of operation.
+
+## Technical depth
+
+The most interesting technical challenge in school operations is the data model for academic time. A student exists in relation to academic years, grade levels, and enrollment status — but these relationships change. A student who enrolls in first grade in 2023 becomes a second grader in 2024, but their historical record needs to preserve what grade they were in each year.
+
+I modeled this with a separation between "student" (the person, stable over time) and "enrollment" (the relationship to a specific academic year and grade level). The enrollment table captures academicYear, gradeLevel, and status — allowing a student to have multiple enrollment records that represent their progression through the school.
+
+Family relationships add another modeling challenge. A student might have two parents, a guardian, and emergency contacts. Each contact needs their own communication preferences and access permissions. I chose a normalized approach: a contacts table for individuals, a relationships table linking contacts to students with type and priority, and a family_groups table for households that share addresses and billing responsibility.
+
+Multi-tenancy is handled at the schema level rather than row-level security. Each school instance has its own database schema with complete table separation. This trades some operational complexity (managing multiple schemas) for data isolation guarantees and simplified mental models. School administrators never see "tenant_id" columns or need to understand that their data lives in a shared database.
+
+The modular architecture anticipates future expansion. Each feature area (enrollment, records, communication, attendance) has clean internal boundaries. Adding a parent portal doesn't require touching enrollment logic. Adding SMS notification features plugs into the existing contact and relationship infrastructure.
+
+## Outcome
+
+EduPlan is currently in pilot deployment at Les Hirondelles school. The enrollment module handled the 2025-2026 enrollment season, processing approximately 80 applications and managing the transition from application through enrollment confirmation.
+
+The feedback loop with school staff has been essential. Initial assumptions about workflow — particularly around application review and waiting list management — required adjustment once real admissions staff started using the system. The discipline of shipping a narrow feature set first meant these adjustments happened while the codebase was still small enough to refactor quickly.
+
+The pathway forward involves broader rollout within the school network. Several other schools in the group have expressed interest after seeing the pilot results. The single-tenant architecture means each new school requires a fresh deployment, but also means data boundaries stay clean and customization for individual school needs remains possible.
+
+## Lessons
+
+**Operational software requires operational presence.** I could not have designed a useful enrollment system without watching how the school's admissions staff actually worked. The spreadsheet templates they used, the phone calls they made, the exceptions they handled — this operational reality shaped the software more than any abstract requirements document.
+
+**CMS discipline applies to internal tools.** The same principles that made the website project successful — clear scope boundaries, incremental delivery, user testing with real content — apply to operational software. The difference is that internal tools have users who are captive and busy, not choosy and evaluating. This makes user feedback both more honest and more operationally grounded.
+
+**Scope control is harder than scope expansion.** There's always pressure to add "just one more feature" before launch. Resisting that pressure — shipping enrollment management without attendance tracking, records without gradebooks — requires confidence that the foundation is solid. That confidence comes from operational validation, not technical proof.
+
+**Schools need data portability more than data sophistication.** The most valued feature in early feedback was not any individual capability — it was the ability to export everything to Excel. School staff need to own their data, manipulate it in familiar tools, and produce reports for authorities in whatever format those authorities demand. Export capability is not an afterthought; it's a core requirement.
+
+EduPlan represents a different approach to education software: start with the operational reality, build incrementally based on usage, and prioritize data integrity and portability over feature breadth. It's early in the lifecycle, but the foundation is solid enough to support the expansion ahead.

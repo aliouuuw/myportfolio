@@ -1,4 +1,8 @@
 {
+  "common": {
+    "close": "Fermer",
+    "menu": "Menu"
+  },
   "Metadata": {
     "title": "Aliou Wade",
     "description": "Portfolio — systèmes logiciels opérationnels pour la fintech et les entreprises à forte charge opérationnelle."
@@ -131,6 +135,11 @@
       "emailRequired": "Une adresse email valide est obligatoire.",
       "messageRequired": "Le message est obligatoire."
     }
+  },
+  "NotFoundPage": {
+    "title": "Page non trouvée",
+    "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
+    "backToHome": "← Retour à l'accueil"
   },
   "Footer": {
     "tagline": "Ingénierie systèmes produit pour la fintech et les équipes à forte charge opérationnelle.",

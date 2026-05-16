@@ -20,7 +20,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   try {
-    const { frontmatter } = await compileWritingBySlug(slug);
+    const { frontmatter } = await compileWritingBySlug(slug, locale);
     const title = locale === "fr" ? frontmatter.titleFr : frontmatter.title;
     const description =
       locale === "fr" ? frontmatter.summaryFr : frontmatter.summary;
@@ -40,7 +40,7 @@ export default async function WritingSlugPage({ params }: Props) {
   let frontmatter: Awaited<ReturnType<typeof compileWritingBySlug>>["frontmatter"];
 
   try {
-    const result = await compileWritingBySlug(slug);
+    const result = await compileWritingBySlug(slug, locale);
     content = result.content;
     frontmatter = result.frontmatter;
   } catch {
