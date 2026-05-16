@@ -17,6 +17,11 @@ interface ContactFormTranslations {
   successTitle: string;
   successBody: string;
   errorBody: string;
+  validation: {
+    nameRequired: string;
+    emailRequired: string;
+    messageRequired: string;
+  };
 }
 
 interface ContactFormProps {
@@ -27,19 +32,27 @@ export function ContactForm({ translations: t }: ContactFormProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [website, setWebsite] = useState(""); // honeypot field
   const [formState, setFormState] = useState<FormState>("idle");
   const [validationError, setValidationError] = useState<string | null>(null);
 
   function validate(): string | null {
-    if (!name.trim()) return "Name is required.";
+    if (!name.trim()) return t.validation.nameRequired;
     if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
-      return "A valid email is required.";
-    if (!message.trim()) return "Message is required.";
+      return t.validation.emailRequired;
+    if (!message.trim()) return t.validation.messageRequired;
     return null;
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    // Honeypot: if filled, silently succeed without sending
+    if (website.trim()) {
+      setFormState("success");
+      return;
+    }
+
     const error = validate();
     if (error) {
       setValidationError(error);
@@ -52,7 +65,7 @@ export function ContactForm({ translations: t }: ContactFormProps) {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
+        body: JSON.stringify({ name, email, message, website }),
       });
       if (res.ok) {
         setFormState("success");
@@ -81,6 +94,20 @@ export function ContactForm({ translations: t }: ContactFormProps) {
     <div>
       <h2 className="text-base font-medium text-ink-primary mb-6">{t.formTitle}</h2>
       <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
+        {/* Honeypot field - hidden from humans, visible to bots */}
+        <div style={{ position: "absolute", opacity: 0, height: 0, width: 0, overflow: "hidden" }}>
+          <label htmlFor="contact-website">Website</label>
+          <input
+            id="contact-website"
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+          />
+        </div>
+
         <div>
           <label htmlFor="contact-name" className={labelClass}>
             {t.name}

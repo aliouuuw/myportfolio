@@ -20,9 +20,9 @@ export default async function AboutPage(props: {
           {t("title")}
         </p>
         <h1 className="font-serif text-4xl sm:text-5xl font-normal tracking-tight text-ink-primary leading-tight">
-          Product Systems Engineer.
+          {t("hero.line1")}
           <br />
-          <span className="text-ink-tertiary">Dakar-based.</span>
+          <span className="text-ink-tertiary">{t("hero.line2")}</span>
         </h1>
       </div>
 

@@ -4,6 +4,7 @@ interface ContactBody {
   name: string;
   email: string;
   message: string;
+  website?: string; // honeypot field
 }
 
 function isValidEmail(value: string): boolean {
@@ -18,7 +19,12 @@ export async function POST(request: Request): Promise<Response> {
     return Response.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const { name, email, message } = body as ContactBody;
+  const { name, email, message, website } = body as ContactBody;
+
+  // Honeypot check: if filled, silently accept without processing (don't reveal it's a honeypot)
+  if (website?.trim()) {
+    return Response.json({ ok: true });
+  }
 
   if (!name?.trim() || !email?.trim() || !message?.trim()) {
     return Response.json({ error: "All fields are required." }, { status: 400 });

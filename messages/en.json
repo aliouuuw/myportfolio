@@ -89,6 +89,10 @@
   },
   "AboutPage": {
     "title": "About",
+    "hero": {
+      "line1": "Product Systems Engineer.",
+      "line2": "Dakar-based."
+    },
     "section1": {
       "heading": "Who I am",
       "body": "I'm a Product Systems Engineer based in Dakar. I specialize in operational software — the systems that keep businesses running: internal tools, admin workflows, CRM consolidation, ERP configuration. I work in French and English, and I build for operational realities that most software ignores."
@@ -121,7 +125,12 @@
     "submitting": "Sending…",
     "successTitle": "Message sent",
     "successBody": "I'll get back to you within a few days.",
-    "errorBody": "Something went wrong. Try emailing me directly."
+    "errorBody": "Something went wrong. Try emailing me directly.",
+    "validation": {
+      "nameRequired": "Name is required.",
+      "emailRequired": "A valid email is required.",
+      "messageRequired": "Message is required."
+    }
   },
   "Footer": {
     "tagline": "Product systems engineering for fintech and operations-heavy teams.",

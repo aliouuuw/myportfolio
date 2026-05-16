@@ -89,6 +89,10 @@
   },
   "AboutPage": {
     "title": "À propos",
+    "hero": {
+      "line1": "Ingénieur Systèmes Produit.",
+      "line2": "Basé à Dakar."
+    },
     "section1": {
       "heading": "Qui je suis",
       "body": "Je suis un Product Systems Engineer basé à Dakar. Je me spécialise dans les logiciels opérationnels — les systèmes qui font tourner les entreprises : outils internes, workflows d'administration, consolidation CRM, configuration ERP. Je travaille en français et en anglais, et je construis pour des réalités opérationnelles que la plupart des logiciels ignorent."
@@ -121,7 +125,12 @@
     "submitting": "Envoi en cours…",
     "successTitle": "Message envoyé",
     "successBody": "Je vous répondrai dans les prochains jours.",
-    "errorBody": "Une erreur s'est produite. Essayez de m'envoyer un email directement."
+    "errorBody": "Une erreur s'est produite. Essayez de m'envoyer un email directement.",
+    "validation": {
+      "nameRequired": "Le nom est obligatoire.",
+      "emailRequired": "Une adresse email valide est obligatoire.",
+      "messageRequired": "Le message est obligatoire."
+    }
   },
   "Footer": {
     "tagline": "Ingénierie systèmes produit pour la fintech et les équipes à forte charge opérationnelle.",

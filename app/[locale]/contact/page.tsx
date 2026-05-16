@@ -13,9 +13,12 @@ export default async function ContactPage(props: {
   setRequestLocale(locale);
 
   const t = await getTranslations("ContactPage");
+  const footerT = await getTranslations("Footer");
 
-  const emailHref = "mailto:hello@example.com";
-  const whatsappHref = "https://wa.me/";
+  const emailHref = footerT("emailHref");
+  const whatsappHref = footerT("whatsappHref");
+  // Extract email from mailto: for display
+  const emailDisplay = emailHref.replace("mailto:", "");
 
   const formTranslations = {
     formTitle: t("formTitle"),
@@ -30,6 +33,11 @@ export default async function ContactPage(props: {
     successTitle: t("successTitle"),
     successBody: t("successBody"),
     errorBody: t("errorBody"),
+    validation: {
+      nameRequired: t("validation.nameRequired"),
+      emailRequired: t("validation.emailRequired"),
+      messageRequired: t("validation.messageRequired"),
+    },
   };
 
   return (
@@ -57,7 +65,7 @@ export default async function ContactPage(props: {
                 href={emailHref}
                 className="text-sm text-ink-primary hover:text-ink-secondary transition-colors underline underline-offset-2 decoration-border"
               >
-                hello@example.com
+                {emailDisplay}
               </a>
             </div>
             <div>
