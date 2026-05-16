@@ -104,6 +104,25 @@
       "body": "Je joue aux échecs — pas en compétition, mais cela façonne ma façon de penser les systèmes : patience, compromis positionnels, jouer sur le long terme. Je suis venu comme opérateur, pas comme académicien. Cela signifie que j'ai géré des réalités parties prenantes, travaillé dans des contraintes opérationnelles, et livré des logiciels dont les entreprises dépendent vraiment."
     }
   },
+  "ContactPage": {
+    "title": "Parlons",
+    "subtitle": "Je suis ouvert aux conversations stratégiques sur les logiciels opérationnels, les missions de conseil, ou simplement un échange utile.",
+    "directTitle": "Contact direct",
+    "email": "Email",
+    "whatsapp": "WhatsApp",
+    "formTitle": "Envoyer un message",
+    "name": "Nom",
+    "emailLabel": "Email",
+    "message": "Message",
+    "namePlaceholder": "Votre nom",
+    "emailPlaceholder": "votre@email.com",
+    "messagePlaceholder": "Sur quoi travaillez-vous ?",
+    "submit": "Envoyer",
+    "submitting": "Envoi en cours…",
+    "successTitle": "Message envoyé",
+    "successBody": "Je vous répondrai dans les prochains jours.",
+    "errorBody": "Une erreur s'est produite. Essayez de m'envoyer un email directement."
+  },
   "Footer": {
     "tagline": "Ingénierie systèmes produit pour la fintech et les équipes à forte charge opérationnelle.",
     "copyright": "© 2026 Aliou Wade",

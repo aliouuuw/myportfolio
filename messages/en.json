@@ -104,6 +104,25 @@
       "body": "I play chess — not competitively, but it shapes how I think about systems: patience, positional tradeoffs, playing the long game. I came up as an operator, not an academic. That means I've managed stakeholder realities, worked inside operational constraints, and shipped software that businesses actually depend on."
     }
   },
+  "ContactPage": {
+    "title": "Let's talk",
+    "subtitle": "I'm open to strategic conversations about operational software, consulting engagements, or just a useful exchange.",
+    "directTitle": "Direct",
+    "email": "Email",
+    "whatsapp": "WhatsApp",
+    "formTitle": "Send a message",
+    "name": "Name",
+    "emailLabel": "Email",
+    "message": "Message",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "your@email.com",
+    "messagePlaceholder": "What are you working on?",
+    "submit": "Send message",
+    "submitting": "Sending…",
+    "successTitle": "Message sent",
+    "successBody": "I'll get back to you within a few days.",
+    "errorBody": "Something went wrong. Try emailing me directly."
+  },
   "Footer": {
     "tagline": "Product systems engineering for fintech and operations-heavy teams.",
     "copyright": "© 2026 Aliou Wade",
