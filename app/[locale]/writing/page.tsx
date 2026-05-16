@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { routing } from "@/i18n/routing";
 import { getWritingSlugs, readWritingFrontmatter } from "@/lib/mdx";
+import { buildCanonical } from "@/lib/metadata";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -19,6 +20,9 @@ export async function generateMetadata({
   return {
     title: t("writingTitle"),
     description: t("writingDescription"),
+    alternates: {
+      canonical: buildCanonical(locale, "/writing"),
+    },
   };
 }
 

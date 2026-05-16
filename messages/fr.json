@@ -64,7 +64,9 @@
       "title": "Derniers écrits",
       "subtitle": "Notes techniques sur le logiciel opérationnel, l'ingénierie IA-native et la pensée systémique.",
       "placeholder": "Bientôt.",
-      "cta": "Lire tous les essais"
+      "cta": "Lire tous les essais",
+      "latestEssay": "Dernier essai",
+      "readEssay": "Lire l'essai"
     },
     "contact": {
       "title": "Construisons ensemble",
@@ -154,12 +156,12 @@
     "copyright": "© 2026 Aliou Wade",
     "linksAriaLabel": "Liens de contact et réseaux",
     "githubLabel": "GitHub",
-    "githubHref": "https://github.com/",
+    "githubHref": "https://github.com/aliouuuw",
     "linkedinLabel": "LinkedIn",
-    "linkedinHref": "https://www.linkedin.com/",
+    "linkedinHref": "https://www.linkedin.com/in/aliouuuw",
     "emailLabel": "E-mail",
-    "emailHref": "mailto:hello@example.com",
+    "emailHref": "mailto:wadealiou00@gmail.com",
     "whatsappLabel": "WhatsApp",
-    "whatsappHref": "https://wa.me/"
+    "whatsappHref": "https://wa.me/221777228845"
   }
 }

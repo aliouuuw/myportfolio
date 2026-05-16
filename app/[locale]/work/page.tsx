@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { routing } from "@/i18n/routing";
 import { getWorkSlugs, readWorkFrontmatter } from "@/lib/mdx";
+import { buildCanonical } from "@/lib/metadata";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -19,6 +20,9 @@ export async function generateMetadata({
   return {
     title: t("workTitle"),
     description: t("workDescription"),
+    alternates: {
+      canonical: buildCanonical(locale, "/work"),
+    },
   };
 }
 

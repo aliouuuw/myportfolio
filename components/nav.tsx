@@ -69,6 +69,7 @@ export function Nav({ locale }: NavProps) {
             ariaLabel={t("ariaLabel")}
             closeLabel={tCommon("common.close")}
             menuLabel={tCommon("common.menu")}
+            pathname={pathname}
           />
         </nav>
       </div>

@@ -1,8 +1,27 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { CaseStudyCard } from "@/components/case-study-card";
 import { Hero } from "@/components/hero";
+import { getWritingSlugs, readWritingFrontmatter } from "@/lib/mdx";
+import { buildCanonical } from "@/lib/metadata";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: {
+      canonical: buildCanonical(locale, ""),
+    },
+  };
+}
 
 export default async function HomePage(props: {
   params: Promise<{ locale: string }>;
@@ -11,6 +30,13 @@ export default async function HomePage(props: {
   setRequestLocale(locale);
 
   const t = await getTranslations("HomePage");
+
+  // Fetch latest essay for the writing teaser
+  const writingSlugs = await getWritingSlugs();
+  const latestEssay =
+    writingSlugs.length > 0
+      ? await readWritingFrontmatter(writingSlugs[0], locale)
+      : null;
 
   const caseStudies = [
     {
@@ -99,11 +125,31 @@ export default async function HomePage(props: {
           </Link>
         </div>
         <div className="flex-1 max-w-md">
-          <div className="border border-border rounded p-6 bg-canvas-elevated">
-            <p className="text-sm text-ink-tertiary italic font-serif">
-              {t("writing.placeholder")}
-            </p>
-          </div>
+          {latestEssay ? (
+            <Link
+              href={`/${locale}/writing/${writingSlugs[0]}`}
+              className="block border border-border rounded p-6 bg-canvas-elevated hover:border-ink-tertiary/30 transition-colors"
+            >
+              <p className="text-xs text-ink-tertiary mb-2">
+                {t("writing.latestEssay")}
+              </p>
+              <h3 className="font-serif text-lg text-ink-primary mb-2">
+                {locale === "fr" ? latestEssay.titleFr : latestEssay.title}
+              </h3>
+              <p className="text-sm text-ink-secondary line-clamp-2">
+                {locale === "fr" ? latestEssay.summaryFr : latestEssay.summary}
+              </p>
+              <span className="inline-flex items-center text-sm font-medium text-ink-primary mt-4">
+                {t("writing.readEssay")} <span className="ml-2 text-ink-tertiary">→</span>
+              </span>
+            </Link>
+          ) : (
+            <div className="border border-border rounded p-6 bg-canvas-elevated">
+              <p className="text-sm text-ink-tertiary italic font-serif">
+                {t("writing.placeholder")}
+              </p>
+            </div>
+          )}
         </div>
       </section>
 

@@ -1,7 +1,17 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
-export default async function NotFound() {
+export const metadata: Metadata = {
+  title: "Page not found",
+};
+
+export default async function NotFound({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   const t = await getTranslations("NotFoundPage");
 
   return (
@@ -24,7 +34,7 @@ export default async function NotFound() {
 
         {/* Back link */}
         <Link
-          href="/"
+          href={`/${locale}`}
           className="inline-flex items-center px-5 py-2.5 rounded-md bg-canvas-elevated border border-border text-sm font-medium text-ink-secondary hover:text-ink-primary hover:border-ink-tertiary/30 transition-colors"
         >
           {t("backToHome")}

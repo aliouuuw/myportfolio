@@ -5,6 +5,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { routing } from "@/i18n/routing";
 import { getWorkSlugs, compileWorkBySlug } from "@/lib/mdx";
+import { buildCanonical } from "@/lib/metadata";
 
 export async function generateStaticParams() {
   const slugs = await getWorkSlugs();
@@ -24,7 +25,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const title = locale === "fr" ? frontmatter.titleFr : frontmatter.title;
     const description =
       locale === "fr" ? frontmatter.summaryFr : frontmatter.summary;
-    return { title, description };
+    return {
+      title,
+      description,
+      alternates: {
+        canonical: buildCanonical(locale, `/work/${slug}`),
+      },
+    };
   } catch {
     return {};
   }
