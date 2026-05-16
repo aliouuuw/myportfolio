@@ -1,0 +1,95 @@
+---
+title: "Odoo 18 Acceptance Testing Toolkit — bringing test discipline to ERP migrations"
+titleFr: "Toolkit de tests d'acceptance Odoo 18 — apporter la discipline de test aux migrations ERP"
+summary: "A Robot Framework + Playwright starter kit for structured acceptance testing of Odoo 18 migrations, built during production ERP work at ERGOBIT."
+summaryFr: "Un starter kit Robot Framework + Playwright pour les tests d'acceptance structurés des migrations Odoo 18, construit pendant un travail ERP en production chez ERGOBIT."
+role: "Software engineer"
+domain: "ERP / QA"
+stack:
+  - "Robot Framework"
+  - "Playwright"
+  - "Python"
+  - "Odoo 18"
+  - "Azure DevOps"
+date: "2024-07"
+featured: true
+confidential: false
+---
+
+## Context
+
+I joined ERGOBIT in Dakar as a software engineer. ERGOBIT is an Odoo integrator serving Senegalese clients across fiscalité, human resources, and accounting — the kind of operational domains where ERP misconfiguration has immediate financial consequences.
+
+My work split into two tracks: building custom ERP and BI modules for clients, and handling Odoo 18 migrations. The module work was substantial — an accounting automation for Africa GreenTec that eliminated roughly 80% of manual data entry and processed over 10,000 records daily. But the migration work is what exposed a gap I couldn't ignore.
+
+## Problem
+
+Odoo migrations are high-stakes, low-confidence events. You're moving an entire business operation — invoicing, payroll, inventory, HR workflows — from one major version to another. Modules break. Custom fields disappear. Workflow automations stop firing. And the standard approach to validating all of this is manual: a functional consultant clicks through screens, eyeballs the data, and declares it good.
+
+This works until it doesn't. Regressions slip through because nobody remembers to check the edge case in the purchase order workflow. A custom report that worked in Odoo 16 silently returns wrong numbers in Odoo 18. By the time someone notices, the client has been operating on bad data.
+
+The deeper issue is cultural. ERP integrators are not software shops — test discipline is not part of the workflow. There's no CI pipeline, no regression suite, no structured way to say "this migration is validated against these criteria." Every migration is a fresh act of faith.
+
+## Approach
+
+I built a starter kit designed to make structured acceptance testing the path of least resistance for Odoo migrations. The architecture decisions were deliberate:
+
+- **Robot Framework for keyword-driven tests.** Robot Framework's keyword abstraction lets functional consultants read and eventually contribute to test definitions without writing Python. A test case reads like a checklist: "Navigate to Sales Order, Create New Order, Verify Total Calculation." This was non-negotiable — the toolkit had to be accessible beyond the engineering team.
+- **Playwright for browser automation.** Odoo's web client is a complex single-page application. Playwright handles the dynamic rendering, waiting, and state management that simpler tools struggle with. It also gives us cross-browser coverage without extra infrastructure.
+- **Smoke vs. full validation split.** Smoke suites run in under two minutes and catch catastrophic failures — can you log in, do core modules load, do menu items exist. Full validation suites exercise business workflows end-to-end. This split lets teams run smoke tests on every deployment and reserve full validation for milestone checkpoints.
+- **Selector guidelines documentation.** Odoo's DOM structure is not stable across versions. I wrote guidelines for the team on how to build resilient selectors — preferring data attributes and ARIA roles over CSS classes, avoiding XPath tied to DOM depth. This is maintenance strategy disguised as documentation.
+
+## System diagram
+
+```
+┌──────────────────────────────────────────────┐
+│           Azure DevOps CI Pipeline           │
+│  ┌────────────────────────────────────────┐  │
+│  │        Robot Framework Runner          │  │
+│  │  ┌──────────┐  ┌───────────────────┐  │  │
+│  │  │  Smoke   │  │  Full Validation  │  │  │
+│  │  │ (9 min)  │  │    (39 tests)     │  │  │
+│  │  └────┬─────┘  └────────┬──────────┘  │  │
+│  │       └────────┬────────┘             │  │
+│  │                ▼                      │  │
+│  │         Playwright Browser            │  │
+│  └────────────────┬───────────────────-──┘  │
+│                   ▼                          │
+│          Odoo 18 Instance                    │
+└──────────────────────────────────────────────┘
+```
+
+## What shipped
+
+- **39 tests across 9 suites** covering core Odoo modules — sales, purchase, invoicing, inventory, HR, and accounting workflows
+- **Smoke test suite** for rapid post-deployment validation
+- **Selector guidelines document** establishing team conventions for maintainable browser selectors
+- **CI/CD pipeline on Azure DevOps** that runs the full suite on migration branches, reducing manual validation interventions by roughly 80%
+- The toolkit was used in production for an Odoo 18 migration engagement
+
+## Technical depth
+
+Robot Framework's keyword architecture was the right abstraction layer for this problem. Each test file reads as a structured acceptance scenario written in near-natural language, but underneath, keywords resolve to Python libraries that drive Playwright. I organized keywords into three layers: business keywords ("Create Sales Order"), navigation keywords ("Navigate To Module"), and assertion keywords ("Verify Field Value"). This layering means a change to Odoo's UI requires updating navigation keywords, not rewriting every test.
+
+The selector strategy deserves its own note. Odoo renders its UI through an OWL framework with dynamically generated class names. Selectors built on class names break across versions — exactly the scenario you're trying to test against. I established a convention of using `data-field`, `name` attributes, and ARIA roles as primary selectors, with CSS class selectors only as fallbacks with explicit comments marking them as fragile. The selector guidelines document became one of the most referenced artifacts on the team.
+
+## Outcome
+
+The toolkit was used in a production Odoo 18 migration at ERGOBIT. It caught regressions that manual validation would have missed — specifically around computed fields in accounting modules that returned different rounding behavior in the new version.
+
+The CI pipeline transformed the deployment workflow. Before the toolkit, a migration validation cycle took a full day of manual clicking. With the automated suite, the team gets a pass/fail signal in under fifteen minutes and can focus manual attention on the failures that matter.
+
+I maintain a strong relationship with ERGOBIT leadership. The toolkit is a candidate for extraction and open-sourcing with their permission — it solves a problem that every Odoo integrator faces but few address systematically.
+
+## Lessons
+
+**What I'd do differently:**
+
+- **Start with acceptance criteria before writing any test code.** I began by automating the obvious workflows and backfilled criteria later. Starting with a formal acceptance matrix — signed off by functional consultants — would have produced better coverage and faster buy-in.
+- **Involve functional consultants from day one.** The keyword-driven approach was designed for their participation, but I built the first version alone and presented it. Co-creating the initial suites would have surfaced domain edge cases I missed and built ownership earlier.
+
+**What worked well:**
+
+- The Robot Framework keyword abstraction genuinely lowered the barrier for non-engineers to understand what the tests do. That matters more than test coverage numbers when you're trying to change a team's relationship with testing.
+- The smoke/full split gave the team a low-friction entry point. Running a two-minute smoke suite after every deployment became habit before the full validation suite was even complete.
+- Investing in selector guidelines paid compound returns. Every new test written by the team followed the conventions, and selector-related flakiness dropped significantly compared to the early prototypes.
