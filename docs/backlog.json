@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-16T23:45:00Z",
+  "updated": "2026-05-16T23:50:00Z",
   "phases": [
     {
       "id": "P0",
@@ -357,7 +357,7 @@
           "id": "T025",
           "title": "C1+C2: CaseReportHeader and ScrollDiagram components",
           "desc": "Build components/case-report-header.tsx: classification header line (FILE: CF-xxx · CLASSIFICATION: xxx · STATUS: xxx), large serif title (clamp 2rem–3.5rem), FR/EN summary block side-by-side at lg+ (stacked at sm). Build components/scroll-diagram.tsx: SVG with paths using stroke-dasharray + stroke-dashoffset transitions; an IntersectionObserver sets a CSS class when the element enters view, triggering lines to draw left-to-right. No JS animation library — pure CSS transitions on SVG attributes. Provide a mock SVG diagram for Everest Finance showing anonymized system topology. Respect prefers-reduced-motion (show instantly at full opacity if reduced).",
-          "status": "pending",
+          "status": "done",
           "deps": ["T018", "T022"],
           "files": [
             "components/case-report-header.tsx",

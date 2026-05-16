@@ -291,6 +291,41 @@ body {
 }
 
 /* ────────────────────────────────────────────────────────────────────────────
+   Scroll diagram line animations
+   ──────────────────────────────────────────────────────────────────────────── */
+
+.diagram-line-hidden {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+
+.diagram-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 1.5s ease-out forwards;
+}
+
+.diagram-line-accent {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 1.5s ease-out forwards;
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .diagram-line,
+  .diagram-line-accent {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
    Magnetic lift animation (for CaseFileCard)
    ──────────────────────────────────────────────────────────────────────────── */
 
