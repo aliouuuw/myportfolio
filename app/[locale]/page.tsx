@@ -130,7 +130,7 @@ export default async function HomePage(props: {
         <div className="flex-1 max-w-md">
           <div className="border border-border rounded p-6 bg-canvas-elevated">
             <p className="text-sm text-ink-tertiary italic font-serif">
-              Coming soon.
+              {t("writing.placeholder")}
             </p>
           </div>
         </div>

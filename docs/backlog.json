@@ -38,7 +38,7 @@
           "id": "T003",
           "title": "Shared layout — nav, footer, locale switcher",
           "desc": "Build the site shell: top nav (Work | Writing | About | Contact | EN/FR), footer (GitHub, LinkedIn, Email, WhatsApp). Create locale-switcher component. All text from next-intl messages.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T001", "T002"],
           "files": [
             "app/[locale]/layout.tsx",

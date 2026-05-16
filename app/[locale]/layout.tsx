@@ -6,6 +6,8 @@ import {
 } from "next-intl/server";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Footer } from "@/components/footer";
+import { Nav } from "@/components/nav";
 import { routing } from "@/i18n/routing";
 
 export function generateStaticParams() {
@@ -46,7 +48,9 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider messages={messages}>
-      {children}
+      <Nav locale={locale} />
+      <main className="flex flex-1 flex-col">{children}</main>
+      <Footer />
     </NextIntlClientProvider>
   );
 }

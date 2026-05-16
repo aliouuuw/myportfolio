@@ -51,6 +51,7 @@
     "writing": {
       "title": "Derniers écrits",
       "subtitle": "Notes techniques sur le logiciel opérationnel, l'ingénierie IA-native et la pensée systémique.",
+      "placeholder": "Bientôt.",
       "cta": "Lire tous les essais"
     },
     "contact": {
@@ -58,5 +59,31 @@
       "description": "Je suis actuellement concentré sur la consolidation des systèmes chez Everest Finance, mais je suis ouvert aux conversations stratégiques sur le logiciel opérationnel.",
       "cta": "Démarrer une conversation"
     }
+  },
+  "Nav": {
+    "brand": "Aliou Wade",
+    "ariaLabel": "Navigation principale",
+    "work": "Travaux",
+    "writing": "Écrits",
+    "about": "À propos",
+    "contact": "Contact"
+  },
+  "LocaleSwitcher": {
+    "ariaLabel": "Langue",
+    "en": "EN",
+    "fr": "FR"
+  },
+  "Footer": {
+    "tagline": "Ingénierie systèmes produit pour la fintech et les équipes à forte charge opérationnelle.",
+    "copyright": "© 2026 Aliou Wade",
+    "linksAriaLabel": "Liens de contact et réseaux",
+    "githubLabel": "GitHub",
+    "githubHref": "https://github.com/",
+    "linkedinLabel": "LinkedIn",
+    "linkedinHref": "https://www.linkedin.com/",
+    "emailLabel": "E-mail",
+    "emailHref": "mailto:hello@example.com",
+    "whatsappLabel": "WhatsApp",
+    "whatsappHref": "https://wa.me/"
   }
 }

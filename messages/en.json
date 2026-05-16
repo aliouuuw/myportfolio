@@ -51,6 +51,7 @@
     "writing": {
       "title": "Latest writing",
       "subtitle": "Technical notes on operational software, AI-native engineering, and systems thinking.",
+      "placeholder": "Coming soon.",
       "cta": "Read all essays"
     },
     "contact": {
@@ -58,5 +59,31 @@
       "description": "I'm currently focused on consolidating systems at Everest Finance, but I'm open to strategic conversations about operational software.",
       "cta": "Start a conversation"
     }
+  },
+  "Nav": {
+    "brand": "Aliou Wade",
+    "ariaLabel": "Primary navigation",
+    "work": "Work",
+    "writing": "Writing",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "LocaleSwitcher": {
+    "ariaLabel": "Language",
+    "en": "EN",
+    "fr": "FR"
+  },
+  "Footer": {
+    "tagline": "Product systems engineering for fintech and operations-heavy teams.",
+    "copyright": "© 2026 Aliou Wade",
+    "linksAriaLabel": "Contact and social links",
+    "githubLabel": "GitHub",
+    "githubHref": "https://github.com/",
+    "linkedinLabel": "LinkedIn",
+    "linkedinHref": "https://www.linkedin.com/",
+    "emailLabel": "Email",
+    "emailHref": "mailto:hello@example.com",
+    "whatsappLabel": "WhatsApp",
+    "whatsappHref": "https://wa.me/"
   }
 }
