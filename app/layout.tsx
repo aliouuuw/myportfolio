@@ -1,11 +1,23 @@
 import type { Metadata } from "next";
-import { Inter, Lora } from "next/font/google";
+import { Inter, JetBrains_Mono, Fraunces } from "next/font/google";
 import { getLocale } from "next-intl/server";
 import "./globals.css";
 
 /**
- * Inter — clean, highly legible sans-serif for UI elements,
- * navigation, buttons, and technical content.
+ * Fraunces — variable serif with optical size axis.
+ * Used for display text: hero sentences, case-study titles, essay headings.
+ * Engraved feel at large sizes via low weight + tight tracking.
+ */
+const fraunces = Fraunces({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  display: "swap",
+  axes: ["opsz"],
+});
+
+/**
+ * Inter — clean, legible sans-serif for UI, body text, and labels.
+ * Geist is preferred but Inter is the reliable Google Fonts fallback.
  */
 const inter = Inter({
   variable: "--font-sans",
@@ -14,11 +26,11 @@ const inter = Inter({
 });
 
 /**
- * Lora — elegant serif for long-form content and editorial moments.
- * Adds warmth and premium feel to case studies and writing.
+ * JetBrains Mono — technical mono for numerical labels, code blocks,
+ * margin notes, and the "Currently —" line.
  */
-const lora = Lora({
-  variable: "--font-serif",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
   display: "swap",
 });
@@ -39,7 +51,7 @@ export default async function RootLayout({
     <html
       suppressHydrationWarning
       lang={locale}
-      className={`${inter.variable} ${lora.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
