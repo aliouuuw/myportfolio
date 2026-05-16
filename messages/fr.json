@@ -87,6 +87,23 @@
     "backToWriting": "← Écrits",
     "readEssay": "Lire l'essai"
   },
+  "AboutPage": {
+    "title": "À propos",
+    "section1": {
+      "heading": "Qui je suis",
+      "body": "Je suis un Product Systems Engineer basé à Dakar. Je me spécialise dans les logiciels opérationnels — les systèmes qui font tourner les entreprises : outils internes, workflows d'administration, consolidation CRM, configuration ERP. Je travaille en français et en anglais, et je construis pour des réalités opérationnelles que la plupart des logiciels ignorent."
+    },
+    "section2": {
+      "heading": "Ce que je construis",
+      "body": "Je ne construis pas des sites marketing. Je construis l'infrastructure derrière — CRM, applications clients, suites de tests d'acceptance, systèmes d'administration, automatisation des workflows. Chez Everest Finance, j'opère comme responsable technique, consolidant trois surfaces séparées en un système cohérent. Chez ERGOBIT, j'ai construit un toolkit de tests d'acceptance Odoo 18 qui a apporté la discipline Robot Framework à une migration ERP en production.",
+      "currentWork": "Actuellement chez Everest Finance",
+      "pastWork": "Précédemment : ERGOBIT, tests d'acceptance Odoo 18"
+    },
+    "section3": {
+      "heading": "Au-delà du travail",
+      "body": "Je joue aux échecs — pas en compétition, mais cela façonne ma façon de penser les systèmes : patience, compromis positionnels, jouer sur le long terme. Je suis venu comme opérateur, pas comme académicien. Cela signifie que j'ai géré des réalités parties prenantes, travaillé dans des contraintes opérationnelles, et livré des logiciels dont les entreprises dépendent vraiment."
+    }
+  },
   "Footer": {
     "tagline": "Ingénierie systèmes produit pour la fintech et les équipes à forte charge opérationnelle.",
     "copyright": "© 2026 Aliou Wade",
