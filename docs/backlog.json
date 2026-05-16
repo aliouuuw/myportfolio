@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-16T21:22:00Z",
+  "updated": "2026-05-16T21:26:00Z",
   "phases": [
     {
       "id": "P0",
@@ -250,7 +250,7 @@
           "id": "T017",
           "title": "Component — MetalPanel with specular drift",
           "desc": "Create components/metal-panel.tsx implementing the layered metallic surface per design-shape-v2.md §9: base fill, brushed micro-texture, edge emboss, cursor-tracked specular highlight via CSS custom properties (--mx, --my) and rAF-throttled handler. Optional 'interactive' prop. Respect prefers-reduced-motion. Add a SpecularHighlight isolated subcomponent. 6px corner radius. Export typed props.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T015"],
           "files": [
             "components/metal-panel.tsx",
