@@ -71,7 +71,7 @@
           "id": "T005",
           "title": "Homepage shell",
           "desc": "Build the homepage: hero with positioning sentence (EN/FR), three flagship case study cards (placeholder content), 'how I work' section, latest writing teaser, contact CTA. Design the signature metallic case-study card component.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T002", "T003"],
           "files": [
             "app/[locale]/page.tsx",

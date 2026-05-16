@@ -1,4 +1,8 @@
+import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+
+import { CaseStudyCard } from "@/components/case-study-card";
+import { Hero } from "@/components/hero";
 
 export default async function HomePage(props: {
   params: Promise<{ locale: string }>;
@@ -26,33 +30,8 @@ export default async function HomePage(props: {
   const howIWorkItems = [0, 1, 2] as const;
 
   return (
-    <div className="flex flex-col flex-1 selection:bg-ink-muted selection:text-ink-primary">
-      {/* ── Hero ── */}
-      <section className="flex flex-col items-start justify-center px-6 pt-32 pb-24 sm:px-12 lg:px-24 max-w-5xl mx-auto w-full">
-        <p className="text-xs font-medium tracking-widest uppercase text-ink-tertiary mb-8">
-          {t("hero.role")}
-        </p>
-        <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal leading-tight tracking-tight text-ink-primary mb-8 max-w-3xl">
-          {t("hero.tagline")}
-        </h1>
-        <p className="text-lg sm:text-xl leading-relaxed text-ink-secondary max-w-2xl mb-12">
-          {t("hero.description")}
-        </p>
-        <div className="flex flex-wrap gap-4">
-          <a
-            href={`/${locale}/work`}
-            className="inline-flex items-center justify-center h-10 px-6 rounded bg-ink-primary text-canvas text-sm font-medium transition-colors hover:bg-ink-secondary"
-          >
-            {t("hero.ctaWork")}
-          </a>
-          <a
-            href={`/${locale}/contact`}
-            className="inline-flex items-center justify-center h-10 px-6 rounded border border-border text-ink-primary text-sm font-medium transition-colors hover:border-border-strong hover:bg-canvas-elevated"
-          >
-            {t("hero.ctaContact")}
-          </a>
-        </div>
-      </section>
+    <div className="flex flex-col flex-1">
+      <Hero locale={locale} />
 
       <div className="hairline max-w-5xl mx-auto" />
 
@@ -68,21 +47,13 @@ export default async function HomePage(props: {
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {caseStudies.map(({ key, href }) => (
-            <a
+            <CaseStudyCard
               key={key}
               href={href}
-              className="card-metallic rounded-md p-8 flex flex-col gap-4 group"
-            >
-              <span className="card-category text-xs font-medium tracking-widest uppercase">
-                {t(`caseStudies.${key}.category`)}
-              </span>
-              <h3 className="card-title text-lg font-medium">
-                {t(`caseStudies.${key}.title`)}
-              </h3>
-              <p className="card-desc text-sm leading-relaxed mt-auto pt-4">
-                {t(`caseStudies.${key}.description`)}
-              </p>
-            </a>
+              category={t(`caseStudies.${key}.category`)}
+              title={t(`caseStudies.${key}.title`)}
+              description={t(`caseStudies.${key}.description`)}
+            />
           ))}
         </div>
       </section>
@@ -120,12 +91,12 @@ export default async function HomePage(props: {
           <p className="text-sm leading-relaxed text-ink-secondary mb-8">
             {t("writing.subtitle")}
           </p>
-          <a
+          <Link
             href={`/${locale}/writing`}
             className="inline-flex items-center text-sm font-medium text-ink-primary hover:text-ink-secondary transition-colors"
           >
             {t("writing.cta")} <span className="ml-2 text-ink-tertiary">→</span>
-          </a>
+          </Link>
         </div>
         <div className="flex-1 max-w-md">
           <div className="border border-border rounded p-6 bg-canvas-elevated">
@@ -146,12 +117,12 @@ export default async function HomePage(props: {
         <p className="text-lg text-ink-secondary max-w-xl mb-10 leading-relaxed">
           {t("contact.description")}
         </p>
-        <a
+        <Link
           href={`/${locale}/contact`}
           className="inline-flex items-center justify-center h-10 px-8 rounded bg-ink-primary text-canvas text-sm font-medium transition-colors hover:bg-ink-secondary"
         >
           {t("contact.cta")}
-        </a>
+        </Link>
       </section>
     </div>
   );

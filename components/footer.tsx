@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
 export async function Footer() {
@@ -22,12 +21,14 @@ export async function Footer() {
             <ul className="flex flex-col gap-3 sm:items-end">
               {items.map(({ href, label }) => (
                 <li key={label}>
-                  <Link
+                  <a
                     href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-sm text-ink-secondary transition-colors duration-200 ease-out hover:text-ink-primary"
                   >
                     {label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>

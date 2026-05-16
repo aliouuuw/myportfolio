@@ -115,7 +115,7 @@ export async function getWritingSlugs(): Promise<string[]> {
 export async function readWorkFrontmatter(
   slug: string,
 ): Promise<CaseStudyFrontmatter> {
-  if (!/^[a-z0-9][a-z0-9-]*$/i.test(slug)) {
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) {
     throw new Error(`Invalid slug: ${slug}`);
   }
   const filePath = path.join(WORK_CONTENT_DIR, `${slug}.mdx`);
@@ -127,7 +127,7 @@ export async function readWorkFrontmatter(
 export async function readWritingFrontmatter(
   slug: string,
 ): Promise<EssayFrontmatter> {
-  if (!/^[a-z0-9][a-z0-9-]*$/i.test(slug)) {
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) {
     throw new Error(`Invalid slug: ${slug}`);
   }
   const filePath = path.join(WRITING_CONTENT_DIR, `${slug}.mdx`);
@@ -159,7 +159,7 @@ export async function compileWorkBySlug(slug: string): Promise<{
   content: ReactElement;
   frontmatter: CaseStudyFrontmatter;
 }> {
-  if (!/^[a-z0-9][a-z0-9-]*$/i.test(slug)) {
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) {
     throw new Error(`Invalid slug: ${slug}`);
   }
   const filePath = path.join(WORK_CONTENT_DIR, `${slug}.mdx`);
@@ -170,7 +170,7 @@ export async function compileWritingBySlug(slug: string): Promise<{
   content: ReactElement;
   frontmatter: EssayFrontmatter;
 }> {
-  if (!/^[a-z0-9][a-z0-9-]*$/i.test(slug)) {
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) {
     throw new Error(`Invalid slug: ${slug}`);
   }
   const filePath = path.join(WRITING_CONTENT_DIR, `${slug}.mdx`);
