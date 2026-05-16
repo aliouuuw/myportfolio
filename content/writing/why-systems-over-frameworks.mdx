@@ -1,0 +1,68 @@
+---
+title: "Why I stopped building frameworks and started shipping systems"
+titleFr: "Pourquoi j'ai arrêté de construire des frameworks pour livrer des systèmes"
+summary: "A reflection on the shift from building abstract infrastructure to shipping operational software that businesses actually depend on."
+summaryFr: "Une réflexion sur le passage de la construction d'infrastructure abstraite à la livraison de logiciels opérationnels dont les entreprises dépendent réellement."
+date: "2026-05"
+---
+
+There's a particular kind of productivity that feels like progress but produces nothing. You recognize it by the artifacts: a CLI that bootstraps projects nobody asked for, a routing abstraction that handles edge cases you haven't encountered, a validation library that's elegant and unused. I spent years in that mode. I was building frameworks.
+
+I don't mean frameworks in the literal sense — I wasn't competing with Next.js or Rails. I mean the habit of reaching for abstraction before reaching for a user. The instinct to solve the general case before solving the specific one. To build the tool that builds the thing, instead of building the thing.
+
+This essay is about why I stopped, and what replaced it.
+
+## The framework instinct
+
+Early in my career, every new project triggered the same reflex: before writing business logic, I'd design the infrastructure around it. A reusable component system before the first screen. A custom state management layer before the first interaction. An API abstraction before the first endpoint.
+
+The reasoning felt sound. If I built the foundation right, everything else would be faster. And sometimes it was — for the first two weeks. Then requirements shifted, or the abstraction didn't fit a real use case, or I simply ran out of energy maintaining plumbing that only I understood.
+
+BocalBun is the clearest example. I was building a development toolkit — a framework for scaffolding, testing, and deploying Bun applications. The architecture was clean. The developer experience was thoughtful. And after months of work, I made a deliberate decision to stop.
+
+Not because it failed. Because I looked at what it would take to make it genuinely useful to other people, and compared that to what I could accomplish by applying the same energy to software that a business was waiting for. The math was clear. BocalBun was intellectually satisfying. It was not creating value for anyone.
+
+Stopping felt like waste at the time. In retrospect, it was the most productive decision I made that year.
+
+## The turning point
+
+What changed my orientation wasn't a blog post or a conference talk. It was working inside real businesses and seeing what actually matters to the people who pay for software.
+
+At ERGOBIT, I was deploying Odoo ERP modules for companies that needed their operations to work tomorrow, not next quarter. These weren't greenfield projects with room for architectural elegance. They were messy environments where a testing toolkit that caught regressions before deployment was worth more than any abstraction I could design. So I built that toolkit. It wasn't glamorous. It didn't have a landing page. But it prevented real failures in production systems that real businesses depended on.
+
+At Everest Finance, the lesson sharpened further. I joined as the sole technical operator for a Senegalese fintech with three disconnected digital surfaces: a public website, an internal CRM, and a customer-facing app. The temptation was enormous — three products, one engineer, surely this calls for a unifying framework?
+
+It didn't. It called for a system. A shared database schema. Consistent type definitions. A deployment pipeline that worked for each surface independently. The difference is subtle but important: a framework is something you build so that future work is easier. A system is something that works today and can be extended tomorrow. I needed the latter.
+
+## What "shipping systems" actually means
+
+When I say I ship systems now, I mean something specific. I mean software that:
+
+- **Has users who depend on it.** The Everest CRM is used daily by an operations team processing real financial transactions. If it breaks, people notice within minutes, not months.
+- **Solves a business problem, not a technical one.** The ERGOBIT testing toolkit didn't exist because testing is interesting. It existed because deployments were failing and clients were losing confidence.
+- **Can be operated by someone other than its creator.** A framework I built for myself can be as idiosyncratic as I want. A system that a business depends on needs to be legible, documented, and predictable.
+- **Prioritizes correctness over elegance.** In fintech, a transaction that processes incorrectly is not a bug — it's a compliance incident. The code that handles it should be boring and correct, not clever and compact.
+
+This is not a universal prescription. Frameworks matter. Open source infrastructure matters. But for me, at this stage, the highest-leverage work is operational software that businesses run on. Not because it's more noble, but because it's where my judgment compounds fastest.
+
+## The tradeoff nobody talks about
+
+Framework building feels like progress because it is progress — on a problem you chose. You control the scope. You control the success criteria. You can always make the abstraction a little more elegant, the API a little more ergonomic. There's no external forcing function telling you it's done.
+
+Systems don't offer that comfort. A CRM is done when the operations team can onboard a client without calling you. A testing toolkit is done when deployments stop failing. The definition of success belongs to someone else, and that someone else doesn't care about your architecture.
+
+This is the tradeoff: frameworks give you intellectual ownership. Systems give you operational accountability. I've found that accountability produces better engineering than ownership does. When someone depends on your code working correctly at 2 AM, you make different design decisions than when you're optimizing for developer experience in a README.
+
+## The practical takeaway
+
+If you recognize the pattern I'm describing — the tendency to build infrastructure before building the thing — here's what I've learned:
+
+**Ask who's waiting.** If nobody is waiting for what you're building, you're probably building a framework. That's fine if it's intentional. It's expensive if it's a habit.
+
+**Measure in deployments, not commits.** I used to track my productivity by how much code I wrote. Now I track it by what shipped and who uses it. The correlation between those two metrics is weaker than you'd expect.
+
+**Treat stopping as a skill.** The decision to stop BocalBun wasn't a failure of discipline. It was discipline. Knowing when an investment isn't going to pay off — and redirecting that energy — is as important as knowing how to build well.
+
+I still build tools for myself. I still enjoy abstraction. But I've learned to treat that impulse as a signal to check whether I'm solving a real problem or just a comfortable one. Most of the time, the real problem is less elegant and more valuable.
+
+That's the shift. Not from building to not-building, but from building for the sake of building to building because someone needs it to work.
