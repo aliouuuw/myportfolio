@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import { CaseStudyCard } from "@/components/case-study-card";
-import { Hero } from "@/components/hero";
+import { CaseFileCard } from "@/components/case-file-card";
 import { getWritingSlugs, readWritingFrontmatter } from "@/lib/mdx";
 import { buildCanonical } from "@/lib/metadata";
 
@@ -31,144 +30,167 @@ export default async function HomePage(props: {
 
   const t = await getTranslations("HomePage");
 
-  // Fetch latest essay for the writing teaser
+  // Fetch latest essay for the field note teaser
   const writingSlugs = await getWritingSlugs();
   const latestEssay =
     writingSlugs.length > 0
       ? await readWritingFrontmatter(writingSlugs[0], locale)
       : null;
 
-  const caseStudies = [
+  // Case files data per design-shape-v3.md
+  const caseFiles = [
     {
-      key: "everest" as const,
+      fileRef: "CF-001",
+      classification: "CONFIDENTIAL" as const,
+      titleKey: "everestTitle",
+      metaKey: "everestMeta",
+      summaryKey: "everestSummary",
+      status: "ACTIVE" as const,
       href: `/${locale}/work/everest-finance`,
+      stagger: 0,
     },
     {
-      key: "odooToolkit" as const,
+      fileRef: "CF-002",
+      classification: "OPEN SOURCE" as const,
+      titleKey: "odooTitle",
+      metaKey: "odooMeta",
+      summaryKey: "odooSummary",
+      status: "SHIPPED" as const,
       href: `/${locale}/work/odoo-testing-toolkit`,
+      stagger: 1,
     },
     {
-      key: "eduplan" as const,
-      href: `/${locale}/work/eduplan`,
+      fileRef: "CF-003",
+      classification: "RETROSPECTIVE" as const,
+      titleKey: "bocalbunTitle",
+      metaKey: "bocalbunMeta",
+      summaryKey: "bocalbunSummary",
+      status: "ARCHIVED" as const,
+      href: `/${locale}/work/bocalbun-retrospective`,
+      stagger: 2,
     },
   ];
 
-  const howIWorkItems = [0, 1, 2] as const;
-
   return (
     <div className="flex flex-col flex-1">
-      <Hero locale={locale} />
+      {/* ── 01 Identity Block ── */}
+      <section className="px-6 pt-32 pb-16 sm:px-12 lg:px-24 max-w-5xl mx-auto w-full">
+        {/* Name */}
+        <h1 className="font-serif text-[clamp(2.5rem,6vw,4rem)] font-normal leading-[1.1] tracking-tight text-ink-primary mb-6">
+          {t("identity.name")}
+        </h1>
 
-      <div className="hairline max-w-5xl mx-auto" />
+        {/* Role */}
+        <p className="font-mono text-[11px] font-medium uppercase tracking-wide text-ink-tertiary mb-6">
+          {t("identity.role")}
+        </p>
 
-      {/* ── Case Studies ── */}
-      <section className="px-6 py-24 sm:px-12 lg:px-24 max-w-5xl mx-auto w-full">
-        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-12 gap-4">
-          <h2 className="text-xl font-medium tracking-tight text-ink-primary">
-            {t("caseStudies.title")}
-          </h2>
-          <p className="text-sm text-ink-tertiary">
-            {t("caseStudies.subtitle")}
+        {/* Positioning sentence */}
+        <p className="text-lg sm:text-xl leading-relaxed text-ink-secondary max-w-[68ch] mb-8">
+          {t("identity.positioning")}
+        </p>
+
+        {/* Currently line with pulse dot */}
+        <div className="flex items-center gap-3 mb-10">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+          </span>
+          <p className="text-sm text-ink-secondary">
+            {t("identity.currently")}
           </p>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {caseStudies.map(({ key, href }) => (
-            <CaseStudyCard
-              key={key}
-              href={href}
-              category={t(`caseStudies.${key}.category`)}
-              title={t(`caseStudies.${key}.title`)}
-              description={t(`caseStudies.${key}.description`)}
+
+        {/* Two text links */}
+        <div className="flex items-center gap-6">
+          <Link
+            href={`/${locale}/work`}
+            className="text-sm text-ink-secondary hover:text-ink-primary transition-colors underline underline-offset-4 decoration-border hover:decoration-ink-tertiary"
+          >
+            {t("identity.viewRecord")}
+          </Link>
+          <Link
+            href={`/${locale}/contact`}
+            className="text-sm text-ink-secondary hover:text-ink-primary transition-colors underline underline-offset-4 decoration-border hover:decoration-ink-tertiary"
+          >
+            {t("identity.getInTouch")}
+          </Link>
+        </div>
+      </section>
+
+      {/* ── 02 Case Files ── */}
+      <section className="px-6 py-16 sm:px-12 lg:px-24 max-w-5xl mx-auto w-full">
+        <div className="flex flex-col gap-6 sm:gap-8">
+          {caseFiles.map((file) => (
+            <CaseFileCard
+              key={file.fileRef}
+              fileRef={file.fileRef}
+              classification={file.classification}
+              title={t(`caseFiles.${file.titleKey}`)}
+              meta={t(`caseFiles.${file.metaKey}`)}
+              summary={t(`caseFiles.${file.summaryKey}`)}
+              status={file.status}
+              href={file.href}
+              stagger={file.stagger}
             />
           ))}
         </div>
       </section>
 
-      <div className="hairline max-w-5xl mx-auto" />
-
-      {/* ── How I Work ── */}
-      <section className="px-6 py-24 sm:px-12 lg:px-24 max-w-5xl mx-auto w-full">
-        <h2 className="text-xl font-medium tracking-tight text-ink-primary mb-16">
-          {t("howIWork.title")}
-        </h2>
-        <div className="grid gap-12 sm:grid-cols-3">
-          {howIWorkItems.map((i) => (
-            <div key={i} className="flex flex-col gap-4">
-              <h3 className="text-sm font-medium text-ink-primary flex items-center">
-                <span className="text-ink-tertiary mr-3">0{i + 1}</span>
-                {t(`howIWork.items.${i}.title`)}
-              </h3>
-              <p className="text-sm leading-relaxed text-ink-secondary">
-                {t(`howIWork.items.${i}.description`)}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <div className="hairline max-w-5xl mx-auto" />
-
-      {/* ── Writing Teaser ── */}
-      <section className="px-6 py-24 sm:px-12 lg:px-24 max-w-5xl mx-auto w-full flex flex-col sm:flex-row sm:items-start justify-between gap-12">
-        <div className="max-w-sm">
-          <h2 className="text-xl font-medium tracking-tight text-ink-primary mb-4">
-            {t("writing.title")}
-          </h2>
-          <p className="text-sm leading-relaxed text-ink-secondary mb-8">
-            {t("writing.subtitle")}
-          </p>
+      {/* ── 03 Field Note ── */}
+      <section className="px-6 py-16 sm:px-12 lg:px-24 max-w-5xl mx-auto w-full">
+        <div className="hairline mb-8" />
+        {latestEssay ? (
           <Link
-            href={`/${locale}/writing`}
-            className="inline-flex items-center text-sm font-medium text-ink-primary hover:text-ink-secondary transition-colors"
+            href={`/${locale}/writing/${writingSlugs[0]}`}
+            className="group block py-4"
           >
-            {t("writing.cta")} <span className="ml-2 text-ink-tertiary">→</span>
+            <p className="font-mono text-[11px] font-medium uppercase tracking-wide text-ink-tertiary mb-2">
+              {t("fieldNote.label")} ·{" "}
+              <time dateTime={latestEssay.date}>
+                {new Date(latestEssay.date).toLocaleDateString(
+                  locale === "fr" ? "fr-FR" : "en-US",
+                  { month: "long", year: "numeric" }
+                )}
+              </time>
+            </p>
+            <h2 className="font-serif text-xl text-ink-primary mb-2 group-hover:text-ink-secondary transition-colors">
+              {locale === "fr" ? latestEssay.titleFr : latestEssay.title}
+            </h2>
+            <p className="text-sm text-ink-secondary max-w-[68ch] line-clamp-2">
+              {locale === "fr" ? latestEssay.summaryFr : latestEssay.summary}
+            </p>
           </Link>
-        </div>
-        <div className="flex-1 max-w-md">
-          {latestEssay ? (
-            <Link
-              href={`/${locale}/writing/${writingSlugs[0]}`}
-              className="block border border-border rounded p-6 bg-canvas-elevated hover:border-ink-tertiary/30 transition-colors"
-            >
-              <p className="text-xs text-ink-tertiary mb-2">
-                {t("writing.latestEssay")}
-              </p>
-              <h3 className="font-serif text-lg text-ink-primary mb-2">
-                {locale === "fr" ? latestEssay.titleFr : latestEssay.title}
-              </h3>
-              <p className="text-sm text-ink-secondary line-clamp-2">
-                {locale === "fr" ? latestEssay.summaryFr : latestEssay.summary}
-              </p>
-              <span className="inline-flex items-center text-sm font-medium text-ink-primary mt-4">
-                {t("writing.readEssay")} <span className="ml-2 text-ink-tertiary">→</span>
-              </span>
-            </Link>
-          ) : (
-            <div className="border border-border rounded p-6 bg-canvas-elevated">
-              <p className="text-sm text-ink-tertiary italic font-serif">
-                {t("writing.placeholder")}
-              </p>
-            </div>
-          )}
-        </div>
+        ) : (
+          <div className="py-4">
+            <p className="font-mono text-[11px] font-medium uppercase tracking-wide text-ink-tertiary mb-2">
+              {t("fieldNote.label")}
+            </p>
+            <p className="text-sm text-ink-tertiary italic">
+              {t("fieldNote.placeholder")}
+            </p>
+          </div>
+        )}
       </section>
 
-      <div className="hairline max-w-5xl mx-auto" />
-
-      {/* ── Contact CTA ── */}
-      <section className="px-6 py-32 sm:px-12 lg:px-24 max-w-5xl mx-auto w-full text-center flex flex-col items-center">
-        <h2 className="font-serif text-3xl sm:text-4xl font-normal tracking-tight text-ink-primary mb-6">
-          {t("contact.title")}
-        </h2>
-        <p className="text-lg text-ink-secondary max-w-xl mb-10 leading-relaxed">
-          {t("contact.description")}
-        </p>
-        <Link
-          href={`/${locale}/contact`}
-          className="inline-flex items-center justify-center h-10 px-8 rounded bg-ink-primary text-canvas text-sm font-medium transition-colors hover:bg-ink-secondary"
-        >
-          {t("contact.cta")}
-        </Link>
+      {/* ── 04 Contact Line ── */}
+      <section className="px-6 py-16 sm:px-12 lg:px-24 max-w-5xl mx-auto w-full">
+        <div className="hairline mb-8" />
+        <p className="text-sm text-ink-secondary mb-4">{t("contact.line")}</p>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
+          <a
+            href="mailto:wadealiou00@gmail.com"
+            className="text-sm text-ink-secondary hover:text-ink-primary transition-colors underline underline-offset-4 decoration-border hover:decoration-ink-tertiary"
+          >
+            wadealiou00@gmail.com
+          </a>
+          <a
+            href="https://wa.me/221777228845"
+            className="text-sm text-ink-secondary hover:text-ink-primary transition-colors underline underline-offset-4 decoration-border hover:decoration-ink-tertiary"
+          >
+            +221 77 722 88 45
+          </a>
+        </div>
       </section>
     </div>
   );

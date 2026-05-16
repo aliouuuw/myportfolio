@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-16T23:40:00Z",
+  "updated": "2026-05-16T23:45:00Z",
   "phases": [
     {
       "id": "P0",
@@ -343,7 +343,7 @@
           "id": "T024",
           "title": "B3: Homepage rewrite",
           "desc": "Rewrite app/[locale]/page.tsx with new IA per design-shape-v3.md §5 Homepage: (1) identity block — name in serif, role mono, positioning sentence, 'Currently:' line with pulse dot, two text links; (2) three CaseFileCard components (Everest CF-001, Odoo CF-002, BocalBun CF-003) staggered list, not grid; (3) single essay teaser (hairline, title, date, first sentence, no card chrome); (4) contact line (email + WhatsApp, no CTA button). Update messages/en.json and messages/fr.json with new copy per §12. Remove 'How I work' section entirely.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T019", "T023"],
           "files": [
             "app/[locale]/page.tsx",

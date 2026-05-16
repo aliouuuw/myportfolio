@@ -16,62 +16,31 @@
     "contactDescription": "Let's talk about operational software."
   },
   "HomePage": {
-    "hero": {
-      "greeting": "Aliou Wade",
+    "identity": {
+      "name": "Aliou Wade",
       "role": "Product Systems Engineer",
-      "tagline": "I build operational software systems for fintech and operations-heavy businesses.",
-      "description": "Currently operating as the technical lead at Everest Finance, where I consolidate websites, CRMs, and customer-facing apps into coherent systems.",
-      "ctaWork": "View case studies",
-      "ctaContact": "Get in touch"
+      "positioning": "I build operational software systems for fintechs and operations-heavy businesses — internal tools, CRMs, admin panels, and domain-specific workflows — from Dakar, bilingual FR/EN.",
+      "currently": "Currently: Senior Technical Operator at Everest Finance. Open to two engagements, Q3 2026.",
+      "viewRecord": "View record",
+      "getInTouch": "Get in touch"
     },
-    "caseStudies": {
-      "title": "Selected work",
-      "subtitle": "Three flagship case studies from my current phase.",
-      "everest": {
-        "title": "Everest Finance",
-        "category": "Fintech Operations",
-        "description": "Consolidating website, internal CRM, and Sama Naffa app into a unified operational system."
-      },
-      "odooToolkit": {
-        "title": "Odoo Testing Toolkit",
-        "category": "Open Source",
-        "description": "Acceptance testing starter kit for Odoo 18 migrations using Robot Framework and Playwright."
-      },
-      "eduplan": {
-        "title": "EduPlan",
-        "category": "Education Systems",
-        "description": "School operations software built from the lessons of a lightweight CMS deployment."
-      }
+    "caseFiles": {
+      "everestTitle": "Everest Finance",
+      "everestMeta": "Fintech Operations · 2024–present",
+      "everestSummary": "Consolidating CRM, website, and customer app into one operational system.",
+      "odooTitle": "Odoo Testing Toolkit",
+      "odooMeta": "ERP Systems · 2023",
+      "odooSummary": "Acceptance testing infrastructure for Odoo 18 ERP migration teams.",
+      "bocalbunTitle": "BocalBun Retrospective",
+      "bocalbunMeta": "Systems Judgment · 2022",
+      "bocalbunSummary": "Why I stopped building a framework and what it cost me."
     },
-    "howIWork": {
-      "title": "How I work",
-      "items": [
-        {
-          "title": "Operational focus",
-          "description": "I specialize in internal tools, admin systems, and workflow automation — the software that keeps businesses running."
-        },
-        {
-          "title": "AI-native workflows",
-          "description": "I design agent-ready repositories and use AI-assisted engineering to move faster without sacrificing quality."
-        },
-        {
-          "title": "West African context",
-          "description": "Based in Dakar, I build systems that work in operational realities — multilingual, occasionally offline, and business-critical."
-        }
-      ]
-    },
-    "writing": {
-      "title": "Latest writing",
-      "subtitle": "Technical notes on operational software, AI-native engineering, and systems thinking.",
-      "placeholder": "Coming soon.",
-      "cta": "Read all essays",
-      "latestEssay": "Latest essay",
-      "readEssay": "Read essay"
+    "fieldNote": {
+      "label": "Field note",
+      "placeholder": "Essays coming soon."
     },
     "contact": {
-      "title": "Let's build something",
-      "description": "I'm currently focused on consolidating systems at Everest Finance, but I'm open to strategic conversations about operational software.",
-      "cta": "Start a conversation"
+      "line": "Direct contact:"
     }
   },
   "Nav": {
