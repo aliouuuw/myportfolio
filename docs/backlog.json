@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-16T20:15:00Z",
+  "updated": "2026-05-16T21:05:00Z",
   "phases": [
     {
       "id": "P0",
@@ -213,6 +213,200 @@
           "deps": ["T007"],
           "files": [
             "content/writing/"
+          ],
+          "verify": "bun run build && bun run lint"
+        }
+      ]
+    },
+    {
+      "id": "P4",
+      "title": "Design v2 — Metal Dossier (see docs/design-shape-v2.md)",
+      "tasks": [
+        {
+          "id": "T015",
+          "title": "Design tokens — OKLCH cool-metal palette, light + dark surfaces",
+          "desc": "Rewrite color tokens in app/globals.css to the OKLCH cool-steel palette defined in docs/design-shape-v2.md §6 (light default + night surface). Register both surfaces via data-theme attribute on <html>. Add brushed-texture utility (repeating linear-gradient) and emboss-edge variables. Add prefers-color-scheme fallback and a no-flash inline script in layout. Foundation files (explicit permission for this task).",
+          "status": "pending",
+          "deps": ["T014"],
+          "files": [
+            "app/globals.css",
+            "app/layout.tsx"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T016",
+          "title": "Typography — install variable serif + mono pair, set scale",
+          "desc": "Install Fraunces (variable, opsz) and Geist Mono via next/font. Confirm Geist (sans) is wired. Set the 1.333 type scale, 11px ALL CAPS micro-labels with 0.12em tracking, body 16px / 1.65 / 68ch max. Update globals.css and any layout that imports fonts. Remove unused font imports. Foundation files (explicit permission).",
+          "status": "pending",
+          "deps": ["T015"],
+          "files": [
+            "app/layout.tsx",
+            "app/globals.css"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T017",
+          "title": "Component — MetalPanel with specular drift",
+          "desc": "Create components/metal-panel.tsx implementing the layered metallic surface per design-shape-v2.md §9: base fill, brushed micro-texture, edge emboss, cursor-tracked specular highlight via CSS custom properties (--mx, --my) and rAF-throttled handler. Optional 'interactive' prop. Respect prefers-reduced-motion. Add a SpecularHighlight isolated subcomponent. 6px corner radius. Export typed props.",
+          "status": "pending",
+          "deps": ["T015"],
+          "files": [
+            "components/metal-panel.tsx",
+            "components/specular-highlight.tsx"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T018",
+          "title": "Component — NumericLabel and section header system",
+          "desc": "Create components/numeric-label.tsx: mono ALL CAPS prefix (e.g. '01 —'), hairline underline, label text. Use across all section headers. Add a SectionHeader convenience component combining NumericLabel + serif title + optional sub-line.",
+          "status": "pending",
+          "deps": ["T016"],
+          "files": [
+            "components/numeric-label.tsx",
+            "components/section-header.tsx"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T019",
+          "title": "Layout — left-rail numbered index with locale and theme toggles",
+          "desc": "Replace top nav on lg+ with a persistent left-rail in app/[locale]/layout.tsx. Numbered index (01 Index, 02 Work, 03 Writing, 04 About, 05 Contact) with current-section indicator (accent hairline). Vertical FR/EN toggle below. Light/dark theme toggle (writes data-theme to <html>, persists via localStorage). Mobile collapses to top bar with inline numeric index. Foundation file (explicit permission).",
+          "status": "pending",
+          "deps": ["T015", "T018"],
+          "files": [
+            "app/[locale]/layout.tsx",
+            "components/left-rail-index.tsx",
+            "components/theme-toggle.tsx",
+            "components/locale-switcher.tsx",
+            "messages/en.json",
+            "messages/fr.json"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T020",
+          "title": "Hero — metal name plate + Currently line",
+          "desc": "Rewrite components/hero.tsx as a MetalPanel containing: name in serif display, role line in mono, two-sentence positioning in serif, 'Currently —' line in mono with pulsing accent dot (2s ease-in-out, pauses on hover, respects reduced-motion). Remove the existing CTA buttons; replace with two inline text links with hairline underlines. Update i18n strings; sweep em dashes.",
+          "status": "pending",
+          "deps": ["T017", "T018"],
+          "files": [
+            "components/hero.tsx",
+            "messages/en.json",
+            "messages/fr.json"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T021",
+          "title": "Homepage — replace 'How I work' cards with paragraph + SystemMap",
+          "desc": "Delete the 3-card 'How I work' grid in app/[locale]/page.tsx. Replace with a 4–6 line first-person paragraph followed by a SystemMap diagram of the operational surface (fintech ops, ERP testing, education systems, future bakery). Use a real Mermaid or static SVG. Add component <SystemMap> with hairline frame and numeric caption.",
+          "status": "pending",
+          "deps": ["T018", "T020"],
+          "files": [
+            "app/[locale]/page.tsx",
+            "components/system-map.tsx",
+            "messages/en.json",
+            "messages/fr.json",
+            "public/images/system-map.svg"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T022",
+          "title": "Work index — numbered-list view with margin thumbnails",
+          "desc": "Rewrite app/[locale]/work/page.tsx as a numbered list (not grid). Each row: numeric prefix, serif title, mono domain · year, right-aligned year. Hairline between rows. Hover reveals a small thumbnail in the right margin (CSS only, no JS). Prepare title element for View Transitions API shared-element morph to /work/[slug].",
+          "status": "pending",
+          "deps": ["T018"],
+          "files": [
+            "app/[locale]/work/page.tsx",
+            "components/work-row.tsx"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T023",
+          "title": "Case study — full-bleed screenshot, annotations, parallel FR/EN summary",
+          "desc": "Update app/[locale]/work/[slug]/page.tsx layout: full-bleed redacted screenshot at top with hairline annotation callouts (SVG overlay), parallel FR/EN summary columns at lg+ via <ParallelText>, prose body in 68ch with mono margin notes. Add prev/next as two MetalPanel rows at the bottom. Update one case study (Everest) to demonstrate the new template.",
+          "status": "pending",
+          "deps": ["T017", "T018", "T022"],
+          "files": [
+            "app/[locale]/work/[slug]/page.tsx",
+            "components/parallel-text.tsx",
+            "components/case-study-annotations.tsx",
+            "content/work/everest-finance.mdx"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T024",
+          "title": "Motion — H1/H2 word reveal and View Transitions for /work navigation",
+          "desc": "Add a small client component <WordReveal> using IntersectionObserver to stagger word translate-Y + opacity on H1/H2 (40ms stagger, 600ms ease-out-quart). Respect prefers-reduced-motion. Wire View Transitions API in app/[locale]/layout.tsx (or via a navigation event handler) so /work row titles morph into /work/[slug] headers (~480ms ease-out-expo). Single transition, used everywhere.",
+          "status": "pending",
+          "deps": ["T022", "T023"],
+          "files": [
+            "components/word-reveal.tsx",
+            "components/view-transitions-provider.tsx",
+            "app/[locale]/layout.tsx",
+            "app/globals.css"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T025",
+          "title": "Command palette — ⌘K with cmdk",
+          "desc": "Install cmdk. Build components/command-palette.tsx with: navigate to each section, switch locale, switch theme, copy email, open latest essay. Trigger on ⌘K / Ctrl+K. Hairline input with accent focus ring. No glow, no shadow. Bilingual labels.",
+          "status": "pending",
+          "deps": ["T019"],
+          "files": [
+            "components/command-palette.tsx",
+            "app/[locale]/layout.tsx",
+            "messages/en.json",
+            "messages/fr.json",
+            "package.json",
+            "bun.lock"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T026",
+          "title": "Colophon footer — stack, type, built-from, source",
+          "desc": "Replace components/footer.tsx with a colophon: four columns (Stack, Type, Built from, Source) on lg+, stacked on mobile. Mono labels with numeric prefixes. Wrapped in a MetalPanel variant (no specular). Bilingual strings.",
+          "status": "pending",
+          "deps": ["T017", "T018"],
+          "files": [
+            "components/footer.tsx",
+            "messages/en.json",
+            "messages/fr.json"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T027",
+          "title": "Copy sweep — remove em dashes, add numeric section labels",
+          "desc": "Sweep messages/en.json and messages/fr.json: remove every em dash (— and --), replace with commas, colons, semicolons, periods, or parentheses per design-shape-v2.md §12. Add numeric section label strings (01 SELECTED WORK, 02 HOW I WORK, 03 WRITING, 04 CONTACT). Rewrite hero positioning sentence to the two-sentence form.",
+          "status": "pending",
+          "deps": ["T020"],
+          "files": [
+            "messages/en.json",
+            "messages/fr.json"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T028",
+          "title": "About — parallel FR/EN columns and operator-detail edits",
+          "desc": "Update app/[locale]/about/page.tsx to render parallel FR/EN columns at lg+ via <ParallelText>, stacked below md. Strengthen first-person operator details (bakery, carpooling, chess, Dakar). Add one small black-and-white photograph at the bottom (placeholder image). Update i18n.",
+          "status": "pending",
+          "deps": ["T023"],
+          "files": [
+            "app/[locale]/about/page.tsx",
+            "components/parallel-text.tsx",
+            "messages/en.json",
+            "messages/fr.json",
+            "public/images/about-portrait.jpg"
           ],
           "verify": "bun run build && bun run lint"
         }
