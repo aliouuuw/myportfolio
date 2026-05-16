@@ -73,6 +73,13 @@
     "en": "EN",
     "fr": "FR"
   },
+  "WorkPage": {
+    "title": "Projets",
+    "subtitle": "Systèmes opérationnels que j'ai construits ou dirigés.",
+    "viewCaseStudy": "Voir l'étude de cas",
+    "confidential": "Confidentiel",
+    "backToWork": "← Projets"
+  },
   "Footer": {
     "tagline": "Ingénierie systèmes produit pour la fintech et les équipes à forte charge opérationnelle.",
     "copyright": "© 2026 Aliou Wade",
