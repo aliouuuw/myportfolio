@@ -7,7 +7,9 @@ import {
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
-import { Nav } from "@/components/nav";
+import { TopNav } from "@/components/top-nav";
+import { BottomMobileNav } from "@/components/bottom-mobile-nav";
+import { ThemeProvider } from "@/components/theme-provider";
 import { routing } from "@/i18n/routing";
 
 export function generateStaticParams() {
@@ -70,25 +72,6 @@ export const viewport: Viewport = {
   ],
 };
 
-/**
- * Inline theme initialization script
- * Prevents flash of wrong theme by reading localStorage or system pref before paint
- */
-const themeInitScript = `
-  (function() {
-    try {
-      const stored = localStorage.getItem('theme');
-      if (stored === 'dark' || stored === 'light') {
-        document.documentElement.setAttribute('data-theme', stored);
-      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
-    } catch (e) {
-      // localStorage not available, fall back to system preference via CSS
-    }
-  })();
-`;
-
 export default async function LocaleLayout({
   children,
   params,
@@ -105,14 +88,17 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      </head>
       <body className="min-h-screen flex flex-col">
         <NextIntlClientProvider messages={messages}>
-          <Nav locale={locale} />
-          <main className="flex flex-1 flex-col">{children}</main>
-          <Footer />
+          <ThemeProvider>
+            <TopNav />
+            {/* Padding top for fixed header, padding bottom for mobile bottom nav */}
+            <main className="flex flex-1 flex-col pt-14 pb-14 sm:pb-0">
+              {children}
+            </main>
+            <Footer />
+            <BottomMobileNav />
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>

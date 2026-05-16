@@ -76,11 +76,22 @@
   },
   "Nav": {
     "brand": "Aliou Wade",
+    "brandAriaLabel": "Accueil — Aliou Wade",
     "ariaLabel": "Navigation principale",
     "work": "Travaux",
     "writing": "Écrits",
     "about": "À propos",
-    "contact": "Contact"
+    "contact": "Contact",
+    "homeShort": "Accueil",
+    "workShort": "Travaux",
+    "writingShort": "Écrits",
+    "aboutShort": "À propos",
+    "contactShort": "Contact",
+    "mobileNavAriaLabel": "Navigation mobile"
+  },
+  "Theme": {
+    "switchToLight": "Passer au mode clair",
+    "switchToDark": "Passer au mode sombre"
   },
   "LocaleSwitcher": {
     "ariaLabel": "Langue",
@@ -152,9 +163,8 @@
     "backToHome": "← Retour à l'accueil"
   },
   "Footer": {
-    "tagline": "Ingénierie systèmes produit pour la fintech et les équipes à forte charge opérationnelle.",
     "copyright": "© 2026 Aliou Wade",
-    "linksAriaLabel": "Liens de contact et réseaux",
+    "linksAriaLabel": "Liens de contact",
     "githubLabel": "GitHub",
     "githubHref": "https://github.com/aliouuuw",
     "linkedinLabel": "LinkedIn",

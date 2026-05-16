@@ -76,11 +76,22 @@
   },
   "Nav": {
     "brand": "Aliou Wade",
+    "brandAriaLabel": "Home — Aliou Wade",
     "ariaLabel": "Primary navigation",
     "work": "Work",
     "writing": "Writing",
     "about": "About",
-    "contact": "Contact"
+    "contact": "Contact",
+    "homeShort": "Home",
+    "workShort": "Work",
+    "writingShort": "Writing",
+    "aboutShort": "About",
+    "contactShort": "Contact",
+    "mobileNavAriaLabel": "Mobile navigation"
+  },
+  "Theme": {
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode"
   },
   "LocaleSwitcher": {
     "ariaLabel": "Language",
@@ -152,9 +163,8 @@
     "backToHome": "← Back to home"
   },
   "Footer": {
-    "tagline": "Product systems engineering for fintech and operations-heavy teams.",
     "copyright": "© 2026 Aliou Wade",
-    "linksAriaLabel": "Contact and social links",
+    "linksAriaLabel": "Contact links",
     "githubLabel": "GitHub",
     "githubHref": "https://github.com/aliouuuw",
     "linkedinLabel": "LinkedIn",

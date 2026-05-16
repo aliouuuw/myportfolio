@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-16T21:26:00Z",
+  "updated": "2026-05-16T23:25:00Z",
   "phases": [
     {
       "id": "P0",
@@ -274,13 +274,14 @@
           "id": "T019",
           "title": "A1: Layout shell — top nav + mobile bottom bar",
           "desc": "Replace any left-rail or old nav with a minimal top bar (56px, AW home link, section links, FR/EN + LN/DK toggles). Add a bottom tab bar for mobile (sm only, text-only mono labels, accent hairline above active item). Wire locale switcher and theme toggle. Remove any 'colophon' or 'left-rail-index' component references. Foundation file (explicit permission). See design-shape-v3.md §6 Navigation.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T018"],
           "files": [
             "app/[locale]/layout.tsx",
             "components/top-nav.tsx",
             "components/bottom-mobile-nav.tsx",
             "components/theme-toggle.tsx",
+            "components/theme-provider.tsx",
             "components/locale-switcher.tsx",
             "components/footer.tsx",
             "messages/en.json",
