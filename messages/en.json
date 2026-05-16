@@ -80,6 +80,13 @@
     "confidential": "Confidential",
     "backToWork": "← Work"
   },
+  "WritingPage": {
+    "title": "Writing",
+    "subtitle": "Technical notes on operational software, AI-native engineering, and systems thinking.",
+    "empty": "Essays coming soon. In the meantime, the work speaks for itself.",
+    "backToWriting": "← Writing",
+    "readEssay": "Read essay"
+  },
   "Footer": {
     "tagline": "Product systems engineering for fintech and operations-heavy teams.",
     "copyright": "© 2026 Aliou Wade",

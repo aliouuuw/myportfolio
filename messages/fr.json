@@ -80,6 +80,13 @@
     "confidential": "Confidentiel",
     "backToWork": "← Projets"
   },
+  "WritingPage": {
+    "title": "Écrits",
+    "subtitle": "Notes techniques sur les logiciels opérationnels, l'ingénierie IA-native et la pensée systèmes.",
+    "empty": "Les essais arrivent bientôt. En attendant, le travail parle de lui-même.",
+    "backToWriting": "← Écrits",
+    "readEssay": "Lire l'essai"
+  },
   "Footer": {
     "tagline": "Ingénierie systèmes produit pour la fintech et les équipes à forte charge opérationnelle.",
     "copyright": "© 2026 Aliou Wade",
