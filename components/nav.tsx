@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
-import { getTranslations } from "next-intl/server";
+import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { MobileNav } from "@/components/mobile-nav";
 
@@ -7,9 +10,10 @@ type NavProps = {
   locale: string;
 };
 
-export async function Nav({ locale }: NavProps) {
-  const t = await getTranslations("Nav");
-  const tCommon = await getTranslations();
+export function Nav({ locale }: NavProps) {
+  const t = useTranslations("Nav");
+  const tCommon = useTranslations();
+  const pathname = usePathname();
 
   const links = [
     { href: `/${locale}/work`, label: t("work") },
@@ -35,16 +39,23 @@ export async function Nav({ locale }: NavProps) {
         >
           {/* Desktop navigation */}
           <ul className="hidden sm:flex min-w-0 flex-wrap items-center justify-end gap-x-4 gap-y-1 sm:gap-x-6">
-            {links.map(({ href, label }) => (
-              <li key={href}>
-                <Link
-                  href={href}
-                  className="text-sm text-ink-secondary transition-colors duration-200 ease-out hover:text-ink-primary"
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
+            {links.map(({ href, label }) => {
+              const isActive = pathname === href || pathname.startsWith(`${href}/`);
+              return (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className={`text-sm transition-colors duration-200 ease-out ${
+                      isActive
+                        ? "font-medium text-ink-primary"
+                        : "text-ink-secondary hover:text-ink-primary"
+                    }`}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
           <LocaleSwitcher locale={locale} />
 

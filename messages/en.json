@@ -5,7 +5,15 @@
   },
   "Metadata": {
     "title": "Aliou Wade",
-    "description": "Portfolio — operational software systems for fintech and operations-heavy businesses."
+    "description": "Portfolio — operational software systems for fintech and operations-heavy businesses.",
+    "workTitle": "Work — Aliou Wade",
+    "workDescription": "Operational systems I've built or led.",
+    "writingTitle": "Writing — Aliou Wade",
+    "writingDescription": "Technical notes on operational software and systems thinking.",
+    "aboutTitle": "About — Aliou Wade",
+    "aboutDescription": "Product Systems Engineer based in Dakar.",
+    "contactTitle": "Contact — Aliou Wade",
+    "contactDescription": "Let's talk about operational software."
   },
   "HomePage": {
     "hero": {

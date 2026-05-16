@@ -19,18 +19,21 @@ export async function Footer() {
           </p>
           <nav aria-label={t("linksAriaLabel")}>
             <ul className="flex flex-col gap-3 sm:items-end">
-              {items.map(({ href, label }) => (
-                <li key={label}>
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-ink-secondary transition-colors duration-200 ease-out hover:text-ink-primary"
-                  >
-                    {label}
-                  </a>
-                </li>
-              ))}
+              {items.map(({ href, label }) => {
+                const isExternal = href.startsWith("http");
+                return (
+                  <li key={label}>
+                    <a
+                      href={href}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noopener noreferrer" : undefined}
+                      className="text-sm text-ink-secondary transition-colors duration-200 ease-out hover:text-ink-primary"
+                    >
+                      {label}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
         </div>

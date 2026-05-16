@@ -5,7 +5,15 @@
   },
   "Metadata": {
     "title": "Aliou Wade",
-    "description": "Portfolio — systèmes logiciels opérationnels pour la fintech et les entreprises à forte charge opérationnelle."
+    "description": "Portfolio — systèmes logiciels opérationnels pour la fintech et les entreprises à forte charge opérationnelle.",
+    "workTitle": "Projets — Aliou Wade",
+    "workDescription": "Systèmes opérationnels que j'ai construits ou dirigés.",
+    "writingTitle": "Écrits — Aliou Wade",
+    "writingDescription": "Notes techniques sur les logiciels opérationnels.",
+    "aboutTitle": "À propos — Aliou Wade",
+    "aboutDescription": "Ingénieur Systèmes Produit basé à Dakar.",
+    "contactTitle": "Contact — Aliou Wade",
+    "contactDescription": "Parlons de logiciels opérationnels."
   },
   "HomePage": {
     "hero": {
