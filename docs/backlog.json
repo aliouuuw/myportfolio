@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-16T21:05:00Z",
+  "updated": "2026-05-16T21:18:00Z",
   "phases": [
     {
       "id": "P0",
@@ -226,7 +226,7 @@
           "id": "T015",
           "title": "Design tokens — OKLCH cool-metal palette, light + dark surfaces",
           "desc": "Rewrite color tokens in app/globals.css to the OKLCH cool-steel palette defined in docs/design-shape-v2.md §6 (light default + night surface). Register both surfaces via data-theme attribute on <html>. Add brushed-texture utility (repeating linear-gradient) and emboss-edge variables. Add prefers-color-scheme fallback and a no-flash inline script in layout. Foundation files (explicit permission for this task).",
-          "status": "pending",
+          "status": "done",
           "deps": ["T014"],
           "files": [
             "app/globals.css",

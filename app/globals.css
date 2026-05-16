@@ -1,67 +1,111 @@
 @import "tailwindcss";
 
 /**
- * Design System — Premium Fintech Aesthetic (Revolut/Secfi/Letter.co blend)
+ * Design System v2 — Metal Dossier
  *
- * Base: Letter/Secfi calmness (warm white, serious typography, lots of air)
- * Accents: Revolut metallic precision (hairline borders, metallic cards)
- * Typography: Inter (UI/sans), Lora (serif/long-form), Tabular figures everywhere
+ * Lane: Swiss-dossier structure + metallic-object surface treatment
+ * Reference: Premium banking card surface under cool daylight
+ * Palette: OKLCH cool-steel, tinted neutrals, never #000/#fff
+ * Surfaces: Light (default) + Night (toggle), shipped day one
  */
 
+/* ────────────────────────────────────────────────────────────────────────────
+   LIGHT SURFACE (default)
+   All neutrals tinted toward cool steel hue (hue ~240–250)
+   ──────────────────────────────────────────────────────────────────────────── */
+
 :root {
-  /* Base backgrounds — warm white, lots of air */
-  --color-canvas: #FCFBF9;
-  --color-canvas-elevated: #F8F7F5;
-  --color-canvas-subtle: #F0EFEA;
+  /* Canvas backgrounds */
+  --color-canvas: oklch(0.96 0.005 240);
+  --color-canvas-elevated: oklch(0.93 0.006 240);
+  --color-canvas-metal: oklch(0.88 0.008 235);
+  --color-canvas-subtle: oklch(0.84 0.007 238);
 
-  /* Text colors — near-black ink */
-  --color-ink-primary: #0A0D12;
-  --color-ink-secondary: #464C54;
-  --color-ink-tertiary: #828994; /* Brushed-steel cool gray */
-  --color-ink-muted: #C2C6CC;
+  /* Ink (text) */
+  --color-ink-primary: oklch(0.18 0.012 250);
+  --color-ink-secondary: oklch(0.42 0.010 248);
+  --color-ink-tertiary: oklch(0.62 0.008 246);
+  --color-ink-muted: oklch(0.74 0.007 244);
 
-  /* Accent — deep ink-blue */
-  --color-accent: #1A2230;
-  --color-accent-hover: #0A0D12;
-  --color-accent-subtle: rgba(26, 34, 48, 0.08);
+  /* Accent — magnetic steel-blue, low chroma, used <6% surface */
+  --color-accent: oklch(0.62 0.045 235);
+  --color-accent-bright: oklch(0.82 0.060 230);
+  --color-accent-subtle: oklch(0.72 0.030 235 / 0.12);
 
-  /* Borders — hairline precision, NO SHADOWS (except the physical card) */
-  --color-border: rgba(10, 13, 18, 0.08);
-  --color-border-strong: rgba(10, 13, 18, 0.16);
+  /* Emboss edges for metal panels */
+  --color-emboss-light: oklch(1.00 0 0 / 0.55);
+  --color-emboss-dark: oklch(0.20 0.010 250 / 0.35);
+
+  /* Borders — hairline precision */
+  --color-border: oklch(0.78 0.006 244);
+  --color-border-strong: oklch(0.68 0.008 246);
 
   /* System */
-  --color-success: #166534;
-  --color-error: #991b1b;
-  --color-warning: #92400e;
+  --color-success: oklch(0.52 0.15 145);
+  --color-error: oklch(0.52 0.22 25);
+  --color-warning: oklch(0.64 0.16 75);
 
-  /* Typography scale */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.25rem;
-  --text-2xl: 1.5rem;
-  --text-3xl: 1.875rem;
-  --text-4xl: 2.25rem;
-  --text-5xl: 3rem;
+  /* Typography scale — 1.333 ratio */
+  --text-micro: 0.6875rem;   /* 11px */
+  --text-xs: 0.75rem;        /* 12px */
+  --text-sm: 0.875rem;       /* 14px */
+  --text-base: 1rem;         /* 16px */
+  --text-lg: 1.125rem;       /* 18px */
+  --text-xl: 1.333rem;       /* ~21px */
+  --text-2xl: 1.777rem;      /* ~28px */
+  --text-3xl: 2.369rem;      /* ~38px */
+  --text-4xl: clamp(2.5rem, 5vw, 3.5rem);
+  --text-5xl: clamp(3.5rem, 8vw, 7rem);
 
   /* Line heights */
   --leading-none: 1;
   --leading-tight: 1.25;
   --leading-snug: 1.375;
   --leading-normal: 1.5;
-  --leading-relaxed: 1.75; /* Increased for more air */
+  --leading-relaxed: 1.65;
   --leading-loose: 2;
 
-  /* Transitions */
-  --transition-fast: 150ms ease;
-  --transition-base: 250ms ease;
-  --transition-slow: 400ms ease;
+  /* Transitions — ease-out-expo for perceived quality */
+  --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-base: 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 600ms cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* ────────────────────────────────────────────────────────────────────────────
+   NIGHT SURFACE (data-theme="dark")
+   Gunmetal base, same hue family, adjusted lightness curves
+   ──────────────────────────────────────────────────────────────────────────── */
+
+[data-theme="dark"] {
+  --color-canvas: oklch(0.16 0.010 248);
+  --color-canvas-elevated: oklch(0.20 0.012 246);
+  --color-canvas-metal: oklch(0.24 0.014 244);
+  --color-canvas-subtle: oklch(0.28 0.012 246);
+
+  --color-ink-primary: oklch(0.94 0.006 240);
+  --color-ink-secondary: oklch(0.74 0.008 246);
+  --color-ink-tertiary: oklch(0.56 0.008 248);
+  --color-ink-muted: oklch(0.42 0.008 250);
+
+  --color-accent: oklch(0.74 0.055 230);
+  --color-accent-bright: oklch(0.88 0.070 228);
+  --color-accent-subtle: oklch(0.68 0.040 232 / 0.18);
+
+  --color-emboss-light: oklch(0.55 0.020 246 / 0.45);
+  --color-emboss-dark: oklch(0.06 0.008 250 / 0.55);
+
+  --color-border: oklch(0.34 0.010 246);
+  --color-border-strong: oklch(0.46 0.012 244);
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   Tailwind theme registration (v4 inline)
+   ──────────────────────────────────────────────────────────────────────────── */
 
 @theme inline {
   --color-canvas: var(--color-canvas);
   --color-canvas-elevated: var(--color-canvas-elevated);
+  --color-canvas-metal: var(--color-canvas-metal);
   --color-canvas-subtle: var(--color-canvas-subtle);
 
   --color-ink-primary: var(--color-ink-primary);
@@ -70,140 +114,145 @@
   --color-ink-muted: var(--color-ink-muted);
 
   --color-accent: var(--color-accent);
-  --color-accent-hover: var(--color-accent-hover);
+  --color-accent-bright: var(--color-accent-bright);
   --color-accent-subtle: var(--color-accent-subtle);
+
+  --color-emboss-light: var(--color-emboss-light);
+  --color-emboss-dark: var(--color-emboss-dark);
 
   --color-border: var(--color-border);
   --color-border-strong: var(--color-border-strong);
 
   --font-sans: var(--font-sans);
   --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
 }
 
-/* Dark mode — deep cool black */
+/* ────────────────────────────────────────────────────────────────────────────
+   System preference fallback (no JS)
+   ──────────────────────────────────────────────────────────────────────────── */
+
 @media (prefers-color-scheme: dark) {
-  :root {
-    --color-canvas: #0A0D12;
-    --color-canvas-elevated: #11161D;
-    --color-canvas-subtle: #05070A;
+  :root:not([data-theme="light"]) {
+    --color-canvas: oklch(0.16 0.010 248);
+    --color-canvas-elevated: oklch(0.20 0.012 246);
+    --color-canvas-metal: oklch(0.24 0.014 244);
+    --color-canvas-subtle: oklch(0.28 0.012 246);
 
-    --color-ink-primary: #F8F7F5;
-    --color-ink-secondary: #A1A7B0;
-    --color-ink-tertiary: #6E7580;
-    --color-ink-muted: #3D444D;
+    --color-ink-primary: oklch(0.94 0.006 240);
+    --color-ink-secondary: oklch(0.74 0.008 246);
+    --color-ink-tertiary: oklch(0.56 0.008 248);
+    --color-ink-muted: oklch(0.42 0.008 250);
 
-    --color-accent: #828994; /* Brushed steel */
-    --color-accent-hover: #B0B5BD;
-    --color-accent-subtle: rgba(130, 137, 148, 0.12);
+    --color-accent: oklch(0.74 0.055 230);
+    --color-accent-bright: oklch(0.88 0.070 228);
+    --color-accent-subtle: oklch(0.68 0.040 232 / 0.18);
 
-    --color-border: rgba(255, 255, 255, 0.08);
-    --color-border-strong: rgba(255, 255, 255, 0.16);
+    --color-emboss-light: oklch(0.55 0.020 246 / 0.45);
+    --color-emboss-dark: oklch(0.06 0.008 250 / 0.55);
+
+    --color-border: oklch(0.34 0.010 246);
+    --color-border-strong: oklch(0.46 0.012 244);
   }
 }
 
-/* Base styles */
+/* ────────────────────────────────────────────────────────────────────────────
+   Base styles
+   ──────────────────────────────────────────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--color-canvas);
   color: var(--color-ink-primary);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   font-size: var(--text-base);
   line-height: var(--leading-relaxed);
-  font-variant-numeric: tabular-nums; /* Tabular figures everywhere */
+  font-variant-numeric: tabular-nums;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Typography utilities */
+/* ────────────────────────────────────────────────────────────────────────────
+   Typography utilities
+   ──────────────────────────────────────────────────────────────────────────── */
+
 .font-serif {
-  font-family: var(--font-serif), Georgia, serif;
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
 }
 
 .font-sans {
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
 }
 
-/* Editorial typography for long-form content */
+.font-mono {
+  font-family: var(--font-mono), "JetBrains Mono", "Fira Code", monospace;
+}
+
+/* Editorial typography for long-form */
 .prose-editorial {
   font-family: var(--font-serif), Georgia, serif;
   font-size: var(--text-lg);
   line-height: var(--leading-relaxed);
   color: var(--color-ink-secondary);
+  max-width: 68ch;
 }
 
 .prose-editorial p + p {
-  margin-top: 1.5rem;
+  margin-top: 1.5em;
 }
 
-/* Signature Metallic Card - Dark Revolut Metal style */
-.card-metallic {
-  background: linear-gradient(145deg, #1A2230 0%, #0A0D12 100%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+/* Micro labels — ALL CAPS, tracked */
+.label-micro {
+  font-family: var(--font-mono), monospace;
+  font-size: var(--text-micro);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-ink-tertiary);
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   Brushed metal texture (CSS-only, no images)
+   ──────────────────────────────────────────────────────────────────────────── */
+
+.brushed-texture {
   position: relative;
-  overflow: hidden;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.6s ease;
-  box-shadow: 0 4px 24px -8px rgba(10, 13, 18, 0.1);
-  color: #F8F7F5; /* Force light text on dark card */
 }
 
-/* Metallic grain */
-.card-metallic::after {
+.brushed-texture::before {
   content: "";
   position: absolute;
   inset: 0;
-  opacity: 0.15;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   pointer-events: none;
-  z-index: 0;
-}
-
-/* Subtle sheen sweep on hover */
-.card-metallic::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    105deg,
-    transparent 20%,
-    rgba(255, 255, 255, 0.12) 45%,
-    rgba(255, 255, 255, 0.12) 55%,
-    transparent 80%
+  opacity: 0.08;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    oklch(0.9 0.008 235 / 0.5) 0.5px,
+    transparent 1px
   );
-  opacity: 0;
-  transform: translateX(-100%);
-  transition: opacity 0.4s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-  z-index: 1;
+  background-size: 2px 100%;
 }
 
-.card-metallic:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px -8px rgba(10, 13, 18, 0.3);
-  border-color: rgba(255, 255, 255, 0.25);
-}
+/* ────────────────────────────────────────────────────────────────────────────
+   Embossed metal panel
+   ──────────────────────────────────────────────────────────────────────────── */
 
-.card-metallic:hover::before {
-  opacity: 1;
-  transform: translateX(100%);
-}
-
-.card-metallic > * {
+.metal-panel {
+  background: var(--color-canvas-metal);
+  border-radius: 6px;
+  border-top: 1px solid var(--color-emboss-light);
+  border-bottom: 1px solid var(--color-emboss-dark);
   position: relative;
-  z-index: 2;
 }
 
-/* Card specific typography overrides to ensure legibility on dark background */
-.card-metallic .card-category {
-  color: #828994; /* Brushed steel */
-}
-.card-metallic .card-title {
-  color: #F8F7F5;
-}
-.card-metallic .card-desc {
-  color: #A1A7B0;
-}
+/* ────────────────────────────────────────────────────────────────────────────
+   Hairline dividers
+   ──────────────────────────────────────────────────────────────────────────── */
 
-/* Hairline divider */
 .hairline {
   height: 1px;
   background: var(--color-border);
@@ -216,14 +265,76 @@ body {
   width: 100%;
 }
 
-/* Focus states */
+/* Vertical hairlines for grid visibility */
+.hairline-v {
+  width: 1px;
+  background: var(--color-border);
+  height: 100%;
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   Focus states — minimal, precise
+   ──────────────────────────────────────────────────────────────────────────── */
+
 :focus-visible {
-  outline: 1px solid var(--color-ink-primary);
+  outline: 1px solid var(--color-accent);
   outline-offset: 2px;
 }
 
-/* Selection */
+/* ────────────────────────────────────────────────────────────────────────────
+   Selection
+   ──────────────────────────────────────────────────────────────────────────── */
+
 ::selection {
-  background: var(--color-ink-muted);
+  background: var(--color-accent-subtle);
   color: var(--color-ink-primary);
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   Motion preferences
+   ──────────────────────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   Legacy card styles (to be migrated to MetalPanel component)
+   DEPRECATED: Remove after T017/T020 complete
+   ──────────────────────────────────────────────────────────────────────────── */
+
+.card-metallic {
+  background: var(--color-canvas-metal);
+  border-radius: 6px;
+  border-top: 1px solid var(--color-emboss-light);
+  border-bottom: 1px solid var(--color-emboss-dark);
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-slow), border-color var(--transition-base);
+}
+
+.card-metallic:hover {
+  transform: translateY(-2px);
+}
+
+.card-metallic .card-category {
+  color: var(--color-ink-tertiary);
+}
+
+.card-metallic .card-title {
+  color: var(--color-ink-primary);
+}
+
+.card-metallic .card-desc {
+  color: var(--color-ink-secondary);
 }

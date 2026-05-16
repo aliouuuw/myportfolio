@@ -4,7 +4,7 @@ import {
   getTranslations,
   setRequestLocale,
 } from "next-intl/server";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
 import { Nav } from "@/components/nav";
@@ -63,6 +63,32 @@ export async function generateMetadata({
   };
 }
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "oklch(0.96 0.005 240)" },
+    { media: "(prefers-color-scheme: dark)", color: "oklch(0.16 0.010 248)" },
+  ],
+};
+
+/**
+ * Inline theme initialization script
+ * Prevents flash of wrong theme by reading localStorage or system pref before paint
+ */
+const themeInitScript = `
+  (function() {
+    try {
+      const stored = localStorage.getItem('theme');
+      if (stored === 'dark' || stored === 'light') {
+        document.documentElement.setAttribute('data-theme', stored);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    } catch (e) {
+      // localStorage not available, fall back to system preference via CSS
+    }
+  })();
+`;
+
 export default async function LocaleLayout({
   children,
   params,
@@ -78,10 +104,17 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <NextIntlClientProvider messages={messages}>
-      <Nav locale={locale} />
-      <main className="flex flex-1 flex-col">{children}</main>
-      <Footer />
-    </NextIntlClientProvider>
+    <html lang={locale} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body className="min-h-screen flex flex-col">
+        <NextIntlClientProvider messages={messages}>
+          <Nav locale={locale} />
+          <main className="flex flex-1 flex-col">{children}</main>
+          <Footer />
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }
