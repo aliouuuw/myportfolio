@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-16T19:53:00Z",
+  "updated": "2026-05-16T20:00:00Z",
   "phases": [
     {
       "id": "P0",
@@ -106,7 +106,7 @@
           "id": "T007",
           "title": "Writing page template — /writing and /writing/[slug]",
           "desc": "Create the /writing listing page and /writing/[slug] dynamic route for MDX essays.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T004"],
           "files": [
             "app/[locale]/writing/page.tsx",
@@ -118,7 +118,7 @@
           "id": "T008",
           "title": "About page",
           "desc": "Build /about page. First person, three short sections max. Include operator context (bakery, carpooling), chess mention, bilingual Dakar positioning. All text from next-intl.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T003"],
           "files": [
             "app/[locale]/about/page.tsx",
@@ -131,7 +131,7 @@
           "id": "T009",
           "title": "Contact page",
           "desc": "Build /contact page with form (Resend route handler), email, WhatsApp link. Bilingual labels.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T003"],
           "files": [
             "app/[locale]/contact/page.tsx",
@@ -151,12 +151,13 @@
           "id": "T010",
           "title": "SEO — metadata, sitemap, robots, OG images",
           "desc": "Add per-page metadata (title, description, og:image). Create sitemap.ts and robots.ts. Generate a default OG image template.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T005", "T006", "T007", "T008", "T009"],
           "files": [
             "app/sitemap.ts",
             "app/robots.ts",
-            "app/[locale]/layout.tsx"
+            "app/[locale]/layout.tsx",
+            "app/opengraph-image.tsx"
           ],
           "verify": "bun run build && bun run lint"
         }
