@@ -19,6 +19,13 @@ type LocaleLayoutProps = {
   params: Promise<{ locale: string }>;
 };
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aliouwade.com";
+
+const ogLocaleMap: Record<string, string> = {
+  en: "en_US",
+  fr: "fr_FR",
+};
+
 export async function generateMetadata({
   params,
 }: LocaleLayoutProps): Promise<Metadata> {
@@ -26,9 +33,34 @@ export async function generateMetadata({
 
   const t = await getTranslations({ locale, namespace: "Metadata" });
 
+  const title = t("title");
+  const description = t("description");
+  const ogLocale = ogLocaleMap[locale] ?? "en_US";
+  const alternateLocale = locale === "en" ? "fr_FR" : "en_US";
+
   return {
-    title: t("title"),
-    description: t("description"),
+    metadataBase: new URL(SITE_URL),
+    title,
+    description,
+    alternates: {
+      canonical: `${SITE_URL}/${locale}`,
+      languages: {
+        en: `${SITE_URL}/en`,
+        fr: `${SITE_URL}/fr`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      locale: ogLocale,
+      alternateLocale,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 
