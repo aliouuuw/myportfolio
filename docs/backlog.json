@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-16T21:18:00Z",
+  "updated": "2026-05-16T21:22:00Z",
   "phases": [
     {
       "id": "P0",
@@ -238,7 +238,7 @@
           "id": "T016",
           "title": "Typography — install variable serif + mono pair, set scale",
           "desc": "Install Fraunces (variable, opsz) and Geist Mono via next/font. Confirm Geist (sans) is wired. Set the 1.333 type scale, 11px ALL CAPS micro-labels with 0.12em tracking, body 16px / 1.65 / 68ch max. Update globals.css and any layout that imports fonts. Remove unused font imports. Foundation files (explicit permission).",
-          "status": "pending",
+          "status": "done",
           "deps": ["T015"],
           "files": [
             "app/layout.tsx",
