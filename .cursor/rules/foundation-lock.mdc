@@ -1,0 +1,24 @@
+---
+description: Protect stable foundation files from unintentional edits
+globs: app/layout.tsx,next.config.ts,postcss.config.mjs,tsconfig.json,eslint.config.mjs,proxy.ts
+alwaysApply: false
+---
+
+# Foundation Lock
+
+These files are **verified and stable**. Do not modify them unless:
+1. The **human explicitly asks**, OR
+2. The current task's `files` array in `backlog.json` **explicitly names them**
+
+## Locked files
+
+- `app/layout.tsx` — root layout, global providers, font setup
+- `next.config.ts` — Next.js configuration, i18n plugin, redirects
+- `postcss.config.mjs` — PostCSS / Tailwind pipeline
+- `tsconfig.json` — TypeScript compiler options, path aliases
+- `eslint.config.mjs` — linting rules
+- `proxy.ts` — locale detection, redirects (Next.js 16; replaces deprecated middleware.ts)
+
+## When these files appear in context but are NOT in the task's `files` array
+
+Do not read them looking for issues. Do not propose improvements. Reference their API surface only when the new feature needs to import from them.

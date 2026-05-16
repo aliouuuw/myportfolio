@@ -1,0 +1,161 @@
+{
+  "updated": "2026-05-16",
+  "phases": [
+    {
+      "id": "P0",
+      "title": "Foundation — layout, i18n, design system, deploy skeleton",
+      "tasks": [
+        {
+          "id": "T001",
+          "title": "Set up next-intl locale routing",
+          "desc": "Install next-intl. Create app/[locale]/ layout with locale provider. Add messages/en.json and messages/fr.json with initial keys. Configure proxy.ts (Next.js 16; not middleware.ts) for locale detection and /en /fr prefixes. Export function proxy(request). Wire i18n/request.ts.",
+          "status": "pending",
+          "deps": [],
+          "files": [
+            "app/[locale]/layout.tsx",
+            "app/[locale]/page.tsx",
+            "messages/en.json",
+            "messages/fr.json",
+            "proxy.ts",
+            "next.config.ts",
+            "i18n/request.ts"
+          ],
+          "verify": "npx next build && npm run lint"
+        },
+        {
+          "id": "T002",
+          "title": "Design system — typography, colors, Tailwind config",
+          "desc": "Define the premium fintech color palette (warm off-white, deep ink, metallic accent) and typography scale in Tailwind/CSS. Set up font imports (one sans for UI, one serif for long-form). Establish CSS custom properties for the theme.",
+          "status": "pending",
+          "deps": [],
+          "files": [
+            "app/globals.css",
+            "app/layout.tsx"
+          ],
+          "verify": "npx next build && npm run lint"
+        },
+        {
+          "id": "T003",
+          "title": "Shared layout — nav, footer, locale switcher",
+          "desc": "Build the site shell: top nav (Work | Writing | About | Contact | EN/FR), footer (GitHub, LinkedIn, Email, WhatsApp). Create locale-switcher component. All text from next-intl messages.",
+          "status": "pending",
+          "deps": ["T001", "T002"],
+          "files": [
+            "app/[locale]/layout.tsx",
+            "components/nav.tsx",
+            "components/footer.tsx",
+            "components/locale-switcher.tsx",
+            "messages/en.json",
+            "messages/fr.json"
+          ],
+          "verify": "npx next build && npm run lint"
+        },
+        {
+          "id": "T004",
+          "title": "MDX content pipeline",
+          "desc": "Set up MDX processing for content/work/ and content/writing/. Create utility functions to read frontmatter and render MDX. Create the case study template frontmatter structure. Add one placeholder MDX file to validate the pipeline.",
+          "status": "pending",
+          "deps": ["T001"],
+          "files": [
+            "lib/mdx.ts",
+            "content/work/.gitkeep",
+            "content/writing/.gitkeep",
+            "components/mdx-components.tsx"
+          ],
+          "verify": "npx next build && npm run lint"
+        },
+        {
+          "id": "T005",
+          "title": "Homepage shell",
+          "desc": "Build the homepage: hero with positioning sentence (EN/FR), three flagship case study cards (placeholder content), 'how I work' section, latest writing teaser, contact CTA. Design the signature metallic case-study card component.",
+          "status": "pending",
+          "deps": ["T002", "T003"],
+          "files": [
+            "app/[locale]/page.tsx",
+            "components/case-study-card.tsx",
+            "components/hero.tsx",
+            "messages/en.json",
+            "messages/fr.json"
+          ],
+          "verify": "npx next build && npm run lint"
+        }
+      ]
+    },
+    {
+      "id": "P1",
+      "title": "Content — case studies, about, contact, writing",
+      "tasks": [
+        {
+          "id": "T006",
+          "title": "Case study page template — /work and /work/[slug]",
+          "desc": "Create the /work listing page and /work/[slug] dynamic route that renders MDX case studies. Follow the 8-section case study template from portfolio-plan.md §9.",
+          "status": "pending",
+          "deps": ["T004", "T005"],
+          "files": [
+            "app/[locale]/work/page.tsx",
+            "app/[locale]/work/[slug]/page.tsx"
+          ],
+          "verify": "npx next build && npm run lint"
+        },
+        {
+          "id": "T007",
+          "title": "Writing page template — /writing and /writing/[slug]",
+          "desc": "Create the /writing listing page and /writing/[slug] dynamic route for MDX essays.",
+          "status": "pending",
+          "deps": ["T004"],
+          "files": [
+            "app/[locale]/writing/page.tsx",
+            "app/[locale]/writing/[slug]/page.tsx"
+          ],
+          "verify": "npx next build && npm run lint"
+        },
+        {
+          "id": "T008",
+          "title": "About page",
+          "desc": "Build /about page. First person, three short sections max. Include operator context (bakery, carpooling), chess mention, bilingual Dakar positioning. All text from next-intl.",
+          "status": "pending",
+          "deps": ["T003"],
+          "files": [
+            "app/[locale]/about/page.tsx",
+            "messages/en.json",
+            "messages/fr.json"
+          ],
+          "verify": "npx next build && npm run lint"
+        },
+        {
+          "id": "T009",
+          "title": "Contact page",
+          "desc": "Build /contact page with form (Resend route handler), email, WhatsApp link. Bilingual labels.",
+          "status": "pending",
+          "deps": ["T003"],
+          "files": [
+            "app/[locale]/contact/page.tsx",
+            "app/api/contact/route.ts",
+            "messages/en.json",
+            "messages/fr.json"
+          ],
+          "verify": "npx next build && npm run lint"
+        }
+      ]
+    },
+    {
+      "id": "P2",
+      "title": "Polish — SEO, OG images, performance, deploy",
+      "tasks": [
+        {
+          "id": "T010",
+          "title": "SEO — metadata, sitemap, robots, OG images",
+          "desc": "Add per-page metadata (title, description, og:image). Create sitemap.ts and robots.ts. Generate a default OG image template.",
+          "status": "pending",
+          "deps": ["T005", "T006", "T007", "T008", "T009"],
+          "files": [
+            "app/sitemap.ts",
+            "app/robots.ts",
+            "app/[locale]/layout.tsx"
+          ],
+          "verify": "npx next build && npm run lint"
+        }
+      ]
+    }
+  ]
+}

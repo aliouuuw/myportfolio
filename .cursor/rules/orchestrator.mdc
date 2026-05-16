@@ -1,0 +1,68 @@
+---
+description: Autonomous build loop — pick task from backlog.json, delegate to builder subagent, verify, commit, advance
+globs:
+alwaysApply: true
+---
+
+# myportfolio Orchestrator
+
+## Source of truth
+
+- Task graph: [docs/backlog.json](docs/backlog.json)
+- Foundation guardrail: [.cursor/rules/foundation-lock.mdc](.cursor/rules/foundation-lock.mdc)
+
+## Autonomous loop
+
+### 1. Pick the next task
+
+Parse `phases[].tasks` in `backlog.json`.
+
+- Human overrides ("build T023 next") take priority.
+- Otherwise: first task where `status === "pending"` and every `deps[]` id has `status === "done"`.
+- If nothing is runnable: report blocked deps; stop.
+
+### 2. State the blast radius
+
+```
+Orchestrator: T0xx — files: [...] — verify: [...]
+```
+
+### 3. Delegate to a Builder subagent
+
+Use the **Task** tool (`subagent_type: generalPurpose`, `readonly: false`) with:
+
+- Full task spec (id, title, desc, files, verify)
+- Instructions: implement, run verify, fix until green, commit as `feat(scope): T0xx — <title>`
+- Forbidden: editing foundation-lock paths unless named in this task's `files`; broad repo review; updating docs unless in `files`
+
+### 4. After builder returns
+
+- Run verify once yourself if unsure.
+- Set task `status` to `"done"` and update `"updated"` in backlog.json.
+- Append one line to `docs/progress.md` only if product state changed.
+
+### 5. Delta review
+
+Inspect only `git diff HEAD~1`. Classify:
+- **Blocker** (security, correctness, data leak): fix in a follow-up commit, then continue
+- **Before merge**: note; do not fix
+- **Backlog**: ignore
+
+### 6. Evolve the backlog
+
+The orchestrator may:
+- Expand a task's `files` array when implementation reveals a genuine need
+- Add new tasks (next available T0xx id, `status: "pending"`)
+- Never delete or reorder existing tasks
+
+State every mutation:
+```
+Backlog: T0xx.files += ["src/foo.ts"] (needed for X)
+Backlog: added T0xx "cleanup: Y" (pending, no deps)
+```
+
+## Hard stops
+
+- Never edit foundation-lock paths not in the current task's `files` array
+- Never "review the whole codebase" — delta-review only
+- Escalate to human when: conflicting ADRs, missing secret/tool, builder failed twice
