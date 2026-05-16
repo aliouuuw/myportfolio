@@ -9,7 +9,7 @@
           "id": "T001",
           "title": "Set up next-intl locale routing",
           "desc": "Install next-intl. Create app/[locale]/ layout with locale provider. Add messages/en.json and messages/fr.json with initial keys. Configure proxy.ts (Next.js 16; not middleware.ts) for locale detection and /en /fr prefixes. Export function proxy(request). Wire i18n/request.ts.",
-          "status": "pending",
+          "status": "done",
           "deps": [],
           "files": [
             "app/[locale]/layout.tsx",
@@ -20,7 +20,7 @@
             "next.config.ts",
             "i18n/request.ts"
           ],
-          "verify": "npx next build && npm run lint"
+          "verify": "bun run build && bun run lint"
         },
         {
           "id": "T002",
@@ -32,7 +32,7 @@
             "app/globals.css",
             "app/layout.tsx"
           ],
-          "verify": "npx next build && npm run lint"
+          "verify": "bun run build && bun run lint"
         },
         {
           "id": "T003",
@@ -48,7 +48,7 @@
             "messages/en.json",
             "messages/fr.json"
           ],
-          "verify": "npx next build && npm run lint"
+          "verify": "bun run build && bun run lint"
         },
         {
           "id": "T004",
@@ -62,7 +62,7 @@
             "content/writing/.gitkeep",
             "components/mdx-components.tsx"
           ],
-          "verify": "npx next build && npm run lint"
+          "verify": "bun run build && bun run lint"
         },
         {
           "id": "T005",
@@ -77,7 +77,7 @@
             "messages/en.json",
             "messages/fr.json"
           ],
-          "verify": "npx next build && npm run lint"
+          "verify": "bun run build && bun run lint"
         }
       ]
     },
@@ -95,7 +95,7 @@
             "app/[locale]/work/page.tsx",
             "app/[locale]/work/[slug]/page.tsx"
           ],
-          "verify": "npx next build && npm run lint"
+          "verify": "bun run build && bun run lint"
         },
         {
           "id": "T007",
@@ -107,7 +107,7 @@
             "app/[locale]/writing/page.tsx",
             "app/[locale]/writing/[slug]/page.tsx"
           ],
-          "verify": "npx next build && npm run lint"
+          "verify": "bun run build && bun run lint"
         },
         {
           "id": "T008",
@@ -120,7 +120,7 @@
             "messages/en.json",
             "messages/fr.json"
           ],
-          "verify": "npx next build && npm run lint"
+          "verify": "bun run build && bun run lint"
         },
         {
           "id": "T009",
@@ -134,7 +134,7 @@
             "messages/en.json",
             "messages/fr.json"
           ],
-          "verify": "npx next build && npm run lint"
+          "verify": "bun run build && bun run lint"
         }
       ]
     },
@@ -153,7 +153,7 @@
             "app/robots.ts",
             "app/[locale]/layout.tsx"
           ],
-          "verify": "npx next build && npm run lint"
+          "verify": "bun run build && bun run lint"
         }
       ]
     }

@@ -130,5 +130,7 @@ export default async function Page(props: PageProps<'/[locale]/work/[slug]'>) {
 After any code change, run:
 
 ```bash
-npx next build && npm run lint
+bun run build && bun run lint
 ```
+
+Uses the Bun toolchain (`bun.lock`). If you temporarily use npm instead, equivalent: `npm run build && npm run lint`.

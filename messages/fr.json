@@ -1,0 +1,16 @@
+{
+  "Metadata": {
+    "title": "Aliou Wade",
+    "description": "Portfolio — systèmes logiciels opérationnels pour la fintech et les entreprises à forte charge opérationnelle."
+  },
+  "HomePage": {
+    "headline": "Pour commencer, modifiez page.tsx.",
+    "introLead": "Vous cherchez un point de départ ou plus d’instructions ? Consultez les",
+    "introTemplates": "modèles",
+    "introOr": "ou le",
+    "introLearning": "centre",
+    "introTrail": "d’apprentissage.",
+    "deployCta": "Déployer",
+    "docsCta": "Documentation"
+  }
+}
