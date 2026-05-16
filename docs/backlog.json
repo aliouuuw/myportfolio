@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-16T23:25:00Z",
+  "updated": "2026-05-16T23:28:00Z",
   "phases": [
     {
       "id": "P0",
@@ -293,7 +293,7 @@
           "id": "T020",
           "title": "A2: Fix not-found.tsx crash",
           "desc": "app/[locale]/not-found.tsx crashes because it destructures 'locale' from params, which is undefined in Next.js 16 not-found files. Replace the params destructure with getLocale() from next-intl/server (or useLocale() if client). Verify the 404 page renders without crash in both locales.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T019"],
           "files": [
             "app/[locale]/not-found.tsx"

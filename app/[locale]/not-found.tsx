@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "Page not found",
 };
 
-export default async function NotFound({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
+export default async function NotFound() {
+  const locale = await getLocale();
   const t = await getTranslations("NotFoundPage");
 
   return (
