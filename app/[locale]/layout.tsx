@@ -10,6 +10,7 @@ import { Footer } from "@/components/footer";
 import { TopNav } from "@/components/top-nav";
 import { BottomMobileNav } from "@/components/bottom-mobile-nav";
 import { ThemeProvider } from "@/components/theme-provider";
+import { CommandPalette } from "@/components/command-palette";
 import { routing } from "@/i18n/routing";
 
 export function generateStaticParams() {
@@ -92,6 +93,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>
             <TopNav />
+            <CommandPalette />
             {/* Padding top for fixed header, padding bottom for mobile bottom nav */}
             <main className="flex flex-1 flex-col pt-14 pb-14 sm:pb-0">
               {children}

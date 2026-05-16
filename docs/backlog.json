@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-16T23:28:00Z",
+  "updated": "2026-05-16T23:35:00Z",
   "phases": [
     {
       "id": "P0",
@@ -304,7 +304,7 @@
           "id": "T021",
           "title": "A3: Command palette — ⌘K with cmdk",
           "desc": "Install cmdk. Build components/command-palette.tsx: navigate to Work, Writing, About, Contact; switch locale; switch theme; copy email. Trigger on ⌘K / Ctrl+K. Hairline input with accent focus ring on :focus. No glow, no shadow. Bilingual labels. Trap focus while open. ESC closes. Wire into app/[locale]/layout.tsx.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T019"],
           "files": [
             "components/command-palette.tsx",

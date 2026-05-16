@@ -93,6 +93,22 @@
     "switchToLight": "Switch to light mode",
     "switchToDark": "Switch to dark mode"
   },
+  "CommandPalette": {
+    "placeholder": "Type a command or search...",
+    "noResults": "No results found.",
+    "navigate": "Navigate",
+    "work": "Work",
+    "writing": "Writing",
+    "about": "About",
+    "contact": "Contact",
+    "preferences": "Preferences",
+    "switchToEn": "Switch to English",
+    "switchToFr": "Switch to French",
+    "actions": "Actions",
+    "copyEmail": "Copy email address",
+    "navigateHint": "Use ↑↓ to navigate",
+    "selectHint": "↵ to select"
+  },
   "LocaleSwitcher": {
     "ariaLabel": "Language",
     "en": "EN",

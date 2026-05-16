@@ -93,6 +93,22 @@
     "switchToLight": "Passer au mode clair",
     "switchToDark": "Passer au mode sombre"
   },
+  "CommandPalette": {
+    "placeholder": "Tapez une commande ou recherchez...",
+    "noResults": "Aucun résultat trouvé.",
+    "navigate": "Navigation",
+    "work": "Travaux",
+    "writing": "Écrits",
+    "about": "À propos",
+    "contact": "Contact",
+    "preferences": "Préférences",
+    "switchToEn": "Passer en anglais",
+    "switchToFr": "Passer en français",
+    "actions": "Actions",
+    "copyEmail": "Copier l'adresse email",
+    "navigateHint": "↑↓ pour naviguer",
+    "selectHint": "↵ pour sélectionner"
+  },
   "LocaleSwitcher": {
     "ariaLabel": "Langue",
     "en": "EN",
