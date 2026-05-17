@@ -88,21 +88,17 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <body className="min-h-screen flex flex-col">
-        <NextIntlClientProvider messages={messages}>
-          <ThemeProvider>
-            <TopNav />
-            <CommandPalette />
-            {/* Padding top for fixed header, padding bottom for mobile bottom nav */}
-            <main className="flex flex-1 flex-col pt-14 pb-14 sm:pb-0">
-              {children}
-            </main>
-            <Footer />
-            <BottomMobileNav />
-          </ThemeProvider>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider messages={messages}>
+      <ThemeProvider>
+        <TopNav />
+        <CommandPalette />
+        {/* Padding top for fixed header, padding bottom for mobile bottom nav */}
+        <main className="flex flex-1 flex-col pt-14 pb-14 sm:pb-0">
+          {children}
+        </main>
+        <Footer />
+        <BottomMobileNav />
+      </ThemeProvider>
+    </NextIntlClientProvider>
   );
 }
