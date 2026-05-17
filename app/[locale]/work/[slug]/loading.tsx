@@ -1,47 +1,31 @@
+/**
+ * Loading state for /work/[slug] — mirrors CaseReportHeader structure so the
+ * layout doesn't shift when MDX streams in. Minimal, classified-record aesthetic.
+ */
 export default function Loading() {
   return (
-    <div className="flex flex-col flex-1">
-      <div className="px-6 py-16 sm:px-12 lg:px-24 max-w-5xl mx-auto w-full">
-        {/* Back link skeleton */}
-        <div className="mb-12">
-          <div className="h-4 w-24 bg-canvas-elevated animate-pulse rounded" />
+    <div className="flex flex-1 flex-col">
+      <header className="mx-auto w-full max-w-5xl px-6 pt-24 pb-12 sm:px-12 lg:px-24">
+        <div className="mb-8 flex items-center gap-3">
+          <span className="font-mono text-[11px] tracking-tight text-ink-tertiary">
+            FILE: ···
+          </span>
+          <span className="text-ink-muted" aria-hidden="true">·</span>
+          <span className="font-mono text-[11px] uppercase tracking-tight text-ink-tertiary">
+            CLASSIFICATION: ···
+          </span>
         </div>
-
-        {/* Article header skeleton */}
-        <header className="mb-16 pb-12 border-b border-border">
-          <div className="flex items-center gap-3 mb-5">
-            <div className="h-3 w-20 bg-canvas-elevated animate-pulse rounded" />
-            <div className="h-5 w-24 bg-canvas-elevated animate-pulse rounded" />
-          </div>
-
-          <div className="h-12 w-full max-w-2xl bg-canvas-elevated animate-pulse rounded mb-6" />
-
-          <div className="flex items-center gap-4 mb-8">
-            <div className="h-4 w-32 bg-canvas-elevated animate-pulse rounded" />
-            <div className="h-4 w-1 bg-canvas-elevated animate-pulse rounded" />
-            <div className="h-4 w-28 bg-canvas-elevated animate-pulse rounded" />
-          </div>
-
-          <div className="flex flex-wrap gap-2">
-            {[1, 2, 3, 4].map((i) => (
-              <div
-                key={i}
-                className="h-6 w-20 bg-canvas-elevated animate-pulse rounded"
-              />
-            ))}
-          </div>
-        </header>
-
-        {/* MDX body skeleton */}
-        <div className="max-w-2xl space-y-4">
-          <div className="h-4 w-full bg-canvas-elevated animate-pulse rounded" />
-          <div className="h-4 w-full bg-canvas-elevated animate-pulse rounded" />
-          <div className="h-4 w-5/6 bg-canvas-elevated animate-pulse rounded" />
-          <div className="h-8" />
-          <div className="h-4 w-full bg-canvas-elevated animate-pulse rounded" />
-          <div className="h-4 w-full bg-canvas-elevated animate-pulse rounded" />
-          <div className="h-4 w-4/5 bg-canvas-elevated animate-pulse rounded" />
+        <div className="mb-12 h-12 w-3/4 max-w-[40ch] bg-canvas-elevated/60" />
+        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+          <div className="h-12 max-w-[40ch] bg-canvas-elevated/40" />
+          <div className="h-12 max-w-[40ch] bg-canvas-elevated/40" />
         </div>
+      </header>
+      <div className="mx-auto w-full max-w-5xl px-6 pt-4 pb-12 sm:px-12 lg:px-24">
+        <div className="hairline mb-10" />
+        <p className="font-mono text-[11px] uppercase tracking-wide text-ink-tertiary">
+          Retrieving file…
+        </p>
       </div>
     </div>
   );

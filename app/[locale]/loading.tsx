@@ -1,34 +1,13 @@
+/** Loading state for the homepage — mirrors the identity block layout. */
 export default function Loading() {
   return (
-    <div className="flex flex-col flex-1">
-      <div className="px-6 py-24 sm:px-12 lg:px-24 max-w-5xl mx-auto w-full">
-        {/* Hero skeleton */}
-        <div className="max-w-2xl">
-          <div className="h-12 w-64 bg-canvas-elevated animate-pulse rounded mb-6" />
-          <div className="h-6 w-48 bg-canvas-elevated animate-pulse rounded mb-4" />
-          <div className="h-4 w-full bg-canvas-elevated animate-pulse rounded mb-2" />
-          <div className="h-4 w-5/6 bg-canvas-elevated animate-pulse rounded" />
-        </div>
-
-        {/* Case studies skeleton */}
-        <div className="mt-24">
-          <div className="h-6 w-40 bg-canvas-elevated animate-pulse rounded mb-3" />
-          <div className="h-4 w-72 bg-canvas-elevated animate-pulse rounded mb-12" />
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="p-6 rounded-lg border border-border bg-canvas"
-              >
-                <div className="h-4 w-24 bg-canvas-elevated animate-pulse rounded mb-3" />
-                <div className="h-6 w-full bg-canvas-elevated animate-pulse rounded mb-2" />
-                <div className="h-4 w-full bg-canvas-elevated animate-pulse rounded" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+    <div className="flex flex-1 flex-col">
+      <section className="mx-auto w-full max-w-5xl px-6 pt-32 pb-16 sm:px-12 lg:px-24">
+        <div className="mb-6 h-16 w-72 bg-canvas-elevated/60" />
+        <div className="mb-6 h-3 w-40 bg-canvas-elevated/40" />
+        <div className="mb-2 h-5 w-full max-w-[48ch] bg-canvas-elevated/40" />
+        <div className="h-5 w-3/4 max-w-[36ch] bg-canvas-elevated/40" />
+      </section>
     </div>
   );
 }

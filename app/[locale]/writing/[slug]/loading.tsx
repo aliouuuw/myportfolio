@@ -1,35 +1,18 @@
+/** Loading state for /writing/[slug] — minimal, design-v3 aesthetic. */
 export default function Loading() {
   return (
-    <div className="flex flex-col flex-1">
-      <div className="px-6 py-16 sm:px-12 lg:px-24 max-w-5xl mx-auto w-full">
-        {/* Back link skeleton */}
-        <div className="mb-12">
-          <div className="h-4 w-24 bg-canvas-elevated animate-pulse rounded" />
-        </div>
-
-        {/* Article header skeleton */}
-        <header className="mb-16 pb-12 border-b border-border">
-          <div className="h-3 w-28 bg-canvas-elevated animate-pulse rounded mb-5" />
-
-          <div className="h-12 w-full max-w-2xl bg-canvas-elevated animate-pulse rounded mb-6" />
-
-          <div className="h-4 w-full max-w-xl bg-canvas-elevated animate-pulse rounded" />
-        </header>
-
-        {/* MDX body skeleton */}
-        <div className="max-w-2xl space-y-4">
-          <div className="h-4 w-full bg-canvas-elevated animate-pulse rounded" />
-          <div className="h-4 w-full bg-canvas-elevated animate-pulse rounded" />
-          <div className="h-4 w-5/6 bg-canvas-elevated animate-pulse rounded" />
-          <div className="h-8" />
-          <div className="h-6 w-48 bg-canvas-elevated animate-pulse rounded" />
-          <div className="h-4 w-full bg-canvas-elevated animate-pulse rounded" />
-          <div className="h-4 w-full bg-canvas-elevated animate-pulse rounded" />
-          <div className="h-4 w-4/5 bg-canvas-elevated animate-pulse rounded" />
-          <div className="h-8" />
-          <div className="h-4 w-full bg-canvas-elevated animate-pulse rounded" />
-          <div className="h-4 w-3/4 bg-canvas-elevated animate-pulse rounded" />
-        </div>
+    <div className="flex flex-1 flex-col">
+      <header className="mx-auto w-full max-w-5xl px-6 pt-24 pb-12 sm:px-12 lg:px-24">
+        <p className="mb-6 font-mono text-[11px] uppercase tracking-wide text-ink-tertiary">
+          Field note · ···
+        </p>
+        <div className="h-12 w-3/4 max-w-[40ch] bg-canvas-elevated/60" />
+      </header>
+      <div className="mx-auto w-full max-w-5xl px-6 pb-12 sm:px-12 lg:px-24">
+        <div className="hairline mb-10" />
+        <p className="font-mono text-[11px] uppercase tracking-wide text-ink-tertiary">
+          Retrieving note…
+        </p>
       </div>
     </div>
   );

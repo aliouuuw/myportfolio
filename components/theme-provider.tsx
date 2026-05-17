@@ -1,17 +1,24 @@
 "use client";
 
-import { createContext, useContext, useCallback, ReactNode } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
 
 type Theme = "light" | "dark";
 
-interface ThemeContextType {
+interface ThemeContextValue {
   theme: Theme;
   toggleTheme: () => void;
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
-export function useTheme() {
+export function useTheme(): ThemeContextValue {
   const context = useContext(ThemeContext);
   if (!context) {
     throw new Error("useTheme must be used within ThemeProvider");
@@ -19,47 +26,64 @@ export function useTheme() {
   return context;
 }
 
+const STORAGE_KEY = "theme";
+
+/**
+ * Read the current theme from the DOM.
+ * Source of truth is set by ThemeInitScript before React hydrates.
+ * On the server, document is undefined so we default to "light".
+ */
+function readThemeFromDOM(): Theme {
+  if (typeof document === "undefined") return "light";
+  return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+}
+
+function applyThemeToDOM(theme: Theme): void {
+  if (typeof document === "undefined") return;
+  document.documentElement.dataset.theme = theme;
+}
+
 interface ThemeProviderProps {
   children: ReactNode;
 }
 
-/**
- * ThemeProvider — simplified to avoid setState-in-effect ESLint errors
- * Uses a callback-based approach with direct DOM manipulation for theme switching
- */
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  // Get initial theme from localStorage (only runs on client during render)
-  const getInitialTheme = (): Theme => {
-    if (typeof window === "undefined") return "light";
-    const stored = localStorage.getItem("theme") as Theme | null;
-    if (stored === "dark" || stored === "light") return stored;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  };
+  // Initial state: "light" on SSR; on client, the lazy initializer reads the
+  // value already applied to <html data-theme="..."> by ThemeInitScript.
+  const [theme, setTheme] = useState<Theme>(readThemeFromDOM);
 
-  const [theme, setThemeState] = React.useState<Theme>(getInitialTheme);
-
-  // Apply theme to document
-  const applyTheme = useCallback((newTheme: Theme) => {
-    const root = document.documentElement;
-    if (newTheme === "dark") {
-      root.setAttribute("data-theme", "dark");
-    } else {
-      root.removeAttribute("data-theme");
-    }
+  const toggleTheme = useCallback(() => {
+    setTheme((current) => {
+      const next: Theme = current === "dark" ? "light" : "dark";
+      try {
+        localStorage.setItem(STORAGE_KEY, next);
+      } catch {
+        // localStorage may be unavailable (private mode, etc.) — ignore
+      }
+      applyThemeToDOM(next);
+      return next;
+    });
   }, []);
 
-  // Toggle between light and dark
-  const toggleTheme = useCallback(() => {
-    const newTheme: Theme = theme === "dark" ? "light" : "dark";
-    setThemeState(newTheme);
-    localStorage.setItem("theme", newTheme);
-    applyTheme(newTheme);
-  }, [theme, applyTheme]);
-
-  // Apply theme on mount
-  React.useEffect(() => {
-    applyTheme(theme);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps -- only on mount
+  // Sync system preference changes IF the user hasn't made an explicit choice.
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleSystemChange = (event: MediaQueryListEvent) => {
+      let stored: string | null = null;
+      try {
+        stored = localStorage.getItem(STORAGE_KEY);
+      } catch {
+        // ignore
+      }
+      // Respect explicit user choice; only follow system if no choice stored
+      if (stored === "light" || stored === "dark") return;
+      const next: Theme = event.matches ? "dark" : "light";
+      applyThemeToDOM(next);
+      setTheme(next);
+    };
+    mq.addEventListener("change", handleSystemChange);
+    return () => mq.removeEventListener("change", handleSystemChange);
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
@@ -67,5 +91,3 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     </ThemeContext.Provider>
   );
 }
-
-import React from "react";
