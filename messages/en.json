@@ -99,6 +99,9 @@
       "comingSoon": "Full case study content being written."
     },
     "caseFiles": {
+      "everestTitle": "Everest Finance",
+      "odooTitle": "Odoo Testing Toolkit",
+      "bocalbunTitle": "BocalBun Retrospective",
       "everestfinanceTitle": "Everest Finance",
       "odoostestingtoolkitTitle": "Odoo Testing Toolkit",
       "bocalbunretrospectiveTitle": "BocalBun Retrospective"

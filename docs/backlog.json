@@ -394,7 +394,7 @@
           "id": "T028",
           "title": "D1: Work index — FileReferenceRow list",
           "desc": "Rewrite app/[locale]/work/page.tsx as a file-cabinet list (not grid). Each row is a FileReferenceRow: file reference (CF-001), serif title, mono domain, year right-aligned, status chip. Accent hairline slides in from left on hover (CSS transition). Rows are <a> elements, not <div onClick>. No thumbnail on hover. See design-shape-v3.md §5 /work index.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T022", "T024"],
           "files": [
             "app/[locale]/work/page.tsx",
