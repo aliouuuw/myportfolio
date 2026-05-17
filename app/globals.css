@@ -27,10 +27,10 @@
   --color-ink-tertiary: oklch(0.62 0.008 246);
   --color-ink-muted: oklch(0.74 0.007 244);
 
-  /* Accent — magnetic steel-blue, low chroma, used <6% surface */
-  --color-accent: oklch(0.62 0.045 235);
-  --color-accent-bright: oklch(0.82 0.060 230);
-  --color-accent-subtle: oklch(0.72 0.030 235 / 0.12);
+  /* Accent — magnetic steel-blue, raised chroma (0.10) for visibility */
+  --color-accent: oklch(0.62 0.10 235);
+  --color-accent-bright: oklch(0.82 0.10 230);
+  --color-accent-subtle: oklch(0.72 0.06 235 / 0.12);
 
   /* Emboss edges for metal panels */
   --color-emboss-light: oklch(1.00 0 0 / 0.55);
@@ -87,9 +87,9 @@
   --color-ink-tertiary: oklch(0.56 0.008 248);
   --color-ink-muted: oklch(0.42 0.008 250);
 
-  --color-accent: oklch(0.74 0.055 230);
-  --color-accent-bright: oklch(0.88 0.070 228);
-  --color-accent-subtle: oklch(0.68 0.040 232 / 0.18);
+  --color-accent: oklch(0.74 0.10 230);
+  --color-accent-bright: oklch(0.88 0.10 228);
+  --color-accent-subtle: oklch(0.68 0.06 232 / 0.18);
 
   --color-emboss-light: oklch(0.55 0.020 246 / 0.45);
   --color-emboss-dark: oklch(0.06 0.008 250 / 0.55);
@@ -144,9 +144,9 @@
     --color-ink-tertiary: oklch(0.56 0.008 248);
     --color-ink-muted: oklch(0.42 0.008 250);
 
-    --color-accent: oklch(0.74 0.055 230);
-    --color-accent-bright: oklch(0.88 0.070 228);
-    --color-accent-subtle: oklch(0.68 0.040 232 / 0.18);
+    --color-accent: oklch(0.74 0.10 230);
+    --color-accent-bright: oklch(0.88 0.10 228);
+    --color-accent-subtle: oklch(0.68 0.06 232 / 0.18);
 
     --color-emboss-light: oklch(0.55 0.020 246 / 0.45);
     --color-emboss-dark: oklch(0.06 0.008 250 / 0.55);

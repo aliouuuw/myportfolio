@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-17T03:35:00Z",
+  "updated": "2026-05-17T17:35:00Z",
   "phases": [
     {
       "id": "P0",
@@ -420,7 +420,7 @@
           "id": "T030",
           "title": "E: Polish, accessibility, and cleanup",
           "desc": "Raise accent chroma in globals.css from 0.045 to 0.10 (oklch(0.62 0.10 235)). Verify WCAG AA contrast for all text including 11px mono labels. Audit: aria-labels on ClassificationStamp, aria-hidden on file reference numbers, <article> semantics on CaseFileCard, focus rings visible (accent color, 1px offset), all touch targets 44x44px min. Confirm prefers-reduced-motion disables all animations. Delete app/[locale]/mock/ directory entirely. Run Lighthouse on /en and /fr: Performance >= 90 mobile, Accessibility 100.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T027", "T028", "T029"],
           "files": [
             "app/globals.css",
