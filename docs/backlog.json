@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-16T23:50:00Z",
+  "updated": "2026-05-17T03:31:00Z",
   "phases": [
     {
       "id": "P0",
@@ -369,7 +369,7 @@
           "id": "T026",
           "title": "C3: RedactedArtifact component",
           "desc": "Build components/redacted-artifact.tsx: wraps a next/image with optional blur regions (array of {x, y, width, height} as percentage positions) rendered as absolute-positioned div overlays with CSS filter:blur(8px) and a [SENSITIVE] label. A small note above: 'This content has been partially declassified. Full details available under NDA.' aria-describedby for screen readers.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T022"],
           "files": [
             "components/redacted-artifact.tsx"
