@@ -406,7 +406,7 @@
           "id": "T029",
           "title": "D2+D3: About and Contact page rewrites",
           "desc": "Rewrite app/[locale]/about/page.tsx as single-column operator record per design-shape-v3.md §5 About: name + role, first-person paragraph, operator context (bakery, carpooling, chess, Dakar), Currently line, languages, contact links. No parallel FR/EN columns. Rewrite app/[locale]/contact/page.tsx: large serif headline, one-line positioning, three numbered contact methods (Email, WhatsApp, Calendar), contact form below the fold. Update messages/en.json and messages/fr.json.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T024"],
           "files": [
             "app/[locale]/about/page.tsx",

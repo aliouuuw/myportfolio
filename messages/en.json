@@ -116,31 +116,22 @@
   },
   "AboutPage": {
     "title": "About",
-    "hero": {
-      "line1": "Product Systems Engineer.",
-      "line2": "Dakar-based."
-    },
-    "section1": {
-      "heading": "Who I am",
-      "body": "I'm a Product Systems Engineer based in Dakar. I specialize in operational software — the systems that keep businesses running: internal tools, admin workflows, CRM consolidation, ERP configuration. I work in French and English, and I build for operational realities that most software ignores."
-    },
-    "section2": {
-      "heading": "What I build",
-      "body": "I don't build marketing sites. I build the infrastructure behind them — CRMs, customer apps, acceptance test suites, admin systems, workflow automation. At Everest Finance, I operate as the technical lead consolidating three separate surfaces into one coherent system. At ERGOBIT, I built an Odoo 18 acceptance testing toolkit that brought Robot Framework discipline to a production ERP migration.",
-      "currentWork": "Currently at Everest Finance",
-      "pastWork": "Previously: ERGOBIT, Odoo 18 acceptance testing"
-    },
-    "section3": {
-      "heading": "Beyond the work",
-      "body": "I play chess — not competitively, but it shapes how I think about systems: patience, positional tradeoffs, playing the long game. I came up as an operator, not an academic. That means I've managed stakeholder realities, worked inside operational constraints, and shipped software that businesses actually depend on."
-    }
+    "name": "Aliou Wade",
+    "role": "Product Systems Engineer · Dakar",
+    "bio": "I specialize in operational software — the systems that keep businesses running: internal tools, admin workflows, CRM consolidation, ERP configuration. I don't build marketing sites. I build the infrastructure behind them — CRMs, customer apps, acceptance test suites, admin systems, workflow automation. I work in French and English, and I build for operational realities that most software ignores.",
+    "context": "I play chess — not competitively, but it shapes how I think about systems: patience, positional tradeoffs, playing the long game. I came up as an operator, not an academic. I've run a bakery logistics chain, built carpooling coordination tools, and shipped software that businesses depend on daily. That operational context is what I bring to every system I build.",
+    "currently": "Currently: Senior Technical Operator at Everest Finance. Open to two engagements, Q3 2026.",
+    "languagesLabel": "Languages",
+    "languages": "French (native), English (fluent), Wolof (native)"
   },
   "ContactPage": {
-    "title": "Let's talk",
+    "title": "Let's work together.",
     "subtitle": "I'm open to strategic conversations about operational software, consulting engagements, or just a useful exchange.",
-    "directTitle": "Direct",
+    "stamp": "OPEN TO ENGAGEMENTS · Q3 2026",
     "email": "Email",
     "whatsapp": "WhatsApp",
+    "calendar": "Calendar",
+    "calendarPlaceholder": "Coming soon.",
     "formTitle": "Send a message",
     "name": "Name",
     "emailLabel": "Email",
