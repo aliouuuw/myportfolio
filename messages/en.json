@@ -88,7 +88,21 @@
     "subtitle": "Operational systems I've built or led.",
     "viewCaseStudy": "View case study",
     "confidential": "Confidential",
-    "backToWork": "← Work"
+    "backToWork": "← All case files",
+    "section": {
+      "situation": "Situation",
+      "constraints": "Constraints",
+      "system": "System",
+      "shipped": "What shipped",
+      "outcome": "Outcome",
+      "lessons": "What I would do differently",
+      "comingSoon": "Full case study content being written."
+    },
+    "caseFiles": {
+      "everestfinanceTitle": "Everest Finance",
+      "odoostestingtoolkitTitle": "Odoo Testing Toolkit",
+      "bocalbunretrospectiveTitle": "BocalBun Retrospective"
+    }
   },
   "WritingPage": {
     "title": "Writing",

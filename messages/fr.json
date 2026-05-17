@@ -88,7 +88,21 @@
     "subtitle": "Systèmes opérationnels que j'ai construits ou dirigés.",
     "viewCaseStudy": "Voir l'étude de cas",
     "confidential": "Confidentiel",
-    "backToWork": "← Projets"
+    "backToWork": "← Tous les dossiers",
+    "section": {
+      "situation": "Situation",
+      "constraints": "Contraintes",
+      "system": "Système",
+      "shipped": "Ce qui a été livré",
+      "outcome": "Résultat",
+      "lessons": "Ce que je ferais différemment",
+      "comingSoon": "Contenu complet de l'étude de cas en cours d'écriture."
+    },
+    "caseFiles": {
+      "everestfinanceTitle": "Everest Finance",
+      "odoostestingtoolkitTitle": "Odoo Testing Toolkit",
+      "bocalbunretrospectiveTitle": "BocalBun Rétrospective"
+    }
   },
   "WritingPage": {
     "title": "Écrits",

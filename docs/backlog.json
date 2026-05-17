@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-17T03:31:00Z",
+  "updated": "2026-05-17T03:35:00Z",
   "phases": [
     {
       "id": "P0",
@@ -380,7 +380,7 @@
           "id": "T027",
           "title": "C4: Case report page rewrite (/work/[slug])",
           "desc": "Rewrite app/[locale]/work/[slug]/page.tsx with the 6-section report structure per design-shape-v3.md §5 Case report: CaseReportHeader, then sections (Situation, Constraints, System with ScrollDiagram, Shipped, Outcome, Lessons) each wrapped in a CaseReportSection with IntersectionObserver reveal (opacity 0→1, translateY 6px→0, 500ms ease-out-quart, 80ms stagger). Add RedactedArtifact where screenshot exists. Prev/Next as two MetalPanel rows at bottom with file reference numbers. Update content/work/everest-finance.mdx to match the 6-section frontmatter structure. Also create placeholder content/work/odoo-testing-toolkit.mdx and content/work/bocalBun-retrospective.mdx sections if missing.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T025", "T026"],
           "files": [
             "app/[locale]/work/[slug]/page.tsx",
