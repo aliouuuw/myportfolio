@@ -1,0 +1,102 @@
+---
+title: "BocalBun Retrospective — Why I stopped building a framework and what it cost me"
+titleFr: "Rétrospective BocalBun — Pourquoi j'ai arrêté de construire un framework et ce que cela m'a coûté"
+summary: "An honest retrospective on building a local-first development engine on Bun, and the engineering judgment required to freeze it in favor of shipping real-world systems."
+summaryFr: "Une rétrospective honnête sur la construction d'un moteur de développement local-first sur Bun, et le jugement d'ingénierie requis pour le geler au profit de systèmes réels."
+role: "Creator & Lead Architect"
+domain: "Developer Tools"
+stack:
+  - "Bun"
+  - "TypeScript"
+  - "SQLite"
+  - "Drizzle"
+date: "2022-11"
+featured: true
+confidential: false
+---
+
+## Context
+
+In late 2022, Bun was emerging as a high-performance alternative to Node.js. Its single-binary execution model, built-in SQLite driver, and rapid startup times promised to redefine local development. Fascinated by this performance leap, I embarked on building **BocalBun**—a local-first, lightweight development engine and framework designed to help solo developers scaffold, build, and deploy high-performance applications in minutes.
+
+The goal was to create a cohesive operational stack: an ultra-fast entity engine with built-in Row-Level Security (RLS), hooks, and automated migrations, all running natively on Bun and SQLite. 
+
+After months of intensive R&D and a beautifully structured codebase, I made a deliberate decision: **I froze the project and walked away.** 
+
+This retrospective is not a story of technical failure. It is an exploration of engineering judgment—understanding when to stop building abstract infrastructure and start shipping systems that businesses actually depend on.
+
+## The Vision: A Local-First Operational Spine
+
+Many modern frameworks are designed with cloud-native, serverless environments in mind. For developers building operational tools—especially in regions like West Africa, where local-first capabilities, low-resource performance, and offline-ready architectures are highly valuable—this cloud dependency is an anti-pattern.
+
+BocalBun was designed to solve this. It wasn't just a router or a template; it was an integrated development runtime that packaged:
+
+- **An Entity Engine:** Structured schema definitions that automatically mapped TypeScript types to an embedded SQLite database.
+- **Embedded Security (RLS):** Security rules declared directly inside the schema, ensuring data access was constrained automatically without boilerplate controller logic.
+- **Event-Driven Hooks:** Reactive side-effects (e.g., triggering a Slack notification on account status changes) attached directly to entity life-cycles.
+- **A Seamless CLI:** A developer utility for automatic migrations, schema seeding, and interactive REPL exploration.
+
+## Architecture
+
+The system was organized around a central entity registry that managed the lifecycle of relational schemas.
+
+```
+┌────────────────────────────────────────────────────────┐
+│                      BocalBun CLI                      │
+│      (Interactive REPL · Migration Generator)          │
+└──────────────────────────┬─────────────────────────────┘
+                           │
+┌──────────────────────────▼─────────────────────────────┐
+│                    BocalBun Runtime                    │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │                  Entity Registry                 │  │
+│  │   - Schema Schema Validation                     │  │
+│  │   - SQLite Connection Pool                       │  │
+│  └───────────────────────┬──────────────────────────┘  │
+│                          │                             │
+│  ┌───────────────────────▼──────────────────────────┐  │
+│  │                   Row-Level Security             │  │
+│  │   - Dynamic Context Evaluation                   │  │
+│  │   - Embedded Access Control Policies             │  │
+│  └───────────────────────┬──────────────────────────┘  │
+│                          │                             │
+│  ┌───────────────────────▼──────────────────────────┐  │
+│  │                 Lifecycle Hooks Engine           │  │
+│  │   - Transaction Safe Side-effects                │  │
+│  │   - Event Dispatching (Pre/Post-commit)          │  │
+│  └──────────────────────────────────────────────────┘  │
+└────────────────────────────────────────────────────────┘
+```
+
+The core codebase prioritized low-overhead runtime performance by leveraging Bun’s fast native SQLite binding and using static TypeScript analysis to eliminate reflection cost during entity execution.
+
+## The Drift: How Elegance Became a Trap
+
+The technical implementation of BocalBun was a success. It was fast, expressive, and robust. However, as the codebase matured, I fell into the "framework gravity" trap:
+
+1. **Solving the General Case:** Instead of building a specific business feature, I spent weeks design-engineering a generic validation library that could handle any speculative edge case.
+2. **Plumbing Over Product:** The focus shifted from "what can I build with this?" to "how can I make the plugin registration API more ergonomic?"
+3. **The Maintenance Tax:** When Bun's early APIs underwent rapid breaking changes, I spent more time adapting my internal low-level bindings than shipping features.
+
+I had built a highly sophisticated tool that had exactly one user: myself. I was accumulating intellectual ownership, but zero operational accountability.
+
+## The Hard Choice: Why I Stopped
+
+The turning point came when I looked at my long-term career goals. I didn't want to be a framework maintainer chasing GitHub stars and answering issue triage for eternity. I wanted to build operational software that runs businesses. 
+
+I compared the investment required to make BocalBun production-ready for others against the value of applying that same energy directly to business problems. The choice was clear:
+
+- **Intellectual satisfying, but commercially empty:** BocalBun was an amazing training ground, but it solved a problem I had fabricated.
+- **High leverage in reality:** Real businesses in my network were struggling with messy Odoo ERP upgrades and fragmented fintech operations. They didn't need a custom Bun framework; they needed operational systems that worked.
+
+I froze BocalBun, archived the repository, and pivoted my entire focus. 
+
+## What I Learned (and What it Cost Me)
+
+Freezing BocalBun cost me months of pure development time, but it bought me the most valuable asset an engineer can have: **judgment.**
+
+- **The "Who's Waiting?" Filter:** If nobody is waiting for what you're building, you're building a playground, not a product. Now, before I write a single line of code, I identify the direct operator who needs the outcome.
+- **Systems Over Abstractions:** I stopped trying to build "the perfect base layer." At Everest Finance, I consolidated three complex digital surfaces by prioritizing shared types, strict schemas, and simple relational database models over custom framework abstractions.
+- **The Sunk Cost Skill:** Knowing when to stop is an engineering discipline. Continuing to write code for a project that doesn't align with your strategic direction is not dedication—it's a lack of focus.
+
+BocalBun is frozen, but its DNA lives on in how I design systems. It taught me to build light, think local-first, and—most importantly—value the feedback of real-world deployments over architectural perfection.

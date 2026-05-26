@@ -1,0 +1,17 @@
+/* Shared mock preview shell */
+
+.mock-shell {
+  --mock-nav-bg: oklch(0.98 0.004 88 / 0.92);
+  --mock-nav-border: oklch(0.84 0.006 90);
+  --mock-nav-ink: oklch(0.14 0.012 85);
+  --mock-nav-ink-muted: oklch(0.45 0.01 88);
+  --mock-nav-hover: oklch(0.94 0.005 90);
+}
+
+[data-theme="dark"] .mock-shell {
+  --mock-nav-bg: oklch(0.16 0.01 85 / 0.92);
+  --mock-nav-border: oklch(0.3 0.008 85);
+  --mock-nav-ink: oklch(0.94 0.005 90);
+  --mock-nav-ink-muted: oklch(0.62 0.008 88);
+  --mock-nav-hover: oklch(0.22 0.012 85);
+}
