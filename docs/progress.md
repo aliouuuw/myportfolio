@@ -12,3 +12,4 @@
 2026-05-16 — T012 done: Everest Finance case study — full 8-section write-up (~1,700 words), first-person, confidential flag, honest "in progress" outcome.
 2026-05-16 — T013 done: Odoo Testing Toolkit case study — supporting case (~850 words), Robot Framework + Playwright, 39 tests / 9 suites.
 2026-05-16 — T014 done: First essay "Why I stopped building frameworks and started shipping systems" (~1,100 words) — writing section is now live.
+2026-05-27 — T031–T032 done: BocalBun retrospective MDX (EN+FR), ledger frontmatter on anchor cases, `lib/work-ledger.ts`, essay cross-links; P5 migration backlog + `docs/launch-prerequisites.md`.

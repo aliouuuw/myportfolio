@@ -1,0 +1,103 @@
+---
+title: "BocalBun — why I stopped building a framework"
+titleFr: "BocalBun — pourquoi j'ai arrêté de construire un framework"
+summary: "A deliberate stop on a Bun development toolkit: clean architecture, no users waiting, and the judgment to redirect energy toward operational software."
+summaryFr: "Un arrêt délibéré sur un toolkit de développement Bun : architecture propre, aucun utilisateur en attente, et le jugement de rediriger l'énergie vers le logiciel opérationnel."
+role: "Solo builder"
+domain: "Systems judgment"
+stack:
+  - "Bun"
+  - "TypeScript"
+  - "PostgreSQL"
+  - "Entity engine"
+  - "RLS"
+date: "2022-09"
+featured: true
+confidential: false
+status: archived
+period: "2022 — stopped"
+proofClaim: "Does this person know when to stop?"
+outcome: "Frozen codebase; lessons applied to Everest and client work"
+relatedEssay: "why-systems-over-frameworks"
+---
+
+## Context
+
+I built BocalBun as a development toolkit for Bun applications — scaffolding, testing hooks, deployment patterns, and an opinionated entity layer with row-level security and audit trails. The architecture was clean. The developer experience was thoughtful. There was no client waiting for it and no revenue attached to finishing it.
+
+This case study is not a product launch story. It is a **retrospective on stopping** — the third anchor on this site because founders and CTOs need to see judgment, not only shipping velocity.
+
+For the longer essay on the same shift, see [Why I stopped building frameworks and started shipping systems](/en/writing/why-systems-over-frameworks).
+
+## Problem
+
+The problem BocalBun tried to solve was real in the abstract: Bun projects lack the mature scaffolding ecosystem that Node has accumulated. Starting a new service still means reinventing folder structure, env handling, migration patterns, and test harnesses.
+
+What I underestimated was **distribution and obligation**. A framework only compounds if other developers adopt it, file issues, and hold you to semver. Without that loop, every abstraction I added was debt I owed only to myself — while operational software (ERP deployments, client modules, internal tools) had people waiting on outcomes.
+
+## Approach
+
+I designed BocalBun around constraints I believed in at the time:
+
+- **Entity-first data model** with typed fields, relationships, and hooks instead of ad-hoc SQL in every route
+- **Row-level security baked in** so multi-tenant patterns were default, not bolted on
+- **Audit trails** on mutations — who changed what, when — because operational software lives or dies on traceability
+- **CLI scaffolding** so a new service could boot with conventions already wired
+
+The stack was Bun and TypeScript end-to-end. I documented conventions in-repo (the precursor to the agent-ready repo ideas I use today). The work was intellectually satisfying and technically coherent.
+
+## System diagram
+
+```
+┌─────────────────────────────────────────────────────┐
+│                  BocalBun CLI / dev loop               │
+│  scaffold → entity definitions → migrations → serve  │
+└──────────────────────────┬──────────────────────────┘
+                           ▼
+┌─────────────────────────────────────────────────────┐
+│              Application runtime (Bun)                 │
+│  ┌─────────────┐  ┌──────────────┐  ┌─────────────┐ │
+│  │ Entity eng. │  │ RLS policies │  │ Audit log   │ │
+│  └──────┬──────┘  └──────┬───────┘  └──────┬──────┘ │
+│         └────────────────┼──────────────────┘       │
+│                          ▼                          │
+│                   PostgreSQL                         │
+└─────────────────────────────────────────────────────┘
+```
+
+## What shipped
+
+- Working **entity engine** with relationships, validation hooks, and migration helpers
+- **RLS patterns** documented and applied in sample apps
+- **Audit logging** on write paths
+- **CLI** for project and entity scaffolding
+- Internal documentation (AGENTS-style conventions) that later informed how I structure client repos
+
+Nothing reached external adoption. No npm downloads, no community, no business depending on releases.
+
+## Technical depth
+
+The entity layer was the deepest piece. I wanted CRUD to feel boring: define a schema once, get list/detail/create/update with consistent error shapes and authorization checks. Hooks let you inject domain logic without scattering guards across handlers.
+
+RLS was non-negotiable because I had seen too many internal tools where "we'll add tenant isolation later" became a production incident. Baking policies into the data layer forced discipline early — the same discipline I later applied when consolidating fintech systems where regulatory expectations do not forgive sloppy access control.
+
+The mistake was not technical quality. It was **sequencing**: I kept refining the general case while ERGOBIT had migration deadlines and Everest would soon need a solo operator who could ship surfaces, not polish abstractions.
+
+## Outcome
+
+I **froze** BocalBun deliberately — archived the repo, stopped feature expansion, and redirected months of energy toward:
+
+- Production Odoo work and the acceptance-testing toolkit
+- Later: Everest Finance (website, CRM, customer app) as a single operational spine
+
+Stopping felt like waste at the time. In retrospect it was the highest-leverage decision of that period. The codebase remains a reference for how I think about entities and audit; it is not a product roadmap.
+
+## Lessons
+
+**Ask who's waiting.** If nobody is waiting, you may be building a framework habit, not a product.
+
+**Treat stopping as a skill.** Knowing when an investment will not compound publicly or commercially is as important as knowing how to build.
+
+**Architecture compounds only when shared.** Private elegance does not create leverage; deployed systems and visible artifacts do.
+
+**Do not revive BocalBun as a framework.** Per my strategic plan: extract lessons, document the retrospective, optionally open small composable tools — not another platform rabbit hole.

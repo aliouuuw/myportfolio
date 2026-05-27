@@ -1,0 +1,104 @@
+---
+title: "BocalBun — why I stopped building a framework"
+titleFr: "BocalBun — pourquoi j'ai arrêté de construire un framework"
+summary: "A deliberate stop on a Bun development toolkit: clean architecture, no users waiting, and the judgment to redirect energy toward operational software."
+summaryFr: "Un arrêt délibéré sur un toolkit de développement Bun : architecture propre, aucun utilisateur en attente, et le jugement de rediriger l'énergie vers le logiciel opérationnel."
+role: "Créateur solo"
+domain: "Jugement systémique"
+stack:
+  - "Bun"
+  - "TypeScript"
+  - "PostgreSQL"
+  - "Moteur d'entités"
+  - "RLS"
+date: "2022-09"
+featured: true
+confidential: false
+status: archived
+period: "2022 — arrêt"
+proofClaim: "Cette personne sait-elle quand s'arrêter ?"
+outcome: "Codebase gelée ; leçons appliquées à Everest et aux missions client"
+relatedEssay: "why-systems-over-frameworks"
+---
+
+## Contexte
+
+J'ai construit BocalBun comme toolkit de développement pour applications Bun — scaffolding, hooks de test, patterns de déploiement, et une couche d'entités opinionnée avec sécurité au niveau des lignes et pistes d'audit. L'architecture était propre. L'expérience développeur était soignée. Aucun client n'attendait le livrable et aucun revenu ne dépendait de le terminer.
+
+Cette étude de cas n'est pas un lancement produit. C'est une **rétrospective sur l'arrêt** — le troisième pilier de ce site parce que les fondateurs et CTO ont besoin de voir le jugement, pas seulement la vélocité de livraison.
+
+Pour l'essai plus long sur le même virage, voir [Pourquoi j'ai arrêté de construire des frameworks pour livrer des systèmes](/fr/writing/why-systems-over-frameworks).
+
+## Problème
+
+Le problème que BocalBun visait était réel en abstract : les projets Bun manquent de l'écosystème de scaffolding mature que Node a accumulé. Démarrer un nouveau service signifie encore réinventer structure, variables d'environnement, migrations et harness de test.
+
+Ce que j'ai sous-estimé, c'est **la distribution et l'obligation**. Un framework ne se compose que si d'autres développeurs l'adoptent, ouvrent des issues et vous tiennent au semver. Sans cette boucle, chaque abstraction ajoutée était une dette envers moi seul — pendant que le logiciel opérationnel (déploiements ERP, modules client, outils internes) avait des personnes qui attendaient des résultats.
+
+## Approche
+
+J'ai conçu BocalBun autour de contraintes auxquelles je croyais alors :
+
+- **Modèle entité d'abord** avec champs typés, relations et hooks plutôt que du SQL ad hoc dans chaque route
+- **RLS intégré** pour que le multi-tenant soit le défaut, pas un ajout tardif
+- **Pistes d'audit** sur les mutations — qui a changé quoi, quand — parce que le logiciel opérationnel vit ou meurt sur la traçabilité
+- **Scaffolding CLI** pour qu'un nouveau service démarre avec les conventions déjà câblées
+
+La stack était Bun et TypeScript de bout en bout. J'ai documenté les conventions dans le repo (précurseur des idées agent-ready que j'utilise aujourd'hui). Le travail était intellectuellement satisfaisant et techniquement cohérent.
+
+## Schéma système
+
+```
+┌─────────────────────────────────────────────────────┐
+│              Boucle CLI / dev BocalBun                 │
+│  scaffold → définitions d'entités → migrations → run │
+└──────────────────────────┬──────────────────────────┘
+                           ▼
+┌─────────────────────────────────────────────────────┐
+│              Runtime application (Bun)                 │
+│  ┌─────────────┐  ┌──────────────┐  ┌─────────────┐ │
+│  │ Moteur ent. │  │ Politiques   │  │ Journal     │ │
+│  │             │  │ RLS          │  │ d'audit     │ │
+│  └──────┬──────┘  └──────┬───────┘  └──────┬──────┘ │
+│         └────────────────┼──────────────────┘       │
+│                          ▼                          │
+│                   PostgreSQL                         │
+└─────────────────────────────────────────────────────┘
+```
+
+## Ce qui a été livré
+
+- **Moteur d'entités** fonctionnel avec relations, hooks de validation et helpers de migration
+- **Patterns RLS** documentés et appliqués dans des apps exemples
+- **Journalisation d'audit** sur les chemins d'écriture
+- **CLI** pour le scaffolding projet et entités
+- Documentation interne (conventions type AGENTS) qui a ensuite structuré mes repos client
+
+Rien n'a atteint une adoption externe. Pas de téléchargements npm, pas de communauté, pas d'entreprise dépendante des releases.
+
+## Profondeur technique
+
+La couche entités était la pièce la plus profonde. Je voulais que le CRUD soit ennuyeux : définir un schéma une fois, obtenir list/detail/create/update avec des formes d'erreur et des contrôles d'accès cohérents. Les hooks permettaient d'injecter la logique métier sans disperser les gardes dans les handlers.
+
+Le RLS était non négociable parce que j'avais vu trop d'outils internes où « on ajoutera l'isolation locataire plus tard » devenait un incident de production. Intégrer les politiques dans la couche données imposait la discipline tôt — la même discipline appliquée plus tard en consolidant des systèmes fintech où la régulation ne pardonne pas les accès flous.
+
+L'erreur n'était pas la qualité technique. C'était le **séquençage** : j'affinais le cas général pendant qu'ERGOBIT avait des deadlines de migration et qu'Everest aurait bientôt besoin d'un opérateur solo capable de livrer des surfaces, pas de polir des abstractions.
+
+## Résultat
+
+J'ai **gelé** BocalBun délibérément — archivé le repo, stoppé l'expansion fonctionnelle, et redirigé des mois d'énergie vers :
+
+- Le travail Odoo en production et le toolkit de tests d'acceptance
+- Plus tard : Everest Finance (site, CRM, app client) comme colonne opérationnelle unique
+
+S'arrêter semblait du gaspillage à l'époque. Avec le recul, c'était la décision à plus fort levier de cette période. Le codebase reste une référence sur ma façon de penser entités et audit ; ce n'est pas une roadmap produit.
+
+## Leçons
+
+**Demandez qui attend.** Si personne n'attend, vous construisez peut-être une habitude de framework, pas un produit.
+
+**Traitez l'arrêt comme une compétence.** Savoir quand un investissement ne se composera ni publiquement ni commercialement compte autant que savoir construire.
+
+**L'architecture ne se compose que lorsqu'elle est partagée.** L'élégance privée ne crée pas de levier ; les systèmes déployés et les artefacts visibles, oui.
+
+**Ne pas relancer BocalBun comme framework.** Selon mon plan stratégique : extraire les leçons, documenter la rétrospective, éventuellement ouvrir de petits outils composables — pas un autre trou de plateforme.

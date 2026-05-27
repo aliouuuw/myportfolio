@@ -3,7 +3,8 @@ import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { CaseFileCard } from "@/components/case-file-card";
-import { getWritingSlugs, readWritingFrontmatter } from "@/lib/mdx";
+import { readWritingFrontmatter } from "@/lib/mdx";
+import { FLAGSHIP_ESSAY_SLUG } from "@/lib/work-ledger";
 import { buildCanonical } from "@/lib/metadata";
 
 export async function generateMetadata({
@@ -30,12 +31,13 @@ export default async function HomePage(props: {
 
   const t = await getTranslations("HomePage");
 
-  // Fetch latest essay for the field note teaser
-  const writingSlugs = await getWritingSlugs();
-  const latestEssay =
-    writingSlugs.length > 0
-      ? await readWritingFrontmatter(writingSlugs[0], locale)
-      : null;
+  let latestEssay: Awaited<ReturnType<typeof readWritingFrontmatter>> | null =
+    null;
+  try {
+    latestEssay = await readWritingFrontmatter(FLAGSHIP_ESSAY_SLUG, locale);
+  } catch {
+    latestEssay = null;
+  }
 
   // Case files data per design-shape-v3.md
   const caseFiles = [
@@ -142,7 +144,7 @@ export default async function HomePage(props: {
         <div className="hairline mb-8" />
         {latestEssay ? (
           <Link
-            href={`/${locale}/writing/${writingSlugs[0]}`}
+            href={`/${locale}/writing/${FLAGSHIP_ESSAY_SLUG}`}
             className="group block py-4"
           >
             <p className="font-mono text-[11px] font-medium uppercase tracking-wide text-ink-tertiary mb-2">

@@ -16,7 +16,10 @@ export const WRITING_CONTENT_DIR = path.join(ROOT, "content", "writing");
 /** Supported locales */
 export const DEFAULT_LOCALE = "en";
 
-/** Case study frontmatter — portfolio-plan.md §9 */
+/** Work ledger status — mock-to-production-plan.md §4C */
+export type WorkLedgerStatus = "active" | "shipped" | "archived";
+
+/** Case study frontmatter — portfolio-plan.md §9 + ledger fields §4C */
 export type CaseStudyFrontmatter = {
   title: string;
   titleFr: string;
@@ -28,6 +31,13 @@ export type CaseStudyFrontmatter = {
   date: string;
   featured: boolean;
   confidential: boolean;
+  /** Ledger row (per-locale MDX file) */
+  status?: WorkLedgerStatus;
+  period?: string;
+  proofClaim?: string;
+  outcome?: string;
+  heroImage?: string;
+  relatedEssay?: string;
 };
 
 export type EssayFrontmatter = {
@@ -36,6 +46,8 @@ export type EssayFrontmatter = {
   summary: string;
   summaryFr: string;
   date: string;
+  /** Cross-link to anchor case study, e.g. bocalbun-retrospective */
+  relatedCaseSlug?: string;
 };
 
 function isRecord(v: unknown): v is Record<string, unknown> {
@@ -62,6 +74,22 @@ function asBoolean(v: unknown, field: string): boolean {
   throw new Error(`MDX frontmatter: expected boolean for "${field}"`);
 }
 
+function asOptionalString(v: unknown): string | undefined {
+  if (v === undefined || v === null) return undefined;
+  if (typeof v === "string" && v.length > 0) return v;
+  return undefined;
+}
+
+function asOptionalWorkLedgerStatus(
+  v: unknown,
+): WorkLedgerStatus | undefined {
+  if (v === undefined || v === null) return undefined;
+  if (v === "active" || v === "shipped" || v === "archived") return v;
+  throw new Error(
+    'MDX frontmatter: status must be "active", "shipped", or "archived"',
+  );
+}
+
 export function parseCaseStudyFrontmatter(
   raw: unknown,
 ): CaseStudyFrontmatter {
@@ -79,6 +107,12 @@ export function parseCaseStudyFrontmatter(
     date: asString(raw.date, "date"),
     featured: asBoolean(raw.featured, "featured"),
     confidential: asBoolean(raw.confidential, "confidential"),
+    status: asOptionalWorkLedgerStatus(raw.status),
+    period: asOptionalString(raw.period),
+    proofClaim: asOptionalString(raw.proofClaim),
+    outcome: asOptionalString(raw.outcome),
+    heroImage: asOptionalString(raw.heroImage),
+    relatedEssay: asOptionalString(raw.relatedEssay),
   };
 }
 
@@ -92,6 +126,7 @@ export function parseEssayFrontmatter(raw: unknown): EssayFrontmatter {
     summary: asString(raw.summary, "summary"),
     summaryFr: asString(raw.summaryFr, "summaryFr"),
     date: asString(raw.date, "date"),
+    relatedCaseSlug: asOptionalString(raw.relatedCaseSlug),
   };
 }
 

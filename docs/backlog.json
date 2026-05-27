@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-17T17:35:00Z",
+  "updated": "2026-05-27T12:00:00Z",
   "phases": [
     {
       "id": "P0",
@@ -424,6 +424,128 @@
           "deps": ["T027", "T028", "T029"],
           "files": [
             "app/globals.css",
+            "app/[locale]/mock"
+          ],
+          "verify": "bun run build && bun run lint"
+        }
+      ]
+    },
+    {
+      "id": "P5",
+      "title": "Mock → Production migration (see docs/mock-to-production-plan.md)",
+      "tasks": [
+        {
+          "id": "T031",
+          "title": "content: bocalbun retrospective MDX EN+FR",
+          "desc": "Write content/work/bocalbun-retrospective/{en,fr}.mdx (8-section retrospective). Link to essay why-systems-over-frameworks. Fixes /work/bocalbun-retrospective 404.",
+          "status": "done",
+          "deps": [],
+          "files": [
+            "content/work/bocalbun-retrospective/en.mdx",
+            "content/work/bocalbun-retrospective/fr.mdx",
+            "content/writing/why-systems-over-frameworks/en.mdx",
+            "content/writing/why-systems-over-frameworks/fr.mdx"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T032",
+          "title": "content: ledger frontmatter + work-ledger helper",
+          "desc": "Extend CaseStudyFrontmatter (status, period, proofClaim, outcome, heroImage, relatedEssay). Add lib/work-ledger.ts with FEATURED_WORK_SLUGS and getFeaturedWorkEntries(). Anchor MDX + eduplan featured:false.",
+          "status": "done",
+          "deps": ["T031"],
+          "files": [
+            "lib/mdx.ts",
+            "lib/work-ledger.ts",
+            "content/work/everest-finance/en.mdx",
+            "content/work/everest-finance/fr.mdx",
+            "content/work/odoo-testing-toolkit/en.mdx",
+            "content/work/odoo-testing-toolkit/fr.mdx",
+            "content/work/bocalbun-retrospective/en.mdx",
+            "content/work/bocalbun-retrospective/fr.mdx",
+            "content/work/eduplan/en.mdx",
+            "content/work/eduplan/fr.mdx",
+            "app/[locale]/page.tsx"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T033",
+          "title": "design: port ledger tokens to globals",
+          "desc": "Extract OKLCH tokens and layout utilities from app/[locale]/mock/neo-futuristic.css into app/globals.css or app/ledger.css. Light/dark parity, scroll-padding-top for TopNav.",
+          "status": "pending",
+          "deps": ["T032"],
+          "files": [
+            "app/globals.css",
+            "app/ledger.css",
+            "app/[locale]/layout.tsx"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T034",
+          "title": "feat: work-ledger component + site scroller",
+          "desc": "Promote mock work-ledger.tsx and join-block.tsx to components/. Refactor use-mock-scroller to use-site-scroller for document scroll.",
+          "status": "pending",
+          "deps": ["T033"],
+          "files": [
+            "components/work-ledger.tsx",
+            "components/join-block.tsx",
+            "components/use-site-scroller.ts",
+            "app/[locale]/mock/_components/work-ledger.tsx",
+            "app/[locale]/mock/_components/join-block.tsx"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T035",
+          "title": "feat: homepage neo-ledger IA",
+          "desc": "Replace CaseFileCard homepage with WorkLedger + hero from messages. Wire getFeaturedWorkEntries(). GSAP in client island only.",
+          "status": "pending",
+          "deps": ["T034"],
+          "files": [
+            "app/[locale]/page.tsx",
+            "messages/en.json",
+            "messages/fr.json"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T036",
+          "title": "feat: case study template v2",
+          "desc": "Replace MetalPanel/CaseReportHeader with case-study-header.tsx. Clean report layout, fix prev/next i18n.",
+          "status": "pending",
+          "deps": ["T035"],
+          "files": [
+            "app/[locale]/work/[slug]/page.tsx",
+            "components/case-study-header.tsx",
+            "components/case-report-header.tsx"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T037",
+          "title": "feat: work index v2",
+          "desc": "Redesign /work index — ledger list, no CF-xxx. Decide full index vs redirect to /#work (see launch-prerequisites.md).",
+          "status": "pending",
+          "deps": ["T035"],
+          "files": [
+            "app/[locale]/work/page.tsx",
+            "components/file-reference-row.tsx"
+          ],
+          "verify": "bun run build && bun run lint"
+        },
+        {
+          "id": "T038",
+          "title": "chore: remove design-shape-v3 components + retire mock",
+          "desc": "Delete unused v3 components after migration. Remove /mock route after production homepage approved. Prune dead message keys.",
+          "status": "pending",
+          "deps": ["T036", "T037"],
+          "files": [
+            "components/case-file-card.tsx",
+            "components/file-reference-row.tsx",
+            "components/metal-panel.tsx",
+            "components/classification-stamp.tsx",
             "app/[locale]/mock"
           ],
           "verify": "bun run build && bun run lint"

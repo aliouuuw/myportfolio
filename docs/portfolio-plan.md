@@ -35,9 +35,9 @@ If a page or feature does not serve one of those four goals, cut it.
 
 **Do not start the portfolio until you have:**
 
-- [ ] A one-sentence positioning statement (draft below)
-- [ ] Permission boundaries for Everest (what can be named, what must be anonymized)
-- [ ] ERGOBIT conversation outcome for Odoo Testing Toolkit (publish solo vs co-brand)
+- [x] A one-sentence positioning statement (§3 — in `messages/en.json` + `fr.json`)
+- [ ] Permission boundaries for Everest (what can be named, what must be anonymized) — see [launch-prerequisites.md](./launch-prerequisites.md)
+- [ ] ERGOBIT conversation outcome for Odoo Testing Toolkit (publish solo vs co-brand) — see [launch-prerequisites.md](./launch-prerequisites.md)
 
 ---
 
@@ -197,7 +197,7 @@ messages/
 | Everest case study | `everest-operational-systems` | **#1** — active commercial proof |
 | Odoo Testing Toolkit | `odoo-acceptance-testing` | **#2** — differentiation + OSS |
 | BocalBun retrospective | `bocalbun-retrospective` | **#3** — judgment + systems thinking |
-| Essay | `why-i-stopped-bocalbun` | Strongest narrative; link from BocalBun case |
+| Essay | `why-systems-over-frameworks` | Strongest narrative; cross-links BocalBun case (canonical slug; not `why-i-stopped-bocalbun`) |
 | About | `/about` | First person, Senegal, bilingual, no buzzwords |
 | Contact | `/contact` | Email, Calendum, WhatsApp |
 
@@ -440,11 +440,11 @@ Align with `strategic-plan.md` 6-month goals:
 
 | Decision | Options | Chosen |
 |---|---|---|
-| Production domain | `aliouwade.com` / `aliou.dev` / Vercel default | |
-| Everest naming | Full name / “West African fintech” / anonymized | |
-| Odoo toolkit repo | Personal GitHub / ERGOBIT org / joint | |
-| Calendly vs email-only contact | Both / email only | |
-| Include Dakar Sport Shop in v1 | Yes / No (recommend: No, month 2) | |
+| Production domain | `aliouwade.com` / `aliou.dev` / Vercel default | `aliouwade.com` (code default) — confirm DNS |
+| Everest naming | Full name / “West African fintech” / anonymized | Full name in MDX — **confirm with CEO** |
+| Odoo toolkit repo | Personal GitHub / ERGOBIT org / joint | Pending ERGOBIT conversation |
+| Calendly vs email-only contact | Both / email only | Email + WhatsApp v1 |
+| Include Dakar Sport Shop in v1 | Yes / No (recommend: No, month 2) | **No** |
 
 ---
 
