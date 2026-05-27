@@ -15,6 +15,9 @@ Technical migration tasks live in `docs/backlog.json` phase **P5** and `docs/moc
 | EduPlan excluded from v1 featured set | Done — `featured: false` |
 | Migration backlog P5 (T031–T038) | Done |
 | Post-migration review fixes | Done — ScrollTrigger, join CTA, i18n status, client nav |
+| Homepage systems map (`#systems`) | Done — `SystemsMapSection` + supporting work MDX |
+| Three.js / R3F removed | Done — unused deps pruned |
+| `metadataBase` on root layout | Done — OG/Twitter absolute URLs |
 
 ---
 
@@ -43,7 +46,7 @@ Technical migration tasks live in `docs/backlog.json` phase **P5** and `docs/moc
 | Everest naming | Full name / anonymized | **Full name** in MDX today — confirm with CEO |
 | Odoo toolkit repo | Personal / ERGOBIT org | Pending ERGOBIT conversation |
 | Calendly vs email-only | Both / email only | **Email + WhatsApp v1**; calendar in v1.1 |
-| Dakar Sport Shop in v1 | Yes / No | **No** (month 2) |
+| Dakar Sport Shop in v1 | Yes / No | **Not homepage hero** — case study on `/work` only |
 
 ### Launch ops (portfolio-plan §16)
 

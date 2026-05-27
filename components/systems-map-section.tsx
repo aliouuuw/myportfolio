@@ -22,25 +22,31 @@ function MapItem({
   t: ReturnType<typeof useTranslations<"SystemsMap">>;
 }) {
   const label = t(item.labelKey);
+
   if (item.workSlug) {
     return (
       <Link
         href={`/${locale}/work/${item.workSlug}`}
-        className="systems-map-item link-subtle text-sm text-[var(--n-fg-secondary)] hover:text-[var(--n-fg)]"
+        className="systems-map-link group"
       >
-        {label}
+        <span className="systems-map-link-label">{label}</span>
+        <span className="systems-map-link-arrow" aria-hidden>
+          →
+        </span>
       </Link>
     );
   }
+
   return (
-    <span className="systems-map-item text-sm text-[var(--n-fg-muted)]">
-      {label}
+    <span className="systems-map-static">
+      <span className="systems-map-static-label">{label}</span>
     </span>
   );
 }
 
 export function SystemsMapSection({ locale }: SystemsMapSectionProps) {
   const t = useTranslations("SystemsMap");
+  const workHref = `/${locale}/work`;
 
   return (
     <section
@@ -60,39 +66,50 @@ export function SystemsMapSection({ locale }: SystemsMapSectionProps) {
           <p className="section-head-lead">{t("lead")}</p>
         </header>
 
-        <div className="systems-map reveal-up mt-10" role="list">
-          <div className="systems-map-center" role="presentation">
-            <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--n-fg-muted)]">
-              {t("centerLabel")}
-            </p>
-            <p className="mt-1 font-medium tracking-tight text-[var(--n-fg)]">
-              {t("centerRole")}
-            </p>
+        <div className="systems-map reveal-up">
+          <div className="systems-map-hub-wrap">
+            <div className="systems-map-hub">
+              <p className="systems-map-hub-label">{t("centerLabel")}</p>
+              <p className="systems-map-hub-role">{t("centerRole")}</p>
+            </div>
+            <div className="systems-map-connector" aria-hidden />
           </div>
 
-          <div
-            className="systems-map-columns mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4"
-            role="list"
-          >
-            {SYSTEMS_MAP_COLUMNS.map((col) => (
-              <div
+          <div className="systems-map-spokes">
+            {SYSTEMS_MAP_COLUMNS.map((col, colIndex) => (
+              <article
                 key={col.id}
-                className="systems-map-column border-t border-[color:var(--n-border)] pt-4"
-                role="listitem"
+                className="systems-map-spoke"
+                aria-labelledby={`systems-spoke-${col.id}`}
               >
-                <p className="label-sm mb-3 text-[var(--n-fg-muted)]">
-                  {t(col.titleKey)}
-                </p>
-                <ul className="flex flex-col gap-2">
+                <header className="systems-map-spoke-head">
+                  <span className="systems-map-spoke-index" aria-hidden>
+                    {String(colIndex + 1).padStart(2, "0")}
+                  </span>
+                  <h3
+                    id={`systems-spoke-${col.id}`}
+                    className="systems-map-spoke-title"
+                  >
+                    {t(col.titleKey)}
+                  </h3>
+                </header>
+                <ul className="systems-map-items">
                   {col.items.map((item) => (
                     <li key={item.labelKey}>
                       <MapItem locale={locale} item={item} t={t} />
                     </li>
                   ))}
                 </ul>
-              </div>
+              </article>
             ))}
           </div>
+
+          <p className="systems-map-foot section-foot">
+            <Link href={workHref} className="link-subtle label-sm">
+              {t("viewAllWork")}
+              <span aria-hidden> →</span>
+            </Link>
+          </p>
         </div>
       </div>
     </section>

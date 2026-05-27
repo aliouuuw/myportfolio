@@ -17,3 +17,4 @@
 2026-05-27 — T035 done: Homepage uses neo-ledger IA (`HomeLedgerPage`, `WorkLedger`, `JoinBlock`, MDX-driven rows, bilingual `HomePage.ledger` copy).
 2026-05-27 — T036–T038 done: Case study template v2, MDX work index, removed v3 components and `/mock` route; TopNav uses homepage anchors.
 2026-05-27 — Review fixes: ScrollTrigger viewport, join block `#contact` anchor, case study i18n labels, `router.push` for ledger CTAs, contact API default email, removed dead CF message keys.
+2026-05-27 — Homepage systems map (`#systems`), supporting work MDX (Mansour, Ndouckmane, Dakar Sport Shop), Everest acquisition copy, Three.js removed, planning docs aligned to neo-ledger IA.

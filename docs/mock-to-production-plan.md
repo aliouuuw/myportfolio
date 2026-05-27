@@ -1,9 +1,9 @@
 # Mock → Production migration plan
 
-**Status:** P5 complete (production homepage + work routes migrated)  
+**Status:** P5 complete — production is source of truth  
 **Last updated:** 2026-05-27  
-**Preview source of truth:** `/en/mock` (`app/[locale]/mock/`)  
-**Target:** Production routes under `app/[locale]/` with existing `TopNav`, i18n, and MDX content
+**Production homepage:** `/[locale]` — neo-ledger (`HomeLedgerPage`, `WorkLedger`, `SystemsMapSection`, `JoinBlock`)  
+**Legacy:** `/mock` route removed; design-shape-v3 CF dossier UI retired
 
 ---
 
@@ -53,32 +53,50 @@ Design should feel **crafted and memorable**, not gimmicky. See [mock-redesign-h
 
 ---
 
-## 3. Current production vs mock (gap analysis)
+## 3. Current production (post-migration)
 
-### Production today
-
-
-| Route                   | File                                | Pattern                                               |
-| ----------------------- | ----------------------------------- | ----------------------------------------------------- |
-| `/[locale]`             | `app/[locale]/page.tsx`             | Identity + 3× `CaseFileCard` + essay teaser + contact |
-| `/[locale]/work`        | `app/[locale]/work/page.tsx`        | `FileReferenceRow` list, hardcoded CF refs            |
-| `/[locale]/work/[slug]` | `app/[locale]/work/[slug]/page.tsx` | `CaseReportHeader` + `MetalPanel` + MDX body          |
-| Layout                  | `app/[locale]/layout.tsx`           | `TopNav`, `Footer`, `CommandPalette`, theme           |
+### Routes
 
 
-### Mock today
+| Route                   | File                                | Pattern                                                                 |
+| ----------------------- | ----------------------------------- | ----------------------------------------------------------------------- |
+| `/[locale]`             | `app/[locale]/page.tsx`             | Editorial hero + `WorkLedger` + `SystemsMapSection` + `JoinBlock` + essay + about + contact |
+| `/[locale]/work`        | `app/[locale]/work/page.tsx`        | Featured trio + “More work” list from `getWorkSlugs()`                  |
+| `/[locale]/work/[slug]` | `app/[locale]/work/[slug]/page.tsx` | `CaseStudyHeader` + MDX body (v2 template)                              |
+| Layout                  | `app/[locale]/layout.tsx`           | `TopNav`, `Footer`, `CommandPalette`, `ledger.css`                      |
 
 
-| Piece                 | File                                                            |
-| --------------------- | --------------------------------------------------------------- |
-| Page shell            | `app/[locale]/mock/page.tsx`                                    |
-| Styles                | `app/[locale]/mock/neo-futuristic.css`                          |
-| Ledger                | `app/[locale]/mock/_components/work-ledger.tsx`                 |
-| Join                  | `app/[locale]/mock/_components/join-block.tsx`                  |
-| Chrome (preview only) | `mock-chrome.tsx` → **do not promote**; use `TopNav`            |
-| Atmosphere            | `spectral-atmosphere.tsx`                                       |
-| Utilities             | `live-signal.tsx`, `keyboard-hints.tsx`, `use-mock-scroller.ts` |
-| Config                | `mock-config.ts` → **delete after migration**                   |
+### Homepage sections (anchors)
+
+
+| #   | Anchor    | Component              |
+| --- | --------- | ---------------------- |
+| 01  | `#work`   | `WorkLedger`           |
+| 02  | `#systems`| `SystemsMapSection`    |
+| 03  | (join)    | `JoinBlock`            |
+| 04  | `#writing`| Essay teaser           |
+| 05  | `#about`  | About copy + link      |
+| 06  | `#contact`| Email + contact CTA    |
+
+
+### Work slugs (content)
+
+
+| Tier      | Slugs                                                                                                      |
+| --------- | ---------------------------------------------------------------------------------------------------------- |
+| Featured  | `everest-finance`, `odoo-testing-toolkit`, `bocalbun-retrospective`                                        |
+| Supporting| `eduplan`, `mansour-holding`, `ndouckmane-transit`, `dakar-sport-shop`                                     |
+
+
+### Remaining gaps (not structural)
+
+
+| Item              | Action                                                                                    |
+| ----------------- | ----------------------------------------------------------------------------------------- |
+| Case images       | Add under `public/images/case-studies/` after permission gates                            |
+| Join “request seat” | Static UI v1; no API                                                                     |
+| Live signal / `?` shortcuts | Deferred (launch-prerequisites)                                                    |
+| Media polish      | Screenshots, diagrams per case study                                                      |
 
 
 ### Content blockers (fix in Phase 0)
@@ -284,9 +302,8 @@ Mock uses `use-mock-scroller.ts` → `.mock-shell`. Production ScrollTrigger mus
 | Task                                                                     | Notes                     |
 | ------------------------------------------------------------------------ | ------------------------- |
 | Delete unused components                                                 | See §9                    |
-| Keep `/mock` until user signs off, then delete route or leave as archive | Update T030 / backlog     |
-| Remove `mock-config.ts`                                                  |                           |
-| Prune `three` / R3F from `package.json` if unused                        | optional dep cleanup task |
+| `/mock` route + mock-only components                                     | **Done** (T038)           |
+| Prune `three` / R3F from `package.json` if unused                        | **Done**                  |
 | Update `docs/mock-redesign-handover.md` → “Promoted to production”       |                           |
 | Update `docs/progress.md` one line                                       | per orchestrator rules    |
 
@@ -341,7 +358,7 @@ Added to `docs/backlog.json` phase **P5**:
 | T032 | content: ledger frontmatter + work-ledger helper | done    |
 | T033 | design: port ledger tokens to globals            | done    |
 | T034 | feat: work-ledger component + site scroller      | done    |
-| T035 | feat: homepage neo-ledger IA                     | pending |
+| T035 | feat: homepage neo-ledger IA                     | done    |
 | T036 | feat: case study template v2                     | done |
 | T037 | feat: work index v2                              | done |
 | T038 | chore: remove v3 components + retire mock        | done |
@@ -414,26 +431,24 @@ From [AGENTS.md](../AGENTS.md) and mock iteration lessons:
 
 ## 12. Session start checklist (next agent)
 
-1. Read this doc + [portfolio-plan.md](./portfolio-plan.md) §3 positioning
-2. Open `/en/mock` and `/en` side by side in browser
-3. `git status` — confirm mock commit on branch
-4. Verify bocalbun MDX exists; if not, **Phase 0 first**
-5. Pick phase from §5; state blast radius in orchestrator format:
-  ```
-   Orchestrator: T0xx — files: [...] — verify: bun run build && bun run lint
-  ```
-6. Do not delete `/mock` until production homepage is approved
-7. After each phase, run verify and update backlog + one line in `docs/progress.md` if product state changed
+1. Read this doc + [portfolio-plan.md](./portfolio-plan.md) §3 positioning + §11 homepage IA
+2. Open `/en` (production) — verify ledger, systems map, work index
+3. `bun run build && bun run lint` before any content or polish change
+4. Remaining work is **media + polish**, not IA migration — see §3 remaining gaps
+5. Human gates: [launch-prerequisites.md](./launch-prerequisites.md)
 
 ---
 
-## 13. Open questions for Aliou (resolve before Phase 3)
+## 13. Resolved product decisions
 
-1. `**/work` route:** Keep as full case index, or redirect to `/#work` on homepage?
-2. **Join block:** Ship static placeholders on homepage for v1, or cut until API exists?
-3. **Live signal + keyboard shortcuts:** Ship in production nav, or keep mock-only delights?
-4. **Case images:** Which screenshots are cleared for public use (Everest confidential flag)?
-5. **EduPlan:** Explicitly exclude from v1 nav (recommended)?
+| # | Question | Decision |
+|---|----------|----------|
+| 1 | `/work` route | **Full index** at `/[locale]/work`; homepage `#work` is primary showcase |
+| 2 | Join block | **Static placeholders v1** on homepage |
+| 3 | Live signal + keyboard hints | **Defer** until a11y review |
+| 4 | Case images | Pending CEO / ERGOBIT sign-off |
+| 5 | EduPlan in featured set | **Excluded** from homepage trio; listed in systems map + “More work” |
+| 6 | Systems map | **Homepage §02** (`#systems`); full `/systems` page remains v2+ |
 
 ---
 

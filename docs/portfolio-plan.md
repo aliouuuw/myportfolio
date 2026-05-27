@@ -83,16 +83,16 @@ If a page or feature does not serve one of those four goals, cut it.
 Case-study-first. Not project-grid-first.
 
 ```
-/                      Homepage: positioning + 3 anchor cards + CTA
-/work                  All case studies (filterable later)
-/work/[slug]           Long-form case study (MDX)
+/                      Homepage: hero + work ledger + systems map + join + writing + about + contact
+/work                  Featured trio + supporting case studies (MDX index)
+/work/[slug]           Long-form case study (MDX, v2 template)
 /writing               Technical essays (start with 1, grow to 10)
 /writing/[slug]        Single essay
-/about                 Real story, first person; includes operator context (bakery, carpooling) and chess line
+/about                 Operator record, first person
 /contact               Form + email + WhatsApp
 ```
 
-`/systems` and `/opensource` are **not** v1 top-level pages. The systems map appears as a homepage section and reusable block inside case studies. OSS projects live inside `/work` (or as a filter once there are enough of them).
+`/systems` and `/opensource` are **not** v1 top-level routes. The **ecosystem map ships as homepage §02** (`#systems`, `SystemsMapSection`). OSS projects live inside `/work` until a dedicated hub is justified.
 
 ### Do NOT build (v1)
 
@@ -154,15 +154,25 @@ i18n/
   request.ts
 content/
   work/
-    everest-operational-systems.mdx
-    odoo-acceptance-testing.mdx
-    bocalbun-retrospective.mdx
+    everest-finance/{en,fr}.mdx
+    odoo-testing-toolkit/{en,fr}.mdx
+    bocalbun-retrospective/{en,fr}.mdx
+    eduplan/{en,fr}.mdx
+    mansour-holding/{en,fr}.mdx
+    ndouckmane-transit/{en,fr}.mdx
+    dakar-sport-shop/{en,fr}.mdx
   writing/
-    why-i-stopped-bocalbun.mdx
+    why-systems-over-frameworks/{en,fr}.mdx
 components/
-  case-study-card.tsx
+  home-ledger-page.tsx
+  work-ledger.tsx
+  systems-map-section.tsx
+  join-block.tsx
+  case-study-header.tsx
   locale-switcher.tsx
   mdx-components.tsx
+app/
+  ledger.css
 public/
   images/case-studies/
 messages/
@@ -174,16 +184,16 @@ messages/
 
 ## 7. Visual Direction
 
-**Reference feel:** Linear marketing, Geoffrey Litt, Vercel/Resend docs — whitespace, restraint, typography-led.
+**Shipped feel:** Neo-ledger homepage — editorial hero, accordion work rows, OKLCH accent (`app/ledger.css`), spectral atmosphere, restrained motion (GSAP + `prefers-reduced-motion`).
 
 **Rules:**
 
-- Max 2 typefaces (sans for UI; optional serif for long-form essays)
-- One accent color, used sparingly
-- Real UI screenshots (blur/redact client data)
+- Sans + mono + serif (Fraunces) via root layout; ledger scoped under `.site-ledger`
+- Single accent hue; green for status only
+- Real UI screenshots (blur/redact client data) — placeholders until launch gates clear
 - Architecture diagrams > abstract hero illustrations
-- Dark mode optional; light default is fine
-- **Avoid:** authism-landing style (glassmorphism, gradient text, animated mesh backgrounds)
+- Theme toggle: light default, dark supported
+- **Avoid:** CF dossier metaphor, glassmorphism defaults, gradient text, rainbow per-project colors
 
 ---
 
@@ -193,21 +203,23 @@ messages/
 
 | Asset | Slug | Role on site |
 |---|---|---|
-| Homepage | `/` | Positioning + 3 cards + contact CTA |
-| Everest case study | `everest-operational-systems` | **#1** — active commercial proof |
-| Odoo Testing Toolkit | `odoo-acceptance-testing` | **#2** — differentiation + OSS |
+| Homepage | `/` | Hero + work ledger + systems map + join + essay + about + contact |
+| Everest case study | `everest-finance` | **#1** — active commercial proof (homepage ledger) |
+| Odoo Testing Toolkit | `odoo-testing-toolkit` | **#2** — differentiation + OSS |
 | BocalBun retrospective | `bocalbun-retrospective` | **#3** — judgment + systems thinking |
-| Essay | `why-systems-over-frameworks` | Strongest narrative; cross-links BocalBun case (canonical slug; not `why-i-stopped-bocalbun`) |
-| About | `/about` | First person, Senegal, bilingual, no buzzwords |
-| Contact | `/contact` | Email, Calendum, WhatsApp |
+| Essay | `why-systems-over-frameworks` | Flagship writing; cross-links BocalBun |
+| About | `/about` | Operator record |
+| Contact | `/contact` | Email, WhatsApp, form (Resend) |
+| Systems map | `#systems` on homepage | Ecosystem graph; links to work where published |
+| Supporting work | `eduplan`, `mansour-holding`, `ndouckmane-transit`, `dakar-sport-shop` | `/work` index only, not homepage trio |
 
 ### Month 2 additions
 
 | Asset | Notes |
 |---|---|
-| EduPlan / Les Hirondelles | Only after teacher conversation defines pilot |
-| Dakar Sport Shop | Short case study — “e-commerce delivery proof”, not hero |
-| `/systems` diagram | Map: fintech ops, ERP/testing, education, bakery (future) |
+| Case study media | Screenshots + diagrams per `public/images/case-studies/` |
+| EduPlan pilot narrative | Deepen after school-network conversation |
+| Full `/systems` route | Promote homepage block to dedicated URL when diagram warrants it |
 | 2 more essays | From strategic plan topic list |
 
 ### Month 3+ (gated by conversations)
@@ -293,56 +305,60 @@ confidential: true  # if anonymized
 
 ---
 
-## 11. Homepage Wireframe (content only)
+## 11. Homepage Wireframe (shipped IA)
 
 ```text
-[Nav: Work | Writing | About | Contact | EN/FR]
+[Nav: Work | Writing | About | Contact | EN/FR | theme]
 
-[Hero]
-  H1: Positioning sentence
-  Sub: Secondary line (Everest + Odoo credibility)
-  CTA: View work | Contact
+[01 Hero]
+  Display name + role lines (EN/FR via next-intl)
+  CTA: #work | /contact
 
-[Three cards — equal visual weight]
-  1. Everest — Fintech operational systems
-  2. Odoo 18 acceptance testing — ERP / QA
-  3. BocalBun — Framework retrospective (judgment story)
+[02 Work — #work]
+  WorkLedger accordion: everest-finance | odoo-testing-toolkit | bocalbun-retrospective
+  Expand → proof, stack, link to /work/[slug]
 
-[Short “How I work” — 3 bullets]
-  - Operational software, not marketing sites
-  - AI-native workflow (agent-ready repos, ADRs)
-  - Bilingual delivery FR/EN
+[03 Systems — #systems]
+  Hub: Product Systems Engineer
+  Four spokes: Fintech | ERP | Commerce | Education
+  Linked nodes → /work/[slug] where case study exists
 
-[Latest writing — 1 essay teaser]
+[04 Open — JoinBlock]
+  Static “request seat” placeholders (no API v1)
+
+[05 Writing — #writing]
+  Latest essay teaser → /writing/why-systems-over-frameworks
+
+[06 About — #about]
+  Short operator copy + link to /about
+
+[07 Contact — #contact]
+  Email, LinkedIn, GitHub, WhatsApp + /contact CTA
 
 [Footer: GitHub | LinkedIn | Email | WhatsApp]
 ```
 
 ---
 
-## 12. `/systems` Page (ecosystem map) — **v2+**
+## 12. `/systems` Page (ecosystem map)
 
-Deferred from v1 navigation: implement as a homepage block first, then promote to a dedicated route when the diagram is worth sharing on its own URL.
+**v1 (done):** Homepage block `SystemsMapSection` at `#systems` — four-column ledger layout, hub + spoke labels, case study links. Data: `lib/systems-map-data.ts`; copy: `messages` namespace `SystemsMap`.
 
-One diagram + short labels. Shows you think in systems, not isolated repos.
+**v2+:** Dedicated `/[locale]/systems` route when the diagram deserves its own URL (reuse same data component).
 
-Suggested nodes (adjust as you publish):
+Current nodes (2026-05):
 
 ```text
-                    [You: Product Systems Engineer]
+                    [Product Systems Engineer]
                               |
-        +---------------------+---------------------+
-        |                     |                     |
-   [Fintech ops]          [ERP / QA]           [Education]
-   Everest                Odoo testing          EduPlan / schools
-   website, CRM,          toolkit + past        Les Hirondelles
-   Sama Naffa             ERGOBIT modules       (pilot TBD)
-        |                     |                     |
-   [Future: Mansour]     [OSS: agent-ready]    [Future: XamtuAI]
-   logistics cluster      manifest drift        public learning
+     +------------+------------+------------+------------+
+     | Fintech    | ERP/QA     | Commerce   | Education  |
+     | Everest    | Odoo kit   | Dakar Sport| EduPlan    |
+     | Acct open  | ERGOBIT    | Ndouckmane | Hirondelles|
+     | Sama Naffa | BocalBun   | Mansour    |            |
 ```
 
-Ship as static SVG or Mermaid — no interactive graph library in v1.
+No interactive graph library; CSS ledger grid only.
 
 ---
 
@@ -388,7 +404,7 @@ Each entry: 2-sentence pitch, stack badges, link, “used in” case study link.
 | Day | Task | Done |
 |---|---|---|
 | 8 | FR translations: homepage, about, summaries for 3 case studies. | [ ] |
-| 9 | Expand homepage **systems** block (or prep v2 `/systems`); keep full `/opensource` + nav item for **v2+** unless scope allows earlier. | [ ] |
+| 9 | Expand homepage **systems** block (or prep v2 `/systems`); keep full `/opensource` + nav item for **v2+** unless scope allows earlier. | [x] |
 | 10 | OG images, favicon, about page final, WhatsApp link. | [ ] |
 | 11 | Proofread. Test mobile. Fix i18n switcher. | [ ] |
 | 12 | LinkedIn + X launch post. Send link to Everest CEO, ERGOBIT CEO, teacher. | [ ] |
