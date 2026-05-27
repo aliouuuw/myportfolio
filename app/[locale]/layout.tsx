@@ -13,6 +13,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeInitScript } from "@/components/theme-init-script";
 import { CommandPalette } from "@/components/command-palette";
 import { routing } from "@/i18n/routing";
+import "@/app/ledger.css";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

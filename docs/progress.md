@@ -13,3 +13,5 @@
 2026-05-16 — T013 done: Odoo Testing Toolkit case study — supporting case (~850 words), Robot Framework + Playwright, 39 tests / 9 suites.
 2026-05-16 — T014 done: First essay "Why I stopped building frameworks and started shipping systems" (~1,100 words) — writing section is now live.
 2026-05-27 — T031–T032 done: BocalBun retrospective MDX (EN+FR), ledger frontmatter on anchor cases, `lib/work-ledger.ts`, essay cross-links; P5 migration backlog + `docs/launch-prerequisites.md`.
+2026-05-27 — T033–T034 done: `app/ledger.css` tokens + accordion/join styles, `components/work-ledger.tsx` + `join-block.tsx` wired to MDX, `/ledger-preview` verification route.
+2026-05-27 — T035 done: Homepage uses neo-ledger IA (`HomeLedgerPage`, `WorkLedger`, `JoinBlock`, MDX-driven rows, bilingual `HomePage.ledger` copy).

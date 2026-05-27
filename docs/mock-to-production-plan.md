@@ -23,15 +23,17 @@ Design should feel **crafted and memorable**, not gimmicky. See [mock-redesign-h
 
 ## 2. What we are migrating (locked from mock)
 
-| Pillar | Mock implementation | Production requirement |
-|--------|---------------------|------------------------|
-| **Execution ledger** | `WorkLedger` accordion, expand/peek, proof in panel | Same interaction on homepage; work index can be simplified list |
-| **Source of truth** | `proofClaim` per case + case study link | Frontmatter or i18n fields; link to `/work/[slug]` |
-| **Editorial hero** | Large display name, role line, 2 CTAs | Server-rendered; copy from `messages/{locale}.json` |
-| **Restrained color** | Single `--n-accent`, neutrals, green = status only | Merge into `app/globals.css` tokens (or scoped `ledger.css`) |
-| **Light default** | `[data-theme="light"]` | Keep `ThemeToggle` + `ThemeInitScript` |
-| **Motion** | GSAP entrance + scroll reveal + accordion springs | Client islands only; respect `prefers-reduced-motion` |
-| **Optional delight** | `LiveSignal` (chrome), `KeyboardHints` (`?`, `g w/j/c`) | Promote only if they survive accessibility review |
+
+| Pillar               | Mock implementation                                     | Production requirement                                          |
+| -------------------- | ------------------------------------------------------- | --------------------------------------------------------------- |
+| **Execution ledger** | `WorkLedger` accordion, expand/peek, proof in panel     | Same interaction on homepage; work index can be simplified list |
+| **Source of truth**  | `proofClaim` per case + case study link                 | Frontmatter or i18n fields; link to `/work/[slug]`              |
+| **Editorial hero**   | Large display name, role line, 2 CTAs                   | Server-rendered; copy from `messages/{locale}.json`             |
+| **Restrained color** | Single `--n-accent`, neutrals, green = status only      | Merge into `app/globals.css` tokens (or scoped `ledger.css`)    |
+| **Light default**    | `[data-theme="light"]`                                  | Keep `ThemeToggle` + `ThemeInitScript`                          |
+| **Motion**           | GSAP entrance + scroll reveal + accordion springs       | Client islands only; respect `prefers-reduced-motion`           |
+| **Optional delight** | `LiveSignal` (chrome), `KeyboardHints` (`?`, `g w/j/c`) | Promote only if they survive accessibility review               |
+
 
 ### Explicitly not migrating (yet)
 
@@ -55,35 +57,41 @@ Design should feel **crafted and memorable**, not gimmicky. See [mock-redesign-h
 
 ### Production today
 
-| Route | File | Pattern |
-|-------|------|---------|
-| `/[locale]` | `app/[locale]/page.tsx` | Identity + 3× `CaseFileCard` + essay teaser + contact |
-| `/[locale]/work` | `app/[locale]/work/page.tsx` | `FileReferenceRow` list, hardcoded CF refs |
-| `/[locale]/work/[slug]` | `app/[locale]/work/[slug]/page.tsx` | `CaseReportHeader` + `MetalPanel` + MDX body |
-| Layout | `app/[locale]/layout.tsx` | `TopNav`, `Footer`, `CommandPalette`, theme |
+
+| Route                   | File                                | Pattern                                               |
+| ----------------------- | ----------------------------------- | ----------------------------------------------------- |
+| `/[locale]`             | `app/[locale]/page.tsx`             | Identity + 3× `CaseFileCard` + essay teaser + contact |
+| `/[locale]/work`        | `app/[locale]/work/page.tsx`        | `FileReferenceRow` list, hardcoded CF refs            |
+| `/[locale]/work/[slug]` | `app/[locale]/work/[slug]/page.tsx` | `CaseReportHeader` + `MetalPanel` + MDX body          |
+| Layout                  | `app/[locale]/layout.tsx`           | `TopNav`, `Footer`, `CommandPalette`, theme           |
+
 
 ### Mock today
 
-| Piece | File |
-|-------|------|
-| Page shell | `app/[locale]/mock/page.tsx` |
-| Styles | `app/[locale]/mock/neo-futuristic.css` |
-| Ledger | `app/[locale]/mock/_components/work-ledger.tsx` |
-| Join | `app/[locale]/mock/_components/join-block.tsx` |
-| Chrome (preview only) | `mock-chrome.tsx` → **do not promote**; use `TopNav` |
-| Atmosphere | `spectral-atmosphere.tsx` |
-| Utilities | `live-signal.tsx`, `keyboard-hints.tsx`, `use-mock-scroller.ts` |
-| Config | `mock-config.ts` → **delete after migration** |
+
+| Piece                 | File                                                            |
+| --------------------- | --------------------------------------------------------------- |
+| Page shell            | `app/[locale]/mock/page.tsx`                                    |
+| Styles                | `app/[locale]/mock/neo-futuristic.css`                          |
+| Ledger                | `app/[locale]/mock/_components/work-ledger.tsx`                 |
+| Join                  | `app/[locale]/mock/_components/join-block.tsx`                  |
+| Chrome (preview only) | `mock-chrome.tsx` → **do not promote**; use `TopNav`            |
+| Atmosphere            | `spectral-atmosphere.tsx`                                       |
+| Utilities             | `live-signal.tsx`, `keyboard-hints.tsx`, `use-mock-scroller.ts` |
+| Config                | `mock-config.ts` → **delete after migration**                   |
+
 
 ### Content blockers (fix in Phase 0)
 
-| Issue | Action |
-|-------|--------|
-| **`bocalbun-retrospective` 404** | ✅ **Done** — `content/work/bocalbun-retrospective/{en,fr}.mdx` (T031) |
-| **`eduplan`** | Exists in `content/work/` but not in v1 hero set (`featured: false`). Do not add to homepage trio |
-| **Prev/next i18n keys** | `work/[slug]/page.tsx` uses fragile `caseFiles.${slug}Title` mapping — refactor in T036 |
-| **Case images** | Placeholders — add under `public/images/case-studies/` after permission gates (`docs/launch-prerequisites.md`) |
-| **Ledger frontmatter** | ✅ **Done** — `lib/work-ledger.ts` + anchor MDX fields (T032) |
+
+| Issue                            | Action                                                                                                         |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `**bocalbun-retrospective` 404** | ✅ **Done** — `content/work/bocalbun-retrospective/{en,fr}.mdx` (T031)                                          |
+| `**eduplan`**                    | Exists in `content/work/` but not in v1 hero set (`featured: false`). Do not add to homepage trio              |
+| **Prev/next i18n keys**          | `work/[slug]/page.tsx` uses fragile `caseFiles.${slug}Title` mapping — refactor in T036                        |
+| **Case images**                  | Placeholders — add under `public/images/case-studies/` after permission gates (`docs/launch-prerequisites.md`) |
+| **Ledger frontmatter**           | ✅ **Done** — `lib/work-ledger.ts` + anchor MDX fields (T032)                                                   |
+
 
 ---
 
@@ -94,7 +102,7 @@ Design should feel **crafted and memorable**, not gimmicky. See [mock-redesign-h
 **Recommendation:** Add production ledger tokens to `app/globals.css` under a `.site-ledger` wrapper (or rename to semantic tokens used site-wide).
 
 - Port OKLCH values from `neo-futuristic.css` (`--n-bg`, `--n-accent`, etc.)
-- Map or deprecate old `--ink-*` / metal tokens on migrated pages only
+- Map or deprecate old `--ink-`* / metal tokens on migrated pages only
 - Do **not** edit `tailwind.config` without an explicit backlog task (foundation-lock)
 
 ### B. Component placement
@@ -155,7 +163,7 @@ Retire or delete unused v3 components after migration: `case-file-card.tsx`, `fi
 
 ### F. GSAP scroller
 
-Mock uses `use-mock-scroller.ts` → `.mock-shell`. Production ScrollTrigger must use **`window`** or the main document scroller (`document.documentElement`). Refactor hook to `use-site-scroller.ts` and test inside real layout (nav height, `scroll-padding-top`).
+Mock uses `use-mock-scroller.ts` → `.mock-shell`. Production ScrollTrigger must use `**window`** or the main document scroller (`document.documentElement`). Refactor hook to `use-site-scroller.ts` and test inside real layout (nav height, `scroll-padding-top`).
 
 ---
 
@@ -165,11 +173,11 @@ Mock uses `use-mock-scroller.ts` → `.mock-shell`. Production ScrollTrigger mus
 
 **Goal:** No 404s, backlog aligned, tokens agreed.
 
-- [x] Restore `content/work/bocalbun-retrospective/en.mdx` + `fr.mdx` (T031; links essay `why-systems-over-frameworks`)
-- [ ] Run `bun run build && bun run lint` on `main`
-- [x] Add backlog tasks P5 T031–T038 (see §8)
-- [ ] Confirm with user: `/work` route = full index vs anchor-only (default: full index — [launch-prerequisites.md](./launch-prerequisites.md))
-- [ ] Gather 1–3 images per anchor case → `public/images/case-studies/{slug}/` (blocked on Everest/ERGOBIT sign-off)
+- Restore `content/work/bocalbun-retrospective/en.mdx` + `fr.mdx` (T031; links essay `why-systems-over-frameworks`)
+- Run `bun run build && bun run lint` on `main`
+- Add backlog tasks P5 T031–T038 (see §8)
+- Confirm with user: `/work` route = full index vs anchor-only (default: full index — [launch-prerequisites.md](./launch-prerequisites.md))
+- Gather 1–3 images per anchor case → `public/images/case-studies/{slug}/` (blocked on Everest/ERGOBIT sijjgn-off)
 
 **Verify:** `/en/work/bocalbun-retrospective` renders; all three homepage slugs resolve.
 
@@ -179,12 +187,14 @@ Mock uses `use-mock-scroller.ts` → `.mock-shell`. Production ScrollTrigger mus
 
 **Goal:** Production can style ledger without mock CSS file.
 
-| Task | Files |
-|------|--------|
-| Extract tokens + base utilities from `neo-futuristic.css` | `app/globals.css` or `app/ledger.css` imported in `[locale]/layout.tsx` |
-| Add layout utilities: `.page-inner`, `.section-block`, `.section-head` | same |
-| Ensure light default + dark theme parity | manual test both themes |
-| Add `scroll-padding-top` for fixed `TopNav` | `globals.css` |
+
+| Task                                                                   | Files                                                                   |
+| ---------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Extract tokens + base utilities from `neo-futuristic.css`              | `app/globals.css` or `app/ledger.css` imported in `[locale]/layout.tsx` |
+| Add layout utilities: `.page-inner`, `.section-block`, `.section-head` | same                                                                    |
+| Ensure light default + dark theme parity                               | manual test both themes                                                 |
+| Add `scroll-padding-top` for fixed `TopNav`                            | `globals.css`                                                           |
+
 
 **Do not** import entire `neo-futuristic.css` into global layout (keeps mock isolated). Copy only what production needs.
 
@@ -196,14 +206,16 @@ Mock uses `use-mock-scroller.ts` → `.mock-shell`. Production ScrollTrigger mus
 
 **Goal:** Ledger and join work outside `/mock`.
 
-| Task | Files |
-|------|--------|
+
+| Task                                                  | Files                                                        |
+| ----------------------------------------------------- | ------------------------------------------------------------ |
 | Move `work-ledger.tsx` → `components/work-ledger.tsx` | update imports, locale-aware links `/${locale}/work/${slug}` |
-| Move `join-block.tsx` → `components/join-block.tsx` | wire i18n |
-| Refactor scroller hook | `components/use-site-scroller.ts` |
-| Optional: `spectral-atmosphere.tsx` | homepage wrapper only |
-| Extend MDX frontmatter + parser | `lib/mdx.ts`, all `content/work/*/en.mdx` |
-| Add `lib/work-ledger.ts` helper | `getFeaturedWorkEntries(locale)` → props for ledger |
+| Move `join-block.tsx` → `components/join-block.tsx`   | wire i18n                                                    |
+| Refactor scroller hook                                | `components/use-site-scroller.ts`                            |
+| Optional: `spectral-atmosphere.tsx`                   | homepage wrapper only                                        |
+| Extend MDX frontmatter + parser                       | `lib/mdx.ts`, all `content/work/*/en.mdx`                    |
+| Add `lib/work-ledger.ts` helper                       | `getFeaturedWorkEntries(locale)` → props for ledger          |
+
 
 **Verify:** Unit path — render ledger in a throwaway route or Storybook-free manual test on `/en` branch.
 
@@ -213,22 +225,24 @@ Mock uses `use-mock-scroller.ts` → `.mock-shell`. Production ScrollTrigger mus
 
 **Goal:** `/[locale]` matches mock IA with real data.
 
-| Task | Files |
-|------|--------|
-| Rewrite homepage sections | `app/[locale]/page.tsx` |
-| Replace `CaseFileCard` grid with `<WorkLedger />` | client boundary |
-| Hero copy from `messages/en.json` / `fr.json` | align with mock tone, no CF-xxx |
-| Writing teaser: keep `getWritingSlugs()` pattern | |
-| About + contact: port mock copy structure | messages namespaces |
-| GSAP: single client `HomeMotion` wrapper or inline `useEffect` in client child | avoid GSAP in RSC |
-| Remove CF / classification from `messages` | `HomePage.caseFiles.*` keys refactor |
+
+| Task                                                                           | Files                                |
+| ------------------------------------------------------------------------------ | ------------------------------------ |
+| Rewrite homepage sections                                                      | `app/[locale]/page.tsx`              |
+| Replace `CaseFileCard` grid with `<WorkLedger />`                              | client boundary                      |
+| Hero copy from `messages/en.json` / `fr.json`                                  | align with mock tone, no CF-xxx      |
+| Writing teaser: keep `getWritingSlugs()` pattern                               |                                      |
+| About + contact: port mock copy structure                                      | messages namespaces                  |
+| GSAP: single client `HomeMotion` wrapper or inline `useEffect` in client child | avoid GSAP in RSC                    |
+| Remove CF / classification from `messages`                                     | `HomePage.caseFiles.`* keys refactor |
+
 
 **Verify:**
 
-- [ ] `/en` and `/fr` build statically
-- [ ] Accordion opens, links go to real case studies
-- [ ] Lighthouse mobile ≥ 90 (performance budget; no WebGL v1)
-- [ ] Keyboard nav + focus visible on accordion
+- `/en` and `/fr` build statically
+- Accordion opens, links go to real case studies
+- Lighthouse mobile ≥ 90 (performance budget; no WebGL v1)
+- Keyboard nav + focus visible on accordion
 
 ---
 
@@ -236,13 +250,15 @@ Mock uses `use-mock-scroller.ts` → `.mock-shell`. Production ScrollTrigger mus
 
 **Goal:** Inner pages match new visual system.
 
-| Task | Files |
-|------|--------|
-| Redesign `app/[locale]/work/page.tsx` | simple ledger list or table, no CF-xxx |
-| Redesign `app/[locale]/work/[slug]/page.tsx` | drop `MetalPanel`, new header component `case-study-header.tsx` |
-| Update `messages` WorkPage strings | |
-| Optional: View Transitions API on “Read case study” | `work-ledger.tsx` + slug layout |
-| Wire `ScrollDiagram` / `RedactedArtifact` in MDX **only if** content uses them | `components/mdx-components.tsx` |
+
+| Task                                                                           | Files                                                           |
+| ------------------------------------------------------------------------------ | --------------------------------------------------------------- |
+| Redesign `app/[locale]/work/page.tsx`                                          | simple ledger list or table, no CF-xxx                          |
+| Redesign `app/[locale]/work/[slug]/page.tsx`                                   | drop `MetalPanel`, new header component `case-study-header.tsx` |
+| Update `messages` WorkPage strings                                             |                                                                 |
+| Optional: View Transitions API on “Read case study”                            | `work-ledger.tsx` + slug layout                                 |
+| Wire `ScrollDiagram` / `RedactedArtifact` in MDX **only if** content uses them | `components/mdx-components.tsx`                                 |
+
 
 **Verify:** Full journey: home → expand row → case study → back. FR parity.
 
@@ -250,26 +266,30 @@ Mock uses `use-mock-scroller.ts` → `.mock-shell`. Production ScrollTrigger mus
 
 ### Phase 5 — Nav, footer, i18n cleanup (½ day)
 
-| Task | Files |
-|------|--------|
-| `TopNav` links match homepage anchors (`#work`, `#join`, `#contact`) | `components/top-nav.tsx` |
-| Optional `LiveSignal` in nav | |
-| `Footer` copy matches new positioning | `components/footer.tsx` |
-| Command palette routes still valid | |
-| Remove dead message keys (CF-xxx) | `messages/en.json`, `messages/fr.json` |
+
+| Task                                                                 | Files                                  |
+| -------------------------------------------------------------------- | -------------------------------------- |
+| `TopNav` links match homepage anchors (`#work`, `#join`, `#contact`) | `components/top-nav.tsx`               |
+| Optional `LiveSignal` in nav                                         |                                        |
+| `Footer` copy matches new positioning                                | `components/footer.tsx`                |
+| Command palette routes still valid                                   |                                        |
+| Remove dead message keys (CF-xxx)                                    | `messages/en.json`, `messages/fr.json` |
+
 
 ---
 
 ### Phase 6 — Delete legacy + mock wind-down (½ day)
 
-| Task | Notes |
-|------|--------|
-| Delete unused components | See §9 |
-| Keep `/mock` until user signs off, then delete route or leave as archive | Update T030 / backlog |
-| Remove `mock-config.ts` | |
-| Prune `three` / R3F from `package.json` if unused | optional dep cleanup task |
-| Update `docs/mock-redesign-handover.md` → “Promoted to production” | |
-| Update `docs/progress.md` one line | per orchestrator rules |
+
+| Task                                                                     | Notes                     |
+| ------------------------------------------------------------------------ | ------------------------- |
+| Delete unused components                                                 | See §9                    |
+| Keep `/mock` until user signs off, then delete route or leave as archive | Update T030 / backlog     |
+| Remove `mock-config.ts`                                                  |                           |
+| Prune `three` / R3F from `package.json` if unused                        | optional dep cleanup task |
+| Update `docs/mock-redesign-handover.md` → “Promoted to production”       |                           |
+| Update `docs/progress.md` one line                                       | per orchestrator rules    |
+
 
 **Verify:** `bun run build && bun run lint`; no imports of deleted components.
 
@@ -279,16 +299,18 @@ Mock uses `use-mock-scroller.ts` → `.mock-shell`. Production ScrollTrigger mus
 
 Create or extend namespaces (example):
 
-| Mock string | Suggested key |
-|-------------|----------------|
-| Hero role line | `HomePage.hero.role` |
-| CTAs | `HomePage.hero.ctaWork`, `HomePage.hero.ctaContact` |
-| Work section title | `HomePage.work.title` |
-| Work section lead | `HomePage.work.lead` |
-| Join block | `HomePage.join.*` or `JoinPage.*` |
-| Status labels | `WorkLedger.status.active` / `shipped` / `archived` |
-| Accordion CTA | `WorkLedger.readCaseStudy` |
-| Peek hint | `WorkLedger.openFullEntry` |
+
+| Mock string        | Suggested key                                       |
+| ------------------ | --------------------------------------------------- |
+| Hero role line     | `HomePage.hero.role`                                |
+| CTAs               | `HomePage.hero.ctaWork`, `HomePage.hero.ctaContact` |
+| Work section title | `HomePage.work.title`                               |
+| Work section lead  | `HomePage.work.lead`                                |
+| Join block         | `HomePage.join.`* or `JoinPage.*`                   |
+| Status labels      | `WorkLedger.status.active` / `shipped` / `archived` |
+| Accordion CTA      | `WorkLedger.readCaseStudy`                          |
+| Peek hint          | `WorkLedger.openFullEntry`                          |
+
 
 Remove: `fileRef`, `classification`, CF-* keys from `HomePage.caseFiles` and `WorkPage.caseFiles`.
 
@@ -312,16 +334,18 @@ Do **not** change without explicit backlog `files` permission:
 
 Added to `docs/backlog.json` phase **P5**:
 
-| ID | Title | Status |
-|----|-------|--------|
-| T031 | content: bocalbun retrospective MDX EN+FR | done |
-| T032 | content: ledger frontmatter + work-ledger helper | done |
-| T033 | design: port ledger tokens to globals | pending |
-| T034 | feat: work-ledger component + site scroller | pending |
-| T035 | feat: homepage neo-ledger IA | pending |
-| T036 | feat: case study template v2 | pending |
-| T037 | feat: work index v2 | pending |
-| T038 | chore: remove v3 components + retire mock | pending |
+
+| ID   | Title                                            | Status  |
+| ---- | ------------------------------------------------ | ------- |
+| T031 | content: bocalbun retrospective MDX EN+FR        | done    |
+| T032 | content: ledger frontmatter + work-ledger helper | done    |
+| T033 | design: port ledger tokens to globals            | done    |
+| T034 | feat: work-ledger component + site scroller      | done    |
+| T035 | feat: homepage neo-ledger IA                     | pending |
+| T036 | feat: case study template v2                     | pending |
+| T037 | feat: work index v2                              | pending |
+| T038 | chore: remove v3 components + retire mock        | pending |
+
 
 Human gates: [launch-prerequisites.md](./launch-prerequisites.md)
 
@@ -329,22 +353,24 @@ Human gates: [launch-prerequisites.md](./launch-prerequisites.md)
 
 ## 9. Component retention matrix
 
-| Component | Action |
-|-----------|--------|
-| `work-ledger.tsx` | **Promote** → `components/` |
-| `join-block.tsx` | **Promote** (i18n) |
-| `spectral-atmosphere.tsx` | **Promote** (homepage optional) |
-| `live-signal.tsx` | **Optional** in TopNav |
-| `keyboard-hints.tsx` | **Optional** in layout |
-| `mock-chrome.tsx` | **Delete** with mock route |
-| `mock-config.ts` | **Delete** after MDX wired |
-| `use-mock-scroller.ts` | **Replace** → `use-site-scroller.ts` |
-| `system-artifact.tsx` | **Defer** or delete if unused |
-| `case-file-card.tsx` | **Remove** after homepage migration |
-| `file-reference-row.tsx` | **Remove** after work index migration |
-| `metal-panel.tsx` | **Remove** from case template |
-| `classification-stamp.tsx` | **Remove** |
-| `case-report-header.tsx` | **Replace** with `case-study-header.tsx` |
+
+| Component                  | Action                                   |
+| -------------------------- | ---------------------------------------- |
+| `work-ledger.tsx`          | **Promote** → `components/`              |
+| `join-block.tsx`           | **Promote** (i18n)                       |
+| `spectral-atmosphere.tsx`  | **Promote** (homepage optional)          |
+| `live-signal.tsx`          | **Optional** in TopNav                   |
+| `keyboard-hints.tsx`       | **Optional** in layout                   |
+| `mock-chrome.tsx`          | **Delete** with mock route               |
+| `mock-config.ts`           | **Delete** after MDX wired               |
+| `use-mock-scroller.ts`     | **Replace** → `use-site-scroller.ts`     |
+| `system-artifact.tsx`      | **Defer** or delete if unused            |
+| `case-file-card.tsx`       | **Remove** after homepage migration      |
+| `file-reference-row.tsx`   | **Remove** after work index migration    |
+| `metal-panel.tsx`          | **Remove** from case template            |
+| `classification-stamp.tsx` | **Remove**                               |
+| `case-report-header.tsx`   | **Replace** with `case-study-header.tsx` |
+
 
 ---
 
@@ -366,23 +392,23 @@ From [AGENTS.md](../AGENTS.md) and mock iteration lessons:
 
 ### Functional
 
-- [ ] All linked work slugs return 200 (EN + FR)
-- [ ] Homepage accordion → case study → back works
-- [ ] Contact email and nav links work
-- [ ] Theme toggle: light default, dark usable
-- [ ] `prefers-reduced-motion`: no essential info hidden
+- All linked work slugs return 200 (EN + FR)
+- Homepage accordion → case study → back works
+- Contact email and nav links work
+- Theme toggle: light default, dark usable
+- `prefers-reduced-motion`: no essential info hidden
 
 ### Strategic (user test)
 
-- [ ] Founder/CTO can answer the three questions in §1 in < 30s on mobile
-- [ ] No “AI portfolio” or agency-template vibe
-- [ ] Bilingual FR does not read like translated EN
+- Founder/CTO can answer the three questions in §1 in < 30s on mobile
+- No “AI portfolio” or agency-template vibe
+- Bilingual FR does not read like translated EN
 
 ### Technical
 
-- [ ] `bun run build && bun run lint` green
-- [ ] Lighthouse mobile performance ≥ 90 (document exceptions)
-- [ ] No new secrets committed; images use `next/image`
+- `bun run build && bun run lint` green
+- Lighthouse mobile performance ≥ 90 (document exceptions)
+- No new secrets committed; images use `next/image`
 
 ---
 
@@ -393,9 +419,9 @@ From [AGENTS.md](../AGENTS.md) and mock iteration lessons:
 3. `git status` — confirm mock commit on branch
 4. Verify bocalbun MDX exists; if not, **Phase 0 first**
 5. Pick phase from §5; state blast radius in orchestrator format:
-   ```
+  ```
    Orchestrator: T0xx — files: [...] — verify: bun run build && bun run lint
-   ```
+  ```
 6. Do not delete `/mock` until production homepage is approved
 7. After each phase, run verify and update backlog + one line in `docs/progress.md` if product state changed
 
@@ -403,7 +429,7 @@ From [AGENTS.md](../AGENTS.md) and mock iteration lessons:
 
 ## 13. Open questions for Aliou (resolve before Phase 3)
 
-1. **`/work` route:** Keep as full case index, or redirect to `/#work` on homepage?
+1. `**/work` route:** Keep as full case index, or redirect to `/#work` on homepage?
 2. **Join block:** Ship static placeholders on homepage for v1, or cut until API exists?
 3. **Live signal + keyboard shortcuts:** Ship in production nav, or keep mock-only delights?
 4. **Case images:** Which screenshots are cleared for public use (Everest confidential flag)?
@@ -413,15 +439,17 @@ From [AGENTS.md](../AGENTS.md) and mock iteration lessons:
 
 ## 14. Reference links
 
-| Doc | Use |
-|-----|-----|
-| [mock-redesign-handover.md](./mock-redesign-handover.md) | Mock file map, rejected directions |
-| [portfolio-plan.md](./portfolio-plan.md) | Positioning, content strategy |
-| [design-shape-v3.md](./design-shape-v3.md) | **Legacy** production spec (being replaced) |
-| [strategic-plan.md](./strategic-plan.md) | Anchor cases, BocalBun framing |
-| [backlog.json](./backlog.json) | Task graph (P5 migration) |
-| [launch-prerequisites.md](./launch-prerequisites.md) | Permissions, decisions, launch ops |
-| [AGENTS.md](../AGENTS.md) | Next.js 16, foundation-lock, verify commands |
+
+| Doc                                                      | Use                                          |
+| -------------------------------------------------------- | -------------------------------------------- |
+| [mock-redesign-handover.md](./mock-redesign-handover.md) | Mock file map, rejected directions           |
+| [portfolio-plan.md](./portfolio-plan.md)                 | Positioning, content strategy                |
+| [design-shape-v3.md](./design-shape-v3.md)               | **Legacy** production spec (being replaced)  |
+| [strategic-plan.md](./strategic-plan.md)                 | Anchor cases, BocalBun framing               |
+| [backlog.json](./backlog.json)                           | Task graph (P5 migration)                    |
+| [launch-prerequisites.md](./launch-prerequisites.md)     | Permissions, decisions, launch ops           |
+| [AGENTS.md](../AGENTS.md)                                | Next.js 16, foundation-lock, verify commands |
+
 
 ---
 

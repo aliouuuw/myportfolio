@@ -162,6 +162,9 @@
 
 html {
   scroll-behavior: smooth;
+  data-scroll-behavior: smooth;
+  /* Fixed TopNav is h-14 (3.5rem) — anchor links and scroll-spy */
+  scroll-padding-top: 3.5rem;
 }
 
 body {

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-27T12:00:00Z",
+  "updated": "2026-05-27T14:30:00Z",
   "phases": [
     {
       "id": "P0",
@@ -473,12 +473,13 @@
           "id": "T033",
           "title": "design: port ledger tokens to globals",
           "desc": "Extract OKLCH tokens and layout utilities from app/[locale]/mock/neo-futuristic.css into app/globals.css or app/ledger.css. Light/dark parity, scroll-padding-top for TopNav.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T032"],
           "files": [
             "app/globals.css",
             "app/ledger.css",
-            "app/[locale]/layout.tsx"
+            "app/[locale]/layout.tsx",
+            "app/[locale]/ledger-preview/page.tsx"
           ],
           "verify": "bun run build && bun run lint"
         },
@@ -486,14 +487,16 @@
           "id": "T034",
           "title": "feat: work-ledger component + site scroller",
           "desc": "Promote mock work-ledger.tsx and join-block.tsx to components/. Refactor use-mock-scroller to use-site-scroller for document scroll.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T033"],
           "files": [
             "components/work-ledger.tsx",
             "components/join-block.tsx",
             "components/use-site-scroller.ts",
-            "app/[locale]/mock/_components/work-ledger.tsx",
-            "app/[locale]/mock/_components/join-block.tsx"
+            "lib/work-ledger.ts",
+            "messages/en.json",
+            "messages/fr.json",
+            "app/[locale]/ledger-preview/page.tsx"
           ],
           "verify": "bun run build && bun run lint"
         },
@@ -501,12 +504,15 @@
           "id": "T035",
           "title": "feat: homepage neo-ledger IA",
           "desc": "Replace CaseFileCard homepage with WorkLedger + hero from messages. Wire getFeaturedWorkEntries(). GSAP in client island only.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T034"],
           "files": [
             "app/[locale]/page.tsx",
+            "components/home-ledger-page.tsx",
+            "components/spectral-atmosphere.tsx",
             "messages/en.json",
-            "messages/fr.json"
+            "messages/fr.json",
+            "app/ledger.css"
           ],
           "verify": "bun run build && bun run lint"
         },
