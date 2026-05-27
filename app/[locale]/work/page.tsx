@@ -5,6 +5,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { getWorkSlugs, readWorkFrontmatter } from "@/lib/mdx";
 import { buildCanonical } from "@/lib/metadata";
+import { sortSupportingSlugs } from "@/lib/work-index-order";
 import {
   FEATURED_WORK_SLUGS,
   type WorkLedgerStatus,
@@ -57,7 +58,9 @@ export default async function WorkPage(props: {
 
   const allSlugs = await getWorkSlugs();
   const featuredSet = new Set<string>(FEATURED_WORK_SLUGS);
-  const otherSlugs = allSlugs.filter((s) => !featuredSet.has(s));
+  const otherSlugs = sortSupportingSlugs(
+    allSlugs.filter((s) => !featuredSet.has(s)),
+  );
 
   const featured = await Promise.all(
     FEATURED_WORK_SLUGS.map(async (slug) => {
@@ -88,7 +91,7 @@ export default async function WorkPage(props: {
   );
 
   return (
-    <div className="site-ledger mx-auto flex w-full max-w-[var(--n-page)] flex-1 flex-col px-[var(--n-gutter)] py-24 text-[var(--n-fg)]">
+    <div className="site-ledger mx-auto flex w-full max-w-[var(--n-page)] flex-1 flex-col px-[var(--n-gutter)] py-24 pb-28 text-[var(--n-fg)]">
       <header className="mb-12 max-w-2xl">
         <h1 className="font-serif text-4xl font-normal tracking-tight mb-3">
           {t("title")}

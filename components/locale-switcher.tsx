@@ -18,24 +18,12 @@ export function LocaleSwitcher({ locale }: LocaleSwitcherProps) {
 
   return (
     <div
-      className="flex shrink-0 items-center gap-1.5 text-xs font-medium tabular-nums"
+      className="flex shrink-0 items-center gap-0.5 text-[12px] font-medium"
       aria-label={t("ariaLabel")}
     >
-      <LocaleLink
-        code="en"
-        current={locale}
-        href={`/en${suffix}`}
-        label={t("en")}
-      />
-      <span className="text-ink-muted select-none" aria-hidden>
-        |
-      </span>
-      <LocaleLink
-        code="fr"
-        current={locale}
-        href={`/fr${suffix}`}
-        label={t("fr")}
-      />
+      <LocaleLink code="en" current={locale} href={`/en${suffix}`} label={t("en")} />
+      <span className="text-[color:var(--ink-4)] select-none" aria-hidden>·</span>
+      <LocaleLink code="fr" current={locale} href={`/fr${suffix}`} label={t("fr")} />
     </div>
   );
 }
@@ -51,19 +39,22 @@ function LocaleLink({
   href: string;
   label: string;
 }) {
-  if (code === current) {
+  const isActive = code === current;
+  if (isActive) {
     return (
-      <span className="text-ink-primary" aria-current="true">
+      <span
+        className="px-1.5 py-0.5 rounded text-[color:var(--ink-1)]"
+        aria-current="true"
+      >
         {label}
       </span>
     );
   }
-
   return (
     <Link
       href={href}
       hrefLang={code}
-      className="text-ink-tertiary transition-colors duration-200 ease-out hover:text-ink-primary"
+      className="px-1.5 py-0.5 rounded text-[color:var(--ink-3)] hover:text-[color:var(--ink-1)] transition-colors"
     >
       {label}
     </Link>

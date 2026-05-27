@@ -103,17 +103,6 @@ export default async function ContactPage(props: {
           </div>
         </div>
 
-        <div className="flex items-baseline gap-6">
-          <span className="font-mono text-[11px] font-medium text-ink-tertiary tracking-tight w-6">
-            03
-          </span>
-          <div>
-            <p className="font-mono text-[11px] font-medium uppercase tracking-wide text-ink-tertiary mb-1">
-              {t("calendar")}
-            </p>
-            <p className="text-sm text-ink-tertiary italic">{t("calendarPlaceholder")}</p>
-          </div>
-        </div>
       </div>
 
       <div className="hairline mb-16" />

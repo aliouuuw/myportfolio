@@ -62,39 +62,30 @@ export default async function WritingSlugPage({ params }: Props) {
   );
 
   return (
-    <div className="flex flex-col flex-1">
-      <div className="px-6 py-16 sm:px-12 lg:px-24 max-w-5xl mx-auto w-full">
-        {/* Back link */}
-        <nav className="mb-12">
-          <Link
-            href={`/${locale}/writing`}
-            className="text-sm text-ink-tertiary hover:text-ink-secondary transition-colors"
-          >
-            {t("backToWriting")}
-          </Link>
-        </nav>
+    <div className="flex flex-1 flex-col">
+      <header className="shell pt-28 pb-12 sm:pt-36">
+        <Link
+          href={`/${locale}/writing`}
+          className="link-muted text-[13px] mb-8 inline-block"
+        >
+          ← {t("backToWriting")}
+        </Link>
 
-        {/* Article header */}
-        <header className="mb-16 pb-12 border-b border-border">
-          <time
-            className="text-xs text-ink-tertiary mb-5 block"
-            dateTime={frontmatter.date}
-          >
-            {formattedDate}
-          </time>
+        <p className="eyebrow mb-4">
+          <time dateTime={frontmatter.date}>{formattedDate}</time>
+        </p>
 
-          <h1 className="font-serif text-4xl sm:text-5xl font-normal tracking-tight text-ink-primary mb-6 leading-tight">
-            {title}
-          </h1>
+        <h1 className="display text-[clamp(2.25rem,5vw,3.75rem)] mb-6 max-w-[20ch]">
+          {title}
+        </h1>
 
-          <p className="text-base text-ink-secondary leading-relaxed max-w-2xl">
-            {summary}
-          </p>
-        </header>
+        <p className="lede max-w-[60ch]">{summary}</p>
+      </header>
 
-        {/* MDX body */}
-        <div className="max-w-2xl">{content}</div>
-      </div>
+      <article className="shell pb-24">
+        <hr className="hairline mb-12" />
+        <div className="prose-editorial">{content}</div>
+      </article>
     </div>
   );
 }

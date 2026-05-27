@@ -4,20 +4,22 @@ export async function Footer() {
   const t = await getTranslations("Footer");
 
   const items = [
+    { href: t("githubHref"), label: t("githubLabel") },
+    { href: t("linkedinHref"), label: t("linkedinLabel") },
     { href: t("emailHref"), label: t("emailLabel") },
     { href: t("whatsappHref"), label: t("whatsappLabel") },
-    { href: t("linkedinHref"), label: t("linkedinLabel") },
   ] as const;
 
   return (
     <footer className="mt-auto border-t border-border">
-      <div className="mx-auto max-w-5xl px-6 py-8 sm:px-12 lg:px-24">
+      <div className="mx-auto max-w-[var(--n-page,72rem)] px-[var(--n-gutter,1.25rem)] py-10 sm:py-12">
+        <p className="max-w-[42ch] text-sm leading-relaxed text-ink-secondary mb-6">
+          {t("tagline")}
+        </p>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <p className="text-xs tabular-nums text-ink-muted">
-            {t("copyright")}
-          </p>
+          <p className="text-xs tabular-nums text-ink-muted">{t("copyright")}</p>
           <nav aria-label={t("linksAriaLabel")}>
-            <ul className="flex items-center gap-6">
+            <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
               {items.map(({ href, label }) => {
                 const isExternal = href.startsWith("http");
                 return (

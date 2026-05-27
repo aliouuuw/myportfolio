@@ -3,22 +3,47 @@
 import { useTheme } from "./theme-provider";
 import { useTranslations } from "next-intl";
 
+function SunIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6" />
+      <path
+        d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
   const t = useTranslations("Theme");
-
   const isDark = theme === "dark";
 
   return (
     <button
+      type="button"
       onClick={toggleTheme}
-      className="font-mono text-[11px] font-medium uppercase tracking-tight text-ink-tertiary transition-colors duration-200 hover:text-ink-primary"
       aria-label={isDark ? t("switchToLight") : t("switchToDark")}
       title={isDark ? t("switchToLight") : t("switchToDark")}
+      className="inline-flex h-8 w-8 items-center justify-center rounded-full text-[color:var(--ink-2)] hover:text-[color:var(--ink-1)] hover:bg-[color:var(--surface-raised)] transition-colors"
     >
-      <span className={isDark ? "text-ink-primary" : "text-ink-tertiary"}>DK</span>
-      <span className="mx-0.5 text-ink-muted">/</span>
-      <span className={!isDark ? "text-ink-primary" : "text-ink-tertiary"}>LN</span>
+      {isDark ? <SunIcon /> : <MoonIcon />}
     </button>
   );
 }
