@@ -12,24 +12,25 @@ interface SystemsMapSectionProps {
   locale: string;
 }
 
-function SystemItem({
+function MapItem({
   locale,
   item,
+  t,
 }: {
   locale: string;
   item: SystemsMapItem;
+  t: ReturnType<typeof useTranslations<"SystemsMap">>;
 }) {
-  const t = useTranslations("SystemsMap");
   const label = t(item.labelKey);
 
   if (item.workSlug) {
     return (
       <Link
         href={`/${locale}/work/${item.workSlug}`}
-        className="group flex items-center justify-between py-3 text-sm text-ink-secondary transition-colors hover:text-ink-primary"
+        className="systems-map-link group"
       >
-        <span>{label}</span>
-        <span className="text-ink-muted transition-transform group-hover:translate-x-0.5">
+        <span className="systems-map-link-label">{label}</span>
+        <span className="systems-map-link-arrow" aria-hidden>
           →
         </span>
       </Link>
@@ -37,8 +38,8 @@ function SystemItem({
   }
 
   return (
-    <span className="flex items-center py-3 text-sm text-ink-muted">
-      {label}
+    <span className="systems-map-static">
+      <span className="systems-map-static-label">{label}</span>
     </span>
   );
 }
@@ -50,43 +51,63 @@ export function SystemsMapSection({ locale }: SystemsMapSectionProps) {
   return (
     <section
       id="systems"
-      className="section-block border-t border-border"
-      aria-labelledby="systems-heading"
+      className="section-block border-t border-[color:var(--n-border)]"
+      aria-labelledby="systems-map-heading"
     >
       <div className="page-inner">
         <header className="section-head reveal-up">
           <span className="label">{t("eyebrow")}</span>
-          <h2 id="systems-heading" className="heading section-head-title">
+          <h2
+            id="systems-map-heading"
+            className="heading section-head-title"
+          >
             {t("title")}
           </h2>
           <p className="section-head-lead">{t("lead")}</p>
         </header>
 
-        <div className="reveal-up">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {SYSTEMS_MAP_COLUMNS.map((col) => (
-              <div key={col.id}>
-                <h3 className="mb-4 font-mono text-[10px] uppercase tracking-wider text-ink-tertiary">
-                  {t(col.titleKey)}
-                </h3>
-                <ul className="divide-y divide-border border-t border-border">
+        <div className="systems-map reveal-up">
+          <div className="systems-map-hub-wrap">
+            <div className="systems-map-hub">
+              <p className="systems-map-hub-label">{t("centerLabel")}</p>
+              <p className="systems-map-hub-role">{t("centerRole")}</p>
+            </div>
+            <div className="systems-map-connector" aria-hidden />
+          </div>
+
+          <div className="systems-map-spokes">
+            {SYSTEMS_MAP_COLUMNS.map((col, colIndex) => (
+              <article
+                key={col.id}
+                className="systems-map-spoke"
+                aria-labelledby={`systems-spoke-${col.id}`}
+              >
+                <header className="systems-map-spoke-head">
+                  <span className="systems-map-spoke-index" aria-hidden>
+                    {String(colIndex + 1).padStart(2, "0")}
+                  </span>
+                  <h3
+                    id={`systems-spoke-${col.id}`}
+                    className="systems-map-spoke-title"
+                  >
+                    {t(col.titleKey)}
+                  </h3>
+                </header>
+                <ul className="systems-map-items">
                   {col.items.map((item) => (
                     <li key={item.labelKey}>
-                      <SystemItem locale={locale} item={item} />
+                      <MapItem locale={locale} item={item} t={t} />
                     </li>
                   ))}
                 </ul>
-              </div>
+              </article>
             ))}
           </div>
 
-          <p className="mt-10">
-            <Link
-              href={workHref}
-              className="inline-flex items-center gap-2 text-sm text-ink-secondary transition-colors hover:text-ink-primary"
-            >
+          <p className="systems-map-foot section-foot">
+            <Link href={workHref} className="link-subtle label-sm">
               {t("viewAllWork")}
-              <span>→</span>
+              <span aria-hidden> →</span>
             </Link>
           </p>
         </div>

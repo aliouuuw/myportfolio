@@ -1,7 +1,6 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 
 interface JoinBlockProps {
   bookHref: string;
@@ -13,43 +12,31 @@ export function JoinBlock({ bookHref }: JoinBlockProps) {
   return (
     <section
       id="join"
-      className="section-block border-t border-border"
+      className="section-block border-t border-[color:var(--n-border)]"
     >
       <div className="page-inner">
-        <header className="section-head reveal-up">
+        <header className="section-head">
           <span className="label">{t("eyebrow")}</span>
           <h2 className="heading section-head-title">{t("title")}</h2>
           <p className="section-head-lead">{t("lead")}</p>
         </header>
 
-        <div className="reveal-up grid gap-6 sm:grid-cols-2">
-          <div className="rounded-lg border border-border bg-canvas-elevated/50 p-5">
-            <h3 className="mb-2 font-medium text-ink-primary">
-              {t("everestName")}
-            </h3>
-            <p className="text-sm leading-relaxed text-ink-secondary">
-              {t("everestBlurb")}
-            </p>
-          </div>
-
-          <div className="rounded-lg border border-border bg-canvas-elevated/50 p-5">
-            <h3 className="mb-2 font-medium text-ink-primary">
-              {t("odooName")}
-            </h3>
-            <p className="text-sm leading-relaxed text-ink-secondary">
-              {t("odooBlurb")}
-            </p>
-          </div>
+        <div className="join-list">
+          <article className="join-entry">
+            <h3 className="heading text-lg md:text-xl">{t("everestName")}</h3>
+            <p className="join-entry-blurb">{t("everestBlurb")}</p>
+          </article>
+          <article className="join-entry">
+            <h3 className="heading text-lg md:text-xl">{t("odooName")}</h3>
+            <p className="join-entry-blurb">{t("odooBlurb")}</p>
+          </article>
         </div>
 
-        <div className="mt-8">
-          <Link
-            href={bookHref}
-            className="btn btn-primary"
-          >
+        <div className="section-foot">
+          <a href={bookHref} className="btn btn-primary">
             {t("bookEngagement")}
-            <span className="ml-2">→</span>
-          </Link>
+            <span aria-hidden>→</span>
+          </a>
         </div>
       </div>
     </section>

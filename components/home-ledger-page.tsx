@@ -7,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslations } from "next-intl";
 
 import { useAbout } from "@/components/about-provider";
-import { JoinBlock } from "@/components/join-block";
+import { SpectralAtmosphere } from "@/components/spectral-atmosphere";
 import { SystemsMapSection } from "@/components/systems-map-section";
 import { WorkLedger } from "@/components/work-ledger";
 import {
@@ -17,10 +17,20 @@ import {
 
 gsap.registerPlugin(ScrollTrigger);
 
+type EssayTeaser = {
+  title: string;
+  summary: string;
+};
+
 interface HomeLedgerPageProps {
   locale: string;
   projects: WorkLedgerProject[];
-  essay: { title: string; summary: string } | null;
+  essay: EssayTeaser | null;
+}
+
+function motionOk(): boolean {
+  if (typeof window === "undefined") return false;
+  return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
 export function HomeLedgerPage({
@@ -33,163 +43,191 @@ export function HomeLedgerPage({
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    if (!prefersReducedMotion) {
-      const ctx = gsap.context(() => {
+    const ctx = gsap.context(() => {
+      if (motionOk()) {
         gsap.fromTo(
-          ".hero-content > *",
-          { opacity: 0, y: 16 },
+          [".hero-mark", ".hero-cta > *"],
+          { opacity: 0, y: 10 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.6,
+            duration: 0.55,
             ease: "power3.out",
-            stagger: 0.08,
-          }
+            stagger: 0.07,
+            delay: 0.06,
+          },
         );
+      } else {
+        gsap.set([".hero-mark", ".hero-cta > *"], {
+          opacity: 1,
+          y: 0,
+        });
+      }
 
-        gsap.utils.toArray<HTMLElement>(".reveal-up").forEach((el) => {
+      gsap.utils.toArray<HTMLElement>(".reveal-up").forEach((el) => {
+        if (motionOk()) {
           gsap.fromTo(
             el,
-            { opacity: 0, y: 12 },
+            { opacity: 0, y: 14 },
             {
               opacity: 1,
               y: 0,
-              duration: 0.5,
+              duration: 0.55,
               ease: "power3.out",
               scrollTrigger: {
                 trigger: el,
-                start: "top 88%",
+                start: "top 90%",
                 toggleActions: "play none none none",
               },
-            }
+            },
           );
-        });
-      }, rootRef);
+        } else {
+          gsap.set(el, { opacity: 1, y: 0 });
+        }
+      });
+    }, rootRef);
 
-      return () => ctx.revert();
-    }
+    const r = requestAnimationFrame(() => ScrollTrigger.refresh());
+    return () => {
+      cancelAnimationFrame(r);
+      ctx.revert();
+    };
   }, []);
 
   const essayHref = `/${locale}/writing/${FLAGSHIP_ESSAY_SLUG}`;
   const contactHref = `/${locale}/contact`;
 
   return (
-    <div ref={rootRef} className="relative flex flex-1 flex-col">
-      {/* Hero */}
-      <section className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28">
-        {/* Subtle gradient background */}
-        <div
-          className="absolute inset-0 -z-10 opacity-40"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 50% at 50% -20%, var(--color-accent-subtle), transparent)",
-          }}
-        />
+    <div
+      ref={rootRef}
+      className="site-ledger relative -mt-14 flex flex-1 flex-col bg-[var(--n-bg)] text-[var(--n-fg)]"
+    >
+      <div className="relative z-[1] flex flex-1 flex-col">
+        <section className="hero-section hero-section--atmosphere section-block pt-28 sm:pt-32">
+          <SpectralAtmosphere />
+          <div className="page-inner relative z-[1]">
+            <p className="hero-mark label">{t("heroEyebrow")}</p>
 
-        <div className="page-inner">
-          <div className="hero-content max-w-3xl">
-            <p className="mb-4 font-mono text-xs uppercase tracking-wider text-ink-tertiary">
-              {t("heroEyebrow")}
-            </p>
-
-            <h1 className="mb-6 font-sans text-4xl font-medium tracking-tight text-ink-primary sm:text-5xl md:text-6xl">
+            <h1 className="hero-mark hero-role">
               {t("heroRole")}
             </h1>
 
-            <p className="mb-8 max-w-xl text-lg leading-relaxed text-ink-secondary">
+            <p className="hero-mark hero-role-soft" style={{ marginTop: '0.75rem' }}>
               {t("heroRoleSoft")}
             </p>
 
-            <div className="flex flex-wrap items-center gap-3">
-              <a
-                href="#work"
-                className="btn btn-primary"
-              >
+            <div className="hero-cta">
+              <a href="#work" className="btn btn-primary">
                 {t("ctaWork")}
+                <span aria-hidden>↓</span>
               </a>
               <Link href={contactHref} className="btn">
                 {t("ctaContact")}
               </Link>
-              <button type="button" className="btn" onClick={openAbout}>
+              <button type="button" className="btn btn-learn-more" onClick={openAbout}>
                 {t("learnMore")}
               </button>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Work */}
-      <section
-        id="work"
-        className="section-block border-t border-border"
-      >
-        <div className="page-inner">
-          <header className="section-head reveal-up">
-            <span className="label">{t("workEyebrow")}</span>
-            <h2 className="heading section-head-title">{t("workTitle")}</h2>
-            <p className="section-head-lead">{t("workLead")}</p>
-          </header>
-
-          <div className="section-body reveal-up">
-            <WorkLedger locale={locale} projects={projects} />
-          </div>
-        </div>
-      </section>
-
-      {/* Systems Map */}
-      <SystemsMapSection locale={locale} />
-
-      {/* Join Block */}
-      <JoinBlock bookHref={contactHref} />
-
-      {/* Writing */}
-      {essay && (
         <section
-          id="writing"
-          className="section-block border-t border-border"
+          id="work"
+          className="section-block border-t border-[color:var(--n-border)]"
         >
           <div className="page-inner">
             <header className="section-head reveal-up">
-              <span className="label">{t("writingEyebrow")}</span>
-              <h2 className="heading section-head-title">{essay.title}</h2>
+              <span className="label">{t("workEyebrow")}</span>
+              <h2 className="heading section-head-title">{t("workTitle")}</h2>
+              <p className="section-head-lead">{t("workLead")}</p>
             </header>
-            <div className="reveal-up max-w-2xl">
-              <p className="mb-6 leading-relaxed text-ink-secondary">
-                {essay.summary}
-              </p>
-              <Link
-                href={essayHref}
-                className="inline-flex items-center gap-2 text-sm font-medium text-ink-primary transition-colors hover:text-accent"
+
+            <div className="section-body reveal-up">
+              <WorkLedger locale={locale} projects={projects} />
+            </div>
+          </div>
+        </section>
+
+        <SystemsMapSection locale={locale} />
+
+        {essay && (
+          <section
+            id="writing"
+            className="section-block border-t border-[color:var(--n-border)]"
+          >
+            <div className="page-inner">
+              <header className="section-head reveal-up">
+                <span className="label">{t("writingEyebrow")}</span>
+                <h2 className="heading section-head-title">{essay.title}</h2>
+              </header>
+              <div className="writing-body reveal-up">
+                <p className="text-[color:var(--n-fg-secondary)] leading-relaxed max-w-[58ch]">
+                  {essay.summary}
+                </p>
+                <Link
+                  href={essayHref}
+                  className="link-subtle label-sm mt-4 inline-block"
+                >
+                  {t("readEssay")}
+                  <span aria-hidden> →</span>
+                </Link>
+              </div>
+            </div>
+          </section>
+        )}
+
+        <section
+          id="contact"
+          className="section-block border-t border-[color:var(--n-border)]"
+        >
+          <div className="page-inner">
+            <header className="section-head reveal-up">
+              <span className="label">{t("contactEyebrow")}</span>
+              <h2 className="heading section-head-title">{t("contactTitle")}</h2>
+            </header>
+            <div className="contact-body reveal-up">
+              <a
+                className="contact-email font-sans text-xl font-medium tracking-tight text-[var(--n-fg)] underline-offset-4 hover:underline"
+                href="mailto:wadealiou00@gmail.com"
               >
-                {t("readEssay")}
-                <span>→</span>
+                wadealiou00@gmail.com
+              </a>
+              <div className="contact-links mt-4 flex flex-wrap gap-4">
+                <a
+                  className="link-subtle label-sm"
+                  href="https://www.linkedin.com/in/aliouuuw"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  className="link-subtle label-sm"
+                  href="https://github.com/aliouuuw"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  GitHub
+                </a>
+                <a
+                  className="link-subtle label-sm"
+                  href="https://wa.me/221777228845"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  WhatsApp
+                </a>
+              </div>
+              <p className="contact-note label-sm mt-4 text-[color:var(--n-fg-muted)]">
+                {t("contactNote")}
+              </p>
+              <Link href={contactHref} className="btn btn-primary mt-6">
+                {t("contactCta")}
               </Link>
             </div>
           </div>
         </section>
-      )}
-
-      {/* Contact CTA */}
-      <section
-        id="contact"
-        className="section-block border-t border-border"
-      >
-        <div className="page-inner text-center">
-          <div className="reveal-up mx-auto max-w-xl">
-            <h2 className="mb-4 font-sans text-2xl font-medium tracking-tight text-ink-primary sm:text-3xl">
-              {t("contactTitle")}
-            </h2>
-            <p className="mb-6 text-ink-secondary">{t("contactNote")}</p>
-            <Link href={contactHref} className="btn btn-primary">
-              {t("contactCta")}
-            </Link>
-          </div>
-        </div>
-      </section>
+      </div>
     </div>
   );
 }
