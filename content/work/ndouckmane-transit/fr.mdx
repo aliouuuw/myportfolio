@@ -1,0 +1,52 @@
+---
+title: "Ndouckmane Transit — freight forwarding operations MVP"
+titleFr: "Ndouckmane Transit — MVP opérations transit & douane"
+summary: "Operational platform for freight forwarding and customs transit in Senegal — dossiers, declarations, agencies, and pilot workflows grounded in real commissionnaire practice."
+summaryFr: "Plateforme opérationnelle pour commissionnaire de transport et transit douanier au Sénégal — dossiers, déclarations, agences et flux pilote ancrés dans la pratique terrain."
+role: "Opérateur technique solo"
+domain: "Logistique & transit douanier"
+stack:
+  - "TypeScript"
+  - "Next.js"
+  - "PostgreSQL"
+  - "Drizzle ORM"
+  - "Better Auth"
+date: "2026-03"
+featured: false
+confidential: false
+status: active
+period: "2026"
+---
+
+## Contexte
+
+Les commissionnaires et opérateurs de transit en Afrique de l'Ouest font encore tourner l'essentiel sur tableurs, messagerie et papier. Ndouckmane Transit est un MVP que je construis pour donner à un commissionnaire dakarois une colonne vertébrale unique : dossiers, déclarations, agences et mouvements financiers avec historique auditable.
+
+La documentation produit prend un client pilote comme contrat — vocabulaire, rapports débit/crédit et flux agences viennent du terrain, pas d'un TMS générique.
+
+## Problème
+
+La douleur opérationnelle se concentre sur quelques échecs récurrents :
+
+- **Fragmentation des dossiers** — données BL, statut déclaration et relais agences dans des endroits différents sans timeline commune.
+- **Argent sans traçabilité** — mouvements débit/crédit doivent se rattacher aux dossiers ; les tableurs masquent les erreurs jusqu'à la clôture.
+- **Coût d'adoption** — les équipes pensent déjà en listes type Notion ; un logiciel qui combat ce modèle ne tient pas.
+
+Le MVP repousse explicitement le scope qui diluerait la première démo.
+
+## Approche
+
+- **Monolithe Next.js** avec modules documentés (auth, organisations, dossiers, reporting).
+- **Règles monétaires dès le schéma** — tenancy et champs type ledger conçus en amont.
+- **Better Auth + organisations** — RBAC aligné sur la délégation réelle d'une petite structure.
+- **UX familière** — patterns liste/détail que les opérateurs connaissent, avec des gains là où ils réduisent les erreurs.
+
+## Résultat
+
+Le dépôt livre migrations, seed pour orgs de démo et une surface qui grandit pour les flux pilote. L'objectif est un outil quotidien crédible pour un client ancre avant d'élargir.
+
+## Leçons
+
+**Le logiciel logistique échoue quand le langage métier est faux.** Investir dans le glossaire (dossier vs déclaration) évite le mauvais modèle d'objets.
+
+**La discipline pilote bat la largeur fonctionnelle.** La ligne BL et le rapport d'un commissionnaire enseignent plus qu'une roadmap de modules hypothétiques.

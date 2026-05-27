@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 
 import { JoinBlock } from "@/components/join-block";
 import { SpectralAtmosphere } from "@/components/spectral-atmosphere";
+import { SystemsMapSection } from "@/components/systems-map-section";
 import { WorkLedger } from "@/components/work-ledger";
 import {
   FLAGSHIP_ESSAY_SLUG,
@@ -168,6 +169,8 @@ export function HomeLedgerPage({
             </div>
           </div>
         </section>
+
+        <SystemsMapSection locale={locale} />
 
         <JoinBlock bookHref={`/${locale}#contact`} />
 

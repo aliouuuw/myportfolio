@@ -1,0 +1,49 @@
+---
+title: "Mansour Holding — public platform and internal operations dashboard"
+titleFr: "Mansour Holding — plateforme publique et tableau de bord opérationnel"
+summary: "Monorepo for Mansour Motors: marketing surfaces, vehicle inventory, and an authenticated internal dashboard on a shared API and data model."
+summaryFr: "Monorepo Mansour Motors : vitrines marketing, stock véhicules et tableau de bord interne authentifié sur une API et un modèle de données partagés."
+role: "Solo technical operator"
+domain: "Automotive & holding operations"
+stack:
+  - "TypeScript"
+  - "React"
+  - "Hono"
+  - "PostgreSQL"
+  - "Drizzle ORM"
+  - "Cloudflare R2"
+date: "2025-11"
+featured: false
+confidential: false
+status: shipped
+period: "2025"
+---
+
+## Context
+
+Mansour Holding operates Mansour Motors and related brands in Senegal. The business needed more than brochure sites: a coherent digital presence for the public, plus an internal surface where staff manage vehicle listings, media, and operational data without juggling spreadsheets.
+
+I scoped and built a monorepo that separates public marketing from authenticated operations while sharing validators, types, and database schema.
+
+## Problem
+
+Before consolidation, marketing and inventory lived in disconnected tools. Public pages could not reflect stock accurately. Internal staff lacked a single dashboard with audit-friendly updates and image handling for vehicle records.
+
+The constraint was familiar from fintech work: one operator, production expectations, and a need to ship incrementally without painting the team into a monolith they could not maintain.
+
+## Approach
+
+- **Monorepo with shared packages** — `shared` for Zod validators and types, `database` for Drizzle schema reference, API and web apps consuming the same contracts.
+- **Split runtime** — React + Vite for the public web (Vercel), Hono API on Bun (Koyeb), Neon PostgreSQL as the system of record.
+- **Auth and media** — better-auth for email/password and bearer sessions; Cloudflare R2 for vehicle imagery with typed upload flows.
+- **Boring boundaries** — API owns business rules; the dashboard renders state and allowed transitions rather than encoding workflow in the UI alone.
+
+## Outcome
+
+The platform ships as a working monorepo: public site, API, and internal dashboard wired to the same schema. Vehicle inventory and marketing content can evolve together without duplicate data entry.
+
+## Lessons
+
+**Holding companies need the same discipline as fintech.** Inventory and brand surfaces look simpler than ledgers, but drift between “what the site shows” and “what ops knows” creates the same operational risk.
+
+**Monorepos pay off when validators are shared early.** The upfront cost of packages felt heavy for a solo build; it paid back the first time a field changed on the API and TypeScript caught the dashboard gap immediately.

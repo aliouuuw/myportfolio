@@ -1,0 +1,49 @@
+---
+title: "Mansour Holding — public platform and internal operations dashboard"
+titleFr: "Mansour Holding — plateforme publique et tableau de bord opérationnel"
+summary: "Monorepo for Mansour Motors: marketing surfaces, vehicle inventory, and an authenticated internal dashboard on a shared API and data model."
+summaryFr: "Monorepo Mansour Motors : vitrines marketing, stock véhicules et tableau de bord interne authentifié sur une API et un modèle de données partagés."
+role: "Opérateur technique solo"
+domain: "Automobile & opérations holding"
+stack:
+  - "TypeScript"
+  - "React"
+  - "Hono"
+  - "PostgreSQL"
+  - "Drizzle ORM"
+  - "Cloudflare R2"
+date: "2025-11"
+featured: false
+confidential: false
+status: shipped
+period: "2025"
+---
+
+## Contexte
+
+Mansour Holding exploite Mansour Motors et des marques associées au Sénégal. L'entreprise avait besoin de plus que des sites vitrine : une présence digitale cohérente pour le public, plus une surface interne où l'équipe gère les annonces véhicules, les médias et les données opérationnelles sans jongler avec des tableurs.
+
+J'ai cadré et construit un monorepo qui sépare le marketing public des opérations authentifiées tout en partageant validateurs, types et schéma base de données.
+
+## Problème
+
+Avant consolidation, marketing et stock vivaient dans des outils déconnectés. Les pages publiques ne reflétaient pas le stock réel. L'équipe interne manquait d'un tableau de bord unique avec des mises à jour traçables et une gestion d'images pour les fiches véhicules.
+
+La contrainte était familière : un opérateur, des attentes production, et la nécessité de livrer par incréments sans enfermer l'équipe dans un monolithe impossible à maintenir.
+
+## Approche
+
+- **Monorepo et packages partagés** — validateurs Zod et types communs, schéma Drizzle de référence, apps API et web sur les mêmes contrats.
+- **Runtimes séparés** — React + Vite pour le web public (Vercel), API Hono sur Bun (Koyeb), Neon PostgreSQL comme source de vérité.
+- **Auth et médias** — better-auth (email/mot de passe, bearer) ; Cloudflare R2 pour les visuels véhicules.
+- **Frontières nettes** — l'API porte les règles métier ; le dashboard affiche l'état et les transitions autorisées.
+
+## Résultat
+
+La plateforme est livrée en monorepo fonctionnel : site public, API et dashboard interne sur le même schéma. Stock et contenu marketing évoluent ensemble sans double saisie.
+
+## Leçons
+
+**Les holdings ont besoin de la même discipline que la fintech.** Le stock et la vitrine paraissent plus simples qu'un ledger, mais l'écart entre « ce que le site montre » et « ce que les ops savent » crée le même risque opérationnel.
+
+**Le monorepo paie quand les validateurs sont partagés tôt.** Le coût initial des packages semblait lourd en solo ; il s'est amorti dès qu'un champ API a changé et TypeScript a signalé l'écart côté dashboard.

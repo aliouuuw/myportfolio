@@ -1,0 +1,52 @@
+---
+title: "Ndouckmane Transit — freight forwarding operations MVP"
+titleFr: "Ndouckmane Transit — MVP opérations transit & douane"
+summary: "Operational platform for freight forwarding and customs transit in Senegal — dossiers, declarations, agencies, and pilot workflows grounded in real commissionnaire practice."
+summaryFr: "Plateforme opérationnelle pour commissionnaire de transport et transit douanier au Sénégal — dossiers, déclarations, agences et flux pilote ancrés dans la pratique terrain."
+role: "Solo technical operator"
+domain: "Logistics & customs transit"
+stack:
+  - "TypeScript"
+  - "Next.js"
+  - "PostgreSQL"
+  - "Drizzle ORM"
+  - "Better Auth"
+date: "2026-03"
+featured: false
+confidential: false
+status: active
+period: "2026"
+---
+
+## Context
+
+Freight forwarders and customs transit operators in West Africa still run core workflows across spreadsheets, messaging apps, and paper. Ndouckmane Transit is an MVP I am building to give a Dakar-area commissionnaire a single operational spine: dossiers, declarations, agency relationships, and money movements with audit-friendly history.
+
+The product docs treat a pilot client as the contract — vocabulary, debit/credit reporting, and agency flows come from real operations, not generic TMS templates.
+
+## Problem
+
+Operational pain clusters around a few recurring failures:
+
+- **Dossier fragmentation** — bill of lading data, declaration status, and agency handoffs live in different places with no shared timeline.
+- **Money without traceability** — debit/credit movements need to reconcile to dossiers; ad-hoc spreadsheets hide errors until month-end.
+- **Onboarding cost** — staff already think in Notion-like lists; software that fights their mental model never sticks.
+
+The MVP explicitly defers scope that would dilute the first demo: no multi-country expansion, no speculative automation — only what the pilot needs to run daily work.
+
+## Approach
+
+- **Monolith Next.js** with clear module boundaries (auth, organizations, dossiers, reporting) documented before code catches up.
+- **Schema-first money rules** — tenancy and ledger-like fields designed in the data model upfront, not “fixed later.”
+- **Better Auth + organizations** — RBAC aligned to how a small agency actually delegates access.
+- **UX that respects familiarity** — list/detail patterns operators already use, with deliberate improvements where they reduce error rates.
+
+## Outcome
+
+The codebase ships with migrations, seed data for demo transit orgs, and a growing surface for pilot workflows. The goal is a credible daily tool for one anchor client before widening scope.
+
+## Lessons
+
+**Logistics software fails when domain language is wrong.** Spending time on glossaries (dossier vs déclaration, agency roles) prevents building the wrong object model.
+
+**Pilot discipline beats feature breadth.** A commissionnaire’s BL row and report layout teach more than a roadmap of hypothetical modules.

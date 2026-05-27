@@ -35,8 +35,11 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aliouwade.com";
+
 /** Root shell only: locale-specific metadata lives under `app/[locale]/`. */
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Aliou Wade",
 };
 
