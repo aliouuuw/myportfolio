@@ -5,28 +5,35 @@ import { useParams } from "next/navigation";
 
 import { ThemeToggle } from "@/components/theme-toggle";
 
+import { LiveSignal } from "./live-signal";
+
 export function MockChrome() {
   const params = useParams();
   const locale = (params.locale as string) ?? "en";
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 mix-blend-difference">
-      <div className="max-w-[1800px] mx-auto px-8 py-6 flex items-center justify-between">
-        <div className="flex items-center gap-6">
+    <header className="mock-chrome fixed top-0 left-0 right-0 z-50">
+      <div className="page-inner chrome-bar">
+        <div className="flex items-center gap-5 min-w-0">
           <Link
             href={`/${locale}`}
-            className="text-xs tracking-[0.2em] uppercase text-white/60 hover:text-white transition-colors"
+            className="label chrome-exit hover:text-[color:var(--n-fg)] transition-colors whitespace-nowrap"
           >
-            ← Exit Preview
+            Exit preview
           </Link>
-          <span className="text-[10px] tracking-[0.3em] uppercase text-cyan-400/80 hidden md:inline">
-            AWWWARDS DIRECTION
-          </span>
+          <span className="chrome-divider hidden md:inline" aria-hidden />
+          <div className="hidden md:flex min-w-0">
+            <LiveSignal />
+          </div>
         </div>
-        <div className="flex items-center gap-4">
-          <span className="text-xs text-white/40 tracking-wider uppercase hidden md:inline">
-            Theme
-          </span>
+
+        <nav className="hidden md:flex items-center gap-6 label" aria-label="Page sections">
+          <a href="#work" className="chrome-link">Work</a>
+          <a href="#join" className="chrome-link">Open</a>
+          <a href="#contact" className="chrome-link">Contact</a>
+        </nav>
+
+        <div className="flex items-center gap-3" suppressHydrationWarning>
           <ThemeToggle />
         </div>
       </div>

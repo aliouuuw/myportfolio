@@ -5,7 +5,7 @@ import {
   useCallback,
   useContext,
   useEffect,
-  useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react";
 
@@ -28,18 +28,29 @@ export function useTheme(): ThemeContextValue {
 
 const STORAGE_KEY = "theme";
 
-/**
- * Read the current theme from the DOM.
- * Source of truth is set by ThemeInitScript before React hydrates.
- * On the server, document is undefined so we default to "light".
- */
-function readThemeFromDOM(): Theme {
-  if (typeof document === "undefined") return "light";
+const themeListeners = new Set<() => void>();
+
+function getThemeSnapshot(): Theme {
   return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 }
 
+/** Must match SSR output so hydration stays consistent. */
+function getServerThemeSnapshot(): Theme {
+  return "light";
+}
+
+function subscribeTheme(onStoreChange: () => void): () => void {
+  themeListeners.add(onStoreChange);
+  return () => {
+    themeListeners.delete(onStoreChange);
+  };
+}
+
+function notifyThemeChange(): void {
+  themeListeners.forEach((listener) => listener());
+}
+
 function applyThemeToDOM(theme: Theme): void {
-  if (typeof document === "undefined") return;
   document.documentElement.dataset.theme = theme;
 }
 
@@ -48,21 +59,21 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  // Initial state: "light" on SSR; on client, the lazy initializer reads the
-  // value already applied to <html data-theme="..."> by ThemeInitScript.
-  const [theme, setTheme] = useState<Theme>(readThemeFromDOM);
+  const theme = useSyncExternalStore(
+    subscribeTheme,
+    getThemeSnapshot,
+    getServerThemeSnapshot,
+  );
 
   const toggleTheme = useCallback(() => {
-    setTheme((current) => {
-      const next: Theme = current === "dark" ? "light" : "dark";
-      try {
-        localStorage.setItem(STORAGE_KEY, next);
-      } catch {
-        // localStorage may be unavailable (private mode, etc.) — ignore
-      }
-      applyThemeToDOM(next);
-      return next;
-    });
+    const next: Theme = getThemeSnapshot() === "dark" ? "light" : "dark";
+    try {
+      localStorage.setItem(STORAGE_KEY, next);
+    } catch {
+      // localStorage may be unavailable (private mode, etc.) — ignore
+    }
+    applyThemeToDOM(next);
+    notifyThemeChange();
   }, []);
 
   // Sync system preference changes IF the user hasn't made an explicit choice.
@@ -79,7 +90,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       if (stored === "light" || stored === "dark") return;
       const next: Theme = event.matches ? "dark" : "light";
       applyThemeToDOM(next);
-      setTheme(next);
+      notifyThemeChange();
     };
     mq.addEventListener("change", handleSystemChange);
     return () => mq.removeEventListener("change", handleSystemChange);

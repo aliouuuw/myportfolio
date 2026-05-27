@@ -1,8 +1,8 @@
 # Portfolio redesign — agent handover
 
-**Last updated:** 2026-05-26  
+**Last updated:** 2026-05-27 (v4 iteration)  
 **Repo:** `myportfolio`  
-**Owner intent:** Redesign the portfolio away from “classified dossier / metallic” toward something **modern, elegant, dynamic, tech-forward** — still grounded in **Source of Truth + Execution Ledger** thinking (claims traceable to proof, shipped work as a record). 
+**Owner intent:** Redesign the portfolio away from “classified dossier / metallic” toward something **modern, elegant, dynamic, tech-forward** — still grounded in **Source of Truth + Execution Ledger** thinking (claims traceable to proof, shipped work as a record). User was **not satisfied** with mock iterations so far; use this doc to continue without re-discovering context.
 
 ---
 
@@ -39,7 +39,7 @@ Implemented per **design-shape-v3** (mostly complete in backlog through T029):
 **Isolated** under `app/[locale]/mock/`:
 
 - `layout.tsx` — full-viewport shell (`fixed inset-0 z-[200]`) so site chrome is covered but still mounted underneath  
-- **Current active UI:** Single **Instrument (WebGL-enhanced)** client page (`page.tsx` rendering `MockClient.tsx`)
+- **Current active UI:** **Neo-Futuristic** client page (`page.tsx` + `neo-futuristic.css`)  
 - **Not wired to production** routes, i18n copy, or real MDX
 
 **Preview URL:** `http://localhost:3000/en/mock` (run `bun dev`)
@@ -54,8 +54,10 @@ Implemented per **design-shape-v3** (mostly complete in backlog through T029):
 | **Living Spine** mock | Organic vertical line, mouse bend | Replaced |
 | **5 direction mocks** | Control Room, Source of Truth, Execution Ledger, Systems Console, Field Engineer | Removed |
 | **Source + Ledger (warm)** | Amber/cyan proof, dependency graph, ledger rail, agency sidebar | Replaced; CSS still in repo (`source-ledger.css`) |
-| **Awwwards mock (v1)** | WebGL shader, GSAP, horizontal scroll cards, custom cursor, glass panels | Replaced |
-| **Instrument (v4)** | Vanilla WebGL wave shader, light-by-default theme, horizontal execution ledger, clean typography, static trackers | **Latest Locked-in Direction**; user-approved |
+| **Awwwards mock** | WebGL shader, GSAP, horizontal scroll cards, custom cursor, glass panels | Removed |
+| **Neo-Futuristic mock v1** | Work ledger with boxed metadata, grid-heavy detail | Replaced |
+| **Neo-Futuristic mock v3** | Sticky scroll layout: text scrolls naturally on left, media stays pinned on right | Replaced |
+| **Neo-Futuristic mock v4 (current)** | Accordion ledger: vertical list of expandable entries, details open in place | **Latest**; full reading flow, no empty space |
 
 ### User-approved *conceptual* pillars (keep these)
 
@@ -66,11 +68,11 @@ Implemented per **design-shape-v3** (mostly complete in backlog through T029):
 
 ### User-rejected or tired of
 
-- `CF-001`, `CONFIDENTIAL`, dossier/LARP (Stamps and stamps-metadata **fully dropped** in v4)
+- `CF-001`, `CONFIDENTIAL`, dossier/LARP  
 - Heavy **metal / brushed panels** as primary metaphor  
 - **Generic** particle fields, dot grids, “creative developer” clichés without craft  
-- **Brutalist / patent document** direction  
-- **Awwwards mock (v1) elements**: `cursor: none` (cursor hijacking dropped), heavy dark-only gradients, weak tie to operator credibility
+- **Brutalist / patent document** direction (user wanted the *opposite*: dynamic, fresh)  
+- Current **Awwwards mock** as-is: reads as template-y, `cursor: none`, gradient/glass tropes, weak tie to operator credibility
 
 ### Stated target aesthetic (use as north star)
 
@@ -86,25 +88,23 @@ Reference *quality bar*, not *copy*: restrained typography + one strong motion s
 
 | File | Purpose |
 |------|---------|
-| `app/[locale]/mock/page.tsx` | Client page: loads `<MockClient />` |
-| `app/[locale]/mock/_components/MockClient.tsx` | Main Client Orchestrator: Hero, `ClaimValidator`, `HorizontalLedger`, Static Agency Trackers, and Footer |
-| `app/[locale]/mock/instrument.css` | Active styles (premium minimal styling, light default / dark support, smooth transitions) |
+| `app/[locale]/mock/page.tsx` | Client page: hero, `WorkLedger`, `JoinBlock`, writing/about/contact |
+| `app/[locale]/mock/neo-futuristic.css` | Active styles (OKLCH tokens, work ledger, terminal bar) |
 | `app/[locale]/mock/layout.tsx` | Preview shell |
 | `app/[locale]/mock/mock-shell.css` | Shell tokens (mostly unused by awwwards page) |
 
-### Active components (`MockClient.tsx` imports)
+### Active components (`page.tsx` imports)
 
 | Component | Role |
 |-----------|------|
-| `_components/ShaderBackground.tsx` | Native WebGL custom fragment shader drawing a slow, pearlescent wave in light mode and deep graphite in dark mode |
-| `_components/KineticText.tsx` | GSAP ScrollTrigger char/word reveal |
-| `_components/MagneticButton.tsx` | GSAP magnetic hover |
-| `_components/HorizontalLedger.tsx` | Pinned horizontal scroll section for cases with theme-aware cards and corrected entrance animations |
-| `_components/ClaimValidator.tsx` | Hover-to-validate claims with theme-aware typography |
-| `_components/mock-chrome.tsx` | Exit link + `ThemeToggle` (DK/LN) |
-| `_components/mock-config.ts` | Hardcoded `MOCK_COPY`, cases, media slots, social counts, `AGENCY_TEASER` |
+| `_components/work-ledger.tsx` | Accordion ledger — expandable rows with smooth height animation |
+| `_components/JoinBlock.tsx` | Open agency / seat requests (static) |
+| `_components/system-artifact.tsx` | Terminal-style KV panel (optional; not in ledger v1) |
+| `_components/mock-chrome.tsx` | Exit link + `ThemeToggle` + section nav |
+| `_components/mock-config.ts` | `MOCK_COPY`, `WORK_LEDGER_META` |
+| `_components/use-mock-scroller.ts` | GSAP ScrollTrigger scroller = `.mock-shell` |
 
-### Orphaned from earlier iteration (not imported by `MockClient.tsx`)
+### Orphaned from earlier iteration (not imported by `page.tsx`)
 
 Do not assume these are active; safe to delete or repurpose:
 
@@ -122,24 +122,29 @@ In root `package.json`:
 
 ---
 
-## 5. Known bugs and tech debt (Resolved)
+## 5. Known bugs and tech debt
 
 ### Mock / UX
 
-- **HorizontalLedger ScrollTrigger [RESOLVED]:** Added `id: "horizontal"` to the pinned scroll trigger so card entry animations find container correctly.
-- **Custom cursor [RESOLVED]:** Custom cursor dropped entirely. Fits user theme toggle and standard interactions natively.
-- **Theme on mock [RESOLVED]:** Refactored components to use theme-aware classes (`text-ink-primary`, `bg-canvas-elevated`, etc.) so they look beautiful in both light-by-default and dark-by-toggle states.
-- **Placeholder media:** Uses `/window.svg`; no real case images.
-- **Social “likes” / trackers:** Clean static presentation as requested.
-- **Footer links:** `href="#"` placeholders.
+| Issue | Detail |
+|-------|--------|
+| **HorizontalLedger ScrollTrigger** | `containerAnimation: gsap.getById("horizontal")` — ID never assigned on tween; card entrance animations likely broken |
+| **Custom cursor** | `cursor: none` on desktop in `awwwards.css`; hurts usability, fights site `ThemeToggle` styling |
+| **Theme on mock** | Dark-first mock vs `ThemeToggle` toggles `data-theme` on `<html>` — shader/colors may not fully respect light mode |
+| **Violates project design rules** | Glassmorphism, gradient text class in CSS, heavy WebGL — fine for experiment, **not** aligned with `AGENTS.md` / design-shape anti-patterns |
+| **Placeholder media** | Uses `/window.svg`; no real case images |
+| **Social “likes”** | Client-only toggle; no API |
+| **Footer links** | `href="#"` placeholders |
 
 ### Production (independent of mock)
 
-- **Missing case study [RESOLVED]:** Wrote full English and French MDX retrospect files for BocalBun at `content/work/bocalbun-retrospective/en.mdx` and `fr.mdx` detailing the framework halt and technical judgment.
-- **Extra content:** `content/work/eduplan/` exists but is **not** on homepage/work index (strategic plan: month 2, not v1 hero).
-- **Case report components unused:** `ScrollDiagram`, `RedactedArtifact`, `CaseReportSection` not in `mdx-components.tsx` / MDX.
-- **Prev/next title keys:** `work/[slug]/page.tsx` uses `t(\`caseFiles.${prevSlug.replace(/-/g, "")}Title\`)` — fragile slug→key mapping.
-- **Backlog drift:** T030 marked done with “delete mock” but mock was re-added and expanded.
+| Issue | Detail |
+|-------|--------|
+| **Missing case study** | UI links to `/work/bocalbun-retrospective` but `content/work/bocalbun-retrospective/` **does not exist** → 404 |
+| **Extra content** | `content/work/eduplan/` exists but is **not** on homepage/work index (strategic plan: month 2, not v1 hero) |
+| **Case report components unused** | `ScrollDiagram`, `RedactedArtifact`, `CaseReportSection` not in `mdx-components.tsx` / MDX |
+| **Prev/next title keys** | `work/[slug]/page.tsx` uses `t(\`caseFiles.${prevSlug.replace(/-/g, "")}Title\`)` — fragile slug→key mapping |
+| **Backlog drift** | T030 marked done with “delete mock” but mock was re-added and expanded |
 
 ---
 
@@ -148,8 +153,8 @@ In root `package.json`:
 | Slug | In homepage/work UI | `content/work/` exists |
 |------|---------------------|-------------------------|
 | `everest-finance` | Yes | Yes (`en.mdx`, `fr.mdx`) |
-| `odoo-testing-toolkit` | Yes | Yes (`en.mdx`, `fr.mdx`) |
-| `bocalbun-retrospective` | Yes | **Yes** (`en.mdx`, `fr.mdx`) |
+| `odoo-testing-toolkit` | Yes | Yes |
+| `bocalbun-retrospective` | Yes | **No** — fix before launch |
 | `eduplan` | No | Yes |
 
 Writing: `content/writing/why-systems-over-frameworks/` (check slugs via `getWritingSlugs()`).
@@ -253,32 +258,37 @@ components/
 
 ```
 app/[locale]/mock/
-  page.tsx                 ← active: Awwwards
-  awwwards.css               ← active styles
-  source-ledger.css          ← orphaned
+  page.tsx
+  neo-futuristic.css         ← active styles
   layout.tsx
   mock-shell.css
   _components/
-    ShaderBackground.tsx
-    KineticText.tsx
-    MagneticButton.tsx
-    HorizontalLedger.tsx
-    ClaimValidator.tsx
+    work-ledger.tsx
+    join-block.tsx
     mock-chrome.tsx
     mock-config.ts
-    … (orphaned: background-layer, ledger-entry, social-feedback, agency-rail)
+    system-artifact.tsx
+    use-mock-scroller.ts
 ```
 
 ---
 
-## 10. Open questions for the user (resolve before production merge)
+## 10. Resolved direction (user decisions, 2026-05-26)
 
-1. **Drop CF-xxx and classification stamps** entirely, or keep subtly?  
-2. **Light default vs dark default** for the new direction?  
-3. **Is WebGL acceptable** on the final site, or CSS/SVG only?  
-4. **Horizontal vs vertical** case study flow?  
-5. **BocalBun** — write MDX now or swap third card to EduPlan temporarily?  
-6. **Social/agency features** — v1 static placeholders vs real backend (Convex/Supabase/etc.)?
+1. **CF-xxx + classification stamps:** **Drop entirely.** Remove from production copy, components, and messages.
+2. **Theme default:** **Light default.** Dark mode remains via `ThemeToggle`.
+3. **WebGL:** **Acceptable** on final site (keep `three` / R3F), provided performance + Lighthouse gates pass on mobile.
+4. **Case study flow:** **Horizontal.** Commit to horizontal pinned scroll — must debug `HorizontalLedger` ScrollTrigger and validate mobile fallback.
+5. **BocalBun:** **Write MDX now** (`content/work/bocalbun-retrospective/{en,fr}.mdx`) before launch; do not swap to EduPlan.
+6. **Social / agency features:** **Static placeholders for v1.** No backend yet.
+
+### Implications for next agent
+
+- Visual lane: closer to **Option B (Spatial ledger)** with WebGL allowed, light-first.
+- Strip CF-xxx / `classification-stamp.tsx` / dossier copy from production migration plan.
+- Fix `HorizontalLedger` (`gsap.getById("horizontal")` bug) before promoting.
+- `/mock` light theme must be first-class, not an afterthought (current `awwwards.css` is dark-first).
+- Add `content/work/bocalbun-retrospective/` to backlog as a blocker for launch.
 
 ---
 
