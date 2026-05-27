@@ -15,3 +15,4 @@
 2026-05-27 — T031–T032 done: BocalBun retrospective MDX (EN+FR), ledger frontmatter on anchor cases, `lib/work-ledger.ts`, essay cross-links; P5 migration backlog + `docs/launch-prerequisites.md`.
 2026-05-27 — T033–T034 done: `app/ledger.css` tokens + accordion/join styles, `components/work-ledger.tsx` + `join-block.tsx` wired to MDX, `/ledger-preview` verification route.
 2026-05-27 — T035 done: Homepage uses neo-ledger IA (`HomeLedgerPage`, `WorkLedger`, `JoinBlock`, MDX-driven rows, bilingual `HomePage.ledger` copy).
+2026-05-27 — T036–T038 done: Case study template v2, MDX work index, removed v3 components and `/mock` route; TopNav uses homepage anchors.

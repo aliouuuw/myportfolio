@@ -3,8 +3,6 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { ContactForm } from "@/components/contact-form";
 import { buildCanonical } from "@/lib/metadata";
-import { ClassificationStamp } from "@/components/classification-stamp";
-
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -55,10 +53,7 @@ export default async function ContactPage(props: {
 
   return (
     <div className="flex flex-col flex-1 px-6 py-24 sm:px-12 lg:px-24 max-w-3xl mx-auto w-full">
-      {/* Classification stamp */}
-      <div className="mb-8">
-        <ClassificationStamp label={t("stamp")} />
-      </div>
+      <p className="label-micro mb-8">{t("stamp")}</p>
 
       {/* Large serif headline */}
       <h1 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-normal tracking-tight text-ink-primary leading-tight mb-4">

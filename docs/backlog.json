@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-27T14:30:00Z",
+  "updated": "2026-05-27T18:00:00Z",
   "phases": [
     {
       "id": "P0",
@@ -520,7 +520,7 @@
           "id": "T036",
           "title": "feat: case study template v2",
           "desc": "Replace MetalPanel/CaseReportHeader with case-study-header.tsx. Clean report layout, fix prev/next i18n.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T035"],
           "files": [
             "app/[locale]/work/[slug]/page.tsx",
@@ -533,7 +533,7 @@
           "id": "T037",
           "title": "feat: work index v2",
           "desc": "Redesign /work index — ledger list, no CF-xxx. Decide full index vs redirect to /#work (see launch-prerequisites.md).",
-          "status": "pending",
+          "status": "done",
           "deps": ["T035"],
           "files": [
             "app/[locale]/work/page.tsx",
@@ -545,7 +545,7 @@
           "id": "T038",
           "title": "chore: remove design-shape-v3 components + retire mock",
           "desc": "Delete unused v3 components after migration. Remove /mock route after production homepage approved. Prune dead message keys.",
-          "status": "pending",
+          "status": "done",
           "deps": ["T036", "T037"],
           "files": [
             "components/case-file-card.tsx",

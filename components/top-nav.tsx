@@ -27,9 +27,18 @@ export function TopNav() {
   }, []);
 
   const links = [
-    { href: `/${locale}/work`, label: t("work") },
-    { href: `/${locale}/writing`, label: t("writing") },
-    { href: `/${locale}/about`, label: t("about") },
+    { href: `/${locale}#work`, label: t("work"), matchPath: `/${locale}/work` },
+    {
+      href: `/${locale}#writing`,
+      label: t("writing"),
+      matchPath: `/${locale}/writing`,
+    },
+    { href: `/${locale}#about`, label: t("about"), matchPath: `/${locale}/about` },
+    {
+      href: `/${locale}#contact`,
+      label: t("contact"),
+      matchPath: `/${locale}/contact`,
+    },
   ] as const;
 
   const brandHref = `/${locale}`;
@@ -54,9 +63,10 @@ export function TopNav() {
         <nav className="flex items-center gap-6" aria-label={t("ariaLabel")}>
           {/* Section links */}
           <ul className="hidden sm:flex items-center gap-6">
-            {links.map(({ href, label }) => {
+            {links.map(({ href, label, matchPath }) => {
               const isActive =
-                pathname === href || pathname.startsWith(`${href}/`);
+                pathname === matchPath ||
+                pathname.startsWith(`${matchPath}/`);
               return (
                 <li key={href}>
                   <Link
