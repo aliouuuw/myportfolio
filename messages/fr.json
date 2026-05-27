@@ -149,6 +149,8 @@
     "statusActive": "En production",
     "statusShipped": "Livré",
     "statusArchived": "Archivé",
+    "roleLabel": "Rôle",
+    "stackLabel": "Stack",
     "section": {
       "situation": "Situation",
       "constraints": "Contraintes",
@@ -157,14 +159,6 @@
       "outcome": "Résultat",
       "lessons": "Ce que je ferais différemment",
       "comingSoon": "Contenu complet de l'étude de cas en cours d'écriture."
-    },
-    "caseFiles": {
-      "everestTitle": "Everest Finance",
-      "odooTitle": "Odoo Testing Toolkit",
-      "bocalbunTitle": "BocalBun Rétrospective",
-      "everestfinanceTitle": "Everest Finance",
-      "odootestingtoolkitTitle": "Odoo Testing Toolkit",
-      "bocalbunretrospectiveTitle": "BocalBun Rétrospective"
     }
   },
   "WritingPage": {

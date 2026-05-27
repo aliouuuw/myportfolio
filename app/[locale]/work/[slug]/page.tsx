@@ -62,6 +62,17 @@ export default async function WorkSlugPage({ params }: Props) {
 
   const { prev, next } = await getFeaturedCaseStudyNav(locale, slug);
 
+  const statusKey = frontmatter.status;
+  const statusLabel = statusKey
+    ? t(
+        statusKey === "active"
+          ? "statusActive"
+          : statusKey === "shipped"
+            ? "statusShipped"
+            : "statusArchived",
+      )
+    : undefined;
+
   return (
     <div className="flex flex-1 flex-col">
       <CaseStudyHeader
@@ -71,6 +82,9 @@ export default async function WorkSlugPage({ params }: Props) {
         domain={frontmatter.domain}
         period={frontmatter.period}
         status={frontmatter.status}
+        statusLabel={statusLabel}
+        roleLabel={t("roleLabel")}
+        stackLabel={t("stackLabel")}
         stack={frontmatter.stack}
         confidential={frontmatter.confidential}
         confidentialLabel={t("confidential")}

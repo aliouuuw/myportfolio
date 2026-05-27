@@ -32,10 +32,11 @@ const OPEN_PROJECTS: OpenProject[] = [
 ];
 
 interface JoinBlockProps {
-  contactHref: string;
+  /** Homepage #contact anchor or full contact page URL */
+  bookHref: string;
 }
 
-export function JoinBlock({ contactHref }: JoinBlockProps) {
+export function JoinBlock({ bookHref }: JoinBlockProps) {
   const t = useTranslations("JoinBlock");
   const [requested, setRequested] = useState<Record<string, boolean>>({});
 
@@ -86,7 +87,7 @@ export function JoinBlock({ contactHref }: JoinBlockProps) {
         </div>
 
         <div className="section-foot">
-          <a href={contactHref} className="btn btn-primary">
+          <a href={bookHref} className="btn btn-primary">
             {t("bookEngagement")}
             <span aria-hidden>→</span>
           </a>

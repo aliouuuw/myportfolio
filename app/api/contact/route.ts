@@ -37,7 +37,7 @@ export async function POST(request: Request): Promise<Response> {
     return Response.json({ ok: true });
   }
 
-  const toEmail = process.env.CONTACT_EMAIL ?? "hello@example.com";
+  const toEmail = process.env.CONTACT_EMAIL ?? "wadealiou00@gmail.com";
   const resend = new Resend(apiKey);
 
   try {

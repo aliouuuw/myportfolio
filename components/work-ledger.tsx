@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
 import { useTranslations } from "next-intl";
 
@@ -31,6 +32,7 @@ function canHoverPreview(): boolean {
 
 export function WorkLedger({ locale, projects }: WorkLedgerProps) {
   const t = useTranslations("WorkLedger");
+  const router = useRouter();
 
   const [openId, setOpenId] = useState<string | null>(null);
   const [peekId, setPeekId] = useState<string | null>(null);
@@ -243,15 +245,14 @@ export function WorkLedger({ locale, projects }: WorkLedgerProps) {
     (href: string) => {
       if (typeof document === "undefined") return;
       const doc = document as DocWithVT;
+      const navigate = () => router.push(href);
       if (doc.startViewTransition) {
-        doc.startViewTransition(() => {
-          window.location.assign(href);
-        });
+        doc.startViewTransition(navigate);
       } else {
-        window.location.assign(href);
+        navigate();
       }
     },
-    [],
+    [router],
   );
 
   const statusLabel = (status: WorkLedgerProject["status"]) => {

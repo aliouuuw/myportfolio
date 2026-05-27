@@ -42,6 +42,8 @@ export function TopNav() {
   ] as const;
 
   const brandHref = `/${locale}`;
+  const isHome =
+    pathname === `/${locale}` || pathname === `/${locale}/`;
 
   return (
     <header
@@ -65,8 +67,9 @@ export function TopNav() {
           <ul className="hidden sm:flex items-center gap-6">
             {links.map(({ href, label, matchPath }) => {
               const isActive =
-                pathname === matchPath ||
-                pathname.startsWith(`${matchPath}/`);
+                !isHome &&
+                (pathname === matchPath ||
+                  pathname.startsWith(`${matchPath}/`));
               return (
                 <li key={href}>
                   <Link

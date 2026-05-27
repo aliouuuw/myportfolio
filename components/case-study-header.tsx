@@ -7,6 +7,9 @@ interface CaseStudyHeaderProps {
   domain: string;
   period?: string;
   status?: WorkLedgerStatus;
+  statusLabel?: string;
+  roleLabel: string;
+  stackLabel: string;
   stack: string[];
   confidential?: boolean;
   confidentialLabel?: string;
@@ -25,6 +28,9 @@ export function CaseStudyHeader({
   domain,
   period,
   status,
+  statusLabel,
+  roleLabel,
+  stackLabel,
   stack,
   confidential,
   confidentialLabel = "Confidential",
@@ -47,7 +53,7 @@ export function CaseStudyHeader({
           <span
             className={`ml-auto font-mono text-[10px] uppercase tracking-wider px-2 py-0.5 rounded border ${statusClass[status]}`}
           >
-            {status}
+            {statusLabel ?? status}
           </span>
         ) : null}
         {confidential ? (
@@ -67,12 +73,12 @@ export function CaseStudyHeader({
 
       <dl className="flex flex-wrap gap-x-8 gap-y-3 text-sm">
         <div>
-          <dt className="label-micro mb-1">Role</dt>
+          <dt className="label-micro mb-1">{roleLabel}</dt>
           <dd className="text-ink-primary">{role}</dd>
         </div>
         {stack.length > 0 ? (
           <div>
-            <dt className="label-micro mb-1">Stack</dt>
+            <dt className="label-micro mb-1">{stackLabel}</dt>
             <dd className="text-ink-secondary">{stack.join(" · ")}</dd>
           </div>
         ) : null}

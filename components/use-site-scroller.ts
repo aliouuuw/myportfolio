@@ -2,11 +2,11 @@
 
 /**
  * Production scroll root for GSAP ScrollTrigger.
- * Uses the document scroller (not mock's `.mock-shell`).
+ * Use the viewport (window), not mock's `.mock-shell` or `documentElement`.
  */
-export function getSiteScroller(): HTMLElement | Window {
-  if (typeof document === "undefined") {
+export function getSiteScroller(): Window {
+  if (typeof window === "undefined") {
     return window;
   }
-  return document.documentElement;
+  return window;
 }

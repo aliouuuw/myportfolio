@@ -9,7 +9,6 @@ import { useTranslations } from "next-intl";
 import { JoinBlock } from "@/components/join-block";
 import { SpectralAtmosphere } from "@/components/spectral-atmosphere";
 import { WorkLedger } from "@/components/work-ledger";
-import { getSiteScroller } from "@/components/use-site-scroller";
 import {
   FLAGSHIP_ESSAY_SLUG,
   type WorkLedgerProject,
@@ -42,7 +41,6 @@ export function HomeLedgerPage({
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const scroller = getSiteScroller();
     const ctx = gsap.context(() => {
       if (motionOk()) {
         gsap.fromTo(
@@ -75,7 +73,6 @@ export function HomeLedgerPage({
               duration: 0.55,
               ease: "power3.out",
               scrollTrigger: {
-                scroller,
                 trigger: el,
                 start: "top 90%",
                 toggleActions: "play none none none",
@@ -100,7 +97,6 @@ export function HomeLedgerPage({
               duration: motionOk() ? 0.9 : 0,
               ease: "power3.out",
               scrollTrigger: {
-                scroller,
                 trigger: el,
                 start: "top 92%",
                 toggleActions: "play none none none",
@@ -173,7 +169,7 @@ export function HomeLedgerPage({
           </div>
         </section>
 
-        <JoinBlock contactHref={`${contactHref}#contact`} />
+        <JoinBlock bookHref={`/${locale}#contact`} />
 
         {essay && (
           <section

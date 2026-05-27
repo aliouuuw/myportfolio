@@ -24,17 +24,6 @@
       "viewRecord": "View record",
       "getInTouch": "Get in touch"
     },
-    "caseFiles": {
-      "everestTitle": "Everest Finance",
-      "everestMeta": "Fintech Operations · 2024–present",
-      "everestSummary": "Consolidating CRM, website, and customer app into one operational system.",
-      "odooTitle": "Odoo Testing Toolkit",
-      "odooMeta": "ERP Systems · 2023",
-      "odooSummary": "Acceptance testing infrastructure for Odoo 18 ERP migration teams.",
-      "bocalbunTitle": "BocalBun Retrospective",
-      "bocalbunMeta": "Systems Judgment · 2022",
-      "bocalbunSummary": "Why I stopped building a framework and what it cost me."
-    },
     "fieldNote": {
       "label": "Field note",
       "placeholder": "Essays coming soon."
@@ -149,6 +138,8 @@
     "statusActive": "In production",
     "statusShipped": "Shipped",
     "statusArchived": "Archived",
+    "roleLabel": "Role",
+    "stackLabel": "Stack",
     "section": {
       "situation": "Situation",
       "constraints": "Constraints",
@@ -157,14 +148,6 @@
       "outcome": "Outcome",
       "lessons": "What I would do differently",
       "comingSoon": "Full case study content being written."
-    },
-    "caseFiles": {
-      "everestTitle": "Everest Finance",
-      "odooTitle": "Odoo Testing Toolkit",
-      "bocalbunTitle": "BocalBun Retrospective",
-      "everestfinanceTitle": "Everest Finance",
-      "odootestingtoolkitTitle": "Odoo Testing Toolkit",
-      "bocalbunretrospectiveTitle": "BocalBun Retrospective"
     }
   },
   "WritingPage": {
