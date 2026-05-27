@@ -1,6 +1,6 @@
 # Mock → Production migration plan
 
-**Status:** Ready to execute (mock committed)  
+**Status:** P5 complete (production homepage + work routes migrated)  
 **Last updated:** 2026-05-27  
 **Preview source of truth:** `/en/mock` (`app/[locale]/mock/`)  
 **Target:** Production routes under `app/[locale]/` with existing `TopNav`, i18n, and MDX content
@@ -342,9 +342,9 @@ Added to `docs/backlog.json` phase **P5**:
 | T033 | design: port ledger tokens to globals            | done    |
 | T034 | feat: work-ledger component + site scroller      | done    |
 | T035 | feat: homepage neo-ledger IA                     | pending |
-| T036 | feat: case study template v2                     | pending |
-| T037 | feat: work index v2                              | pending |
-| T038 | chore: remove v3 components + retire mock        | pending |
+| T036 | feat: case study template v2                     | done |
+| T037 | feat: work index v2                              | done |
+| T038 | chore: remove v3 components + retire mock        | done |
 
 
 Human gates: [launch-prerequisites.md](./launch-prerequisites.md)
