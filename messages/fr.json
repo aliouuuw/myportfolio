@@ -111,6 +111,150 @@
         "more": "plus",
         "chartAria": "{total} contributions GitHub sur {period}",
         "yearAria": "{total} contributions en {year}"
+      },
+      "workedWith": {
+        "eyebrow": "Parcours pro",
+        "title": "Employeurs et builds clients",
+        "hint": "Survoler un employeur pour mettre en évidence les études de cas liées.",
+        "employersLabel": "Employeurs",
+        "clientsLabel": "Projets clients",
+        "clientsTagline": "Dakar · freelance & produit",
+        "conceptBadge": "Concept",
+        "teams": {
+          "everest": {
+            "name": "Everest Finance",
+            "role": "Responsable technique solo",
+            "tag": "Fintech",
+            "period": "2024 → maintenant",
+            "proof": "Site public, CRM interne, application client Sama Naffa."
+          },
+          "ergobit": {
+            "name": "ERGOBIT",
+            "role": "Ingénieur logiciel",
+            "tag": "ERP / BI",
+            "period": "2024 → maintenant",
+            "proof": "Modules ERP et BI sur mesure pour clients sénégalais. CI/CD Azure DevOps : −80 % d'interventions manuelles."
+          },
+          "bankingbook": {
+            "name": "BankingBook Analytics",
+            "role": "Ingénieur logiciel",
+            "tag": "Open banking",
+            "period": "2024",
+            "proof": "APIs open banking pour ALM cloud-native. i18n zone UEMOA. Migration web et mail vers bbafintech.com."
+          },
+          "purolator": {
+            "name": "Purolator",
+            "role": "Ingénieur logiciel",
+            "tag": "Logistique",
+            "period": "2023",
+            "proof": "Migration CI/CD sur trois projets. Outils Power Automate / Azure DevOps. SDK tri colis réduisant la latence."
+          },
+          "orange": {
+            "name": "Orange",
+            "role": "Développeur mobile",
+            "tag": "Mobile",
+            "period": "2022",
+            "proof": "App fitness React Native, 1 000+ membres. Rapports d'impact pour décideurs."
+          },
+          "itech": {
+            "name": "ITech Solutions Afrique",
+            "role": "Développeur IoT",
+            "tag": "IoT",
+            "period": "2019",
+            "proof": "Géolocalisation Arduino sur Azure. Refonte planning : −20 % de coûts système."
+          },
+          "daust": {
+            "name": "DAUST",
+            "role": "Tuteur Python",
+            "tag": "Éducation",
+            "period": "2018 → 2019",
+            "proof": "Mentorat POO pour étudiants et supports de cours rédigés."
+          }
+        },
+        "clients": {
+          "ndouckmane": {
+            "name": "Ndouckmane Transit",
+            "scope": "Opérations transitaire : expéditions, douane, tableaux de bord.",
+            "domain": "Logistique"
+          },
+          "eduplan": {
+            "name": "EduPlan",
+            "scope": "Tableau de bord scolaire K-12 : cours, emploi du temps, notes.",
+            "domain": "Éducation"
+          },
+          "gerpain": {
+            "name": "Gerpain",
+            "scope": "Plateforme multi-boulangeries : stock, livraisons, employés, RBAC.",
+            "domain": "Opérations"
+          },
+          "mansour": {
+            "name": "Mansour Motors",
+            "scope": "Concession automobile : site public et inventaire véhicules pour la société opérationnelle.",
+            "domain": "Automobile"
+          },
+          "mamebimo": {
+            "name": "Mamebimo",
+            "scope": "Marketplace services à domicile à Dakar : réservation, messagerie, paiements (produit Everest Finance).",
+            "domain": "Marketplace"
+          },
+          "prescriptos": {
+            "name": "Prescriptos",
+            "scope": "Workflow pharmacie et ordonnances (monorepo, web + API).",
+            "domain": "Santé"
+          },
+          "asaaman": {
+            "name": "Asaaman",
+            "scope": "Startup drones intelligents au Sénégal : recherche sémantique vidéo, surveillance, reporting.",
+            "domain": "Drone / IA"
+          },
+          "bocal-tontine": {
+            "name": "Bocal Tontine",
+            "scope": "Épargne collective ancrée dans les tontines africaines. Produit et architecture en cours.",
+            "domain": "Fintech"
+          },
+          "dakar-sport": {
+            "name": "Dakar Sport",
+            "scope": "Surfaces retail et communauté pour une marque sportive locale.",
+            "domain": "Retail"
+          },
+          "hirondelles": {
+            "name": "Les Hirondelles",
+            "scope": "Site institutionnel école dakaroise : CMS éditorial sur Convex.",
+            "domain": "Institution"
+          }
+        }
+      },
+      "work": {
+        "eyebrow": "Études de cas",
+        "title": "Travail sélectionné",
+        "aside": "Profondeur plutôt qu'étendue",
+        "status": {
+          "ACTIVE": "ACTIF",
+          "SHIPPED": "LIVRÉ",
+          "FROZEN": "FIGÉ"
+        },
+        "rows": {
+          "01": {
+            "name": "Everest Finance",
+            "desc": "Responsable technique solo d'une fintech sénégalaise : site public, CRM interne et app client Sama Naffa convergent vers un modèle opérationnel unique.",
+            "stack": "Next.js · React Native · PostgreSQL"
+          },
+          "02": {
+            "name": "ERGOBIT / Odoo 18",
+            "desc": "Kit de tests d'acceptation pour migrations Odoo 18 : 39 tests, 9 suites, CI Azure DevOps et guidelines de sélecteurs maintenables.",
+            "stack": "Robot Framework · Playwright · Azure DevOps"
+          },
+          "03": {
+            "name": "Africa GreenTec comptabilité",
+            "desc": "Module comptable Odoo sur mesure : ~80 % des écritures manuelles automatisées, 10 000+ enregistrements/jour en production pour un opérateur énergies renouvelables.",
+            "stack": "Odoo · Python · BI"
+          },
+          "04": {
+            "name": "BocalBun rétrospective",
+            "desc": "Toolkit Bun volontairement arrêté. La preuve n'est pas l'adoption, c'est savoir quand l'architecture propre n'est pas le levier principal.",
+            "stack": "Bun · TypeScript · PostgreSQL · RLS"
+          }
+        }
       }
     }
   },

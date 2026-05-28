@@ -82,6 +82,7 @@ export const SYNTHESIS_LINKABLE_SLUGS: readonly FeaturedWorkSlug[] =
   FEATURED_WORK_SLUGS;
 
 export type SynthesisTeam = {
+  key: string;
   name: string;
   role: string;
   tag: string;
@@ -93,6 +94,7 @@ export type SynthesisTeam = {
 
 export const SYNTHESIS_TEAMS: SynthesisTeam[] = [
   {
+    key: "everest",
     name: "Everest Finance",
     role: "Solo technical owner",
     tag: "Fintech",
@@ -103,6 +105,7 @@ export const SYNTHESIS_TEAMS: SynthesisTeam[] = [
     linkedWork: ["01"],
   },
   {
+    key: "ergobit",
     name: "ERGOBIT",
     role: "Software engineer",
     tag: "ERP / BI",
@@ -113,6 +116,7 @@ export const SYNTHESIS_TEAMS: SynthesisTeam[] = [
     linkedWork: ["02", "03"],
   },
   {
+    key: "bankingbook",
     name: "BankingBook Analytics",
     role: "Software engineer",
     tag: "Open banking",
@@ -122,6 +126,7 @@ export const SYNTHESIS_TEAMS: SynthesisTeam[] = [
     linkedWork: [],
   },
   {
+    key: "purolator",
     name: "Purolator",
     role: "Software engineer",
     tag: "Logistics",
@@ -131,6 +136,7 @@ export const SYNTHESIS_TEAMS: SynthesisTeam[] = [
     linkedWork: [],
   },
   {
+    key: "orange",
     name: "Orange",
     role: "Mobile developer",
     tag: "Mobile",
@@ -140,6 +146,7 @@ export const SYNTHESIS_TEAMS: SynthesisTeam[] = [
     linkedWork: [],
   },
   {
+    key: "itech",
     name: "ITech Solutions Afrique",
     role: "IoT developer",
     tag: "IoT",
@@ -149,6 +156,7 @@ export const SYNTHESIS_TEAMS: SynthesisTeam[] = [
     linkedWork: [],
   },
   {
+    key: "daust",
     name: "DAUST",
     role: "Python tutor",
     tag: "Education",
@@ -160,6 +168,7 @@ export const SYNTHESIS_TEAMS: SynthesisTeam[] = [
 ];
 
 export type SynthesisFreelanceProject = {
+  key: string;
   name: string;
   scope: string;
   domain: string;
@@ -168,48 +177,56 @@ export type SynthesisFreelanceProject = {
 
 export const SYNTHESIS_FREELANCE: SynthesisFreelanceProject[] = [
   {
+    key: "ndouckmane",
     name: "Ndouckmane Transit",
     scope:
       "Freight forwarder operations: shipments, customs, dashboards.",
     domain: "Logistics",
   },
   {
+    key: "eduplan",
     name: "EduPlan",
     scope:
       "K-12 school operations dashboard: courses, schedule, grading.",
     domain: "Education",
   },
   {
+    key: "gerpain",
     name: "Gerpain",
     scope:
       "Multi-bakery operations platform: inventory, deliveries, employees, RBAC.",
     domain: "Operations",
   },
   {
+    key: "mansour",
     name: "Mansour Motors",
     scope:
       "Automotive dealership: public site and internal vehicle inventory for the operating company.",
     domain: "Automotive",
   },
   {
+    key: "mamebimo",
     name: "Mamebimo",
     scope:
       "Home-services marketplace in Dakar: booking, messaging, payouts (Everest Finance product).",
     domain: "Marketplace",
   },
   {
+    key: "prescriptos",
     name: "Prescriptos",
     scope:
       "Pharmacy and prescription workflow tooling (monorepo, web + API).",
     domain: "Health",
   },
   {
+    key: "asaaman",
     name: "Asaaman",
     scope:
       "Senegalese intelligent-drone startup: semantic video search, surveillance workflows, and reporting.",
     domain: "Drone / AI",
   },
   {
+    key: "bocal-tontine",
     name: "Bocal Tontine",
     scope:
       "Group savings rooted in African tontine traditions. Product and architecture in progress.",
@@ -217,11 +234,13 @@ export const SYNTHESIS_FREELANCE: SynthesisFreelanceProject[] = [
     note: "Concept",
   },
   {
+    key: "dakar-sport",
     name: "Dakar Sport",
     scope: "Retail and community surfaces for a local sports brand.",
     domain: "Retail",
   },
   {
+    key: "hirondelles",
     name: "Les Hirondelles",
     scope:
       "Institutional site for a Dakar school: Convex-backed editorial CMS.",

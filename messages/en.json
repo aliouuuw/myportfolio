@@ -100,6 +100,150 @@
         "more": "more",
         "chartAria": "{total} GitHub contributions in {period}",
         "yearAria": "{total} contributions in {year}"
+      },
+      "workedWith": {
+        "eyebrow": "Work history",
+        "title": "Employers and client builds",
+        "hint": "Hover an employer to highlight related case studies.",
+        "employersLabel": "Employers",
+        "clientsLabel": "Client projects",
+        "clientsTagline": "Dakar · freelance & product",
+        "conceptBadge": "Concept",
+        "teams": {
+          "everest": {
+            "name": "Everest Finance",
+            "role": "Solo technical owner",
+            "tag": "Fintech",
+            "period": "2024 → Now",
+            "proof": "Public site, internal CRM, Sama Naffa customer app."
+          },
+          "ergobit": {
+            "name": "ERGOBIT",
+            "role": "Software engineer",
+            "tag": "ERP / BI",
+            "period": "2024 → Now",
+            "proof": "Custom ERP and BI modules for Senegalese clients. CI/CD on Azure DevOps cut manual interventions by 80%."
+          },
+          "bankingbook": {
+            "name": "BankingBook Analytics",
+            "role": "Software engineer",
+            "tag": "Open banking",
+            "period": "2024",
+            "proof": "Open-banking APIs for a cloud-native ALM. UEMOA-region i18n. Web and mail server migration to bbafintech.com."
+          },
+          "purolator": {
+            "name": "Purolator",
+            "role": "Software engineer",
+            "tag": "Logistics",
+            "period": "2023",
+            "proof": "CI/CD migration across three projects. Internal Power Automate / Azure DevOps tooling. Package-sorter SDK that cut transfer latency."
+          },
+          "orange": {
+            "name": "Orange",
+            "role": "Mobile developer",
+            "tag": "Mobile",
+            "period": "2022",
+            "proof": "React Native fitness community app, 1,000+ members. Impact reports for decision-makers."
+          },
+          "itech": {
+            "name": "ITech Solutions Afrique",
+            "role": "IoT developer",
+            "tag": "IoT",
+            "period": "2019",
+            "proof": "Arduino geolocation system on Azure. Planning rework cut system costs by 20%."
+          },
+          "daust": {
+            "name": "DAUST",
+            "role": "Python tutor",
+            "tag": "Education",
+            "period": "2018 → 2019",
+            "proof": "OOP mentoring for undergraduate students and self-authored course material."
+          }
+        },
+        "clients": {
+          "ndouckmane": {
+            "name": "Ndouckmane Transit",
+            "scope": "Freight forwarder operations: shipments, customs, dashboards.",
+            "domain": "Logistics"
+          },
+          "eduplan": {
+            "name": "EduPlan",
+            "scope": "K-12 school operations dashboard: courses, schedule, grading.",
+            "domain": "Education"
+          },
+          "gerpain": {
+            "name": "Gerpain",
+            "scope": "Multi-bakery operations platform: inventory, deliveries, employees, RBAC.",
+            "domain": "Operations"
+          },
+          "mansour": {
+            "name": "Mansour Motors",
+            "scope": "Automotive dealership: public site and internal vehicle inventory for the operating company.",
+            "domain": "Automotive"
+          },
+          "mamebimo": {
+            "name": "Mamebimo",
+            "scope": "Home-services marketplace in Dakar: booking, messaging, payouts (Everest Finance product).",
+            "domain": "Marketplace"
+          },
+          "prescriptos": {
+            "name": "Prescriptos",
+            "scope": "Pharmacy and prescription workflow tooling (monorepo, web + API).",
+            "domain": "Health"
+          },
+          "asaaman": {
+            "name": "Asaaman",
+            "scope": "Senegalese intelligent-drone startup: semantic video search, surveillance workflows, and reporting.",
+            "domain": "Drone / AI"
+          },
+          "bocal-tontine": {
+            "name": "Bocal Tontine",
+            "scope": "Group savings rooted in African tontine traditions. Product and architecture in progress.",
+            "domain": "Fintech"
+          },
+          "dakar-sport": {
+            "name": "Dakar Sport",
+            "scope": "Retail and community surfaces for a local sports brand.",
+            "domain": "Retail"
+          },
+          "hirondelles": {
+            "name": "Les Hirondelles",
+            "scope": "Institutional site for a Dakar school: Convex-backed editorial CMS.",
+            "domain": "Institution"
+          }
+        }
+      },
+      "work": {
+        "eyebrow": "Case studies",
+        "title": "Selected work",
+        "aside": "Depth over breadth",
+        "status": {
+          "ACTIVE": "ACTIVE",
+          "SHIPPED": "SHIPPED",
+          "FROZEN": "FROZEN"
+        },
+        "rows": {
+          "01": {
+            "name": "Everest Finance",
+            "desc": "Sole technical owner for a Senegalese fintech: public site, internal CRM, and the Sama Naffa customer app converging toward one shared operating model.",
+            "stack": "Next.js · React Native · PostgreSQL"
+          },
+          "02": {
+            "name": "ERGOBIT / Odoo 18",
+            "desc": "Acceptance-testing starter kit for Odoo 18 migration teams: 39 tests across 9 suites, CI on Azure DevOps, and selector guidelines for maintainable ERP validation.",
+            "stack": "Robot Framework · Playwright · Azure DevOps"
+          },
+          "03": {
+            "name": "Africa GreenTec accounting",
+            "desc": "Custom Odoo accounting module: automated roughly 80% of manual entries and held 10,000+ records per day in production for a renewable-energy operator.",
+            "stack": "Odoo · Python · BI"
+          },
+          "04": {
+            "name": "BocalBun retrospective",
+            "desc": "A deliberately stopped Bun toolkit. The proof is not adoption, it is knowing when clean architecture is not the highest-leverage work.",
+            "stack": "Bun · TypeScript · PostgreSQL · RLS"
+          }
+        }
       }
     }
   },

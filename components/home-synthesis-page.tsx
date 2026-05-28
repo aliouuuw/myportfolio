@@ -5,6 +5,8 @@ import { useTranslations } from "next-intl";
 
 import { SynthesisGithubActivity } from "@/components/synthesis-github-activity";
 import { SynthesisHero } from "@/components/synthesis-hero";
+import { SynthesisSelectedWork } from "@/components/synthesis-selected-work";
+import { SynthesisWorkedWith } from "@/components/synthesis-worked-with";
 
 type HomeSynthesisPageProps = {
   locale: string;
@@ -53,6 +55,7 @@ export function HomeSynthesisPage({ locale }: HomeSynthesisPageProps) {
   const tChess = useTranslations("HomePage.synthesis.chess");
 
   const [heroReady, setHeroReady] = useState(false);
+  const [highlightedWork, setHighlightedWork] = useState<string[]>([]);
   const reducedMotion = usePrefersReducedMotion();
   const ambientHour = useAmbientHour();
 
@@ -144,7 +147,11 @@ export function HomeSynthesisPage({ locale }: HomeSynthesisPageProps) {
           </div>
         </section>
 
-        {/* Phase 2+: worked-with, capabilities, work, approach, writing, connect */}
+        <SynthesisWorkedWith onHighlightChange={setHighlightedWork} />
+        <SynthesisSelectedWork
+          locale={locale}
+          highlightedWork={highlightedWork}
+        />
       </div>
     </div>
   );
