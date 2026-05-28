@@ -63,9 +63,8 @@
       "rail": {
         "ariaLabel": "Section index",
         "profile": "profile",
-        "teams": "teams",
-        "focus": "focus",
         "work": "work",
+        "teams": "teams",
         "approach": "approach",
         "notes": "notes",
         "connect": "connect"
@@ -129,8 +128,9 @@
       },
       "workedWith": {
         "eyebrow": "Work history",
-        "title": "Employers and client builds",
-        "hint": "Hover an employer to see proof and highlight related case studies.",
+        "title": "Where I've worked",
+        "hint": "Roles with a case study link below. Client and product builds live on the work index.",
+        "clientsLink": "Client projects",
         "employersLabel": "Employers",
         "clientsLabel": "Client projects",
         "clientsTagline": "Dakar · freelance & product",
@@ -242,7 +242,8 @@
       "work": {
         "eyebrow": "Case studies",
         "title": "Selected work",
-        "aside": "Depth over breadth",
+        "aside": "Depth over breadth. Four flagship systems, not a project gallery.",
+        "seeAll": "All work",
         "status": {
           "ACTIVE": "ACTIVE",
           "SHIPPED": "SHIPPED",
@@ -500,6 +501,9 @@
     "title": "Work",
     "indexEyebrow": "Case studies",
     "subtitle": "Operational systems I've built or led.",
+    "clientsEyebrow": "Client & product builds",
+    "clientsTitle": "Freelance and product work",
+    "clientsLead": "Dakar-area operations software and product surfaces, alongside employer-led case studies above.",
     "viewCaseStudy": "View case study",
     "confidential": "Confidential",
     "backToWork": "← All case studies",

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
+import { WorkFreelanceList } from "@/components/work-freelance-list";
 import { WorkIndexList } from "@/components/work-index-list";
 import { routing } from "@/i18n/routing";
 import { getWorkSlugs, readWorkFrontmatter } from "@/lib/mdx";
@@ -119,6 +120,8 @@ export default async function WorkPage(props: {
           featuredAside={tWork("aside")}
           moreLabel={t("moreWork")}
         />
+
+        <WorkFreelanceList />
 
         <p className="mt-14">
           <Link

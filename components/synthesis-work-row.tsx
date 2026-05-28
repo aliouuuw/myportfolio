@@ -38,7 +38,7 @@ export function SynthesisWorkRow({
 
   const content = (
     <>
-      <div className="flex items-center gap-5 lg:w-1/4 shrink-0 pl-3">
+      <div className="flex items-center gap-5 lg:w-1/4 shrink-0">
         <span className="mono text-xs text-syn-ink-faint">{work.id}</span>
         <div>
           <h4
@@ -55,10 +55,10 @@ export function SynthesisWorkRow({
           </p>
         </div>
       </div>
-      <p className="text-sm text-syn-ink-secondary group-hover:text-syn-ink-muted transition-colors flex-1 leading-relaxed pl-3 lg:pl-0">
+      <p className="text-sm text-syn-ink-secondary group-hover:text-syn-ink-muted transition-colors flex-1 leading-relaxed">
         {tRow("desc")}
       </p>
-      <div className="flex items-center justify-between lg:justify-end gap-6 lg:w-1/4 shrink-0 pl-3 lg:pl-0">
+      <div className="flex items-center justify-between lg:justify-end gap-6 lg:w-1/4 shrink-0">
         <span className="mono text-[10px] text-syn-ink-subtle hidden xl:inline truncate">
           {tRow("stack")}
         </span>

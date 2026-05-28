@@ -74,9 +74,8 @@
       "rail": {
         "ariaLabel": "Index des sections",
         "profile": "profil",
-        "teams": "équipes",
-        "focus": "focus",
         "work": "projets",
+        "teams": "équipes",
         "approach": "approche",
         "notes": "notes",
         "connect": "contact"
@@ -140,8 +139,9 @@
       },
       "workedWith": {
         "eyebrow": "Parcours pro",
-        "title": "Employeurs et builds clients",
-        "hint": "Survoler un employeur pour voir la preuve et mettre en évidence les études de cas liées.",
+        "title": "Où j'ai travaillé",
+        "hint": "Les rôles avec une étude de cas renvoient vers la preuve ci-dessus. Les builds clients sont sur l'index projets.",
+        "clientsLink": "Projets clients",
         "employersLabel": "Employeurs",
         "clientsLabel": "Projets clients",
         "clientsTagline": "Dakar · freelance & produit",
@@ -253,7 +253,8 @@
       "work": {
         "eyebrow": "Études de cas",
         "title": "Travail sélectionné",
-        "aside": "Profondeur plutôt qu'étendue",
+        "aside": "Profondeur plutôt qu'étendue. Quatre systèmes phares, pas une galerie de projets.",
+        "seeAll": "Tous les projets",
         "status": {
           "ACTIVE": "ACTIF",
           "SHIPPED": "LIVRÉ",
@@ -511,6 +512,9 @@
     "title": "Projets",
     "indexEyebrow": "Études de cas",
     "subtitle": "Systèmes opérationnels que j'ai construits ou dirigés.",
+    "clientsEyebrow": "Builds clients & produit",
+    "clientsTitle": "Freelance et produit",
+    "clientsLead": "Logiciels opérationnels à Dakar et surfaces produit, en complément des études de cas employeur ci-dessus.",
     "viewCaseStudy": "Voir l'étude de cas",
     "confidential": "Confidentiel",
     "backToWork": "← Toutes les études de cas",

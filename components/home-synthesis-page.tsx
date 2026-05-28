@@ -1,10 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
 
+import { SynthesisAboutStrip } from "@/components/synthesis-about-strip";
 import { SynthesisApproach } from "@/components/synthesis-approach";
-import { SynthesisCapabilities } from "@/components/synthesis-capabilities";
 import { SynthesisConnect } from "@/components/synthesis-connect";
 import { SynthesisGithubActivity } from "@/components/synthesis-github-activity";
 import { SynthesisHero } from "@/components/synthesis-hero";
@@ -61,10 +60,6 @@ function useAmbientHour() {
 }
 
 export function HomeSynthesisPage({ locale, writing }: HomeSynthesisPageProps) {
-  const tBg = useTranslations("HomePage.synthesis.background");
-  const tCred = useTranslations("HomePage.synthesis.credentials");
-  const tChess = useTranslations("HomePage.synthesis.chess");
-
   const [heroReady, setHeroReady] = useState(false);
   const [highlightedWork, setHighlightedWork] = useState<string[]>([]);
   const reducedMotion = usePrefersReducedMotion();
@@ -93,7 +88,10 @@ export function HomeSynthesisPage({ locale, writing }: HomeSynthesisPageProps) {
         aria-hidden
       />
 
-      <div className="synthesis-bg-layers fixed inset-0 pointer-events-none -z-10 overflow-hidden" aria-hidden>
+      <div
+        className="synthesis-bg-layers fixed inset-0 pointer-events-none -z-10 overflow-hidden"
+        aria-hidden
+      >
         <div className="absolute inset-0 bg-grain" />
         <div className="ambient-accent top-[-15%] left-[-5%]" />
       </div>
@@ -104,77 +102,20 @@ export function HomeSynthesisPage({ locale, writing }: HomeSynthesisPageProps) {
         <section id="profile" className="grid-bento scroll-mt-28">
           <SynthesisHero onHeroReady={onHeroReady} />
           <SynthesisGithubActivity />
-
-          <div className="md:col-span-7">
-            <div className="p-8 md:p-10 rounded-2xl bg-syn-surface border border-syn-border h-full">
-              <h2 className="text-lg font-medium text-syn-ink-strong">
-                {tBg("title")}
-              </h2>
-              <div className="mt-5 space-y-4 text-syn-ink-muted leading-relaxed text-sm max-w-xl">
-                <p>{tBg("p1")}</p>
-                <p>{tBg("p2")}</p>
-              </div>
-
-              <div className="mt-10 pt-8 border-t border-syn-border">
-                <h3 className="text-sm font-medium text-syn-ink-strong">
-                  {tChess("title")}
-                </h3>
-                <p className="mt-3 text-sm text-syn-ink-secondary leading-relaxed max-w-xl">
-                  {tChess("body")}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="md:col-span-5">
-            <div className="p-8 md:p-10 rounded-2xl bg-syn-surface border border-syn-border h-full">
-              <h2 className="text-lg font-medium text-syn-ink-strong">
-                {tCred("title")}
-              </h2>
-              <dl className="mt-6 space-y-6 text-sm">
-                <div>
-                  <dt className="text-syn-ink-subtle text-xs uppercase tracking-wide">
-                    {tCred("experienceLabel")}
-                  </dt>
-                  <dd className="mt-1.5 text-syn-ink-muted leading-relaxed">
-                    {tCred("experience")}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-syn-ink-subtle text-xs uppercase tracking-wide">
-                    {tCred("educationLabel")}
-                  </dt>
-                  <dd className="mt-1.5 text-syn-ink-muted leading-relaxed">
-                    {tCred("educationPrimary")}
-                    <br />
-                    <span className="text-syn-ink-secondary">
-                      {tCred("educationSecondary")}
-                    </span>
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-syn-ink-subtle text-xs uppercase tracking-wide">
-                    {tCred("certificationsLabel")}
-                  </dt>
-                  <dd className="mt-1.5 text-syn-ink-muted leading-relaxed">
-                    {tCred("certPrimary")}
-                    <br />
-                    {tCred("certSecondary")}
-                    <br />
-                    <span className="text-syn-ink-secondary">{tCred("certTertiary")}</span>
-                  </dd>
-                </div>
-              </dl>
-            </div>
-          </div>
         </section>
 
-        <SynthesisWorkedWith onHighlightChange={setHighlightedWork} />
-        <SynthesisCapabilities />
         <SynthesisSelectedWork
           locale={locale}
           highlightedWork={highlightedWork}
         />
+
+        <SynthesisWorkedWith
+          locale={locale}
+          onHighlightChange={setHighlightedWork}
+        />
+
+        <SynthesisAboutStrip />
+
         <SynthesisApproach />
         <SynthesisWriting locale={locale} entries={writing} />
         <SynthesisConnect />
