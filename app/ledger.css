@@ -1291,3 +1291,206 @@
     animation: none !important;
   }
 }
+
+/* ── Synthesis homepage (production + mock parity) ───────────────────── */
+
+.site-synthesis {
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.site-synthesis .glow-card--spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    600px circle at var(--x, 0px) var(--y, 0px),
+    rgba(255, 255, 255, 0.04),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.45s var(--ease-out-quart);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.site-synthesis .glow-card--spotlight:hover::before {
+  opacity: 1;
+}
+
+.site-synthesis .grid-bento {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+@media (min-width: 768px) {
+  .site-synthesis .grid-bento {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+  }
+}
+
+.site-synthesis .mono {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, monospace;
+}
+
+.site-synthesis .mono-eyebrow {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.site-synthesis .hairline {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+}
+
+.site-synthesis .pulse-dot {
+  box-shadow: 0 0 12px currentColor;
+}
+
+.site-synthesis .bg-dot-grid {
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.07) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+}
+
+.site-synthesis .bg-grain {
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.site-synthesis .ambient-accent {
+  position: absolute;
+  width: min(70vw, 720px);
+  height: min(70vw, 720px);
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.35;
+  animation: synthesis-ambient-drift 28s ease-in-out infinite alternate;
+}
+
+.site-synthesis.ambient--day .ambient-accent {
+  background: rgba(245, 240, 230, 0.06);
+}
+
+.site-synthesis.ambient--evening .ambient-accent {
+  background: rgba(180, 140, 100, 0.07);
+}
+
+.site-synthesis.ambient--night .ambient-accent {
+  background: rgba(120, 160, 140, 0.06);
+}
+
+@keyframes synthesis-ambient-drift {
+  from {
+    transform: translate(-8%, -5%);
+  }
+  to {
+    transform: translate(12%, 8%);
+  }
+}
+
+@keyframes synthesis-scan {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.site-synthesis .scan-bar {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.site-synthesis .scan-bar::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  width: 28%;
+  left: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.035),
+    transparent
+  );
+  animation: synthesis-scan 14s linear infinite;
+}
+
+.site-synthesis.motion-reduced .scan-bar::after {
+  animation: none;
+  opacity: 0;
+}
+
+.site-synthesis .hero-reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.45s var(--ease-out-quart),
+    transform 0.45s var(--ease-out-quart);
+}
+
+.site-synthesis.hero-ready .hero-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.site-synthesis.hero-ready .hero-reveal--1 {
+  transition-delay: 0ms;
+}
+
+.site-synthesis.hero-ready .hero-reveal--2 {
+  transition-delay: 70ms;
+}
+
+.site-synthesis.hero-ready .hero-reveal--3 {
+  transition-delay: 140ms;
+}
+
+.site-synthesis.hero-ready .hero-reveal--4 {
+  transition-delay: 210ms;
+}
+
+.site-synthesis.motion-reduced .hero-reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+.site-synthesis .boot-line {
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 0.3s var(--ease-out-quart),
+    transform 0.3s var(--ease-out-quart);
+}
+
+.site-synthesis .boot-line--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.site-synthesis .btn-press:active {
+  transform: scale(0.98);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-synthesis .ambient-accent {
+    animation: none;
+  }
+}

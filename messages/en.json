@@ -48,6 +48,59 @@
       "contactTitle": "Tell me what you're building.",
       "contactNote": "Replies within 48 hours, Mon–Fri.",
       "contactCta": "Send a message"
+    },
+    "synthesis": {
+      "hero": {
+        "location": "Dakar, Senegal",
+        "languages": "FR / EN",
+        "timezone": "WAT",
+        "skipBoot": "Skip intro",
+        "bootLoading": "Loading profile · click to skip",
+        "bootLines": {
+          "teams": "> teams loaded · 7 employers",
+          "focus": "> current focus · Everest Finance, ERGOBIT",
+          "availability": "> availability · Q3 2026"
+        },
+        "headline": "I build the software layer between business operations and product ambition.",
+        "subtitle": "Product systems engineer in Dakar. I ship finance and ERP tooling, internal ops software, and AI-assisted workflows for teams that need one engineer to hold the full stack.",
+        "availability": "Two client slots open Q3 2026 · replies within 48h on business days",
+        "ctaWork": "See selected work",
+        "ctaContact": "Get in touch"
+      },
+      "background": {
+        "title": "Background",
+        "p1": "I work where business workflows meet software: CRMs, ERP modules, customer apps, and the glue that keeps them coherent. Less framework theater, more systems people can run every day.",
+        "p2": "The path ran through open banking in Ottawa, logistics automation, React Native, IoT, Python teaching, and now a steady load of Dakar client work alongside Everest Finance and ERGOBIT."
+      },
+      "credentials": {
+        "title": "Credentials",
+        "experienceLabel": "Experience",
+        "experience": "Six years building production software across fintech, ERP, logistics, mobile, IoT, and education.",
+        "educationLabel": "Education",
+        "educationPrimary": "B.Sc. Software Engineering, University of Ottawa",
+        "educationSecondary": "B.Sc. Computer Science, DAUST",
+        "certificationsLabel": "Certifications",
+        "certPrimary": "Odoo 18 Functional",
+        "certSecondary": "Meta Front-End Developer Professional",
+        "certTertiary": "Datacamp Python Data Science"
+      },
+      "chess": {
+        "title": "Chess",
+        "body": "I play competitive chess online. Peak ratings: 2043 bullet, 1856 blitz. It is the same muscle I use in engineering: pattern recognition under a clock, weighing tradeoffs quickly, and staying composed when a production system is under pressure."
+      },
+      "github": {
+        "title": "GitHub activity",
+        "pinned": "Pinned",
+        "loading": "Loading contributions…",
+        "unavailable": "chart unavailable · view on",
+        "contributions": "contributions",
+        "periodLast12": "last 12 months",
+        "periodAll": "all years",
+        "less": "less",
+        "more": "more",
+        "chartAria": "{total} GitHub contributions in {period}",
+        "yearAria": "{total} contributions in {year}"
+      }
     }
   },
   "Nav": {

@@ -2,25 +2,25 @@
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { MockSwitcher } from "@/components/mock-switcher";
-
-const EMAIL = "wadealiou00@gmail.com";
-const BOOT_KEY = "synthesis-boot-v1";
+import {
+  SYNTHESIS_CAPABILITIES as CAPABILITIES,
+  SYNTHESIS_EMAIL as EMAIL,
+  SYNTHESIS_FREELANCE as FREELANCE,
+  SYNTHESIS_GITHUB_USER as GITHUB_USER,
+  SYNTHESIS_PINNED_REPOS as PINNED_REPOS,
+  SYNTHESIS_PROCESS as PROCESS,
+  SYNTHESIS_RAIL_SECTIONS as RAIL_SECTIONS,
+  SYNTHESIS_STACK_GROUPS as STACK_GROUPS,
+  SYNTHESIS_TEAMS as TEAMS,
+  SYNTHESIS_BOOT_KEY as BOOT_KEY,
+  SYNTHESIS_WORK as WORK,
+} from "@/lib/synthesis-data";
 
 const BOOT_LINES = [
   "> teams loaded · 7 employers",
   "> current focus · Everest Finance, ERGOBIT",
   "> availability · Q3 2026",
 ];
-
-const RAIL_SECTIONS = [
-  { id: "profile", label: "profile" },
-  { id: "worked-with", label: "teams" },
-  { id: "capabilities", label: "focus" },
-  { id: "work", label: "work" },
-  { id: "approach", label: "approach" },
-  { id: "writing", label: "notes" },
-  { id: "connect", label: "connect" },
-] as const;
 
 const PALETTE_COMMANDS = [
   { label: "Jump to selected work", href: "#work" },
@@ -29,78 +29,10 @@ const PALETTE_COMMANDS = [
   { label: "Copy email", action: "copy-email" as const },
 ];
 
-/* ──────────────────────────────────────────────────────
-   DATA
-─────────────────────────────────────────────────────── */
-const WORK = [
-  { id: "01", name: "Everest Finance", type: "fintech_spine", status: "ACTIVE", year: "2024 → Now", desc: "Sole technical owner for a Senegalese fintech: public site, internal CRM, and the Sama Naffa customer app converging toward one shared operating model.", stack: "Next.js · React Native · PostgreSQL" },
-  { id: "02", name: "ERGOBIT / Odoo 18", type: "erp_validation", status: "SHIPPED", year: "2024", desc: "Acceptance-testing starter kit for Odoo 18 migration teams: 39 tests across 9 suites, CI on Azure DevOps, and selector guidelines for maintainable ERP validation.", stack: "Robot Framework · Playwright · Azure DevOps" },
-  { id: "03", name: "Africa GreenTec accounting", type: "odoo_automation", status: "SHIPPED", year: "2024", desc: "Custom Odoo accounting module: automated roughly 80% of manual entries and held 10,000+ records per day in production for a renewable-energy operator.", stack: "Odoo · Python · BI" },
-  { id: "04", name: "BocalBun retrospective", type: "systems_judgment", status: "FROZEN", year: "2022", desc: "A deliberately stopped Bun toolkit. The proof is not adoption, it is knowing when clean architecture is not the highest-leverage work.", stack: "Bun · TypeScript · PostgreSQL · RLS" },
-];
-
-const CAPABILITIES = [
-  { label: "Product systems engineering", desc: "Bridging business workflows and software. Internal tools, admin panels, and customer surfaces." },
-  { label: "Finance & fintech", desc: "Open-banking APIs, CRM workflows, and secure foundations for regulated markets." },
-  { label: "ERP & BI", desc: "Odoo modules, CI/CD pipelines, and acceptance testing for operational teams." },
-  { label: "AI-assisted delivery", desc: "Agent-ready repositories and workflows that multiply engineering context." },
-];
-
-const TEAMS = [
-  { name: "Everest Finance", role: "Solo technical owner", tag: "Fintech", period: "2024 → Now", proof: "Public site, internal CRM, Sama Naffa customer app.", current: true, linkedWork: ["01"] as string[] },
-  { name: "ERGOBIT", role: "Software engineer", tag: "ERP / BI", period: "2024 → Now", proof: "Custom ERP and BI modules for Senegalese clients. CI/CD on Azure DevOps cut manual interventions by 80%.", current: true, linkedWork: ["02", "03"] },
-  { name: "BankingBook Analytics", role: "Software engineer", tag: "Open banking", period: "2024", proof: "Open-banking APIs for a cloud-native ALM. UEMOA-region i18n. Web and mail server migration to bbafintech.com.", linkedWork: [] as string[] },
-  { name: "Purolator", role: "Software engineer", tag: "Logistics", period: "2023", proof: "CI/CD migration across three projects. Internal Power Automate / Azure DevOps tooling. Package-sorter SDK that cut transfer latency.", linkedWork: [] as string[] },
-  { name: "Orange", role: "Mobile developer", tag: "Mobile", period: "2022", proof: "React Native fitness community app, 1,000+ members. Impact reports for decision-makers.", linkedWork: [] as string[] },
-  { name: "ITech Solutions Afrique", role: "IoT developer", tag: "IoT", period: "2019", proof: "Arduino geolocation system on Azure. Planning rework cut system costs by 20%.", linkedWork: [] as string[] },
-  { name: "DAUST", role: "Python tutor", tag: "Education", period: "2018 → 2019", proof: "OOP mentoring for undergraduate students and self-authored course material.", linkedWork: [] as string[] },
-];
-
-type FreelanceProject = { name: string; scope: string; domain: string; note?: string };
-
-// Local / freelance client work. Concrete domains, not adjectives.
-const FREELANCE: FreelanceProject[] = [
-  { name: "Ndouckmane Transit", scope: "Freight forwarder operations: shipments, customs, dashboards.", domain: "Logistics" },
-  { name: "EduPlan", scope: "K-12 school operations dashboard: courses, schedule, grading.", domain: "Education" },
-  { name: "Gerpain", scope: "Multi-bakery operations platform: inventory, deliveries, employees, RBAC.", domain: "Operations" },
-  { name: "Mansour Motors", scope: "Automotive dealership: public site and internal vehicle inventory for the operating company.", domain: "Automotive" },
-  { name: "Mamebimo", scope: "Home-services marketplace in Dakar: booking, messaging, payouts (Everest Finance product).", domain: "Marketplace" },
-  { name: "Prescriptos", scope: "Pharmacy and prescription workflow tooling (monorepo, web + API).", domain: "Health" },
-  { name: "Asaaman", scope: "Senegalese intelligent-drone startup: semantic video search, surveillance workflows, and reporting.", domain: "Drone / AI" },
-  { name: "Bocal Tontine", scope: "Group savings rooted in African tontine traditions. Product and architecture in progress.", domain: "Fintech", note: "Concept" },
-  { name: "Dakar Sport", scope: "Retail and community surfaces for a local sports brand.", domain: "Retail" },
-  { name: "Les Hirondelles", scope: "Institutional site for a Dakar school: Convex-backed editorial CMS.", domain: "Institution" },
-];
-
-// Pinned repos surfaced inline under the contribution chart.
-const PINNED_REPOS = [
-  { repo: "aliouuuw/myportfolio",                   note: "this site" },
-  { repo: "aliouuuw/odoo18-acceptance-testing-kit", note: "Robot + Playwright" },
-  { repo: "aliouuuw/agent-ready-repo",              note: "AI-collab conventions" },
-  { repo: "aliouuuw/bocalbun",                      note: "frozen retrospective" },
-];
-
-const GITHUB_USER = "aliouuuw";
-
 const WRITING = [
   { date: "2025·11", title: "Why I stopped building BocalBun.", desc: "On framework gravity, customer absence, and judgment over ambition.", tag: "Retrospective" },
   { date: "2025·09", title: "Designing agent-ready repositories.", desc: "Conventions, manifests, and persistence for AI-collaborative codebases.", tag: "AI-native" },
   { date: "2025·07", title: "Acceptance testing Odoo 18 migrations.", desc: "Robot Framework + Playwright. Selectors, profiles, CI-friendly output.", tag: "ERP" },
-];
-
-const STACK_GROUPS = [
-  { k: "Language", v: "TypeScript, Python" },
-  { k: "Runtime", v: "Bun, Node, Deno" },
-  { k: "Frontend", v: "Next.js, React, Tailwind" },
-  { k: "Backend", v: "Postgres, Drizzle, RLS" },
-  { k: "ERP / QA", v: "Odoo 18, Robot, Playwright" },
-  { k: "Infra", v: "Vercel, Resend, Cloudflare" },
-];
-
-const PROCESS = [
-  { n: "01", title: "Discovery", desc: "Workflows, spreadsheets, pain. Where the business actually leaks time." },
-  { n: "02", title: "Architecture", desc: "One stack. Boring choices. Documented tradeoffs. No premature abstraction." },
-  { n: "03", title: "Ship & operate", desc: "Live systems with real users. Iterate based on operational reality, not aesthetics." },
 ];
 
 /* ──────────────────────────────────────────────────────

@@ -59,6 +59,59 @@
       "contactTitle": "Dites-moi ce que vous construisez.",
       "contactNote": "Réponse sous 48 h, lun–ven.",
       "contactCta": "Envoyer un message"
+    },
+    "synthesis": {
+      "hero": {
+        "location": "Dakar, Sénégal",
+        "languages": "FR / EN",
+        "timezone": "WAT",
+        "skipBoot": "Passer l'intro",
+        "bootLoading": "Chargement du profil · cliquer pour passer",
+        "bootLines": {
+          "teams": "> équipes chargées · 7 employeurs",
+          "focus": "> focus actuel · Everest Finance, ERGOBIT",
+          "availability": "> disponibilité · T3 2026"
+        },
+        "headline": "Je construis la couche logicielle entre les opérations métier et l'ambition produit.",
+        "subtitle": "Ingénieur systèmes produit à Dakar. Je livre des outils finance et ERP, des logiciels ops internes et des workflows assistés par IA pour les équipes qui ont besoin d'un seul ingénieur sur toute la stack.",
+        "availability": "Deux créneaux clients ouverts T3 2026 · réponse sous 48 h les jours ouvrés",
+        "ctaWork": "Voir le travail sélectionné",
+        "ctaContact": "Me contacter"
+      },
+      "background": {
+        "title": "Parcours",
+        "p1": "Je travaille à l'intersection des workflows métier et du logiciel : CRM, modules ERP, apps client et la cohérence entre eux. Moins de théâtre framework, plus de systèmes exploitables au quotidien.",
+        "p2": "Le parcours passe par l'open banking à Ottawa, l'automatisation logistique, React Native, l'IoT, l'enseignement Python, puis une charge régulière de missions client à Dakar aux côtés d'Everest Finance et ERGOBIT."
+      },
+      "credentials": {
+        "title": "Formation",
+        "experienceLabel": "Expérience",
+        "experience": "Six ans de logiciels en production : fintech, ERP, logistique, mobile, IoT et éducation.",
+        "educationLabel": "Études",
+        "educationPrimary": "B.Sc. génie logiciel, Université d'Ottawa",
+        "educationSecondary": "B.Sc. informatique, DAUST",
+        "certificationsLabel": "Certifications",
+        "certPrimary": "Odoo 18 Functional",
+        "certSecondary": "Meta Front-End Developer Professional",
+        "certTertiary": "Datacamp Python Data Science"
+      },
+      "chess": {
+        "title": "Échecs",
+        "body": "Je joue aux échecs en ligne en compétition. Records : 2043 bullet, 1856 blitz. Le même réflexe qu'en ingénierie : reconnaissance de motifs sous la montre, arbitrages rapides et sang-froid quand un système de production est sous pression."
+      },
+      "github": {
+        "title": "Activité GitHub",
+        "pinned": "Épinglés",
+        "loading": "Chargement des contributions…",
+        "unavailable": "graphique indisponible · voir sur",
+        "contributions": "contributions",
+        "periodLast12": "12 derniers mois",
+        "periodAll": "toutes les années",
+        "less": "moins",
+        "more": "plus",
+        "chartAria": "{total} contributions GitHub sur {period}",
+        "yearAria": "{total} contributions en {year}"
+      }
     }
   },
   "Nav": {
