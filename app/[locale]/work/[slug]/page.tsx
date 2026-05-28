@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { TransitionLink } from "@/components/transition-link";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
@@ -89,6 +89,7 @@ export default async function WorkSlugPage({ params }: Props) {
         stack={frontmatter.stack}
         confidential={frontmatter.confidential}
         confidentialLabel={t("confidential")}
+        slug={slug}
       />
 
       <CaseStudyProofStrip outcome={frontmatter.outcome} />
@@ -106,7 +107,7 @@ export default async function WorkSlugPage({ params }: Props) {
           <div className="hairline mb-8" />
           <div className="grid gap-0 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-syn-border border-y border-syn-border">
             {prev ? (
-              <Link
+              <TransitionLink
                 href={`/${locale}/work/${prev.slug}`}
                 className="group flex flex-col gap-2 py-6 sm:px-6 sm:first:pl-0 hover:bg-syn-row-hover transition-colors -mx-4 px-4 sm:mx-0 sm:px-6"
               >
@@ -116,13 +117,13 @@ export default async function WorkSlugPage({ params }: Props) {
                 <p className="text-base font-medium text-syn-ink-muted transition-colors group-hover:text-syn-ink">
                   {prev.title}
                 </p>
-              </Link>
+              </TransitionLink>
             ) : (
               <div className="hidden sm:block" />
             )}
 
             {next ? (
-              <Link
+              <TransitionLink
                 href={`/${locale}/work/${next.slug}`}
                 className="group flex flex-col gap-2 py-6 sm:px-6 sm:text-right hover:bg-syn-row-hover transition-colors -mx-4 px-4 sm:mx-0"
               >
@@ -132,19 +133,19 @@ export default async function WorkSlugPage({ params }: Props) {
                 <p className="text-base font-medium text-syn-ink-muted transition-colors group-hover:text-syn-ink">
                   {next.title}
                 </p>
-              </Link>
+              </TransitionLink>
             ) : null}
           </div>
         </nav>
       )}
 
       <div className="mx-auto w-full max-w-5xl px-6 pb-8 text-center sm:px-12 lg:px-24">
-        <Link
+        <TransitionLink
           href={`/${locale}/work`}
           className="mono text-xs text-syn-ink-subtle hover:text-syn-ink-muted transition-colors"
         >
           {t("backToWork")}
-        </Link>
+        </TransitionLink>
       </div>
     </div>
   );

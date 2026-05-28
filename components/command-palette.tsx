@@ -56,7 +56,13 @@ export function CommandPalette() {
 
   const navigate = useCallback(
     (href: string) => {
-      router.push(href);
+      if (!document.startViewTransition) {
+        router.push(href);
+      } else {
+        document.startViewTransition(() => {
+          router.push(href);
+        });
+      }
       close();
     },
     [router, close],

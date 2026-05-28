@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { TransitionLink } from "@/components/transition-link";
 import { useTranslations } from "next-intl";
 
 import { SynthesisRevealSection } from "@/components/synthesis-reveal-section";
@@ -29,20 +29,21 @@ export function SynthesisSelectedWork({
             {t("aside")}
           </p>
         </div>
-        <Link
+        <TransitionLink
           href={`/${locale}/work`}
           className="text-xs text-syn-ink-muted hover:text-syn-ink transition-colors shrink-0"
         >
           {t("seeAll")} →
-        </Link>
+        </TransitionLink>
       </div>
-      <div className="flex flex-col gap-3">
-        {SYNTHESIS_WORK.map((w) => (
+      <div className="flex flex-col gap-3 relative">
+        {SYNTHESIS_WORK.map((w, index) => (
           <SynthesisWorkRow
             key={w.id}
             locale={locale}
             work={w}
             highlighted={highlightedWork.includes(w.id)}
+            index={index}
           />
         ))}
       </div>

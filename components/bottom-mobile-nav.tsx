@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { TransitionLink } from "@/components/transition-link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 
@@ -48,7 +48,7 @@ export function BottomMobileNav() {
 
           return (
             <li key={href} className="flex-1">
-              <Link
+              <TransitionLink
                 href={href}
                 className={`relative flex h-full flex-col items-center justify-center gap-0.5 transition-colors duration-200 ${
                   isActive
@@ -67,7 +67,7 @@ export function BottomMobileNav() {
                 <span className="font-mono text-[10px] font-medium uppercase tracking-wide">
                   {label}
                 </span>
-              </Link>
+              </TransitionLink>
             </li>
           );
         })}

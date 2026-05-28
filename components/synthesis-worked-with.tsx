@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
+import { ScrambleText } from "@/components/scramble-text";
 import { SynthesisRevealSection } from "@/components/synthesis-reveal-section";
 import {
   SYNTHESIS_TEAMS,
@@ -56,7 +57,7 @@ function TeamRow({
         {t("period")}
       </p>
       <span className="mono text-[10px] uppercase tracking-widest text-syn-ink-faint shrink-0">
-        {t("tag")}
+        <ScrambleText text={t("tag")} trigger="hover" />
       </span>
       {caseHref ? (
         <span className="text-syn-ink-faint shrink-0" aria-hidden>

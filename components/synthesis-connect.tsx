@@ -4,6 +4,7 @@ import { useCallback, useRef } from "react";
 import { useTranslations } from "next-intl";
 
 import { useCommandPalette } from "@/components/command-palette-provider";
+import { MagneticElement } from "@/components/magnetic-element";
 import { SynthesisRevealSection } from "@/components/synthesis-reveal-section";
 import {
   SYNTHESIS_EMAIL,
@@ -82,25 +83,31 @@ export function SynthesisConnect() {
             {t("lead")}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href={`mailto:${SYNTHESIS_EMAIL}`}
-              className="syn-btn-primary btn-press inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium hover:scale-[1.02] transition-transform"
-            >
-              {t("ctaEmail")}
-            </a>
-            <a
-              href="https://wa.me/221777228845"
-              className="syn-btn-secondary btn-press inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-colors"
-            >
-              {t("ctaWhatsApp")}
-            </a>
-            <button
-              type="button"
-              onClick={copyEmail}
-              className="syn-btn-secondary btn-press inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-colors"
-            >
-              {t("ctaCopyEmail")}
-            </button>
+            <MagneticElement>
+              <a
+                href={`mailto:${SYNTHESIS_EMAIL}`}
+                className="syn-btn-primary btn-press inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium hover:scale-[1.02] transition-transform"
+              >
+                {t("ctaEmail")}
+              </a>
+            </MagneticElement>
+            <MagneticElement>
+              <a
+                href="https://wa.me/221777228845"
+                className="syn-btn-secondary btn-press inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-colors"
+              >
+                {t("ctaWhatsApp")}
+              </a>
+            </MagneticElement>
+            <MagneticElement>
+              <button
+                type="button"
+                onClick={copyEmail}
+                className="syn-btn-secondary btn-press inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-colors"
+              >
+                {t("ctaCopyEmail")}
+              </button>
+            </MagneticElement>
           </div>
           <div className="mt-10 pt-8 border-t border-syn-border grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4 text-sm">
             <ChannelRow

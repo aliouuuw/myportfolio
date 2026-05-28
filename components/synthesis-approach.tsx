@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 
+import { ScrambleText } from "@/components/scramble-text";
 import { SynthesisRevealSection } from "@/components/synthesis-reveal-section";
 
 const PROCESS_KEYS = ["discovery", "architecture", "ship"] as const;
@@ -12,7 +13,7 @@ function ProcessStep({ stepKey, index }: { stepKey: string; index: number }) {
   return (
     <div className="flex gap-5">
       <span className="mono text-xs text-syn-ink-faint pt-0.5 w-6 shrink-0">
-        0{index + 1}
+        <ScrambleText text={`0${index + 1}`} trigger="hover" />
       </span>
       <div>
         <h3 className="text-base font-medium text-syn-ink-strong">{t("title")}</h3>

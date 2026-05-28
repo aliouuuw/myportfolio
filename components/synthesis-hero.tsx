@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useTranslations } from "next-intl";
 
+import { MagneticElement } from "@/components/magnetic-element";
 import { SYNTHESIS_BOOT_KEY } from "@/lib/synthesis-data";
 
 const BOOT_LINE_KEYS = ["teams", "focus", "availability"] as const;
@@ -164,7 +165,7 @@ export function SynthesisHero({ onHeroReady }: SynthesisHeroProps) {
         </button>
       ) : (
         <div className="mt-10">
-          <h1 className="hero-reveal hero-reveal--1 text-[clamp(2rem,4.5vw,4.5rem)] font-medium tracking-[-0.03em] leading-[1.05] max-w-3xl text-syn-ink">
+          <h1 className="hero-reveal hero-reveal--1 text-[clamp(2rem,5vw,5rem)] font-medium tracking-[-0.03em] leading-[1.05] max-w-[18ch] text-syn-ink">
             {t("headline")}
           </h1>
           <p className="hero-reveal hero-reveal--2 mt-6 max-w-2xl text-syn-ink-muted text-lg leading-relaxed">
@@ -174,18 +175,22 @@ export function SynthesisHero({ onHeroReady }: SynthesisHeroProps) {
             {t("availability")}
           </p>
           <div className="hero-reveal hero-reveal--4 mt-10 flex flex-wrap gap-4">
-            <a
-              href="#work"
-              className="syn-btn-primary btn-press inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-transform hover:scale-[1.02]"
-            >
-              {t("ctaWork")} <span aria-hidden>↓</span>
-            </a>
-            <a
-              href="#connect"
-              className="syn-btn-secondary btn-press inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-colors"
-            >
-              {t("ctaContact")}
-            </a>
+            <MagneticElement>
+              <a
+                href="#work"
+                className="syn-btn-primary btn-press inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-transform hover:scale-[1.02]"
+              >
+                {t("ctaWork")} <span aria-hidden>↓</span>
+              </a>
+            </MagneticElement>
+            <MagneticElement>
+              <a
+                href="#connect"
+                className="syn-btn-secondary btn-press inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-colors"
+              >
+                {t("ctaContact")}
+              </a>
+            </MagneticElement>
           </div>
         </div>
       )}

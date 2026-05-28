@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { TransitionLink } from "@/components/transition-link";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
@@ -65,18 +65,21 @@ export default async function WritingSlugPage({ params }: Props) {
     <div className="page-shell">
       <div className="page-shell-inner">
         <header className="mb-12 max-w-2xl">
-          <Link
+          <TransitionLink
             href={`/${locale}/writing`}
             className="inline-block text-[13px] text-ink-tertiary hover:text-ink-primary underline decoration-border hover:decoration-accent underline-offset-4 transition-colors mb-8"
           >
             ← {t("backToWriting")}
-          </Link>
+          </TransitionLink>
 
           <p className="label-micro mb-4">
             <time dateTime={frontmatter.date}>{formattedDate}</time>
           </p>
 
-          <h1 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-normal tracking-tight text-ink-primary leading-tight mb-4 max-w-[20ch]">
+          <h1
+            className="font-serif text-[clamp(2.5rem,6vw,4.5rem)] font-normal tracking-tight text-ink-primary leading-tight mb-4 max-w-[20ch]"
+            style={{ viewTransitionName: `writing-${slug}` }}
+          >
             {title}
           </h1>
 

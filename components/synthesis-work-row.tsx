@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { TransitionLink } from "@/components/transition-link";
+import { ScrambleText } from "@/components/scramble-text";
 import { useTranslations } from "next-intl";
-
 import { useInView } from "@/components/synthesis-reveal-section";
 import {
   synthesisWorkHref,
@@ -13,12 +13,14 @@ type SynthesisWorkRowProps = {
   locale: string;
   work: WorkRowData;
   highlighted: boolean;
+  index?: number;
 };
 
 export function SynthesisWorkRow({
   locale,
   work,
   highlighted,
+  index = 0,
 }: SynthesisWorkRowProps) {
   const t = useTranslations("HomePage.synthesis.work");
   const tRow = useTranslations(`HomePage.synthesis.work.rows.${work.id}`);
@@ -32,14 +34,18 @@ export function SynthesisWorkRow({
         ? "border-blue-500/20 text-blue-400 bg-blue-500/5"
         : "border-syn-border-strong text-syn-ink-subtle";
 
-  const className = `syn-entity-card group flex flex-col lg:flex-row lg:items-center justify-between p-5 md:p-6 gap-4 lg:gap-6 ${
+  const className = `syn-entity-card stacking-card group flex flex-col lg:flex-row lg:items-center justify-between p-5 md:p-6 gap-4 lg:gap-6 ${
     highlighted ? "work-row--highlight syn-entity-card--active" : ""
   }`;
+
+  const style = { "--index": index } as React.CSSProperties;
 
   const content = (
     <>
       <div className="flex items-center gap-5 lg:w-1/4 shrink-0">
-        <span className="mono text-xs text-syn-ink-faint">{work.id}</span>
+        <span className="mono text-xs text-syn-ink-faint">
+          <ScrambleText text={work.id} trigger="hover" />
+        </span>
         <div>
           <h4
             className={`font-medium transition-colors ${
@@ -47,11 +53,12 @@ export function SynthesisWorkRow({
                 ? "text-syn-accent"
                 : "text-syn-ink-strong group-hover:text-syn-accent"
             }`}
+            style={{ viewTransitionName: `title-${work.slug}` }}
           >
             {tRow("name")}
           </h4>
           <p className="mono-eyebrow mt-1">
-            &lt;{work.type}&gt; · {work.year}
+            &lt;<ScrambleText text={work.type} trigger="hover" />&gt; · {work.year}
           </p>
         </div>
       </div>
@@ -78,18 +85,19 @@ export function SynthesisWorkRow({
 
   if (href) {
     return (
-      <Link
+      <TransitionLink
         ref={ref as React.RefObject<HTMLAnchorElement>}
         href={href}
         className={className}
+        style={style}
       >
         {content}
-      </Link>
+      </TransitionLink>
     );
   }
 
   return (
-    <div ref={ref as React.RefObject<HTMLDivElement>} className={className}>
+    <div ref={ref as React.RefObject<HTMLDivElement>} className={className} style={style}>
       {content}
     </div>
   );

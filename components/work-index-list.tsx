@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { TransitionLink } from "@/components/transition-link";
 
 import type { WorkLedgerStatus } from "@/lib/work-ledger-types";
 
@@ -43,9 +43,10 @@ function FeaturedRow({
   statusLabel: string;
 }) {
   return (
-    <Link
+    <TransitionLink
       href={`/${locale}/work/${entry.slug}`}
       className="syn-entity-card group flex flex-col lg:flex-row lg:items-center justify-between p-5 md:p-6 gap-4 lg:gap-6"
+      style={{ viewTransitionName: `title-${entry.slug}` }}
     >
       <div className="flex items-center gap-5 lg:w-1/3 shrink-0">
         {entry.indexId ? (
@@ -70,7 +71,7 @@ function FeaturedRow({
           ↗
         </span>
       </div>
-    </Link>
+    </TransitionLink>
   );
 }
 
@@ -82,7 +83,7 @@ function SupportingRow({
   entry: WorkIndexEntry;
 }) {
   return (
-    <Link
+    <TransitionLink
       href={`/${locale}/work/${entry.slug}`}
       className="syn-entity-card group flex flex-wrap items-baseline justify-between gap-3 p-4 md:px-5 md:py-4"
     >
@@ -92,7 +93,7 @@ function SupportingRow({
       <span className="mono text-[10px] uppercase tracking-widest text-syn-ink-faint">
         {entry.domain}
       </span>
-    </Link>
+    </TransitionLink>
   );
 }
 

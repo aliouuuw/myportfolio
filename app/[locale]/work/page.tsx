@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { TransitionLink } from "@/components/transition-link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { WorkFreelanceList } from "@/components/work-freelance-list";
@@ -124,12 +124,12 @@ export default async function WorkPage(props: {
         <WorkFreelanceList />
 
         <p className="mt-14">
-          <Link
+          <TransitionLink
             href={`/${locale}`}
             className="mono text-xs text-syn-ink-subtle hover:text-syn-ink-muted transition-colors"
           >
             ← {t("backToHome")}
-          </Link>
+          </TransitionLink>
         </p>
       </div>
     </div>

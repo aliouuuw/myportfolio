@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { TransitionLink } from "@/components/transition-link";
 import { useTranslations } from "next-intl";
 
 import { SynthesisRevealSection } from "@/components/synthesis-reveal-section";
@@ -29,22 +29,23 @@ export function SynthesisWriting({ locale, entries }: SynthesisWritingProps) {
             {t("title")}
           </h2>
         </div>
-        <Link
+        <TransitionLink
           href={`/${locale}/writing`}
           className="text-xs text-syn-ink-secondary hover:text-syn-ink transition-colors"
         >
           {t("allLink")}
-        </Link>
+        </TransitionLink>
       </div>
       {entries.length === 0 ? (
         <p className="text-sm text-syn-ink-subtle">{t("empty")}</p>
       ) : (
         <div className="flex flex-col gap-3">
           {entries.map((entry) => (
-            <Link
+            <TransitionLink
               key={entry.slug}
               href={`/${locale}/writing/${entry.slug}`}
               className="syn-entity-card group flex flex-col gap-3 p-5 sm:flex-row sm:items-baseline sm:gap-8"
+              style={{ viewTransitionName: `writing-${entry.slug}` }}
             >
               <span className="mono text-xs text-syn-ink-subtle w-16 shrink-0">
                 {entry.dateLabel}
@@ -60,7 +61,7 @@ export function SynthesisWriting({ locale, entries }: SynthesisWritingProps) {
               <span className="text-syn-ink-faint group-hover:text-syn-ink-muted transition-colors shrink-0">
                 ↗
               </span>
-            </Link>
+            </TransitionLink>
           ))}
         </div>
       )}

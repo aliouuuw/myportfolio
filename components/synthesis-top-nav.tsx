@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { TransitionLink } from "@/components/transition-link";
 import { useTranslations } from "next-intl";
 
 import { useCommandPalette } from "@/components/command-palette-provider";
@@ -44,7 +44,7 @@ export function SynthesisTopNav({ locale, pathname }: SynthesisTopNavProps) {
   return (
     <header className="site-header sticky top-0 z-50 border-b border-syn-border bg-syn-canvas/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-3 px-4 py-3.5 md:px-6 lg:px-8 xl:pr-8">
-        <Link
+        <TransitionLink
           href={homePath}
           className="flex min-w-0 items-center gap-3 transition-opacity hover:opacity-90"
           aria-label={tNav("brandAriaLabel")}
@@ -58,14 +58,14 @@ export function SynthesisTopNav({ locale, pathname }: SynthesisTopNavProps) {
           <span className="mono-eyebrow ml-0.5 hidden sm:inline">
             {t("role")}
           </span>
-        </Link>
+        </TransitionLink>
 
         <div className="flex items-center gap-1">
           {NAV_ITEMS.map((item) => {
             const active =
               "matchPath" in item ? isLinkActive(item.matchPath) : false;
             return (
-              <Link
+              <TransitionLink
                 key={item.key}
                 href={item.href(locale)}
                 className={`hidden md:inline-flex rounded-full px-3 py-1.5 text-xs transition-colors ${
@@ -74,7 +74,7 @@ export function SynthesisTopNav({ locale, pathname }: SynthesisTopNavProps) {
                 aria-current={active ? "page" : undefined}
               >
                 {tNav(item.key)}
-              </Link>
+              </TransitionLink>
             );
           })}
 

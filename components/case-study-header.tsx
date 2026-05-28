@@ -13,6 +13,7 @@ interface CaseStudyHeaderProps {
   stack: string[];
   confidential?: boolean;
   confidentialLabel?: string;
+  slug?: string;
 }
 
 const statusClass: Record<WorkLedgerStatus, string> = {
@@ -34,6 +35,7 @@ export function CaseStudyHeader({
   stack,
   confidential,
   confidentialLabel = "Confidential",
+  slug,
 }: CaseStudyHeaderProps) {
   return (
     <header className="mx-auto w-full max-w-5xl px-6 pb-8 pt-8 sm:px-12 lg:px-24">
@@ -63,7 +65,10 @@ export function CaseStudyHeader({
         ) : null}
       </div>
 
-      <h1 className="text-[clamp(2rem,4.5vw,3.25rem)] font-medium leading-[1.08] tracking-[-0.03em] text-syn-ink mb-6 max-w-[65ch]">
+      <h1
+        className="text-[clamp(2.5rem,5vw,4.5rem)] font-medium leading-[1.05] tracking-[-0.03em] text-syn-ink mb-6 max-w-[20ch]"
+        style={slug ? { viewTransitionName: `title-${slug}` } : undefined}
+      >
         {title}
       </h1>
 

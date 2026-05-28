@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { TransitionLink } from "@/components/transition-link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { routing } from "@/i18n/routing";
@@ -80,9 +80,10 @@ export default async function WritingPage(props: {
 
                 return (
                   <li key={slug}>
-                    <Link
+                    <TransitionLink
                       href={href}
                       className="syn-entity-card grid gap-3 p-5 sm:grid-cols-[10rem_1fr] sm:gap-8 group"
+                      style={{ viewTransitionName: `writing-${slug}` }}
                     >
                       <time
                         className="font-mono text-[12px] text-ink-muted sm:pt-1"
@@ -101,7 +102,7 @@ export default async function WritingPage(props: {
                           {t("readEssay")} <span aria-hidden>→</span>
                         </span>
                       </div>
-                    </Link>
+                    </TransitionLink>
                   </li>
                 );
               })}

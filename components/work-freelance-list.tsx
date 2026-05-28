@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 
+import { ScrambleText } from "@/components/scramble-text";
 import { SYNTHESIS_FREELANCE } from "@/lib/synthesis-data";
 
 export async function WorkFreelanceList() {
@@ -38,7 +39,7 @@ export async function WorkFreelanceList() {
                   </span>
                 ) : null}
                 <span className="mono text-[10px] uppercase tracking-widest text-syn-ink-faint">
-                  {tClients(`clients.${project.key}.domain`)}
+                  <ScrambleText text={tClients(`clients.${project.key}.domain`)} trigger="hover" />
                 </span>
               </div>
             </li>
