@@ -98,16 +98,10 @@ export default async function LocaleLayout({
       <NextIntlClientProvider messages={messages}>
         <ThemeProvider>
           <AboutProvider>
-            <a
-              href="#main-content"
-              className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:rounded focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:text-white"
-            >
-              Skip to content
-            </a>
             <TopNav />
             <CommandPalette />
             {/* Padding top for fixed header, padding bottom for mobile bottom nav */}
-            <main id="main-content" className="flex flex-1 flex-col pt-14 pb-14 sm:pb-0">
+            <main className="flex flex-1 flex-col pt-14 pb-14 sm:pb-0">
               {children}
             </main>
             <Footer />

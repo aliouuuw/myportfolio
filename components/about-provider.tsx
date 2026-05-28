@@ -6,6 +6,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import { usePathname } from "next/navigation";
@@ -39,8 +40,10 @@ interface AboutProviderProps {
 export function AboutProvider({ children }: AboutProviderProps) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const triggerRef = useRef<HTMLElement | null>(null);
 
   const openAbout = useCallback(() => {
+    triggerRef.current = document.activeElement as HTMLElement | null;
     setOpen(true);
     if (typeof window !== "undefined") {
       window.history.replaceState(null, "", `${pathname}#about`);
@@ -56,6 +59,11 @@ export function AboutProvider({ children }: AboutProviderProps) {
         `${pathname}${window.location.search}`,
       );
     }
+    // Return focus to trigger on next tick after modal unmounts
+    setTimeout(() => {
+      triggerRef.current?.focus();
+      triggerRef.current = null;
+    }, 0);
   }, [pathname]);
 
   useEffect(() => {

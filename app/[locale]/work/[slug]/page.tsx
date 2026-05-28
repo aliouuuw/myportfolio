@@ -100,33 +100,37 @@ export default async function WorkSlugPage({ params }: Props) {
           className="mx-auto w-full max-w-5xl px-6 py-16 sm:px-12 lg:px-24"
           aria-label={t("caseNavAria")}
         >
-          <div className="flex flex-col border-t border-border">
-            {prev && (
+          <div className="hairline mb-8" />
+          <div className="grid gap-4 sm:grid-cols-2">
+            {prev ? (
               <Link
                 href={`/${locale}/work/${prev.slug}`}
-                className="group flex items-center justify-between gap-4 border-b border-border py-4 transition-colors hover:bg-canvas-elevated -mx-2 px-2 rounded"
+                className="group rounded-lg border border-border p-5 transition-colors hover:border-border-strong hover:bg-canvas-elevated focus:outline-none focus-visible:ring-1 focus-visible:ring-accent"
               >
-                <span className="font-mono text-[10px] text-ink-tertiary shrink-0">
+                <p className="mb-2 font-mono text-[10px] text-ink-tertiary">
                   ← {t("previous")}
-                </span>
-                <span className="text-sm text-ink-secondary transition-colors group-hover:text-ink-primary truncate">
+                </p>
+                <p className="font-serif text-base text-ink-secondary transition-colors group-hover:text-ink-primary">
                   {prev.title}
-                </span>
+                </p>
               </Link>
+            ) : (
+              <div />
             )}
-            {next && (
+
+            {next ? (
               <Link
                 href={`/${locale}/work/${next.slug}`}
-                className="group flex items-center justify-between gap-4 border-b border-border py-4 transition-colors hover:bg-canvas-elevated -mx-2 px-2 rounded"
+                className="group rounded-lg border border-border p-5 text-right transition-colors hover:border-border-strong hover:bg-canvas-elevated focus:outline-none focus-visible:ring-1 focus-visible:ring-accent sm:col-start-2"
               >
-                <span className="text-sm text-ink-secondary transition-colors group-hover:text-ink-primary truncate">
-                  {next.title}
-                </span>
-                <span className="font-mono text-[10px] text-ink-tertiary shrink-0">
+                <p className="mb-2 font-mono text-[10px] text-ink-tertiary">
                   {t("next")} →
-                </span>
+                </p>
+                <p className="font-serif text-base text-ink-secondary transition-colors group-hover:text-ink-primary">
+                  {next.title}
+                </p>
               </Link>
-            )}
+            ) : null}
           </div>
         </nav>
       )}

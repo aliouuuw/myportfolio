@@ -56,7 +56,17 @@ export default async function RootLayout({
       lang={locale}
       className={`${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-canvas focus:text-ink-primary focus:border focus:border-border focus:rounded"
+        >
+          Skip to content
+        </a>
+        <main id="main-content" className="flex flex-col flex-1">
+          {children}
+        </main>
+      </body>
     </html>
   );
 }

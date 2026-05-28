@@ -33,7 +33,6 @@ export function TopNav() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-
   const links: NavItem[] = [
     {
       kind: "link",
@@ -70,8 +69,7 @@ export function TopNav() {
           className="font-serif text-sm font-medium tracking-tight text-ink-primary transition-colors duration-200 hover:text-ink-secondary"
           aria-label={t("brandAriaLabel")}
         >
-          <span className="sm:hidden">AW</span>
-          <span className="hidden sm:inline">{t("brand")}</span>
+          AW
         </Link>
 
         <nav className="flex items-center gap-5" aria-label={t("ariaLabel")}>
@@ -91,9 +89,8 @@ export function TopNav() {
                 );
               }
 
-              const isActive =
-                pathname === item.matchPath ||
-                pathname.startsWith(`${item.matchPath}/`);
+              const isActive = pathname === item.matchPath ||
+                  pathname.startsWith(`${item.matchPath}/`);
 
               return (
                 <li key={item.href}>

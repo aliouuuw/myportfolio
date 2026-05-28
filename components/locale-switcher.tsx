@@ -22,7 +22,7 @@ export function LocaleSwitcher({ locale }: LocaleSwitcherProps) {
       aria-label={t("ariaLabel")}
     >
       <LocaleLink code="en" current={locale} href={`/en${suffix}`} label={t("en")} />
-      <span className="text-[color:var(--ink-4)] select-none" aria-hidden>·</span>
+      <span className="text-ink-muted select-none" aria-hidden>·</span>
       <LocaleLink code="fr" current={locale} href={`/fr${suffix}`} label={t("fr")} />
     </div>
   );
@@ -43,7 +43,7 @@ function LocaleLink({
   if (isActive) {
     return (
       <span
-        className="px-1.5 py-0.5 rounded text-[color:var(--ink-1)]"
+        className="px-1.5 py-0.5 rounded text-ink-primary"
         aria-current="true"
       >
         {label}
@@ -54,7 +54,7 @@ function LocaleLink({
     <Link
       href={href}
       hrefLang={code}
-      className="px-1.5 py-0.5 rounded text-[color:var(--ink-3)] hover:text-[color:var(--ink-1)] transition-colors"
+      className="px-1.5 py-0.5 rounded text-ink-tertiary hover:text-ink-primary transition-colors"
     >
       {label}
     </Link>

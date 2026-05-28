@@ -8,6 +8,12 @@ interface AboutModalProps {
   onClose: () => void;
 }
 
+function getFocusableElements(container: HTMLElement): HTMLElement[] {
+  const selector =
+    'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+  return Array.from(container.querySelectorAll(selector));
+}
+
 export function AboutModal({ open, onClose }: AboutModalProps) {
   const t = useTranslations("AboutPage");
   const tCommon = useTranslations("common");
@@ -17,10 +23,48 @@ export function AboutModal({ open, onClose }: AboutModalProps) {
     if (!open) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    panelRef.current?.focus();
+
+    // Focus first focusable element in modal
+    const timer = setTimeout(() => {
+      const focusables = getFocusableElements(panelRef.current!);
+      const first = focusables[0];
+      if (first) first.focus();
+    }, 0);
+
     return () => {
+      clearTimeout(timer);
       document.body.style.overflow = prev;
     };
+  }, [open]);
+
+  // Focus trap
+  useEffect(() => {
+    if (!open) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+      const panel = panelRef.current;
+      if (!panel) return;
+      const focusables = getFocusableElements(panel);
+      if (focusables.length === 0) {
+        e.preventDefault();
+        return;
+      }
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [open]);
 
   if (!open) return null;
@@ -38,6 +82,7 @@ export function AboutModal({ open, onClose }: AboutModalProps) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="about-modal-title"
+        aria-describedby="about-modal-bio"
         tabIndex={-1}
         className="about-modal-panel site-ledger"
       >
@@ -65,7 +110,9 @@ export function AboutModal({ open, onClose }: AboutModalProps) {
         </header>
 
         <div className="about-modal-body">
-          <p className="about-modal-bio">{t("bio")}</p>
+          <p id="about-modal-bio" className="about-modal-bio">
+            {t("bio")}
+          </p>
           <p className="about-modal-context">{t("context")}</p>
 
           <div className="about-modal-currently">

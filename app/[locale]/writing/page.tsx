@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import { PageHeader } from "@/components/page-header";
 import { routing } from "@/i18n/routing";
 import { getWritingSlugs, readWritingFrontmatter } from "@/lib/mdx";
 import { buildCanonical } from "@/lib/metadata";
@@ -48,66 +47,71 @@ export default async function WritingPage(props: {
   );
 
   return (
-    <div className="flex flex-1 flex-col">
-      <PageHeader
-        eyebrow={t("eyebrow")}
-        title={t("title")}
-        subtitle={t("subtitle")}
-      />
+    <div className="page-shell">
+      <div className="page-shell-inner">
+        <header className="mb-12 max-w-2xl">
+          <h1 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-normal tracking-tight text-ink-primary leading-tight mb-4">
+            {t("title")}
+          </h1>
+          <p className="text-base text-ink-secondary leading-relaxed max-w-[68ch]">
+            {t("subtitle")}
+          </p>
+        </header>
 
-      <section className="page-shell pb-24">
-        {sorted.length === 0 ? (
-          <div className="card">
-            <p className="text-[15px] text-ink-tertiary italic">
-              {t("empty")}
-            </p>
-          </div>
-        ) : (
-          <ul className="flex flex-col border-t border-border">
-            {sorted.map(({ slug, frontmatter }) => {
-              const title =
-                locale === "fr" ? frontmatter.titleFr : frontmatter.title;
-              const summary =
-                locale === "fr" ? frontmatter.summaryFr : frontmatter.summary;
-              const href = `/${locale}/writing/${slug}`;
-              const date = new Date(frontmatter.date).toLocaleDateString(
-                locale === "fr" ? "fr-FR" : "en-US",
-                { year: "numeric", month: "long" },
-              );
+        <section>
+          {sorted.length === 0 ? (
+            <div className="card">
+              <p className="text-[15px] text-ink-tertiary italic">
+                {t("empty")}
+              </p>
+            </div>
+          ) : (
+            <ul className="flex flex-col border-t border-border">
+              {sorted.map(({ slug, frontmatter }) => {
+                const title =
+                  locale === "fr" ? frontmatter.titleFr : frontmatter.title;
+                const summary =
+                  locale === "fr" ? frontmatter.summaryFr : frontmatter.summary;
+                const href = `/${locale}/writing/${slug}`;
+                const date = new Date(frontmatter.date).toLocaleDateString(
+                  locale === "fr" ? "fr-FR" : "en-US",
+                  { year: "numeric", month: "long" },
+                );
 
-              return (
-                <li
-                  key={slug}
-                  className="border-b border-border"
-                >
-                  <Link
-                    href={href}
-                    className="grid gap-3 py-8 sm:grid-cols-[10rem_1fr] sm:gap-8 group hover:bg-canvas-elevated transition-colors px-2 -mx-2 rounded"
+                return (
+                  <li
+                    key={slug}
+                    className="border-b border-border"
                   >
-                    <time
-                      className="font-mono text-[12px] text-ink-tertiary sm:pt-1"
-                      dateTime={frontmatter.date}
+                    <Link
+                      href={href}
+                      className="grid gap-3 py-8 sm:grid-cols-[10rem_1fr] sm:gap-8 group hover:bg-canvas-elevated transition-colors px-2 -mx-2 rounded"
                     >
-                      {date}
-                    </time>
-                    <div>
-                      <h2 className="text-[clamp(1.25rem,2.4vw,1.625rem)] font-medium tracking-tight text-ink-primary group-hover:text-accent transition-colors mb-2">
-                        {title}
-                      </h2>
-                      <p className="text-[15px] text-ink-secondary leading-relaxed max-w-[60ch]">
-                        {summary}
-                      </p>
-                      <span className="mt-3 inline-flex items-center gap-1.5 text-[13px] text-accent font-medium">
-                        {t("readEssay")} <span aria-hidden>→</span>
-                      </span>
-                    </div>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </section>
+                      <time
+                        className="font-mono text-[12px] text-ink-muted sm:pt-1"
+                        dateTime={frontmatter.date}
+                      >
+                        {date}
+                      </time>
+                      <div>
+                        <h2 className="text-[clamp(1.25rem,2.4vw,1.625rem)] font-medium tracking-tight text-ink-primary group-hover:text-accent transition-colors mb-2">
+                          {title}
+                        </h2>
+                        <p className="text-[15px] text-ink-secondary leading-relaxed max-w-[60ch]">
+                          {summary}
+                        </p>
+                        <span className="mt-3 inline-flex items-center gap-1.5 text-[13px] text-accent font-medium">
+                          {t("readEssay")} <span aria-hidden>→</span>
+                        </span>
+                      </div>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </section>
+      </div>
     </div>
   );
 }

@@ -73,10 +73,10 @@ export function ContactForm({ translations: t }: ContactFormProps) {
   if (formState === "success") {
     return (
       <div className="card">
-        <p className="text-[16px] font-medium text-[color:var(--color-ink-primary)] mb-2">
+        <p className="text-[16px] font-medium text-ink-primary mb-2">
           {t.successTitle}
         </p>
-        <p className="text-[14px] text-[color:var(--color-ink-secondary)] leading-relaxed">
+        <p className="text-[14px] text-ink-secondary leading-relaxed">
           {t.successBody}
         </p>
       </div>
@@ -85,7 +85,7 @@ export function ContactForm({ translations: t }: ContactFormProps) {
 
   return (
     <div className="card">
-      <h2 className="text-[15px] font-medium text-[color:var(--color-ink-primary)] mb-5">
+      <h2 className="text-[15px] font-medium text-ink-primary mb-5">
         {t.formTitle}
       </h2>
       <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
@@ -153,12 +153,12 @@ export function ContactForm({ translations: t }: ContactFormProps) {
         </div>
 
         {validationError && (
-          <p className="text-[13px] text-[color:var(--color-error)]">
+          <p className="text-[13px] text-error">
             {validationError}
           </p>
         )}
         {formState === "error" && (
-          <p className="text-[13px] text-[color:var(--color-error)]">{t.errorBody}</p>
+          <p className="text-[13px] text-error">{t.errorBody}</p>
         )}
 
         <button

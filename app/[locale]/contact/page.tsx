@@ -52,8 +52,9 @@ export default async function ContactPage(props: {
   };
 
   return (
-    <div className="flex flex-col flex-1 px-6 py-24 sm:px-12 lg:px-24 max-w-3xl mx-auto w-full">
-      <p className="label-micro mb-8">{t("stamp")}</p>
+    <div className="page-shell">
+      <div className="page-shell-inner max-w-3xl">
+        <p className="label-micro mb-8">{t("stamp")}</p>
 
       {/* Large serif headline */}
       <h1 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-normal tracking-tight text-ink-primary leading-tight mb-4">
@@ -102,7 +103,6 @@ export default async function ContactPage(props: {
             </a>
           </div>
         </div>
-
       </div>
 
       <div className="hairline mb-16" />
@@ -110,5 +110,6 @@ export default async function ContactPage(props: {
       {/* Contact form — below the fold */}
       <ContactForm translations={formTranslations} />
     </div>
+  </div>
   );
 }

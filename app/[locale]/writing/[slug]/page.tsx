@@ -62,30 +62,34 @@ export default async function WritingSlugPage({ params }: Props) {
   );
 
   return (
-    <div className="flex flex-1 flex-col">
-      <header className="shell pt-28 pb-12 sm:pt-36">
-        <Link
-          href={`/${locale}/writing`}
-          className="link-muted text-[13px] mb-8 inline-block"
-        >
-          ← {t("backToWriting")}
-        </Link>
+    <div className="page-shell">
+      <div className="page-shell-inner">
+        <header className="mb-12 max-w-2xl">
+          <Link
+            href={`/${locale}/writing`}
+            className="inline-block text-[13px] text-ink-tertiary hover:text-ink-primary underline decoration-border hover:decoration-accent underline-offset-4 transition-colors mb-8"
+          >
+            ← {t("backToWriting")}
+          </Link>
 
-        <p className="eyebrow mb-4">
-          <time dateTime={frontmatter.date}>{formattedDate}</time>
-        </p>
+          <p className="label-micro mb-4">
+            <time dateTime={frontmatter.date}>{formattedDate}</time>
+          </p>
 
-        <h1 className="display text-[clamp(2.25rem,5vw,3.75rem)] mb-6 max-w-[20ch]">
-          {title}
-        </h1>
+          <h1 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-normal tracking-tight text-ink-primary leading-tight mb-4 max-w-[20ch]">
+            {title}
+          </h1>
 
-        <p className="lede max-w-[60ch]">{summary}</p>
-      </header>
+          <p className="text-base text-ink-secondary leading-relaxed max-w-[68ch]">
+            {summary}
+          </p>
+        </header>
 
-      <article className="shell pb-24">
-        <hr className="hairline mb-12" />
-        <div className="prose-editorial">{content}</div>
-      </article>
+        <article className="pb-12">
+          <hr className="hairline mb-12" />
+          <div className="max-w-[68ch]">{content}</div>
+        </article>
+      </div>
     </div>
   );
 }

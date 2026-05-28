@@ -8,7 +8,6 @@ import { useTranslations } from "next-intl";
 
 import { useAbout } from "@/components/about-provider";
 import { SpectralAtmosphere } from "@/components/spectral-atmosphere";
-import { SystemsMapSection } from "@/components/systems-map-section";
 import { WorkLedger } from "@/components/work-ledger";
 import {
   FLAGSHIP_ESSAY_SLUG,
@@ -46,7 +45,7 @@ export function HomeLedgerPage({
     const ctx = gsap.context(() => {
       if (motionOk()) {
         gsap.fromTo(
-          [".hero-mark", ".hero-cta > *"],
+          [".hero-mark", ".hero-role", ".hero-cta > *"],
           { opacity: 0, y: 10 },
           {
             opacity: 1,
@@ -58,7 +57,7 @@ export function HomeLedgerPage({
           },
         );
       } else {
-        gsap.set([".hero-mark", ".hero-cta > *"], {
+        gsap.set([".hero-mark", ".hero-role", ".hero-cta > *"], {
           opacity: 1,
           y: 0,
         });
@@ -106,14 +105,15 @@ export function HomeLedgerPage({
         <section className="hero-section hero-section--atmosphere section-block pt-28 sm:pt-32">
           <SpectralAtmosphere />
           <div className="page-inner relative z-[1]">
-            <p className="hero-mark label">{t("heroEyebrow")}</p>
+            <p className="hero-mark hero-eyebrow label">{t("heroEyebrow")}</p>
 
-            <h1 className="hero-mark hero-role">
-              {t("heroRole")}
+            <h1 className="hero-mark hero-display">
+              <span>{t("heroDisplay")}</span>
             </h1>
 
-            <p className="hero-mark hero-role-soft" style={{ marginTop: '0.75rem' }}>
-              {t("heroRoleSoft")}
+            <p className="hero-role">
+              {t("heroRole")}{" "}
+              <span className="hero-role-soft">{t("heroRoleSoft")}</span>
             </p>
 
             <div className="hero-cta">
@@ -124,7 +124,7 @@ export function HomeLedgerPage({
               <Link href={contactHref} className="btn">
                 {t("ctaContact")}
               </Link>
-              <button type="button" className="btn btn-learn-more" onClick={openAbout}>
+              <button type="button" className="btn" onClick={openAbout}>
                 {t("learnMore")}
               </button>
             </div>
@@ -147,8 +147,6 @@ export function HomeLedgerPage({
             </div>
           </div>
         </section>
-
-        <SystemsMapSection locale={locale} />
 
         {essay && (
           <section

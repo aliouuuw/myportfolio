@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Command } from "cmdk";
 import { useAbout } from "@/components/about-provider";
+import { FEATURED_WORK_SLUGS } from "@/lib/work-ledger-types";
 import { useTheme } from "./theme-provider";
 
 export function CommandPalette() {
@@ -124,18 +125,13 @@ export function CommandPalette() {
             </Command.Group>
 
             <Command.Group heading={t("caseStudies")} className="px-2 mt-2">
-              <CommandItem
-                onSelect={() => navigate(`/${locale}/work/everest-finance`)}
-                label={t("caseEverest")}
-              />
-              <CommandItem
-                onSelect={() => navigate(`/${locale}/work/odoo-testing-toolkit`)}
-                label={t("caseOdoo")}
-              />
-              <CommandItem
-                onSelect={() => navigate(`/${locale}/work/bocalbun-retrospective`)}
-                label={t("caseBocalbun")}
-              />
+              {FEATURED_WORK_SLUGS.map((slug) => (
+                <CommandItem
+                  key={slug}
+                  onSelect={() => navigate(`/${locale}/work/${slug}`)}
+                  label={slug.replace(/-/g, " ")}
+                />
+              ))}
             </Command.Group>
 
             {/* Preferences group */}
@@ -148,7 +144,7 @@ export function CommandPalette() {
               <CommandItem
                 onSelect={handleToggleTheme}
                 label={theme === "dark" ? t("switchToLight") : t("switchToDark")}
-                shortcut="D"
+                shortcut="T"
               />
             </Command.Group>
 

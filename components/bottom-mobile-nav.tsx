@@ -12,6 +12,7 @@ export function BottomMobileNav() {
   const { openAbout } = useAbout();
 
   const locale = pathname.split("/")[1] || "en";
+  const homePath = `/${locale}`;
 
   const routeLinks = [
     { href: `/${locale}/work`, label: t("workShort"), ariaLabel: t("work") },
@@ -35,7 +36,8 @@ export function BottomMobileNav() {
       <ul className="flex h-14 items-stretch">
         {routeLinks.map(({ href, label, ariaLabel }) => {
           const isActive =
-            pathname === href || pathname.startsWith(`${href}/`);
+            pathname === href ||
+            (href !== homePath && pathname.startsWith(`${href.split("#")[0]}/`));
 
           return (
             <li key={href} className="flex-1">
