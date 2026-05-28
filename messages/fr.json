@@ -75,8 +75,7 @@
         "ariaLabel": "Index des sections",
         "profile": "profil",
         "work": "projets",
-        "teams": "équipes",
-        "approach": "approche",
+        "about": "parcours",
         "notes": "notes",
         "connect": "contact"
       },
@@ -141,6 +140,7 @@
         "eyebrow": "Parcours pro",
         "title": "Où j'ai travaillé",
         "hint": "Les rôles avec une étude de cas renvoient vers la preuve ci-dessus. Les builds clients sont sur l'index projets.",
+        "contextHint": "Survolez un employeur pour mettre en avant l'étude de cas liée.",
         "clientsLink": "Projets clients",
         "employersLabel": "Employeurs",
         "clientsLabel": "Projets clients",
@@ -255,6 +255,7 @@
         "title": "Travail sélectionné",
         "aside": "Profondeur plutôt qu'étendue. Quatre systèmes phares, pas une galerie de projets.",
         "seeAll": "Tous les projets",
+        "readCase": "Lire l'étude de cas",
         "status": {
           "ACTIVE": "ACTIF",
           "SHIPPED": "LIVRÉ",
@@ -344,6 +345,7 @@
         "eyebrow": "Écrits",
         "title": "Notes de terrain",
         "allLink": "Tous les écrits →",
+        "readEssay": "Lire l'essai",
         "empty": "Les essais arrivent bientôt."
       },
       "connect": {
@@ -396,8 +398,8 @@
     "synthesisEyebrow": "commandes opérateur",
     "sections": "Sur cette page",
     "jumpWork": "Aller au travail sélectionné",
-    "jumpTeams": "Aller au parcours pro",
-    "jumpApproach": "Aller à l'approche",
+    "jumpAbout": "Aller au parcours",
+    "jumpWriting": "Aller aux notes de terrain",
     "jumpConnect": "Aller au contact",
     "home": "Accueil",
     "navigate": "Navigation",

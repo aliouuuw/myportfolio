@@ -296,7 +296,7 @@ export function SynthesisGithubActivity() {
   const user = SYNTHESIS_GITHUB_USER;
 
   return (
-    <div className="md:col-span-5 p-6 md:p-8 rounded-2xl bg-syn-surface border border-syn-border flex flex-col min-h-[280px] md:min-h-[320px]">
+    <div className="md:col-span-4 p-6 md:p-8 rounded-2xl bg-syn-surface border border-syn-border flex flex-col min-h-[280px] md:min-h-full syn-github-panel">
       <div className="flex items-baseline justify-between gap-3 mb-4 shrink-0">
         <h2 className="text-sm font-medium text-syn-ink-strong">{t("title")}</h2>
         <a

@@ -4,6 +4,7 @@ import { TransitionLink } from "@/components/transition-link";
 import { useTranslations } from "next-intl";
 
 import { SynthesisRevealSection } from "@/components/synthesis-reveal-section";
+import { SynthesisSectionHeader } from "@/components/synthesis-section-header";
 
 export type SynthesisWritingEntry = {
   slug: string;
@@ -19,50 +20,79 @@ type SynthesisWritingProps = {
 
 export function SynthesisWriting({ locale, entries }: SynthesisWritingProps) {
   const t = useTranslations("HomePage.synthesis.writing");
+  const [featured, ...rest] = entries;
 
   return (
-    <SynthesisRevealSection id="writing" className="pt-16 scroll-mt-28">
-      <div className="flex items-end justify-between mb-8">
-        <div>
-          <p className="mono-eyebrow">{t("eyebrow")}</p>
-          <h2 className="mt-3 text-2xl font-medium tracking-tight text-syn-ink-strong">
-            {t("title")}
-          </h2>
-        </div>
-        <TransitionLink
-          href={`/${locale}/writing`}
-          className="text-xs text-syn-ink-secondary hover:text-syn-ink transition-colors"
-        >
-          {t("allLink")}
-        </TransitionLink>
-      </div>
+    <SynthesisRevealSection
+      id="writing"
+      className="scroll-mt-28 border-t border-syn-border pt-16 md:pt-20"
+    >
+      <SynthesisSectionHeader
+        index="03"
+        title={t("title")}
+        aside={
+          <TransitionLink
+            href={`/${locale}/writing`}
+            className="text-xs text-syn-ink-secondary hover:text-syn-ink transition-colors"
+          >
+            {t("allLink")}
+          </TransitionLink>
+        }
+      />
+
       {entries.length === 0 ? (
-        <p className="text-sm text-syn-ink-subtle">{t("empty")}</p>
+        <p className="mt-10 text-sm text-syn-ink-subtle">{t("empty")}</p>
       ) : (
-        <div className="flex flex-col gap-3">
-          {entries.map((entry) => (
+        <div className="mt-10 space-y-4">
+          {featured ? (
             <TransitionLink
-              key={entry.slug}
-              href={`/${locale}/writing/${entry.slug}`}
-              className="syn-entity-card group flex flex-col gap-3 p-5 sm:flex-row sm:items-baseline sm:gap-8"
-              style={{ viewTransitionName: `writing-${entry.slug}` }}
+              href={`/${locale}/writing/${featured.slug}`}
+              className="syn-writing-featured syn-entity-card group block p-8 md:p-10"
+              style={{ viewTransitionName: `writing-${featured.slug}` }}
             >
-              <span className="mono text-xs text-syn-ink-subtle w-16 shrink-0">
-                {entry.dateLabel}
-              </span>
-              <div className="flex-1">
-                <h3 className="text-base font-medium text-syn-ink-strong group-hover:text-syn-ink mb-1">
-                  {entry.title}
-                </h3>
-                <p className="text-sm text-syn-ink-secondary leading-relaxed max-w-2xl">
-                  {entry.summary}
-                </p>
-              </div>
-              <span className="text-syn-ink-faint group-hover:text-syn-ink-muted transition-colors shrink-0">
-                ↗
+              <p className="mono-eyebrow">{t("eyebrow")}</p>
+              <time className="mt-4 block mono text-xs text-syn-ink-subtle">
+                {featured.dateLabel}
+              </time>
+              <h3 className="mt-4 text-[clamp(1.5rem,3vw,2.25rem)] font-medium tracking-tight text-syn-ink-strong group-hover:text-syn-accent transition-colors max-w-[22ch] leading-[1.12]">
+                {featured.title}
+              </h3>
+              <p className="mt-4 text-base text-syn-ink-secondary leading-relaxed max-w-2xl">
+                {featured.summary}
+              </p>
+              <span className="mt-8 inline-flex text-sm text-syn-accent opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                {t("readEssay")} →
               </span>
             </TransitionLink>
-          ))}
+          ) : null}
+
+          {rest.length > 0 ? (
+            <div className="flex flex-col gap-3">
+              {rest.map((entry) => (
+                <TransitionLink
+                  key={entry.slug}
+                  href={`/${locale}/writing/${entry.slug}`}
+                  className="syn-entity-card group flex flex-col gap-3 p-5 sm:flex-row sm:items-baseline sm:gap-8"
+                  style={{ viewTransitionName: `writing-${entry.slug}` }}
+                >
+                  <span className="mono text-xs text-syn-ink-subtle w-16 shrink-0">
+                    {entry.dateLabel}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-base font-medium text-syn-ink-strong group-hover:text-syn-accent mb-1 transition-colors">
+                      {entry.title}
+                    </h3>
+                    <p className="text-sm text-syn-ink-secondary leading-relaxed max-w-2xl line-clamp-2">
+                      {entry.summary}
+                    </p>
+                  </div>
+                  <span className="text-syn-ink-faint group-hover:text-syn-accent transition-colors shrink-0">
+                    ↗
+                  </span>
+                </TransitionLink>
+              ))}
+            </div>
+          ) : null}
         </div>
       )}
     </SynthesisRevealSection>

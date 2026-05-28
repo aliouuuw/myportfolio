@@ -30,8 +30,8 @@ export function ScrambleText({ text, className = "", trigger = "hover" }: Scramb
     let iteration = 0;
     const target = originalText.current;
     const interval = setInterval(() => {
-      setDisplayText(() => {
-        return target
+      setDisplayText(() =>
+        target
           .split("")
           .map((char, index) => {
             if (char === " ") return " ";
@@ -40,8 +40,8 @@ export function ScrambleText({ text, className = "", trigger = "hover" }: Scramb
             }
             return CHARS[Math.floor(Math.random() * CHARS.length)];
           })
-          .join("");
-      });
+          .join(""),
+      );
 
       if (iteration >= target.length) {
         clearInterval(interval);

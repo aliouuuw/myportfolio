@@ -20,8 +20,8 @@ import { featuredWorkIndexId } from "@/lib/synthesis-work-index";
 
 const HOME_SECTIONS = [
   { id: "work", key: "jumpWork" as const },
-  { id: "worked-with", key: "jumpTeams" as const },
-  { id: "approach", key: "jumpApproach" as const },
+  { id: "about", key: "jumpAbout" as const },
+  { id: "writing", key: "jumpWriting" as const },
   { id: "connect", key: "jumpConnect" as const },
 ] as const;
 

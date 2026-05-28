@@ -12,8 +12,7 @@ export const SYNTHESIS_BOOT_KEY = "synthesis-boot-v1";
 export const SYNTHESIS_RAIL_SECTIONS = [
   { id: "profile", label: "profile" },
   { id: "work", label: "work" },
-  { id: "worked-with", label: "teams" },
-  { id: "approach", label: "approach" },
+  { id: "about", label: "about" },
   { id: "writing", label: "notes" },
   { id: "connect", label: "connect" },
 ] as const;

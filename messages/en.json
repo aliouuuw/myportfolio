@@ -64,8 +64,7 @@
         "ariaLabel": "Section index",
         "profile": "profile",
         "work": "work",
-        "teams": "teams",
-        "approach": "approach",
+        "about": "about",
         "notes": "notes",
         "connect": "connect"
       },
@@ -130,6 +129,7 @@
         "eyebrow": "Work history",
         "title": "Where I've worked",
         "hint": "Roles with a case study link below. Client and product builds live on the work index.",
+        "contextHint": "Hover an employer to highlight the related case study above.",
         "clientsLink": "Client projects",
         "employersLabel": "Employers",
         "clientsLabel": "Client projects",
@@ -244,6 +244,7 @@
         "title": "Selected work",
         "aside": "Depth over breadth. Four flagship systems, not a project gallery.",
         "seeAll": "All work",
+        "readCase": "Read case study",
         "status": {
           "ACTIVE": "ACTIVE",
           "SHIPPED": "SHIPPED",
@@ -333,6 +334,7 @@
         "eyebrow": "Writing",
         "title": "Field notes",
         "allLink": "All writing →",
+        "readEssay": "Read essay",
         "empty": "Essays coming soon."
       },
       "connect": {
@@ -385,8 +387,8 @@
     "synthesisEyebrow": "operator commands",
     "sections": "On this page",
     "jumpWork": "Jump to selected work",
-    "jumpTeams": "Jump to work history",
-    "jumpApproach": "Jump to approach",
+    "jumpAbout": "Jump to background",
+    "jumpWriting": "Jump to field notes",
     "jumpConnect": "Jump to contact",
     "home": "Home",
     "navigate": "Navigate",

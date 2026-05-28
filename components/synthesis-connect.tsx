@@ -6,10 +6,8 @@ import { useTranslations } from "next-intl";
 import { useCommandPalette } from "@/components/command-palette-provider";
 import { MagneticElement } from "@/components/magnetic-element";
 import { SynthesisRevealSection } from "@/components/synthesis-reveal-section";
-import {
-  SYNTHESIS_EMAIL,
-  SYNTHESIS_GITHUB_USER,
-} from "@/lib/synthesis-data";
+import { SynthesisSectionHeader } from "@/components/synthesis-section-header";
+import { SYNTHESIS_EMAIL } from "@/lib/synthesis-data";
 
 function GlowCardSpotlight({
   children,
@@ -37,27 +35,6 @@ function GlowCardSpotlight({
   );
 }
 
-function ChannelRow({
-  label,
-  value,
-  href,
-}: {
-  label: string;
-  value: string;
-  href: string;
-}) {
-  return (
-    <a href={href} className="group flex flex-col">
-      <span className="mono-eyebrow text-syn-ink-subtle group-hover:text-syn-ink-muted transition-colors">
-        {label}
-      </span>
-      <span className="mt-1 text-syn-ink-strong group-hover:text-syn-ink truncate transition-colors">
-        {value}
-      </span>
-    </a>
-  );
-}
-
 export function SynthesisConnect() {
   const t = useTranslations("HomePage.synthesis.connect");
   const { showCopyToast } = useCommandPalette();
@@ -72,67 +49,46 @@ export function SynthesisConnect() {
   }, [showCopyToast]);
 
   return (
-    <>
-      <SynthesisRevealSection id="connect" className="pt-20 pb-12 scroll-mt-28">
-        <GlowCardSpotlight className="p-10 md:p-14">
-          <p className="mono-eyebrow">{t("eyebrow")}</p>
-          <h2 className="mt-4 text-3xl md:text-4xl font-medium tracking-tight text-syn-ink max-w-2xl leading-[1.1]">
-            {t("title")}
-          </h2>
-          <p className="mt-5 text-syn-ink-muted text-base md:text-lg leading-relaxed max-w-2xl">
-            {t("lead")}
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <MagneticElement>
-              <a
-                href={`mailto:${SYNTHESIS_EMAIL}`}
-                className="syn-btn-primary btn-press inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium hover:scale-[1.02] transition-transform"
-              >
-                {t("ctaEmail")}
-              </a>
-            </MagneticElement>
-            <MagneticElement>
-              <a
-                href="https://wa.me/221777228845"
-                className="syn-btn-secondary btn-press inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-colors"
-              >
-                {t("ctaWhatsApp")}
-              </a>
-            </MagneticElement>
-            <MagneticElement>
-              <button
-                type="button"
-                onClick={copyEmail}
-                className="syn-btn-secondary btn-press inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-colors"
-              >
-                {t("ctaCopyEmail")}
-              </button>
-            </MagneticElement>
-          </div>
-          <div className="mt-10 pt-8 border-t border-syn-border grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4 text-sm">
-            <ChannelRow
-              label={t("channels.email")}
-              value={SYNTHESIS_EMAIL}
+    <SynthesisRevealSection
+      id="connect"
+      className="pt-16 md:pt-24 pb-12 scroll-mt-28 border-t border-syn-border"
+    >
+      <SynthesisSectionHeader index="04" title={t("eyebrow")} />
+      <GlowCardSpotlight className="mt-10 p-10 md:p-14 syn-connect-card">
+        <h2 className="text-[clamp(2rem,5vw,3.75rem)] font-medium tracking-[-0.03em] text-syn-ink max-w-[16ch] leading-[1.05]">
+          {t("title")}
+        </h2>
+        <p className="mt-6 text-syn-ink-muted text-base md:text-lg leading-relaxed max-w-2xl">
+          {t("lead")}
+        </p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <MagneticElement>
+            <a
               href={`mailto:${SYNTHESIS_EMAIL}`}
-            />
-            <ChannelRow
-              label={t("channels.whatsapp")}
-              value={t("channels.whatsappValue")}
+              className="syn-btn-primary btn-press inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium hover:scale-[1.02] transition-transform"
+            >
+              {t("ctaEmail")}
+            </a>
+          </MagneticElement>
+          <MagneticElement>
+            <a
               href="https://wa.me/221777228845"
-            />
-            <ChannelRow
-              label={t("channels.linkedin")}
-              value={t("channels.linkedinValue")}
-              href="https://www.linkedin.com/in/aliouuuw"
-            />
-            <ChannelRow
-              label={t("channels.github")}
-              value={`@${SYNTHESIS_GITHUB_USER}`}
-              href={`https://github.com/${SYNTHESIS_GITHUB_USER}`}
-            />
-          </div>
-        </GlowCardSpotlight>
-      </SynthesisRevealSection>
-    </>
+              className="syn-btn-secondary btn-press inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-colors"
+            >
+              {t("ctaWhatsApp")}
+            </a>
+          </MagneticElement>
+          <MagneticElement>
+            <button
+              type="button"
+              onClick={copyEmail}
+              className="syn-btn-secondary btn-press inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-colors"
+            >
+              {t("ctaCopyEmail")}
+            </button>
+          </MagneticElement>
+        </div>
+      </GlowCardSpotlight>
+    </SynthesisRevealSection>
   );
 }

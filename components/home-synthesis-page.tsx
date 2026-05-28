@@ -3,22 +3,15 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { SynthesisAboutStrip } from "@/components/synthesis-about-strip";
-import { SynthesisApproach } from "@/components/synthesis-approach";
 import { SynthesisConnect } from "@/components/synthesis-connect";
 import { SynthesisGithubActivity } from "@/components/synthesis-github-activity";
 import { SynthesisHero } from "@/components/synthesis-hero";
-import { SynthesisScrollRail } from "@/components/synthesis-scroll-rail";
-import { SynthesisSelectedWork } from "@/components/synthesis-selected-work";
-import { SynthesisWorkedWith } from "@/components/synthesis-worked-with";
+import { SynthesisProofSection } from "@/components/synthesis-proof-section";
 import {
   SynthesisWriting,
   type SynthesisWritingEntry,
 } from "@/components/synthesis-writing";
-import {
-  useActiveSection,
-  useScrollProgress,
-} from "@/hooks/use-active-section";
-import { SYNTHESIS_RAIL_SECTIONS } from "@/lib/synthesis-data";
+import { useScrollProgress } from "@/hooks/use-active-section";
 
 type HomeSynthesisPageProps = {
   locale: string;
@@ -65,8 +58,6 @@ export function HomeSynthesisPage({ locale, writing }: HomeSynthesisPageProps) {
   const reducedMotion = usePrefersReducedMotion();
   const ambientHour = useAmbientHour();
   const scrollProgress = useScrollProgress();
-  const sectionIds = SYNTHESIS_RAIL_SECTIONS.map((s) => s.id);
-  const activeSection = useActiveSection(sectionIds);
 
   const onHeroReady = useCallback(() => setHeroReady(true), []);
 
@@ -92,35 +83,29 @@ export function HomeSynthesisPage({ locale, writing }: HomeSynthesisPageProps) {
         className="synthesis-bg-layers fixed inset-0 pointer-events-none -z-10 overflow-hidden"
         aria-hidden
       >
-        <div className="aurora-orb aurora-orb--1" />
-        <div className="aurora-orb aurora-orb--2" />
-        <div className="aurora-orb aurora-orb--3" />
+        <div className="syn-hero-wash" />
         <div className="absolute inset-0 bg-grain" />
-        <div className="absolute inset-0 bg-vignette" />
+        <div className="ambient-accent top-[-12%] left-[-8%]" />
+        <div className="ambient-accent ambient-accent--secondary bottom-[8%] right-[-12%]" />
+        <div className="syn-floor-glow" />
       </div>
 
-      <SynthesisScrollRail active={activeSection} />
-
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 xl:pl-24 space-y-5 md:space-y-6 pt-6 md:pt-10 pb-16">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 syn-page-flow pt-6 md:pt-10 pb-20">
         <section id="profile" className="grid-bento scroll-mt-28">
           <SynthesisHero onHeroReady={onHeroReady} />
           <SynthesisGithubActivity />
         </section>
 
-        <SynthesisSelectedWork
+        <SynthesisProofSection
           locale={locale}
           highlightedWork={highlightedWork}
-        />
-
-        <SynthesisWorkedWith
-          locale={locale}
           onHighlightChange={setHighlightedWork}
         />
 
         <SynthesisAboutStrip />
 
-        <SynthesisApproach />
         <SynthesisWriting locale={locale} entries={writing} />
+
         <SynthesisConnect />
       </div>
     </div>

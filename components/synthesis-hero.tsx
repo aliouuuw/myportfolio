@@ -131,7 +131,7 @@ export function SynthesisHero({ onHeroReady }: SynthesisHeroProps) {
   return (
     <GlowCardHero
       spotlight
-      className="md:col-span-7 p-8 md:p-12 min-h-[320px] justify-between"
+      className="md:col-span-8 p-8 md:p-12 lg:p-14 min-h-[min(72vh,520px)] justify-between"
     >
       {!reducedMotion && <div className="scan-bar" aria-hidden />}
       <div className="flex flex-wrap justify-between items-start gap-3">

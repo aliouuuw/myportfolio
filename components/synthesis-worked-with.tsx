@@ -106,7 +106,6 @@ export function SynthesisWorkedWith({
     <SynthesisRevealSection id="worked-with" className="pt-16 scroll-mt-28">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <span className="section-marker">{t("eyebrow")}</span>
           <h2 className="text-2xl font-medium tracking-tight text-syn-ink-strong">
             {t("title")}
           </h2>
