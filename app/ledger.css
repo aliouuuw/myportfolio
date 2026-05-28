@@ -1545,3 +1545,38 @@
     animation: none;
   }
 }
+
+/* Inner routes (work index + case studies) — synthesis dark shell, theme-independent */
+
+.site-synthesis-inner {
+  background-color: #050505;
+  color: #ededed;
+  --color-ink-primary: #ededed;
+  --color-ink-secondary: rgba(255, 255, 255, 0.6);
+  --color-ink-tertiary: rgba(255, 255, 255, 0.45);
+  --color-ink-muted: rgba(255, 255, 255, 0.35);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-strong: rgba(255, 255, 255, 0.15);
+  --color-canvas-elevated: #0a0a0a;
+  --color-accent: rgb(52, 211, 153);
+}
+
+.site-synthesis-inner .hairline {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+}
+
+.site-synthesis-inner .link {
+  color: rgba(52, 211, 153, 0.9);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.site-synthesis-inner .link:hover {
+  color: rgb(52, 211, 153);
+}

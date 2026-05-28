@@ -2,9 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
+import { WorkIndexList } from "@/components/work-index-list";
 import { routing } from "@/i18n/routing";
 import { getWorkSlugs, readWorkFrontmatter } from "@/lib/mdx";
 import { buildCanonical } from "@/lib/metadata";
+import {
+  featuredWorkIndexId,
+} from "@/lib/synthesis-work-index";
 import { sortSupportingSlugs } from "@/lib/work-index-order";
 import {
   FEATURED_WORK_SLUGS,
@@ -31,11 +35,7 @@ export async function generateMetadata({
   };
 }
 
-function localized(
-  locale: string,
-  en: string,
-  fr: string,
-): string {
+function localized(locale: string, en: string, fr: string): string {
   return locale === "fr" ? fr : en;
 }
 
@@ -55,6 +55,7 @@ export default async function WorkPage(props: {
   setRequestLocale(locale);
 
   const t = await getTranslations("WorkPage");
+  const tWork = await getTranslations("HomePage.synthesis.work");
 
   const allSlugs = await getWorkSlugs();
   const featuredSet = new Set<string>(FEATURED_WORK_SLUGS);
@@ -72,6 +73,7 @@ export default async function WorkPage(props: {
         domain: fm.domain,
         period: fm.period ?? fm.date,
         status,
+        indexId: featuredWorkIndexId(slug),
       };
     }),
   );
@@ -90,71 +92,43 @@ export default async function WorkPage(props: {
     }),
   );
 
+  const statusLabels: Record<WorkLedgerStatus, string> = {
+    active: t(statusLabelKey.active),
+    shipped: t(statusLabelKey.shipped),
+    archived: t(statusLabelKey.archived),
+  };
+
   return (
-    <div className="site-ledger mx-auto flex w-full max-w-[var(--n-page)] flex-1 flex-col px-[var(--n-gutter)] py-24 pb-28 text-[var(--n-fg)]">
-      <header className="mb-12 max-w-2xl">
-        <h1 className="font-serif text-4xl font-normal tracking-tight mb-3">
-          {t("title")}
-        </h1>
-        <p className="text-[var(--n-fg-secondary)] leading-relaxed">
-          {t("subtitle")}
+    <div className="site-synthesis site-synthesis-inner min-h-dvh pb-20">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 xl:pl-24 pt-20 pb-16">
+        <header className="mb-12 max-w-2xl">
+          <p className="mono-eyebrow mb-3">{t("indexEyebrow")}</p>
+          <h1 className="text-[clamp(2rem,4vw,2.75rem)] font-medium tracking-tight text-white/90 mb-4">
+            {t("title")}
+          </h1>
+          <p className="text-white/55 leading-relaxed">{t("subtitle")}</p>
+        </header>
+
+        <WorkIndexList
+          locale={locale}
+          featured={featured}
+          other={other}
+          statusLabels={statusLabels}
+          featuredEyebrow={tWork("eyebrow")}
+          featuredTitle={tWork("title")}
+          featuredAside={tWork("aside")}
+          moreLabel={t("moreWork")}
+        />
+
+        <p className="mt-14">
+          <Link
+            href={`/${locale}`}
+            className="mono text-xs text-white/40 hover:text-white/70 transition-colors"
+          >
+            ← {t("backToHome")}
+          </Link>
         </p>
-      </header>
-
-      <ul className="work-accordion flex flex-col border-t border-[color:var(--n-border)]">
-        {featured.map((entry) => (
-          <li key={entry.slug} className="border-b border-[color:var(--n-border)]">
-            <Link
-              href={`/${locale}/work/${entry.slug}`}
-              className="flex flex-wrap items-baseline justify-between gap-3 py-5 transition-colors hover:bg-[var(--n-bg-surface)] min-h-[44px] px-1 -mx-1"
-            >
-              <div className="min-w-0 flex-1">
-                <p className="font-medium tracking-tight truncate">
-                  {entry.title}
-                </p>
-                <p className="font-mono text-[10px] uppercase tracking-wide text-[var(--n-fg-muted)] mt-1">
-                  {entry.domain}
-                </p>
-              </div>
-              <div className="flex items-center gap-4 shrink-0 font-mono text-[11px] text-[var(--n-fg-muted)]">
-                <span className="hidden sm:inline">{entry.period}</span>
-                <span
-                  className={`work-accordion-status ${entry.status} uppercase text-[10px] tracking-wider`}
-                >
-                  {t(statusLabelKey[entry.status])}
-                </span>
-              </div>
-            </Link>
-          </li>
-        ))}
-      </ul>
-
-      {other.length > 0 ? (
-        <>
-          <p className="label mt-12 mb-4">{t("moreWork")}</p>
-          <ul className="flex flex-col divide-y divide-[color:var(--n-border)] border-t border-[color:var(--n-border)]">
-            {other.map((entry) => (
-              <li key={entry.slug}>
-                <Link
-                  href={`/${locale}/work/${entry.slug}`}
-                  className="flex flex-wrap items-baseline justify-between gap-3 py-4 text-[var(--n-fg-secondary)] hover:text-[var(--n-fg)] transition-colors min-h-[44px]"
-                >
-                  <span>{entry.title}</span>
-                  <span className="font-mono text-[10px] text-[var(--n-fg-muted)]">
-                    {entry.domain}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </>
-      ) : null}
-
-      <p className="mt-12">
-        <Link href={`/${locale}`} className="link-subtle label-sm">
-          ← {t("backToHome")}
-        </Link>
-      </p>
+      </div>
     </div>
   );
 }

@@ -460,6 +460,7 @@
   },
   "WorkPage": {
     "title": "Work",
+    "indexEyebrow": "Case studies",
     "subtitle": "Operational systems I've built or led.",
     "viewCaseStudy": "View case study",
     "confidential": "Confidential",

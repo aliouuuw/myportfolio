@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { CaseStudyHeader } from "@/components/case-study-header";
+import { CaseStudyProofStrip } from "@/components/case-study-proof-strip";
 import { routing } from "@/i18n/routing";
 import { getWorkSlugs, compileWorkBySlug } from "@/lib/mdx";
 import { buildCanonical } from "@/lib/metadata";
@@ -74,7 +75,7 @@ export default async function WorkSlugPage({ params }: Props) {
     : undefined;
 
   return (
-    <div className="flex flex-1 flex-col">
+    <div className="site-synthesis site-synthesis-inner flex min-h-dvh flex-1 flex-col pb-16">
       <CaseStudyHeader
         title={title}
         summary={summary}
@@ -90,43 +91,45 @@ export default async function WorkSlugPage({ params }: Props) {
         confidentialLabel={t("confidential")}
       />
 
-      <article className="mx-auto w-full max-w-5xl px-6 pb-12 sm:px-12 lg:px-24">
+      <CaseStudyProofStrip outcome={frontmatter.outcome} />
+
+      <article className="mx-auto w-full max-w-5xl px-6 pb-12 pt-8 sm:px-12 lg:px-24">
         <div className="hairline mb-10" />
         <div className="max-w-[68ch]">{content}</div>
       </article>
 
       {(prev || next) && (
         <nav
-          className="mx-auto w-full max-w-5xl px-6 py-16 sm:px-12 lg:px-24"
+          className="mx-auto w-full max-w-5xl px-6 py-12 sm:px-12 lg:px-24"
           aria-label={t("caseNavAria")}
         >
           <div className="hairline mb-8" />
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-0 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-white/5 border-y border-white/5">
             {prev ? (
               <Link
                 href={`/${locale}/work/${prev.slug}`}
-                className="group rounded-lg border border-border p-5 transition-colors hover:border-border-strong hover:bg-canvas-elevated focus:outline-none focus-visible:ring-1 focus-visible:ring-accent"
+                className="group flex flex-col gap-2 py-6 sm:px-6 sm:first:pl-0 hover:bg-white/[0.02] transition-colors -mx-4 px-4 sm:mx-0 sm:px-6"
               >
-                <p className="mb-2 font-mono text-[10px] text-ink-tertiary">
+                <p className="mono text-[10px] text-white/40">
                   ← {t("previous")}
                 </p>
-                <p className="font-serif text-base text-ink-secondary transition-colors group-hover:text-ink-primary">
+                <p className="text-base font-medium text-white/80 transition-colors group-hover:text-white">
                   {prev.title}
                 </p>
               </Link>
             ) : (
-              <div />
+              <div className="hidden sm:block" />
             )}
 
             {next ? (
               <Link
                 href={`/${locale}/work/${next.slug}`}
-                className="group rounded-lg border border-border p-5 text-right transition-colors hover:border-border-strong hover:bg-canvas-elevated focus:outline-none focus-visible:ring-1 focus-visible:ring-accent sm:col-start-2"
+                className="group flex flex-col gap-2 py-6 sm:px-6 sm:text-right hover:bg-white/[0.02] transition-colors -mx-4 px-4 sm:mx-0"
               >
-                <p className="mb-2 font-mono text-[10px] text-ink-tertiary">
+                <p className="mono text-[10px] text-white/40">
                   {t("next")} →
                 </p>
-                <p className="font-serif text-base text-ink-secondary transition-colors group-hover:text-ink-primary">
+                <p className="text-base font-medium text-white/80 transition-colors group-hover:text-white">
                   {next.title}
                 </p>
               </Link>
@@ -135,10 +138,10 @@ export default async function WorkSlugPage({ params }: Props) {
         </nav>
       )}
 
-      <div className="mx-auto w-full max-w-5xl px-6 pb-16 text-center sm:px-12 lg:px-24">
+      <div className="mx-auto w-full max-w-5xl px-6 pb-8 text-center sm:px-12 lg:px-24">
         <Link
           href={`/${locale}/work`}
-          className="text-sm text-ink-tertiary underline decoration-border underline-offset-4 transition-colors hover:text-ink-secondary"
+          className="mono text-xs text-white/40 hover:text-white/70 transition-colors"
         >
           {t("backToWork")}
         </Link>

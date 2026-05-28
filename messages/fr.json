@@ -471,6 +471,7 @@
   },
   "WorkPage": {
     "title": "Projets",
+    "indexEyebrow": "Études de cas",
     "subtitle": "Systèmes opérationnels que j'ai construits ou dirigés.",
     "viewCaseStudy": "Voir l'étude de cas",
     "confidential": "Confidentiel",
