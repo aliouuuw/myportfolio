@@ -244,6 +244,86 @@
             "stack": "Bun · TypeScript · PostgreSQL · RLS"
           }
         }
+      },
+      "capabilities": {
+        "eyebrow": "Focus",
+        "title": "What I build",
+        "items": {
+          "productSystems": {
+            "label": "Product systems engineering",
+            "desc": "Bridging business workflows and software. Internal tools, admin panels, and customer surfaces."
+          },
+          "finance": {
+            "label": "Finance & fintech",
+            "desc": "Open-banking APIs, CRM workflows, and secure foundations for regulated markets."
+          },
+          "erp": {
+            "label": "ERP & BI",
+            "desc": "Odoo modules, CI/CD pipelines, and acceptance testing for operational teams."
+          },
+          "ai": {
+            "label": "AI-assisted delivery",
+            "desc": "Agent-ready repositories and workflows that multiply engineering context."
+          }
+        }
+      },
+      "approach": {
+        "eyebrow": "Approach",
+        "title": "Start from the workflow, not the framework.",
+        "lead": "The useful work is often less glamorous than the architecture: a reliable CRM state transition, a migration test that catches regressions, a CI pipeline that saves a team from manual checking.",
+        "principlesLabel": "Principles",
+        "principles": {
+          "p1": "Prefer evidence over breadth.",
+          "p2": "A system is done when someone can operate it.",
+          "p3": "Architecture should reduce drift, not impress engineers.",
+          "p4": "Use AI to increase throughput without losing ownership."
+        },
+        "stackLabel": "Stack",
+        "process": {
+          "discovery": {
+            "title": "Discovery",
+            "desc": "Workflows, spreadsheets, pain. Where the business actually leaks time."
+          },
+          "architecture": {
+            "title": "Architecture",
+            "desc": "One stack. Boring choices. Documented tradeoffs. No premature abstraction."
+          },
+          "ship": {
+            "title": "Ship & operate",
+            "desc": "Live systems with real users. Iterate based on operational reality, not aesthetics."
+          }
+        },
+        "stack": {
+          "language": { "label": "Language", "value": "TypeScript, Python" },
+          "runtime": { "label": "Runtime", "value": "Bun, Node, Deno" },
+          "frontend": { "label": "Frontend", "value": "Next.js, React, Tailwind" },
+          "backend": { "label": "Backend", "value": "Postgres, Drizzle, RLS" },
+          "erpQa": { "label": "ERP / QA", "value": "Odoo 18, Robot, Playwright" },
+          "infra": { "label": "Infra", "value": "Vercel, Resend, Cloudflare" }
+        }
+      },
+      "writing": {
+        "eyebrow": "Writing",
+        "title": "Field notes",
+        "allLink": "All writing →",
+        "empty": "Essays coming soon."
+      },
+      "connect": {
+        "eyebrow": "Contact",
+        "title": "Tell me what you are building and where it hurts.",
+        "lead": "Fintech, ERP migrations, internal tools, or AI-assisted delivery. Two slots for Q3 2026. I reply within 48 hours on business days.",
+        "ctaEmail": "Send a message →",
+        "ctaWhatsApp": "WhatsApp ↗",
+        "ctaCopyEmail": "Copy email",
+        "copyToast": "copied to clipboard",
+        "channels": {
+          "email": "Email",
+          "whatsapp": "WhatsApp",
+          "whatsappValue": "+221 77 722 88 45",
+          "linkedin": "LinkedIn",
+          "linkedinValue": "/in/aliouuuw",
+          "github": "GitHub"
+        }
       }
     }
   },

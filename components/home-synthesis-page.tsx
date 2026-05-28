@@ -3,13 +3,27 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
+import { SynthesisApproach } from "@/components/synthesis-approach";
+import { SynthesisCapabilities } from "@/components/synthesis-capabilities";
+import { SynthesisConnect } from "@/components/synthesis-connect";
 import { SynthesisGithubActivity } from "@/components/synthesis-github-activity";
 import { SynthesisHero } from "@/components/synthesis-hero";
+import { SynthesisScrollRail } from "@/components/synthesis-scroll-rail";
 import { SynthesisSelectedWork } from "@/components/synthesis-selected-work";
 import { SynthesisWorkedWith } from "@/components/synthesis-worked-with";
+import {
+  SynthesisWriting,
+  type SynthesisWritingEntry,
+} from "@/components/synthesis-writing";
+import {
+  useActiveSection,
+  useScrollProgress,
+} from "@/hooks/use-active-section";
+import { SYNTHESIS_RAIL_SECTIONS } from "@/lib/synthesis-data";
 
 type HomeSynthesisPageProps = {
   locale: string;
+  writing: SynthesisWritingEntry[];
 };
 
 function usePrefersReducedMotion() {
@@ -49,7 +63,7 @@ function useAmbientHour() {
   return ambientHour;
 }
 
-export function HomeSynthesisPage({ locale }: HomeSynthesisPageProps) {
+export function HomeSynthesisPage({ locale, writing }: HomeSynthesisPageProps) {
   const tBg = useTranslations("HomePage.synthesis.background");
   const tCred = useTranslations("HomePage.synthesis.credentials");
   const tChess = useTranslations("HomePage.synthesis.chess");
@@ -58,6 +72,9 @@ export function HomeSynthesisPage({ locale }: HomeSynthesisPageProps) {
   const [highlightedWork, setHighlightedWork] = useState<string[]>([]);
   const reducedMotion = usePrefersReducedMotion();
   const ambientHour = useAmbientHour();
+  const scrollProgress = useScrollProgress();
+  const sectionIds = SYNTHESIS_RAIL_SECTIONS.map((s) => s.id);
+  const activeSection = useActiveSection(sectionIds);
 
   const onHeroReady = useCallback(() => setHeroReady(true), []);
 
@@ -73,12 +90,20 @@ export function HomeSynthesisPage({ locale }: HomeSynthesisPageProps) {
       data-locale={locale}
       className={`site-synthesis min-h-dvh bg-[#050505] text-[#ededed] font-sans selection:bg-white/20 ${ambientClass} ${heroReady ? "hero-ready" : ""} ${reducedMotion ? "motion-reduced" : ""}`}
     >
+      <div
+        className="scroll-progress"
+        style={{ width: "100%", transform: `scaleX(${scrollProgress})` }}
+        aria-hidden
+      />
+
       <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-dot-grid" aria-hidden>
         <div className="absolute inset-0 bg-grain" />
         <div className="ambient-accent top-[-15%] left-[-5%]" />
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 xl:pl-16 space-y-5 md:space-y-6 pt-4 md:pt-8 pb-16">
+      <SynthesisScrollRail active={activeSection} />
+
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 xl:pl-24 space-y-5 md:space-y-6 pt-4 md:pt-8 pb-16">
         <section id="profile" className="grid-bento scroll-mt-28">
           <SynthesisHero onHeroReady={onHeroReady} />
           <SynthesisGithubActivity />
@@ -148,10 +173,14 @@ export function HomeSynthesisPage({ locale }: HomeSynthesisPageProps) {
         </section>
 
         <SynthesisWorkedWith onHighlightChange={setHighlightedWork} />
+        <SynthesisCapabilities />
         <SynthesisSelectedWork
           locale={locale}
           highlightedWork={highlightedWork}
         />
+        <SynthesisApproach />
+        <SynthesisWriting locale={locale} entries={writing} />
+        <SynthesisConnect />
       </div>
     </div>
   );

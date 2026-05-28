@@ -255,6 +255,86 @@
             "stack": "Bun · TypeScript · PostgreSQL · RLS"
           }
         }
+      },
+      "capabilities": {
+        "eyebrow": "Focus",
+        "title": "Ce que je construis",
+        "items": {
+          "productSystems": {
+            "label": "Ingénierie systèmes produit",
+            "desc": "Relier workflows métier et logiciel. Outils internes, back-offices et surfaces client."
+          },
+          "finance": {
+            "label": "Finance & fintech",
+            "desc": "APIs open banking, workflows CRM et fondations sécurisées pour marchés régulés."
+          },
+          "erp": {
+            "label": "ERP & BI",
+            "desc": "Modules Odoo, pipelines CI/CD et tests d'acceptation pour équipes opérationnelles."
+          },
+          "ai": {
+            "label": "Livraison assistée par IA",
+            "desc": "Dépôts agent-ready et workflows qui multiplient le contexte ingénierie."
+          }
+        }
+      },
+      "approach": {
+        "eyebrow": "Approche",
+        "title": "Partir du workflow, pas du framework.",
+        "lead": "Le travail utile est souvent moins glamour que l'architecture : une transition CRM fiable, un test de migration qui attrape les régressions, un pipeline CI qui évite les contrôles manuels.",
+        "principlesLabel": "Principes",
+        "principles": {
+          "p1": "Privilégier la preuve à l'étendue.",
+          "p2": "Un système est fini quand quelqu'un peut l'exploiter.",
+          "p3": "L'architecture doit réduire la dérive, pas impressionner les ingénieurs.",
+          "p4": "Utiliser l'IA pour augmenter le débit sans perdre la responsabilité."
+        },
+        "stackLabel": "Stack",
+        "process": {
+          "discovery": {
+            "title": "Discovery",
+            "desc": "Workflows, tableurs, points de friction. Où le métier perd vraiment du temps."
+          },
+          "architecture": {
+            "title": "Architecture",
+            "desc": "Une stack. Choix sobres. Compromis documentés. Pas d'abstraction prématurée."
+          },
+          "ship": {
+            "title": "Ship & operate",
+            "desc": "Systèmes live avec de vrais utilisateurs. Itérer sur la réalité opérationnelle, pas l'esthétique."
+          }
+        },
+        "stack": {
+          "language": { "label": "Langage", "value": "TypeScript, Python" },
+          "runtime": { "label": "Runtime", "value": "Bun, Node, Deno" },
+          "frontend": { "label": "Frontend", "value": "Next.js, React, Tailwind" },
+          "backend": { "label": "Backend", "value": "Postgres, Drizzle, RLS" },
+          "erpQa": { "label": "ERP / QA", "value": "Odoo 18, Robot, Playwright" },
+          "infra": { "label": "Infra", "value": "Vercel, Resend, Cloudflare" }
+        }
+      },
+      "writing": {
+        "eyebrow": "Écrits",
+        "title": "Notes de terrain",
+        "allLink": "Tous les écrits →",
+        "empty": "Les essais arrivent bientôt."
+      },
+      "connect": {
+        "eyebrow": "Contact",
+        "title": "Dites-moi ce que vous construisez et où ça coince.",
+        "lead": "Fintech, migrations ERP, outils internes ou livraison assistée par IA. Deux créneaux T3 2026. Réponse sous 48 h les jours ouvrés.",
+        "ctaEmail": "Envoyer un message →",
+        "ctaWhatsApp": "WhatsApp ↗",
+        "ctaCopyEmail": "Copier l'email",
+        "copyToast": "copié dans le presse-papiers",
+        "channels": {
+          "email": "Email",
+          "whatsapp": "WhatsApp",
+          "whatsappValue": "+221 77 722 88 45",
+          "linkedin": "LinkedIn",
+          "linkedinValue": "/in/aliouuuw",
+          "github": "GitHub"
+        }
       }
     }
   },
