@@ -39,12 +39,12 @@ export function SynthesisWriting({ locale, entries }: SynthesisWritingProps) {
       {entries.length === 0 ? (
         <p className="text-sm text-syn-ink-subtle">{t("empty")}</p>
       ) : (
-        <div className="divide-y divide-syn-border border-y border-syn-border">
+        <div className="flex flex-col gap-3">
           {entries.map((entry) => (
             <Link
               key={entry.slug}
               href={`/${locale}/writing/${entry.slug}`}
-              className="group flex flex-col sm:flex-row sm:items-baseline gap-3 sm:gap-8 py-6 hover:bg-syn-row-hover transition-colors -mx-4 px-4 rounded-lg"
+              className="syn-entity-card group flex flex-col gap-3 p-5 sm:flex-row sm:items-baseline sm:gap-8"
             >
               <span className="mono text-xs text-syn-ink-subtle w-16 shrink-0">
                 {entry.dateLabel}

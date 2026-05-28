@@ -8,8 +8,6 @@ import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { MainShell } from "@/components/main-shell";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ThemeInitScript } from "@/components/theme-init-script";
-import { AboutProvider } from "@/components/about-provider";
 import { CommandPalette } from "@/components/command-palette";
 import { CommandPaletteProvider } from "@/components/command-palette-provider";
 import { routing } from "@/i18n/routing";
@@ -91,16 +89,11 @@ export default async function LocaleLayout({
 
   return (
     <>
-      {/* Render outside the client provider tree so the script lives in pure
-          RSC space and isn't re-evaluated by React's client renderer. */}
-      <ThemeInitScript />
       <NextIntlClientProvider messages={messages}>
         <ThemeProvider>
           <CommandPaletteProvider>
-            <AboutProvider>
-              <MainShell>{children}</MainShell>
-              <CommandPalette />
-            </AboutProvider>
+            <MainShell>{children}</MainShell>
+            <CommandPalette />
           </CommandPaletteProvider>
         </ThemeProvider>
       </NextIntlClientProvider>

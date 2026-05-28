@@ -60,6 +60,16 @@
         "availableShort": "Available",
         "openCommand": "Open command palette"
       },
+      "rail": {
+        "ariaLabel": "Section index",
+        "profile": "profile",
+        "teams": "teams",
+        "focus": "focus",
+        "work": "work",
+        "approach": "approach",
+        "notes": "notes",
+        "connect": "connect"
+      },
       "hero": {
         "location": "Dakar, Senegal",
         "languages": "FR / EN",

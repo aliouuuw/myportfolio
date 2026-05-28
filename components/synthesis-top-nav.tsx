@@ -3,39 +3,20 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
-import { useAbout } from "@/components/about-provider";
 import { useCommandPalette } from "@/components/command-palette-provider";
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { ThemeToggle } from "@/components/theme-toggle";
 
-type NavItem =
-  | {
-      kind: "link";
-      key: "work" | "writing" | "contact";
-      matchPath: string;
-      href: (locale: string) => string;
-    }
-  | { kind: "about"; key: "about" };
-
-const NAV_ITEMS: readonly NavItem[] = [
+const NAV_ITEMS = [
+  { key: "work" as const, matchPath: "work", href: (l: string) => `/${l}/work` },
   {
-    kind: "link",
-    key: "work",
-    matchPath: "work",
-    href: (locale) => `/${locale}/work`,
-  },
-  {
-    kind: "link",
-    key: "writing",
+    key: "writing" as const,
     matchPath: "writing",
-    href: (locale) => `/${locale}/writing`,
+    href: (l: string) => `/${l}/writing`,
   },
-  { kind: "about", key: "about" },
   {
-    kind: "link",
-    key: "contact",
-    matchPath: "contact",
-    href: (locale) => `/${locale}/contact`,
+    key: "contact" as const,
+    href: (l: string) => `/${l}#connect`,
   },
 ] as const;
 
@@ -48,7 +29,6 @@ export function SynthesisTopNav({ locale, pathname }: SynthesisTopNavProps) {
   const t = useTranslations("HomePage.synthesis.nav");
   const tNav = useTranslations("Nav");
   const { toggle } = useCommandPalette();
-  const { openAbout } = useAbout();
 
   const homePath = `/${locale}`;
 
@@ -82,20 +62,8 @@ export function SynthesisTopNav({ locale, pathname }: SynthesisTopNavProps) {
 
         <div className="flex items-center gap-1">
           {NAV_ITEMS.map((item) => {
-            if (item.kind === "about") {
-              return (
-                <button
-                  key="about"
-                  type="button"
-                  onClick={openAbout}
-                  className={`hidden md:inline-flex rounded-full px-3 py-1.5 text-xs transition-colors ${pillIdle}`}
-                >
-                  {tNav(item.key)}
-                </button>
-              );
-            }
-
-            const active = isLinkActive(item.matchPath);
+            const active =
+              "matchPath" in item ? isLinkActive(item.matchPath) : false;
             return (
               <Link
                 key={item.key}
@@ -123,14 +91,14 @@ export function SynthesisTopNav({ locale, pathname }: SynthesisTopNavProps) {
 
           <ThemeToggle nav />
 
-          <Link
-            href={`/${locale}/contact`}
-            className="ml-1 inline-flex items-center gap-2 rounded-full border border-syn-border bg-syn-surface px-3 py-1.5 text-xs font-medium text-syn-ink-muted transition-colors hover:text-syn-ink"
+          <span
+            className="ml-1 inline-flex items-center gap-2 rounded-full border border-syn-border bg-syn-surface px-3 py-1.5 text-xs font-medium text-syn-ink-muted"
+            title={t("available")}
           >
             <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-emerald-500 text-emerald-500" />
             <span className="hidden sm:inline">{t("available")}</span>
             <span className="sm:hidden">{t("availableShort")}</span>
-          </Link>
+          </span>
         </div>
       </div>
     </header>

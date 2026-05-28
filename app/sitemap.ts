@@ -5,7 +5,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://aliouwade.com";
 
 const locales = ["en", "fr"] as const;
 
-const staticPaths = ["", "/work", "/writing", "/about", "/contact"] as const;
+const staticPaths = ["", "/work", "/writing"] as const;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [workSlugs, writingSlugs] = await Promise.all([

@@ -47,7 +47,7 @@ export default async function WritingPage(props: {
   );
 
   return (
-    <div className="page-shell">
+    <div className="site-synthesis-page page-shell">
       <div className="page-shell-inner">
         <header className="mb-12 max-w-2xl">
           <h1 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-normal tracking-tight text-ink-primary leading-tight mb-4">
@@ -66,7 +66,7 @@ export default async function WritingPage(props: {
               </p>
             </div>
           ) : (
-            <ul className="flex flex-col border-t border-border">
+            <ul className="flex flex-col gap-3">
               {sorted.map(({ slug, frontmatter }) => {
                 const title =
                   locale === "fr" ? frontmatter.titleFr : frontmatter.title;
@@ -79,13 +79,10 @@ export default async function WritingPage(props: {
                 );
 
                 return (
-                  <li
-                    key={slug}
-                    className="border-b border-border"
-                  >
+                  <li key={slug}>
                     <Link
                       href={href}
-                      className="grid gap-3 py-8 sm:grid-cols-[10rem_1fr] sm:gap-8 group hover:bg-canvas-elevated transition-colors px-2 -mx-2 rounded"
+                      className="syn-entity-card grid gap-3 p-5 sm:grid-cols-[10rem_1fr] sm:gap-8 group"
                     >
                       <time
                         className="font-mono text-[12px] text-ink-muted sm:pt-1"

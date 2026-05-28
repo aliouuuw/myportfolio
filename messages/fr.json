@@ -71,6 +71,16 @@
         "availableShort": "Disponible",
         "openCommand": "Ouvrir la palette de commandes"
       },
+      "rail": {
+        "ariaLabel": "Index des sections",
+        "profile": "profil",
+        "teams": "équipes",
+        "focus": "focus",
+        "work": "projets",
+        "approach": "approche",
+        "notes": "notes",
+        "connect": "contact"
+      },
       "hero": {
         "location": "Dakar, Sénégal",
         "languages": "FR / EN",

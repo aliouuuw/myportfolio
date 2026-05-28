@@ -27,25 +27,34 @@ function TeamRow({
   const t = useTranslations(`HomePage.synthesis.workedWith.teams.${team.key}`);
   const [hovered, setHovered] = useState(false);
 
+  const activate = () => {
+    setHovered(true);
+    onHover();
+  };
+
+  const handleClick = () => {
+    activate();
+    const target = document.getElementById("work");
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
-    <div
-      className={`syn-entity-card p-5 md:p-6 flex flex-col md:flex-row md:items-baseline gap-4 group outline-none ${
+    <button
+      type="button"
+      className={`syn-entity-card p-5 md:p-6 flex flex-col md:flex-row md:items-baseline gap-4 group w-full text-left outline-none ${
         hovered ? "syn-entity-card--active" : ""
       }`}
-      onMouseEnter={() => {
-        setHovered(true);
-        onHover();
-      }}
+      onMouseEnter={activate}
       onMouseLeave={() => {
         setHovered(false);
         onLeave();
       }}
-      onFocus={() => {
-        setHovered(true);
-        onHover();
-      }}
+      onFocus={activate}
       onBlur={onLeave}
-      tabIndex={0}
+      onClick={handleClick}
+      aria-label={`${t("name")} — ${t("tag")}`}
     >
       <div className="md:w-1/3 shrink-0 pl-3">
         <div className="flex items-center gap-2">
@@ -82,7 +91,7 @@ function TeamRow({
           {t("tag")}
         </span>
       </div>
-    </div>
+    </button>
   );
 }
 

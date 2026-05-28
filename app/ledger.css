@@ -1583,7 +1583,7 @@
   );
 }
 
-.site-synthesis .pulse-dot {
+.pulse-dot {
   box-shadow: 0 0 12px currentColor;
 }
 
@@ -1794,14 +1794,30 @@
   }
 }
 
-/* Inner routes (work index + case studies) — inherit synthesis tokens */
+/* Inner routes (work index + case studies) and standalone synthesis pages
+   (writing, contact) — remap base ink/canvas tokens to synthesis values so
+   shared `text-ink-*` / `bg-canvas` / `border-border` utilities and MDX prose
+   inherit the synthesis palette in both themes. */
 
-.site-synthesis-inner {
+.site-synthesis-inner,
+.site-synthesis-page {
   background-color: var(--syn-canvas);
   color: var(--syn-ink);
+  --color-canvas: var(--syn-canvas);
+  --color-canvas-elevated: var(--syn-surface);
+  --color-canvas-metal: var(--syn-surface-hover);
+  --color-canvas-subtle: var(--syn-surface-hover);
+  --color-ink-primary: var(--syn-ink);
+  --color-ink-secondary: var(--syn-ink-muted);
+  --color-ink-tertiary: var(--syn-ink-subtle);
+  --color-ink-muted: var(--syn-ink-faint);
+  --color-border: var(--syn-border);
+  --color-border-strong: var(--syn-border-strong);
+  --color-accent: var(--syn-accent);
 }
 
-.site-synthesis-inner .hairline {
+.site-synthesis-inner .hairline,
+.site-synthesis-page .hairline {
   height: 1px;
   background: linear-gradient(
     90deg,
@@ -1811,12 +1827,14 @@
   );
 }
 
-.site-synthesis-inner .link {
+.site-synthesis-inner .link,
+.site-synthesis-page .link {
   color: color-mix(in oklch, var(--syn-accent) 90%, transparent);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
-.site-synthesis-inner .link:hover {
+.site-synthesis-inner .link:hover,
+.site-synthesis-page .link:hover {
   color: var(--syn-accent);
 }

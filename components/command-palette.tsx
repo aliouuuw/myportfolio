@@ -5,7 +5,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Command } from "cmdk";
 
-import { useAbout } from "@/components/about-provider";
 import { useCommandPalette } from "@/components/command-palette-provider";
 import { useTheme } from "@/components/theme-provider";
 import { SYNTHESIS_EMAIL } from "@/lib/synthesis-data";
@@ -32,7 +31,6 @@ export function CommandPalette() {
   const router = useRouter();
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
-  const { openAbout } = useAbout();
   const { open, setOpen, toggle, copyToast, showCopyToast } = useCommandPalette();
 
   const locale = getLocaleFromPathname(pathname);
@@ -45,12 +43,14 @@ export function CommandPalette() {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         toggle();
+      } else if (e.key === "Escape") {
+        setOpen(false);
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [toggle]);
+  }, [toggle, setOpen]);
 
   const close = useCallback(() => setOpen(false), [setOpen]);
 
@@ -179,15 +179,7 @@ export function CommandPalette() {
                 />
                 <PaletteItem
                   dark={isDark}
-                  onSelect={() => {
-                    openAbout();
-                    close();
-                  }}
-                  label={t("about")}
-                />
-                <PaletteItem
-                  dark={isDark}
-                  onSelect={() => navigate(`/${locale}/contact`)}
+                  onSelect={() => jumpToSection("connect")}
                   label={t("contact")}
                 />
               </Command.Group>
