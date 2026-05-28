@@ -18,7 +18,7 @@ interface CaseStudyHeaderProps {
 const statusClass: Record<WorkLedgerStatus, string> = {
   active: "border-emerald-500/20 text-emerald-400 bg-emerald-500/5",
   shipped: "border-blue-500/20 text-blue-400 bg-blue-500/5",
-  archived: "border-white/10 text-white/40 bg-transparent",
+  archived: "border-syn-border-strong text-syn-ink-subtle bg-transparent",
 };
 
 export function CaseStudyHeader({
@@ -36,15 +36,15 @@ export function CaseStudyHeader({
   confidentialLabel = "Confidential",
 }: CaseStudyHeaderProps) {
   return (
-    <header className="mx-auto w-full max-w-5xl px-6 pb-8 pt-24 sm:px-12 lg:px-24">
+    <header className="mx-auto w-full max-w-5xl px-6 pb-8 pt-8 sm:px-12 lg:px-24">
       <div className="mb-6 flex flex-wrap items-center gap-3">
         <p className="mono-eyebrow">{domain}</p>
         {period ? (
           <>
-            <span className="text-white/20" aria-hidden>
+            <span className="text-syn-ink-dim" aria-hidden>
               ·
             </span>
-            <span className="mono text-[10px] text-white/40 tracking-wide">
+            <span className="mono text-[10px] text-syn-ink-subtle tracking-wide">
               {period}
             </span>
           </>
@@ -57,29 +57,29 @@ export function CaseStudyHeader({
           </span>
         ) : null}
         {confidential ? (
-          <span className="mono text-[10px] uppercase tracking-widest text-white/40 border border-white/10 px-2 py-1 rounded-full">
+          <span className="mono text-[10px] uppercase tracking-widest text-syn-ink-subtle border border-syn-border-strong px-2 py-1 rounded-full">
             {confidentialLabel}
           </span>
         ) : null}
       </div>
 
-      <h1 className="text-[clamp(2rem,4.5vw,3.25rem)] font-medium leading-[1.08] tracking-[-0.03em] text-white mb-6 max-w-[65ch]">
+      <h1 className="text-[clamp(2rem,4.5vw,3.25rem)] font-medium leading-[1.08] tracking-[-0.03em] text-syn-ink mb-6 max-w-[65ch]">
         {title}
       </h1>
 
-      <p className="text-lg leading-relaxed text-white/60 max-w-[68ch] mb-8">
+      <p className="text-lg leading-relaxed text-syn-ink-muted max-w-[68ch] mb-8">
         {summary}
       </p>
 
-      <dl className="flex flex-wrap gap-x-8 gap-y-4 text-sm border-t border-white/5 pt-6">
+      <dl className="flex flex-wrap gap-x-8 gap-y-4 text-sm border-t border-syn-border pt-6">
         <div>
           <dt className="mono-eyebrow mb-1.5">{roleLabel}</dt>
-          <dd className="text-white/85">{role}</dd>
+          <dd className="text-syn-ink-strong">{role}</dd>
         </div>
         {stack.length > 0 ? (
           <div>
             <dt className="mono-eyebrow mb-1.5">{stackLabel}</dt>
-            <dd className="text-white/70">{stack.join(" · ")}</dd>
+            <dd className="text-syn-ink-muted">{stack.join(" · ")}</dd>
           </div>
         ) : null}
       </dl>

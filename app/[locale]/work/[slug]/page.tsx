@@ -104,16 +104,16 @@ export default async function WorkSlugPage({ params }: Props) {
           aria-label={t("caseNavAria")}
         >
           <div className="hairline mb-8" />
-          <div className="grid gap-0 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-white/5 border-y border-white/5">
+          <div className="grid gap-0 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-syn-border border-y border-syn-border">
             {prev ? (
               <Link
                 href={`/${locale}/work/${prev.slug}`}
-                className="group flex flex-col gap-2 py-6 sm:px-6 sm:first:pl-0 hover:bg-white/[0.02] transition-colors -mx-4 px-4 sm:mx-0 sm:px-6"
+                className="group flex flex-col gap-2 py-6 sm:px-6 sm:first:pl-0 hover:bg-syn-row-hover transition-colors -mx-4 px-4 sm:mx-0 sm:px-6"
               >
-                <p className="mono text-[10px] text-white/40">
+                <p className="mono text-[10px] text-syn-ink-subtle">
                   ← {t("previous")}
                 </p>
-                <p className="text-base font-medium text-white/80 transition-colors group-hover:text-white">
+                <p className="text-base font-medium text-syn-ink-muted transition-colors group-hover:text-syn-ink">
                   {prev.title}
                 </p>
               </Link>
@@ -124,12 +124,12 @@ export default async function WorkSlugPage({ params }: Props) {
             {next ? (
               <Link
                 href={`/${locale}/work/${next.slug}`}
-                className="group flex flex-col gap-2 py-6 sm:px-6 sm:text-right hover:bg-white/[0.02] transition-colors -mx-4 px-4 sm:mx-0"
+                className="group flex flex-col gap-2 py-6 sm:px-6 sm:text-right hover:bg-syn-row-hover transition-colors -mx-4 px-4 sm:mx-0"
               >
-                <p className="mono text-[10px] text-white/40">
+                <p className="mono text-[10px] text-syn-ink-subtle">
                   {t("next")} →
                 </p>
-                <p className="text-base font-medium text-white/80 transition-colors group-hover:text-white">
+                <p className="text-base font-medium text-syn-ink-muted transition-colors group-hover:text-syn-ink">
                   {next.title}
                 </p>
               </Link>
@@ -141,7 +141,7 @@ export default async function WorkSlugPage({ params }: Props) {
       <div className="mx-auto w-full max-w-5xl px-6 pb-8 text-center sm:px-12 lg:px-24">
         <Link
           href={`/${locale}/work`}
-          className="mono text-xs text-white/40 hover:text-white/70 transition-colors"
+          className="mono text-xs text-syn-ink-subtle hover:text-syn-ink-muted transition-colors"
         >
           {t("backToWork")}
         </Link>

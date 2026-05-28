@@ -16,9 +16,9 @@ function CapabilityItem({ itemKey, index }: { itemKey: string; index: number }) 
 
   return (
     <div className="flex flex-col">
-      <span className="mono-eyebrow text-white/30 mb-3">0{index + 1}</span>
-      <h3 className="text-base font-medium text-white/90">{t("label")}</h3>
-      <p className="mt-2 text-sm text-white/50 leading-relaxed">{t("desc")}</p>
+      <span className="mono-eyebrow text-syn-ink-faint mb-3">0{index + 1}</span>
+      <h3 className="text-base font-medium text-syn-ink-strong">{t("label")}</h3>
+      <p className="mt-2 text-sm text-syn-ink-secondary leading-relaxed">{t("desc")}</p>
     </div>
   );
 }
@@ -29,12 +29,12 @@ export function SynthesisCapabilities() {
   return (
     <SynthesisRevealSection
       id="capabilities"
-      className="pt-16 mt-16 border-t border-white/5 scroll-mt-28"
+      className="pt-16 mt-16 border-t border-syn-border scroll-mt-28"
     >
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
         <div className="md:col-span-4">
           <p className="mono-eyebrow">{t("eyebrow")}</p>
-          <h2 className="text-2xl font-medium tracking-tight mt-3 text-white/90">
+          <h2 className="text-2xl font-medium tracking-tight mt-3 text-syn-ink-strong">
             {t("title")}
           </h2>
         </div>

@@ -5,14 +5,21 @@ import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import { useAbout } from "@/components/about-provider";
+import { useCommandPalette } from "@/components/command-palette-provider";
 
-export function BottomMobileNav() {
+type BottomMobileNavProps = {
+  hideOnHome?: boolean;
+};
+
+export function BottomMobileNav({ hideOnHome = false }: BottomMobileNavProps) {
   const t = useTranslations("Nav");
   const pathname = usePathname();
   const { openAbout } = useAbout();
+  const { toggle } = useCommandPalette();
+
+  if (hideOnHome) return null;
 
   const locale = pathname.split("/")[1] || "en";
-  const homePath = `/${locale}`;
 
   const routeLinks = [
     { href: `/${locale}/work`, label: t("workShort"), ariaLabel: t("work") },
@@ -36,8 +43,7 @@ export function BottomMobileNav() {
       <ul className="flex h-14 items-stretch">
         {routeLinks.map(({ href, label, ariaLabel }) => {
           const isActive =
-            pathname === href ||
-            (href !== homePath && pathname.startsWith(`${href.split("#")[0]}/`));
+            pathname === href || pathname.startsWith(`${href}/`);
 
           return (
             <li key={href} className="flex-1">
@@ -73,6 +79,18 @@ export function BottomMobileNav() {
           >
             <span className="font-mono text-[10px] font-medium uppercase tracking-wide">
               {t("aboutShort")}
+            </span>
+          </button>
+        </li>
+        <li className="flex-1">
+          <button
+            type="button"
+            className="relative flex h-full w-full flex-col items-center justify-center gap-0.5 text-ink-tertiary transition-colors duration-200 hover:text-ink-secondary"
+            aria-label={t("openCommand")}
+            onClick={toggle}
+          >
+            <span className="font-mono text-[10px] font-medium uppercase tracking-wide">
+              ⌘K
             </span>
           </button>
         </li>

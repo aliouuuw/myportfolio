@@ -29,7 +29,9 @@ function TeamRow({
 
   return (
     <div
-      className="py-5 flex flex-col md:flex-row md:items-baseline gap-4 hover:bg-white/[0.02] transition-colors -mx-4 px-4 rounded-lg group"
+      className={`syn-entity-card p-5 md:p-6 flex flex-col md:flex-row md:items-baseline gap-4 group outline-none ${
+        hovered ? "syn-entity-card--active" : ""
+      }`}
       onMouseEnter={() => {
         setHovered(true);
         onHover();
@@ -45,28 +47,38 @@ function TeamRow({
       onBlur={onLeave}
       tabIndex={0}
     >
-      <div className="md:w-1/3 shrink-0">
+      <div className="md:w-1/3 shrink-0 pl-3">
         <div className="flex items-center gap-2">
-          <p className="font-medium text-white/90">{t("name")}</p>
+          <p
+            className={`font-medium transition-colors ${
+              hovered ? "text-syn-accent" : "text-syn-ink-strong"
+            }`}
+          >
+            {t("name")}
+          </p>
           {team.current ? (
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot" />
           ) : null}
         </div>
-        <p className="mono text-[10px] text-white/40 mt-1">
+        <p className="mono text-[10px] text-syn-ink-subtle mt-1">
           {t("role")} · {t("period")}
         </p>
       </div>
-      <div className="md:w-2/3 flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+      <div className="md:w-2/3 flex flex-col md:flex-row md:items-baseline justify-between gap-4 pl-3">
         <div className="max-w-lg min-h-[2.75rem]">
           {hovered ? (
-            <p className="mono text-xs text-emerald-400/90 leading-relaxed transition-opacity duration-200">
+            <p className="mono text-xs text-syn-accent leading-relaxed transition-opacity duration-200">
               &gt; {t("proof")}
             </p>
           ) : (
-            <p className="text-sm text-white/60 leading-relaxed">{t("proof")}</p>
+            <p className="text-sm text-syn-ink-muted leading-relaxed">{t("proof")}</p>
           )}
         </div>
-        <span className="mono text-[10px] uppercase tracking-widest text-white/30 shrink-0">
+        <span
+          className={`mono text-[10px] uppercase tracking-widest shrink-0 transition-colors ${
+            hovered ? "text-syn-ink-secondary" : "text-syn-ink-faint"
+          }`}
+        >
           {t("tag")}
         </span>
       </div>
@@ -86,21 +98,27 @@ function FreelanceProjectCard({
   );
 
   return (
-    <div className="flex flex-col">
-      <div className="flex items-baseline justify-between gap-3 flex-wrap">
-        <p className="font-medium text-white/85">{t("name")}</p>
-        <div className="flex items-center gap-2">
-          {project.note ? (
-            <span className="mono text-[10px] uppercase tracking-widest text-amber-400/80">
-              {conceptLabel}
+    <div className="syn-entity-card p-5 h-full group">
+      <div className="pl-3 flex flex-col h-full">
+        <div className="flex items-baseline justify-between gap-3 flex-wrap">
+          <p className="font-medium text-syn-ink-strong group-hover:text-syn-accent transition-colors">
+            {t("name")}
+          </p>
+          <div className="flex items-center gap-2">
+            {project.note ? (
+              <span className="mono text-[10px] uppercase tracking-widest text-amber-400/80">
+                {conceptLabel}
+              </span>
+            ) : null}
+            <span className="mono text-[10px] uppercase tracking-widest text-syn-ink-faint">
+              {t("domain")}
             </span>
-          ) : null}
-          <span className="mono text-[10px] uppercase tracking-widest text-white/30">
-            {t("domain")}
-          </span>
+          </div>
         </div>
+        <p className="mt-2 text-sm leading-relaxed text-syn-ink-secondary flex-1">
+          {t("scope")}
+        </p>
       </div>
-      <p className="mt-2 text-sm leading-relaxed text-white/55">{t("scope")}</p>
     </div>
   );
 }
@@ -113,18 +131,18 @@ export function SynthesisWorkedWith({ onHighlightChange }: SynthesisWorkedWithPr
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
         <div>
           <p className="mono-eyebrow shrink-0">{t("eyebrow")}</p>
-          <h2 className="mt-3 text-2xl font-medium tracking-tight text-white/90 max-w-2xl">
+          <h2 className="mt-3 text-2xl font-medium tracking-tight text-syn-ink-strong max-w-2xl">
             {t("title")}
           </h2>
         </div>
-        <p className="text-xs text-white/50 max-w-xs md:text-right leading-relaxed">
+        <p className="text-xs text-syn-ink-secondary max-w-xs md:text-right leading-relaxed">
           {t("hint")}
         </p>
       </div>
 
       <div className="mt-10">
-        <p className="mono-eyebrow mb-6 text-white/40">{t("employersLabel")}</p>
-        <div className="divide-y divide-white/5 border-y border-white/5">
+        <p className="mono-eyebrow mb-6">{t("employersLabel")}</p>
+        <div className="flex flex-col gap-3">
           {SYNTHESIS_TEAMS.map((team) => (
             <TeamRow
               key={team.key}
@@ -139,11 +157,11 @@ export function SynthesisWorkedWith({ onHighlightChange }: SynthesisWorkedWithPr
       <div className="mt-12">
         <div className="flex items-baseline justify-between gap-3 mb-6 flex-wrap">
           <div className="flex items-baseline gap-3">
-            <p className="mono-eyebrow text-white/40">{t("clientsLabel")}</p>
-            <p className="text-[10px] text-white/30 mono">{t("clientsTagline")}</p>
+            <p className="mono-eyebrow">{t("clientsLabel")}</p>
+            <p className="text-[10px] text-syn-ink-faint mono">{t("clientsTagline")}</p>
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-7">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {SYNTHESIS_FREELANCE.map((project) => (
             <FreelanceProjectCard
               key={project.key}

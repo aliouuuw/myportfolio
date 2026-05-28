@@ -249,10 +249,10 @@ export const SYNTHESIS_FREELANCE: SynthesisFreelanceProject[] = [
 ];
 
 export const SYNTHESIS_PINNED_REPOS = [
-  { repo: "aliouuuw/myportfolio", note: "this site" },
-  { repo: "aliouuuw/odoo18-acceptance-testing-kit", note: "Robot + Playwright" },
-  { repo: "aliouuuw/agent-ready-repo", note: "AI-collab conventions" },
-  { repo: "aliouuuw/bocalbun", note: "frozen retrospective" },
+  { repo: "aliouuuw/myportfolio", noteKey: "portfolio" },
+  { repo: "aliouuuw/odoo18-acceptance-testing-kit", noteKey: "odooKit" },
+  { repo: "aliouuuw/agent-ready-repo", noteKey: "agentReady" },
+  { repo: "aliouuuw/bocalbun", noteKey: "bocalbun" },
 ] as const;
 
 export const SYNTHESIS_CAPABILITIES = [

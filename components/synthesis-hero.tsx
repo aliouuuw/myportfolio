@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useTranslations } from "next-intl";
 
 import { SYNTHESIS_BOOT_KEY } from "@/lib/synthesis-data";
@@ -8,33 +8,33 @@ import { SYNTHESIS_BOOT_KEY } from "@/lib/synthesis-data";
 const BOOT_LINE_KEYS = ["teams", "focus", "availability"] as const;
 
 function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(
-    () =>
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-  );
+  const [reduced, setReduced] = useState(false);
+
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const handler = (e: MediaQueryListEvent) => setReduced(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
+    const sync = () => setReduced(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
   }, []);
+
   return reduced;
 }
 
-function getInitialBoot() {
-  if (typeof window === "undefined") return { done: false, lines: 0 };
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    return { done: true, lines: BOOT_LINE_KEYS.length };
-  }
+function readBootSkipped(): boolean {
   try {
-    if (sessionStorage.getItem(SYNTHESIS_BOOT_KEY) === "1") {
-      return { done: true, lines: BOOT_LINE_KEYS.length };
-    }
+    return sessionStorage.getItem(SYNTHESIS_BOOT_KEY) === "1";
   } catch {
-    /* ignore */
+    return false;
   }
-  return { done: false, lines: 0 };
+}
+
+function useIsClient() {
+  return useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
 }
 
 function GlowCardHero({
@@ -58,7 +58,7 @@ function GlowCardHero({
     <div
       ref={ref}
       onMouseMove={handleMouseMove}
-      className={`glow-card relative overflow-hidden rounded-2xl bg-[#0a0a0a] border border-white/5 ${spotlight ? "glow-card--spotlight" : ""} ${className}`}
+      className={`glow-card relative overflow-hidden rounded-2xl bg-syn-surface border border-syn-border ${spotlight ? "glow-card--spotlight" : ""} ${className}`}
     >
       <div className="relative z-10 h-full flex flex-col">{children}</div>
     </div>
@@ -72,13 +72,16 @@ type SynthesisHeroProps = {
 export function SynthesisHero({ onHeroReady }: SynthesisHeroProps) {
   const t = useTranslations("HomePage.synthesis.hero");
   const [time, setTime] = useState("");
-  const [boot, setBoot] = useState(getInitialBoot);
-  const bootDone = boot.done;
-  const bootLines = boot.lines;
+  const [bootLines, setBootLines] = useState(0);
+  const [bootFinished, setBootFinished] = useState(false);
+  const isClient = useIsClient();
   const reducedMotion = usePrefersReducedMotion();
 
+  const skipBoot = isClient && (reducedMotion || readBootSkipped());
+  const bootDone = skipBoot || bootFinished;
+
   const finishBoot = useCallback(() => {
-    setBoot({ done: true, lines: BOOT_LINE_KEYS.length });
+    setBootFinished(true);
     onHeroReady();
     try {
       sessionStorage.setItem(SYNTHESIS_BOOT_KEY, "1");
@@ -105,20 +108,24 @@ export function SynthesisHero({ onHeroReady }: SynthesisHeroProps) {
   useEffect(() => {
     if (bootDone) {
       onHeroReady();
-      return;
     }
-    if (reducedMotion) return;
+  }, [bootDone, onHeroReady]);
+
+  useEffect(() => {
+    if (!isClient || skipBoot || bootFinished) return;
+
     let line = 0;
     const interval = window.setInterval(() => {
       line += 1;
-      setBoot((prev) => ({ ...prev, lines: line }));
+      setBootLines(line);
       if (line >= BOOT_LINE_KEYS.length) {
         window.clearInterval(interval);
         window.setTimeout(finishBoot, 380);
       }
     }, 520);
+
     return () => window.clearInterval(interval);
-  }, [bootDone, reducedMotion, finishBoot, onHeroReady]);
+  }, [isClient, skipBoot, bootFinished, finishBoot]);
 
   return (
     <GlowCardHero
@@ -127,11 +134,11 @@ export function SynthesisHero({ onHeroReady }: SynthesisHeroProps) {
     >
       {!reducedMotion && <div className="scan-bar" aria-hidden />}
       <div className="flex flex-wrap justify-between items-start gap-3">
-        <p className="text-sm text-white/50">
+        <p className="text-sm text-syn-ink-secondary">
           {t("location")} ·{" "}
-          <span className="text-white/70">{t("languages")}</span>
+          <span className="text-syn-ink-muted">{t("languages")}</span>
         </p>
-        <p className="mono text-xs text-white/35 hidden sm:block">
+        <p className="mono text-xs text-syn-ink-subtle hidden sm:block">
           {time || "00:00:00"} {t("timezone")}
         </p>
       </div>
@@ -143,7 +150,7 @@ export function SynthesisHero({ onHeroReady }: SynthesisHeroProps) {
           onClick={finishBoot}
           aria-label={t("skipBoot")}
         >
-          <p className="text-xs text-white/35 mb-4">{t("bootLoading")}</p>
+          <p className="text-xs text-syn-ink-subtle mb-4">{t("bootLoading")}</p>
           <div className="space-y-2 mono text-sm text-emerald-400/90">
             {BOOT_LINE_KEYS.map((key, i) => (
               <p
@@ -157,25 +164,25 @@ export function SynthesisHero({ onHeroReady }: SynthesisHeroProps) {
         </button>
       ) : (
         <div className="mt-10">
-          <h1 className="hero-reveal hero-reveal--1 text-[clamp(2rem,4.5vw,4.5rem)] font-medium tracking-[-0.03em] leading-[1.05] max-w-3xl text-white">
+          <h1 className="hero-reveal hero-reveal--1 text-[clamp(2rem,4.5vw,4.5rem)] font-medium tracking-[-0.03em] leading-[1.05] max-w-3xl text-syn-ink">
             {t("headline")}
           </h1>
-          <p className="hero-reveal hero-reveal--2 mt-6 max-w-2xl text-white/60 text-lg leading-relaxed">
+          <p className="hero-reveal hero-reveal--2 mt-6 max-w-2xl text-syn-ink-muted text-lg leading-relaxed">
             {t("subtitle")}
           </p>
-          <p className="hero-reveal hero-reveal--3 mt-4 text-sm text-white/45">
+          <p className="hero-reveal hero-reveal--3 mt-4 text-sm text-syn-ink-secondary">
             {t("availability")}
           </p>
           <div className="hero-reveal hero-reveal--4 mt-10 flex flex-wrap gap-4">
             <a
               href="#work"
-              className="btn-press inline-flex items-center gap-2 rounded-full bg-white text-[#050505] px-5 py-2.5 text-sm font-medium transition-transform hover:scale-[1.02]"
+              className="syn-btn-primary btn-press inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-transform hover:scale-[1.02]"
             >
               {t("ctaWork")} <span aria-hidden>↓</span>
             </a>
             <a
               href="#connect"
-              className="btn-press inline-flex items-center gap-2 rounded-full bg-[#0a0a0a] border border-white/10 px-5 py-2.5 text-sm font-medium text-white/80 hover:text-white hover:bg-white/5 transition-colors"
+              className="syn-btn-secondary btn-press inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-colors"
             >
               {t("ctaContact")}
             </a>

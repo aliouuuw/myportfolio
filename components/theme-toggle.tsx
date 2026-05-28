@@ -30,7 +30,11 @@ function MoonIcon() {
   );
 }
 
-export function ThemeToggle() {
+type ThemeToggleProps = {
+  nav?: boolean;
+};
+
+export function ThemeToggle({ nav = false }: ThemeToggleProps) {
   const { theme, toggleTheme } = useTheme();
   const t = useTranslations("Theme");
   const isDark = theme === "dark";
@@ -41,7 +45,11 @@ export function ThemeToggle() {
       onClick={toggleTheme}
       aria-label={isDark ? t("switchToLight") : t("switchToDark")}
       title={isDark ? t("switchToLight") : t("switchToDark")}
-      className="inline-flex h-8 w-8 items-center justify-center rounded-full text-ink-secondary hover:text-ink-primary hover:bg-canvas-elevated transition-colors"
+      className={
+        nav
+          ? "inline-flex h-8 w-8 items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-canvas-elevated hover:text-ink-primary"
+          : "inline-flex h-8 w-8 items-center justify-center rounded-full text-ink-secondary transition-colors hover:bg-canvas-elevated hover:text-ink-primary"
+      }
     >
       {isDark ? <SunIcon /> : <MoonIcon />}
     </button>

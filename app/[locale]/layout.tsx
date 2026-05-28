@@ -6,13 +6,12 @@ import {
 } from "next-intl/server";
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-import { Footer } from "@/components/footer";
-import { TopNav } from "@/components/top-nav";
-import { BottomMobileNav } from "@/components/bottom-mobile-nav";
+import { MainShell } from "@/components/main-shell";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeInitScript } from "@/components/theme-init-script";
 import { AboutProvider } from "@/components/about-provider";
 import { CommandPalette } from "@/components/command-palette";
+import { CommandPaletteProvider } from "@/components/command-palette-provider";
 import { routing } from "@/i18n/routing";
 import "@/app/ledger.css";
 
@@ -97,16 +96,12 @@ export default async function LocaleLayout({
       <ThemeInitScript />
       <NextIntlClientProvider messages={messages}>
         <ThemeProvider>
-          <AboutProvider>
-            <TopNav />
-            <CommandPalette />
-            {/* Padding top for fixed header, padding bottom for mobile bottom nav */}
-            <main className="flex flex-1 flex-col pt-14 pb-14 sm:pb-0">
-              {children}
-            </main>
-            <Footer />
-            <BottomMobileNav />
-          </AboutProvider>
+          <CommandPaletteProvider>
+            <AboutProvider>
+              <MainShell>{children}</MainShell>
+              <CommandPalette />
+            </AboutProvider>
+          </CommandPaletteProvider>
         </ThemeProvider>
       </NextIntlClientProvider>
     </>

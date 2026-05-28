@@ -22,13 +22,13 @@ export function SynthesisSelectedWork({
       <div className="flex justify-between items-end mb-8">
         <div>
           <p className="mono-eyebrow">{t("eyebrow")}</p>
-          <h2 className="text-2xl font-medium tracking-tight mt-3 text-white/90">
+          <h2 className="text-2xl font-medium tracking-tight mt-3 text-syn-ink-strong">
             {t("title")}
           </h2>
         </div>
-        <span className="mono-eyebrow text-white/40">{t("aside")}</span>
+        <span className="mono-eyebrow">{t("aside")}</span>
       </div>
-      <div className="divide-y divide-white/5 border-y border-white/5">
+      <div className="flex flex-col gap-3">
         {SYNTHESIS_WORK.map((w) => (
           <SynthesisWorkRow
             key={w.id}

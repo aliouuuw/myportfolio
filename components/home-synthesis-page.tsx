@@ -27,16 +27,13 @@ type HomeSynthesisPageProps = {
 };
 
 function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(
-    () =>
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-  );
+  const [reduced, setReduced] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const handler = (e: MediaQueryListEvent) => setReduced(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
+    const sync = () => setReduced(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
   }, []);
   return reduced;
 }
@@ -88,7 +85,7 @@ export function HomeSynthesisPage({ locale, writing }: HomeSynthesisPageProps) {
   return (
     <div
       data-locale={locale}
-      className={`site-synthesis min-h-dvh bg-[#050505] text-[#ededed] font-sans selection:bg-white/20 ${ambientClass} ${heroReady ? "hero-ready" : ""} ${reducedMotion ? "motion-reduced" : ""}`}
+      className={`site-synthesis min-h-dvh font-sans selection-syn ${ambientClass} ${heroReady ? "hero-ready" : ""} ${reducedMotion ? "motion-reduced" : ""}`}
     >
       <div
         className="scroll-progress"
@@ -96,33 +93,33 @@ export function HomeSynthesisPage({ locale, writing }: HomeSynthesisPageProps) {
         aria-hidden
       />
 
-      <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-dot-grid" aria-hidden>
+      <div className="synthesis-bg-layers fixed inset-0 pointer-events-none -z-10 overflow-hidden" aria-hidden>
         <div className="absolute inset-0 bg-grain" />
         <div className="ambient-accent top-[-15%] left-[-5%]" />
       </div>
 
       <SynthesisScrollRail active={activeSection} />
 
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 xl:pl-24 space-y-5 md:space-y-6 pt-4 md:pt-8 pb-16">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 xl:pl-24 space-y-5 md:space-y-6 pt-6 md:pt-10 pb-16">
         <section id="profile" className="grid-bento scroll-mt-28">
           <SynthesisHero onHeroReady={onHeroReady} />
           <SynthesisGithubActivity />
 
           <div className="md:col-span-7">
-            <div className="p-8 md:p-10 rounded-2xl bg-[#0a0a0a] border border-white/5 h-full">
-              <h2 className="text-lg font-medium text-white/90">
+            <div className="p-8 md:p-10 rounded-2xl bg-syn-surface border border-syn-border h-full">
+              <h2 className="text-lg font-medium text-syn-ink-strong">
                 {tBg("title")}
               </h2>
-              <div className="mt-5 space-y-4 text-white/60 leading-relaxed text-sm max-w-xl">
+              <div className="mt-5 space-y-4 text-syn-ink-muted leading-relaxed text-sm max-w-xl">
                 <p>{tBg("p1")}</p>
                 <p>{tBg("p2")}</p>
               </div>
 
-              <div className="mt-10 pt-8 border-t border-white/5">
-                <h3 className="text-sm font-medium text-white/85">
+              <div className="mt-10 pt-8 border-t border-syn-border">
+                <h3 className="text-sm font-medium text-syn-ink-strong">
                   {tChess("title")}
                 </h3>
-                <p className="mt-3 text-sm text-white/55 leading-relaxed max-w-xl">
+                <p className="mt-3 text-sm text-syn-ink-secondary leading-relaxed max-w-xl">
                   {tChess("body")}
                 </p>
               </div>
@@ -130,41 +127,41 @@ export function HomeSynthesisPage({ locale, writing }: HomeSynthesisPageProps) {
           </div>
 
           <div className="md:col-span-5">
-            <div className="p-8 md:p-10 rounded-2xl bg-[#0a0a0a] border border-white/5 h-full">
-              <h2 className="text-lg font-medium text-white/90">
+            <div className="p-8 md:p-10 rounded-2xl bg-syn-surface border border-syn-border h-full">
+              <h2 className="text-lg font-medium text-syn-ink-strong">
                 {tCred("title")}
               </h2>
               <dl className="mt-6 space-y-6 text-sm">
                 <div>
-                  <dt className="text-white/45 text-xs uppercase tracking-wide">
+                  <dt className="text-syn-ink-subtle text-xs uppercase tracking-wide">
                     {tCred("experienceLabel")}
                   </dt>
-                  <dd className="mt-1.5 text-white/80 leading-relaxed">
+                  <dd className="mt-1.5 text-syn-ink-muted leading-relaxed">
                     {tCred("experience")}
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-white/45 text-xs uppercase tracking-wide">
+                  <dt className="text-syn-ink-subtle text-xs uppercase tracking-wide">
                     {tCred("educationLabel")}
                   </dt>
-                  <dd className="mt-1.5 text-white/80 leading-relaxed">
+                  <dd className="mt-1.5 text-syn-ink-muted leading-relaxed">
                     {tCred("educationPrimary")}
                     <br />
-                    <span className="text-white/55">
+                    <span className="text-syn-ink-secondary">
                       {tCred("educationSecondary")}
                     </span>
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-white/45 text-xs uppercase tracking-wide">
+                  <dt className="text-syn-ink-subtle text-xs uppercase tracking-wide">
                     {tCred("certificationsLabel")}
                   </dt>
-                  <dd className="mt-1.5 text-white/80 leading-relaxed">
+                  <dd className="mt-1.5 text-syn-ink-muted leading-relaxed">
                     {tCred("certPrimary")}
                     <br />
                     {tCred("certSecondary")}
                     <br />
-                    <span className="text-white/55">{tCred("certTertiary")}</span>
+                    <span className="text-syn-ink-secondary">{tCred("certTertiary")}</span>
                   </dd>
                 </div>
               </dl>

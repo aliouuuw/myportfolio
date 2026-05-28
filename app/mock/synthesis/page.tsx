@@ -659,7 +659,14 @@ export default function SynthesisPage() {
                       className="group flex items-baseline justify-between gap-2 text-xs hover:bg-white/[0.02] rounded -mx-1 px-1 py-0.5 transition-colors"
                     >
                       <span className="mono text-white/70 group-hover:text-white truncate">{r.repo.split("/")[1]}</span>
-                      <span className="text-white/40 shrink-0">{r.note}</span>
+                      <span className="text-white/40 shrink-0">
+                        {{
+                          portfolio: "this site",
+                          odooKit: "Robot + Playwright",
+                          agentReady: "AI-collab conventions",
+                          bocalbun: "frozen retrospective",
+                        }[r.noteKey] ?? r.noteKey}
+                      </span>
                     </a>
                   </li>
                 ))}

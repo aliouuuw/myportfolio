@@ -16,7 +16,7 @@ export function SynthesisScrollRail({ active }: SynthesisScrollRailProps) {
         <a
           key={s.id}
           href={`#${s.id}`}
-          className={`transition-colors py-0.5 ${active === s.id ? "text-emerald-400" : "text-white/25 hover:text-white/55"}`}
+          className={`transition-colors py-0.5 ${active === s.id ? "text-syn-accent" : "text-syn-ink-faint hover:text-syn-ink-secondary"}`}
         >
           {active === s.id ? `› ${s.label}` : s.label}
         </a>

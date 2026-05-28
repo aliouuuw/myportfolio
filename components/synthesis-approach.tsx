@@ -24,7 +24,7 @@ function GlowCard({
 }) {
   return (
     <div
-      className={`glow-card relative overflow-hidden rounded-2xl bg-[#0a0a0a] border border-white/5 ${className}`}
+      className={`glow-card relative overflow-hidden rounded-2xl bg-syn-surface border border-syn-border ${className}`}
     >
       <div className="relative z-10 h-full flex flex-col">{children}</div>
     </div>
@@ -36,12 +36,12 @@ function ProcessStep({ stepKey, index }: { stepKey: string; index: number }) {
 
   return (
     <div className="flex gap-6">
-      <span className="mono text-xs text-white/30 pt-0.5">
+      <span className="mono text-xs text-syn-ink-faint pt-0.5">
         0{index + 1}
       </span>
       <div>
-        <h3 className="text-base font-medium text-white/90">{t("title")}</h3>
-        <p className="mt-1 text-sm text-white/50 leading-relaxed">{t("desc")}</p>
+        <h3 className="text-base font-medium text-syn-ink-strong">{t("title")}</h3>
+        <p className="mt-1 text-sm text-syn-ink-secondary leading-relaxed">{t("desc")}</p>
       </div>
     </div>
   );
@@ -52,8 +52,8 @@ function StackRow({ stackKey }: { stackKey: string }) {
 
   return (
     <div>
-      <p className="text-white/40 mono-eyebrow mb-1.5">{t("label")}</p>
-      <p className="text-white/80 leading-snug">{t("value")}</p>
+      <p className="mono-eyebrow mb-1.5">{t("label")}</p>
+      <p className="text-syn-ink-strong leading-snug">{t("value")}</p>
     </div>
   );
 }
@@ -68,10 +68,10 @@ export function SynthesisApproach() {
     >
       <div className="lg:col-span-7">
         <p className="mono-eyebrow">{t("eyebrow")}</p>
-        <h2 className="mt-3 text-2xl font-medium tracking-tight text-white/90">
+        <h2 className="mt-3 text-2xl font-medium tracking-tight text-syn-ink-strong">
           {t("title")}
         </h2>
-        <p className="mt-4 text-white/50 text-sm leading-relaxed max-w-md">
+        <p className="mt-4 text-syn-ink-secondary text-sm leading-relaxed max-w-md">
           {t("lead")}
         </p>
         <div className="mt-10 space-y-8">
@@ -83,10 +83,10 @@ export function SynthesisApproach() {
       <div className="lg:col-span-5 flex flex-col gap-8">
         <GlowCard className="p-8">
           <p className="mono-eyebrow mb-6">{t("principlesLabel")}</p>
-          <ul className="space-y-4 text-sm text-white/70 leading-relaxed">
+          <ul className="space-y-4 text-sm text-syn-ink-muted leading-relaxed">
             {PRINCIPLE_KEYS.map((key) => (
               <li key={key} className="flex gap-3">
-                <span className="text-white/30">·</span>
+                <span className="text-syn-ink-faint">·</span>
                 {t(`principles.${key}`)}
               </li>
             ))}

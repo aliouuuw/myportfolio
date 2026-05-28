@@ -30,16 +30,24 @@ export function SynthesisWorkRow({
       ? "border-emerald-500/20 text-emerald-400 bg-emerald-500/5"
       : work.status === "SHIPPED"
         ? "border-blue-500/20 text-blue-400 bg-blue-500/5"
-        : "border-white/10 text-white/40";
+        : "border-syn-border-strong text-syn-ink-subtle";
 
-  const className = `group flex flex-col lg:flex-row lg:items-center justify-between py-6 gap-4 lg:gap-6 hover:bg-white/[0.02] transition-colors -mx-4 px-4 rounded-lg ${highlighted ? "work-row--highlight" : ""}`;
+  const className = `syn-entity-card group flex flex-col lg:flex-row lg:items-center justify-between p-5 md:p-6 gap-4 lg:gap-6 ${
+    highlighted ? "work-row--highlight syn-entity-card--active" : ""
+  }`;
 
   const content = (
     <>
-      <div className="flex items-center gap-5 lg:w-1/4 shrink-0">
-        <span className="mono text-xs text-white/30">{work.id}</span>
+      <div className="flex items-center gap-5 lg:w-1/4 shrink-0 pl-3">
+        <span className="mono text-xs text-syn-ink-faint">{work.id}</span>
         <div>
-          <h4 className="font-medium text-white/90 group-hover:text-white">
+          <h4
+            className={`font-medium transition-colors ${
+              highlighted
+                ? "text-syn-accent"
+                : "text-syn-ink-strong group-hover:text-syn-accent"
+            }`}
+          >
             {tRow("name")}
           </h4>
           <p className="mono-eyebrow mt-1">
@@ -47,11 +55,11 @@ export function SynthesisWorkRow({
           </p>
         </div>
       </div>
-      <p className="text-sm text-white/50 group-hover:text-white/70 transition-colors flex-1 leading-relaxed">
+      <p className="text-sm text-syn-ink-secondary group-hover:text-syn-ink-muted transition-colors flex-1 leading-relaxed pl-3 lg:pl-0">
         {tRow("desc")}
       </p>
-      <div className="flex items-center justify-between lg:justify-end gap-6 lg:w-1/4 shrink-0">
-        <span className="mono text-[10px] text-white/40 hidden xl:inline truncate">
+      <div className="flex items-center justify-between lg:justify-end gap-6 lg:w-1/4 shrink-0 pl-3 lg:pl-0">
+        <span className="mono text-[10px] text-syn-ink-subtle hidden xl:inline truncate">
           {tRow("stack")}
         </span>
         <span
@@ -60,7 +68,7 @@ export function SynthesisWorkRow({
           {t(`status.${work.status}`)}
         </span>
         {href ? (
-          <span className="text-white/30 group-hover:text-white/70 transition-colors">
+          <span className="text-syn-ink-faint group-hover:text-syn-accent transition-colors">
             ↗
           </span>
         ) : null}

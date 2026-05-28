@@ -61,6 +61,16 @@
       "contactCta": "Envoyer un message"
     },
     "synthesis": {
+      "nav": {
+        "role": "Ingénieur systèmes produit",
+        "work": "Travaux",
+        "approach": "Approche",
+        "writing": "Écrits",
+        "connect": "Contact",
+        "available": "Disponible T3 2026",
+        "availableShort": "Disponible",
+        "openCommand": "Ouvrir la palette de commandes"
+      },
       "hero": {
         "location": "Dakar, Sénégal",
         "languages": "FR / EN",
@@ -73,7 +83,7 @@
           "availability": "> disponibilité · T3 2026"
         },
         "headline": "Je construis la couche logicielle entre les opérations métier et l'ambition produit.",
-        "subtitle": "Ingénieur systèmes produit à Dakar. Je livre des outils finance et ERP, des logiciels ops internes et des workflows assistés par IA pour les équipes qui ont besoin d'un seul ingénieur sur toute la stack.",
+        "subtitle": "Ingénieur systèmes produit à Dakar. Outils finance et ERP, logiciels ops internes et workflows assistés par IA — un seul ingénieur sur toute la stack.",
         "availability": "Deux créneaux clients ouverts T3 2026 · réponse sous 48 h les jours ouvrés",
         "ctaWork": "Voir le travail sélectionné",
         "ctaContact": "Me contacter"
@@ -102,6 +112,12 @@
       "github": {
         "title": "Activité GitHub",
         "pinned": "Épinglés",
+        "pinnedNotes": {
+          "portfolio": "ce site",
+          "odooKit": "Robot + Playwright",
+          "agentReady": "conventions IA",
+          "bocalbun": "rétrospective figée"
+        },
         "loading": "Chargement des contributions…",
         "unavailable": "graphique indisponible · voir sur",
         "contributions": "contributions",
@@ -115,7 +131,7 @@
       "workedWith": {
         "eyebrow": "Parcours pro",
         "title": "Employeurs et builds clients",
-        "hint": "Survoler un employeur pour mettre en évidence les études de cas liées.",
+        "hint": "Survoler un employeur pour voir la preuve et mettre en évidence les études de cas liées.",
         "employersLabel": "Employeurs",
         "clientsLabel": "Projets clients",
         "clientsTagline": "Dakar · freelance & produit",
@@ -322,7 +338,7 @@
       "connect": {
         "eyebrow": "Contact",
         "title": "Dites-moi ce que vous construisez et où ça coince.",
-        "lead": "Fintech, migrations ERP, outils internes ou livraison assistée par IA. Deux créneaux T3 2026. Réponse sous 48 h les jours ouvrés.",
+        "lead": "Fintech, migrations ERP, outils internes ou livraison assistée par IA. Deux créneaux mission T3 2026. Réponse sous 48 h les jours ouvrés.",
         "ctaEmail": "Envoyer un message →",
         "ctaWhatsApp": "WhatsApp ↗",
         "ctaCopyEmail": "Copier l'email",
@@ -354,15 +370,25 @@
     "writingShort": "Écrits",
     "aboutShort": "À propos",
     "contactShort": "Contact",
-    "mobileNavAriaLabel": "Navigation mobile"
+    "mobileNavAriaLabel": "Navigation mobile",
+    "openCommand": "Ouvrir la palette de commandes"
   },
   "Theme": {
     "switchToLight": "Passer au mode clair",
     "switchToDark": "Passer au mode sombre"
   },
   "CommandPalette": {
-    "placeholder": "Tapez une commande ou recherchez...",
+    "placeholder": "Aller, naviguer ou lancer une action…",
     "noResults": "Aucun résultat trouvé.",
+    "dialogLabel": "Palette de commandes",
+    "close": "Fermer",
+    "synthesisEyebrow": "commandes opérateur",
+    "sections": "Sur cette page",
+    "jumpWork": "Aller au travail sélectionné",
+    "jumpTeams": "Aller au parcours pro",
+    "jumpApproach": "Aller à l'approche",
+    "jumpConnect": "Aller au contact",
+    "home": "Accueil",
     "navigate": "Navigation",
     "work": "Travaux",
     "systems": "Systèmes",
@@ -375,8 +401,10 @@
     "switchToFr": "Passer en français",
     "actions": "Actions",
     "copyEmail": "Copier l'adresse email",
+    "openWhatsApp": "Ouvrir WhatsApp",
+    "copied": "Copié dans le presse-papiers",
     "navigateHint": "↑↓ pour naviguer",
-    "selectHint": "↵ pour sélectionner"
+    "selectHint": "↵ pour exécuter"
   },
   "LocaleSwitcher": {
     "ariaLabel": "Langue",

@@ -50,6 +50,16 @@
       "contactCta": "Send a message"
     },
     "synthesis": {
+      "nav": {
+        "role": "Product Systems Eng.",
+        "work": "Work",
+        "approach": "Approach",
+        "writing": "Writing",
+        "connect": "Connect",
+        "available": "Available Q3 2026",
+        "availableShort": "Available",
+        "openCommand": "Open command palette"
+      },
       "hero": {
         "location": "Dakar, Senegal",
         "languages": "FR / EN",
@@ -62,7 +72,7 @@
           "availability": "> availability · Q3 2026"
         },
         "headline": "I build the software layer between business operations and product ambition.",
-        "subtitle": "Product systems engineer in Dakar. I ship finance and ERP tooling, internal ops software, and AI-assisted workflows for teams that need one engineer to hold the full stack.",
+        "subtitle": "Product systems engineer in Dakar. Finance and ERP tooling, internal ops software, and AI-assisted workflows — one engineer across the full stack.",
         "availability": "Two client slots open Q3 2026 · replies within 48h on business days",
         "ctaWork": "See selected work",
         "ctaContact": "Get in touch"
@@ -91,6 +101,12 @@
       "github": {
         "title": "GitHub activity",
         "pinned": "Pinned",
+        "pinnedNotes": {
+          "portfolio": "this site",
+          "odooKit": "Robot + Playwright",
+          "agentReady": "AI-collab conventions",
+          "bocalbun": "frozen retrospective"
+        },
         "loading": "Loading contributions…",
         "unavailable": "chart unavailable · view on",
         "contributions": "contributions",
@@ -104,7 +120,7 @@
       "workedWith": {
         "eyebrow": "Work history",
         "title": "Employers and client builds",
-        "hint": "Hover an employer to highlight related case studies.",
+        "hint": "Hover an employer to see proof and highlight related case studies.",
         "employersLabel": "Employers",
         "clientsLabel": "Client projects",
         "clientsTagline": "Dakar · freelance & product",
@@ -311,7 +327,7 @@
       "connect": {
         "eyebrow": "Contact",
         "title": "Tell me what you are building and where it hurts.",
-        "lead": "Fintech, ERP migrations, internal tools, or AI-assisted delivery. Two slots for Q3 2026. I reply within 48 hours on business days.",
+        "lead": "Fintech, ERP migrations, internal tools, or AI-assisted delivery. Two contract slots for Q3 2026. I reply within 48 hours on business days.",
         "ctaEmail": "Send a message →",
         "ctaWhatsApp": "WhatsApp ↗",
         "ctaCopyEmail": "Copy email",
@@ -343,15 +359,25 @@
     "writingShort": "Writing",
     "aboutShort": "About",
     "contactShort": "Contact",
-    "mobileNavAriaLabel": "Mobile navigation"
+    "mobileNavAriaLabel": "Mobile navigation",
+    "openCommand": "Open command palette"
   },
   "Theme": {
     "switchToLight": "Switch to light mode",
     "switchToDark": "Switch to dark mode"
   },
   "CommandPalette": {
-    "placeholder": "Type a command or search...",
+    "placeholder": "Jump, navigate, or run an action…",
     "noResults": "No results found.",
+    "dialogLabel": "Command palette",
+    "close": "Close",
+    "synthesisEyebrow": "operator commands",
+    "sections": "On this page",
+    "jumpWork": "Jump to selected work",
+    "jumpTeams": "Jump to work history",
+    "jumpApproach": "Jump to approach",
+    "jumpConnect": "Jump to contact",
+    "home": "Home",
     "navigate": "Navigate",
     "work": "Work",
     "systems": "Systems",
@@ -364,8 +390,10 @@
     "switchToFr": "Switch to French",
     "actions": "Actions",
     "copyEmail": "Copy email address",
-    "navigateHint": "Use ↑↓ to navigate",
-    "selectHint": "↵ to select"
+    "openWhatsApp": "Open WhatsApp",
+    "copied": "Copied to clipboard",
+    "navigateHint": "↑↓ to navigate",
+    "selectHint": "↵ to run"
   },
   "LocaleSwitcher": {
     "ariaLabel": "Language",

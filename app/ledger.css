@@ -1292,9 +1292,243 @@
   }
 }
 
+/* ── Synthesis theme tokens (global — header, homepage, work shell) ─── */
+
+:root,
+[data-theme="light"] {
+  --syn-canvas: oklch(0.985 0.003 240);
+  --syn-surface: oklch(0.965 0.004 240);
+  --syn-surface-hover: oklch(0.94 0.005 240);
+  --syn-border: oklch(0.90 0.005 240);
+  --syn-border-strong: oklch(0.82 0.006 240);
+  --syn-ink: oklch(0.16 0.012 250);
+  --syn-ink-strong: oklch(0.20 0.012 250);
+  --syn-ink-muted: oklch(0.34 0.010 248);
+  --syn-ink-secondary: oklch(0.46 0.010 248);
+  --syn-ink-subtle: oklch(0.60 0.008 246);
+  --syn-ink-faint: oklch(0.72 0.007 244);
+  --syn-ink-dim: oklch(0.80 0.006 242);
+  --syn-accent: oklch(0.60 0.15 160);
+  --syn-grain-opacity: 0.02;
+  --syn-ambient-strength: 0.12;
+  --syn-selection: oklch(0.60 0.15 160 / 0.18);
+  --syn-glow-spot: oklch(0.20 0.012 250 / 0.04);
+  --syn-btn-primary-bg: oklch(0.16 0.012 250);
+  --syn-btn-primary-fg: oklch(0.985 0.003 240);
+  --syn-btn-secondary-bg: oklch(0.965 0.004 240);
+  --syn-btn-secondary-border: oklch(0.82 0.006 240);
+  --syn-btn-secondary-fg: oklch(0.34 0.010 248);
+  --syn-btn-secondary-hover-bg: oklch(0.94 0.005 240);
+  --syn-row-hover: oklch(0.20 0.012 250 / 0.04);
+  --syn-hairline: oklch(0.88 0.005 240);
+  --contrib-0: oklch(0.88 0.008 240);
+  --contrib-1: oklch(0.80 0.07 160);
+  --contrib-2: oklch(0.70 0.11 160);
+  --contrib-3: oklch(0.60 0.14 160);
+  --contrib-4: oklch(0.50 0.16 160);
+}
+
+[data-theme="dark"] {
+  --syn-canvas: #050505;
+  --syn-surface: #0d0d0d;
+  --syn-surface-hover: rgba(255, 255, 255, 0.05);
+  --syn-border: rgba(255, 255, 255, 0.06);
+  --syn-border-strong: rgba(255, 255, 255, 0.12);
+  --syn-ink: #ededed;
+  --syn-ink-strong: rgba(255, 255, 255, 0.92);
+  --syn-ink-muted: rgba(255, 255, 255, 0.62);
+  --syn-ink-secondary: rgba(255, 255, 255, 0.5);
+  --syn-ink-subtle: rgba(255, 255, 255, 0.38);
+  --syn-ink-faint: rgba(255, 255, 255, 0.26);
+  --syn-ink-dim: rgba(255, 255, 255, 0.18);
+  --syn-accent: oklch(0.78 0.16 160);
+  --syn-grain-opacity: 0.045;
+  --syn-ambient-strength: 0.35;
+  --syn-selection: rgba(255, 255, 255, 0.2);
+  --syn-glow-spot: rgba(255, 255, 255, 0.04);
+  --syn-btn-primary-bg: #ffffff;
+  --syn-btn-primary-fg: #050505;
+  --syn-btn-secondary-bg: #0d0d0d;
+  --syn-btn-secondary-border: rgba(255, 255, 255, 0.12);
+  --syn-btn-secondary-fg: rgba(255, 255, 255, 0.82);
+  --syn-btn-secondary-hover-bg: rgba(255, 255, 255, 0.05);
+  --syn-row-hover: rgba(255, 255, 255, 0.03);
+  --syn-hairline: rgba(255, 255, 255, 0.1);
+  --contrib-0: rgba(255, 255, 255, 0.07);
+  --contrib-1: rgba(16, 185, 129, 0.28);
+  --contrib-2: rgba(16, 185, 129, 0.48);
+  --contrib-3: rgba(52, 211, 153, 0.72);
+  --contrib-4: rgb(110, 231, 183);
+}
+
+.contrib-cell-0 {
+  fill: var(--contrib-0);
+}
+
+.contrib-cell-1 {
+  fill: var(--contrib-1);
+}
+
+.contrib-cell-2 {
+  fill: var(--contrib-2);
+}
+
+.contrib-cell-3 {
+  fill: var(--contrib-3);
+}
+
+.contrib-cell-4 {
+  fill: var(--contrib-4);
+}
+
+.bg-contrib-0 {
+  background-color: var(--contrib-0);
+}
+
+.mono-eyebrow {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 10px;
+  color: var(--syn-ink-subtle);
+}
+
+.bg-syn-canvas {
+  background-color: var(--syn-canvas);
+}
+
+.bg-syn-surface {
+  background-color: var(--syn-surface);
+}
+
+.text-syn-ink {
+  color: var(--syn-ink);
+}
+
+.text-syn-ink-strong {
+  color: var(--syn-ink-strong);
+}
+
+.text-syn-ink-muted {
+  color: var(--syn-ink-muted);
+}
+
+.text-syn-ink-secondary {
+  color: var(--syn-ink-secondary);
+}
+
+.text-syn-ink-subtle {
+  color: var(--syn-ink-subtle);
+}
+
+.text-syn-ink-faint {
+  color: var(--syn-ink-faint);
+}
+
+.text-syn-ink-dim {
+  color: var(--syn-ink-dim);
+}
+
+.text-syn-accent {
+  color: var(--syn-accent);
+}
+
+.border-syn-border {
+  border-color: var(--syn-border);
+}
+
+.border-syn-border-strong {
+  border-color: var(--syn-border-strong);
+}
+
+.border-t-syn-border {
+  border-top-color: var(--syn-border);
+}
+
+.border-y-syn-border {
+  border-top-color: var(--syn-border);
+  border-bottom-color: var(--syn-border);
+}
+
+.divide-syn-border > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--syn-border);
+}
+
+.hover\:bg-syn-row-hover:hover {
+  background-color: var(--syn-row-hover);
+}
+
+.syn-entity-card {
+  position: relative;
+  border: 1px solid var(--syn-border);
+  border-radius: 0.75rem;
+  background: var(--syn-surface);
+  transition:
+    border-color 220ms cubic-bezier(0.25, 1, 0.5, 1),
+    box-shadow 220ms cubic-bezier(0.25, 1, 0.5, 1),
+    transform 220ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.syn-entity-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1rem;
+  bottom: 1rem;
+  width: 2px;
+  border-radius: 999px;
+  background: transparent;
+  transition: background 220ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.syn-entity-card:hover,
+.syn-entity-card:focus-within {
+  border-color: color-mix(in oklch, var(--syn-accent) 28%, var(--syn-border));
+  box-shadow: 0 1px 0 color-mix(in oklch, var(--syn-accent) 8%, transparent);
+}
+
+.syn-entity-card:hover::before,
+.syn-entity-card:focus-within::before {
+  background: var(--syn-accent);
+}
+
+.syn-entity-card--active {
+  border-color: color-mix(in oklch, var(--syn-accent) 42%, var(--syn-border));
+  box-shadow:
+    0 0 0 1px color-mix(in oklch, var(--syn-accent) 14%, transparent),
+    0 8px 24px -20px color-mix(in oklch, var(--syn-accent) 35%, transparent);
+}
+
+.syn-entity-card--active::before {
+  background: var(--syn-accent);
+}
+
+.selection-syn::selection {
+  background: var(--syn-selection);
+}
+
+.syn-btn-primary {
+  background-color: var(--syn-btn-primary-bg);
+  color: var(--syn-btn-primary-fg);
+}
+
+.syn-btn-secondary {
+  background-color: var(--syn-btn-secondary-bg);
+  border-color: var(--syn-btn-secondary-border);
+  color: var(--syn-btn-secondary-fg);
+}
+
+.syn-btn-secondary:hover {
+  background-color: var(--syn-btn-secondary-hover-bg);
+  color: var(--syn-ink);
+}
+
 /* ── Synthesis homepage (production + mock parity) ───────────────────── */
 
 .site-synthesis {
+  background-color: var(--syn-canvas);
+  color: var(--syn-ink);
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -1304,7 +1538,7 @@
   inset: 0;
   background: radial-gradient(
     600px circle at var(--x, 0px) var(--y, 0px),
-    rgba(255, 255, 255, 0.04),
+    var(--syn-glow-spot),
     transparent 40%
   );
   opacity: 0;
@@ -1336,11 +1570,7 @@
 }
 
 .site-synthesis .mono-eyebrow {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.35);
+  color: var(--syn-ink-subtle);
 }
 
 .site-synthesis .hairline {
@@ -1348,7 +1578,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.1),
+    var(--syn-hairline),
     transparent
   );
 }
@@ -1365,8 +1595,18 @@
   background-size: 24px 24px;
 }
 
+.site-synthesis .synthesis-bg-layers {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    black 4.5rem,
+    black calc(100% - 6rem),
+    transparent 100%
+  );
+}
+
 .site-synthesis .bg-grain {
-  opacity: 0.045;
+  opacity: var(--syn-grain-opacity);
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -1376,7 +1616,7 @@
   height: min(70vw, 720px);
   border-radius: 50%;
   filter: blur(100px);
-  opacity: 0.35;
+  opacity: var(--syn-ambient-strength);
   animation: synthesis-ambient-drift 28s ease-in-out infinite alternate;
 }
 
@@ -1520,7 +1760,15 @@
 }
 
 .site-synthesis .work-row--highlight {
-  background: rgba(52, 211, 153, 0.06);
+  border-color: color-mix(in oklch, var(--syn-accent) 42%, var(--syn-border));
+  box-shadow:
+    0 0 0 1px color-mix(in oklch, var(--syn-accent) 14%, transparent),
+    0 8px 24px -20px color-mix(in oklch, var(--syn-accent) 35%, transparent);
+  background: var(--syn-surface);
+}
+
+.site-synthesis .work-row--highlight::before {
+  background: var(--syn-accent);
 }
 
 .site-synthesis .status-pulse-once {
@@ -1546,19 +1794,11 @@
   }
 }
 
-/* Inner routes (work index + case studies) — synthesis dark shell, theme-independent */
+/* Inner routes (work index + case studies) — inherit synthesis tokens */
 
 .site-synthesis-inner {
-  background-color: #050505;
-  color: #ededed;
-  --color-ink-primary: #ededed;
-  --color-ink-secondary: rgba(255, 255, 255, 0.6);
-  --color-ink-tertiary: rgba(255, 255, 255, 0.45);
-  --color-ink-muted: rgba(255, 255, 255, 0.35);
-  --color-border: rgba(255, 255, 255, 0.1);
-  --color-border-strong: rgba(255, 255, 255, 0.15);
-  --color-canvas-elevated: #0a0a0a;
-  --color-accent: rgb(52, 211, 153);
+  background-color: var(--syn-canvas);
+  color: var(--syn-ink);
 }
 
 .site-synthesis-inner .hairline {
@@ -1566,17 +1806,17 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.1),
+    var(--syn-hairline),
     transparent
   );
 }
 
 .site-synthesis-inner .link {
-  color: rgba(52, 211, 153, 0.9);
+  color: color-mix(in oklch, var(--syn-accent) 90%, transparent);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
 .site-synthesis-inner .link:hover {
-  color: rgb(52, 211, 153);
+  color: var(--syn-accent);
 }

@@ -33,17 +33,17 @@ const CONTRIB_YEARS: ContribYear[] = [
 function contribLevelClass(level: number) {
   switch (level) {
     case 0:
-      return "fill-white/[0.04]";
+      return "contrib-cell-0";
     case 1:
-      return "fill-emerald-500/25";
+      return "contrib-cell-1";
     case 2:
-      return "fill-emerald-500/50";
+      return "contrib-cell-2";
     case 3:
-      return "fill-emerald-400/75";
+      return "contrib-cell-3";
     case 4:
-      return "fill-emerald-300";
+      return "contrib-cell-4";
     default:
-      return "fill-white/[0.04]";
+      return "contrib-cell-0";
   }
 }
 
@@ -137,7 +137,7 @@ function ContributionSkeleton({ compact }: { compact?: boolean }) {
   const t = useTranslations("HomePage.synthesis.github");
   return (
     <div className="space-y-4">
-      <p className="mono text-xs text-white/30">{t("loading")}</p>
+      <p className="mono text-xs text-syn-ink-faint">{t("loading")}</p>
       <div
         className="grid gap-[3px] max-w-full overflow-hidden"
         style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
@@ -145,7 +145,7 @@ function ContributionSkeleton({ compact }: { compact?: boolean }) {
         {Array.from({ length: cols * 7 }).map((_, i) => (
           <span
             key={i}
-            className="aspect-square rounded-[2px] bg-white/[0.04] animate-pulse"
+            className="aspect-square rounded-[2px] bg-contrib-0 animate-pulse"
             style={{ animationDelay: `${(i % cols) * 8}ms` }}
           />
         ))}
@@ -184,7 +184,7 @@ function ContributionChartBody({
 
   if (error) {
     return (
-      <p className="mono text-xs text-white/40 py-6">
+      <p className="mono text-xs text-syn-ink-subtle py-6">
         {t("unavailable")}{" "}
         <a
           href={`https://github.com/${user}`}
@@ -211,11 +211,11 @@ function ContributionChartBody({
   return (
     <>
       <div className="flex items-baseline justify-between gap-4 flex-wrap">
-        <p className="mono text-xs text-white/55">
+        <p className="mono text-xs text-syn-ink-secondary">
           <span className="text-emerald-400">{total.toLocaleString()}</span>{" "}
           {t("contributions")} · {periodLabel}
         </p>
-        <div className="flex items-center gap-2 mono text-[10px] text-white/40">
+        <div className="flex items-center gap-2 mono text-[10px] text-syn-ink-subtle">
           <span>{t("less")}</span>
           {[0, 1, 2, 3, 4].map((l) => (
             <svg key={l} width={11} height={11} aria-hidden>
@@ -235,8 +235,8 @@ function ContributionChartBody({
                 (data.total as Record<string, number>)[String(y)] ?? 0;
               return (
                 <div key={y}>
-                  <p className="mono text-[10px] text-white/45 mb-2">
-                    {y} · <span className="text-white/65">{yearTotal}</span>
+                  <p className="mono text-[10px] text-syn-ink-subtle mb-2">
+                    {y} · <span className="text-syn-ink-muted">{yearTotal}</span>
                   </p>
                   <ContributionHeatmap
                     days={days}
@@ -279,7 +279,7 @@ function ContributionChart({ user }: { user: string }) {
             className={`mono text-[10px] px-2 py-1 rounded-md border transition-colors ${
               year === y
                 ? "border-emerald-500/40 text-emerald-400 bg-emerald-500/10"
-                : "border-white/10 text-white/40 hover:text-white/70 hover:border-white/20"
+                : "border-syn-border-strong text-syn-ink-subtle hover:text-syn-ink-muted hover:border-syn-border-strong"
             }`}
           >
             {contribYearLabel(y)}
@@ -296,12 +296,12 @@ export function SynthesisGithubActivity() {
   const user = SYNTHESIS_GITHUB_USER;
 
   return (
-    <div className="md:col-span-5 p-6 md:p-8 rounded-2xl bg-[#0a0a0a] border border-white/5 flex flex-col min-h-[280px] md:min-h-[320px]">
+    <div className="md:col-span-5 p-6 md:p-8 rounded-2xl bg-syn-surface border border-syn-border flex flex-col min-h-[280px] md:min-h-[320px]">
       <div className="flex items-baseline justify-between gap-3 mb-4 shrink-0">
-        <h2 className="text-sm font-medium text-white/90">{t("title")}</h2>
+        <h2 className="text-sm font-medium text-syn-ink-strong">{t("title")}</h2>
         <a
           href={`https://github.com/${user}`}
-          className="mono text-[10px] text-white/45 hover:text-white transition-colors"
+          className="mono text-[10px] text-syn-ink-subtle hover:text-syn-ink transition-colors"
         >
           @{user} ↗
         </a>
@@ -309,8 +309,8 @@ export function SynthesisGithubActivity() {
       <div className="flex-1 min-h-0">
         <ContributionChart user={user} />
       </div>
-      <div className="mt-5 pt-5 border-t border-white/5 shrink-0">
-        <p className="text-[10px] uppercase tracking-wide text-white/40 mb-2">
+      <div className="mt-5 pt-5 border-t border-syn-border shrink-0">
+        <p className="text-[10px] uppercase tracking-wide text-syn-ink-subtle mb-2">
           {t("pinned")}
         </p>
         <ul className="space-y-1.5">
@@ -318,12 +318,14 @@ export function SynthesisGithubActivity() {
             <li key={r.repo}>
               <a
                 href={`https://github.com/${r.repo}`}
-                className="group flex items-baseline justify-between gap-2 text-xs hover:bg-white/[0.02] rounded -mx-1 px-1 py-0.5 transition-colors"
+                className="group flex items-baseline justify-between gap-2 text-xs hover:bg-syn-row-hover rounded -mx-1 px-1 py-0.5 transition-colors"
               >
-                <span className="mono text-white/70 group-hover:text-white truncate">
+                <span className="mono text-syn-ink-muted group-hover:text-syn-ink truncate">
                   {r.repo.split("/")[1]}
                 </span>
-                <span className="text-white/40 shrink-0">{r.note}</span>
+                <span className="text-syn-ink-subtle shrink-0">
+                  {t(`pinnedNotes.${r.noteKey}`)}
+                </span>
               </a>
             </li>
           ))}

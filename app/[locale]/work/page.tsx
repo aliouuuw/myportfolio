@@ -100,13 +100,13 @@ export default async function WorkPage(props: {
 
   return (
     <div className="site-synthesis site-synthesis-inner min-h-dvh pb-20">
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 xl:pl-24 pt-20 pb-16">
+      <div className="mx-auto max-w-[1400px] px-4 pb-16 pt-6 md:px-6 lg:px-8 xl:pl-24">
         <header className="mb-12 max-w-2xl">
           <p className="mono-eyebrow mb-3">{t("indexEyebrow")}</p>
-          <h1 className="text-[clamp(2rem,4vw,2.75rem)] font-medium tracking-tight text-white/90 mb-4">
+          <h1 className="text-[clamp(2rem,4vw,2.75rem)] font-medium tracking-tight text-syn-ink-strong mb-4">
             {t("title")}
           </h1>
-          <p className="text-white/55 leading-relaxed">{t("subtitle")}</p>
+          <p className="text-syn-ink-secondary leading-relaxed">{t("subtitle")}</p>
         </header>
 
         <WorkIndexList
@@ -123,7 +123,7 @@ export default async function WorkPage(props: {
         <p className="mt-14">
           <Link
             href={`/${locale}`}
-            className="mono text-xs text-white/40 hover:text-white/70 transition-colors"
+            className="mono text-xs text-syn-ink-subtle hover:text-syn-ink-muted transition-colors"
           >
             ← {t("backToHome")}
           </Link>

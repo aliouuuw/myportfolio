@@ -29,7 +29,7 @@ function statusPillClass(status: WorkLedgerStatus): string {
     case "shipped":
       return "border-blue-500/20 text-blue-400 bg-blue-500/5";
     case "archived":
-      return "border-white/10 text-white/40 bg-transparent";
+      return "border-syn-border-strong text-syn-ink-subtle bg-transparent";
   }
 }
 
@@ -45,14 +45,14 @@ function FeaturedRow({
   return (
     <Link
       href={`/${locale}/work/${entry.slug}`}
-      className="group flex flex-col lg:flex-row lg:items-center justify-between py-6 gap-4 lg:gap-6 hover:bg-white/[0.02] transition-colors -mx-4 px-4 rounded-lg"
+      className="syn-entity-card group flex flex-col lg:flex-row lg:items-center justify-between p-5 md:p-6 gap-4 lg:gap-6"
     >
-      <div className="flex items-center gap-5 lg:w-1/3 shrink-0">
+      <div className="flex items-center gap-5 lg:w-1/3 shrink-0 pl-3">
         {entry.indexId ? (
-          <span className="mono text-xs text-white/30">{entry.indexId}</span>
+          <span className="mono text-xs text-syn-ink-faint">{entry.indexId}</span>
         ) : null}
         <div>
-          <h2 className="font-medium text-white/90 group-hover:text-white">
+          <h2 className="font-medium text-syn-ink-strong group-hover:text-syn-accent transition-colors">
             {entry.title}
           </h2>
           <p className="mono-eyebrow mt-1">
@@ -60,13 +60,13 @@ function FeaturedRow({
           </p>
         </div>
       </div>
-      <div className="flex items-center justify-between lg:justify-end gap-6 lg:w-1/3 shrink-0 lg:ml-auto">
+      <div className="flex items-center justify-between lg:justify-end gap-6 lg:w-1/3 shrink-0 lg:ml-auto pl-3 lg:pl-0">
         <span
           className={`mono text-[10px] tracking-widest px-2 py-1 rounded-full border ${statusPillClass(entry.status)}`}
         >
           {statusLabel}
         </span>
-        <span className="text-white/30 group-hover:text-white/70 transition-colors">
+        <span className="text-syn-ink-faint group-hover:text-syn-accent transition-colors">
           ↗
         </span>
       </div>
@@ -84,12 +84,12 @@ function SupportingRow({
   return (
     <Link
       href={`/${locale}/work/${entry.slug}`}
-      className="group flex flex-wrap items-baseline justify-between gap-3 py-4 hover:bg-white/[0.02] transition-colors -mx-4 px-4 rounded-lg"
+      className="syn-entity-card group flex flex-wrap items-baseline justify-between gap-3 p-4 md:px-5 md:py-4"
     >
-      <span className="text-white/75 group-hover:text-white transition-colors">
+      <span className="pl-3 text-syn-ink-strong group-hover:text-syn-accent transition-colors">
         {entry.title}
       </span>
-      <span className="mono text-[10px] uppercase tracking-widest text-white/30">
+      <span className="mono text-[10px] uppercase tracking-widest text-syn-ink-faint pl-3">
         {entry.domain}
       </span>
     </Link>
@@ -111,14 +111,14 @@ export function WorkIndexList({
       <div className="flex justify-between items-end mb-8">
         <div>
           <p className="mono-eyebrow">{featuredEyebrow}</p>
-          <h2 className="text-2xl font-medium tracking-tight mt-3 text-white/90">
+          <h2 className="text-2xl font-medium tracking-tight mt-3 text-syn-ink-strong">
             {featuredTitle}
           </h2>
         </div>
-        <span className="mono-eyebrow text-white/40">{featuredAside}</span>
+        <span className="mono-eyebrow">{featuredAside}</span>
       </div>
 
-      <div className="divide-y divide-white/5 border-y border-white/5">
+      <div className="flex flex-col gap-3">
         {featured.map((entry) => (
           <FeaturedRow
             key={entry.slug}
@@ -131,8 +131,8 @@ export function WorkIndexList({
 
       {other.length > 0 ? (
         <div className="mt-14">
-          <p className="mono-eyebrow mb-6 text-white/40">{moreLabel}</p>
-          <div className="divide-y divide-white/5 border-y border-white/5">
+          <p className="mono-eyebrow mb-6">{moreLabel}</p>
+          <div className="flex flex-col gap-3">
             {other.map((entry) => (
               <SupportingRow key={entry.slug} locale={locale} entry={entry} />
             ))}
