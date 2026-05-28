@@ -28,6 +28,7 @@ export function ScrambleText({ text, className = "", trigger = "hover" }: Scramb
     isAnimating.current = true;
 
     let iteration = 0;
+    const target = originalText.current;
     const interval = setInterval(() => {
       setDisplayText(() => {
         return target

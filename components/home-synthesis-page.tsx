@@ -92,8 +92,11 @@ export function HomeSynthesisPage({ locale, writing }: HomeSynthesisPageProps) {
         className="synthesis-bg-layers fixed inset-0 pointer-events-none -z-10 overflow-hidden"
         aria-hidden
       >
+        <div className="aurora-orb aurora-orb--1" />
+        <div className="aurora-orb aurora-orb--2" />
+        <div className="aurora-orb aurora-orb--3" />
         <div className="absolute inset-0 bg-grain" />
-        <div className="ambient-accent top-[-15%] left-[-5%]" />
+        <div className="absolute inset-0 bg-vignette" />
       </div>
 
       <SynthesisScrollRail active={activeSection} />

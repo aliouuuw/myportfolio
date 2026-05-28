@@ -22,6 +22,7 @@ export function SynthesisSelectedWork({
     <SynthesisRevealSection id="work" className="pt-8 scroll-mt-28">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between mb-8">
         <div>
+          <span className="section-marker">{t("eyebrow")}</span>
           <h2 className="text-[clamp(1.75rem,3vw,2.25rem)] font-medium tracking-tight text-syn-ink-strong">
             {t("title")}
           </h2>

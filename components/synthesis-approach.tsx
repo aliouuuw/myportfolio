@@ -33,6 +33,7 @@ export function SynthesisApproach() {
       id="approach"
       className="pt-16 border-t border-syn-border scroll-mt-28"
     >
+      <span className="section-marker">{t("eyebrow")}</span>
       <h2 className="text-2xl font-medium tracking-tight text-syn-ink-strong">
         {t("title")}
       </h2>
