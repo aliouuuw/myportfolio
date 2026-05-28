@@ -15,6 +15,7 @@ import {
   SYNTHESIS_BOOT_KEY as BOOT_KEY,
   SYNTHESIS_WORK as WORK,
 } from "@/lib/synthesis-data";
+import { githubContributionsApiPath } from "@/lib/github-contributions";
 
 const BOOT_LINES = [
   "> teams loaded · 7 employers",
@@ -1097,7 +1098,7 @@ function ContributionChartBody({ user, year }: { user: string; year: ContribYear
   useEffect(() => {
     let cancelled = false;
     const param = year === "last" ? "last" : year === "all" ? "all" : String(year);
-    fetch(`https://github-contributions-api.jogruber.de/v4/${user}?y=${param}`)
+    fetch(githubContributionsApiPath(param))
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error("fetch failed"))))
       .then((json: ContribData) => {
         if (!cancelled) setData(json);

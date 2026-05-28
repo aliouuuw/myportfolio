@@ -7,12 +7,14 @@ import {
   SYNTHESIS_GITHUB_USER,
   SYNTHESIS_PINNED_REPOS,
 } from "@/lib/synthesis-data";
+import {
+  type GithubContribData,
+  type GithubContribDay,
+  githubContributionsApiPath,
+} from "@/lib/github-contributions";
 
-type ContribDay = { date: string; count: number; level: 0 | 1 | 2 | 3 | 4 };
-type ContribData = {
-  total: { lastYear: number } | Record<string, number>;
-  contributions: ContribDay[];
-};
+type ContribDay = GithubContribDay;
+type ContribData = GithubContribData;
 type ContribYear = "last" | "all" | number;
 
 const CONTRIB_YEARS: ContribYear[] = [
@@ -167,7 +169,7 @@ function ContributionChartBody({
     let cancelled = false;
     const param =
       year === "last" ? "last" : year === "all" ? "all" : String(year);
-    fetch(`https://github-contributions-api.jogruber.de/v4/${user}?y=${param}`)
+    fetch(githubContributionsApiPath(param))
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error("fetch failed"))))
       .then((json: ContribData) => {
         if (!cancelled) setData(json);
@@ -178,7 +180,7 @@ function ContributionChartBody({
     return () => {
       cancelled = true;
     };
-  }, [user, year]);
+  }, [year]);
 
   if (error) {
     return (
