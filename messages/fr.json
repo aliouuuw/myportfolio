@@ -83,7 +83,8 @@
         "location": "Dakar, Sénégal",
         "languages": "FR / EN",
         "timezone": "WAT",
-        "headline": "Je construis la couche logicielle entre les opérations métier et l'ambition produit — ingénieur systèmes produit à Dakar, une stack pour la fintech, l'ERP et l'ops.",
+        "headline": "Je construis le logiciel entre vos opérations et le produit ou les services que vous livrez.",
+        "tagline": "Ingénieur systèmes produit — fintech, ERP, outils internes, de l'architecture à la production.",
         "availability": "Deux créneaux clients ouverts T3 2026 · réponse sous 48 h les jours ouvrés",
         "ctaWork": "Voir le travail sélectionné",
         "ctaContact": "Me contacter"
@@ -134,7 +135,8 @@
         "less": "moins",
         "more": "plus",
         "chartAria": "{total} contributions GitHub sur {period}",
-        "yearAria": "{total} contributions en {year}"
+        "yearAria": "{total} contributions en {year}",
+        "scopeNote": "Ce graphique ne couvre que ce profil. Une grande partie de mon travail est aussi livrée via des comptes GitHub employeur et Azure DevOps."
       },
       "workedWith": {
         "eyebrow": "Parcours pro",

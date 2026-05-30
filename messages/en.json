@@ -72,7 +72,8 @@
         "location": "Dakar, Senegal",
         "languages": "FR / EN",
         "timezone": "WAT",
-        "headline": "I build the software layer between business operations and product ambition — product systems engineer in Dakar, one stack across fintech, ERP, and ops.",
+        "headline": "I build the software between your operations and the product or services you deliver.",
+        "tagline": "Product systems engineer — fintech, ERP, internal tools, from architecture to production.",
         "availability": "Two client slots open Q3 2026 · replies within 48h on business days",
         "ctaWork": "See selected work",
         "ctaContact": "Get in touch"
@@ -123,7 +124,8 @@
         "less": "less",
         "more": "more",
         "chartAria": "{total} GitHub contributions in {period}",
-        "yearAria": "{total} contributions in {year}"
+        "yearAria": "{total} contributions in {year}",
+        "scopeNote": "This chart is this profile only. A large share of my work also ships on employer GitHub accounts and Azure DevOps."
       },
       "workedWith": {
         "eyebrow": "Work history",

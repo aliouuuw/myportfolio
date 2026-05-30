@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
-import { MagneticElement } from "@/components/magnetic-element";
+import { SynButton } from "@/components/syn-button";
 
 type SynthesisHeroProps = {
   onHeroReady: () => void;
@@ -44,30 +44,21 @@ export function SynthesisHero({ onHeroReady }: SynthesisHeroProps) {
         </p>
       </div>
 
-      <p className="syn-hero-availability mono hero-reveal hero-reveal--2">
-        {t("availability")}
-      </p>
-
-      <h1 className="syn-hero-title hero-reveal hero-reveal--3">{t("headline")}</h1>
+      <h1 className="syn-hero-title hero-reveal hero-reveal--2">{t("headline")}</h1>
+      <p className="syn-hero-tagline hero-reveal hero-reveal--3">{t("tagline")}</p>
 
       <div className="syn-hero-cta hero-reveal hero-reveal--4">
-        <MagneticElement>
-          <a
-            href="#work"
-            className="syn-btn-primary btn-press inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-transform hover:scale-[1.02]"
-          >
-            {t("ctaWork")} <span aria-hidden>↓</span>
-          </a>
-        </MagneticElement>
-        <MagneticElement>
-          <a
-            href="#connect"
-            className="syn-btn-secondary btn-press inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-colors"
-          >
-            {t("ctaContact")}
-          </a>
-        </MagneticElement>
+        <SynButton variant="primary" href="#work">
+          {t("ctaWork")} <span aria-hidden>↓</span>
+        </SynButton>
+        <SynButton variant="secondary" href="#connect">
+          {t("ctaContact")}
+        </SynButton>
       </div>
+
+      <p className="syn-hero-availability mono hero-reveal hero-reveal--5">
+        {t("availability")}
+      </p>
     </header>
   );
 }

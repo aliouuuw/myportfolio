@@ -98,7 +98,6 @@ function ContributionHeatmap({
   const GAP = compact ? 2 : 3;
   const width = weeks.length * (CELL + GAP);
   const height = 7 * (CELL + GAP);
-  let cellIndex = 0;
 
   return (
     <div className="syn-contrib-scroll">
@@ -112,9 +111,8 @@ function ContributionHeatmap({
         {weeks.map((week, x) =>
           week.map((day, y) => {
             if (!day) return null;
-            const index = cellIndex++;
-            const delay = (index * 47 + x * 13 + y * 31) % 2800;
-            const duration = 2600 + (index % 7) * 320;
+            const revealDelay = x * 32 + y * 14;
+            const liveDelay = (x * 19 + y * 41 + day.level * 120) % 4800;
 
             return (
               <rect
@@ -124,16 +122,18 @@ function ContributionHeatmap({
                 width={CELL}
                 height={CELL}
                 rx={2}
-                className={
-                  animated
-                    ? `contrib-cell-animated ${day.level === 0 ? "contrib-cell-animated--dim" : ""}`
-                    : contribLevelClass(day.level)
-                }
+                className={[
+                  contribLevelClass(day.level),
+                  animated ? "contrib-cell-reveal" : "",
+                  animated && day.level > 0 ? "contrib-cell-live" : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
                 style={
                   animated
                     ? ({
-                        "--tile-delay": `${delay}ms`,
-                        "--tile-duration": `${duration}ms`,
+                        "--reveal-delay": `${revealDelay}ms`,
+                        "--live-delay": `${liveDelay}ms`,
                       } as React.CSSProperties)
                     : undefined
                 }
@@ -359,6 +359,7 @@ export function SynthesisGithubActivity() {
           </a>
         </div>
         <ContributionChart user={user} animated={!reducedMotion} />
+        <p className="syn-github-scope-note">{t("scopeNote")}</p>
       </div>
     </section>
   );

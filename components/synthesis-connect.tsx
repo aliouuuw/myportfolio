@@ -4,7 +4,7 @@ import { useCallback, useRef } from "react";
 import { useTranslations } from "next-intl";
 
 import { useCommandPalette } from "@/components/command-palette-provider";
-import { MagneticElement } from "@/components/magnetic-element";
+import { SynButton } from "@/components/syn-button";
 import { SynthesisRevealSection } from "@/components/synthesis-reveal-section";
 import { SynthesisSectionHeader } from "@/components/synthesis-section-header";
 import { SYNTHESIS_EMAIL } from "@/lib/synthesis-data";
@@ -60,31 +60,15 @@ export function SynthesisConnect() {
       />
       <GlowCardSpotlight className="mt-8 p-8 md:p-10 syn-connect-card">
         <div className="flex flex-wrap gap-3">
-          <MagneticElement>
-            <a
-              href={`mailto:${SYNTHESIS_EMAIL}`}
-              className="syn-btn-primary btn-press inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium hover:scale-[1.02] transition-transform"
-            >
-              {t("ctaEmail")}
-            </a>
-          </MagneticElement>
-          <MagneticElement>
-            <a
-              href="https://wa.me/221777228845"
-              className="syn-btn-secondary btn-press inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-colors"
-            >
-              {t("ctaWhatsApp")}
-            </a>
-          </MagneticElement>
-          <MagneticElement>
-            <button
-              type="button"
-              onClick={copyEmail}
-              className="syn-btn-secondary btn-press inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-colors"
-            >
-              {t("ctaCopyEmail")}
-            </button>
-          </MagneticElement>
+          <SynButton variant="primary" href={`mailto:${SYNTHESIS_EMAIL}`}>
+            {t("ctaEmail")}
+          </SynButton>
+          <SynButton variant="secondary" href="https://wa.me/221777228845">
+            {t("ctaWhatsApp")}
+          </SynButton>
+          <SynButton variant="secondary" onClick={copyEmail}>
+            {t("ctaCopyEmail")}
+          </SynButton>
         </div>
       </GlowCardSpotlight>
     </SynthesisRevealSection>

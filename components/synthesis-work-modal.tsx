@@ -11,6 +11,7 @@ import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 
 import { CaseStudyMediaGallery } from "@/components/case-study-media-gallery";
+import { SynButton } from "@/components/syn-button";
 import { SYNTHESIS_WORK, type SynthesisWorkRow } from "@/lib/synthesis-data";
 
 type SynthesisWorkModalProps = {
@@ -217,13 +218,9 @@ function SynthesisWorkModalPanel({
             </div>
 
             <div className="syn-work-modal-actions">
-              <button
-                type="button"
-                onClick={onDiscuss}
-                className="syn-btn-primary btn-press inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium"
-              >
+              <SynButton variant="primary" onClick={onDiscuss}>
                 {t("modalDiscuss")} →
-              </button>
+              </SynButton>
             </div>
           </div>
         </div>
