@@ -262,10 +262,10 @@
       "work": {
         "eyebrow": "Case studies",
         "title": "Selected work",
-        "aside": "Depth over breadth. Four flagship systems, not a project gallery.",
+        "aside": "A few projects I've stayed close to long enough to explain without hand-waving.",
         "seeAll": "All work",
         "readCase": "Read case study",
-        "storiesHint": "Drag, or use the arrows. Open any project for the full story.",
+        "scrollHintRight": "Swipe right for more projects",
         "tileOpen": "Open",
         "scrollPrev": "Scroll back",
         "scrollNext": "Scroll forward",
@@ -288,34 +288,34 @@
         "rows": {
           "01": {
             "name": "Everest Finance",
-            "role": "Solo technical operator",
-            "desc": "Sole technical owner for a Senegalese fintech: public site, internal CRM, and the Sama Naffa customer app converging toward one shared operating model.",
-            "detail": "Three surfaces were evolving independently: marketing site, internal CRM, and the customer app. I unified them on one TypeScript stack and a single PostgreSQL schema so operations, compliance, and product stay aligned as the company scales.",
-            "outcomes": "One operational spine across web, CRM, and mobile\nPublic site shipped first, then CRM, then client app hardening\nShared types and validation from marketing through transactions",
+            "role": "Contract · product & ops software",
+            "desc": "Public site, internal CRM, and customer app on one TypeScript stack and shared Postgres schema.",
+            "detail": "Marketing, CRM, and the customer app had drifted apart. I brought them onto one codebase and database so ops and product do not fight separate sources of truth.",
+            "outcomes": "One schema behind web, CRM, and mobile\nShipped public site, then CRM, then app hardening\nShared validation from marketing through transactions",
             "stack": "Next.js · React Native · PostgreSQL"
           },
           "02": {
             "name": "ERGOBIT / Odoo 18",
-            "role": "Software engineer, ERP validation",
-            "desc": "Acceptance-testing starter kit for Odoo 18 migration teams: 39 tests across 9 suites, CI on Azure DevOps, and selector guidelines for maintainable ERP validation.",
-            "detail": "Migration teams were re-learning Odoo selectors on every engagement. The kit packages Robot Framework and Playwright patterns, CI wiring, and documentation so a new suite is repeatable instead of bespoke.",
-            "outcomes": "39 acceptance tests across 9 suites\nAzure DevOps pipeline for regression on every change\nSelector guidelines that survive minor Odoo UI drift",
+            "role": "Contract · ERP QA",
+            "desc": "Acceptance-test kit for Odoo 18 migrations—39 tests, nine suites, CI on Azure DevOps.",
+            "detail": "Each migration team was rebuilding selectors from scratch. I packaged Robot Framework and Playwright patterns with CI so the next project starts from a checklist, not a blank repo.",
+            "outcomes": "39 acceptance tests in nine suites\nAzure DevOps runs on every change\nSelector notes that survive small UI drift",
             "stack": "Robot Framework · Playwright · Azure DevOps"
           },
           "03": {
             "name": "Africa GreenTec accounting",
-            "role": "Odoo module author",
-            "desc": "Custom Odoo accounting module: automated roughly 80% of manual entries and held 10,000+ records per day in production for a renewable-energy operator.",
-            "detail": "Finance teams were posting thousands of manual journal lines daily. The module encodes their recurring patterns, validates against operational data, and keeps auditors on a traceable ledger without spreadsheet bridges.",
-            "outcomes": "~80% reduction in manual accounting entries\n10,000+ records per day in production\nBI-ready exports for management reporting",
+            "role": "Contract · Odoo module",
+            "desc": "Accounting module that removed most manual journal work—about 10k lines a day in production.",
+            "detail": "Finance was keying the same patterns every day. The module encodes those flows, checks against operational data, and keeps a clear audit trail without spreadsheet bridges.",
+            "outcomes": "Most recurring entries automated\n~10k records per day in production\nExports ready for management reports",
             "stack": "Odoo · Python · BI"
           },
           "04": {
             "name": "BocalBun retrospective",
-            "role": "Author, then deliberate stop",
-            "desc": "A deliberately stopped Bun toolkit. The proof is not adoption, it is knowing when clean architecture is not the highest-leverage work.",
-            "detail": "BocalBun explored a Bun-native toolkit with PostgreSQL RLS and strict layering. Shipping slowed once the abstraction cost outweighed delivery. Stopping preserved judgment as the artifact.",
-            "outcomes": "Documented architecture and schema before pause\nClear criteria for when to resume vs. abandon\nHonest retrospective instead of a zombie repo",
+            "role": "Side project · paused",
+            "desc": "A Bun toolkit I paused when the abstractions cost more than they saved.",
+            "detail": "I tried a Bun-native toolkit with Postgres RLS and strict layers. Delivery slowed, so I stopped and wrote up what was worth keeping—a better outcome than a quiet repo.",
+            "outcomes": "Architecture and schema documented before pause\nClear notes on when to resume or drop it\nPublic write-up instead of a zombie project",
             "stack": "Bun · TypeScript · PostgreSQL · RLS"
           }
         }

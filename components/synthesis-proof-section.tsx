@@ -40,7 +40,7 @@ export function SynthesisProofSection({ locale }: SynthesisProofSectionProps) {
         aside={
           <TransitionLink
             href={`/${locale}/work`}
-            className="text-xs text-syn-ink-muted hover:text-syn-ink transition-colors"
+            className="syn-work-see-all text-xs text-syn-ink-muted hover:text-syn-ink transition-colors"
           >
             {tWork("seeAll")} →
           </TransitionLink>
@@ -49,6 +49,7 @@ export function SynthesisProofSection({ locale }: SynthesisProofSectionProps) {
 
       <div className="mt-8">
         <SynthesisWorkStories
+          locale={locale}
           activeWorkId={openWorkId}
           onOpenWork={handleOpenWork}
         />

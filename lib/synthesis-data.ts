@@ -40,8 +40,8 @@ export const SYNTHESIS_WORK: SynthesisWorkRow[] = [
     name: "Everest Finance",
     type: "fintech_spine",
     status: "ACTIVE",
-    year: "2024 → Now",
-    desc: "Sole technical owner for a Senegalese fintech: public site, internal CRM, and the Sama Naffa customer app converging toward one shared operating model.",
+    year: "2025 → now",
+    desc: "Public site, internal CRM, and customer app for a Senegalese fintech—one stack, still evolving together.",
     stack: "Next.js · React Native · PostgreSQL",
   },
   {
@@ -50,8 +50,8 @@ export const SYNTHESIS_WORK: SynthesisWorkRow[] = [
     name: "ERGOBIT / Odoo 18",
     type: "erp_validation",
     status: "SHIPPED",
-    year: "2024",
-    desc: "Acceptance-testing starter kit for Odoo 18 migration teams: 39 tests across 9 suites, CI on Azure DevOps, and selector guidelines for maintainable ERP validation.",
+    year: "2024–25",
+    desc: "Starter kit for Odoo 18 migrations: acceptance tests, CI on Azure DevOps, and notes on selectors that survive UI changes.",
     stack: "Robot Framework · Playwright · Azure DevOps",
   },
   {
@@ -61,7 +61,7 @@ export const SYNTHESIS_WORK: SynthesisWorkRow[] = [
     type: "odoo_automation",
     status: "SHIPPED",
     year: "2024",
-    desc: "Custom Odoo accounting module: automated roughly 80% of manual entries and held 10,000+ records per day in production for a renewable-energy operator.",
+    desc: "Odoo accounting module that cut most manual journal work for a renewable-energy operator—about 10k lines a day in production.",
     stack: "Odoo · Python · BI",
   },
   {
@@ -71,7 +71,7 @@ export const SYNTHESIS_WORK: SynthesisWorkRow[] = [
     type: "systems_judgment",
     status: "FROZEN",
     year: "2022",
-    desc: "A deliberately stopped Bun toolkit. The proof is not adoption, it is knowing when clean architecture is not the highest-leverage work.",
+    desc: "A Bun toolkit I stopped on purpose—useful as a note on when to simplify instead of polishing architecture.",
     stack: "Bun · TypeScript · PostgreSQL · RLS",
   },
 ];

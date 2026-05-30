@@ -273,10 +273,10 @@
       "work": {
         "eyebrow": "Études de cas",
         "title": "Travail sélectionné",
-        "aside": "Profondeur plutôt qu'étendue. Quatre systèmes phares, pas une galerie de projets.",
+        "aside": "Quelques projets que je connais assez bien pour les expliquer sans généralités.",
         "seeAll": "Tous les projets",
         "readCase": "Lire l'étude de cas",
-        "storiesHint": "Glissez, ou utilisez les flèches. Ouvrez un projet pour l'histoire complète.",
+        "scrollHintRight": "Glissez vers la droite pour voir les autres projets",
         "tileOpen": "Ouvrir",
         "scrollPrev": "Reculer",
         "scrollNext": "Avancer",
@@ -299,34 +299,34 @@
         "rows": {
           "01": {
             "name": "Everest Finance",
-            "role": "Opérateur technique solo",
-            "desc": "Responsable technique solo d'une fintech sénégalaise : site public, CRM interne et app client Sama Naffa convergent vers un modèle opérationnel unique.",
-            "detail": "Trois surfaces évoluaient en silos : site marketing, CRM interne et app client. Je les ai unifiées sur une stack TypeScript et un schéma PostgreSQL unique pour garder opérations, conformité et produit alignés.",
-            "outcomes": "Une colonne vertébrale opérationnelle web, CRM et mobile\nSite public livré en premier, puis CRM, puis durcissement app client\nTypes et validation partagés du marketing aux transactions",
+            "role": "Contrat · produit & ops",
+            "desc": "Site public, CRM interne et app client sur une stack TypeScript et un schéma Postgres partagé.",
+            "detail": "Marketing, CRM et l'app client avaient divergé. Je les ai regroupés sur une base de code et une base de données pour éviter plusieurs vérités métier.",
+            "outcomes": "Un schéma pour le web, le CRM et le mobile\nSite public, puis CRM, puis durcissement app\nValidation partagée du marketing aux transactions",
             "stack": "Next.js · React Native · PostgreSQL"
           },
           "02": {
             "name": "ERGOBIT / Odoo 18",
-            "role": "Ingénieur logiciel, validation ERP",
-            "desc": "Kit de tests d'acceptation pour migrations Odoo 18 : 39 tests, 9 suites, CI Azure DevOps et guidelines de sélecteurs maintenables.",
-            "detail": "Les équipes migration réinventaient les sélecteurs Odoo à chaque mission. Le kit regroupe patterns Robot Framework et Playwright, CI et documentation pour des suites reproductibles.",
-            "outcomes": "39 tests d'acceptation sur 9 suites\nPipeline Azure DevOps pour les régressions\nGuidelines de sélecteurs résistantes aux dérives UI Odoo",
+            "role": "Contrat · QA ERP",
+            "desc": "Kit de tests d'acceptation pour migrations Odoo 18 — 39 tests, neuf suites, CI Azure DevOps.",
+            "detail": "Chaque migration repartait de zéro sur les sélecteurs. J'ai regroupé Robot Framework, Playwright et la CI pour démarrer avec une checklist, pas un repo vide.",
+            "outcomes": "39 tests d'acceptation en neuf suites\nAzure DevOps à chaque changement\nNotes de sélecteurs pour petites dérives UI",
             "stack": "Robot Framework · Playwright · Azure DevOps"
           },
           "03": {
             "name": "Africa GreenTec comptabilité",
-            "role": "Auteur module Odoo",
-            "desc": "Module comptable Odoo sur mesure : ~80 % des écritures manuelles automatisées, 10 000+ enregistrements/jour en production pour un opérateur énergies renouvelables.",
-            "detail": "Les équipes finance saisissaient des milliers d'écritures manuelles par jour. Le module encode leurs patterns récurrents, valide contre les données opérationnelles et garde une piste d'audit sans tableurs.",
-            "outcomes": "~80 % de réduction des écritures manuelles\n10 000+ enregistrements/jour en production\nExports BI pour le reporting direction",
+            "role": "Contrat · module Odoo",
+            "desc": "Module comptable qui a supprimé la plupart des saisies manuelles — environ 10 k lignes/jour en production.",
+            "detail": "La finance retapait les mêmes écritures chaque jour. Le module encode ces flux, vérifie les données opérationnelles et garde une piste claire sans tableurs.",
+            "outcomes": "Écritures récurrentes largement automatisées\n~10 k enregistrements/jour en production\nExports prêts pour le reporting",
             "stack": "Odoo · Python · BI"
           },
           "04": {
             "name": "BocalBun rétrospective",
-            "role": "Auteur, puis arrêt volontaire",
-            "desc": "Toolkit Bun volontairement arrêté. La preuve n'est pas l'adoption, c'est savoir quand l'architecture propre n'est pas le levier principal.",
-            "detail": "BocalBun explorait un toolkit natif Bun avec RLS PostgreSQL et couches strictes. La livraison a ralenti quand le coût d'abstraction a dépassé le débit. L'arrêt préserve le jugement comme artefact.",
-            "outcomes": "Architecture et schéma documentés avant pause\nCritères clairs pour reprendre ou abandonner\nRétrospective honnête plutôt qu'un repo zombie",
+            "role": "Projet perso · en pause",
+            "desc": "Toolkit Bun mis en pause quand les abstractions coûtaient plus qu'elles n'aidaient.",
+            "detail": "J'ai testé un toolkit Bun avec RLS Postgres et des couches strictes. La livraison a ralenti ; j'ai arrêté et documenté ce qui valait la peine—mieux qu'un repo silencieux.",
+            "outcomes": "Architecture et schéma documentés avant pause\nNotes claires pour reprendre ou laisser tomber\nArticle public plutôt qu'un projet zombie",
             "stack": "Bun · TypeScript · PostgreSQL · RLS"
           }
         }
