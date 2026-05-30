@@ -1579,15 +1579,20 @@
 
 /* ── Homepage layout system (proof, rhythm, atmosphere) ─────────────────── */
 
+/* Even rhythm between homepage sections (work → about → writing → connect) */
 .site-synthesis .syn-page-flow {
+  --syn-section-gap: clamp(3rem, 6vw, 4.25rem);
   display: flex;
   flex-direction: column;
   gap: 0;
 }
 
-/* Even rhythm between homepage sections (work → about → writing → connect) */
+.site-synthesis .syn-page-flow > .reveal-section:not(:last-child) {
+  padding-bottom: var(--syn-section-gap);
+}
+
 .site-synthesis .syn-page-flow > .reveal-section:not(:first-child) {
-  padding-top: clamp(3rem, 6vw, 4.25rem);
+  padding-top: var(--syn-section-gap);
   border-top: 1px solid var(--syn-border);
 }
 
