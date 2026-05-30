@@ -55,13 +55,16 @@ export function SynthesisHero({ onHeroReady }: SynthesisHeroProps) {
         />
       </h1>
       <p className="syn-hero-tagline hero-reveal hero-reveal--3">{t("tagline")}</p>
+      <p className="syn-hero-availability mono hero-reveal hero-reveal--3">
+        {t("availability")}
+      </p>
 
       <div className="syn-hero-cta hero-reveal hero-reveal--4">
-        <SynButton variant="primary" href="#work">
-          {t("ctaWork")} <span aria-hidden>↓</span>
-        </SynButton>
-        <SynButton variant="secondary" href="#connect">
+        <SynButton variant="primary" href="#connect">
           {t("ctaContact")}
+        </SynButton>
+        <SynButton variant="secondary" href="#work">
+          {t("ctaWork")} <span aria-hidden>↓</span>
         </SynButton>
       </div>
     </header>

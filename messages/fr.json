@@ -88,12 +88,13 @@
         "headlineRotateServices": "services",
         "headlineRotateStatic": "produits et services",
         "headlineAria": "Je construis le logiciel entre vos opérations et vos produits ou services.",
-        "tagline": "Ingénieur systèmes produit — outils internes, ERP, fintech, de l'architecture à la production.",
+        "tagline": "Ingénieur systèmes produit : outils internes, ERP, fintech, de l'architecture à la production.",
+        "availability": "Deux créneaux clients · T3 2026",
         "ctaWork": "Voir le travail sélectionné",
-        "ctaContact": "Me contacter"
+        "ctaContact": "Démarrer un projet"
       },
       "skipNav": {
-        "work": "Aller au travail sélectionné"
+        "connect": "Aller au contact"
       },
       "media": {
         "ariaLabel": "Espace réservé pour les médias d'étude de cas",
@@ -102,10 +103,9 @@
       },
       "background": {
         "eyebrow": "À propos",
-        "title": "Parcours",
-        "lead": "Ce que je construis et d'où je viens.",
-        "p1": "Je travaille à l'intersection des workflows métier et du logiciel : CRM, modules ERP, apps client et la cohérence entre eux. Moins de théâtre framework, plus de systèmes exploitables au quotidien.",
-        "p2": "Le parcours passe par l'open banking à Ottawa, l'automatisation logistique, React Native, l'IoT, l'enseignement Python, puis une charge régulière de missions client à Dakar aux côtés d'Everest Finance et ERGOBIT."
+        "title": "Ma façon de travailler",
+        "lead": "Philosophie et ce qui me garde affûté. Le parcours détaillé est dans la timeline des projets ci-dessus.",
+        "p1": "Je travaille à l'intersection des workflows métier et du logiciel : CRM, modules ERP, apps client et la cohérence entre eux. Moins de théâtre framework, plus de systèmes exploitables au quotidien."
       },
       "credentials": {
         "title": "Formation",
@@ -147,7 +147,7 @@
       "workedWith": {
         "eyebrow": "Parcours pro",
         "title": "Où j'ai travaillé",
-        "lead": "Formation, stages et contrats depuis 2018.",
+        "lead": "Employeurs et contrats depuis 2018. Sélectionnez un nœud pour le détail du rôle.",
         "hint": "Les rôles avec une étude de cas renvoient vers la preuve ci-dessus. Les builds clients sont sur l'index projets.",
         "employersLead": "Formation, stages et contrats depuis 2018.",
         "scrollHintLeft": "Glissez vers la gauche pour les rôles précédents",

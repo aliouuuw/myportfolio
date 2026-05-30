@@ -3234,19 +3234,12 @@
 .site-synthesis.motion-reduced .syn-cgraph__detail-inner {
   animation: none;
 }
-.site-synthesis .syn-about-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 768px) {
-  .site-synthesis .syn-about-grid {
-    grid-template-columns: 1.15fr 0.85fr;
-  }
+.site-synthesis .syn-about-panel {
+  background: color-mix(in oklch, var(--syn-surface-hover) 35%, var(--syn-surface));
 }
 
 .site-synthesis .syn-about-quote {
-  background: color-mix(in oklch, var(--syn-surface-hover) 40%, transparent);
+  margin: 0;
 }
 
 .site-synthesis .syn-timeline {
@@ -3505,8 +3498,18 @@
   color: var(--syn-ink-muted);
 }
 
+.site-synthesis .syn-hero-availability {
+  margin-top: 0.75rem;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--syn-accent);
+  max-width: 42ch;
+  line-height: 1.5;
+}
+
 .site-synthesis .syn-hero-cta {
-  margin-top: 1.5rem;
+  margin-top: 1.25rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;

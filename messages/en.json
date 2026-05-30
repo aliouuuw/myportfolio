@@ -77,12 +77,13 @@
         "headlineRotateServices": "services",
         "headlineRotateStatic": "products & services",
         "headlineAria": "I build software between your operations and your products or services.",
-        "tagline": "Product systems engineer — internal tools, ERP, fintech, from architecture to production.",
+        "tagline": "Product systems engineer: internal tools, ERP, fintech, from architecture to production.",
+        "availability": "Two client slots open · Q3 2026",
         "ctaWork": "See selected work",
-        "ctaContact": "Get in touch"
+        "ctaContact": "Start a project"
       },
       "skipNav": {
-        "work": "Skip to selected work"
+        "connect": "Skip to contact"
       },
       "media": {
         "ariaLabel": "Case study media placeholder",
@@ -91,10 +92,9 @@
       },
       "background": {
         "eyebrow": "About",
-        "title": "Background",
-        "lead": "What I build and how I got here.",
-        "p1": "I work where business workflows meet software: CRMs, ERP modules, customer apps, and the glue that keeps them coherent. Less framework theater, more systems people can run every day.",
-        "p2": "The path ran through open banking in Ottawa, logistics automation, React Native, IoT, Python teaching, and now a steady load of Dakar client work alongside Everest Finance and ERGOBIT."
+        "title": "How I work",
+        "lead": "Philosophy and how I stay sharp. Career timeline lives with selected work above.",
+        "p1": "I work where business workflows meet software: CRMs, ERP modules, customer apps, and the glue that keeps them coherent. Less framework theater, more systems people can run every day."
       },
       "credentials": {
         "title": "Credentials",
@@ -136,7 +136,7 @@
       "workedWith": {
         "eyebrow": "Work history",
         "title": "Where I've worked",
-        "lead": "School, internships, and contracts from 2018 to today.",
+        "lead": "Employers and contracts from 2018 to today. Select a node for role detail.",
         "hint": "Roles with a case study link below. Client and product builds live on the work index.",
         "employersLead": "School, internships, and contracts from 2018 to today.",
         "scrollHintLeft": "Swipe left for earlier roles",

@@ -92,10 +92,10 @@ export function HomeSynthesisPage({ locale, writing }: HomeSynthesisPageProps) {
       </div>
 
       <a
-        href="#work"
+        href="#connect"
         className="syn-skip-link fixed left-4 top-4 z-50 -translate-y-[calc(100%+1rem)] rounded-full border border-syn-border-strong bg-syn-surface px-4 py-2 text-sm font-medium text-syn-ink-strong shadow-lg transition-transform focus:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-syn-accent"
       >
-        {tSkip("work")}
+        {tSkip("connect")}
       </a>
 
       <section id="profile" className="syn-profile scroll-mt-28">
