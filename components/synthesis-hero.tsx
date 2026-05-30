@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
+import { HeroHeadlineRotate } from "@/components/hero-headline-rotate";
 import { SynButton } from "@/components/syn-button";
 
 type SynthesisHeroProps = {
@@ -44,7 +45,15 @@ export function SynthesisHero({ onHeroReady }: SynthesisHeroProps) {
         </p>
       </div>
 
-      <h1 className="syn-hero-title hero-reveal hero-reveal--2">{t("headline")}</h1>
+      <h1 className="syn-hero-title hero-reveal hero-reveal--2">
+        <HeroHeadlineRotate
+          before={t("headlineBefore")}
+          products={t("headlineRotateProducts")}
+          services={t("headlineRotateServices")}
+          staticLabel={t("headlineRotateStatic")}
+          ariaLabel={t("headlineAria")}
+        />
+      </h1>
       <p className="syn-hero-tagline hero-reveal hero-reveal--3">{t("tagline")}</p>
 
       <div className="syn-hero-cta hero-reveal hero-reveal--4">
@@ -55,10 +64,6 @@ export function SynthesisHero({ onHeroReady }: SynthesisHeroProps) {
           {t("ctaContact")}
         </SynButton>
       </div>
-
-      <p className="syn-hero-availability mono hero-reveal hero-reveal--5">
-        {t("availability")}
-      </p>
     </header>
   );
 }

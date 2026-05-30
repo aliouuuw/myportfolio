@@ -30,6 +30,7 @@ export function SynthesisWriting({ locale, entries }: SynthesisWritingProps) {
       <SynthesisSectionHeader
         eyebrow={t("eyebrow")}
         title={t("title")}
+        lead={t("lead")}
         aside={
           <TransitionLink
             href={`/${locale}/writing`}
@@ -50,8 +51,7 @@ export function SynthesisWriting({ locale, entries }: SynthesisWritingProps) {
               className="syn-writing-featured syn-entity-card group block p-8 md:p-10"
               style={{ viewTransitionName: `writing-${featured.slug}` }}
             >
-              <p className="mono-eyebrow">{t("eyebrow")}</p>
-              <time className="mt-4 block mono text-xs text-syn-ink-subtle">
+              <time className="block mono text-xs text-syn-ink-subtle">
                 {featured.dateLabel}
               </time>
               <h3 className="mt-4 text-[clamp(1.5rem,3vw,2.25rem)] font-medium tracking-tight text-syn-ink-strong group-hover:text-syn-accent transition-colors max-w-[22ch] leading-[1.12]">

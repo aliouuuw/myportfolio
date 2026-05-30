@@ -117,7 +117,7 @@ export default async function WorkPage(props: {
           statusLabels={statusLabels}
           featuredEyebrow={tWork("eyebrow")}
           featuredTitle={tWork("title")}
-          featuredAside={tWork("aside")}
+          featuredAside={tWork("lead")}
           moreLabel={t("moreWork")}
         />
 

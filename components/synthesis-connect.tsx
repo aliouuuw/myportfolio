@@ -59,7 +59,8 @@ export function SynthesisConnect() {
         lead={t("lead")}
       />
       <GlowCardSpotlight className="mt-8 p-8 md:p-10 syn-connect-card">
-        <div className="flex flex-wrap gap-3">
+        <p className="syn-connect-availability mono">{t("availability")}</p>
+        <div className="mt-6 flex flex-wrap gap-3">
           <SynButton variant="primary" href={`mailto:${SYNTHESIS_EMAIL}`}>
             {t("ctaEmail")}
           </SynButton>

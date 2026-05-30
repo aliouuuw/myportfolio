@@ -83,9 +83,12 @@
         "location": "Dakar, Sénégal",
         "languages": "FR / EN",
         "timezone": "WAT",
-        "headline": "Je construis le logiciel entre vos opérations et le produit ou les services que vous livrez.",
-        "tagline": "Ingénieur systèmes produit — fintech, ERP, outils internes, de l'architecture à la production.",
-        "availability": "Deux créneaux clients ouverts T3 2026 · réponse sous 48 h les jours ouvrés",
+        "headlineBefore": "Je construis le logiciel entre vos opérations et vos",
+        "headlineRotateProducts": "produits",
+        "headlineRotateServices": "services",
+        "headlineRotateStatic": "produits et services",
+        "headlineAria": "Je construis le logiciel entre vos opérations et vos produits ou services.",
+        "tagline": "Ingénieur systèmes produit — outils internes, ERP, fintech, de l'architecture à la production.",
         "ctaWork": "Voir le travail sélectionné",
         "ctaContact": "Me contacter"
       },
@@ -98,7 +101,9 @@
         "caption": "Captures et démo à venir"
       },
       "background": {
+        "eyebrow": "À propos",
         "title": "Parcours",
+        "lead": "Ce que je construis et d'où je viens.",
         "p1": "Je travaille à l'intersection des workflows métier et du logiciel : CRM, modules ERP, apps client et la cohérence entre eux. Moins de théâtre framework, plus de systèmes exploitables au quotidien.",
         "p2": "Le parcours passe par l'open banking à Ottawa, l'automatisation logistique, React Native, l'IoT, l'enseignement Python, puis une charge régulière de missions client à Dakar aux côtés d'Everest Finance et ERGOBIT."
       },
@@ -136,13 +141,15 @@
         "more": "plus",
         "chartAria": "{total} contributions GitHub sur {period}",
         "yearAria": "{total} contributions en {year}",
-        "scopeNote": "Ce graphique ne couvre que ce profil. Une grande partie de mon travail est aussi livrée via des comptes GitHub employeur et Azure DevOps."
+        "scopeNoteLine1": "Ce graphique ne couvre que ce profil.",
+        "scopeNoteLine2": "Une grande partie est aussi livrée sur GitHub employeur et Azure DevOps."
       },
       "workedWith": {
         "eyebrow": "Parcours pro",
         "title": "Où j'ai travaillé",
+        "lead": "Formation, stages et contrats depuis 2018.",
         "hint": "Les rôles avec une étude de cas renvoient vers la preuve ci-dessus. Les builds clients sont sur l'index projets.",
-        "employersLead": "Huit rôles — formation, stages et ingénierie en contrat — de 2018 à aujourd'hui.",
+        "employersLead": "Formation, stages et contrats depuis 2018.",
         "scrollHintLeft": "Glissez vers la gauche pour les rôles précédents",
         "graphAria": "Parcours professionnel en graphique git horizontal, 2018 à 2026",
         "clientsLink": "Projets clients",
@@ -271,9 +278,9 @@
         }
       },
       "work": {
-        "eyebrow": "Études de cas",
+        "eyebrow": "Projets",
         "title": "Travail sélectionné",
-        "aside": "Du travail que je peux expliquer en détail.",
+        "lead": "Du travail que je peux expliquer en détail.",
         "seeAll": "Tous les projets",
         "readCase": "Lire l'étude de cas",
         "scrollHintRight": "Glissez vers la droite pour voir les autres projets",
@@ -390,15 +397,17 @@
       },
       "writing": {
         "eyebrow": "Écrits",
-        "title": "Notes de terrain",
+        "title": "Notes",
+        "lead": "Billets courts sur le logiciel au quotidien.",
         "allLink": "Tous les écrits →",
         "readEssay": "Lire l'essai",
         "empty": "Les essais arrivent bientôt."
       },
       "connect": {
         "eyebrow": "Contact",
-        "title": "Dites-moi ce que vous construisez et où ça coince.",
-        "lead": "Fintech, migrations ERP, outils internes ou livraison assistée par IA. Deux créneaux mission T3 2026. Réponse sous 48 h les jours ouvrés.",
+        "title": "Me contacter",
+        "lead": "Parlez-moi de votre projet.",
+        "availability": "Deux créneaux clients ouverts T3 2026 · réponse sous 48 h les jours ouvrés",
         "ctaEmail": "Envoyer un message →",
         "ctaWhatsApp": "WhatsApp ↗",
         "ctaCopyEmail": "Copier l'email",

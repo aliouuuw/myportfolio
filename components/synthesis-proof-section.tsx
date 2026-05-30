@@ -36,7 +36,7 @@ export function SynthesisProofSection({ locale }: SynthesisProofSectionProps) {
       <SynthesisSectionHeader
         eyebrow={tWork("eyebrow")}
         title={tWork("title")}
-        lead={tWork("aside")}
+        lead={tWork("lead")}
         aside={
           <TransitionLink
             href={`/${locale}/work`}
@@ -62,20 +62,12 @@ export function SynthesisProofSection({ locale }: SynthesisProofSectionProps) {
       />
 
       <div className="mt-14 pt-10 border-t border-syn-border">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-5">
-          <div>
-            <p className="mono-eyebrow">{tTeams("employersLabel")}</p>
-            <p className="mt-2 text-sm text-syn-ink-secondary max-w-xl leading-relaxed">
-              {tTeams("employersLead")}
-            </p>
-          </div>
-          <TransitionLink
-            href={`/${locale}/work`}
-            className="text-xs text-syn-ink-muted hover:text-syn-ink transition-colors shrink-0"
-          >
-            {tTeams("clientsLink")} →
-          </TransitionLink>
-        </div>
+        <SynthesisSectionHeader
+          eyebrow={tTeams("eyebrow")}
+          title={tTeams("title")}
+          lead={tTeams("lead")}
+          className="mb-6"
+        />
         <SynthesisCareerGraph locale={locale} />
       </div>
     </SynthesisRevealSection>

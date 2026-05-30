@@ -72,9 +72,12 @@
         "location": "Dakar, Senegal",
         "languages": "FR / EN",
         "timezone": "WAT",
-        "headline": "I build the software between your operations and the product or services you deliver.",
-        "tagline": "Product systems engineer — fintech, ERP, internal tools, from architecture to production.",
-        "availability": "Two client slots open Q3 2026 · replies within 48h on business days",
+        "headlineBefore": "I build software between your operations and your",
+        "headlineRotateProducts": "products",
+        "headlineRotateServices": "services",
+        "headlineRotateStatic": "products & services",
+        "headlineAria": "I build software between your operations and your products or services.",
+        "tagline": "Product systems engineer — internal tools, ERP, fintech, from architecture to production.",
         "ctaWork": "See selected work",
         "ctaContact": "Get in touch"
       },
@@ -87,7 +90,9 @@
         "caption": "Screenshots and walkthrough coming soon"
       },
       "background": {
+        "eyebrow": "About",
         "title": "Background",
+        "lead": "What I build and how I got here.",
         "p1": "I work where business workflows meet software: CRMs, ERP modules, customer apps, and the glue that keeps them coherent. Less framework theater, more systems people can run every day.",
         "p2": "The path ran through open banking in Ottawa, logistics automation, React Native, IoT, Python teaching, and now a steady load of Dakar client work alongside Everest Finance and ERGOBIT."
       },
@@ -125,13 +130,15 @@
         "more": "more",
         "chartAria": "{total} GitHub contributions in {period}",
         "yearAria": "{total} contributions in {year}",
-        "scopeNote": "This chart is this profile only. A large share of my work also ships on employer GitHub accounts and Azure DevOps."
+        "scopeNoteLine1": "This chart is this profile only.",
+        "scopeNoteLine2": "Much of my work also ships on employer GitHub and Azure DevOps."
       },
       "workedWith": {
         "eyebrow": "Work history",
         "title": "Where I've worked",
+        "lead": "School, internships, and contracts from 2018 to today.",
         "hint": "Roles with a case study link below. Client and product builds live on the work index.",
-        "employersLead": "Eight roles across education, internships, and contract engineering — 2018 to today.",
+        "employersLead": "School, internships, and contracts from 2018 to today.",
         "scrollHintLeft": "Swipe left for earlier roles",
         "graphAria": "Career timeline as a horizontal git branch graph, 2018 to 2026",
         "clientsLink": "Client projects",
@@ -260,9 +267,9 @@
         }
       },
       "work": {
-        "eyebrow": "Case studies",
+        "eyebrow": "Projects",
         "title": "Selected work",
-        "aside": "Work I can explain thoroughly.",
+        "lead": "Work I can explain thoroughly.",
         "seeAll": "All work",
         "readCase": "Read case study",
         "scrollHintRight": "Swipe right for more projects",
@@ -379,15 +386,17 @@
       },
       "writing": {
         "eyebrow": "Writing",
-        "title": "Field notes",
+        "title": "Notes",
+        "lead": "Short posts on building and running software.",
         "allLink": "All writing →",
         "readEssay": "Read essay",
         "empty": "Essays coming soon."
       },
       "connect": {
         "eyebrow": "Contact",
-        "title": "Tell me what you are building and where it hurts.",
-        "lead": "Fintech, ERP migrations, internal tools, or AI-assisted delivery. Two contract slots for Q3 2026. I reply within 48 hours on business days.",
+        "title": "Get in touch",
+        "lead": "Tell me about your project.",
+        "availability": "Two client slots open Q3 2026 · replies within 48h on business days",
         "ctaEmail": "Send a message →",
         "ctaWhatsApp": "WhatsApp ↗",
         "ctaCopyEmail": "Copy email",

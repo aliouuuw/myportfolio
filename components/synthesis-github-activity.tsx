@@ -359,7 +359,10 @@ export function SynthesisGithubActivity() {
           </a>
         </div>
         <ContributionChart user={user} animated={!reducedMotion} />
-        <p className="syn-github-scope-note">{t("scopeNote")}</p>
+        <p className="syn-github-scope-note">
+          <span className="block">{t("scopeNoteLine1")}</span>
+          <span className="block">{t("scopeNoteLine2")}</span>
+        </p>
       </div>
     </section>
   );

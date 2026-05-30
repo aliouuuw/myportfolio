@@ -26,7 +26,7 @@ export function SynthesisSelectedWork({
             {t("title")}
           </h2>
           <p className="mt-2 text-sm text-syn-ink-secondary max-w-xl leading-relaxed">
-            {t("aside")}
+            {t("lead")}
           </p>
         </div>
         <TransitionLink
