@@ -93,8 +93,17 @@
         "headline": "Je construis la couche logicielle entre les opérations métier et l'ambition produit.",
         "subtitle": "Ingénieur systèmes produit à Dakar. Outils finance et ERP, logiciels ops internes et workflows assistés par IA — un seul ingénieur sur toute la stack.",
         "availability": "Deux créneaux clients ouverts T3 2026 · réponse sous 48 h les jours ouvrés",
+        "proofLine": "Épine fintech, kits d'acceptation ERP et logiciels ops — la preuve est dans les études de cas ci-dessous.",
         "ctaWork": "Voir le travail sélectionné",
         "ctaContact": "Me contacter"
+      },
+      "skipNav": {
+        "work": "Aller au travail sélectionné"
+      },
+      "media": {
+        "ariaLabel": "Espace réservé pour les médias d'étude de cas",
+        "label": "Médias de preuve",
+        "caption": "Captures et démo à venir"
       },
       "background": {
         "title": "Parcours",
@@ -256,6 +265,21 @@
         "aside": "Profondeur plutôt qu'étendue. Quatre systèmes phares, pas une galerie de projets.",
         "seeAll": "Tous les projets",
         "readCase": "Lire l'étude de cas",
+        "storiesHint": "Glissez, ou utilisez les flèches. Ouvrez un projet pour l'histoire complète.",
+        "tileOpen": "Ouvrir",
+        "scrollPrev": "Reculer",
+        "scrollNext": "Avancer",
+        "modalEyebrow": "Étude de cas",
+        "modalClose": "Fermer",
+        "modalPrev": "Projet précédent",
+        "modalNext": "Projet suivant",
+        "modalStackLabel": "Stack",
+        "modalOutcomesLabel": "Résultats",
+        "modalDiscuss": "Discuter de ce projet",
+        "galleryPrev": "Média précédent",
+        "galleryNext": "Média suivant",
+        "galleryTabs": "Médias du projet",
+        "caseSoon": "Étude de cas en cours",
         "status": {
           "ACTIVE": "ACTIF",
           "SHIPPED": "LIVRÉ",
@@ -264,22 +288,34 @@
         "rows": {
           "01": {
             "name": "Everest Finance",
+            "role": "Opérateur technique solo",
             "desc": "Responsable technique solo d'une fintech sénégalaise : site public, CRM interne et app client Sama Naffa convergent vers un modèle opérationnel unique.",
+            "detail": "Trois surfaces évoluaient en silos : site marketing, CRM interne et app client. Je les ai unifiées sur une stack TypeScript et un schéma PostgreSQL unique pour garder opérations, conformité et produit alignés.",
+            "outcomes": "Une colonne vertébrale opérationnelle web, CRM et mobile\nSite public livré en premier, puis CRM, puis durcissement app client\nTypes et validation partagés du marketing aux transactions",
             "stack": "Next.js · React Native · PostgreSQL"
           },
           "02": {
             "name": "ERGOBIT / Odoo 18",
+            "role": "Ingénieur logiciel, validation ERP",
             "desc": "Kit de tests d'acceptation pour migrations Odoo 18 : 39 tests, 9 suites, CI Azure DevOps et guidelines de sélecteurs maintenables.",
+            "detail": "Les équipes migration réinventaient les sélecteurs Odoo à chaque mission. Le kit regroupe patterns Robot Framework et Playwright, CI et documentation pour des suites reproductibles.",
+            "outcomes": "39 tests d'acceptation sur 9 suites\nPipeline Azure DevOps pour les régressions\nGuidelines de sélecteurs résistantes aux dérives UI Odoo",
             "stack": "Robot Framework · Playwright · Azure DevOps"
           },
           "03": {
             "name": "Africa GreenTec comptabilité",
+            "role": "Auteur module Odoo",
             "desc": "Module comptable Odoo sur mesure : ~80 % des écritures manuelles automatisées, 10 000+ enregistrements/jour en production pour un opérateur énergies renouvelables.",
+            "detail": "Les équipes finance saisissaient des milliers d'écritures manuelles par jour. Le module encode leurs patterns récurrents, valide contre les données opérationnelles et garde une piste d'audit sans tableurs.",
+            "outcomes": "~80 % de réduction des écritures manuelles\n10 000+ enregistrements/jour en production\nExports BI pour le reporting direction",
             "stack": "Odoo · Python · BI"
           },
           "04": {
             "name": "BocalBun rétrospective",
+            "role": "Auteur, puis arrêt volontaire",
             "desc": "Toolkit Bun volontairement arrêté. La preuve n'est pas l'adoption, c'est savoir quand l'architecture propre n'est pas le levier principal.",
+            "detail": "BocalBun explorait un toolkit natif Bun avec RLS PostgreSQL et couches strictes. La livraison a ralenti quand le coût d'abstraction a dépassé le débit. L'arrêt préserve le jugement comme artefact.",
+            "outcomes": "Architecture et schéma documentés avant pause\nCritères clairs pour reprendre ou abandonner\nRétrospective honnête plutôt qu'un repo zombie",
             "stack": "Bun · TypeScript · PostgreSQL · RLS"
           }
         }

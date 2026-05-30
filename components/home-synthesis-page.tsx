@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 import { SynthesisAboutStrip } from "@/components/synthesis-about-strip";
 import { SynthesisConnect } from "@/components/synthesis-connect";
@@ -53,6 +54,7 @@ function useAmbientHour() {
 }
 
 export function HomeSynthesisPage({ locale, writing }: HomeSynthesisPageProps) {
+  const tSkip = useTranslations("HomePage.synthesis.skipNav");
   const [heroReady, setHeroReady] = useState(false);
   const [highlightedWork, setHighlightedWork] = useState<string[]>([]);
   const reducedMotion = usePrefersReducedMotion();
@@ -91,6 +93,12 @@ export function HomeSynthesisPage({ locale, writing }: HomeSynthesisPageProps) {
       </div>
 
       <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 syn-page-flow pt-6 md:pt-10 pb-20">
+        <a
+          href="#work"
+          className="syn-skip-link fixed left-4 top-4 z-50 -translate-y-[calc(100%+1rem)] rounded-full border border-syn-border-strong bg-syn-surface px-4 py-2 text-sm font-medium text-syn-ink-strong shadow-lg transition-transform focus:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-syn-accent"
+        >
+          {tSkip("work")}
+        </a>
         <section id="profile" className="grid-bento scroll-mt-28">
           <SynthesisHero onHeroReady={onHeroReady} />
           <SynthesisGithubActivity />

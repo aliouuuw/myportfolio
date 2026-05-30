@@ -53,15 +53,13 @@ export function SynthesisConnect() {
       id="connect"
       className="pt-16 md:pt-24 pb-12 scroll-mt-28 border-t border-syn-border"
     >
-      <SynthesisSectionHeader index="04" title={t("eyebrow")} />
-      <GlowCardSpotlight className="mt-10 p-10 md:p-14 syn-connect-card">
-        <h2 className="text-[clamp(2rem,5vw,3.75rem)] font-medium tracking-[-0.03em] text-syn-ink max-w-[16ch] leading-[1.05]">
-          {t("title")}
-        </h2>
-        <p className="mt-6 text-syn-ink-muted text-base md:text-lg leading-relaxed max-w-2xl">
-          {t("lead")}
-        </p>
-        <div className="mt-8 flex flex-wrap gap-3">
+      <SynthesisSectionHeader
+        eyebrow={t("eyebrow")}
+        title={t("title")}
+        lead={t("lead")}
+      />
+      <GlowCardSpotlight className="mt-8 p-8 md:p-10 syn-connect-card">
+        <div className="flex flex-wrap gap-3">
           <MagneticElement>
             <a
               href={`mailto:${SYNTHESIS_EMAIL}`}

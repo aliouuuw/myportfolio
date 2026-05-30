@@ -29,10 +29,6 @@ public/*.mov
 public/**/*.mov
 public/**/*-raw.*
 
-# Playwright media capture temp
-scripts/media-capture/.capture-tmp/
-scripts/media-capture/.repos/
-
 # debug
 npm-debug.log*
 yarn-debug.log*

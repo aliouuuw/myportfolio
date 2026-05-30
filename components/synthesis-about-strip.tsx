@@ -24,7 +24,7 @@ export function SynthesisAboutStrip() {
 
   return (
     <SynthesisRevealSection id="about" className="scroll-mt-28">
-      <SynthesisSectionHeader index="02" title={tBg("title")} />
+      <SynthesisSectionHeader title={tBg("title")} />
       <div className="mt-10 syn-about-grid rounded-2xl border border-syn-border bg-syn-surface overflow-hidden">
         <div className="syn-about-quote p-6 md:p-10 lg:p-12 border-b md:border-b-0 md:border-r border-syn-border">
           <blockquote className="text-[clamp(1.125rem,2.2vw,1.5rem)] leading-relaxed text-syn-ink-muted font-medium tracking-[-0.02em] max-w-[42ch]">

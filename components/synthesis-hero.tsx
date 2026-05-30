@@ -171,10 +171,13 @@ export function SynthesisHero({ onHeroReady }: SynthesisHeroProps) {
           <p className="hero-reveal hero-reveal--2 mt-6 max-w-2xl text-syn-ink-muted text-lg leading-relaxed">
             {t("subtitle")}
           </p>
-          <p className="hero-reveal hero-reveal--3 mt-4 text-sm text-syn-ink-secondary">
+          <p className="hero-reveal hero-reveal--3 mt-5 max-w-xl text-base text-syn-ink-secondary leading-relaxed border-l-2 border-syn-border-strong pl-4">
+            {t("proofLine")}
+          </p>
+          <p className="hero-reveal hero-reveal--4 mt-4 text-sm text-syn-ink-subtle">
             {t("availability")}
           </p>
-          <div className="hero-reveal hero-reveal--4 mt-10 flex flex-wrap gap-4">
+          <div className="hero-reveal hero-reveal--5 mt-10 flex flex-wrap gap-4">
             <MagneticElement>
               <a
                 href="#work"

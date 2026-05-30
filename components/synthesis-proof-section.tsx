@@ -1,11 +1,13 @@
 "use client";
 
+import { useCallback, useState } from "react";
 import { TransitionLink } from "@/components/transition-link";
 import { useTranslations } from "next-intl";
 
 import { SynthesisRevealSection } from "@/components/synthesis-reveal-section";
 import { SynthesisSectionHeader } from "@/components/synthesis-section-header";
-import { SynthesisWorkRow } from "@/components/synthesis-work-row";
+import { SynthesisWorkModal } from "@/components/synthesis-work-modal";
+import { SynthesisWorkStories } from "@/components/synthesis-work-stories";
 import {
   SYNTHESIS_TEAMS,
   SYNTHESIS_WORK,
@@ -97,12 +99,22 @@ export function SynthesisProofSection({
   const tWork = useTranslations("HomePage.synthesis.work");
   const tTeams = useTranslations("HomePage.synthesis.workedWith");
 
-  const [featured, ...supporting] = SYNTHESIS_WORK;
+  const [openWorkId, setOpenWorkId] = useState<string | null>(null);
+  const openWork =
+    SYNTHESIS_WORK.find((w) => w.id === openWorkId) ?? null;
+
+  const handleOpenWork = useCallback((workId: string) => {
+    setOpenWorkId(workId);
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setOpenWorkId(null);
+  }, []);
 
   return (
     <SynthesisRevealSection id="work" className="scroll-mt-28">
       <SynthesisSectionHeader
-        index="01"
+        eyebrow={tWork("eyebrow")}
         title={tWork("title")}
         lead={tWork("aside")}
         aside={
@@ -115,29 +127,19 @@ export function SynthesisProofSection({
         }
       />
 
-      <div className="mt-10 syn-proof-stack">
-        {featured ? (
-          <SynthesisWorkRow
-            locale={locale}
-            work={featured}
-            highlighted={highlightedWork.includes(featured.id)}
-            variant="featured"
-          />
-        ) : null}
-
-        <div className="syn-proof-grid">
-          {supporting.map((w, index) => (
-            <SynthesisWorkRow
-              key={w.id}
-              locale={locale}
-              work={w}
-              highlighted={highlightedWork.includes(w.id)}
-              variant="compact"
-              index={index + 1}
-            />
-          ))}
-        </div>
+      <div className="mt-8">
+        <SynthesisWorkStories
+          highlightedWork={highlightedWork}
+          activeWorkId={openWorkId}
+          onOpenWork={handleOpenWork}
+        />
       </div>
+
+      <SynthesisWorkModal
+        work={openWork}
+        onClose={handleCloseModal}
+        onNavigate={handleOpenWork}
+      />
 
       <div className="mt-14 pt-10 border-t border-syn-border">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-5">

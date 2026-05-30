@@ -3,7 +3,8 @@
 import type { ReactNode } from "react";
 
 type SynthesisSectionHeaderProps = {
-  index: string;
+  index?: string;
+  eyebrow?: string;
   title: string;
   lead?: string;
   aside?: ReactNode;
@@ -12,6 +13,7 @@ type SynthesisSectionHeaderProps = {
 
 export function SynthesisSectionHeader({
   index,
+  eyebrow,
   title,
   lead,
   aside,
@@ -21,14 +23,17 @@ export function SynthesisSectionHeader({
     <header
       className={`syn-section-header flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between ${className}`}
     >
-      <div className="flex gap-5 sm:gap-8 min-w-0">
-        <span
-          className="syn-section-index mono shrink-0 select-none"
-          aria-hidden
-        >
-          {index}
-        </span>
-        <div className="min-w-0 pt-1">
+      <div className={`flex min-w-0 ${index ? "gap-5 sm:gap-8" : ""}`}>
+        {index ? (
+          <span
+            className="syn-section-index mono shrink-0 select-none"
+            aria-hidden
+          >
+            {index}
+          </span>
+        ) : null}
+        <div className={`min-w-0 ${index ? "pt-1" : ""}`}>
+          {eyebrow ? <p className="mono-eyebrow mb-3">{eyebrow}</p> : null}
           <h2 className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-medium tracking-[-0.03em] leading-[1.08] text-syn-ink-strong">
             {title}
           </h2>

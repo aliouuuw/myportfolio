@@ -28,7 +28,7 @@ export function SynthesisWriting({ locale, entries }: SynthesisWritingProps) {
       className="scroll-mt-28 border-t border-syn-border pt-16 md:pt-20"
     >
       <SynthesisSectionHeader
-        index="03"
+        eyebrow={t("eyebrow")}
         title={t("title")}
         aside={
           <TransitionLink

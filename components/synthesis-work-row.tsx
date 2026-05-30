@@ -1,5 +1,6 @@
 "use client";
 
+import { CaseStudyMedia } from "@/components/case-study-media";
 import { TransitionLink } from "@/components/transition-link";
 import { ScrambleText } from "@/components/scramble-text";
 import { useTranslations } from "next-intl";
@@ -46,7 +47,7 @@ export function SynthesisWorkRow({
     }`;
 
     const body = (
-      <div className="grid md:grid-cols-[1fr_min(100%,300px)]">
+      <div className="grid items-stretch md:grid-cols-[1fr_min(100%,300px)]">
         <div className="flex flex-col justify-between gap-8 p-6 md:p-9 min-h-[min(52vw,320px)] md:min-h-[340px]">
           <div>
             <div className="flex flex-wrap items-center gap-3 mb-6">
@@ -81,19 +82,8 @@ export function SynthesisWorkRow({
             ) : null}
           </div>
         </div>
-        <div
-          className="syn-featured-panel relative min-h-[180px] border-t border-syn-border md:border-t-0 md:border-l"
-          aria-hidden
-        >
-          <div className="absolute inset-0 syn-featured-panel__wash" />
-          <div className="relative z-10 flex h-full flex-col justify-between p-6 md:p-8">
-            <span className="mono text-[10px] uppercase tracking-[0.2em] text-syn-ink-faint">
-              {work.type.replace(/_/g, " ")}
-            </span>
-            <span className="text-[clamp(3rem,8vw,5rem)] font-medium leading-none tracking-tighter text-syn-ink-faint/30">
-              {work.id}
-            </span>
-          </div>
+        <div className="syn-featured-panel relative min-h-[min(52vw,220px)] border-t border-syn-border md:min-h-full md:border-t-0 md:border-l overflow-hidden">
+          <CaseStudyMedia slug={work.slug} variant="featured" />
         </div>
       </div>
     );
@@ -117,13 +107,15 @@ export function SynthesisWorkRow({
     );
   }
 
-  const compactClass = `syn-entity-card group flex flex-col gap-4 p-5 md:p-6 h-full ${
+  const compactClass = `syn-entity-card group flex flex-col overflow-hidden h-full ${
     highlighted ? "syn-entity-card--active" : ""
   }`;
 
   if (variant === "compact") {
     const compactBody = (
       <>
+        <CaseStudyMedia slug={work.slug} variant="thumb" />
+        <div className="flex flex-col gap-4 p-5 md:p-6 flex-1">
         <div className="flex items-start justify-between gap-3">
           <span className="mono text-xs text-syn-ink-faint">
             <ScrambleText text={work.id} trigger="hover" />
@@ -153,6 +145,7 @@ export function SynthesisWorkRow({
             ↗
           </span>
         ) : null}
+        </div>
       </>
     );
 
