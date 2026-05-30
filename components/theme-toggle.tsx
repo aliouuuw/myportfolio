@@ -47,7 +47,7 @@ export function ThemeToggle({ nav = false }: ThemeToggleProps) {
       title={isDark ? t("switchToLight") : t("switchToDark")}
       className={
         nav
-          ? "inline-flex h-8 w-8 items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-canvas-elevated hover:text-ink-primary"
+          ? "inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-transparent text-syn-ink-subtle transition-colors hover:border-syn-border hover:bg-syn-surface hover:text-syn-ink"
           : "inline-flex h-8 w-8 items-center justify-center rounded-full text-ink-secondary transition-colors hover:bg-canvas-elevated hover:text-ink-primary"
       }
     >

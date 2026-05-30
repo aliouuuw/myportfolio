@@ -1,8 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
+
+import { TransitionLink } from "@/components/transition-link";
+
+const LOCALES = ["en", "fr"] as const;
 
 type LocaleSwitcherProps = {
   locale: string;
@@ -24,38 +27,53 @@ export function LocaleSwitcher({
   const rest = segments.slice(1).join("/");
   const suffix = rest ? `/${rest}` : "";
 
+  if (!useNavStyle) {
+    return (
+      <div
+        className="locale-switcher inline-flex shrink-0 items-center gap-0.5 text-[11px] font-medium"
+        aria-label={t("ariaLabel")}
+      >
+        {LOCALES.map((code, index) => (
+          <span key={code} className="inline-flex items-center gap-0.5">
+            {index > 0 ? (
+              <span className="text-ink-muted select-none" aria-hidden>
+                /
+              </span>
+            ) : null}
+            <LocaleSegment
+              code={code}
+              current={locale}
+              href={`/${code}${suffix}`}
+              label={t(code)}
+              nav={false}
+            />
+          </span>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div
-      className={`hidden shrink-0 items-center gap-0.5 text-[11px] font-medium sm:flex ${
-        useNavStyle ? "mono text-ink-muted" : ""
-      }`}
+      className="locale-switcher locale-switcher--nav"
+      role="group"
       aria-label={t("ariaLabel")}
     >
-      <LocaleLink
-        code="en"
-        current={locale}
-        href={`/en${suffix}`}
-        label={t("en")}
-        nav={useNavStyle}
-      />
-      <span
-        className={useNavStyle ? "text-ink-muted/60 select-none" : "text-ink-muted select-none"}
-        aria-hidden
-      >
-        /
-      </span>
-      <LocaleLink
-        code="fr"
-        current={locale}
-        href={`/fr${suffix}`}
-        label={t("fr")}
-        nav={useNavStyle}
-      />
+      {LOCALES.map((code) => (
+        <LocaleSegment
+          key={code}
+          code={code}
+          current={locale}
+          href={`/${code}${suffix}`}
+          label={t(code)}
+          nav
+        />
+      ))}
     </div>
   );
 }
 
-function LocaleLink({
+function LocaleSegment({
   code,
   current,
   href,
@@ -69,31 +87,34 @@ function LocaleLink({
   nav: boolean;
 }) {
   const isActive = code === current;
-  if (isActive) {
+
+  if (!nav) {
+    if (isActive) {
+      return (
+        <span className="rounded px-1.5 py-0.5 text-ink-primary" aria-current="true">
+          {label}
+        </span>
+      );
+    }
     return (
-      <span
-        className={
-          nav
-            ? "px-1.5 py-0.5 text-ink-primary"
-            : "rounded px-1.5 py-0.5 text-ink-primary"
-        }
-        aria-current="true"
+      <TransitionLink
+        href={href}
+        hrefLang={code}
+        className="rounded px-1.5 py-0.5 text-ink-tertiary transition-colors hover:text-ink-primary"
       >
         {label}
-      </span>
+      </TransitionLink>
     );
   }
+
   return (
-    <Link
+    <TransitionLink
       href={href}
       hrefLang={code}
-      className={
-        nav
-          ? "px-1.5 py-0.5 transition-colors hover:text-ink-secondary"
-          : "rounded px-1.5 py-0.5 text-ink-tertiary transition-colors hover:text-ink-primary"
-      }
+      className={`locale-switcher__segment ${isActive ? "locale-switcher__segment--active" : ""}`}
+      aria-current={isActive ? "true" : undefined}
     >
       {label}
-    </Link>
+    </TransitionLink>
   );
 }

@@ -87,12 +87,12 @@ export function SynthesisTopNav({ locale, pathname }: SynthesisTopNavProps) {
             ⌘K
           </button>
 
-          <LocaleSwitcher locale={locale} nav />
-
           <ThemeToggle nav />
 
+          <LocaleSwitcher locale={locale} nav />
+
           <span
-            className="ml-1 inline-flex items-center gap-2 rounded-full border border-syn-border bg-syn-surface px-3 py-1.5 text-xs font-medium text-syn-ink-muted"
+            className="ml-1 inline-flex items-center gap-2 rounded-full border border-syn-border bg-syn-surface px-2.5 py-1.5 text-xs font-medium text-syn-ink-muted sm:px-3"
             title={t("available")}
           >
             <span className="pulse-dot h-1.5 w-1.5 rounded-full" />
