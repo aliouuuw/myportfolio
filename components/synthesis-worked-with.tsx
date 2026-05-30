@@ -43,7 +43,7 @@ function TeamRow({
         <p className="font-medium text-syn-ink-strong truncate">{t("name")}</p>
         {stint.current ? (
           <span
-            className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400 pulse-dot"
+            className="h-1.5 w-1.5 shrink-0 rounded-full pulse-dot"
             aria-hidden
           />
         ) : null}

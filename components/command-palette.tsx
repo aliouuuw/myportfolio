@@ -113,7 +113,9 @@ export function CommandPalette() {
     <>
       <div
         className={`fixed inset-0 z-[100] flex items-start justify-center px-4 pt-[16vh] ${
-          isDark ? "bg-black/70 backdrop-blur-sm" : "bg-canvas/80 backdrop-blur-sm"
+          isDark
+            ? "bg-syn-canvas/80 backdrop-blur-sm"
+            : "bg-syn-canvas/85 backdrop-blur-sm"
         }`}
         role="dialog"
         aria-modal
@@ -267,7 +269,7 @@ function CopyToast({ message }: { message: string }) {
     <div
       role="status"
       aria-live="polite"
-      className="fixed bottom-6 left-1/2 z-[110] -translate-x-1/2 rounded-full border border-emerald-500/30 bg-syn-surface px-4 py-2 mono text-xs text-emerald-400"
+      className="fixed bottom-6 left-1/2 z-[110] -translate-x-1/2 rounded-full px-4 py-2 mono text-xs syn-toast-accent"
     >
       {message}
     </div>

@@ -34,7 +34,7 @@ export async function WorkFreelanceList() {
               </div>
               <div className="flex shrink-0 items-center gap-2 sm:pl-6">
                 {project.note ? (
-                  <span className="mono text-[10px] uppercase tracking-widest text-amber-400/80">
+                  <span className="mono syn-concept-label text-[10px] uppercase tracking-widest">
                     {tClients("conceptBadge")}
                   </span>
                 ) : null}

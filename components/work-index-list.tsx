@@ -25,11 +25,11 @@ type WorkIndexListProps = {
 function statusPillClass(status: WorkLedgerStatus): string {
   switch (status) {
     case "active":
-      return "border-emerald-500/20 text-emerald-400 bg-emerald-500/5";
+      return "syn-status-badge syn-status-badge--active";
     case "shipped":
-      return "border-blue-500/20 text-blue-400 bg-blue-500/5";
+      return "syn-status-badge syn-status-badge--shipped";
     case "archived":
-      return "border-syn-border-strong text-syn-ink-subtle bg-transparent";
+      return "syn-status-badge syn-status-badge--frozen";
   }
 }
 
@@ -63,7 +63,7 @@ function FeaturedRow({
       </div>
       <div className="flex items-center justify-between lg:justify-end gap-6 lg:w-1/3 shrink-0 lg:ml-auto">
         <span
-          className={`mono text-[10px] tracking-widest px-2 py-1 rounded-full border ${statusPillClass(entry.status)}`}
+          className={statusPillClass(entry.status)}
         >
           {statusLabel}
         </span>

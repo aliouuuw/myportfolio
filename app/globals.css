@@ -15,30 +15,30 @@
    ──────────────────────────────────────────────────────────────────────────── */
 
 :root {
-  /* Canvas backgrounds */
-  --color-canvas: oklch(0.96 0.005 240);
-  --color-canvas-elevated: oklch(0.93 0.006 240);
-  --color-canvas-metal: oklch(0.88 0.008 235);
-  --color-canvas-subtle: oklch(0.84 0.007 238);
+  /* Canvas backgrounds — warm off-white, matches synthesis canvas */
+  --color-canvas: oklch(0.975 0.006 80);
+  --color-canvas-elevated: oklch(0.950 0.008 80);
+  --color-canvas-metal: oklch(0.928 0.010 80);
+  --color-canvas-subtle: oklch(0.900 0.010 80);
 
-  /* Ink (text) */
-  --color-ink-primary: oklch(0.18 0.012 250);
-  --color-ink-secondary: oklch(0.42 0.010 248);
-  --color-ink-tertiary: oklch(0.62 0.008 246);
-  --color-ink-muted: oklch(0.74 0.007 244);
+  /* Ink — cool-toned near-black, contrasts well on warm canvas */
+  --color-ink-primary: oklch(0.13 0.010 250);
+  --color-ink-secondary: oklch(0.46 0.008 248);
+  --color-ink-tertiary: oklch(0.60 0.007 246);
+  --color-ink-muted: oklch(0.72 0.006 244);
 
-  /* Accent — magnetic steel-blue, raised chroma (0.10) for visibility */
-  --color-accent: oklch(0.62 0.10 235);
-  --color-accent-bright: oklch(0.82 0.10 230);
-  --color-accent-subtle: oklch(0.72 0.06 235 / 0.12);
+  /* Accent — forest green, consistent with synthesis accent */
+  --color-accent: oklch(0.44 0.15 155);
+  --color-accent-bright: oklch(0.62 0.16 155);
+  --color-accent-subtle: oklch(0.44 0.15 155 / 0.12);
 
-  /* Emboss edges for metal panels */
+  /* Emboss edges */
   --color-emboss-light: oklch(1.00 0 0 / 0.55);
   --color-emboss-dark: oklch(0.20 0.010 250 / 0.35);
 
-  /* Borders — hairline precision */
-  --color-border: oklch(0.78 0.006 244);
-  --color-border-strong: oklch(0.68 0.008 246);
+  /* Borders */
+  --color-border: oklch(0.858 0.008 80);
+  --color-border-strong: oklch(0.762 0.010 80);
 
   /* System */
   --color-success: oklch(0.52 0.15 145);
@@ -77,25 +77,27 @@
    ──────────────────────────────────────────────────────────────────────────── */
 
 [data-theme="dark"] {
-  --color-canvas: oklch(0.16 0.010 248);
-  --color-canvas-elevated: oklch(0.20 0.012 246);
-  --color-canvas-metal: oklch(0.24 0.014 244);
-  --color-canvas-subtle: oklch(0.28 0.012 246);
+  /* Cool graphite — matches synthesis dark mode */
+  --color-canvas: oklch(0.115 0.008 250);
+  --color-canvas-elevated: oklch(0.158 0.010 250);
+  --color-canvas-metal: oklch(0.198 0.010 250);
+  --color-canvas-subtle: oklch(0.235 0.010 250);
 
-  --color-ink-primary: oklch(0.94 0.006 240);
-  --color-ink-secondary: oklch(0.74 0.008 246);
-  --color-ink-tertiary: oklch(0.56 0.008 248);
-  --color-ink-muted: oklch(0.42 0.008 250);
+  --color-ink-primary: oklch(0.968 0.003 250);
+  --color-ink-secondary: oklch(0.770 0.010 250);
+  --color-ink-tertiary: oklch(0.635 0.012 250);
+  --color-ink-muted: oklch(0.498 0.012 250);
 
-  --color-accent: oklch(0.74 0.10 230);
-  --color-accent-bright: oklch(0.88 0.10 228);
-  --color-accent-subtle: oklch(0.68 0.06 232 / 0.18);
+  /* Emerald accent, consistent with synthesis dark mode */
+  --color-accent: oklch(0.74 0.16 155);
+  --color-accent-bright: oklch(0.86 0.14 155);
+  --color-accent-subtle: oklch(0.74 0.16 155 / 0.18);
 
   --color-emboss-light: oklch(0.55 0.020 246 / 0.45);
   --color-emboss-dark: oklch(0.06 0.008 250 / 0.55);
 
-  --color-border: oklch(0.34 0.010 246);
-  --color-border-strong: oklch(0.46 0.012 244);
+  --color-border: oklch(0.34 0.010 250);
+  --color-border-strong: oklch(0.46 0.012 250);
 }
 
 /* ────────────────────────────────────────────────────────────────────────────

@@ -1296,69 +1296,75 @@
 
 :root,
 [data-theme="light"] {
-  --syn-canvas: oklch(0.985 0.003 240);
-  --syn-surface: oklch(0.965 0.004 240);
-  --syn-surface-hover: oklch(0.94 0.005 240);
-  --syn-border: oklch(0.90 0.005 240);
-  --syn-border-strong: oklch(0.82 0.006 240);
-  --syn-ink: oklch(0.16 0.012 250);
-  --syn-ink-strong: oklch(0.20 0.012 250);
-  --syn-ink-muted: oklch(0.34 0.010 248);
-  --syn-ink-secondary: oklch(0.46 0.010 248);
-  --syn-ink-subtle: oklch(0.60 0.008 246);
-  --syn-ink-faint: oklch(0.72 0.007 244);
-  --syn-ink-dim: oklch(0.80 0.006 242);
-  --syn-accent: oklch(0.60 0.15 160);
-  --syn-grain-opacity: 0.02;
-  --syn-ambient-strength: 0.12;
-  --syn-selection: oklch(0.60 0.15 160 / 0.18);
-  --syn-glow-spot: oklch(0.20 0.012 250 / 0.04);
-  --syn-btn-primary-bg: oklch(0.16 0.012 250);
-  --syn-btn-primary-fg: oklch(0.985 0.003 240);
-  --syn-btn-secondary-bg: oklch(0.965 0.004 240);
-  --syn-btn-secondary-border: oklch(0.82 0.006 240);
-  --syn-btn-secondary-fg: oklch(0.34 0.010 248);
-  --syn-btn-secondary-hover-bg: oklch(0.94 0.005 240);
-  --syn-row-hover: oklch(0.20 0.012 250 / 0.04);
-  --syn-hairline: oklch(0.88 0.005 240);
-  --contrib-0: oklch(0.88 0.008 240);
-  --contrib-1: oklch(0.80 0.07 160);
-  --contrib-2: oklch(0.70 0.11 160);
-  --contrib-3: oklch(0.60 0.14 160);
-  --contrib-4: oklch(0.50 0.16 160);
+  /* Warm off-white canvas — slight warmth prevents clinical flatness */
+  --syn-canvas: oklch(0.975 0.006 80);
+  --syn-surface: oklch(0.950 0.008 80);
+  --syn-surface-hover: oklch(0.928 0.010 80);
+  /* Borders are visible on the warm canvas */
+  --syn-border: oklch(0.858 0.008 80);
+  --syn-border-strong: oklch(0.762 0.010 80);
+  /* Ink is cool-toned near-black — elegant contrast on warm canvas */
+  --syn-ink: oklch(0.13 0.010 250);
+  --syn-ink-strong: oklch(0.17 0.010 250);
+  --syn-ink-muted: oklch(0.32 0.009 248);
+  --syn-ink-secondary: oklch(0.46 0.008 248);
+  --syn-ink-subtle: oklch(0.60 0.007 246);
+  --syn-ink-faint: oklch(0.72 0.006 244);
+  --syn-ink-dim: oklch(0.82 0.005 242);
+  /* Forest green — accessible at L=0.44 on light canvas (~5:1 contrast) */
+  --syn-accent: oklch(0.44 0.15 155);
+  --syn-grain-opacity: 0.025;
+  --syn-ambient-strength: 0.10;
+  --syn-selection: oklch(0.44 0.15 155 / 0.14);
+  --syn-glow-spot: oklch(0.13 0.010 250 / 0.04);
+  --syn-btn-primary-bg: oklch(0.13 0.010 250);
+  --syn-btn-primary-fg: oklch(0.975 0.006 80);
+  --syn-btn-secondary-bg: oklch(0.950 0.008 80);
+  --syn-btn-secondary-border: oklch(0.762 0.010 80);
+  --syn-btn-secondary-fg: oklch(0.32 0.009 248);
+  --syn-btn-secondary-hover-bg: oklch(0.928 0.010 80);
+  --syn-row-hover: oklch(0.13 0.010 250 / 0.03);
+  --syn-hairline: oklch(0.840 0.008 80);
+  --contrib-0: oklch(0.882 0.007 80);
+  --contrib-1: oklch(0.78 0.07 155);
+  --contrib-2: oklch(0.66 0.12 155);
+  --contrib-3: oklch(0.55 0.15 155);
+  --contrib-4: oklch(0.44 0.17 155);
 }
 
 [data-theme="dark"] {
-  --syn-canvas: oklch(0.13 0.012 160);
-  --syn-surface: oklch(0.17 0.014 160);
-  --syn-surface-hover: oklch(0.20 0.015 160);
-  --syn-border: color-mix(in oklch, var(--syn-ink) 6%, transparent);
-  --syn-border-strong: color-mix(in oklch, var(--syn-ink) 12%, transparent);
-  --syn-ink: oklch(0.93 0.006 160);
-  --syn-ink-strong: oklch(0.97 0.004 160);
-  --syn-ink-muted: oklch(0.78 0.010 160);
-  --syn-ink-secondary: oklch(0.64 0.012 160);
-  --syn-ink-subtle: oklch(0.50 0.012 160);
-  --syn-ink-faint: oklch(0.38 0.010 160);
-  --syn-ink-dim: oklch(0.28 0.008 160);
-  --syn-accent: oklch(0.78 0.16 160);
+  /* Cool graphite — canvas/surfaces/ink are neutral steel, not green-tinted */
+  --syn-canvas: oklch(0.115 0.008 250);
+  --syn-surface: oklch(0.158 0.010 250);
+  --syn-surface-hover: oklch(0.198 0.010 250);
+  --syn-border: color-mix(in oklch, var(--syn-ink) 8%, transparent);
+  --syn-border-strong: color-mix(in oklch, var(--syn-ink) 16%, transparent);
+  --syn-ink: oklch(0.930 0.005 250);
+  --syn-ink-strong: oklch(0.968 0.003 250);
+  --syn-ink-muted: oklch(0.770 0.010 250);
+  --syn-ink-secondary: oklch(0.635 0.012 250);
+  --syn-ink-subtle: oklch(0.498 0.012 250);
+  --syn-ink-faint: oklch(0.370 0.010 250);
+  --syn-ink-dim: oklch(0.265 0.008 250);
+  /* Emerald accent stands out clearly against neutral graphite */
+  --syn-accent: oklch(0.74 0.16 155);
   --syn-grain-opacity: 0.045;
   --syn-ambient-strength: 0.48;
   --syn-selection: color-mix(in oklch, var(--syn-accent) 22%, transparent);
   --syn-glow-spot: color-mix(in oklch, var(--syn-accent) 8%, transparent);
-  --syn-btn-primary-bg: oklch(0.97 0.004 160);
-  --syn-btn-primary-fg: oklch(0.13 0.012 160);
-  --syn-btn-secondary-bg: oklch(0.17 0.014 160);
+  --syn-btn-primary-bg: oklch(0.968 0.003 250);
+  --syn-btn-primary-fg: oklch(0.115 0.008 250);
+  --syn-btn-secondary-bg: oklch(0.158 0.010 250);
   --syn-btn-secondary-border: color-mix(in oklch, var(--syn-ink) 14%, transparent);
-  --syn-btn-secondary-fg: oklch(0.88 0.008 160);
-  --syn-btn-secondary-hover-bg: oklch(0.20 0.015 160);
+  --syn-btn-secondary-fg: oklch(0.770 0.010 250);
+  --syn-btn-secondary-hover-bg: oklch(0.198 0.010 250);
   --syn-row-hover: color-mix(in oklch, var(--syn-ink) 4%, transparent);
   --syn-hairline: color-mix(in oklch, var(--syn-ink) 10%, transparent);
-  --contrib-0: color-mix(in oklch, var(--syn-ink) 7%, var(--syn-surface));
+  --contrib-0: color-mix(in oklch, var(--syn-ink) 8%, var(--syn-surface));
   --contrib-1: color-mix(in oklch, var(--syn-accent) 22%, var(--syn-surface));
-  --contrib-2: color-mix(in oklch, var(--syn-accent) 38%, var(--syn-surface));
-  --contrib-3: color-mix(in oklch, var(--syn-accent) 55%, var(--syn-surface));
-  --contrib-4: color-mix(in oklch, var(--syn-accent) 78%, var(--syn-surface));
+  --contrib-2: color-mix(in oklch, var(--syn-accent) 40%, var(--syn-surface));
+  --contrib-3: color-mix(in oklch, var(--syn-accent) 58%, var(--syn-surface));
+  --contrib-4: color-mix(in oklch, var(--syn-accent) 82%, var(--syn-surface));
 }
 
 .contrib-cell-0 {

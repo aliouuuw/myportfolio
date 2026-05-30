@@ -17,9 +17,9 @@ interface CaseStudyHeaderProps {
 }
 
 const statusClass: Record<WorkLedgerStatus, string> = {
-  active: "border-emerald-500/20 text-emerald-400 bg-emerald-500/5",
-  shipped: "border-blue-500/20 text-blue-400 bg-blue-500/5",
-  archived: "border-syn-border-strong text-syn-ink-subtle bg-transparent",
+  active: "syn-status-badge syn-status-badge--active",
+  shipped: "syn-status-badge syn-status-badge--shipped",
+  archived: "syn-status-badge syn-status-badge--frozen",
 };
 
 export function CaseStudyHeader({
@@ -53,7 +53,7 @@ export function CaseStudyHeader({
         ) : null}
         {status ? (
           <span
-            className={`ml-auto mono text-[10px] tracking-widest px-2 py-1 rounded-full border ${statusClass[status]}`}
+            className={`ml-auto ${statusClass[status]}`}
           >
             {statusLabel ?? status}
           </span>
