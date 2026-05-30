@@ -2591,6 +2591,215 @@
   }
 }
 
+/* ── Profile band (hero + GitHub, full width) ──────────────────────────── */
+
+.site-synthesis .syn-profile {
+  width: 100%;
+  border-bottom: 1px solid var(--syn-border);
+}
+
+.site-synthesis .syn-profile-hero-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 0;
+}
+
+@media (min-width: 768px) {
+  .site-synthesis .syn-profile-hero-inner {
+    padding: 1.75rem 1.5rem 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-synthesis .syn-profile-hero-inner {
+    padding: 2rem 2rem 0;
+  }
+}
+
+.site-synthesis .syn-hero {
+  padding-bottom: 1.25rem;
+}
+
+.site-synthesis .syn-hero-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.site-synthesis .syn-hero-location {
+  font-size: 0.8125rem;
+  color: var(--syn-ink-secondary);
+}
+
+.site-synthesis .syn-hero-lang {
+  color: var(--syn-ink-faint);
+}
+
+.site-synthesis .syn-hero-clock {
+  font-size: 0.75rem;
+  text-align: right;
+}
+
+.site-synthesis .syn-hero-clock-time {
+  color: var(--syn-ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.site-synthesis .syn-hero-clock-tz {
+  color: var(--syn-ink-faint);
+}
+
+.site-synthesis .syn-hero-availability {
+  margin-top: 1rem;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--syn-ink-subtle);
+}
+
+.site-synthesis .syn-hero-title {
+  margin-top: 0.875rem;
+  max-width: 24ch;
+  font-size: clamp(1.875rem, 5vw, 3.5rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.07;
+  color: var(--syn-ink-strong);
+}
+
+@media (min-width: 768px) {
+  .site-synthesis .syn-hero-title {
+    max-width: 30ch;
+  }
+}
+
+.site-synthesis .syn-hero-cta {
+  margin-top: 1.35rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.site-synthesis .syn-github-band {
+  width: 100%;
+  background: color-mix(in oklch, var(--syn-surface-hover) 40%, var(--syn-surface));
+}
+
+.site-synthesis .syn-github-band-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .site-synthesis .syn-github-band-inner {
+    padding: 1.35rem 1.5rem 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-synthesis .syn-github-band-inner {
+    padding: 1.5rem 2rem 2rem;
+  }
+}
+
+.site-synthesis .syn-github-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.875rem;
+}
+
+.site-synthesis .syn-contrib-scroll {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.site-synthesis .syn-contrib-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.site-synthesis .syn-contrib-svg {
+  display: block;
+  width: 100%;
+  min-width: min(100%, 720px);
+}
+
+.site-synthesis .syn-contrib-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.875rem;
+}
+
+@keyframes contrib-tile-cycle {
+  0% {
+    fill: var(--contrib-0);
+    transform: translateY(-7px);
+    opacity: 0.35;
+  }
+  18% {
+    fill: var(--contrib-1);
+    transform: translateY(-2px);
+    opacity: 0.65;
+  }
+  36% {
+    fill: var(--contrib-2);
+    transform: translateY(0);
+    opacity: 0.85;
+  }
+  54% {
+    fill: var(--contrib-3);
+    opacity: 1;
+  }
+  72% {
+    fill: var(--contrib-4);
+    opacity: 1;
+  }
+  100% {
+    fill: var(--contrib-0);
+    transform: translateY(-7px);
+    opacity: 0.35;
+  }
+}
+
+@keyframes contrib-tile-cycle-dim {
+  0%,
+  100% {
+    fill: var(--contrib-0);
+    transform: translateY(-4px);
+    opacity: 0.22;
+  }
+  50% {
+    fill: var(--contrib-1);
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+}
+
+.contrib-cell-animated {
+  animation: contrib-tile-cycle var(--tile-duration, 3s) ease-in-out infinite;
+  animation-delay: var(--tile-delay, 0ms);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.contrib-cell-animated--dim {
+  animation-name: contrib-tile-cycle-dim;
+}
+
+.site-synthesis.motion-reduced .contrib-cell-animated {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
 .site-synthesis .mono {
   font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
     Consolas, monospace;
@@ -2731,10 +2940,6 @@
 
 .site-synthesis.hero-ready .hero-reveal--4 {
   transition-delay: 210ms;
-}
-
-.site-synthesis.hero-ready .hero-reveal--5 {
-  transition-delay: 280ms;
 }
 
 .site-synthesis.motion-reduced .hero-reveal {

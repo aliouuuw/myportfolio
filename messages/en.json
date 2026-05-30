@@ -72,17 +72,8 @@
         "location": "Dakar, Senegal",
         "languages": "FR / EN",
         "timezone": "WAT",
-        "skipBoot": "Skip intro",
-        "bootLoading": "Loading profile · click to skip",
-        "bootLines": {
-          "teams": "> teams loaded · 7 employers",
-          "focus": "> current focus · Everest Finance, ERGOBIT",
-          "availability": "> availability · Q3 2026"
-        },
-        "headline": "I build the software layer between business operations and product ambition.",
-        "subtitle": "Product systems engineer in Dakar. Finance and ERP tooling, internal ops software, and AI-assisted workflows — one engineer across the full stack.",
+        "headline": "I build the software layer between business operations and product ambition — product systems engineer in Dakar, one stack across fintech, ERP, and ops.",
         "availability": "Two client slots open Q3 2026 · replies within 48h on business days",
-        "proofLine": "Fintech spine, ERP acceptance kits, and ops software — proof in the case studies below.",
         "ctaWork": "See selected work",
         "ctaContact": "Get in touch"
       },

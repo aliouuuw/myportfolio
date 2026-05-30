@@ -92,18 +92,23 @@ export function HomeSynthesisPage({ locale, writing }: HomeSynthesisPageProps) {
         <div className="syn-floor-glow" />
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 syn-page-flow pt-6 md:pt-10 pb-20">
-        <a
-          href="#work"
-          className="syn-skip-link fixed left-4 top-4 z-50 -translate-y-[calc(100%+1rem)] rounded-full border border-syn-border-strong bg-syn-surface px-4 py-2 text-sm font-medium text-syn-ink-strong shadow-lg transition-transform focus:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-syn-accent"
-        >
-          {tSkip("work")}
-        </a>
-        <section id="profile" className="grid-bento scroll-mt-28">
-          <SynthesisHero onHeroReady={onHeroReady} />
-          <SynthesisGithubActivity />
-        </section>
+      <a
+        href="#work"
+        className="syn-skip-link fixed left-4 top-4 z-50 -translate-y-[calc(100%+1rem)] rounded-full border border-syn-border-strong bg-syn-surface px-4 py-2 text-sm font-medium text-syn-ink-strong shadow-lg transition-transform focus:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-syn-accent"
+      >
+        {tSkip("work")}
+      </a>
 
+      <section id="profile" className="syn-profile scroll-mt-28">
+        <div className="syn-profile-hero-wrap">
+          <div className="syn-profile-hero-inner">
+            <SynthesisHero onHeroReady={onHeroReady} />
+          </div>
+        </div>
+        <SynthesisGithubActivity />
+      </section>
+
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 syn-page-flow pt-12 md:pt-16 pb-20">
         <SynthesisProofSection
           locale={locale}
           highlightedWork={highlightedWork}

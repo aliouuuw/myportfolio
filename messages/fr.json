@@ -83,17 +83,8 @@
         "location": "Dakar, Sénégal",
         "languages": "FR / EN",
         "timezone": "WAT",
-        "skipBoot": "Passer l'intro",
-        "bootLoading": "Chargement du profil · cliquer pour passer",
-        "bootLines": {
-          "teams": "> équipes chargées · 7 employeurs",
-          "focus": "> focus actuel · Everest Finance, ERGOBIT",
-          "availability": "> disponibilité · T3 2026"
-        },
-        "headline": "Je construis la couche logicielle entre les opérations métier et l'ambition produit.",
-        "subtitle": "Ingénieur systèmes produit à Dakar. Outils finance et ERP, logiciels ops internes et workflows assistés par IA — un seul ingénieur sur toute la stack.",
+        "headline": "Je construis la couche logicielle entre les opérations métier et l'ambition produit — ingénieur systèmes produit à Dakar, une stack pour la fintech, l'ERP et l'ops.",
         "availability": "Deux créneaux clients ouverts T3 2026 · réponse sous 48 h les jours ouvrés",
-        "proofLine": "Épine fintech, kits d'acceptation ERP et logiciels ops — la preuve est dans les études de cas ci-dessous.",
         "ctaWork": "Voir le travail sélectionné",
         "ctaContact": "Me contacter"
       },

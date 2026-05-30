@@ -3,10 +3,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
-import {
-  SYNTHESIS_GITHUB_USER,
-  SYNTHESIS_PINNED_REPOS,
-} from "@/lib/synthesis-data";
+import { SYNTHESIS_GITHUB_USER } from "@/lib/synthesis-data";
 import {
   type GithubContribData,
   type GithubContribDay,
@@ -32,8 +29,6 @@ const CONTRIB_YEARS: ContribYear[] = [
 
 function contribLevelClass(level: number) {
   switch (level) {
-    case 0:
-      return "contrib-cell-0";
     case 1:
       return "contrib-cell-1";
     case 2:
@@ -78,38 +73,50 @@ function groupDaysByYear(days: ContribDay[]): Map<number, ContribDay[]> {
   return map;
 }
 
-function ContributionHeatmap({
-  days,
-  compact,
-  ariaLabel,
-}: {
-  days: ContribDay[];
-  compact?: boolean;
-  ariaLabel: string;
-}) {
+function buildWeekGrid(days: ContribDay[]) {
   const firstDay = days[0] ? new Date(`${days[0].date}T12:00:00`).getDay() : 0;
   const blanks: (ContribDay | null)[] = new Array(firstDay).fill(null);
   const padded: (ContribDay | null)[] = [...blanks, ...days];
   const weeks: (ContribDay | null)[][] = [];
   for (let i = 0; i < padded.length; i += 7) weeks.push(padded.slice(i, i + 7));
+  return weeks;
+}
 
+function ContributionHeatmap({
+  days,
+  compact,
+  animated,
+  ariaLabel,
+}: {
+  days: ContribDay[];
+  compact?: boolean;
+  animated?: boolean;
+  ariaLabel: string;
+}) {
+  const weeks = buildWeekGrid(days);
   const CELL = compact ? 9 : 11;
   const GAP = compact ? 2 : 3;
   const width = weeks.length * (CELL + GAP);
   const height = 7 * (CELL + GAP);
+  let cellIndex = 0;
 
   return (
-    <div className="overflow-x-auto -mx-1 px-1">
+    <div className="syn-contrib-scroll">
       <svg
         viewBox={`0 0 ${width} ${height}`}
         width="100%"
-        style={{ minWidth: compact ? width / 2.2 : width / 1.6 }}
+        className="syn-contrib-svg"
         role="img"
         aria-label={ariaLabel}
       >
         {weeks.map((week, x) =>
-          week.map((day, y) =>
-            day ? (
+          week.map((day, y) => {
+            if (!day) return null;
+            const index = cellIndex++;
+            const delay = (index * 47 + x * 13 + y * 31) % 2800;
+            const duration = 2600 + (index % 7) * 320;
+
+            return (
               <rect
                 key={`${day.date}-${x}-${y}`}
                 x={x * (CELL + GAP)}
@@ -117,29 +124,41 @@ function ContributionHeatmap({
                 width={CELL}
                 height={CELL}
                 rx={2}
-                className={contribLevelClass(day.level)}
+                className={
+                  animated
+                    ? `contrib-cell-animated ${day.level === 0 ? "contrib-cell-animated--dim" : ""}`
+                    : contribLevelClass(day.level)
+                }
+                style={
+                  animated
+                    ? ({
+                        "--tile-delay": `${delay}ms`,
+                        "--tile-duration": `${duration}ms`,
+                      } as React.CSSProperties)
+                    : undefined
+                }
               >
                 <title>
                   {day.date} · {day.count} contribution
                   {day.count === 1 ? "" : "s"}
                 </title>
               </rect>
-            ) : null,
-          ),
+            );
+          }),
         )}
       </svg>
     </div>
   );
 }
 
-function ContributionSkeleton({ compact }: { compact?: boolean }) {
-  const cols = compact ? 26 : 53;
+function ContributionSkeleton() {
   const t = useTranslations("HomePage.synthesis.github");
+  const cols = 53;
   return (
     <div className="space-y-4">
       <p className="mono text-xs text-syn-ink-faint">{t("loading")}</p>
       <div
-        className="grid gap-[3px] max-w-full overflow-hidden"
+        className="grid gap-[3px] w-full"
         style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
       >
         {Array.from({ length: cols * 7 }).map((_, i) => (
@@ -157,9 +176,11 @@ function ContributionSkeleton({ compact }: { compact?: boolean }) {
 function ContributionChartBody({
   user,
   year,
+  animated,
 }: {
   user: string;
   year: ContribYear;
+  animated: boolean;
 }) {
   const t = useTranslations("HomePage.synthesis.github");
   const [data, setData] = useState<ContribData | null>(null);
@@ -197,7 +218,7 @@ function ContributionChartBody({
   }
 
   if (!data) {
-    return <ContributionSkeleton compact={year === "all"} />;
+    return <ContributionSkeleton />;
   }
 
   const total = contribTotal(data, year);
@@ -208,9 +229,13 @@ function ContributionChartBody({
         ? t("periodAll")
         : String(year);
 
+  const sortedDays = [...data.contributions].sort((a, b) =>
+    a.date.localeCompare(b.date),
+  );
+
   return (
     <>
-      <div className="flex items-baseline justify-between gap-4 flex-wrap">
+      <div className="syn-contrib-meta">
         <p className="mono text-xs text-syn-ink-secondary">
           <span className="text-emerald-400">{total.toLocaleString()}</span>{" "}
           {t("contributions")} · {periodLabel}
@@ -241,6 +266,7 @@ function ContributionChartBody({
                   <ContributionHeatmap
                     days={days}
                     compact
+                    animated={animated}
                     ariaLabel={t("yearAria", { year: y, total: yearTotal })}
                   />
                 </div>
@@ -249,9 +275,8 @@ function ContributionChartBody({
         </div>
       ) : (
         <ContributionHeatmap
-          days={[...data.contributions].sort((a, b) =>
-            a.date.localeCompare(b.date),
-          )}
+          days={sortedDays}
+          animated={animated}
           ariaLabel={t("chartAria", { total, period: periodLabel })}
         />
       )}
@@ -259,7 +284,13 @@ function ContributionChartBody({
   );
 }
 
-function ContributionChart({ user }: { user: string }) {
+function ContributionChart({
+  user,
+  animated,
+}: {
+  user: string;
+  animated: boolean;
+}) {
   const [year, setYear] = useState<ContribYear>("last");
 
   return (
@@ -286,51 +317,49 @@ function ContributionChart({ user }: { user: string }) {
           </button>
         ))}
       </div>
-      <ContributionChartBody key={String(year)} user={user} year={year} />
+      <ContributionChartBody
+        key={String(year)}
+        user={user}
+        year={year}
+        animated={animated}
+      />
     </div>
   );
+}
+
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setReduced(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+  return reduced;
 }
 
 export function SynthesisGithubActivity() {
   const t = useTranslations("HomePage.synthesis.github");
   const user = SYNTHESIS_GITHUB_USER;
+  const reducedMotion = usePrefersReducedMotion();
 
   return (
-    <div className="md:col-span-4 p-6 md:p-8 rounded-2xl bg-syn-surface border border-syn-border flex flex-col min-h-[280px] md:min-h-full syn-github-panel">
-      <div className="flex items-baseline justify-between gap-3 mb-4 shrink-0">
-        <h2 className="text-sm font-medium text-syn-ink-strong">{t("title")}</h2>
-        <a
-          href={`https://github.com/${user}`}
-          className="mono text-[10px] text-syn-ink-subtle hover:text-syn-ink transition-colors"
-        >
-          @{user} ↗
-        </a>
+    <section className="syn-github-band" aria-labelledby="syn-github-title">
+      <div className="syn-github-band-inner">
+        <div className="syn-github-head">
+          <h2 id="syn-github-title" className="text-sm font-medium text-syn-ink-strong">
+            {t("title")}
+          </h2>
+          <a
+            href={`https://github.com/${user}`}
+            className="mono text-[10px] text-syn-ink-subtle hover:text-syn-ink transition-colors"
+          >
+            @{user} ↗
+          </a>
+        </div>
+        <ContributionChart user={user} animated={!reducedMotion} />
       </div>
-      <div className="flex-1 min-h-0">
-        <ContributionChart user={user} />
-      </div>
-      <div className="mt-5 pt-5 border-t border-syn-border shrink-0">
-        <p className="text-[10px] uppercase tracking-wide text-syn-ink-subtle mb-2">
-          {t("pinned")}
-        </p>
-        <ul className="space-y-1.5">
-          {SYNTHESIS_PINNED_REPOS.map((r) => (
-            <li key={r.repo}>
-              <a
-                href={`https://github.com/${r.repo}`}
-                className="group flex items-baseline justify-between gap-2 text-xs hover:bg-syn-row-hover rounded -mx-1 px-1 py-0.5 transition-colors"
-              >
-                <span className="mono text-syn-ink-muted group-hover:text-syn-ink truncate">
-                  {r.repo.split("/")[1]}
-                </span>
-                <span className="text-syn-ink-subtle shrink-0">
-                  {t(`pinnedNotes.${r.noteKey}`)}
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+    </section>
   );
 }
