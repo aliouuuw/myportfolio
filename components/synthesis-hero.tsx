@@ -34,12 +34,22 @@ export function SynthesisHero({ onHeroReady }: SynthesisHeroProps) {
 
   return (
     <header className="syn-hero">
-      <div className="syn-hero-top">
-        <p className="syn-hero-location hero-reveal hero-reveal--1">
-          {t("location")}
-          <span className="syn-hero-lang"> · {t("languages")}</span>
+      <div className="syn-hero-top hero-reveal hero-reveal--1">
+        <p className="syn-hero-meta syn-hero-meta--lead mono">
+          <span className="syn-hero-meta-availability syn-hero-meta--mobile-only">
+            {t("availabilityShort")}
+          </span>
+          <span className="syn-hero-meta-location syn-hero-meta--desktop-only">
+            {t("location")}
+          </span>
         </p>
-        <p className="syn-hero-clock mono hero-reveal hero-reveal--1">
+        <p className="syn-hero-meta syn-hero-meta--trail mono">
+          <span className="syn-hero-meta-location syn-hero-meta--mobile-only">
+            {t("location")}
+          </span>
+          <span className="syn-hero-meta-sep syn-hero-meta--mobile-only" aria-hidden>
+            ·
+          </span>
           <span className="syn-hero-clock-time">{time || "00:00:00"}</span>
           <span className="syn-hero-clock-tz"> {t("timezone")}</span>
         </p>
@@ -55,16 +65,16 @@ export function SynthesisHero({ onHeroReady }: SynthesisHeroProps) {
         />
       </h1>
       <p className="syn-hero-tagline hero-reveal hero-reveal--3">{t("tagline")}</p>
-      <p className="syn-hero-availability mono hero-reveal hero-reveal--3">
-        {t("availability")}
-      </p>
 
       <div className="syn-hero-cta hero-reveal hero-reveal--4">
         <SynButton variant="primary" href="#connect">
           {t("ctaContact")}
         </SynButton>
         <SynButton variant="secondary" href="#work">
-          {t("ctaWork")} <span aria-hidden>↓</span>
+          {t("ctaWork")}
+          <span className="syn-btn__trail" aria-hidden>
+            ↓
+          </span>
         </SynButton>
       </div>
     </header>

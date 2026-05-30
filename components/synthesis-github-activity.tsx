@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useTranslations } from "next-intl";
 
 import { SYNTHESIS_GITHUB_USER } from "@/lib/synthesis-data";
@@ -82,20 +82,32 @@ function buildWeekGrid(days: ContribDay[]) {
   return weeks;
 }
 
+function useMinWidth(query: string) {
+  const subscribe = (onStoreChange: () => void) => {
+    const mq = window.matchMedia(query);
+    mq.addEventListener("change", onStoreChange);
+    return () => mq.removeEventListener("change", onStoreChange);
+  };
+  const getSnapshot = () => window.matchMedia(query).matches;
+  const getServerSnapshot = () => false;
+
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+}
+
 function ContributionHeatmap({
   days,
-  compact,
+  size = "compact",
   animated,
   ariaLabel,
 }: {
   days: ContribDay[];
-  compact?: boolean;
+  size?: "compact" | "full";
   animated?: boolean;
   ariaLabel: string;
 }) {
   const weeks = buildWeekGrid(days);
-  const CELL = compact ? 9 : 11;
-  const GAP = compact ? 2 : 3;
+  const CELL = size === "full" ? 11 : 8;
+  const GAP = size === "full" ? 3 : 2;
   const width = weeks.length * (CELL + GAP);
   const height = 7 * (CELL + GAP);
 
@@ -104,7 +116,7 @@ function ContributionHeatmap({
       <svg
         viewBox={`0 0 ${width} ${height}`}
         width="100%"
-        className="syn-contrib-svg"
+        className={`syn-contrib-svg syn-contrib-svg--${size}`}
         role="img"
         aria-label={ariaLabel}
       >
@@ -177,10 +189,12 @@ function ContributionChartBody({
   user,
   year,
   animated,
+  chartSize,
 }: {
   user: string;
   year: ContribYear;
   animated: boolean;
+  chartSize: "compact" | "full";
 }) {
   const t = useTranslations("HomePage.synthesis.github");
   const [data, setData] = useState<ContribData | null>(null);
@@ -209,7 +223,7 @@ function ContributionChartBody({
         {t("unavailable")}{" "}
         <a
           href={`https://github.com/${user}`}
-          className="text-emerald-400 hover:text-emerald-300"
+          className="text-syn-accent hover:opacity-90 transition-opacity"
         >
           github.com/{user}
         </a>
@@ -237,7 +251,7 @@ function ContributionChartBody({
     <>
       <div className="syn-contrib-meta">
         <p className="mono text-xs text-syn-ink-secondary">
-          <span className="text-emerald-400">{total.toLocaleString()}</span>{" "}
+          <span className="syn-contrib-total">{total.toLocaleString()}</span>{" "}
           {t("contributions")} · {periodLabel}
         </p>
         <div className="flex items-center gap-2 mono text-[10px] text-syn-ink-subtle">
@@ -265,7 +279,7 @@ function ContributionChartBody({
                   </p>
                   <ContributionHeatmap
                     days={days}
-                    compact
+                    size="compact"
                     animated={animated}
                     ariaLabel={t("yearAria", { year: y, total: yearTotal })}
                   />
@@ -276,6 +290,7 @@ function ContributionChartBody({
       ) : (
         <ContributionHeatmap
           days={sortedDays}
+          size={chartSize}
           animated={animated}
           ariaLabel={t("chartAria", { total, period: periodLabel })}
         />
@@ -287,9 +302,11 @@ function ContributionChartBody({
 function ContributionChart({
   user,
   animated,
+  chartSize,
 }: {
   user: string;
   animated: boolean;
+  chartSize: "compact" | "full";
 }) {
   const [year, setYear] = useState<ContribYear>("last");
 
@@ -307,11 +324,7 @@ function ContributionChart({
             role="tab"
             aria-selected={year === y}
             onClick={() => setYear(y)}
-            className={`mono text-[10px] px-2 py-1 rounded-md border transition-colors ${
-              year === y
-                ? "border-emerald-500/40 text-emerald-400 bg-emerald-500/10"
-                : "border-syn-border-strong text-syn-ink-subtle hover:text-syn-ink-muted hover:border-syn-border-strong"
-            }`}
+            className={`syn-contrib-tab ${year === y ? "syn-contrib-tab--active" : ""}`}
           >
             {contribYearLabel(y)}
           </button>
@@ -322,6 +335,7 @@ function ContributionChart({
         user={user}
         year={year}
         animated={animated}
+        chartSize={chartSize}
       />
     </div>
   );
@@ -343,6 +357,8 @@ export function SynthesisGithubActivity() {
   const t = useTranslations("HomePage.synthesis.github");
   const user = SYNTHESIS_GITHUB_USER;
   const reducedMotion = usePrefersReducedMotion();
+  const isMdUp = useMinWidth("(min-width: 768px)");
+  const chartSize = isMdUp ? "full" : "compact";
 
   return (
     <section className="syn-github-band" aria-labelledby="syn-github-title">
@@ -358,8 +374,12 @@ export function SynthesisGithubActivity() {
             @{user} ↗
           </a>
         </div>
-        <ContributionChart user={user} animated={!reducedMotion} />
-        <p className="syn-github-scope-note">
+        <ContributionChart
+          user={user}
+          animated={!reducedMotion}
+          chartSize={chartSize}
+        />
+        <p className="syn-github-scope-note italic">
           <span className="block">{t("scopeNoteLine1")}</span>
           <span className="block">{t("scopeNoteLine2")}</span>
         </p>

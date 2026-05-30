@@ -14,12 +14,12 @@ export default async function NotFound() {
     <div className="flex flex-col flex-1">
       <div className="px-6 py-24 sm:px-12 lg:px-24 max-w-5xl mx-auto w-full flex flex-col items-center text-center">
         {/* 404 number */}
-        <div className="text-7xl sm:text-9xl font-serif font-light text-ink-tertiary/30 mb-8">
+        <div className="text-7xl sm:text-9xl font-light text-ink-tertiary/30 mb-8">
           404
         </div>
 
         {/* Heading */}
-        <h1 className="font-serif text-3xl sm:text-4xl font-normal tracking-tight text-ink-primary mb-4">
+        <h1 className="text-3xl sm:text-4xl font-medium tracking-tight text-ink-primary mb-4">
           {t("title")}
         </h1>
 

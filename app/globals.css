@@ -128,7 +128,6 @@
   --color-warning: var(--color-warning);
 
   --font-sans: var(--font-sans);
-  --font-serif: var(--font-serif);
   --font-mono: var(--font-mono);
 }
 
@@ -186,10 +185,6 @@ body {
    Typography utilities
    ──────────────────────────────────────────────────────────────────────────── */
 
-.font-serif {
-  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
-}
-
 .font-sans {
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
 }
@@ -200,7 +195,7 @@ body {
 
 /* Editorial typography for long-form */
 .prose-editorial {
-  font-family: var(--font-serif), Georgia, serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   font-size: var(--text-lg);
   line-height: var(--leading-relaxed);
   color: var(--color-ink-secondary);

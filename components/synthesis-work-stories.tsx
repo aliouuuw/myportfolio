@@ -28,12 +28,10 @@ function StatusDot({ status }: { status: SynthesisWorkRow["status"] }) {
 
 function WorkTile({
   work,
-  position,
   isOpen,
   onOpen,
 }: {
   work: SynthesisWorkRow;
-  position: number;
   isOpen: boolean;
   onOpen: () => void;
 }) {
@@ -41,7 +39,10 @@ function WorkTile({
   const tRow = useTranslations(`HomePage.synthesis.work.rows.${work.id}`);
 
   return (
-    <article role="listitem" className="syn-tile-wrap">
+    <article
+      role="listitem"
+      className={`syn-tile-wrap${work.id === "01" ? " syn-tile-wrap--lead" : ""}`}
+    >
       <button
         type="button"
         onClick={onOpen}
@@ -53,7 +54,6 @@ function WorkTile({
           <CaseStudyMedia slug={work.slug} variant="story" />
           <span className="syn-tile-gradient" aria-hidden />
           <span className="syn-tile-top">
-            <span className="syn-tile-index mono">{work.id}</span>
             <span className="syn-tile-status mono">
               <StatusDot status={work.status} />
               {t(`status.${work.status}`)}
@@ -64,15 +64,13 @@ function WorkTile({
             <span className="syn-tile-meta mono">
               {work.type.replace(/_/g, " ")} · {work.year}
             </span>
+            <span className="syn-tile-outcome">{tRow("tileOutcome")}</span>
           </span>
           <span className="syn-tile-open mono" aria-hidden>
             {t("tileOpen")}
           </span>
         </div>
       </button>
-      <span className="syn-tile-count mono" aria-hidden>
-        {position} / {SYNTHESIS_WORK.length}
-      </span>
     </article>
   );
 }
@@ -260,11 +258,10 @@ export function SynthesisWorkStories({
           role="list"
           onPointerDown={dismissScrollHint}
         >
-          {SYNTHESIS_WORK.map((work, i) => (
+          {SYNTHESIS_WORK.map((work) => (
             <WorkTile
               key={work.id}
               work={work}
-              position={i + 1}
               isOpen={activeWorkId === work.id}
               onOpen={() => onOpenWork(work.id)}
             />

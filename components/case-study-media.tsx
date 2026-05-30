@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { CaseMediaPlaceholder } from "@/components/case-media-placeholder";
 import { getCaseStudyCover } from "@/lib/case-media";
@@ -12,6 +12,18 @@ type CaseStudyMediaProps = {
   className?: string;
 };
 
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setReduced(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+  return reduced;
+}
+
 export function CaseStudyMedia({
   slug,
   variant = "featured",
@@ -19,6 +31,18 @@ export function CaseStudyMedia({
 }: CaseStudyMediaProps) {
   const cover = slug ? getCaseStudyCover(slug) : null;
   const [broken, setBroken] = useState(false);
+  const reducedMotion = usePrefersReducedMotion();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || cover?.kind !== "video") return;
+    if (reducedMotion) {
+      video.pause();
+      return;
+    }
+    void video.play().catch(() => undefined);
+  }, [reducedMotion, cover?.kind]);
 
   if (!cover || broken) {
     return (
@@ -32,10 +56,11 @@ export function CaseStudyMedia({
         className={`syn-case-media syn-case-media--${variant} ${className}`.trim()}
       >
         <video
+          ref={videoRef}
           className="syn-case-media__video"
           src={cover.src}
           poster={cover.poster}
-          autoPlay
+          autoPlay={!reducedMotion}
           muted
           loop
           playsInline

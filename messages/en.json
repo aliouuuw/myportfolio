@@ -39,12 +39,12 @@
       "ctaWork": "See selected work",
       "ctaContact": "Start a project",
       "learnMore": "About",
-      "workEyebrow": "01 / Work",
+      "workEyebrow": "Work",
       "workTitle": "Three systems that define how I work.",
       "workLead": "Flagship case studies with stack, outcome, and full write-up.",
-      "writingEyebrow": "04 / Writing",
+      "writingEyebrow": "Writing",
       "readEssay": "Read essay",
-      "contactEyebrow": "05 / Contact",
+      "contactEyebrow": "Contact",
       "contactTitle": "Tell me what you're building.",
       "contactNote": "Replies within 48 hours, Mon–Fri.",
       "contactCta": "Send a message"
@@ -79,6 +79,7 @@
         "headlineAria": "I build software between your operations and your products or services.",
         "tagline": "Product systems engineer: internal tools, ERP, fintech, from architecture to production.",
         "availability": "Two client slots open · Q3 2026",
+        "availabilityShort": "Open · Q3 2026",
         "ctaWork": "See selected work",
         "ctaContact": "Start a project"
       },
@@ -295,6 +296,7 @@
         "rows": {
           "01": {
             "name": "Everest Finance",
+            "tileOutcome": "One schema behind web, CRM, and mobile",
             "role": "Contract · product & ops software",
             "desc": "Public site, internal CRM, and customer app on one TypeScript stack and shared Postgres schema.",
             "detail": "Marketing, CRM, and the customer app had drifted apart. I brought them onto one codebase and database so ops and product do not fight separate sources of truth.",
@@ -303,6 +305,7 @@
           },
           "02": {
             "name": "ERGOBIT / Odoo 18",
+            "tileOutcome": "39 acceptance tests in nine suites",
             "role": "Contract · ERP QA",
             "desc": "Acceptance-test kit for Odoo 18 migrations—39 tests, nine suites, CI on Azure DevOps.",
             "detail": "Each migration team was rebuilding selectors from scratch. I packaged Robot Framework and Playwright patterns with CI so the next project starts from a checklist, not a blank repo.",
@@ -311,6 +314,7 @@
           },
           "03": {
             "name": "Africa GreenTec accounting",
+            "tileOutcome": "~10k records per day in production",
             "role": "Contract · Odoo module",
             "desc": "Accounting module that removed most manual journal work—about 10k lines a day in production.",
             "detail": "Finance was keying the same patterns every day. The module encodes those flows, checks against operational data, and keeps a clear audit trail without spreadsheet bridges.",
@@ -319,6 +323,7 @@
           },
           "04": {
             "name": "BocalBun retrospective",
+            "tileOutcome": "Documented pause, public write-up",
             "role": "Side project · paused",
             "desc": "A Bun toolkit I paused when the abstractions cost more than they saved.",
             "detail": "I tried a Bun-native toolkit with Postgres RLS and strict layers. Delivery slowed, so I stopped and wrote up what was worth keeping—a better outcome than a quiet repo.",
@@ -485,7 +490,7 @@
     "mediaPlaceholder": "Screenshots and diagrams available on request"
   },
   "WorkedWith": {
-    "eyebrow": "02 / Worked with",
+    "eyebrow": "Worked with",
     "title": "Teams and operators I've built for.",
     "lead": "Employers and contracts from my resume, plus local builds in Dakar and Ottawa.",
     "employersTitle": "Employers & contracts",
@@ -530,7 +535,7 @@
     "greentecPeriod": "ERGOBIT client"
   },
   "GithubActivity": {
-    "eyebrow": "03 / GitHub",
+    "eyebrow": "GitHub",
     "title": "Selected repositories.",
     "lead": "Public work and extraction candidates. Full profile on GitHub.",
     "profileLink": "@aliouuuw",
@@ -546,7 +551,7 @@
     }
   },
   "JoinBlock": {
-    "eyebrow": "03 / Open",
+    "eyebrow": "Open",
     "title": "Collaborate or follow along.",
     "lead": "Focused engagements on operational software. Two slots open for Q3 2026.",
     "everestName": "Everest Finance consolidation",

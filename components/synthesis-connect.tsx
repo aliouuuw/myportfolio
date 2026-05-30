@@ -4,6 +4,7 @@ import { useCallback, useRef } from "react";
 import { useTranslations } from "next-intl";
 
 import { useCommandPalette } from "@/components/command-palette-provider";
+import { SynBezel } from "@/components/syn-bezel";
 import { SynButton } from "@/components/syn-button";
 import { SynthesisRevealSection } from "@/components/synthesis-reveal-section";
 import { SynthesisSectionHeader } from "@/components/synthesis-section-header";
@@ -28,9 +29,9 @@ function GlowCardSpotlight({
     <div
       ref={ref}
       onMouseMove={handleMouseMove}
-      className={`glow-card glow-card--spotlight relative overflow-hidden rounded-2xl bg-syn-surface border border-syn-border ${className}`}
+      className={`glow-card glow-card--spotlight syn-bezel__inner relative overflow-hidden ${className}`}
     >
-      <div className="relative z-10 h-full flex flex-col">{children}</div>
+      <div className="relative z-10 flex h-full flex-col">{children}</div>
     </div>
   );
 }
@@ -51,27 +52,29 @@ export function SynthesisConnect() {
   return (
     <SynthesisRevealSection
       id="connect"
-      className="pt-16 md:pt-24 pb-12 scroll-mt-28 border-t border-syn-border"
+      className="scroll-mt-28 pb-12"
     >
       <SynthesisSectionHeader
         eyebrow={t("eyebrow")}
         title={t("title")}
         lead={t("lead")}
       />
-      <GlowCardSpotlight className="mt-8 p-8 md:p-10 syn-connect-card">
-        <p className="syn-connect-availability mono">{t("availability")}</p>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <SynButton variant="primary" href={`mailto:${SYNTHESIS_EMAIL}`}>
-            {t("ctaEmail")}
-          </SynButton>
-          <SynButton variant="secondary" href="https://wa.me/221777228845">
-            {t("ctaWhatsApp")}
-          </SynButton>
-          <SynButton variant="secondary" onClick={copyEmail}>
-            {t("ctaCopyEmail")}
-          </SynButton>
-        </div>
-      </GlowCardSpotlight>
+      <SynBezel className="mt-8">
+        <GlowCardSpotlight className="p-8 md:p-10 syn-connect-card">
+          <p className="syn-connect-availability mono">{t("availability")}</p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <SynButton variant="primary" href={`mailto:${SYNTHESIS_EMAIL}`}>
+              {t("ctaEmail")}
+            </SynButton>
+            <SynButton variant="secondary" href="https://wa.me/221777228845">
+              {t("ctaWhatsApp")}
+            </SynButton>
+            <SynButton variant="secondary" onClick={copyEmail}>
+              {t("ctaCopyEmail")}
+            </SynButton>
+          </div>
+        </GlowCardSpotlight>
+      </SynBezel>
     </SynthesisRevealSection>
   );
 }

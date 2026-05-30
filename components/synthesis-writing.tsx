@@ -3,6 +3,7 @@
 import { TransitionLink } from "@/components/transition-link";
 import { useTranslations } from "next-intl";
 
+import { SynBezel } from "@/components/syn-bezel";
 import { SynthesisRevealSection } from "@/components/synthesis-reveal-section";
 import { SynthesisSectionHeader } from "@/components/synthesis-section-header";
 
@@ -25,7 +26,7 @@ export function SynthesisWriting({ locale, entries }: SynthesisWritingProps) {
   return (
     <SynthesisRevealSection
       id="writing"
-      className="scroll-mt-28 border-t border-syn-border pt-16 md:pt-20"
+      className="scroll-mt-28"
     >
       <SynthesisSectionHeader
         eyebrow={t("eyebrow")}
@@ -46,24 +47,26 @@ export function SynthesisWriting({ locale, entries }: SynthesisWritingProps) {
       ) : (
         <div className="mt-10 space-y-4">
           {featured ? (
-            <TransitionLink
-              href={`/${locale}/writing/${featured.slug}`}
-              className="syn-writing-featured syn-entity-card group block p-8 md:p-10"
-              style={{ viewTransitionName: `writing-${featured.slug}` }}
-            >
-              <time className="block mono text-xs text-syn-ink-subtle">
-                {featured.dateLabel}
-              </time>
-              <h3 className="mt-4 text-[clamp(1.5rem,3vw,2.25rem)] font-medium tracking-tight text-syn-ink-strong group-hover:text-syn-accent transition-colors max-w-[22ch] leading-[1.12]">
-                {featured.title}
-              </h3>
-              <p className="mt-4 text-base text-syn-ink-secondary leading-relaxed max-w-2xl">
-                {featured.summary}
-              </p>
-              <span className="mt-8 inline-flex text-sm text-syn-accent opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                {t("readEssay")} →
-              </span>
-            </TransitionLink>
+            <SynBezel className="syn-writing-bezel">
+              <TransitionLink
+                href={`/${locale}/writing/${featured.slug}`}
+                className="syn-writing-featured syn-entity-card group block p-8 md:p-10"
+                style={{ viewTransitionName: `writing-${featured.slug}` }}
+              >
+                <time className="block mono text-xs text-syn-ink-subtle">
+                  {featured.dateLabel}
+                </time>
+                <h3 className="mt-4 text-[clamp(1.5rem,3vw,2.25rem)] font-medium tracking-tight text-syn-ink-strong group-hover:text-syn-accent transition-colors max-w-[28ch] leading-[1.12]">
+                  {featured.title}
+                </h3>
+                <p className="mt-4 text-base text-syn-ink-secondary leading-relaxed max-w-2xl">
+                  {featured.summary}
+                </p>
+                <span className="mt-8 inline-flex text-sm text-syn-accent opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                  {t("readEssay")} →
+                </span>
+              </TransitionLink>
+            </SynBezel>
           ) : null}
 
           {rest.length > 0 ? (

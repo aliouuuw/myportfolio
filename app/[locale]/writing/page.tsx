@@ -50,7 +50,7 @@ export default async function WritingPage(props: {
     <div className="site-synthesis-page page-shell">
       <div className="page-shell-inner">
         <header className="mb-12 max-w-2xl">
-          <h1 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-normal tracking-tight text-ink-primary leading-tight mb-4">
+          <h1 className="text-[clamp(2rem,5vw,3.5rem)] font-medium tracking-tight text-ink-primary leading-tight mb-4">
             {t("title")}
           </h1>
           <p className="text-base text-ink-secondary leading-relaxed max-w-[68ch]">

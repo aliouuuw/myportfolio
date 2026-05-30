@@ -51,9 +51,6 @@ export function SynthesisWorkRow({
         <div className="flex flex-col justify-between gap-8 p-6 md:p-9 min-h-[min(52vw,320px)] md:min-h-[340px]">
           <div>
             <div className="flex flex-wrap items-center gap-3 mb-6">
-              <span className="mono text-xs text-syn-ink-faint">
-                <ScrambleText text={work.id} trigger="hover" />
-              </span>
               <span
                 className={`mono text-[10px] tracking-widest px-2 py-1 rounded-full border ${statusClass} ${inView ? "status-pulse-once" : ""}`}
               >
@@ -116,10 +113,7 @@ export function SynthesisWorkRow({
       <>
         <CaseStudyMedia slug={work.slug} variant="thumb" />
         <div className="flex flex-col gap-4 p-5 md:p-6 flex-1">
-        <div className="flex items-start justify-between gap-3">
-          <span className="mono text-xs text-syn-ink-faint">
-            <ScrambleText text={work.id} trigger="hover" />
-          </span>
+        <div className="flex items-start justify-end gap-3">
           <span
             className={`mono text-[10px] tracking-widest px-2 py-1 rounded-full border shrink-0 ${statusClass}`}
           >
@@ -180,9 +174,6 @@ export function SynthesisWorkRow({
   const content = (
     <>
       <div className="flex items-center gap-5 lg:w-1/4 shrink-0">
-        <span className="mono text-xs text-syn-ink-faint">
-          <ScrambleText text={work.id} trigger="hover" />
-        </span>
         <div>
           <h4
             className={`font-medium transition-colors ${

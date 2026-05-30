@@ -77,7 +77,7 @@ export default async function WritingSlugPage({ params }: Props) {
           </p>
 
           <h1
-            className="font-serif text-[clamp(2.5rem,6vw,4.5rem)] font-normal tracking-tight text-ink-primary leading-tight mb-4 max-w-[20ch]"
+            className="text-[clamp(2.5rem,6vw,4.5rem)] font-medium tracking-tight text-ink-primary leading-tight mb-4 max-w-[20ch]"
             style={{ viewTransitionName: `writing-${slug}` }}
           >
             {title}

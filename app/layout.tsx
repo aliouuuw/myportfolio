@@ -1,24 +1,9 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Fraunces } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import { getLocale } from "next-intl/server";
 import "./globals.css";
 
-/**
- * Fraunces — variable serif with optical size axis.
- * Used for display text: hero sentences, case-study titles, essay headings.
- * Engraved feel at large sizes via low weight + tight tracking.
- */
-const fraunces = Fraunces({
-  variable: "--font-serif",
-  subsets: ["latin"],
-  display: "swap",
-  axes: ["opsz"],
-});
-
-/**
- * Inter — clean, legible sans-serif for UI, body text, and labels.
- * Geist is preferred but Inter is the reliable Google Fonts fallback.
- */
+/** Inter — UI, body, and display headings (single sans stack). */
 const inter = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
@@ -57,7 +42,7 @@ export default async function RootLayout({
     <html
       suppressHydrationWarning
       lang={locale}
-      className={`${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />

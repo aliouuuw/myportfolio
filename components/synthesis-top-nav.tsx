@@ -95,7 +95,7 @@ export function SynthesisTopNav({ locale, pathname }: SynthesisTopNavProps) {
             className="ml-1 inline-flex items-center gap-2 rounded-full border border-syn-border bg-syn-surface px-3 py-1.5 text-xs font-medium text-syn-ink-muted"
             title={t("available")}
           >
-            <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-emerald-500 text-emerald-500" />
+            <span className="pulse-dot h-1.5 w-1.5 rounded-full" />
             <span className="hidden sm:inline">{t("available")}</span>
             <span className="sm:hidden">{t("availableShort")}</span>
           </span>

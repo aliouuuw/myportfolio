@@ -11,12 +11,11 @@ const CAPABILITY_KEYS = [
   "ai",
 ] as const;
 
-function CapabilityItem({ itemKey, index }: { itemKey: string; index: number }) {
+function CapabilityItem({ itemKey }: { itemKey: string }) {
   const t = useTranslations(`HomePage.synthesis.capabilities.items.${itemKey}`);
 
   return (
     <div className="flex flex-col">
-      <span className="mono-eyebrow text-syn-ink-faint mb-3">0{index + 1}</span>
       <h3 className="text-base font-medium text-syn-ink-strong">{t("label")}</h3>
       <p className="mt-2 text-sm text-syn-ink-secondary leading-relaxed">{t("desc")}</p>
     </div>
@@ -39,8 +38,8 @@ export function SynthesisCapabilities() {
           </h2>
         </div>
         <div className="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-12">
-          {CAPABILITY_KEYS.map((key, i) => (
-            <CapabilityItem key={key} itemKey={key} index={i} />
+          {CAPABILITY_KEYS.map((key) => (
+            <CapabilityItem key={key} itemKey={key} />
           ))}
         </div>
       </div>
