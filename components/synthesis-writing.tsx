@@ -1,9 +1,9 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { TransitionLink } from "@/components/transition-link";
 import { useTranslations } from "next-intl";
 
-import { SynBezel } from "@/components/syn-bezel";
 import { SynthesisRevealSection } from "@/components/synthesis-reveal-section";
 import { SynthesisSectionHeader } from "@/components/synthesis-section-header";
 
@@ -24,10 +24,9 @@ export function SynthesisWriting({ locale, entries }: SynthesisWritingProps) {
   const [featured, ...rest] = entries;
 
   return (
-    <SynthesisRevealSection
-      id="writing"
-      className="scroll-mt-28"
-    >
+    <SynthesisRevealSection id="writing" className="scroll-mt-28 syn-writing-section">
+      <div className="syn-section-atmo syn-section-atmo--writing" aria-hidden />
+
       <SynthesisSectionHeader
         eyebrow={t("eyebrow")}
         title={t("title")}
@@ -35,7 +34,7 @@ export function SynthesisWriting({ locale, entries }: SynthesisWritingProps) {
         aside={
           <TransitionLink
             href={`/${locale}/writing`}
-            className="text-xs text-syn-ink-secondary hover:text-syn-ink transition-colors"
+            className="syn-section-aside-link"
           >
             {t("allLink")}
           </TransitionLink>
@@ -43,58 +42,49 @@ export function SynthesisWriting({ locale, entries }: SynthesisWritingProps) {
       />
 
       {entries.length === 0 ? (
-        <p className="mt-10 text-sm text-syn-ink-subtle">{t("empty")}</p>
+        <p className="syn-section-body text-sm text-syn-ink-subtle">{t("empty")}</p>
       ) : (
-        <div className="mt-10 space-y-4">
+        <div className="syn-section-body syn-stagger-children">
           {featured ? (
-            <SynBezel className="syn-writing-bezel">
+            <article
+              className="syn-writing-lead"
+              style={{ "--stagger": 0 } as CSSProperties}
+            >
               <TransitionLink
                 href={`/${locale}/writing/${featured.slug}`}
-                className="syn-writing-featured syn-entity-card group block p-8 md:p-10"
+                className="syn-writing-lead__link group"
                 style={{ viewTransitionName: `writing-${featured.slug}` }}
               >
-                <time className="block mono text-xs text-syn-ink-subtle">
-                  {featured.dateLabel}
-                </time>
-                <h3 className="mt-4 text-[clamp(1.5rem,3vw,2.25rem)] font-medium tracking-tight text-syn-ink-strong group-hover:text-syn-accent transition-colors max-w-[28ch] leading-[1.12]">
-                  {featured.title}
-                </h3>
-                <p className="mt-4 text-base text-syn-ink-secondary leading-relaxed max-w-2xl">
-                  {featured.summary}
-                </p>
-                <span className="mt-8 inline-flex text-sm text-syn-accent opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                  {t("readEssay")} →
-                </span>
+                <div className="syn-writing-lead__head">
+                  <h3 className="syn-writing-lead__title">{featured.title}</h3>
+                  <time className="syn-writing-lead__date mono">{featured.dateLabel}</time>
+                </div>
+                <p className="syn-writing-lead__summary">{featured.summary}</p>
+                <span className="syn-writing-lead__go mono">{t("readEssay")}</span>
               </TransitionLink>
-            </SynBezel>
+            </article>
           ) : null}
 
           {rest.length > 0 ? (
-            <div className="flex flex-col gap-3">
-              {rest.map((entry) => (
-                <TransitionLink
+            <ul className="syn-writing-list">
+              {rest.map((entry, i) => (
+                <li
                   key={entry.slug}
-                  href={`/${locale}/writing/${entry.slug}`}
-                  className="syn-entity-card group flex flex-col gap-3 p-5 sm:flex-row sm:items-baseline sm:gap-8"
-                  style={{ viewTransitionName: `writing-${entry.slug}` }}
+                  className="syn-writing-list__item"
+                  style={{ "--stagger": i + 1 } as CSSProperties}
                 >
-                  <span className="mono text-xs text-syn-ink-subtle w-16 shrink-0">
-                    {entry.dateLabel}
-                  </span>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-base font-medium text-syn-ink-strong group-hover:text-syn-accent mb-1 transition-colors">
-                      {entry.title}
-                    </h3>
-                    <p className="text-sm text-syn-ink-secondary leading-relaxed max-w-2xl line-clamp-2">
-                      {entry.summary}
-                    </p>
-                  </div>
-                  <span className="text-syn-ink-faint group-hover:text-syn-accent transition-colors shrink-0">
-                    ↗
-                  </span>
-                </TransitionLink>
+                  <TransitionLink
+                    href={`/${locale}/writing/${entry.slug}`}
+                    className="syn-writing-list__link group"
+                    style={{ viewTransitionName: `writing-${entry.slug}` }}
+                  >
+                    <span className="syn-writing-list__title">{entry.title}</span>
+                    <time className="syn-writing-list__date mono">{entry.dateLabel}</time>
+                    <span className="syn-writing-list__summary">{entry.summary}</span>
+                  </TransitionLink>
+                </li>
               ))}
-            </div>
+            </ul>
           ) : null}
         </div>
       )}

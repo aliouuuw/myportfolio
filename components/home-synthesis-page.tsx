@@ -107,7 +107,7 @@ export function HomeSynthesisPage({ locale, writing }: HomeSynthesisPageProps) {
         <SynthesisGithubActivity />
       </section>
 
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 syn-page-flow pt-12 md:pt-16 pb-20">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 syn-page-flow min-w-0 pt-12 md:pt-16 pb-20">
         <SynthesisProofSection locale={locale} />
 
         <SynthesisAboutStrip />

@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 
 type SynthesisSectionHeaderProps = {
   eyebrow?: string;
-  title: string;
+  title?: string;
   lead?: string;
   aside?: ReactNode;
   variant?: "default" | "compact";
@@ -37,9 +37,11 @@ export function SynthesisSectionHeader({
     >
       <div className="min-w-0">
         {eyebrow ? <p className="mono-eyebrow mb-3">{eyebrow}</p> : null}
-        <h2 id={titleId} className={titleClass}>
-          {title}
-        </h2>
+        {title ? (
+          <h2 id={titleId} className={titleClass}>
+            {title}
+          </h2>
+        ) : null}
         {lead ? <p className={leadClass}>{lead}</p> : null}
       </div>
       {aside ? <div className="shrink-0 sm:pb-1">{aside}</div> : null}

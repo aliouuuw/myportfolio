@@ -94,8 +94,7 @@
       "background": {
         "eyebrow": "About",
         "title": "How I work",
-        "lead": "Philosophy and how I stay sharp. Career timeline lives with selected work above.",
-        "p1": "I work where business workflows meet software: CRMs, ERP modules, customer apps, and the glue that keeps them coherent. Less framework theater, more systems people can run every day."
+        "lead": "Philosophy and how I stay sharp. Career timeline lives with selected work above."
       },
       "credentials": {
         "title": "Credentials",
@@ -111,7 +110,12 @@
       },
       "chess": {
         "title": "Chess",
-        "body": "I play competitive chess online. Peak ratings: 2043 bullet, 1856 blitz. It is the same muscle I use in engineering: pattern recognition under a clock, weighing tradeoffs quickly, and staying composed when a production system is under pressure."
+        "bulletLabel": "Bullet",
+        "blitzLabel": "Blitz",
+        "bulletRating": "2043",
+        "blitzRating": "1856",
+        "ratingsAria": "Peak online ratings",
+        "body": "Competitive play online. Same muscle as engineering: pattern recognition under a clock, tradeoffs weighed fast, composure when production is under pressure."
       },
       "github": {
         "title": "GitHub activity",
@@ -394,14 +398,19 @@
         "title": "Notes",
         "lead": "Short posts on building and running software.",
         "allLink": "All writing →",
+        "indexLabel": "More notes",
         "readEssay": "Read essay",
+        "readShort": "Read",
         "empty": "Essays coming soon."
       },
       "connect": {
         "eyebrow": "Contact",
         "title": "Get in touch",
         "lead": "Tell me about your project.",
+        "prompt": "A short note on scope and timing is enough to start.",
         "availability": "Two client slots open Q3 2026 · replies within 48h on business days",
+        "channelsAria": "Contact channels",
+        "channelCopy": "Copy",
         "ctaEmail": "Send a message →",
         "ctaWhatsApp": "WhatsApp ↗",
         "ctaCopyEmail": "Copy email",

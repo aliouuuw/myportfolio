@@ -1585,6 +1585,8 @@
   display: flex;
   flex-direction: column;
   gap: 0;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .site-synthesis .syn-page-flow > .reveal-section:not(:last-child) {
@@ -1666,6 +1668,15 @@
 
 .site-synthesis .syn-carousel-rail-wrap {
   position: relative;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+@media (max-width: 767px) {
+  .site-synthesis .syn-carousel-rail-wrap {
+    margin-inline: -1rem;
+    padding-inline: 1rem;
+  }
 }
 
 .site-synthesis .syn-carousel__fade {
@@ -1797,6 +1808,9 @@
 .site-synthesis .syn-carousel-rail {
   display: flex;
   gap: 1.5rem;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-padding-inline: 1rem;
@@ -2741,9 +2755,12 @@
 
 .site-synthesis .syn-cgraph__track-wrap {
   position: relative;
+  min-width: 0;
 }
 
 .site-synthesis .syn-cgraph__track {
+  min-width: 0;
+  max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
@@ -3300,12 +3317,202 @@
   box-shadow: inset 0 1px 0 color-mix(in oklch, var(--syn-ink) 6%, transparent);
 }
 
-.site-synthesis .syn-about-panel {
-  background: color-mix(in oklch, var(--syn-surface-hover) 35%, var(--syn-surface));
+/* ── Section atmosphere (about, writing, connect) ─────────────────────── */
+
+.site-synthesis .syn-section-atmo {
+  position: absolute;
+  top: -12%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 100%;
+  height: min(52vw, 420px);
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(72px);
+  opacity: calc(var(--syn-ambient-strength) * 1.15);
 }
 
-.site-synthesis .syn-about-quote {
+.site-synthesis .syn-about-section,
+.site-synthesis .syn-writing-section,
+.site-synthesis .syn-connect-section {
+  position: relative;
+  overflow-x: clip;
+}
+
+.site-synthesis .syn-about-section > :not(.syn-section-atmo),
+.site-synthesis .syn-writing-section > :not(.syn-section-atmo),
+.site-synthesis .syn-connect-section > :not(.syn-section-atmo) {
+  position: relative;
+  z-index: 1;
+}
+
+.site-synthesis .syn-section-atmo--about {
+  background: radial-gradient(
+    ellipse 70% 80% at 18% 40%,
+    color-mix(in oklch, var(--syn-accent) 18%, transparent),
+    transparent 68%
+  );
+}
+
+.site-synthesis .syn-section-atmo--writing {
+  left: auto;
+  width: min(52%, 480px);
+  margin-left: auto;
+  background: radial-gradient(
+    ellipse 75% 70% at 85% 30%,
+    color-mix(in oklch, var(--syn-accent) 12%, transparent),
+    transparent 72%
+  );
+}
+
+.site-synthesis .syn-section-atmo--connect {
+  top: auto;
+  bottom: -18%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: min(40vw, 320px);
+  transform: none;
+  background: radial-gradient(
+    ellipse 80% 90% at 50% 50%,
+    color-mix(in oklch, var(--syn-accent) 22%, transparent),
+    transparent 70%
+  );
+}
+
+.site-synthesis .reveal-section--visible .syn-stagger-children > * {
+  animation: syn-stagger-in 0.55s var(--ease-out-quart) both;
+  animation-delay: calc(var(--stagger, 0) * 70ms + 100ms);
+}
+
+.site-synthesis.motion-reduced .reveal-section--visible .syn-stagger-children > * {
+  animation: none;
+}
+
+/* Shared section rhythm (matches work block) */
+
+.site-synthesis .syn-section-body {
+  margin-top: 2rem;
+}
+
+.site-synthesis .syn-section-aside-link {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--syn-ink-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.site-synthesis .syn-section-aside-link:hover,
+.site-synthesis .syn-section-aside-link:focus-visible {
+  color: var(--syn-ink-strong);
+  outline: none;
+}
+
+.site-synthesis .syn-section-prose {
+  width: 100%;
+  max-width: 60vw;
+}
+
+@media (max-width: 767px) {
+  .site-synthesis .syn-section-prose {
+    max-width: 100%;
+  }
+}
+
+/* About: credentials registry */
+
+.site-synthesis .syn-about-registry {
   margin: 0;
+  padding: 0;
+}
+
+.site-synthesis .syn-about-registry__row {
+  display: grid;
+  gap: 0.5rem 1.5rem;
+  padding: 1.125rem 0;
+  border-bottom: 1px solid var(--syn-border);
+}
+
+.site-synthesis .syn-about-registry__row:first-child {
+  padding-top: 0;
+}
+
+@media (min-width: 768px) {
+  .site-synthesis .syn-about-registry__row {
+    grid-template-columns: 9rem minmax(0, 1fr);
+    align-items: baseline;
+    gap: 2rem;
+    padding: 1.25rem 0;
+  }
+}
+
+.site-synthesis .syn-about-registry__row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.site-synthesis .syn-about-registry__term,
+.site-synthesis .syn-about-registry__detail {
+  margin: 0;
+}
+
+.site-synthesis .syn-about-registry__term {
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--syn-ink-faint);
+}
+
+.site-synthesis .syn-about-registry__detail {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--syn-ink-secondary);
+}
+
+.site-synthesis .syn-about-registry__detail-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+@media (min-width: 768px) {
+  .site-synthesis .syn-about-registry__detail-head {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem 1.25rem;
+  }
+}
+
+.site-synthesis .syn-about-registry__metrics {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--syn-accent);
+  flex-shrink: 0;
+}
+
+.site-synthesis .syn-about-registry__metrics-k {
+  font-size: 0.5625rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--syn-ink-faint);
+  margin-right: 0.35rem;
+}
+
+.site-synthesis .syn-about-registry__sep {
+  color: var(--syn-ink-dim);
+  margin: 0 0.15rem;
+}
+
+.site-synthesis .syn-about-registry__detail-text {
+  flex: 1;
+  min-width: min(100%, 36ch);
 }
 
 .site-synthesis .syn-timeline {
@@ -3331,30 +3538,323 @@
   width: 2.5rem;
 }
 
-.site-synthesis .syn-writing-featured {
+/* Writing: typographic stack (no cards) */
+
+.site-synthesis .syn-writing-lead {
+  margin: 0;
+  padding-bottom: clamp(1.75rem, 4vw, 2.75rem);
+  border-bottom: 1px solid var(--syn-border);
+}
+
+.site-synthesis .syn-writing-lead__link {
   display: block;
   text-decoration: none;
+  color: inherit;
 }
 
-.site-synthesis .syn-writing-featured.syn-bezel__inner {
-  background: linear-gradient(
-    145deg,
-    color-mix(in oklch, var(--syn-surface-hover) 60%, var(--syn-surface)),
-    var(--syn-surface)
-  );
+.site-synthesis .syn-writing-lead__link:focus-visible {
+  outline: 2px solid var(--syn-accent);
+  outline-offset: 4px;
 }
 
-.site-synthesis .syn-connect-card {
-  border-radius: 1rem;
+.site-synthesis .syn-writing-lead__head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.site-synthesis .syn-connect-availability {
-  font-size: 10px;
-  letter-spacing: 0.14em;
+@media (min-width: 768px) {
+  .site-synthesis .syn-writing-lead__head {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+}
+
+.site-synthesis .syn-writing-lead__title {
+  margin: 0;
+  max-width: min(60vw, 42ch);
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  color: var(--syn-ink-strong);
+  transition: color 0.35s var(--ease-out-quart);
+}
+
+.site-synthesis .syn-writing-lead__link:hover .syn-writing-lead__title,
+.site-synthesis .syn-writing-lead__link:focus-visible .syn-writing-lead__title {
+  color: var(--syn-accent);
+}
+
+.site-synthesis .syn-writing-lead__date {
+  flex-shrink: 0;
+  font-size: 0.6875rem;
+  color: var(--syn-ink-subtle);
+}
+
+.site-synthesis .syn-writing-lead__summary {
+  margin: 1.25rem 0 0;
+  max-width: min(60vw, 48ch);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--syn-ink-secondary);
+}
+
+.site-synthesis .syn-writing-lead__go {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--syn-ink-faint);
+  transition:
+    color 0.3s var(--ease-out-quart),
+    transform 0.35s var(--ease-out-quart);
+}
+
+.site-synthesis .syn-writing-lead__link:hover .syn-writing-lead__go,
+.site-synthesis .syn-writing-lead__link:focus-visible .syn-writing-lead__go {
+  color: var(--syn-accent);
+  transform: translateX(3px);
+}
+
+.site-synthesis .syn-writing-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-synthesis .syn-writing-list__item {
+  border-bottom: 1px solid var(--syn-border);
+}
+
+.site-synthesis .syn-writing-list__link {
+  display: grid;
+  gap: 0.35rem 1.5rem;
+  padding: 1.125rem 0;
+  text-decoration: none;
+  color: inherit;
+  transition: padding 0.35s var(--ease-out-quart);
+}
+
+@media (min-width: 768px) {
+  .site-synthesis .syn-writing-list__link {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    align-items: baseline;
+    padding: 1.35rem 0;
+  }
+}
+
+.site-synthesis .syn-writing-list__link:focus-visible {
+  outline: none;
+}
+
+.site-synthesis .syn-writing-list__link:focus-visible .syn-writing-list__title {
+  color: var(--syn-accent);
+}
+
+.site-synthesis .syn-writing-list__title {
+  grid-column: 1;
+  grid-row: 1;
+  font-size: clamp(1.125rem, 2.2vw, 1.5rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  color: var(--syn-ink-strong);
+  transition: color 0.3s var(--ease-out-quart);
+}
+
+.site-synthesis .syn-writing-list__link:hover .syn-writing-list__title {
+  color: var(--syn-accent);
+}
+
+.site-synthesis .syn-writing-list__date {
+  grid-column: 1;
+  grid-row: 2;
+  font-size: 0.625rem;
+  color: var(--syn-ink-subtle);
+}
+
+@media (min-width: 768px) {
+  .site-synthesis .syn-writing-list__date {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
+  }
+}
+
+.site-synthesis .syn-writing-list__summary {
+  grid-column: 1 / -1;
+  margin: 0;
+  max-height: 0;
+  overflow: hidden;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--syn-ink-subtle);
+  opacity: 0;
+  transition:
+    max-height 0.45s var(--ease-out-quart),
+    opacity 0.35s var(--ease-out-quart),
+    margin 0.35s var(--ease-out-quart);
+}
+
+.site-synthesis .syn-writing-list__link:hover .syn-writing-list__summary,
+.site-synthesis .syn-writing-list__link:focus-visible .syn-writing-list__summary {
+  max-height: 4rem;
+  margin-top: 0.35rem;
+  opacity: 1;
+}
+
+@media (max-width: 767px) {
+  .site-synthesis .syn-writing-list__summary {
+    max-height: none;
+    margin-top: 0.25rem;
+    opacity: 1;
+  }
+}
+
+/* Connect: display mail + link rail (no cards) */
+
+.site-synthesis .syn-connect-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.site-synthesis .syn-connect-status {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin: 0;
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--syn-ink-subtle);
-  max-width: 52ch;
-  line-height: 1.6;
+  line-height: 1.5;
+}
+
+.site-synthesis .syn-connect-pulse {
+  flex-shrink: 0;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 999px;
+  background: var(--syn-accent);
+  box-shadow: 0 0 0 2px color-mix(in oklch, var(--syn-accent) 20%, transparent);
+  animation: syn-connect-pulse 2.4s var(--ease-out-quart) infinite;
+}
+
+@keyframes syn-connect-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(0.88);
+  }
+}
+
+.site-synthesis.motion-reduced .syn-connect-pulse {
+  animation: none;
+}
+
+.site-synthesis .syn-connect-mail {
+  display: block;
+  margin-top: 1.25rem;
+  max-width: 100%;
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  color: var(--syn-ink-strong);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color 0.35s var(--ease-out-quart);
+}
+
+.site-synthesis .syn-connect-mail:hover,
+.site-synthesis .syn-connect-mail:focus-visible {
+  color: var(--syn-accent);
+  outline: none;
+}
+
+.site-synthesis .syn-connect-prompt {
+  margin: 1rem 0 0;
+  max-width: 100%;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--syn-ink-secondary);
+}
+
+.site-synthesis .syn-connect-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.15rem;
+  margin-top: 2rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.site-synthesis .syn-connect-nav__item {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.site-synthesis .syn-connect-nav__sep {
+  margin: 0 0.5rem;
+  color: var(--syn-ink-dim);
+}
+
+.site-synthesis .syn-connect-nav__link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.2rem;
+  color: var(--syn-ink-muted);
+  text-decoration: none;
+  transition: color 0.25s var(--ease-out-quart);
+}
+
+.site-synthesis .syn-connect-nav__link:hover,
+.site-synthesis .syn-connect-nav__link:focus-visible {
+  color: var(--syn-accent);
+  outline: none;
+}
+
+.site-synthesis .syn-connect-nav__ext {
+  font-size: 0.75em;
+  opacity: 0.7;
+}
+
+.site-synthesis .syn-connect-copy {
+  display: block;
+  margin-top: 1.5rem;
+  padding: 0;
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--syn-ink-faint);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.2em;
+  transition:
+    color 0.25s var(--ease-out-quart),
+    text-decoration-color 0.25s var(--ease-out-quart);
+}
+
+.site-synthesis .syn-connect-copy:hover,
+.site-synthesis .syn-connect-copy:focus-visible {
+  color: var(--syn-accent);
+  text-decoration-color: currentColor;
+  outline: none;
 }
 
 .site-synthesis .syn-hero-wash {
@@ -3372,7 +3872,7 @@
   position: absolute;
   left: 50%;
   bottom: -20%;
-  width: min(120vw, 900px);
+  width: min(100%, 900px);
   height: min(60vw, 480px);
   transform: translateX(-50%);
   border-radius: 50%;
@@ -3414,6 +3914,9 @@
 .site-synthesis {
   background-color: var(--syn-canvas);
   color: var(--syn-ink);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-spring: linear(0, 0.009, 0.035 2.1%, 0.141, 0.281 6.7%, 0.723 12.9%, 0.938 16.7%, 1.017, 1.077, 1.121, 1.149 24.3%, 1.159, 1.163, 1.161, 1.154 29.9%, 1.129 32.8%, 1.051 39.6%, 1.017 43.1%, 0.991, 0.977 51%, 0.974 53.8%, 0.975 57.1%, 0.997 69.8%, 1.003 76.9%, 1);
 }
@@ -3454,6 +3957,8 @@
 
 .site-synthesis .syn-profile {
   width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
   border-bottom: 1px solid var(--syn-border);
 }
 
@@ -3645,6 +4150,8 @@
 
 .site-synthesis .syn-contrib-scroll {
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -3680,9 +4187,6 @@
     margin-bottom: 1rem;
   }
 
-  .site-synthesis .syn-contrib-scroll {
-    overflow-x: visible;
-  }
 }
 
 @media (min-width: 1024px) {

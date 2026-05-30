@@ -40,7 +40,7 @@ export function SynthesisProofSection({ locale }: SynthesisProofSectionProps) {
         aside={
           <TransitionLink
             href={`/${locale}/work`}
-            className="syn-work-see-all text-xs text-syn-ink-muted hover:text-syn-ink transition-colors"
+            className="syn-section-aside-link syn-work-see-all"
           >
             {tWork("seeAll")} →
           </TransitionLink>

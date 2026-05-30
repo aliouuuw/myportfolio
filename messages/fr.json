@@ -105,8 +105,7 @@
       "background": {
         "eyebrow": "À propos",
         "title": "Ma façon de travailler",
-        "lead": "Philosophie et ce qui me garde affûté. Le parcours détaillé est dans la timeline des projets ci-dessus.",
-        "p1": "Je travaille à l'intersection des workflows métier et du logiciel : CRM, modules ERP, apps client et la cohérence entre eux. Moins de théâtre framework, plus de systèmes exploitables au quotidien."
+        "lead": "Philosophie et ce qui me garde affûté. Le parcours détaillé est dans la timeline des projets ci-dessus."
       },
       "credentials": {
         "title": "Formation",
@@ -122,7 +121,12 @@
       },
       "chess": {
         "title": "Échecs",
-        "body": "Je joue aux échecs en ligne en compétition. Records : 2043 bullet, 1856 blitz. Le même réflexe qu'en ingénierie : reconnaissance de motifs sous la montre, arbitrages rapides et sang-froid quand un système de production est sous pression."
+        "bulletLabel": "Bullet",
+        "blitzLabel": "Blitz",
+        "bulletRating": "2043",
+        "blitzRating": "1856",
+        "ratingsAria": "Records en ligne",
+        "body": "Jeu compétitif en ligne. Même réflexe qu'en ingénierie : motifs sous la montre, arbitrages rapides, sang-froid quand la production est sous pression."
       },
       "github": {
         "title": "Activité GitHub",
@@ -405,14 +409,19 @@
         "title": "Notes",
         "lead": "Billets courts sur le logiciel au quotidien.",
         "allLink": "Tous les écrits →",
+        "indexLabel": "Autres notes",
         "readEssay": "Lire l'essai",
+        "readShort": "Lire",
         "empty": "Les essais arrivent bientôt."
       },
       "connect": {
         "eyebrow": "Contact",
         "title": "Me contacter",
         "lead": "Parlez-moi de votre projet.",
+        "prompt": "Une note courte sur le périmètre et le calendrier suffit pour démarrer.",
         "availability": "Deux créneaux clients ouverts T3 2026 · réponse sous 48 h les jours ouvrés",
+        "channelsAria": "Canaux de contact",
+        "channelCopy": "Copier",
         "ctaEmail": "Envoyer un message →",
         "ctaWhatsApp": "WhatsApp ↗",
         "ctaCopyEmail": "Copier l'email",

@@ -254,7 +254,7 @@ export function SynthesisWorkStories({
       <div className="syn-carousel-rail-wrap">
         <div
           ref={railRef}
-          className="syn-carousel-rail -mx-4 px-4 md:mx-0 md:px-0"
+          className="syn-carousel-rail"
           role="list"
           onPointerDown={dismissScrollHint}
         >
