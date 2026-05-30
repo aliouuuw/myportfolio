@@ -142,61 +142,79 @@
         "eyebrow": "Parcours pro",
         "title": "Où j'ai travaillé",
         "hint": "Les rôles avec une étude de cas renvoient vers la preuve ci-dessus. Les builds clients sont sur l'index projets.",
-        "contextHint": "Survolez un employeur pour mettre en avant l'étude de cas liée.",
+        "employersLead": "Huit rôles — formation, stages et ingénierie en contrat — de 2018 à aujourd'hui.",
+        "scrollHintLeft": "Glissez vers la gauche pour les rôles précédents",
+        "graphAria": "Parcours professionnel en graphique git horizontal, 2018 à 2026",
         "clientsLink": "Projets clients",
         "employersLabel": "Employeurs",
+        "currentBadge": "HEAD",
         "clientsLabel": "Projets clients",
         "clientsTagline": "Dakar · freelance & produit",
         "conceptBadge": "Concept",
-        "teams": {
-          "everest": {
-            "name": "Everest Finance",
-            "role": "Responsable technique solo",
-            "tag": "Fintech",
-            "period": "2024 → maintenant",
-            "proof": "Site public, CRM interne, application client Sama Naffa."
-          },
-          "ergobit": {
-            "name": "ERGOBIT",
-            "role": "Ingénieur logiciel",
-            "tag": "ERP / BI",
-            "period": "2024 → maintenant",
-            "proof": "Modules ERP et BI sur mesure pour clients sénégalais. CI/CD Azure DevOps : −80 % d'interventions manuelles."
-          },
-          "bankingbook": {
-            "name": "BankingBook Analytics",
-            "role": "Ingénieur logiciel",
-            "tag": "Open banking",
-            "period": "2024",
-            "proof": "APIs open banking pour ALM cloud-native. i18n zone UEMOA. Migration web et mail vers bbafintech.com."
-          },
-          "purolator": {
-            "name": "Purolator",
-            "role": "Ingénieur logiciel",
-            "tag": "Logistique",
-            "period": "2023",
-            "proof": "Migration CI/CD sur trois projets. Outils Power Automate / Azure DevOps. SDK tri colis réduisant la latence."
-          },
-          "orange": {
-            "name": "Orange",
-            "role": "Développeur mobile",
-            "tag": "Mobile",
-            "period": "2022",
-            "proof": "App fitness React Native, 1 000+ membres. Rapports d'impact pour décideurs."
+        "stints": {
+          "daust": {
+            "label": "Formation",
+            "name": "DAUST",
+            "role": "Tutorat Python & assistant d'enseignement",
+            "period": "2018",
+            "proof": "Mentorat POO pour étudiants et supports de cours rédigés.",
+            "caseLink": "Voir l'étude de cas"
           },
           "itech": {
+            "label": "Stage",
             "name": "ITech Solutions Afrique",
-            "role": "Développeur IoT",
-            "tag": "IoT",
+            "role": "Stage IoT — géolocalisation Arduino",
             "period": "2019",
-            "proof": "Géolocalisation Arduino sur Azure. Refonte planning : −20 % de coûts système."
+            "proof": "Système de géolocalisation sur Azure ; refonte planning : ~−20 % de coûts.",
+            "caseLink": "Voir l'étude de cas"
           },
-          "daust": {
-            "name": "DAUST",
-            "role": "Tuteur Python",
-            "tag": "Éducation",
-            "period": "2018 → 2019",
-            "proof": "Mentorat POO pour étudiants et supports de cours rédigés."
+          "orange": {
+            "label": "COOP",
+            "name": "Orange Digital Lab",
+            "role": "Développement mobile — stage COOP",
+            "period": "2022",
+            "proof": "App fitness React Native (1 000+ membres) et rapports d'impact pour décideurs.",
+            "caseLink": "Voir l'étude de cas"
+          },
+          "ergobit-fe": {
+            "label": "COOP",
+            "name": "ERGOBIT",
+            "role": "Développement frontend — stage COOP T1",
+            "period": "2023 · T1",
+            "proof": "Livrables frontend COOP sur surfaces ERP client.",
+            "caseLink": "Voir l'étude de cas"
+          },
+          "purolator": {
+            "label": "COOP · TP",
+            "name": "Purolator Digital Lab",
+            "role": "Ingénierie logicielle — COOP T3 + contractuel temps partiel T4",
+            "period": "2023 · T3–T4",
+            "proof": "Migration CI/CD sur trois projets, Power Automate / Azure DevOps, SDK tri colis.",
+            "caseLink": "Voir l'étude de cas"
+          },
+          "bankingbook": {
+            "label": "Contrat",
+            "name": "BankingBook Analytics",
+            "role": "Ingénieur logiciel — contrat temps plein",
+            "period": "2023 → T2 2024",
+            "proof": "APIs open banking, i18n UEMOA, migration web et mail vers bbafintech.com.",
+            "caseLink": "Voir l'étude de cas"
+          },
+          "ergobit-se": {
+            "label": "Contrat",
+            "name": "ERGOBIT",
+            "role": "Ingénierie logicielle — ERP & infra (temps plein puis temps partiel)",
+            "period": "T3 2024 → T1 2026",
+            "proof": "Modules ERP/BI, CI/CD Azure DevOps, kit de tests d'acceptation Odoo 18.",
+            "caseLink": "Voir l'étude de cas"
+          },
+          "everest": {
+            "label": "Contrat",
+            "name": "Everest Finance",
+            "role": "Contractuel — temps partiel (3 mois) puis temps plein",
+            "period": "T3 2025 → maintenant",
+            "proof": "Site public, CRM interne et app Sama Naffa vers un modèle d'exploitation unique.",
+            "caseLink": "Voir l'étude de cas"
           }
         },
         "clients": {

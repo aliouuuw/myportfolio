@@ -7,7 +7,6 @@ import { CaseStudyMedia } from "@/components/case-study-media";
 import { SYNTHESIS_WORK, type SynthesisWorkRow } from "@/lib/synthesis-data";
 
 type SynthesisWorkStoriesProps = {
-  highlightedWork: string[];
   activeWorkId: string | null;
   onOpenWork: (workId: string) => void;
 };
@@ -25,13 +24,11 @@ function StatusDot({ status }: { status: SynthesisWorkRow["status"] }) {
 function WorkTile({
   work,
   position,
-  highlighted,
   isOpen,
   onOpen,
 }: {
   work: SynthesisWorkRow;
   position: number;
-  highlighted: boolean;
   isOpen: boolean;
   onOpen: () => void;
 }) {
@@ -41,7 +38,7 @@ function WorkTile({
   return (
     <article
       role="listitem"
-      className={`syn-tile-wrap ${highlighted ? "syn-tile-wrap--highlight" : ""}`}
+      className="syn-tile-wrap"
     >
       <button
         type="button"
@@ -79,7 +76,6 @@ function WorkTile({
 }
 
 export function SynthesisWorkStories({
-  highlightedWork,
   activeWorkId,
   onOpenWork,
 }: SynthesisWorkStoriesProps) {
@@ -155,7 +151,6 @@ export function SynthesisWorkStories({
             key={work.id}
             work={work}
             position={i + 1}
-            highlighted={highlightedWork.includes(work.id)}
             isOpen={activeWorkId === work.id}
             onOpen={() => onOpenWork(work.id)}
           />

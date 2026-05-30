@@ -131,61 +131,79 @@
         "eyebrow": "Work history",
         "title": "Where I've worked",
         "hint": "Roles with a case study link below. Client and product builds live on the work index.",
-        "contextHint": "Hover an employer to highlight the related case study above.",
+        "employersLead": "Eight roles across education, internships, and contract engineering — 2018 to today.",
+        "scrollHintLeft": "Swipe left for earlier roles",
+        "graphAria": "Career timeline as a horizontal git branch graph, 2018 to 2026",
         "clientsLink": "Client projects",
         "employersLabel": "Employers",
+        "currentBadge": "HEAD",
         "clientsLabel": "Client projects",
         "clientsTagline": "Dakar · freelance & product",
         "conceptBadge": "Concept",
-        "teams": {
-          "everest": {
-            "name": "Everest Finance",
-            "role": "Solo technical owner",
-            "tag": "Fintech",
-            "period": "2024 → Now",
-            "proof": "Public site, internal CRM, Sama Naffa customer app."
-          },
-          "ergobit": {
-            "name": "ERGOBIT",
-            "role": "Software engineer",
-            "tag": "ERP / BI",
-            "period": "2024 → Now",
-            "proof": "Custom ERP and BI modules for Senegalese clients. CI/CD on Azure DevOps cut manual interventions by 80%."
-          },
-          "bankingbook": {
-            "name": "BankingBook Analytics",
-            "role": "Software engineer",
-            "tag": "Open banking",
-            "period": "2024",
-            "proof": "Open-banking APIs for a cloud-native ALM. UEMOA-region i18n. Web and mail server migration to bbafintech.com."
-          },
-          "purolator": {
-            "name": "Purolator",
-            "role": "Software engineer",
-            "tag": "Logistics",
-            "period": "2023",
-            "proof": "CI/CD migration across three projects. Internal Power Automate / Azure DevOps tooling. Package-sorter SDK that cut transfer latency."
-          },
-          "orange": {
-            "name": "Orange",
-            "role": "Mobile developer",
-            "tag": "Mobile",
-            "period": "2022",
-            "proof": "React Native fitness community app, 1,000+ members. Impact reports for decision-makers."
+        "stints": {
+          "daust": {
+            "label": "Education",
+            "name": "DAUST",
+            "role": "Python tutoring & teaching assistant",
+            "period": "2018",
+            "proof": "OOP mentoring for undergraduates and self-authored course material.",
+            "caseLink": "View case study"
           },
           "itech": {
+            "label": "Internship",
             "name": "ITech Solutions Afrique",
-            "role": "IoT developer",
-            "tag": "IoT",
+            "role": "IoT development internship — Arduino geolocation",
             "period": "2019",
-            "proof": "Arduino geolocation system on Azure. Planning rework cut system costs by 20%."
+            "proof": "Geolocation system on Azure; planning rework cut system costs by ~20%.",
+            "caseLink": "View case study"
           },
-          "daust": {
-            "name": "DAUST",
-            "role": "Python tutor",
-            "tag": "Education",
-            "period": "2018 → 2019",
-            "proof": "OOP mentoring for undergraduate students and self-authored course material."
+          "orange": {
+            "label": "COOP",
+            "name": "Orange Digital Lab",
+            "role": "Mobile development — COOP internship",
+            "period": "2022",
+            "proof": "React Native fitness community app (1,000+ members) and impact reports for decision-makers.",
+            "caseLink": "View case study"
+          },
+          "ergobit-fe": {
+            "label": "COOP",
+            "name": "ERGOBIT",
+            "role": "Frontend development — Q1 COOP internship",
+            "period": "2023 · Q1",
+            "proof": "Frontend COOP deliverables on client ERP-facing surfaces.",
+            "caseLink": "View case study"
+          },
+          "purolator": {
+            "label": "COOP · PT",
+            "name": "Purolator Digital Lab",
+            "role": "Software engineering — Q3 COOP + Q4 part-time contractor",
+            "period": "2023 · Q3–Q4",
+            "proof": "CI/CD migration across three projects, internal Power Automate / Azure DevOps tooling, package-sorter SDK.",
+            "caseLink": "View case study"
+          },
+          "bankingbook": {
+            "label": "Contract",
+            "name": "BankingBook Analytics",
+            "role": "Software engineer — full-time contract",
+            "period": "2023 → Q2 2024",
+            "proof": "Open-banking APIs for cloud-native ALM, UEMOA i18n, web and mail migration to bbafintech.com.",
+            "caseLink": "View case study"
+          },
+          "ergobit-se": {
+            "label": "Contract",
+            "name": "ERGOBIT",
+            "role": "Software engineering — ERP development & infra (full-time, then part-time contract)",
+            "period": "Q3 2024 → Q1 2026",
+            "proof": "Custom ERP/BI modules, Azure DevOps CI/CD, Odoo 18 acceptance-testing kit for migration teams.",
+            "caseLink": "View case study"
+          },
+          "everest": {
+            "label": "Contract",
+            "name": "Everest Finance",
+            "role": "Contractor — part-time (3 mo) then full-time",
+            "period": "Q3 2025 → Now",
+            "proof": "Public site, internal CRM, and Sama Naffa customer app toward one operating model.",
+            "caseLink": "View case study"
           }
         },
         "clients": {

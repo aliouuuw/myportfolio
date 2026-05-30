@@ -3,14 +3,9 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
-import { ScrambleText } from "@/components/scramble-text";
 import { SynthesisRevealSection } from "@/components/synthesis-reveal-section";
-import {
-  SYNTHESIS_TEAMS,
-  SYNTHESIS_WORK,
-  synthesisWorkHref,
-  type SynthesisTeam,
-} from "@/lib/synthesis-data";
+import { CAREER_STINTS, type CareerStint } from "@/lib/career-timeline";
+import { SYNTHESIS_WORK, synthesisWorkHref } from "@/lib/synthesis-data";
 
 type SynthesisWorkedWithProps = {
   locale: string;
@@ -30,23 +25,23 @@ function primaryCaseHref(
 
 function TeamRow({
   locale,
-  team,
+  stint,
   onHover,
   onLeave,
 }: {
   locale: string;
-  team: SynthesisTeam;
+  stint: CareerStint;
   onHover: () => void;
   onLeave: () => void;
 }) {
-  const t = useTranslations(`HomePage.synthesis.workedWith.teams.${team.key}`);
-  const caseHref = primaryCaseHref(locale, team.linkedWork);
+  const t = useTranslations(`HomePage.synthesis.workedWith.stints.${stint.key}`);
+  const caseHref = primaryCaseHref(locale, stint.linkedWork);
 
   const inner = (
     <>
       <div className="flex min-w-0 flex-1 items-baseline gap-3">
         <p className="font-medium text-syn-ink-strong truncate">{t("name")}</p>
-        {team.current ? (
+        {stint.current ? (
           <span
             className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400 pulse-dot"
             aria-hidden
@@ -56,8 +51,8 @@ function TeamRow({
       <p className="mono text-[10px] text-syn-ink-subtle shrink-0 hidden sm:block">
         {t("period")}
       </p>
-      <span className="mono text-[10px] uppercase tracking-widest text-syn-ink-faint shrink-0">
-        <ScrambleText text={t("tag")} trigger="hover" />
+      <span className="mono text-[10px] text-syn-ink-faint shrink-0 hidden md:inline max-w-[14rem] truncate">
+        {t("role")}
       </span>
       {caseHref ? (
         <span className="text-syn-ink-faint shrink-0" aria-hidden>
@@ -122,12 +117,12 @@ export function SynthesisWorkedWith({
       </div>
 
       <ul className="mt-6 flex flex-col gap-2">
-        {SYNTHESIS_TEAMS.map((team) => (
-          <li key={team.key}>
+        {[...CAREER_STINTS].reverse().map((stint) => (
+          <li key={stint.key}>
             <TeamRow
               locale={locale}
-              team={team}
-              onHover={() => onHighlightChange(team.linkedWork)}
+              stint={stint}
+              onHover={() => onHighlightChange(stint.linkedWork)}
               onLeave={() => onHighlightChange([])}
             />
           </li>

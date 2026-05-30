@@ -56,7 +56,6 @@ function useAmbientHour() {
 export function HomeSynthesisPage({ locale, writing }: HomeSynthesisPageProps) {
   const tSkip = useTranslations("HomePage.synthesis.skipNav");
   const [heroReady, setHeroReady] = useState(false);
-  const [highlightedWork, setHighlightedWork] = useState<string[]>([]);
   const reducedMotion = usePrefersReducedMotion();
   const ambientHour = useAmbientHour();
   const scrollProgress = useScrollProgress();
@@ -109,11 +108,7 @@ export function HomeSynthesisPage({ locale, writing }: HomeSynthesisPageProps) {
       </section>
 
       <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 syn-page-flow pt-12 md:pt-16 pb-20">
-        <SynthesisProofSection
-          locale={locale}
-          highlightedWork={highlightedWork}
-          onHighlightChange={setHighlightedWork}
-        />
+        <SynthesisProofSection locale={locale} />
 
         <SynthesisAboutStrip />
 

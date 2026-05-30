@@ -3,6 +3,7 @@
  * User-facing copy for employers/clients/work rows moves to messages in later phases.
  */
 
+import { CAREER_STINTS } from "@/lib/career-timeline";
 import { FEATURED_WORK_SLUGS, type FeaturedWorkSlug } from "@/lib/work-ledger-types";
 
 export const SYNTHESIS_EMAIL = "wadealiou00@gmail.com";
@@ -79,6 +80,7 @@ export const SYNTHESIS_WORK: SynthesisWorkRow[] = [
 export const SYNTHESIS_LINKABLE_SLUGS: readonly FeaturedWorkSlug[] =
   FEATURED_WORK_SLUGS;
 
+/** @deprecated Mock-only shape; production uses {@link CAREER_STINTS} + i18n stints. */
 export type SynthesisTeam = {
   key: string;
   name: string;
@@ -90,80 +92,84 @@ export type SynthesisTeam = {
   linkedWork: string[];
 };
 
-export const SYNTHESIS_TEAMS: SynthesisTeam[] = [
-  {
-    key: "everest",
-    name: "Everest Finance",
-    role: "Solo technical owner",
-    tag: "Fintech",
-    period: "2024 → Now",
-    proof:
-      "Public site, internal CRM, Sama Naffa customer app.",
-    current: true,
-    linkedWork: ["01"],
+const MOCK_TEAM_LABELS: Record<
+  string,
+  Pick<SynthesisTeam, "name" | "role" | "tag" | "period" | "proof">
+> = {
+  daust: {
+    name: "DAUST",
+    role: "Python tutoring",
+    tag: "Education",
+    period: "2018",
+    proof: "Teaching assistant.",
   },
-  {
-    key: "ergobit",
+  itech: {
+    name: "ITech Solutions Afrique",
+    role: "IoT internship",
+    tag: "IoT",
+    period: "2019",
+    proof: "Arduino geolocation.",
+  },
+  orange: {
+    name: "Orange Digital Lab",
+    role: "Mobile COOP",
+    tag: "Mobile",
+    period: "2022",
+    proof: "React Native app.",
+  },
+  "ergobit-fe": {
     name: "ERGOBIT",
-    role: "Software engineer",
-    tag: "ERP / BI",
-    period: "2024 → Now",
-    proof:
-      "Custom ERP and BI modules for Senegalese clients. CI/CD on Azure DevOps cut manual interventions by 80%.",
-    current: true,
-    linkedWork: ["02", "03"],
+    role: "Frontend COOP",
+    tag: "ERP",
+    period: "2023 Q1",
+    proof: "Frontend internship.",
   },
-  {
-    key: "bankingbook",
+  purolator: {
+    name: "Purolator Digital Lab",
+    role: "Software engineering",
+    tag: "Logistics",
+    period: "2023 Q3–Q4",
+    proof: "COOP + contractor.",
+  },
+  bankingbook: {
     name: "BankingBook Analytics",
     role: "Software engineer",
     tag: "Open banking",
-    period: "2024",
-    proof:
-      "Open-banking APIs for a cloud-native ALM. UEMOA-region i18n. Web and mail server migration to bbafintech.com.",
-    linkedWork: [],
+    period: "2023–2024",
+    proof: "Full-time contract.",
   },
-  {
-    key: "purolator",
-    name: "Purolator",
-    role: "Software engineer",
-    tag: "Logistics",
-    period: "2023",
-    proof:
-      "CI/CD migration across three projects. Internal Power Automate / Azure DevOps tooling. Package-sorter SDK that cut transfer latency.",
-    linkedWork: [],
+  "ergobit-se": {
+    name: "ERGOBIT",
+    role: "Software engineering",
+    tag: "ERP / Infra",
+    period: "2024–2026",
+    proof: "ERP development.",
   },
-  {
-    key: "orange",
-    name: "Orange",
-    role: "Mobile developer",
-    tag: "Mobile",
-    period: "2022",
-    proof:
-      "React Native fitness community app, 1,000+ members. Impact reports for decision-makers.",
-    linkedWork: [],
+  everest: {
+    name: "Everest Finance",
+    role: "Contractor",
+    tag: "Fintech",
+    period: "2025 → Now",
+    proof: "Fintech product owner.",
   },
-  {
-    key: "itech",
-    name: "ITech Solutions Afrique",
-    role: "IoT developer",
-    tag: "IoT",
-    period: "2019",
-    proof:
-      "Arduino geolocation system on Azure. Planning rework cut system costs by 20%.",
-    linkedWork: [],
-  },
-  {
-    key: "daust",
-    name: "DAUST",
-    role: "Python tutor",
-    tag: "Education",
-    period: "2018 → 2019",
-    proof:
-      "OOP mentoring for undergraduate students and self-authored course material.",
-    linkedWork: [],
-  },
-];
+};
+
+/** Mock synthesis page employer list (newest first). */
+export const SYNTHESIS_TEAMS: SynthesisTeam[] = [...CAREER_STINTS]
+  .reverse()
+  .map((stint) => {
+    const labels = MOCK_TEAM_LABELS[stint.key];
+    return {
+      key: stint.key,
+      name: labels?.name ?? stint.key,
+      role: labels?.role ?? "",
+      tag: labels?.tag ?? "",
+      period: labels?.period ?? "",
+      proof: labels?.proof ?? "",
+      current: stint.current,
+      linkedWork: stint.linkedWork,
+    };
+  });
 
 export type SynthesisFreelanceProject = {
   key: string;
