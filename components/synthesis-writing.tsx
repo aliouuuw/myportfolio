@@ -31,14 +31,14 @@ export function SynthesisWriting({ locale, entries }: SynthesisWritingProps) {
         eyebrow={t("eyebrow")}
         title={t("title")}
         lead={t("lead")}
-        aside={
+        aside={entries.length > 1 ? (
           <TransitionLink
             href={`/${locale}/writing`}
             className="syn-section-aside-link"
           >
             {t("allLink")}
           </TransitionLink>
-        }
+        ) : null}
       />
 
       {entries.length === 0 ? (
@@ -56,10 +56,20 @@ export function SynthesisWriting({ locale, entries }: SynthesisWritingProps) {
                 style={{ viewTransitionName: `writing-${featured.slug}` }}
               >
                 <div className="syn-writing-lead__head">
-                  <h3 className="syn-writing-lead__title">{featured.title}</h3>
-                  <time className="syn-writing-lead__date mono">{featured.dateLabel}</time>
+                  <div>
+                    <p className="syn-writing-lead__marker mono">{t("currentLabel")}</p>
+                    <h3 className="syn-writing-lead__title">{featured.title}</h3>
+                  </div>
+                  <div className="syn-writing-lead__meta mono" aria-label={t("metaAria")}>
+                    <time className="syn-writing-lead__date">{featured.dateLabel}</time>
+                    <span>{t("categoryLabel")}</span>
+                  </div>
                 </div>
                 <p className="syn-writing-lead__summary">{featured.summary}</p>
+                <p className="syn-writing-lead__why">
+                  <span className="mono">{t("whyLabel")}</span>
+                  {t("whyText")}
+                </p>
                 <span className="syn-writing-lead__go mono">{t("readEssay")}</span>
               </TransitionLink>
             </article>

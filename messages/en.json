@@ -94,12 +94,31 @@
       "background": {
         "eyebrow": "About",
         "title": "How I work",
-        "lead": "Philosophy and how I stay sharp. Career timeline lives with selected work above."
+        "lead": "I build software the way it actually gets used: in operations, under pressure, by people who need it to work."
+      },
+      "operatingManual": {
+        "kicker": "Principles",
+        "principlesAria": "Working principles",
+        "registryAria": "Background",
+        "principles": {
+          "workflow": {
+            "label": "Workflow first",
+            "body": "I learn the process before I pick the stack. The people, constraints, and handoffs already in place decide the architecture."
+          },
+          "slices": {
+            "label": "Ship small, ship real",
+            "body": "A working increment in production beats a big plan on a whiteboard. Founders need signal, not slides."
+          },
+          "handoff": {
+            "label": "Leave it runnable",
+            "body": "Docs, admin tools, logs, edge cases. The boring stuff matters because software outlives the launch."
+          }
+        }
       },
       "credentials": {
-        "title": "Credentials",
+        "title": "Background",
         "experienceLabel": "Experience",
-        "experience": "Six years building production software across fintech, ERP, logistics, mobile, IoT, and education.",
+        "experience": "Six years shipping production software across fintech, ERP, logistics, mobile, IoT, and education.",
         "educationLabel": "Education",
         "educationPrimary": "B.Sc. Software Engineering, University of Ottawa",
         "educationSecondary": "B.Sc. Computer Science, DAUST",
@@ -115,7 +134,7 @@
         "bulletRating": "2043",
         "blitzRating": "1856",
         "ratingsAria": "Peak online ratings",
-        "body": "Competitive play online. Same muscle as engineering: pattern recognition under a clock, tradeoffs weighed fast, composure when production is under pressure."
+        "body": "I play competitively online. Same skills as shipping under deadline: read the board fast, pick a move, stay calm."
       },
       "github": {
         "title": "GitHub activity",
@@ -395,10 +414,15 @@
       },
       "writing": {
         "eyebrow": "Writing",
-        "title": "Notes",
-        "lead": "Short posts on building and running software.",
+        "title": "Field notes",
+        "lead": "Essays on product systems, operating constraints, and the engineering decisions behind durable software.",
         "allLink": "All writing →",
         "indexLabel": "More notes",
+        "currentLabel": "Current note",
+        "categoryLabel": "Systems",
+        "metaAria": "Essay metadata",
+        "whyLabel": "Why it matters",
+        "whyText": "This is where I make the tradeoffs explicit before they become architecture.",
         "readEssay": "Read essay",
         "readShort": "Read",
         "empty": "Essays coming soon."
@@ -406,9 +430,17 @@
       "connect": {
         "eyebrow": "Contact",
         "title": "Get in touch",
-        "lead": "Tell me about your project.",
-        "prompt": "A short note on scope and timing is enough to start.",
+        "lead": "Send the context, constraint, and deadline. I will tell you quickly if I am the right fit.",
+        "prompt": "A short note is enough to start. The sharper the context, the faster I can give you a useful answer.",
         "availability": "Two client slots open Q3 2026 · replies within 48h on business days",
+        "briefTitle": "Helpful brief",
+        "briefAria": "Helpful project brief details",
+        "brief": {
+          "scope": "Scope or workflow to improve",
+          "timeline": "Target date or urgency",
+          "system": "Current tools and constraints",
+          "decision": "Who owns the decision"
+        },
         "channelsAria": "Contact channels",
         "channelCopy": "Copy",
         "ctaEmail": "Send a message →",

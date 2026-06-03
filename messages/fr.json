@@ -105,10 +105,29 @@
       "background": {
         "eyebrow": "À propos",
         "title": "Ma façon de travailler",
-        "lead": "Philosophie et ce qui me garde affûté. Le parcours détaillé est dans la timeline des projets ci-dessus."
+        "lead": "Je construis du logiciel comme il est vraiment utilisé : en opérations, sous pression, par des gens qui en ont besoin."
+      },
+      "operatingManual": {
+        "kicker": "Principes",
+        "principlesAria": "Principes de travail",
+        "registryAria": "Parcours",
+        "principles": {
+          "workflow": {
+            "label": "Le flux d'abord",
+            "body": "Je comprends le processus avant de choisir la stack. Les gens, les contraintes et les relais déjà en place décident de l'architecture."
+          },
+          "slices": {
+            "label": "Livrer petit, livrer vrai",
+            "body": "Un incrément en production vaut mieux qu'un grand plan sur papier. Les fondateurs ont besoin de signal, pas de slides."
+          },
+          "handoff": {
+            "label": "Laisser ça utilisable",
+            "body": "Docs, outils admin, logs, cas limites. Le truc ennuyeux compte parce que le logiciel survit au lancement."
+          }
+        }
       },
       "credentials": {
-        "title": "Formation",
+        "title": "Parcours",
         "experienceLabel": "Expérience",
         "experience": "Six ans de logiciels en production : fintech, ERP, logistique, mobile, IoT et éducation.",
         "educationLabel": "Études",
@@ -126,7 +145,7 @@
         "bulletRating": "2043",
         "blitzRating": "1856",
         "ratingsAria": "Records en ligne",
-        "body": "Jeu compétitif en ligne. Même réflexe qu'en ingénierie : motifs sous la montre, arbitrages rapides, sang-froid quand la production est sous pression."
+        "body": "Je joue en compétition en ligne. Même compétences que livrer sous deadline : lire vite, décider, rester calme."
       },
       "github": {
         "title": "Activité GitHub",
@@ -406,10 +425,15 @@
       },
       "writing": {
         "eyebrow": "Écrits",
-        "title": "Notes",
-        "lead": "Billets courts sur le logiciel au quotidien.",
+        "title": "Notes de terrain",
+        "lead": "Essais sur les systèmes produit, les contraintes opérationnelles et les décisions d'ingénierie derrière un logiciel durable.",
         "allLink": "Tous les écrits →",
         "indexLabel": "Autres notes",
+        "currentLabel": "Note actuelle",
+        "categoryLabel": "Systèmes",
+        "metaAria": "Métadonnées de l'essai",
+        "whyLabel": "Pourquoi c'est utile",
+        "whyText": "C'est ici que je rends les arbitrages explicites avant qu'ils deviennent de l'architecture.",
         "readEssay": "Lire l'essai",
         "readShort": "Lire",
         "empty": "Les essais arrivent bientôt."
@@ -417,9 +441,17 @@
       "connect": {
         "eyebrow": "Contact",
         "title": "Me contacter",
-        "lead": "Parlez-moi de votre projet.",
-        "prompt": "Une note courte sur le périmètre et le calendrier suffit pour démarrer.",
+        "lead": "Envoyez le contexte, la contrainte et l'échéance. Je vous dirai vite si je suis le bon profil.",
+        "prompt": "Une note courte suffit pour démarrer. Plus le contexte est précis, plus ma réponse sera utile.",
         "availability": "Deux créneaux clients ouverts T3 2026 · réponse sous 48 h les jours ouvrés",
+        "briefTitle": "Brief utile",
+        "briefAria": "Détails utiles pour un brief projet",
+        "brief": {
+          "scope": "Périmètre ou flux à améliorer",
+          "timeline": "Date cible ou urgence",
+          "system": "Outils et contraintes actuels",
+          "decision": "Responsable de la décision"
+        },
         "channelsAria": "Canaux de contact",
         "channelCopy": "Copier",
         "ctaEmail": "Envoyer un message →",

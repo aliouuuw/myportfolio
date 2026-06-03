@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { useCommandPalette } from "@/components/command-palette-provider";
 import { SynthesisRevealSection } from "@/components/synthesis-reveal-section";
 import { SynthesisSectionHeader } from "@/components/synthesis-section-header";
+import { TransitionLink } from "@/components/transition-link";
 import { SYNTHESIS_EMAIL, SYNTHESIS_GITHUB_USER } from "@/lib/synthesis-data";
 
 type ConnectLink = {
@@ -16,7 +17,11 @@ type ConnectLink = {
   external?: boolean;
 };
 
-export function SynthesisConnect() {
+type SynthesisConnectProps = {
+  locale: string;
+};
+
+export function SynthesisConnect({ locale }: SynthesisConnectProps) {
   const t = useTranslations("HomePage.synthesis.connect");
   const { showCopyToast } = useCommandPalette();
 
@@ -50,6 +55,13 @@ export function SynthesisConnect() {
     },
   ];
 
+  const briefItems = [
+    t("brief.scope"),
+    t("brief.timeline"),
+    t("brief.system"),
+    t("brief.decision"),
+  ];
+
   return (
     <SynthesisRevealSection id="connect" className="scroll-mt-28 pb-12 syn-connect-section">
       <div className="syn-section-atmo syn-section-atmo--connect" aria-hidden />
@@ -62,53 +74,70 @@ export function SynthesisConnect() {
 
       <div className="syn-section-body syn-stagger-children">
         <div
-          className="syn-connect-stage syn-section-prose"
+          className="syn-connect-stage"
           style={{ "--stagger": 0 } as CSSProperties}
         >
-          <p className="syn-connect-status mono">
-            <span className="syn-connect-pulse" aria-hidden />
-            {t("availability")}
-          </p>
+          <div className="syn-connect-primary">
+            <p className="syn-connect-status mono">
+              <span className="syn-connect-pulse" aria-hidden />
+              {t("availability")}
+            </p>
 
-          <a href={`mailto:${SYNTHESIS_EMAIL}`} className="syn-connect-mail">
-            {SYNTHESIS_EMAIL}
-          </a>
+            <p className="syn-connect-prompt">{t("prompt")}</p>
 
-          <p className="syn-connect-prompt">{t("prompt")}</p>
+            <div className="syn-connect-actions">
+              <TransitionLink href={`/${locale}/contact`} className="syn-connect-cta">
+                {t("ctaEmail")}
+              </TransitionLink>
+              <a href={`mailto:${SYNTHESIS_EMAIL}`} className="syn-connect-mail">
+                {SYNTHESIS_EMAIL}
+              </a>
+              <button
+                type="button"
+                className="syn-connect-copy mono"
+                onClick={() => void copyEmail()}
+              >
+                {t("ctaCopyEmail")}
+              </button>
+            </div>
+          </div>
 
-          <nav className="syn-connect-nav mono" aria-label={t("channelsAria")}>
-            {links.map((link, i) => (
-              <span key={link.id} className="syn-connect-nav__item">
-                {i > 0 ? (
-                  <span className="syn-connect-nav__sep" aria-hidden>
-                    /
-                  </span>
-                ) : null}
-                <a
-                  href={link.href}
-                  className="syn-connect-nav__link"
-                  {...(link.external
-                    ? { target: "_blank", rel: "noopener noreferrer" }
-                    : {})}
-                >
-                  {link.label}
-                  {link.external ? (
-                    <span className="syn-connect-nav__ext" aria-hidden>
-                      ↗
+          <aside className="syn-connect-brief" aria-label={t("briefAria")}>
+            <p className="syn-connect-brief__title mono">{t("briefTitle")}</p>
+            <ul className="syn-connect-brief__list">
+              {briefItems.map((item) => (
+                <li key={item} className="syn-connect-brief__item">
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <nav className="syn-connect-nav mono" aria-label={t("channelsAria")}>
+              {links.map((link, i) => (
+                <span key={link.id} className="syn-connect-nav__item">
+                  {i > 0 ? (
+                    <span className="syn-connect-nav__sep" aria-hidden>
+                      /
                     </span>
                   ) : null}
-                </a>
-              </span>
-            ))}
-          </nav>
-
-          <button
-            type="button"
-            className="syn-connect-copy mono"
-            onClick={() => void copyEmail()}
-          >
-            {t("ctaCopyEmail")}
-          </button>
+                  <a
+                    href={link.href}
+                    className="syn-connect-nav__link"
+                    {...(link.external
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                  >
+                    {link.label}
+                    {link.external ? (
+                      <span className="syn-connect-nav__ext" aria-hidden>
+                        ↗
+                      </span>
+                    ) : null}
+                  </a>
+                </span>
+              ))}
+            </nav>
+          </aside>
         </div>
       </div>
     </SynthesisRevealSection>

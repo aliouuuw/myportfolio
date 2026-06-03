@@ -114,7 +114,7 @@ export function HomeSynthesisPage({ locale, writing }: HomeSynthesisPageProps) {
 
         <SynthesisWriting locale={locale} entries={writing} />
 
-        <SynthesisConnect />
+        <SynthesisConnect locale={locale} />
       </div>
     </div>
   );
