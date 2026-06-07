@@ -19,6 +19,7 @@ const proofStage = document.getElementById('proofStage');
 const proofDomainDesc = document.getElementById('proofDomainDesc');
 const proofAnchor = document.getElementById('proofAnchor');
 const proofPeeks = document.getElementById('proofPeeks');
+const caseRow = document.getElementById('caseRow');
 const commsCore = document.getElementById('commsCore');
 const principlesList = document.getElementById('principlesList');
 const commsNote = document.getElementById('commsNote');
@@ -264,7 +265,7 @@ function renderAnchor(caseItem) {
       <div class="anchor-title-row">
         ${logoHtml}
         <div>
-          ${caseItem.label ? `<span class="anchor-label mono">${escapeHtml(caseItem.label)}</span>` : ''}
+          <span class="anchor-label mono">Selected proof${caseItem.label ? ` · ${escapeHtml(caseItem.label)}` : ''}</span>
           <h2 class="anchor-title">${escapeHtml(caseItem.title)}</h2>
         </div>
       </div>
@@ -339,12 +340,8 @@ function renderProofStage(animate = false) {
     positionCaseTabIndicator(false);
     hydrateLogos(proofAnchor);
 
-    const caseRow = proofPeeks.closest('.nav-row');
-    if (caseRow) {
-      caseRow.hidden = allCases.length <= 1;
-    } else {
-      proofPeeks.hidden = allCases.length <= 1;
-    }
+    proofPeeks.hidden = allCases.length <= 1;
+    if (caseRow) caseRow.hidden = allCases.length <= 1;
     document.title = `${anchor?.title ?? section.domain} · Aliou Wade · Operator Board`;
   };
 
@@ -525,7 +522,7 @@ function renderLedgerPreview() {
   hydrateLogos(ledgerClientsPreview);
 
   if (ledgerExpandBtn) {
-    ledgerExpandBtn.textContent = 'Full record';
+    ledgerExpandBtn.textContent = 'Expand';
     ledgerExpandBtn.setAttribute(
       'aria-label',
       hiddenCount > 0
