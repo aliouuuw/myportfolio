@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proof Graph — Pivot 5</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  .graph-wrap { margin-top: 40px; }
+  .proof-node {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: border-color .2s, box-shadow .2s;
+    position: relative;
+  }
+  .proof-node:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+  .proof-node--active { border-color: var(--accent); background: var(--accent-muted); }
+
+  .proof-node__label {
+    font-family: var(--font-mono); font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--ink-tertiary); margin-bottom: 6px;
+  }
+  .proof-node__title { font-size: 17px; font-weight: 600; }
+  .proof-node__desc { font-size: 13px; color: var(--ink-secondary); margin-top: 6px; }
+
+  .proof-connections {
+    display: none;
+    padding: 0 0 16px 24px;
+    border-left: 2px solid var(--border);
+    margin: 0 0 16px 16px;
+    animation: unfold .3s ease;
+  }
+  .proof-connections.visible { display: block; }
+  @keyframes unfold { from { opacity: 0; max-height: 0; } to { opacity: 1; } }
+
+  .proof-link {
+    padding: 10px 16px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+  .proof-link__project { font-weight: 500; color: var(--ink); }
+  .proof-link__role { color: var(--ink-secondary); }
+</style>
+</head>
+<body>
+
+<div class="pivot-page">
+  <header class="pivot-header">
+    <div class="pivot-header__label">Pivot 05 — Proof Graph</div>
+    <h1 class="pivot-header__title serif">Proof Graph</h1>
+    <p class="pivot-header__desc">
+      Not projects — proof types. Click a proof node to see which real experiences and systems support it.
+    </p>
+  </header>
+
+  <div class="graph-wrap" id="graph">
+    <div class="proof-node" data-proof="shipped">
+      <div class="proof-node__label">Proof Type</div>
+      <div class="proof-node__title">Shipped under client constraints</div>
+      <div class="proof-node__desc">Real deadlines, real budgets, real stakeholders. Not side projects.</div>
+    </div>
+    <div class="proof-connections" data-for="shipped">
+      <div class="proof-link"><span class="proof-link__project">Everest Finance</span> <span class="proof-link__role">— solo operator, 2025&rarr;now</span></div>
+      <div class="proof-link"><span class="proof-link__project">Africa GreenTec</span> <span class="proof-link__role">— Odoo module, ERGOBIT, 2024</span></div>
+      <div class="proof-link"><span class="proof-link__project">BankingBook Analytics</span> <span class="proof-link__role">— open-banking APIs, 2023&rarr;24</span></div>
+      <div class="proof-link"><span class="proof-link__project">Purolator Digital Lab</span> <span class="proof-link__role">— COOP + contract, 2023</span></div>
+    </div>
+
+    <div class="proof-node" data-proof="reduced">
+      <div class="proof-node__label">Proof Type</div>
+      <div class="proof-node__title">Reduced manual work measurably</div>
+      <div class="proof-node__desc">Systems that replaced repetitive human processes with automation.</div>
+    </div>
+    <div class="proof-connections" data-for="reduced">
+      <div class="proof-link"><span class="proof-link__project">Africa GreenTec</span> <span class="proof-link__role">— ~80% manual journal entry eliminated</span></div>
+      <div class="proof-link"><span class="proof-link__project">Odoo Testing Toolkit</span> <span class="proof-link__role">— ~80% reduction in validation time</span></div>
+      <div class="proof-link"><span class="proof-link__project">Everest CRM</span> <span class="proof-link__role">— structured onboarding replacing ad-hoc tracking</span></div>
+    </div>
+
+    <div class="proof-node" data-proof="testing">
+      <div class="proof-node__label">Proof Type</div>
+      <div class="proof-node__title">Built testing discipline into operations</div>
+      <div class="proof-node__desc">Not just wrote tests — changed how a team validates systems.</div>
+    </div>
+    <div class="proof-connections" data-for="testing">
+      <div class="proof-link"><span class="proof-link__project">Odoo 18 Testing Toolkit</span> <span class="proof-link__role">— 39 tests, CI on Azure DevOps</span></div>
+      <div class="proof-link"><span class="proof-link__project">Everest stack</span> <span class="proof-link__role">— type-checking as primary quality gate</span></div>
+    </div>
+
+    <div class="proof-node" data-proof="range">
+      <div class="proof-node__label">Proof Type</div>
+      <div class="proof-node__title">Worked across regulated + operational domains</div>
+      <div class="proof-node__desc">Fintech, ERP, logistics, health, education — not one vertical.</div>
+    </div>
+    <div class="proof-connections" data-for="range">
+      <div class="proof-link"><span class="proof-link__project">BankingBook</span> <span class="proof-link__role">— open banking / UEMOA regulation</span></div>
+      <div class="proof-link"><span class="proof-link__project">ERGOBIT / Everest</span> <span class="proof-link__role">— ERP + fintech operations</span></div>
+      <div class="proof-link"><span class="proof-link__project">Purolator</span> <span class="proof-link__role">— logistics / supply chain</span></div>
+      <div class="proof-link"><span class="proof-link__project">Prescriptos</span> <span class="proof-link__role">— health / pharmacy workflow</span></div>
+    </div>
+
+    <div class="proof-node" data-proof="judgment">
+      <div class="proof-node__label">Proof Type</div>
+      <div class="proof-node__title">Demonstrated judgment under uncertainty</div>
+      <div class="proof-node__desc">Knowing when to stop, when to simplify, when to ship instead of polish.</div>
+    </div>
+    <div class="proof-connections" data-for="judgment">
+      <div class="proof-link"><span class="proof-link__project">BocalBun</span> <span class="proof-link__role">— frozen deliberately, lessons applied to Everest</span></div>
+      <div class="proof-link"><span class="proof-link__project">Strategic positioning</span> <span class="proof-link__role">— stopped framework building, shipped operational systems</span></div>
+    </div>
+
+    <div class="proof-node" data-proof="ai">
+      <div class="proof-node__label">Proof Type</div>
+      <div class="proof-node__title">Uses AI-native workflows deliberately</div>
+      <div class="proof-node__desc">Not prompt engineering — architecture for sustained AI collaboration.</div>
+    </div>
+    <div class="proof-connections" data-for="ai">
+      <div class="proof-link"><span class="proof-link__project">Agent-ready repo</span> <span class="proof-link__role">— conventions, manifests, persistence</span></div>
+      <div class="proof-link"><span class="proof-link__project">Everest development</span> <span class="proof-link__role">— agent-ready structure, ADRs, automated gates</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="pivot-nav">
+  <button class="pivot-nav__toggle" onclick="toggleNav()">
+    <span class="mono">Pivots</span><span>&#9776;</span>
+  </button>
+  <div class="pivot-nav__menu" id="navMenu">
+    <a href="atlas.html">01 Atlas</a>
+    <a href="control-room.html">02 Control Room</a>
+    <a href="constraint-engine.html">03 Constraint Engine</a>
+    <a href="field-notes.html">04 Field Notes</a>
+    <a href="proof-graph.html" class="current">05 Proof Graph</a>
+    <a href="simulator.html">06 Simulator</a>
+    <a href="audit-log.html">07 Audit Log</a>
+    <a href="blueprint.html">08 Blueprint</a>
+    <a href="chrono-canvas.html">09 Chrono Canvas</a>
+  </div>
+</div>
+
+<script>
+function toggleNav() { document.getElementById('navMenu').classList.toggle('open'); }
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.pivot-nav')) document.getElementById('navMenu').classList.remove('open');
+});
+
+document.querySelectorAll('.proof-node').forEach(node => {
+  node.addEventListener('click', () => {
+    const k = node.dataset.proof;
+    const conn = document.querySelector(`.proof-connections[data-for="${k}"]`);
+    const isOpen = conn.classList.contains('visible');
+    document.querySelectorAll('.proof-connections').forEach(c => c.classList.remove('visible'));
+    document.querySelectorAll('.proof-node').forEach(n => n.classList.remove('proof-node--active'));
+    if (!isOpen) {
+      conn.classList.add('visible');
+      node.classList.add('proof-node--active');
+    }
+  });
+});
+</script>
+</body>
+</html>

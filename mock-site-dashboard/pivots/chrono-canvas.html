@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chrono-Metric Canvas — Pivot 9</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  .chrono-wrap { margin-top: 40px; }
+  .chrono-canvas {
+    position: relative; height: 320px;
+    background: #fff; border: 1px solid var(--border);
+    border-radius: var(--radius); margin-bottom: 32px; overflow: hidden;
+  }
+  .chrono-canvas svg { width: 100%; height: 100%; }
+  .chrono-canvas__area { fill: var(--accent-muted); opacity: .4; }
+  .chrono-canvas__line { fill: none; stroke: var(--accent); stroke-width: 2; opacity: .6; }
+  .chrono-canvas__node { cursor: pointer; transition: r .2s; }
+  .chrono-canvas__node:hover { r: 8; }
+  .chrono-canvas__label { font-family: var(--font-mono); font-size: 9px; fill: var(--ink-tertiary); }
+  .chrono-canvas__axis { font-family: var(--font-mono); font-size: 10px; fill: var(--ink-tertiary); }
+
+  .chrono-detail {
+    display: none; background: #fff; border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px;
+    animation: fade .3s ease;
+  }
+  .chrono-detail.visible { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; } }
+  .chrono-detail__year { font-family: var(--font-mono); font-size: 11px; color: var(--accent); margin-bottom: 6px; }
+  .chrono-detail__title { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+  .chrono-detail__body { font-size: 14px; color: var(--ink-secondary); line-height: 1.7; }
+  .chrono-detail__meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+</style>
+</head>
+<body>
+
+<div class="pivot-page">
+  <header class="pivot-header">
+    <div class="pivot-header__label">Pivot 09 — Chrono-Metric Canvas</div>
+    <h1 class="pivot-header__title serif">Chrono-Metric Canvas</h1>
+    <p class="pivot-header__desc">
+      A time-series graph of operational scale and complexity. Click a node to explore the system at that coordinate.
+    </p>
+  </header>
+
+  <div class="chrono-wrap">
+    <div class="chrono-canvas">
+      <svg viewBox="0 0 1000 300" preserveAspectRatio="none">
+        <line x1="0" y1="250" x2="1000" y2="250" stroke="var(--border)" stroke-width="1"/>
+        <line x1="0" y1="180" x2="1000" y2="180" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="4,4"/>
+        <line x1="0" y1="110" x2="1000" y2="110" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="4,4"/>
+        <line x1="0" y1="40" x2="1000" y2="40" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="4,4"/>
+        <polygon class="chrono-canvas__area" points="50,250 150,230 250,210 350,180 450,140 550,100 650,80 750,60 850,50 950,40 950,250 50,250"/>
+        <polyline class="chrono-canvas__line" points="50,250 150,230 250,210 350,180 450,140 550,100 650,80 750,60 850,50 950,40"/>
+        <circle class="chrono-canvas__node" cx="50" cy="250" r="5" fill="var(--ink-tertiary)" data-key="daust"/>
+        <circle class="chrono-canvas__node" cx="150" cy="230" r="5" fill="var(--ink-tertiary)" data-key="itech"/>
+        <circle class="chrono-canvas__node" cx="350" cy="180" r="5" fill="var(--ink-tertiary)" data-key="orange"/>
+        <circle class="chrono-canvas__node" cx="450" cy="140" r="5" fill="var(--accent)" data-key="bankingbook"/>
+        <circle class="chrono-canvas__node" cx="550" cy="100" r="5" fill="var(--accent)" data-key="ergobit"/>
+        <circle class="chrono-canvas__node" cx="850" cy="50" r="7" fill="var(--accent)" data-key="everest"/>
+        <text class="chrono-canvas__label" x="50" y="275">2018</text>
+        <text class="chrono-canvas__label" x="150" y="275">2019</text>
+        <text class="chrono-canvas__label" x="350" y="275">2022</text>
+        <text class="chrono-canvas__label" x="450" y="275">2023</text>
+        <text class="chrono-canvas__label" x="550" y="275">2024</text>
+        <text class="chrono-canvas__label" x="850" y="275">2025+</text>
+        <text class="chrono-canvas__axis" x="10" y="20">System Scale / Complexity</text>
+      </svg>
+    </div>
+
+    <div class="chrono-detail" id="detail">
+      <div class="chrono-detail__year" id="d-year"></div>
+      <div class="chrono-detail__title" id="d-title"></div>
+      <div class="chrono-detail__body" id="d-body"></div>
+      <div class="chrono-detail__meta" id="d-meta"></div>
+    </div>
+  </div>
+</div>
+
+<div class="pivot-nav">
+  <button class="pivot-nav__toggle" onclick="toggleNav()">
+    <span class="mono">Pivots</span><span>&#9776;</span>
+  </button>
+  <div class="pivot-nav__menu" id="navMenu">
+    <a href="atlas.html">01 Atlas</a>
+    <a href="control-room.html">02 Control Room</a>
+    <a href="constraint-engine.html">03 Constraint Engine</a>
+    <a href="field-notes.html">04 Field Notes</a>
+    <a href="proof-graph.html">05 Proof Graph</a>
+    <a href="simulator.html">06 Simulator</a>
+    <a href="audit-log.html">07 Audit Log</a>
+    <a href="blueprint.html">08 Blueprint</a>
+    <a href="chrono-canvas.html" class="current">09 Chrono Canvas</a>
+  </div>
+</div>
+
+<script>
+function toggleNav() { document.getElementById('navMenu').classList.toggle('open'); }
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.pivot-nav')) document.getElementById('navMenu').classList.remove('open');
+});
+
+const DATA = {
+  daust: { y:'2018', t:'DAUST — Python tutoring', b:'Teaching assistant. First formal technical instruction. Foundation in CS fundamentals.', m:['Python','Education'] },
+  itech: { y:'2019', t:'ITech — IoT internship', b:'Arduino geolocation. 20% IoT cost reduction. First hardware-adjacent software.', m:['IoT','Arduino'] },
+  orange: { y:'2022', t:'Orange — Mobile COOP', b:'React Native app, 1,000+ members. First mobile product at scale.', m:['React Native','Mobile'] },
+  bankingbook: { y:'2023', t:'BankingBook — Open banking', b:'UEMOA open-banking APIs. Multi-tenant secure pipelines. First fintech regulatory exposure.', m:['API','UEMOA','Fintech'] },
+  ergobit: { y:'2024', t:'ERGOBIT — ERP + BI + Testing', b:'Odoo modules, Africa GreenTec accounting (80% manual cut), testing toolkit (39 tests / 9 suites).', m:['Odoo','Python','Robot','Playwright'] },
+  everest: { y:'2025+', t:'Everest Finance — Solo operator', b:'Consolidating public site, CRM, Sama Naffa app into one TypeScript/PostgreSQL operational spine.', m:['Next.js','React Native','PostgreSQL','ACTIVE'] }
+};
+
+document.querySelectorAll('.chrono-canvas__node').forEach(node => {
+  node.addEventListener('click', () => {
+    const d = DATA[node.dataset.key]; if (!d) return;
+    document.getElementById('d-year').textContent = d.y;
+    document.getElementById('d-title').textContent = d.t;
+    document.getElementById('d-body').textContent = d.b;
+    document.getElementById('d-meta').innerHTML = d.m.map(t => `<span class="tag">${t}</span>`).join('');
+    document.getElementById('detail').classList.add('visible');
+  });
+});
+</script>
+</body>
+</html>

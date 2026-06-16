@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Field Notes — Pivot 4</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  .note { max-width: 720px; margin: 0 auto; padding: 48px 0; }
+  .note + .note { border-top: 1px solid var(--border); }
+  .note__num {
+    font-family: var(--font-mono); font-size: 11px; color: var(--ink-tertiary);
+    letter-spacing: 0.1em; margin-bottom: 12px;
+  }
+  .note__title {
+    font-family: var(--font-serif); font-size: 28px; font-weight: 400;
+    line-height: 1.2; margin-bottom: 16px;
+  }
+  .note__body {
+    font-size: 15px; color: var(--ink-secondary); line-height: 1.75;
+    margin-bottom: 20px;
+  }
+  .note__body p + p { margin-top: 14px; }
+  .note__evidence {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    padding: 16px; background: var(--canvas-alt); border-radius: var(--radius);
+  }
+  .note__evidence-item {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--ink-secondary);
+  }
+  .note__link {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 16px; font-size: 13px; color: var(--accent);
+  }
+</style>
+</head>
+<body>
+
+<div class="pivot-page">
+  <header class="pivot-header">
+    <div class="pivot-header__label">Pivot 04 — Field Notes from Production</div>
+    <h1 class="pivot-header__title serif">Field Notes</h1>
+    <p class="pivot-header__desc">
+      Editorial lessons from real operating environments. Not project cards — production observations with evidence.
+    </p>
+  </header>
+
+  <div class="note">
+    <div class="note__num">FIELD NOTE 01</div>
+    <h2 class="note__title">Fintech systems fragment when schemas drift</h2>
+    <div class="note__body">
+      <p>At Everest Finance, the public website, internal CRM, and customer app were three separate codebases with no shared data contract. A field added to the website's account form never propagated to the CRM. The CRM tracked onboarding status the website could not read.</p>
+      <p>The fix was not more integration. It was making the database schema the contract. Shared Zod schemas validate at the API boundary and generate types for all three frontends. A change to the account model is now structurally impossible to handle inconsistently.</p>
+    </div>
+    <div class="note__evidence">
+      <span class="note__evidence-item">3 surfaces &rarr; 1 schema</span>
+      <span class="note__evidence-item">Next.js + React Native + PostgreSQL</span>
+      <span class="note__evidence-item">Sama Naffa app in hardening</span>
+    </div>
+    <a class="note__link" href="#">&#10132; Read Everest case study</a>
+  </div>
+
+  <div class="note">
+    <div class="note__num">FIELD NOTE 02</div>
+    <h2 class="note__title">ERP migrations fail when validation is manual</h2>
+    <div class="note__body">
+      <p>Every Odoo migration I witnessed at ERGOBIT followed the same pattern: a functional consultant clicks through screens, eyeballs data, and declares the migration good. Then a computed field silently returns wrong numbers for two weeks.</p>
+      <p>The toolkit I built uses Robot Framework keywords that non-engineers can read, Playwright for the complex SPA interactions, and a smoke/full split so teams get a pass/fail signal in fifteen minutes instead of a full day of clicking.</p>
+    </div>
+    <div class="note__evidence">
+      <span class="note__evidence-item">39 tests &times; 9 suites</span>
+      <span class="note__evidence-item">Robot Framework + Playwright</span>
+      <span class="note__evidence-item">Azure DevOps CI</span>
+    </div>
+    <a class="note__link" href="#">&#10132; Read Odoo toolkit case study</a>
+  </div>
+
+  <div class="note">
+    <div class="note__num">FIELD NOTE 03</div>
+    <h2 class="note__title">Frameworks become traps when nobody is waiting</h2>
+    <div class="note__body">
+      <p>BocalBun had clean architecture, typed entities, RLS baked in, and audit trails. It also had zero users, zero revenue, and no distribution path. Every abstraction I added was debt I owed only to myself.</p>
+      <p>Stopping was the highest-leverage decision of that period. The same months redirected toward production Odoo work and later Everest generated more visible, trusted proof than any amount of framework polish could have.</p>
+    </div>
+    <div class="note__evidence">
+      <span class="note__evidence-item">Frozen, not abandoned</span>
+      <span class="note__evidence-item">Entity engine + RLS patterns live on in client work</span>
+      <span class="note__evidence-item">Bun / TypeScript / PostgreSQL</span>
+    </div>
+    <a class="note__link" href="#">&#10132; Read BocalBun retrospective</a>
+  </div>
+
+  <div class="note">
+    <div class="note__num">FIELD NOTE 04</div>
+    <h2 class="note__title">Local businesses need workflow software, not app theater</h2>
+    <div class="note__body">
+      <p>Schools in Dakar run on WhatsApp groups and Excel. Bakeries track inventory in notebooks. A fancy mobile app does not solve this — a structured operations layer that respects existing habits does.</p>
+      <p>EduPlan and Gerpain were built by observing actual workflows first: how a school registrar schedules exams, how a bakery manager counts flour. The software follows the workflow. It does not replace it with a new interface to learn.</p>
+    </div>
+    <div class="note__evidence">
+      <span class="note__evidence-item">EduPlan — K-12 operations</span>
+      <span class="note__evidence-item">Gerpain — multi-bakery platform</span>
+      <span class="note__evidence-item">6+ local clients across Dakar</span>
+    </div>
+  </div>
+
+  <div class="note">
+    <div class="note__num">FIELD NOTE 05</div>
+    <h2 class="note__title">AI agents need repo memory, not prompts alone</h2>
+    <div class="note__body">
+      <p>When I started using AI coding assistants, the same pattern emerged: excellent first-session output, architectural drift by the fifth. Agents forget constraints, rename variables inconsistently, and introduce patterns that contradict existing conventions.</p>
+      <p>The solution is not better prompts. It is persistent repo context: AGENTS.md conventions, architecture decision records, manifest files that describe the system structure. The agent reads the manifest on every session. The human retains architectural control.</p>
+    </div>
+    <div class="note__evidence">
+      <span class="note__evidence-item">AGENTS.md pattern</span>
+      <span class="note__evidence-item">Architecture persistence</span>
+      <span class="note__evidence-item">Manifest drift detection</span>
+    </div>
+  </div>
+</div>
+
+<div class="pivot-nav">
+  <button class="pivot-nav__toggle" onclick="toggleNav()">
+    <span class="mono">Pivots</span><span>&#9776;</span>
+  </button>
+  <div class="pivot-nav__menu" id="navMenu">
+    <a href="atlas.html">01 Atlas</a>
+    <a href="control-room.html">02 Control Room</a>
+    <a href="constraint-engine.html">03 Constraint Engine</a>
+    <a href="field-notes.html" class="current">04 Field Notes</a>
+    <a href="proof-graph.html">05 Proof Graph</a>
+    <a href="simulator.html">06 Simulator</a>
+    <a href="audit-log.html">07 Audit Log</a>
+    <a href="blueprint.html">08 Blueprint</a>
+    <a href="chrono-canvas.html">09 Chrono Canvas</a>
+  </div>
+</div>
+
+<script>
+function toggleNav() { document.getElementById('navMenu').classList.toggle('open'); }
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.pivot-nav')) document.getElementById('navMenu').classList.remove('open');
+});
+</script>
+</body>
+</html>

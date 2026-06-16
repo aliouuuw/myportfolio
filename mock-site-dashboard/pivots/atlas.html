@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operational Atlas — Pivot 1</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  .atlas-canvas { position: relative; min-height: 70vh; margin-top: 40px; }
+  .atlas-node {
+    position: absolute;
+    width: 160px;
+    padding: 18px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: box-shadow .2s, transform .2s;
+    text-align: center;
+  }
+  .atlas-node:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-3px);
+    border-color: var(--accent);
+  }
+  .atlas-node__icon {
+    font-size: 24px; margin-bottom: 8px; display: block;
+  }
+  .atlas-node__label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-tertiary);
+  }
+  .atlas-node__title {
+    font-size: 15px; font-weight: 600; margin-top: 4px;
+  }
+  .atlas-edge {
+    position: absolute;
+    height: 1px;
+    background: var(--border-strong);
+    transform-origin: left center;
+    pointer-events: none;
+  }
+  .atlas-detail {
+    display: none;
+    margin-top: 24px;
+    max-width: 640px;
+  }
+  .atlas-detail.visible { display: block; animation: fade .3s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; } }
+  .atlas-detail__head {
+    font-family: var(--font-mono); font-size: 11px; color: var(--accent); margin-bottom: 6px;
+  }
+  .atlas-detail__title { font-size: 22px; margin-bottom: 8px; }
+  .atlas-detail__proof { font-size: 14px; color: var(--ink-secondary); line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="pivot-page">
+  <header class="pivot-header">
+    <div class="pivot-header__label">Pivot 01 — Operational Atlas</div>
+    <h1 class="pivot-header__title serif">Operational Atlas</h1>
+    <p class="pivot-header__desc">
+      An interactive map of operational domains touched across a career. Each node is a territory; hover to reveal systems shipped.
+    </p>
+  </header>
+
+  <div class="atlas-canvas" id="atlas">
+    <!-- Edges drawn by JS -->
+    <div class="atlas-node" style="left:10%;top:8%;" data-domain="fintech">
+      <span class="atlas-node__icon">&#x1F4B0;</span>
+      <div class="atlas-node__label">Domain</div>
+      <div class="atlas-node__title">Fintech</div>
+    </div>
+    <div class="atlas-node" style="left:42%;top:2%;" data-domain="erp">
+      <span class="atlas-node__icon">&#x2699;&#xFE0F;</span>
+      <div class="atlas-node__label">Domain</div>
+      <div class="atlas-node__title">ERP / BI</div>
+    </div>
+    <div class="atlas-node" style="left:74%;top:10%;" data-domain="logistics">
+      <span class="atlas-node__icon">&#x1F69A;</span>
+      <div class="atlas-node__label">Domain</div>
+      <div class="atlas-node__title">Logistics</div>
+    </div>
+    <div class="atlas-node" style="left:6%;top:48%;" data-domain="education">
+      <span class="atlas-node__icon">&#x1F393;</span>
+      <div class="atlas-node__label">Domain</div>
+      <div class="atlas-node__title">Education</div>
+    </div>
+    <div class="atlas-node" style="left:38%;top:40%;" data-domain="iot">
+      <span class="atlas-node__icon">&#x1F4F6;</span>
+      <div class="atlas-node__label">Domain</div>
+      <div class="atlas-node__title">IoT / Mobile</div>
+    </div>
+    <div class="atlas-node" style="left:70%;top:44%;" data-domain="drone">
+      <span class="atlas-node__icon">&#x1F681;</span>
+      <div class="atlas-node__label">Domain</div>
+      <div class="atlas-node__title">Drone / AI</div>
+    </div>
+    <div class="atlas-node" style="left:20%;top:76%;" data-domain="health">
+      <span class="atlas-node__icon">&#x1F3E5;</span>
+      <div class="atlas-node__label">Domain</div>
+      <div class="atlas-node__title">Health</div>
+    </div>
+    <div class="atlas-node" style="left:56%;top:70%;" data-domain="retail">
+      <span class="atlas-node__icon">&#x1F6D2;</span>
+      <div class="atlas-node__label">Domain</div>
+      <div class="atlas-node__title">Retail / Commerce</div>
+    </div>
+  </div>
+
+  <div class="atlas-detail" id="detail">
+    <div class="atlas-detail__head" id="detail-head"></div>
+    <div class="atlas-detail__title serif" id="detail-title"></div>
+    <div class="atlas-detail__proof" id="detail-proof"></div>
+  </div>
+</div>
+
+<!-- Bottom-right nav -->
+<div class="pivot-nav">
+  <button class="pivot-nav__toggle" onclick="toggleNav()">
+    <span class="mono">Pivots</span>
+    <span>&#9776;</span>
+  </button>
+  <div class="pivot-nav__menu" id="navMenu">
+    <a href="atlas.html" class="current">01 Atlas</a>
+    <a href="control-room.html">02 Control Room</a>
+    <a href="constraint-engine.html">03 Constraint Engine</a>
+    <a href="field-notes.html">04 Field Notes</a>
+    <a href="proof-graph.html">05 Proof Graph</a>
+    <a href="simulator.html">06 Simulator</a>
+    <a href="audit-log.html">07 Audit Log</a>
+    <a href="blueprint.html">08 Blueprint</a>
+    <a href="chrono-canvas.html">09 Chrono Canvas</a>
+  </div>
+</div>
+
+<script>
+function toggleNav() { document.getElementById('navMenu').classList.toggle('open'); }
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.pivot-nav')) document.getElementById('navMenu').classList.remove('open');
+});
+
+const PROOF = {
+  fintech: {
+    head: '01 Everest Finance', title: 'Consolidated fintech operational spine',
+    proof: 'Solo operator consolidating a public website, internal CRM, and customer-facing app (Sama Naffa) into one coherent TypeScript/PostgreSQL stack. Digital account opening, transaction tracking, onboarding workflows — live and operational in Dakar.'
+  },
+  erp: {
+    head: '02 Odoo 18 Toolkit + Africa GreenTec', title: 'ERP discipline at scale',
+    proof: '39 tests across 9 suites for Odoo 18 migration validation. Robot Framework + Playwright on Azure DevOps. Africa GreenTec accounting module eliminated ~80% of manual journal work, processing 10,000+ records daily.'
+  },
+  logistics: {
+    head: '03 Purolator + Ndouckmane Transit', title: 'Logistics from Canada to Dakar',
+    proof: 'Software engineering COOP at Purolator Digital Lab (Canada). Freight forwarder operations dashboard for Ndouckmane Transit in Dakar — shipments, customs, dashboards.'
+  },
+  education: {
+    head: '04 EduPlan + Les Hirondelles', title: 'School operations software',
+    proof: 'K-12 school operations dashboard for course scheduling, grading, and reporting. Institutional CMS for Les Hirondelles built on Convex.'
+  },
+  iot: {
+    head: '05 Orange + ITech', title: 'Mobile and IoT foundations',
+    proof: 'React Native app for 1,000+ members at Orange Digital Lab. Arduino geolocation prototype at ITech Solutions Afrique — 20% IoT cost reduction.'
+  },
+  drone: {
+    head: '06 Asaaman', title: 'Drone AI surveillance systems',
+    proof: 'Semantic video search, surveillance workflows, and reporting for a Senegalese intelligent-drone startup.'
+  },
+  health: {
+    head: '07 Prescriptos', title: 'Pharmacy workflow tooling',
+    proof: 'Pharmacy and prescription workflow tooling built as a monorepo (web + API). Health sector operational software.'
+  },
+  retail: {
+    head: '08 Dakar Sport + Gerpain', title: 'Retail and bakery operations',
+    proof: 'E-commerce surfaces for Dakar Sport. Multi-bakery operations platform (Gerpain) with inventory, deliveries, employees, and RBAC.'
+  }
+};
+
+// Draw edges
+const atlas = document.getElementById('atlas');
+const nodes = [...atlas.querySelectorAll('.atlas-node')];
+const connections = [[0,1],[1,2],[0,4],[1,4],[2,4],[4,5],[0,3],[3,6],[4,7],[2,7],[6,7]];
+connections.forEach(([a,b]) => {
+  const r1 = nodes[a].getBoundingClientRect(), r2 = nodes[b].getBoundingClientRect();
+  const ar = atlas.getBoundingClientRect();
+  const x1 = r1.left + r1.width/2 - ar.left, y1 = r1.top + r1.height/2 - ar.top;
+  const x2 = r2.left + r2.width/2 - ar.left, y2 = r2.top + r2.height/2 - ar.top;
+  const len = Math.hypot(x2-x1, y2-y1), ang = Math.atan2(y2-y1, x2-x1)*180/Math.PI;
+  const el = document.createElement('div');
+  el.className = 'atlas-edge';
+  el.style.cssText = `left:${x1}px;top:${y1}px;width:${len}px;transform:rotate(${ang}deg);`;
+  atlas.appendChild(el);
+});
+
+// Detail reveal
+nodes.forEach(n => n.addEventListener('mouseenter', () => {
+  const d = PROOF[n.dataset.domain];
+  if (!d) return;
+  document.getElementById('detail-head').textContent = d.head;
+  document.getElementById('detail-title').textContent = d.title;
+  document.getElementById('detail-proof').textContent = d.proof;
+  document.getElementById('detail').classList.add('visible');
+}));
+</script>
+</body>
+</html>

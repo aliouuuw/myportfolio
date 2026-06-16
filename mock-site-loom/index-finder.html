@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aliou Wade · Product Systems Engineer</title>
+  
+  <!-- Premium Typography -->
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Background Texture -->
+  <div class="bg-noise" aria-hidden="true"></div>
+
+  <!-- Floating Nav Pill -->
+  <nav class="main-nav">
+    <div class="nav-shell">
+      <div class="nav-core">
+        <span class="nav-identity">Aliou Wade</span>
+        <span class="nav-role mono">Product Systems Engineer</span>
+        <a href="mailto:wadealiou00@gmail.com" class="nav-contact-btn">
+          <span class="btn-text">Contact</span>
+          <span class="btn-icon">↗</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- State 1: The Diagnostic View -->
+  <main class="diagnostic-view" id="diagnosticView">
+    <header class="diagnostic-header">
+      <div class="eyebrow mono">Operational Diagnostic</div>
+      <h1 class="massive-text">Where is your operational friction?</h1>
+      <p class="subtitle">Select a bottleneck to see the system built to resolve it.</p>
+    </header>
+
+    <!-- The Bento Grid of Problems -->
+    <div class="bottleneck-grid" id="bottleneckGrid">
+      
+      <!-- Card 1 -->
+      <button class="bottleneck-card" data-case="everest">
+        <div class="card-shell">
+          <div class="card-core">
+            <div class="card-tag mono">Fragmentation</div>
+            <h2 class="card-title">"Customer data and operations are scattered across spreadsheets and multiple tools."</h2>
+            <div class="card-action">
+              <span class="action-text">View the consolidation spine</span>
+              <span class="action-icon">→</span>
+            </div>
+          </div>
+        </div>
+      </button>
+
+      <!-- Card 2 -->
+      <button class="bottleneck-card" data-case="odoo">
+        <div class="card-shell">
+          <div class="card-core">
+            <div class="card-tag mono">QA Blindspots</div>
+            <h2 class="card-title">"Localization and ERP deployments break quietly in production."</h2>
+            <div class="card-action">
+              <span class="action-text">View the acceptance kit</span>
+              <span class="action-icon">→</span>
+            </div>
+          </div>
+        </div>
+      </button>
+
+      <!-- Card 3 -->
+      <button class="bottleneck-card" data-case="bocalbun">
+        <div class="card-shell">
+          <div class="card-core">
+            <div class="card-tag mono">Misalignment</div>
+            <h2 class="card-title">"Engineering is building abstractions instead of solving the business problem."</h2>
+            <div class="card-action">
+              <span class="action-text">Read the retrospective</span>
+              <span class="action-icon">→</span>
+            </div>
+          </div>
+        </div>
+      </button>
+
+    </div>
+
+    <!-- Supplementary Record (Bottom Row) -->
+    <div class="record-drawer">
+      <button class="drawer-trigger" id="recordTrigger">
+        <span class="mono">View complete shipped record (2021—Now)</span>
+      </button>
+    </div>
+  </main>
+
+  <!-- State 2: Case Blueprint Detail (Expanded) -->
+  <article class="blueprint-view" id="blueprintView" aria-hidden="true">
+    <button class="close-blueprint" id="closeBlueprint">
+      <div class="close-shell">
+        <div class="close-core">✕</div>
+      </div>
+    </button>
+
+    <div class="blueprint-content" id="blueprintContent">
+      <!-- Injected by JS -->
+    </div>
+  </article>
+
+  <!-- Record Overlay -->
+  <div class="record-overlay" id="recordOverlay" aria-hidden="true">
+    <div class="record-panel">
+      <div class="panel-header">
+        <h2 class="mono">Shipped Record</h2>
+        <button class="close-panel" id="closeRecord">✕</button>
+      </div>
+      <div class="panel-body" id="recordList">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

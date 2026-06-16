@@ -42,14 +42,7 @@
 
     <div class="board-body" id="boardBody">
       <section class="proof-zone" aria-label="Proof stage">
-        <div class="nav-row nav-row--domain">
-          <span class="nav-eyebrow mono"><span class="nav-eyebrow-key">Domain</span><span class="nav-eyebrow-q">what kind of problem?</span></span>
-          <div class="domain-tabs" id="domainTabs" role="tablist" aria-label="Proof domains"></div>
-        </div>
-        <div class="nav-row nav-row--case" id="caseRow">
-          <span class="nav-eyebrow mono"><span class="nav-eyebrow-key">Proof</span><span class="nav-eyebrow-q">which project shows it?</span></span>
-          <div class="case-tabs" id="proofPeeks" role="tablist" aria-label="Work records"></div>
-        </div>
+        <div class="domain-tabs" id="domainTabs" role="tablist" aria-label="Problem domains"></div>
 
         <div
           class="proof-stage"
@@ -58,7 +51,10 @@
           aria-live="polite"
           aria-labelledby="domainTabs"
         >
-          <p class="proof-domain-desc mono" id="proofDomainDesc"></p>
+          <div class="case-row" id="caseRow">
+            <span class="case-row-elbow" aria-hidden="true"></span>
+            <div class="case-tabs" id="proofPeeks" role="tablist" aria-label="Projects proving this domain"></div>
+          </div>
           <div class="proof-anchor-tray">
             <article class="proof-anchor" id="proofAnchor"></article>
           </div>
@@ -76,10 +72,7 @@
 
     <footer class="ledger-bar" id="ledgerBar">
       <div class="ledger-collapsed" id="ledgerCollapsed">
-        <p class="ledger-lead mono">
-          <span class="ledger-lead-key">Full record</span>
-          <span class="ledger-lead-note">everything — not just the proofs above</span>
-        </p>
+        <span class="ledger-bar-kicker mono" aria-hidden="true">Work record</span>
         <div class="ledger-group">
           <span class="ledger-group-label mono">Employers</span>
           <div class="ledger-employers" id="ledgerEmployersPreview"></div>
@@ -89,16 +82,13 @@
           <div class="ledger-clients" id="ledgerClientsPreview"></div>
         </div>
         <button type="button" class="ledger-expand-btn glass-btn mono" id="ledgerExpandBtn" aria-expanded="false" aria-controls="ledgerExpanded" aria-label="Expand full work record">
-          Expand
+          Full record
         </button>
       </div>
 
       <div class="ledger-expanded" id="ledgerExpanded" hidden>
         <div class="ledger-expanded-head">
-          <div class="ledger-expanded-heading">
-            <h2 class="ledger-title mono">Work record</h2>
-            <p class="ledger-subtitle">Complete ledger — every employer and client build. The anchor cases above are the curated proof; this is the full history.</p>
-          </div>
+          <h2 class="ledger-title mono">Work record</h2>
           <button type="button" class="ledger-close glass-btn mono" id="ledgerCloseBtn" aria-label="Close full record">Close</button>
         </div>
         <div class="ledger-expanded-grid">

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aliou Wade · Soft Flow</title>
+  <meta name="description" content="Operational software portfolio. Soft Structuralism aesthetics, horizontal flow IA, Stripe-informed tokens.">
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@300,400,500,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="flow-soft.css">
+</head>
+<body class="flow-soft">
+  <a href="#flowStage" class="skip-link">Skip to content</a>
+  <a href="#connect" class="skip-link skip-link--contact" data-goto="connect">Skip to contact</a>
+  <div class="ambient-grain" aria-hidden="true"></div>
+
+  <header class="flow-hero" id="flowHero">
+    <div class="hero-gradient" aria-hidden="true">
+      <div class="grad-orb grad-orb--1"></div>
+      <div class="grad-orb grad-orb--2"></div>
+      <div class="grad-orb grad-orb--3"></div>
+    </div>
+
+    <nav class="hero-nav" aria-label="Primary">
+      <div class="nav-tray">
+        <div class="nav-core">
+          <a href="#flowHero" class="nav-name">Aliou Wade</a>
+          <span class="nav-role mono">Product Systems Engineer</span>
+          <div class="nav-spacer"></div>
+          <a href="mailto:wadealiou00@gmail.com" class="nav-cta">
+            Email
+            <span class="cta-icon" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="hero-content">
+      <span class="hero-label mono">Product Systems Engineer · Dakar · FR / EN</span>
+      <h1 class="hero-title">I build the systems<br>that make operations<br><span class="title-accent">actually work.</span></h1>
+      <p class="hero-desc">Operational software for fintechs and operations-heavy businesses: internal tools, CRM consolidation, ERP modules, and domain-specific workflows.</p>
+      <p class="hero-secondary">Currently consolidating Everest Finance. Previously ERGOBIT Odoo 18 localization and acceptance testing.</p>
+      <p class="hero-proof mono">Senior Technical Operator · Everest Finance · Two client slots Q3 2026</p>
+      <div class="hero-ctas">
+        <button type="button" class="hero-cta hero-cta--primary" data-goto="fintech">See Everest proof</button>
+        <button type="button" class="hero-cta hero-cta--secondary" data-goto="connect">Get in touch</button>
+      </div>
+      <div class="hero-domains mono" aria-label="Domains"></div>
+    </div>
+
+    <p class="scroll-hint mono" aria-hidden="true">
+      <span>Scroll →</span>
+    </p>
+  </header>
+
+  <main class="flow-stage" id="flowStage">
+    <div class="flow-track" id="flowTrack" aria-label="Portfolio journey"></div>
+
+    <p class="flow-mobile-hint mono" id="flowMobileHint" hidden>Swipe or scroll sideways to explore panels →</p>
+
+    <div class="flow-progress" role="navigation" aria-label="Section progress">
+      <p class="progress-label mono" id="progressLabel" aria-live="polite">01 · Fintech</p>
+      <div class="flow-progress__track" aria-hidden="true">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-dots" id="progressDots"></div>
+      <p class="progress-keys mono" id="progressKeys" aria-hidden="true">Keys 1–6</p>
+    </div>
+  </main>
+
+  <script>window.FLOW_THEME = 'soft';</script>
+  <script src="flow-data.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="flow-pivot.js"></script>
+</body>
+</html>

@@ -16,7 +16,6 @@ const BOOT_LINES = [
 const board = document.getElementById('board');
 const domainTabsEl = document.getElementById('domainTabs');
 const proofStage = document.getElementById('proofStage');
-const proofDomainDesc = document.getElementById('proofDomainDesc');
 const proofAnchor = document.getElementById('proofAnchor');
 const proofPeeks = document.getElementById('proofPeeks');
 const caseRow = document.getElementById('caseRow');
@@ -40,7 +39,6 @@ const state = {
 
 let domainSections = [];
 let tabIndicator = null;
-let caseTabIndicator = null;
 let proofSwapTimer = null;
 
 function clearProofAnchorMotion() {
@@ -245,8 +243,14 @@ function getCases() {
   return cases;
 }
 
-function renderAnchor(caseItem) {
+function renderAnchor(caseItem, context = {}) {
   const meta = caseItem.meta?.map((item) => `<span>${escapeHtml(item)}</span>`).join('') ?? '';
+  const kicker = [
+    context.domain,
+    caseItem.label ?? (context.total > 1 ? `Proof ${context.index + 1} of ${context.total}` : null)
+  ]
+    .filter(Boolean)
+    .join(' · ');
   const caseStudyLink =
     caseItem.caseStudySlug
       ? `<a class="case-study-link glass-btn glass-btn--primary" href="${escapeHtml(workUrl(caseItem.caseStudySlug))}">Read case study <span aria-hidden="true">↗</span></a>`
@@ -265,7 +269,7 @@ function renderAnchor(caseItem) {
       <div class="anchor-title-row">
         ${logoHtml}
         <div>
-          <span class="anchor-label mono">Selected proof${caseItem.label ? ` · ${escapeHtml(caseItem.label)}` : ''}</span>
+          ${kicker ? `<span class="anchor-label mono">${escapeHtml(kicker)}</span>` : ''}
           <h2 class="anchor-title">${escapeHtml(caseItem.title)}</h2>
         </div>
       </div>
@@ -291,34 +295,20 @@ function renderAnchor(caseItem) {
 }
 
 function renderCaseTab(caseItem, originalIndex, isActive) {
+  const ariaLabel = caseItem.primary
+    ? `${caseItem.title} — anchor case`
+    : caseItem.title;
   return `
     <button
       type="button"
-      class="case-tab glass-chip"
+      class="case-tab${caseItem.primary ? ' case-tab--primary' : ''}"
       role="tab"
       data-case-index="${originalIndex}"
       aria-selected="${isActive ? 'true' : 'false'}"
-      aria-label="${escapeHtml(caseItem.title)}"
-    >${escapeHtml(caseItem.title)}</button>
+      aria-label="${escapeHtml(ariaLabel)}"
+      ${caseItem.primary ? 'title="Anchor case"' : ''}
+    >${isActive ? '<span class="case-tab-dot" aria-hidden="true"></span>' : ''}<span>${escapeHtml(caseItem.title)}</span></button>
   `;
-}
-
-function positionCaseTabIndicator(animate = true) {
-  const active = proofPeeks.querySelector('.case-tab[aria-selected="true"]');
-  if (!active || !caseTabIndicator) return;
-
-  const tabsRect = proofPeeks.getBoundingClientRect();
-  const activeRect = active.getBoundingClientRect();
-  const left = activeRect.left - tabsRect.left;
-  const width = activeRect.width;
-
-  if (animate && !reduceMotion && typeof gsap !== 'undefined') {
-    gsap.to(caseTabIndicator, { left, width, opacity: 1, duration: 0.5, ease: SPRING_BACK });
-  } else {
-    caseTabIndicator.style.left = `${left}px`;
-    caseTabIndicator.style.width = `${width}px`;
-    caseTabIndicator.style.opacity = '1';
-  }
 }
 
 function renderProofStage(animate = false) {
@@ -329,18 +319,20 @@ function renderProofStage(animate = false) {
   const anchor = cases[0];
 
   const update = () => {
-    proofDomainDesc.textContent = section.desc;
-    proofAnchor.innerHTML = anchor ? renderAnchor(anchor) : '';
+    proofAnchor.innerHTML = anchor
+      ? renderAnchor(anchor, {
+          domain: section.domain,
+          index: state.anchorIndex,
+          total: section.cases.length
+        })
+      : '';
 
     const allCases = section.cases;
-    proofPeeks.innerHTML = `<span class="case-tab-indicator glass-indicator" id="caseTabIndicator" aria-hidden="true"></span>${allCases
+    proofPeeks.innerHTML = allCases
       .map((item, index) => renderCaseTab(item, index, index === state.anchorIndex))
-      .join('')}`;
-    caseTabIndicator = document.getElementById('caseTabIndicator');
-    positionCaseTabIndicator(false);
+      .join('');
     hydrateLogos(proofAnchor);
 
-    proofPeeks.hidden = allCases.length <= 1;
     if (caseRow) caseRow.hidden = allCases.length <= 1;
     document.title = `${anchor?.title ?? section.domain} · Aliou Wade · Operator Board`;
   };
@@ -382,7 +374,9 @@ function renderProofStage(animate = false) {
 function renderDomainTabs() {
   const tabs = domainSections
     .map(
-      (section) => `
+      (section) => {
+        const count = section.cases?.length ?? 0;
+        return `
         <button
           type="button"
           class="domain-tab glass-chip"
@@ -390,9 +384,11 @@ function renderDomainTabs() {
           id="tab-${escapeHtml(section.id)}"
           aria-selected="${section.id === state.domain ? 'true' : 'false'}"
           aria-controls="proofStage"
+          aria-label="${escapeHtml(`${section.domain}, ${count} proof ${count === 1 ? 'case' : 'cases'}`)}"
           data-domain="${escapeHtml(section.id)}"
-        >${escapeHtml(section.domain)}</button>
-      `
+        ><span>${escapeHtml(section.domain)}</span><span class="domain-tab-count mono" aria-hidden="true">${count}</span></button>
+      `;
+      }
     )
     .join('');
 
@@ -522,7 +518,7 @@ function renderLedgerPreview() {
   hydrateLogos(ledgerClientsPreview);
 
   if (ledgerExpandBtn) {
-    ledgerExpandBtn.textContent = 'Expand';
+    ledgerExpandBtn.textContent = 'Full record';
     ledgerExpandBtn.setAttribute(
       'aria-label',
       hiddenCount > 0
@@ -730,7 +726,6 @@ function bindEvents() {
   window.addEventListener('hashchange', parseDeepLink);
   window.addEventListener('resize', () => {
     positionTabIndicator(false);
-    positionCaseTabIndicator(false);
   });
 
   bindCursorTilt();
@@ -738,7 +733,6 @@ function bindEvents() {
   if (document.fonts) {
     document.fonts.ready.then(() => {
       positionTabIndicator(false);
-      positionCaseTabIndicator(false);
     });
   }
 }
@@ -842,7 +836,6 @@ function runBoot() {
 
 function applyGlassChrome() {
   domainTabsEl?.classList.add('glass-well');
-  proofPeeks?.classList.add('glass-well', 'glass-well--nested');
   principlesList?.classList.add('glass-well');
   document.getElementById('localeSwitch')?.classList.add('glass-well');
   ledgerExpandBtn?.classList.add('glass-btn');
