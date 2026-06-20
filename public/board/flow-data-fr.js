@@ -10,7 +10,7 @@ window.applyFlowLocale({
   },
 
   ui: {
-    bootLines: ['session ok', 'registre synchronisé · index à jour', 'surface de preuve en ligne'],
+    bootLines: ['tableau de bord', '3 cas principaux · 8 projets clients · Dakar', 'surface de preuve prête'],
     greetings: {
       late: 'Encore au travail',
       morning: 'Bonjour',

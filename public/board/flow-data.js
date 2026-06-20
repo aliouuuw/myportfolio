@@ -11,7 +11,7 @@ window.FLOW_DATA = {
   },
 
   ui: {
-    bootLines: ['session ok', 'ledger synced · record indexed', 'proof surface online'],
+    bootLines: ['operator board', '3 anchors · 8 client builds · Dakar', 'proof surface ready'],
     greetings: {
       late: 'Working late',
       morning: 'Good morning',
