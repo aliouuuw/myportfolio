@@ -11,7 +11,7 @@ window.FLOW_DATA = {
   },
 
   ui: {
-    bootLines: ['operator board', '3 anchors · 8 client builds · Dakar', 'proof surface ready'],
+    bootLines: ['Establishing session', 'Indexing work record', 'Proof surface ready'],
     greetings: {
       late: 'Working late',
       morning: 'Good morning',

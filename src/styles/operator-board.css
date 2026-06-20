@@ -2554,60 +2554,81 @@ body.is-booted .ledger-bar {
 /* ── Boot sequence overlay ── */
 .boot-overlay {
   position: absolute; inset: 0; z-index: 60;
-  display: grid; align-items: center;
-  padding: 0 clamp(var(--sp-6), 8vw, 96px);
+  display: grid; place-items: center;
+  padding: clamp(var(--sp-6), 8vw, 96px);
   background:
-    radial-gradient(ellipse 70% 50% at 8% 0%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 60%),
-    var(--hw-bg);
+    radial-gradient(ellipse 70% 60% at 50% 0%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 60%),
+    var(--paper);
 }
 
-.boot-stack {
-  display: flex; flex-direction: column;
-  gap: clamp(var(--sp-8), 6vw, var(--sp-12));
-  max-width: 560px;
+.boot-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  width: 100%;
+  max-width: 380px;
 }
 
-.boot-head {
-  display: flex; flex-direction: column; gap: 6px;
+.boot-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: var(--sp-5);
+  border-bottom: 1px solid var(--line);
+  animation: fadeUp 0.5s var(--ease) both;
 }
 
-.boot-kicker {
-  font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--accent-secondary);
-}
-
-.boot-name {
-  margin: 0;
+.boot-brand__name {
   font-family: var(--sans);
-  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-size: 1.375rem;
   font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
   color: var(--ink);
 }
 
-.boot-role {
-  margin: 0;
-  font-size: 0.8125rem; letter-spacing: 0.02em;
+.boot-brand__role {
+  font-size: 0.8125rem;
   color: var(--ink-faint);
 }
 
 .boot-lines {
-  display: flex; flex-direction: column; gap: 8px;
+  display: flex; flex-direction: column; gap: var(--sp-3);
 }
 
 .boot-line {
-  display: flex; align-items: baseline; gap: 10px;
-  font-size: 0.8125rem; line-height: 1.5;
-  color: var(--ink-soft);
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.8125rem; line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: var(--ink-faint);
+  transition: color var(--dur-base) var(--ease);
 }
 
-.boot-prompt { color: var(--accent-secondary); }
+.boot-line.is-done { color: var(--ink-soft); }
 
-.boot-line:last-child .boot-text::after {
+.boot-tick {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px; height: 16px;
+  flex-shrink: 0;
+  color: var(--accent);
+  opacity: 0;
+  transform: scale(0.7);
+  transition: opacity var(--dur-micro) var(--ease), transform var(--dur-micro) var(--ease);
+}
+
+.boot-tick svg { width: 13px; height: 13px; }
+
+.boot-line.is-done .boot-tick {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.boot-line:not(.is-done):last-child .boot-text::after {
   content: '\258D';
   margin-left: 1px;
-  color: var(--accent-secondary);
+  color: var(--accent);
   animation: bootCaret 0.85s steps(1) infinite;
 }
 

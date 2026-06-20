@@ -11,9 +11,6 @@ const t =
         skip: "Aller au tableau",
         themeToggle: "Basculer le thème",
         themeTitle: "Thème",
-        bootKicker: "Tableau de bord",
-        bootName: "Aliou Wade",
-        bootRole: "Ingénieur systèmes produit · Dakar",
         proofStage: "Scène de preuve",
         domains: "Domaines",
         problemDomains: "Domaines problème",
@@ -29,14 +26,12 @@ const t =
         fieldNotes: "Notes de terrain",
         toolkit: "Boîte à outils",
         close: "Fermer",
+        bootRole: "Ingénieur systèmes produit",
       }
     : {
         skip: "Skip to board",
         themeToggle: "Toggle dark mode",
         themeTitle: "Toggle theme",
-        bootKicker: "Operator board",
-        bootName: "Aliou Wade",
-        bootRole: "Product Systems Engineer · Dakar",
         proofStage: "Proof stage",
         domains: "Domains",
         problemDomains: "Problem domains",
@@ -52,6 +47,7 @@ const t =
         fieldNotes: "Field notes",
         toolkit: "Toolkit",
         close: "Close",
+        bootRole: "Product Systems Engineer",
       };
 ---
 
@@ -60,11 +56,10 @@ const t =
 
 <main class="board" id="board">
   <div class="boot-overlay" id="bootOverlay" aria-hidden="true">
-    <div class="boot-stack">
-      <div class="boot-head">
-        <span class="boot-kicker mono">{t.bootKicker}</span>
-        <h2 class="boot-name">{t.bootName}</h2>
-        <p class="boot-role mono">{t.bootRole}</p>
+    <div class="boot-panel">
+      <div class="boot-brand">
+        <span class="boot-brand__name">Aliou Wade</span>
+        <span class="boot-brand__role">{t.bootRole}</span>
       </div>
       <div class="boot-lines mono" id="bootLines"></div>
     </div>

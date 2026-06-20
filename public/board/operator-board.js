@@ -6,7 +6,7 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 const DOMAIN_IDS = ['fintech', 'erp', 'systems'];
 const SPRING = 'back.out(1.2)';
 const SPRING_BACK = 'back.out(1.7)';
-const BOOT_LINES = () => data.ui?.bootLines ?? ['operator board', '3 anchors · 8 client builds · Dakar', 'proof surface ready'];
+const BOOT_LINES = () => data.ui?.bootLines ?? ['session ok', 'ledger synced · record indexed', 'proof surface online'];
 
 function proofTypeLabel(type) {
   return data.ui?.proofTypes?.[type] ?? data.ui?.proofTypes?.project ?? 'Project';
@@ -1122,17 +1122,11 @@ function runBoot() {
   overlay.addEventListener('click', onSkip);
 
   tl = gsap.timeline({ onComplete: () => gsap.delayedCall(0.4, finish) });
-
-  const head = overlay.querySelector('.boot-head');
-  if (head) {
-    gsap.set(head, { opacity: 0, y: 8 });
-    tl.to(head, { opacity: 1, y: 0, duration: 0.45, ease: SPRING }, 0.1);
-  }
-
   BOOT_LINES().forEach((line, index) => {
     const lineEl = document.createElement('div');
     lineEl.className = 'boot-line';
-    lineEl.innerHTML = '<span class="boot-prompt" aria-hidden="true">\u25C9</span><span class="boot-text"></span>';
+    lineEl.innerHTML =
+      '<span class="boot-tick" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="boot-text"></span>';
     linesEl.appendChild(lineEl);
     const textEl = lineEl.querySelector('.boot-text');
     const cursor = { n: 0 };
@@ -1140,8 +1134,9 @@ function runBoot() {
       n: line.length,
       duration: Math.max(0.28, line.length * 0.024),
       ease: 'none',
-      onUpdate: () => { textEl.textContent = line.slice(0, Math.round(cursor.n)); }
-    }, index === 0 ? 0.6 : '>0.12');
+      onUpdate: () => { textEl.textContent = line.slice(0, Math.round(cursor.n)); },
+      onComplete: () => { lineEl.classList.add('is-done'); }
+    }, index === 0 ? 0.25 : '>0.12');
   });
 }
 
