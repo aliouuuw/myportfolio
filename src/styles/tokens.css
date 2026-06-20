@@ -1,0 +1,81 @@
+/* Shared design tokens — operator board + case studies */
+
+:root {
+  --accent: #b8d92e;
+  --accent-hover: #c8e845;
+  --accent-secondary: #2e6bff;
+
+  --graphite-1: #1a1815;
+  --graphite-2: #24221f;
+  --graphite-3: #6b6760;
+  --graphite-4: #9a958c;
+  --graphite-6: #d1d0cc;
+
+  --paper: #f5f3ef;
+  --paper-2: #f0efea;
+  --surface: #ffffff;
+  --wash: #fafafa;
+
+  --sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+
+  --ink: var(--graphite-1);
+  --ink-soft: var(--graphite-3);
+  --ink-faint: var(--graphite-4);
+
+  --line: rgba(0, 0, 0, 0.06);
+  --line-strong: rgba(0, 0, 0, 0.1);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.06);
+
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+
+  --radius-outer: 20px;
+  --radius-inner: 16px;
+  --r-md: 8px;
+  --r-pill: 999px;
+
+  --ease: cubic-bezier(0.2, 1, 0.2, 1);
+  --dur-micro: 0.2s;
+  --focus-ring: 0 0 0 2px var(--paper), 0 0 0 4px var(--accent);
+
+  --hw-bg: rgba(255, 255, 255, 0.85);
+  --hw-border: rgba(0, 0, 0, 0.06);
+  --hw-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --hw-primary-bg: var(--ink);
+  --hw-primary-fg: #fff;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+
+  --graphite-1: #f3f1ec;
+  --graphite-2: #e8e5df;
+  --graphite-3: #a8a39a;
+  --graphite-4: #7a756d;
+  --graphite-6: #3d3a36;
+
+  --paper: #181614;
+  --paper-2: #12100e;
+  --surface: #211f1c;
+  --wash: #1e1c19;
+
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.14);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.22);
+  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.28);
+
+  --hw-bg: rgba(33, 31, 28, 0.88);
+  --hw-border: rgba(255, 255, 255, 0.08);
+  --hw-shadow: 0 4px 12px rgba(0, 0, 0, 0.24);
+  --hw-primary-bg: #f3f1ec;
+  --hw-primary-fg: #181614;
+}

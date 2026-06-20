@@ -1,136 +1,137 @@
 # AGENTS.md — myportfolio AI Conventions
 
-<!-- BEGIN:nextjs-agent-rules -->
-# This is NOT the Next.js you know
-
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
-<!-- END:nextjs-agent-rules -->
-
 ## Project overview
 
 Bilingual (FR/EN) portfolio and case-study site for a Product Systems Engineer. Conversion tool for founders, CTOs, and network referrals — not a project gallery.
 
 - **Runtime**: Node (Bun lockfile)
-- **Framework**: Next.js 16 App Router
+- **Framework**: Astro 5 (static + selective server routes)
 - **Database**: None (MDX content in repo)
 - **Auth**: None
-- **Styling**: Tailwind CSS v4
-- **i18n**: next-intl (planned)
-- **Content**: MDX files in `content/`
-- **Hosting**: Vercel
-- **Test runner**: ESLint (no test suite yet)
+- **Styling**: Hand-tuned CSS (`src/styles/`) — no Tailwind
+- **Motion**: GSAP (bundled via Vite, not CDN)
+- **i18n**: Astro built-in routing (`en` default, `fr` prefixed)
+- **Content**: MDX in `content/work/` via Content Collections + Zod
+- **Hosting**: Vercel (`@astrojs/vercel`)
+- **Typecheck**: `astro check` (no ESLint suite yet)
 - **CI**: None yet
+
+The previous Next.js 16 app is archived on branch/tag `archive/nextjs-v1`.
 
 ## Structure
 
 ```
-app/
-  [locale]/
-    page.tsx
-    work/
-    work/[slug]/
-    writing/
-    writing/[slug]/
-    about/
-    contact/
-  layout.tsx
-  globals.css
-proxy.ts          ← request interception (Next.js 16; replaces middleware.ts)
-i18n/
-  request.ts      ← next-intl request config
+src/
+  components/
+    OperatorBoard.astro   ← single-viewport home surface
+  layouts/
+    Base.astro            ← operator board shell
+    CaseStudy.astro       ← proof / case-study pages
+  pages/
+    index.astro           ← EN home (operator board)
+    fr/index.astro        ← FR home
+    work/[slug].astro     ← EN case studies
+    fr/work/[slug].astro  ← FR case studies
+    api/contact.ts        ← Resend contact (server route)
+  scripts/
+    board-boot.ts         ← loads GSAP + board runtime
+  styles/
+    operator-board.css    ← board UI (large, hand-tuned)
+    case-study.css        ← proof page typography
+    tokens.css            ← shared design tokens
+  content.config.ts       ← Zod schema for proofs
 content/
-  work/           ← MDX case studies
-  writing/        ← MDX essays
-components/       ← shared UI components
-messages/
-  en.json         ← next-intl translations
-  fr.json
+  work/<slug>/
+    en.mdx
+    fr.mdx
 public/
-  images/
+  board/                  ← flow-data.js + operator-board.js (board runtime)
+  logos/
+  media/case-studies/
+mock-site-loom/           ← reference mock (not served in prod)
 docs/
-  strategic-plan.md
-  portfolio-plan.md
   backlog.json
 ```
 
-## Next.js 16 conventions
+## Astro conventions
 
-Read `node_modules/next/dist/docs/` before implementing routing, caching, or config. Key differences from older Next.js:
+| Topic | Rule |
+|-------|------|
+| Default output | Static prerender for pages |
+| Server routes | `export const prerender = false` on API endpoints |
+| Content | Use `astro:content` collections — do not hand-edit a giant JS blob for proofs |
+| Client JS | Prefer Astro `<script>` imports (Vite-bundled). Use `is:inline` only for tiny boot snippets (theme flash prevention) |
+| Env vars | `import.meta.env.*` in Astro server code (not `process.env` unless in adapter context) |
+| Path alias | `@/*` → `src/*` |
+| i18n | EN at `/`, FR at `/fr`. Case studies at `/work/<slug>` and `/fr/work/<slug>` |
 
-| Topic | Next.js 16 rule |
-|-------|-----------------|
-| Request interception | Use root **`proxy.ts`** with `export function proxy(request)`. Do **not** add `middleware.ts` (deprecated). |
-| Proxy runtime | **`nodejs` only** (not Edge). If Edge is required, `middleware.ts` still works but is deprecated. |
-| Dynamic route params | **`await props.params`** in pages, layouts, and route handlers. Sync access is removed. |
-| `searchParams` | **`await props.searchParams`** in pages. |
-| `cookies()` / `headers()` | **Await** in Server Components and route handlers. |
-| Typed routes | Run **`npx next typegen`** after adding routes; use `PageProps<'/path'>` / `LayoutProps`. |
-| Dev / build bundler | **Turbopack is default** for `next dev` and `next build`. No `--turbopack` flag needed. |
-| Linting | **`next lint` removed**. Use `npm run lint` (ESLint CLI). `next build` does not lint. |
-| `sitemap` / OG image generators | `id` from `generateSitemaps` / `generateImageMetadata` is a **Promise** — await it. |
-| Config flags | `skipMiddlewareUrlNormalize` → **`skipProxyUrlNormalize`**. `experimental.turbopack` → top-level **`turbopack`**. |
-
-Example locale proxy (pattern only; wire to next-intl when installed):
+Example content collection entry:
 
 ```ts
-// proxy.ts
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
-
-export function proxy(request: NextRequest) {
-  // locale detection / redirects
-  return NextResponse.next()
-}
-
-export const config = { matcher: ['/((?!api|_next|.*\\..*).*)'] }
+// src/content.config.ts
+const work = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "content/work" }),
+  schema: z.object({
+    title: z.string(),
+    titleFr: z.string().optional(),
+  }),
+});
 ```
 
-Example dynamic page:
+Example static path:
 
-```tsx
-export default async function Page(props: PageProps<'/[locale]/work/[slug]'>) {
-  const { locale, slug } = await props.params
-  // ...
+```astro
+---
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("work", (e) => e.id.endsWith("/en"));
+  return entries.map((entry) => ({
+    params: { slug: entry.id.replace(/\/en$/, "") },
+    props: { entry },
+  }));
 }
+---
 ```
 
 ## Key conventions
 
-- **Locale routing**: All user-facing routes live under `app/[locale]/`. Root `app/layout.tsx` handles global providers only. Locale detection and redirects go in **`proxy.ts`**, not `middleware.ts`.
-- **Content files**: MDX with YAML frontmatter in `content/work/` and `content/writing/`. Frontmatter includes both EN and FR fields (`title` / `titleFr`, `summary` / `summaryFr`).
-- **Component files**: kebab-case (`case-study-card.tsx`)
-- **Route files**: Next.js conventions (`page.tsx`, `layout.tsx`, `loading.tsx`)
+- **Home surface**: The operator board is vanilla JS (`public/board/`) orchestrated by `board-boot.ts`. Do not rewrite it in React unless explicitly tasked.
+- **Adding a proof**: Create `content/work/<slug>/en.mdx` + `fr.mdx` with valid frontmatter. Build validates via Zod.
+- **Content files**: MDX with YAML frontmatter. Bilingual fields: `title` / `titleFr`, `summary` / `summaryFr`.
 - **No `any` types**: use proper TypeScript types throughout
-- **Styling**: Tailwind utility classes. No CSS modules. No styled-components.
-- **Design direction**: Premium fintech calm — metallic card signature, hairline borders, serious typography, warm off-white or deep graphite base. No glassmorphism, no gradient text, no SaaS template patterns.
-- **Imports**: Use `@/*` path alias for all internal imports
-- **Images**: `next/image` only. No raw `<img>` tags.
+- **Design direction**: Premium fintech calm — hairline borders, serious typography, warm off-white or deep graphite base. No glassmorphism, no gradient text, no SaaS template patterns.
+- **First person**: Do not write about the author in third person
+- **Theme**: `localStorage` key `operator-board-theme` (`light` | `dark`), shared across board and case-study pages
 
 ## What NOT to do
 
 | Rule | Reason |
 |------|--------|
 | Do not add Sanity or any CMS | Single author, MDX in repo is the content strategy |
-| Do not create `/projects` grid with many cards | Depth over breadth — 3 flagship case studies first |
+| Do not create `/projects` grid with many cards | Depth over breadth — anchor case studies first |
 | Do not add `/skills` page with progress bars | Kills credibility with CTO/founder audience |
 | Do not add `/services` page | Too agency-template |
 | Do not use glassmorphism, gradient text, animated mesh | Violates design direction |
 | Do not add interactive 3D or heavy animations | Performance cost, wrong signal |
-| Do not write about the author in third person | First person only |
-| Do not edit `app/layout.tsx` global providers without explicit task permission | Foundation file |
-| Do not edit `next.config.ts` without explicit task permission | Foundation file |
-| Do not edit `tailwind` / `postcss` config without explicit task permission | Foundation file |
+| Do not rewrite operator board in React without explicit task | The handcrafted CSS/GSAP surface is the product signature |
+| Do not load GSAP from CDN | Bundle via `board-boot.ts` |
+| Do not edit `astro.config.mjs` without explicit task permission | Foundation file |
 | Do not commit `.env` or credentials | Security |
 | Do not add a fourth anchor case study before the first three are live | Strategic plan rule |
-| Do not create `middleware.ts` | Next.js 16: use `proxy.ts` and `export function proxy` |
-| Do not use sync `params` / `searchParams` / `cookies()` / `headers()` | Removed in Next.js 16; always await |
 
 ## Verification
 
 After any code change, run:
 
 ```bash
-bun run build && bun run lint
+bun run build
 ```
 
-Uses the Bun toolchain (`bun.lock`). If you temporarily use npm instead, equivalent: `npm run build && npm run lint`.
+Uses the Bun toolchain (`bun.lock`). Equivalent with npm: `npm run build`.
+
+`bun run lint` runs `astro check` (TypeScript + Astro diagnostics).
+
+## Archive
+
+The Next.js 16 portfolio lives on `archive/nextjs-v1` (branch and tag). Do not resurrect it on `main` without an explicit migration task.

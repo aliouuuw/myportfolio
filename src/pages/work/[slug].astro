@@ -1,6 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
-import Base from "@/layouts/Base.astro";
+import CaseStudy from "@/layouts/CaseStudy.astro";
 
 export async function getStaticPaths() {
   const entries = await getCollection("work", (e) => e.id.endsWith("/en"));
@@ -15,11 +15,36 @@ const { Content } = await render(entry);
 const { title, summary, role, domain, period, stack, outcome } = entry.data;
 ---
 
-<Base lang="en" title={`${title} · Aliou Wade`} description={summary}>
+<CaseStudy lang="en" title={`${title} · Aliou Wade`} description={summary}>
   <main class="case-study">
-    <a class="case-study__back" href="/">← Operator board</a>
+    <div class="case-study__top">
+      <a class="case-study__back" href="/">← Operator board</a>
+      <button
+        type="button"
+        class="theme-toggle theme-toggle--article"
+        id="caseThemeToggle"
+        aria-label="Toggle theme"
+        aria-pressed="false"
+      >
+        <svg class="theme-toggle__sun" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <circle cx="8" cy="8" r="3.25" stroke="currentColor" stroke-width="1.5"></circle>
+          <path
+            d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.05 3.05l1.06 1.06M11.89 11.89l1.06 1.06M3.05 12.95l1.06-1.06M11.89 4.11l1.06-1.06"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"></path>
+        </svg>
+        <svg class="theme-toggle__moon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path
+            d="M7.2 2.2a5.8 5.8 0 1 0 6.6 9.4A6.2 6.2 0 0 1 7.2 2.2z"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linejoin="round"></path>
+        </svg>
+      </button>
+    </div>
     <header class="case-study__head">
-      <p class="case-study__meta mono">{domain}{period ? ` · ${period}` : ""}</p>
+      <p class="case-study__meta">{domain}{period ? ` · ${period}` : ""}</p>
       <h1 class="case-study__title">{title}</h1>
       <p class="case-study__summary">{summary}</p>
       <dl class="case-study__facts">
@@ -32,4 +57,4 @@ const { title, summary, role, domain, period, stack, outcome } = entry.data;
       <Content />
     </article>
   </main>
-</Base>
+</CaseStudy>
