@@ -7,7 +7,17 @@
   <meta name="description" content="Single-viewport operator board — live proof, comms, and ledger for a Product Systems Engineer.">
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem('operator-board-theme');
+        if (theme === 'dark' || theme === 'light') {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <link rel="stylesheet" href="operator-board.css">
 </head>
 <body class="operator-board">
@@ -21,27 +31,32 @@
 
     <header class="board-rail" id="statusRail">
       <div class="rail-brand">
-        <div class="rail-mark mono" aria-hidden="true">AW</div>
         <div class="rail-identity">
-          <p class="rail-greeting mono" id="statusGreeting"></p>
           <div class="rail-title-row">
             <h1 class="rail-name">Aliou Wade</h1>
             <span class="rail-sep mono" aria-hidden="true">/</span>
-            <span class="rail-role mono" id="railRole">Product Systems Engineer</span>
+            <span class="rail-role" id="railRole">Product Systems Engineer</span>
           </div>
         </div>
       </div>
-      <div class="rail-context mono">
-        <span>Dakar · <span id="dakarclock" aria-label="Local time"></span></span>
-        <span class="rail-context-sep" aria-hidden="true">·</span>
-        <span class="locale-switch" id="localeSwitch" role="group" aria-label="Language"></span>
-        <span class="rail-context-sep" aria-hidden="true">·</span>
-        <span class="rail-availability" id="statusSlots">Two client slots · Q3 2026</span>
+      <p class="rail-status mono ui-pill ui-pill--dot" id="statusGreeting" aria-live="polite"></p>
+      <div class="rail-context">
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false" title="Toggle theme">
+          <span class="theme-toggle__icon" aria-hidden="true">
+            <svg class="theme-toggle__sun" width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3.25" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.05 3.05l1.06 1.06M11.89 11.89l1.06 1.06M3.05 12.95l1.06-1.06M11.89 4.11l1.06-1.06" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg class="theme-toggle__moon" width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M7.2 2.2a5.8 5.8 0 1 0 6.6 9.4A6.2 6.2 0 0 1 7.2 2.2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </span>
+        </button>
+        <span id="localeSwitch"></span>
       </div>
     </header>
 
     <div class="board-body" id="boardBody">
       <section class="proof-zone" aria-label="Proof stage">
+        <div class="zone-label" aria-hidden="true">
+          <span class="zone-label__tick"></span>
+          <span class="zone-label__text mono">Domains</span>
+        </div>
         <div class="domain-tabs" id="domainTabs" role="tablist" aria-label="Problem domains"></div>
 
         <div
@@ -52,7 +67,6 @@
           aria-labelledby="domainTabs"
         >
           <div class="case-row" id="caseRow">
-            <span class="case-row-elbow" aria-hidden="true"></span>
             <div class="case-tabs" id="proofPeeks" role="tablist" aria-label="Projects proving this domain"></div>
           </div>
           <div class="proof-anchor-tray">
@@ -61,52 +75,75 @@
         </div>
       </section>
 
-      <aside class="comms-zone" aria-label="Contact and principles">
+      <button
+        type="button"
+        class="signal-rail"
+        id="sidebarHandle"
+        aria-expanded="true"
+        aria-controls="commsZone"
+        aria-label="Collapse contact panel"
+      >
+        <span class="signal-rail__bracket" aria-hidden="true"></span>
+        <span class="signal-rail__frame" aria-hidden="true">
+          <span class="signal-rail__trace"></span>
+        </span>
+      </button>
+
+      <aside class="comms-zone" id="commsZone" aria-label="Contact">
+        <div class="zone-label" aria-hidden="true">
+          <span class="zone-label__tick"></span>
+          <span class="zone-label__text mono">Contact</span>
+        </div>
         <div class="comms-tray">
           <div class="comms-core" id="commsCore"></div>
         </div>
-        <ul class="principles-list" id="principlesList" aria-label="Operating principles"></ul>
-        <p class="comms-note" id="commsNote"></p>
       </aside>
     </div>
 
     <footer class="ledger-bar" id="ledgerBar">
       <div class="ledger-collapsed" id="ledgerCollapsed">
-        <span class="ledger-bar-kicker mono" aria-hidden="true">Work record</span>
+        <span class="ledger-bar-kicker" aria-hidden="true">Work record</span>
         <div class="ledger-group">
-          <span class="ledger-group-label mono">Employers</span>
+          <span class="ledger-group-label">Employers</span>
           <div class="ledger-employers" id="ledgerEmployersPreview"></div>
         </div>
         <div class="ledger-group">
-          <span class="ledger-group-label mono">Client builds</span>
+          <span class="ledger-group-label">Client builds</span>
           <div class="ledger-clients" id="ledgerClientsPreview"></div>
         </div>
-        <button type="button" class="ledger-expand-btn glass-btn mono" id="ledgerExpandBtn" aria-expanded="false" aria-controls="ledgerExpanded" aria-label="Expand full work record">
+        <button type="button" class="ledger-expand-btn hw-btn" id="ledgerExpandBtn" aria-expanded="false" aria-controls="ledgerExpanded" aria-label="Expand full work record">
           Full record
         </button>
       </div>
 
       <div class="ledger-expanded" id="ledgerExpanded" hidden>
         <div class="ledger-expanded-head">
-          <h2 class="ledger-title mono">Work record</h2>
-          <button type="button" class="ledger-close glass-btn mono" id="ledgerCloseBtn" aria-label="Close full record">Close</button>
+          <div class="ledger-expanded-intro">
+            <h2 class="ledger-title" id="ledgerTitle">Work record</h2>
+            <p class="ledger-subtitle" id="ledgerSubtitle"></p>
+          </div>
+          <button type="button" class="ledger-close hw-btn" id="ledgerCloseBtn" aria-label="Close full record">Close</button>
         </div>
         <div class="ledger-expanded-grid">
           <section class="ledger-panel" aria-labelledby="employersHeading">
-            <h3 class="panel-label mono" id="employersHeading">Employers</h3>
-            <ul class="employer-list" id="employerList"></ul>
+            <h3 class="panel-label" id="employersHeading">Employers</h3>
+            <div class="ledger-panel-surface">
+              <ul class="employer-list" id="employerList"></ul>
+            </div>
           </section>
           <section class="ledger-panel" aria-labelledby="clientsHeading">
-            <h3 class="panel-label mono" id="clientsHeading">Client builds</h3>
-            <ul class="client-list" id="clientList"></ul>
+            <h3 class="panel-label" id="clientsHeading">Client builds</h3>
+            <div class="ledger-panel-surface ledger-panel-surface--scroll">
+              <ul class="client-list" id="clientList"></ul>
+            </div>
           </section>
           <section class="ledger-panel ledger-panel--writing" aria-labelledby="notesHeading">
-            <h3 class="panel-label mono" id="notesHeading">Field notes</h3>
+            <h3 class="panel-label" id="notesHeading">Field notes</h3>
             <div class="field-notes-card essay-teaser" id="essayTeaser"></div>
           </section>
         </div>
         <div class="ledger-toolkit" aria-labelledby="toolkitHeading">
-          <span class="toolkit-label mono" id="toolkitHeading">Toolkit</span>
+          <span class="toolkit-label" id="toolkitHeading">Toolkit</span>
           <div class="stack-list" id="stackList"></div>
         </div>
       </div>

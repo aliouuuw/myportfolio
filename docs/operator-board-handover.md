@@ -165,12 +165,6 @@ Implemented fixes from IA critique:
 
 ## 9. Known gaps — polish opportunities for next agent
 
-### Polish completed recently
-
-- [x] **Two-level navigation hierarchy** — Structured `.domain-tabs` and `.case-tabs` inside `.proof-nav`. Added elegant, fixed-width `.nav-label` labels (`Domain` and `↳ Proof`) with hairline "circuit path" connector lines for a premium, aligned, Soft Structuralism feel.
-- [x] **Editorial Domain Context** — Enabled and custom-styled the `.proof-domain-desc` block. When a domain is selected, it presents the core operational problem (e.g. Fintech surfaces, ERP acceptance, systems velocity judgment) in a beautifully subtle console-styled readout with a vertical accent left border and theme tint.
-- [x] **Mobile Responsiveness** — Added stacking and fluid vertical layout for `.nav-row` and `.nav-label` on screens below 600px width to prevent overflow and maintain perfect legibility on mobile.
-
 ### Visual / layout
 
 - [ ] **Status rail** feels utilitarian — consider stronger typographic hierarchy or wordmark treatment

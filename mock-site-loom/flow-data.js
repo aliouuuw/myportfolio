@@ -31,6 +31,8 @@ window.FLOW_DATA = {
     offClock:
       'Off the clock, I play competitive chess (2043 bullet). Same muscle as shipping on a deadline: read fast, commit, stay calm.',
     initials: 'AW',
+    photo: 'Aliou.png',
+    photoAlt: 'Aliou Wade, Product Systems Engineer',
     heroLabel: 'Product Systems Engineer · Dakar · FR / EN',
     heroTitle: 'I build the systems',
     heroTitleLine2: 'that make operations',
@@ -97,7 +99,15 @@ window.FLOW_DATA = {
       web: 'everestfinance.sn',
       logo: 'logos/everest-finance.png',
       role: 'Contractor → full-time · solo technical operator',
-      proof: 'Public site, CRM, and Sama Naffa toward one operating model.'
+      proof: 'Public site, CRM, and Sama Naffa toward one operating model.',
+      proofPreview: {
+        type: 'case',
+        slug: 'everest-finance',
+        label: 'Open case study',
+        title: 'Everest Finance',
+        excerpt: 'Three products unified on one PostgreSQL schema — public site, CRM, and Sama Naffa.',
+        meta: 'Anchor case · Fintech'
+      }
     },
     {
       period: '2024 → Q1 2026',
@@ -105,7 +115,15 @@ window.FLOW_DATA = {
       web: 'ergobit.com',
       logo: 'logos/ergobit.png',
       role: 'Software engineering · ERP & infra',
-      proof: 'Custom ERP/BI modules, Azure DevOps CI/CD, Odoo 18 acceptance kit.'
+      proof: 'Custom ERP/BI modules, Azure DevOps CI/CD, Odoo 18 acceptance kit.',
+      proofPreview: {
+        type: 'case',
+        slug: 'odoo-testing-toolkit',
+        label: 'Open case study',
+        title: 'Odoo 18 Acceptance Testing Kit',
+        excerpt: 'Robot + Playwright acceptance discipline integrators can run on every branch.',
+        meta: '39 tests · 9 suites'
+      }
     },
     {
       period: '2023 → Q2 2024',
@@ -113,7 +131,15 @@ window.FLOW_DATA = {
       web: 'bbafintech.com',
       logo: 'logos/bbafintech.png',
       role: 'Software engineer · contract',
-      proof: 'Open-banking APIs, UEMOA i18n, web and mail migration to bbafintech.com.'
+      proof: 'Open-banking APIs, UEMOA i18n, web and mail migration to bbafintech.com.',
+      proofPreview: {
+        type: 'link',
+        href: 'https://bbafintech.com',
+        label: 'Visit live site',
+        title: 'BankingBook Analytics',
+        excerpt: 'Open-banking APIs and bilingual surfaces for UEMOA cloud-native ALM.',
+        meta: 'bbafintech.com'
+      }
     },
     {
       period: '2023',
@@ -121,7 +147,15 @@ window.FLOW_DATA = {
       web: 'purolator.com',
       logo: 'logos/purolator.png',
       role: 'COOP + part-time contractor · Ottawa',
-      proof: 'CI/CD across three projects, Power Automate tooling, package-sorter SDK.'
+      proof: 'CI/CD across three projects, Power Automate tooling, package-sorter SDK.',
+      proofPreview: {
+        type: 'report',
+        href: '#purolator-coop-report',
+        label: 'Open COOP report',
+        title: 'Purolator Digital Lab — COOP dossier',
+        excerpt: 'CI/CD rollout, Power Automate tooling, and package-sorter SDK integration notes.',
+        meta: 'PDF · 18 pages · EN'
+      }
     },
     {
       period: '2022',
@@ -129,26 +163,148 @@ window.FLOW_DATA = {
       web: 'orange.com',
       logo: 'logos/orange-dc.jpg',
       role: 'Mobile development · COOP',
-      proof: 'React Native fitness community app, 1,000+ members.'
+      proof: 'React Native fitness community app, 1,000+ members.',
+      proofPreview: {
+        type: 'report',
+        href: '#orange-coop-report',
+        label: 'Open internship report',
+        title: 'Orange Digital Lab — Mobile COOP',
+        excerpt: 'React Native fitness community app shipped to 1,000+ members.',
+        meta: 'PDF · 22 pages · FR / EN'
+      }
     },
     {
       period: '2019',
       name: 'ITech Solutions Afrique',
       logo: 'logos/itech-solutions.png',
       role: 'IoT internship',
-      proof: 'Geolocation on Azure; planning rework cut system costs ~20%.'
+      proof: 'Geolocation on Azure; planning rework cut system costs ~20%.',
+      proofPreview: {
+        type: 'report',
+        href: '#itech-internship-report',
+        title: 'ITech Solutions — IoT internship',
+        excerpt: 'Azure geolocation stack and planning rework that cut system costs ~20%.',
+        meta: 'PDF · 14 pages · FR'
+      }
     }
   ],
 
   clients: [
-    { name: 'Ndouckmane Transit', domain: 'Logistics', logo: 'logos/ndouckmane.svg', scope: 'Freight forwarder ops: shipments, customs, dashboards.' },
-    { name: 'EduPlan', domain: 'Education', logo: 'logos/eduplan.svg', scope: 'K-12 school operations: courses, schedule, grading.' },
-    { name: 'Gerpain', domain: 'Operations', logo: 'logos/gerpain.svg', scope: 'Multi-bakery platform: inventory, deliveries, employees, RBAC.' },
-    { name: 'Mansour Motors', domain: 'Automotive', web: 'mansourmotors.sn', logo: 'logos/mansour.png', scope: 'Dealership public site and internal vehicle inventory.' },
-    { name: 'Mamebimo', domain: 'Marketplace', web: 'mamebimo.com', logo: 'logos/mamebimo.png', scope: 'Home-services booking, messaging, payouts (Everest product).' },
-    { name: 'Asaaman', domain: 'Drone / AI', web: 'asaaman.com', logo: 'logos/asaaman.svg', scope: 'Semantic video search and surveillance workflows.' },
-    { name: 'Les Hirondelles', domain: 'Institution', logo: 'logos/les-hirondelles.svg', scope: 'School site with Convex-backed editorial CMS.' },
-    { name: 'Dakar Sport', domain: 'Retail', logo: 'logos/dakar-sport.jpg', scope: 'Retail and community surfaces for a local sports brand.' }
+    {
+      name: 'Ndouckmane Transit',
+      domain: 'Logistics',
+      logo: 'logos/ndouckmane.svg',
+      scope: 'Freight forwarder ops: shipments, customs, dashboards.',
+      proofPreview: {
+        type: 'link',
+        href: '#ndouckmane-transit',
+        label: 'Open project dossier',
+        title: 'Ndouckmane Transit',
+        excerpt: 'Shipment tracking, customs workflows, and operator dashboards.',
+        meta: 'Internal ops platform'
+      }
+    },
+    {
+      name: 'EduPlan',
+      domain: 'Education',
+      logo: 'logos/eduplan.svg',
+      scope: 'K-12 school operations: courses, schedule, grading.',
+      proofPreview: {
+        type: 'link',
+        href: '#eduplan',
+        label: 'Open project dossier',
+        title: 'EduPlan',
+        excerpt: 'Courses, schedule, and grading for K-12 school operations.',
+        meta: 'School operations suite'
+      }
+    },
+    {
+      name: 'Gerpain',
+      domain: 'Operations',
+      logo: 'logos/gerpain.svg',
+      scope: 'Multi-bakery platform: inventory, deliveries, employees, RBAC.',
+      proofPreview: {
+        type: 'link',
+        href: '#gerpain',
+        label: 'Open project dossier',
+        title: 'Gerpain',
+        excerpt: 'Multi-bakery inventory, deliveries, employees, and RBAC.',
+        meta: 'Multi-site operations'
+      }
+    },
+    {
+      name: 'Mansour Motors',
+      domain: 'Automotive',
+      web: 'mansourmotors.sn',
+      logo: 'logos/mansour.png',
+      scope: 'Dealership public site and internal vehicle inventory.',
+      proofPreview: {
+        type: 'link',
+        href: 'https://mansourmotors.sn',
+        label: 'Visit live project',
+        title: 'Mansour Motors',
+        excerpt: 'Dealership public site and internal vehicle inventory.',
+        meta: 'mansourmotors.sn'
+      }
+    },
+    {
+      name: 'Mamebimo',
+      domain: 'Marketplace',
+      web: 'mamebimo.com',
+      logo: 'logos/mamebimo.png',
+      scope: 'Home-services booking, messaging, payouts (Everest product).',
+      proofPreview: {
+        type: 'link',
+        href: 'https://mamebimo.com',
+        label: 'Visit live project',
+        title: 'Mamebimo',
+        excerpt: 'Home-services booking, messaging, and payouts.',
+        meta: 'mamebimo.com'
+      }
+    },
+    {
+      name: 'Asaaman',
+      domain: 'Drone / AI',
+      web: 'asaaman.com',
+      logo: 'logos/asaaman.svg',
+      scope: 'Semantic video search and surveillance workflows.',
+      proofPreview: {
+        type: 'link',
+        href: 'https://asaaman.com',
+        label: 'Visit live project',
+        title: 'Asaaman',
+        excerpt: 'Semantic video search and surveillance workflows.',
+        meta: 'asaaman.com'
+      }
+    },
+    {
+      name: 'Les Hirondelles',
+      domain: 'Institution',
+      logo: 'logos/les-hirondelles.svg',
+      scope: 'School site with Convex-backed editorial CMS.',
+      proofPreview: {
+        type: 'link',
+        href: '#les-hirondelles',
+        label: 'Open project dossier',
+        title: 'Les Hirondelles',
+        excerpt: 'School site with Convex-backed editorial CMS.',
+        meta: 'Institutional web + CMS'
+      }
+    },
+    {
+      name: 'Dakar Sport',
+      domain: 'Retail',
+      logo: 'logos/dakar-sport.jpg',
+      scope: 'Retail and community surfaces for a local sports brand.',
+      proofPreview: {
+        type: 'link',
+        href: '#dakar-sport',
+        label: 'Open project dossier',
+        title: 'Dakar Sport',
+        excerpt: 'Retail and community surfaces for a local sports brand.',
+        meta: 'Retail + community'
+      }
+    }
   ],
 
   recordFeaturedClients: 4,
@@ -210,7 +366,8 @@ window.FLOW_DATA = {
           summary:
             'Three products, no engineering team. I unified the public website, internal CRM, and Sama Naffa customer app on one PostgreSQL schema and shared TypeScript types.',
           outcome: 'Public site live. CRM in daily use. Sama Naffa in hardening before wider rollout.',
-          meta: ['Next.js', 'React Native', 'PostgreSQL', 'Zod', 'Solo owner']
+          meta: ['Next.js', 'React Native', 'PostgreSQL', 'Zod', 'Solo owner'],
+          metric: { value: '3', label: 'unified products' }
         },
         {
           primary: false,
@@ -243,7 +400,8 @@ window.FLOW_DATA = {
           summary:
             'Robot Framework keywords functional consultants can read. Playwright drives Odoo\'s OWL client. Smoke suites under two minutes; full validation across sales, purchase, inventory, HR, and accounting.',
           outcome: '39 tests in 9 suites. Validation cycle dropped from a full day to under fifteen minutes.',
-          meta: ['Robot Framework', 'Playwright', 'Azure DevOps', '39 tests', '9 suites']
+          meta: ['Robot Framework', 'Playwright', 'Azure DevOps', '39 tests', '9 suites'],
+          metric: { value: '15m', label: 'validation cycle' }
         },
         {
           primary: false,
@@ -277,6 +435,7 @@ window.FLOW_DATA = {
             'Bun-native scaffolding, typed entity layer, row-level security, CLI conventions. Clean architecture, zero external adoption. The retrospective documents when to redirect energy.',
           outcome: 'Frozen codebase. Lessons applied to Everest repo structure and agent-ready conventions.',
           meta: ['Bun', 'TypeScript', 'PostgreSQL', 'RLS'],
+          metric: { value: '0', label: 'external users' },
           essaySlug: 'why-systems-over-frameworks'
         },
         {
@@ -333,7 +492,8 @@ window.FLOW_DATA = {
           summary:
             'Three products, no engineering team. I unified the public website, internal CRM, and Sama Naffa customer app on one PostgreSQL schema and shared TypeScript types.',
           outcome: 'Public site live. CRM in daily use. Sama Naffa in hardening before wider rollout.',
-          meta: ['Next.js', 'React Native', 'PostgreSQL', 'Zod', 'Solo owner']
+          meta: ['Next.js', 'React Native', 'PostgreSQL', 'Zod', 'Solo owner'],
+          metric: { value: '3', label: 'unified products' }
         },
         {
           primary: false,
@@ -370,7 +530,8 @@ window.FLOW_DATA = {
           summary:
             'Robot Framework keywords functional consultants can read. Playwright drives Odoo\'s OWL client. Smoke suites under two minutes; full validation across sales, purchase, inventory, HR, and accounting.',
           outcome: '39 tests in 9 suites. Validation cycle dropped from a full day to under fifteen minutes.',
-          meta: ['Robot Framework', 'Playwright', 'Azure DevOps', '39 tests', '9 suites']
+          meta: ['Robot Framework', 'Playwright', 'Azure DevOps', '39 tests', '9 suites'],
+          metric: { value: '15m', label: 'validation cycle' }
         },
         {
           primary: false,
@@ -406,6 +567,7 @@ window.FLOW_DATA = {
             'Bun-native scaffolding, typed entity layer, row-level security, CLI conventions. Clean architecture, zero external adoption. The retrospective documents when to redirect energy.',
           outcome: 'Frozen codebase. Lessons applied to Everest repo structure and agent-ready conventions.',
           meta: ['Bun', 'TypeScript', 'PostgreSQL', 'RLS'],
+          metric: { value: '0', label: 'external users' },
           essaySlug: 'why-systems-over-frameworks'
         },
         {

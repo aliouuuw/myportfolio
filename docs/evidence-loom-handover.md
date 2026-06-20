@@ -29,45 +29,30 @@ A portfolio for **Aliou Wade — Product Systems Engineer** targeting founders, 
 
 **File:** `mock-site-loom/index.html` + `loom.css` + `loom.js`
 
-### Pivot B — Gradient Loom (Stripe DNA × Soft Structuralism)
+### Pivot C — Hardware UI (Current)
 
 | Element | Rule |
 |---------|------|
-| **Base** | Navy hero (`#0a2540`) with spectral gradient orbs; light proof stage (`#f6f8fa`) |
-| **Typography** | General Sans **300–400** (light weights like Stripe), tight spacing (-0.04em) |
-| **Shadows** | Stripe-minimal: 0 2px 5px, 0 3px 8px — no puffy depth |
-| **Components** | Low-radius cards (4–8px like Stripe), clean borders |
-| **Accent** | Stripe Indigo (`#533afd`) primary; lavender/orange gradient orbs |
-| **Signature** | Full-bleed gradient hero with parallax orbs; horizontal claim chips |
-| **Motion** | ScrollTrigger orb parallax; staggered load choreography |
-| **Spacing** | 8px base grid (Stripe tokens) |
-
-**File:** `mock-site-loom/stripe-pivot.html` + `stripe-pivot.css` + `stripe-pivot.js`
-
-### Pivot C — Operator Board (single-viewport instrument)
-
-| Element | Rule |
-|---------|------|
-| **Base** | Same light surface as Pivot A, but compressed into a single viewport |
-| **Typography** | Manrope 400–700 + JetBrains Mono; utility-focused labels |
-| **Layout** | Fixed header → two-column body (proof stage + comms) → footer ledger |
-| **Interaction** | Domain tabs → case tabs → anchor card; keyboard arrow nav |
-| **Ledger** | Collapsed strip with expand affordance; full expanded grid |
+| **Base** | Dotted light-grey background (`#E8E8E8` / `#d1d1d1` grid), solid white surfaces |
+| **Typography** | Space Grotesk (headings/mono) + Inter (body) |
+| **Shadows** | Hard brutalist shadow blocks (`2px 2px 0px #111`, no blur) |
+| **Components** | Flat panels, 2px solid black borders, rounded corners (8-12px) |
+| **Accent** | Vivid Hardware Orange (`#FF4A00`) |
+| **Signature** | Utilitarian layout, high-contrast states, physical button feel |
+| **Motion** | Fast snappy movement, physical scale changes on click |
+| **Spacing** | Compact, tabular |
 
 **File:** `mock-site-loom/operator-board.html` + `operator-board.css` + `operator-board.js`
 
-### Key Stripe DNA incorporated into Pivot B
+### Key Hardware UI DNA incorporated
 
-1. **Spectral gradient hero** — indigo → lavender → orange orbs, full-bleed, parallax on scroll
-2. **Light-weight typography** — 300–400 weights create editorial elegance unusual in fintech
-3. **Low corner radius** — 4–8px (not 26–34px); professional, not chunky
-4. **Minimal shadows** — flat-to-minimal; depth is restrained
-5. **8px spacing grid** — consistent rhythm from Stripe's token system
-6. **Indigo accent** — `#533afd` for primary actions, active states, focus rings
-7. **Horizontal claim chips** — pill-shaped, white-on-dark, Stripe's product nav pattern
-8. **Intentional motion** — staggered timings, spring curves, purposeful not decorative
+1. **Lightweight brutalism** — 2px solid black borders with hard block shadows.
+2. **Typography pairing** — Space Grotesk for bold robotic headings, Inter for high legibility body.
+3. **Hardware color strategy** — Neutral base `#f2f2f2` with stark orange accent `#FF4A00`.
+4. **Physical buttons** — Active states sink components down to match shadow (e.g. `transform: translate(2px, 2px)`).
+5. **No thread** — The SVG thread has been removed in favor of direct active states.
 
-**Banned (both pivots):** glassmorphism, gradient text, heavy blur, particle fields, custom cursor, generic Codrops clichés.
+**Banned (all pivots):** glassmorphism, gradient text, heavy blur, particle fields, custom cursor, generic Codrops clichés.
 
 ---
 
@@ -87,7 +72,6 @@ A portfolio for **Aliou Wade — Product Systems Engineer** targeting founders, 
 │ - Left: Proof index (4 tabs)                            │
 │ - Center: Proof card (dynamic content)                  │
 │ - Right: Context rail (availability, arc, contact)     │
-│ - Overlay: Source thread (SVG path, claim → proof)     │
 ├─────────────────────────────────────────────────────────┤
 │ Record strip (4-column ledger)                          │
 │ - Compressed execution record (2021–now)               │
@@ -101,15 +85,16 @@ A portfolio for **Aliou Wade — Product Systems Engineer** targeting founders, 
 1. **Claim pills** (4 options): "Builds operational systems," "Ships fintech workflows," "Hardens ERP behavior," "Stops wrong abstractions"
 2. **Proof tabs** (4 options): Everest Finance, Odoo 18 kit, BocalBun retrospective, Shipped record
 3. **Claim-to-proof mapping:** Each claim routes to one proof surface
-4. **Source thread:** Visible SVG path redraws from selected claim to proof card on interaction
+4. **Hardware focus states:** Active tabs are highlighted with high-contrast borders and colors, no decorative svg thread.
 5. **Proof card:** Master-detail panel showing kicker, title, summary, meta, outcome, actions
 
 ### Success criteria
 
 - [x] Visitor clicks a claim within 3 seconds (claim board above fold, keyboard hints)
-- [x] Thread animation feels premium, not gimmicky (spring ease, endpoint nodes, ResizeObserver)
+- [x] Hardware theme implemented (Rabbit R1 / TE style)
+- [x] Thread animation removed for direct state changes
 - [x] Proof card content is scannable (hierarchy, whitespace, typography)
-- [x] Mobile fallback: proof index becomes 2-column grid; thread hidden; mobile hint on interaction
+- [x] Mobile fallback: proof index becomes 2-column grid; mobile hint on interaction
 - [x] 30s test passes: what Aliou does, what shipped, how to contact
 - [ ] Feels Awwwards-level craft (not template-y) — pending visual proof assets (Sprint 4)
 
@@ -153,9 +138,6 @@ mock-site-loom/
   stripe-pivot.html   ← Pivot B: Gradient Loom (Stripe DNA)
   stripe-pivot.css    ← Pivot B styles
   stripe-pivot.js     ← Pivot B interactions
-  operator-board.html  ← Pivot C: single-viewport instrument surface
-  operator-board.css   ← Pivot C styles
-  operator-board.js    ← Pivot C interactions
   index-finder.html   ← Archived Bottleneck Finder
   styles.css          ← Archived (finder CSS)
   app.js              ← Archived (finder JS)
@@ -192,16 +174,6 @@ mock-site-loom/
 - [ ] Record cell tint/image variation (2–3 cells)
 - [ ] Font self-hosting (preconnect added; CDN fonts remain for mock iteration)
 - [ ] Dark mode (light-only by decision)
-
-### Operator Board polish (2026-06-07)
-
-- [x] Eyebrow labels on both tab rows (`Domain: what kind of problem?` / `Proof: which project shows it?`)
-- [x] Domain description text surfaced under active domain tab (was hidden with `display: none`)
-- [x] Anchor card label changed to `Selected proof · {label}` to connect case tab → card
-- [x] Footer ledger caption (`Full record — everything, not just the proofs above`)
-- [x] Expanded ledger subtitle distinguishing curated proofs from full history
-- [x] Case row hides entirely when a domain has only one case
-- [x] Responsive: eyebrow questions hidden on tablet, both labels stacked on mobile
 
 ---
 
