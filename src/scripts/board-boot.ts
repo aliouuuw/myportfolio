@@ -3,6 +3,7 @@ import gsap from "gsap";
 type BoardWindow = Window & {
   gsap?: typeof gsap;
   FLOW_DATA?: unknown;
+  applyFlowLocale?: (overlay: Record<string, unknown>) => void;
 };
 
 const boardWindow = window as BoardWindow;
@@ -19,4 +20,10 @@ function loadScript(src: string): Promise<void> {
 }
 
 await loadScript("/board/flow-data.js");
+
+if (document.documentElement.lang.startsWith("fr")) {
+  await loadScript("/board/flow-locale.js");
+  await loadScript("/board/flow-data-fr.js");
+}
+
 await loadScript("/board/operator-board.js");

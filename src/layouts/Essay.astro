@@ -1,0 +1,136 @@
+---
+import "@/styles/case-study.css";
+
+interface Props {
+  pageTitle: string;
+  headline: string;
+  description: string;
+  lang?: "en" | "fr";
+  backHref: string;
+  backLabel: string;
+  date: string;
+  dateLabel?: string;
+  relatedCaseHref?: string;
+  relatedCaseTitle?: string;
+  relatedCaseLabel?: string;
+}
+
+const {
+  pageTitle,
+  headline,
+  description,
+  lang = "en",
+  backHref,
+  backLabel,
+  date,
+  dateLabel = lang === "fr" ? "Date" : "Date",
+  relatedCaseHref,
+  relatedCaseTitle,
+  relatedCaseLabel = lang === "fr" ? "Étude de cas liée" : "Related case study",
+} = Astro.props;
+
+const themeLabel = lang === "fr" ? "Basculer le thème" : "Toggle theme";
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script is:inline>
+      (function () {
+        try {
+          var theme = localStorage.getItem("operator-board-theme");
+          if (theme === "dark" || theme === "light") {
+            document.documentElement.setAttribute("data-theme", theme);
+          }
+        } catch (e) {
+          /* ignore */
+        }
+      })();
+    </script>
+  </head>
+  <body class="case-study-page">
+    <main class="case-study">
+      <div class="case-study__top">
+        <a class="case-study__back" href={backHref}>{backLabel}</a>
+        <button
+          type="button"
+          class="theme-toggle theme-toggle--article"
+          id="caseThemeToggle"
+          aria-label={themeLabel}
+          aria-pressed="false"
+        >
+          <svg class="theme-toggle__sun" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <circle cx="8" cy="8" r="3.25" stroke="currentColor" stroke-width="1.5"></circle>
+            <path
+              d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.05 3.05l1.06 1.06M11.89 11.89l1.06 1.06M3.05 12.95l1.06-1.06M11.89 4.11l1.06-1.06"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"></path>
+          </svg>
+          <svg class="theme-toggle__moon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path
+              d="M7.2 2.2a5.8 5.8 0 1 0 6.6 9.4A6.2 6.2 0 0 1 7.2 2.2z"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linejoin="round"></path>
+          </svg>
+        </button>
+      </div>
+      <header class="case-study__head">
+        <p class="case-study__meta mono">{dateLabel} · {date}</p>
+        <h1 class="case-study__title">{headline}</h1>
+        <p class="case-study__summary">{description}</p>
+        {
+          relatedCaseHref && relatedCaseTitle && (
+            <dl class="case-study__facts">
+              <div>
+                <dt>{relatedCaseLabel}</dt>
+                <dd>
+                  <a href={relatedCaseHref}>{relatedCaseTitle}</a>
+                </dd>
+              </div>
+            </dl>
+          )
+        }
+      </header>
+      <article class="case-study__body">
+        <slot />
+      </article>
+    </main>
+    <script is:inline>
+      (function () {
+        var toggle = document.getElementById("caseThemeToggle");
+        if (!toggle) return;
+
+        function syncPressed() {
+          var isDark = document.documentElement.getAttribute("data-theme") === "dark";
+          toggle.setAttribute("aria-pressed", isDark ? "true" : "false");
+        }
+
+        toggle.addEventListener("click", function () {
+          var isDark = document.documentElement.getAttribute("data-theme") === "dark";
+          var next = isDark ? "light" : "dark";
+          document.documentElement.setAttribute("data-theme", next);
+          try {
+            localStorage.setItem("operator-board-theme", next);
+          } catch (e) {
+            /* ignore */
+          }
+          syncPressed();
+        });
+
+        syncPressed();
+      })();
+    </script>
+  </body>
+</html>

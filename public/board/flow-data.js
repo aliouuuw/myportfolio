@@ -1,11 +1,52 @@
 /* Flow content — MDX, messages/en.json, strategic + portfolio plans */
 
 window.FLOW_DATA = {
+  locale: 'en',
+
   paths: {
-    work: '/en/work',
-    writing: '/en/writing',
-    homeEn: '/en',
+    work: '/work',
+    writing: '/writing',
+    homeEn: '/',
     homeFr: '/fr'
+  },
+
+  ui: {
+    bootLines: ['session ok', 'ledger synced · record indexed', 'proof surface online'],
+    greetings: {
+      late: 'Working late',
+      morning: 'Good morning',
+      afternoon: 'Good afternoon',
+      evening: 'Good evening'
+    },
+    copyFailed: 'Copy failed',
+    copied: 'Copied',
+    copiedWithLabel: '{label} copied',
+    openPrefix: 'Open',
+    proofTypes: {
+      report: 'Report',
+      case: 'Case study',
+      link: 'Live site',
+      project: 'Project'
+    },
+    openCaseStudy: 'Open case study',
+    visitLiveProject: 'Visit live project',
+    anchorCase: 'Anchor case',
+    judgmentCase: 'Judgment case',
+    fullRecord: 'Full record',
+    expandFullRecord: 'Expand full work record',
+    expandFullRecordMore: 'Expand full work record, includes {count} more client builds',
+    ledgerMore: '+{count} more',
+    ledgerSubtitle: '{employers} employers · {clients} client builds',
+    essayKicker: 'Essay',
+    readEssay: 'Read essay',
+    collapseComms: 'Collapse contact panel',
+    expandComms: 'Expand contact panel',
+    themeLight: 'Switch to light mode',
+    themeDark: 'Switch to dark mode',
+    localeSwitchToFr: 'Switch to French',
+    localeSwitchToEn: 'Switch to English',
+    localeTitleFr: 'Version française',
+    localeTitleEn: 'English version'
   },
 
   profile: {

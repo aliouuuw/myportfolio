@@ -6,11 +6,11 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 const DOMAIN_IDS = ['fintech', 'erp', 'systems'];
 const SPRING = 'back.out(1.2)';
 const SPRING_BACK = 'back.out(1.7)';
-const BOOT_LINES = [
-  'session ok',
-  'ledger synced · record indexed',
-  'proof surface online'
-];
+const BOOT_LINES = () => data.ui?.bootLines ?? ['session ok', 'ledger synced · record indexed', 'proof surface online'];
+
+function proofTypeLabel(type) {
+  return data.ui?.proofTypes?.[type] ?? data.ui?.proofTypes?.project ?? 'Project';
+}
 
 const board = document.getElementById('board');
 const domainTabsEl = document.getElementById('domainTabs');
@@ -167,11 +167,12 @@ function dakarGreeting() {
     new Date().toLocaleString('en-US', { timeZone: 'Africa/Dakar' })
   );
   const h = now.getHours();
-  if (h < 5) return 'Working late';
-  if (h < 12) return 'Good morning';
-  if (h < 17) return 'Good afternoon';
-  if (h < 21) return 'Good evening';
-  return 'Good evening';
+  const g = data.ui?.greetings ?? {};
+  if (h < 5) return g.late ?? 'Working late';
+  if (h < 12) return g.morning ?? 'Good morning';
+  if (h < 17) return g.afternoon ?? 'Good afternoon';
+  if (h < 21) return g.evening ?? 'Good evening';
+  return g.evening ?? 'Good evening';
 }
 
 function startDakarClock() {
@@ -210,9 +211,10 @@ function showToast(msg) {
 async function copyText(text, label) {
   try {
     await navigator.clipboard.writeText(text);
-    showToast(`${label} copied`);
+    const copiedTpl = data.ui?.copiedWithLabel ?? '{label} copied';
+    showToast(copiedTpl.replace('{label}', label));
   } catch {
-    showToast('Copy failed');
+    showToast(data.ui?.copyFailed ?? 'Copy failed');
   }
 }
 
@@ -256,7 +258,7 @@ function resolveProofPreview(record) {
     return {
       type: 'case',
       href: workUrl(slug),
-      label: 'Open case study',
+      label: data.ui?.openCaseStudy ?? 'Open case study',
       title: record.name,
       excerpt: record.proof || record.scope || ''
     };
@@ -266,7 +268,7 @@ function resolveProofPreview(record) {
     return {
       type: 'link',
       href: externalUrl(record.web),
-      label: 'Visit live project',
+      label: data.ui?.visitLiveProject ?? 'Visit live project',
       title: record.name,
       excerpt: record.proof || record.scope || '',
       meta: record.web
@@ -276,11 +278,26 @@ function resolveProofPreview(record) {
   return null;
 }
 
-const PROOF_TYPE_LABEL = {
-  report: 'Report',
-  case: 'Case study',
-  link: 'Live site'
-};
+function proofPreviewCardHTML(preview) {
+  if (!preview) return '';
+  const typeLabel = proofTypeLabel(preview.type);
+  const label = preview.label || `${data.ui?.openPrefix ?? 'Open'} ${typeLabel.toLowerCase()}`;
+  const meta = preview.meta
+    ? `<span class="proof-card__meta mono">${escapeHtml(preview.meta)}</span>`
+    : '';
+
+  return `
+    ${proofThumb(preview)}
+    <div class="proof-card__body">
+      <span class="proof-card__tag mono">${escapeHtml(typeLabel)}</span>
+      ${preview.excerpt ? `<p class="proof-card__excerpt">${escapeHtml(preview.excerpt)}</p>` : ''}
+      <div class="proof-card__foot">
+        ${meta}
+        <span class="proof-card__cta">${escapeHtml(label)} <span aria-hidden="true">→</span></span>
+      </div>
+    </div>
+  `;
+}
 
 /* Mock thumbnail for the hover preview.
    Reports render as a document page; case/live render as a browser window. */
@@ -330,26 +347,6 @@ function proofRowAttrs(id, preview) {
   if (!id || !preview) return '';
   const href = preview.href || '#';
   return ` data-proof-id="${escapeHtml(id)}" data-proof-href="${escapeHtml(href)}" role="link" tabindex="0"`;
-}
-
-function proofPreviewCardHTML(preview) {
-  if (!preview) return '';
-  const label = preview.label || `Open ${PROOF_TYPE_LABEL[preview.type].toLowerCase()}`;
-  const meta = preview.meta
-    ? `<span class="proof-card__meta mono">${escapeHtml(preview.meta)}</span>`
-    : '';
-
-  return `
-    ${proofThumb(preview)}
-    <div class="proof-card__body">
-      <span class="proof-card__tag mono">${escapeHtml(PROOF_TYPE_LABEL[preview.type] || 'Project')}</span>
-      ${preview.excerpt ? `<p class="proof-card__excerpt">${escapeHtml(preview.excerpt)}</p>` : ''}
-      <div class="proof-card__foot">
-        ${meta}
-        <span class="proof-card__cta">${escapeHtml(label)} <span aria-hidden="true">→</span></span>
-      </div>
-    </div>
-  `;
 }
 
 /* ── Shared proof hovercard ──
@@ -546,8 +543,9 @@ function domainViz(domainId) {
 }
 
 function renderCaseTab(caseItem, originalIndex, isActive) {
+  const anchorLabel = data.ui?.anchorCase ?? 'Anchor case';
   const ariaLabel = caseItem.primary
-    ? `${caseItem.title} — anchor case`
+    ? `${caseItem.title} — ${anchorLabel.toLowerCase()}`
     : caseItem.title;
   return `
     <button
@@ -557,7 +555,7 @@ function renderCaseTab(caseItem, originalIndex, isActive) {
       data-case-index="${originalIndex}"
       aria-selected="${isActive ? 'true' : 'false'}"
       aria-label="${escapeHtml(ariaLabel)}"
-      ${caseItem.primary ? 'title="Anchor case"' : ''}
+      ${caseItem.primary ? `title="${escapeHtml(anchorLabel)}"` : ''}
     ><span>${escapeHtml(caseItem.title)}</span></button>
   `;
 }
@@ -752,18 +750,20 @@ function renderLedgerPreview() {
 
   ledgerClientsPreview.innerHTML =
     clients.map((item) => `<span class="ledger-chip">${recordLogo(item, 18, 'chip-logo')}<span>${escapeHtml(item.name)}</span></span>`).join('') +
-    (hiddenCount > 0 ? `<span class="ledger-chip ledger-chip--more">+${hiddenCount} more</span>` : '');
+    (hiddenCount > 0
+      ? `<span class="ledger-chip ledger-chip--more">${escapeHtml((data.ui?.ledgerMore ?? '+{count} more').replace('{count}', hiddenCount))}</span>`
+      : '');
 
   hydrateLogos(ledgerEmployersPreview);
   hydrateLogos(ledgerClientsPreview);
 
   if (ledgerExpandBtn) {
-    ledgerExpandBtn.textContent = 'Full record';
+    ledgerExpandBtn.textContent = data.ui?.fullRecord ?? 'Full record';
     ledgerExpandBtn.setAttribute(
       'aria-label',
-      hiddenCount > 0
-        ? `Expand full work record, includes ${hiddenCount} more client builds`
-        : 'Expand full work record'
+    (hiddenCount > 0
+        ? (data.ui?.expandFullRecordMore ?? 'Expand full work record, includes {count} more client builds').replace('{count}', hiddenCount)
+        : (data.ui?.expandFullRecord ?? 'Expand full work record'))
     );
   }
 }
@@ -772,8 +772,15 @@ function renderLocaleSwitch() {
   const el = document.getElementById('localeSwitch');
   if (!el || !data?.paths) return;
 
-  const homeFr = data.paths.homeFr ?? '/fr';
-  el.innerHTML = `<a href="${escapeHtml(homeFr)}" class="locale-toggle" hreflang="fr" lang="fr" aria-label="Switch to French" title="Version française">EN</a>`;
+  const isFr = (data.locale ?? 'en') === 'fr';
+  const href = isFr ? (data.paths.homeEn ?? '/') : (data.paths.homeFr ?? '/fr');
+  const label = isFr ? 'EN' : 'FR';
+  const aria = isFr ? (data.ui?.localeSwitchToEn ?? 'Switch to English') : (data.ui?.localeSwitchToFr ?? 'Switch to French');
+  const title = isFr ? (data.ui?.localeTitleEn ?? 'English version') : (data.ui?.localeTitleFr ?? 'Version française');
+  const hreflang = isFr ? 'en' : 'fr';
+  const langAttr = isFr ? 'en' : 'fr';
+
+  el.innerHTML = `<a href="${escapeHtml(href)}" class="locale-toggle" hreflang="${hreflang}" lang="${langAttr}" aria-label="${escapeHtml(aria)}" title="${escapeHtml(title)}">${label}</a>`;
 }
 
 function renderLedgerExpanded() {
@@ -784,7 +791,10 @@ function renderLedgerExpanded() {
   const ledgerSubtitle = document.getElementById('ledgerSubtitle');
 
   if (ledgerSubtitle) {
-    ledgerSubtitle.textContent = `${data.employers.length} employers · ${data.clients.length} client builds`;
+    const tpl = data.ui?.ledgerSubtitle ?? '{employers} employers · {clients} client builds';
+    ledgerSubtitle.textContent = tpl
+      .replace('{employers}', data.employers.length)
+      .replace('{clients}', data.clients.length);
   }
 
   proofPreviewRegistry = {};
@@ -844,10 +854,10 @@ function renderLedgerExpanded() {
 
   if (essayTeaser) {
     essayTeaser.innerHTML = `
-      <span class="field-notes-kicker">Essay</span>
+      <span class="field-notes-kicker">${escapeHtml(data.ui?.essayKicker ?? 'Essay')}</span>
       <h4 class="field-notes-title">${escapeHtml(data.writing.title)}</h4>
       <p class="field-notes-summary">${escapeHtml(data.writing.summary)}</p>
-      <a class="field-notes-read hw-btn" href="${escapeHtml(writingUrl(data.writing.slug))}">Read essay <span aria-hidden="true">→</span></a>
+      <a class="field-notes-read hw-btn" href="${escapeHtml(writingUrl(data.writing.slug))}">${escapeHtml(data.ui?.readEssay ?? 'Read essay')} <span aria-hidden="true">→</span></a>
     `;
   }
 }
@@ -905,7 +915,7 @@ function setCommsOpen(open) {
 
   if (sidebarHandle) {
     sidebarHandle.setAttribute('aria-expanded', String(open));
-    const label = open ? 'Collapse contact panel' : 'Expand contact panel';
+    const label = open ? (data.ui?.collapseComms ?? 'Collapse contact panel') : (data.ui?.expandComms ?? 'Expand contact panel');
     sidebarHandle.setAttribute('aria-label', label);
   }
 }
@@ -925,7 +935,7 @@ function updateThemeSwitchUI() {
   themeToggle.setAttribute('aria-pressed', String(isDark));
   themeToggle.setAttribute(
     'aria-label',
-    isDark ? 'Switch to light mode' : 'Switch to dark mode'
+    isDark ? (data.ui?.themeLight ?? 'Switch to light mode') : (data.ui?.themeDark ?? 'Switch to dark mode')
   );
 }
 
@@ -985,7 +995,7 @@ function bindEvents() {
     const labelEl = btn.querySelector('.comms-link-label');
     if (labelEl) {
       const prev = labelEl.textContent;
-      labelEl.textContent = 'Copied';
+      labelEl.textContent = data.ui?.copied ?? 'Copied';
       setTimeout(() => {
         btn.classList.remove('is-copied');
         labelEl.textContent = prev;
@@ -1112,7 +1122,7 @@ function runBoot() {
   overlay.addEventListener('click', onSkip);
 
   tl = gsap.timeline({ onComplete: () => gsap.delayedCall(0.4, finish) });
-  BOOT_LINES.forEach((line, index) => {
+  BOOT_LINES().forEach((line, index) => {
     const lineEl = document.createElement('div');
     lineEl.className = 'boot-line';
     lineEl.innerHTML = '<span class="boot-prompt" aria-hidden="true">\u25C9</span><span class="boot-text"></span>';

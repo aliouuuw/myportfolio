@@ -1,0 +1,33 @@
+---
+import { getCollection, render } from "astro:content";
+import Essay from "@/layouts/Essay.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("writing", (e) => e.id.endsWith("/en"));
+  return entries.map((entry) => ({
+    params: { slug: entry.id.replace(/\/en$/, "") },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, summary, date, relatedCaseSlug } = entry.data;
+const relatedCase = relatedCaseSlug
+  ? (await getCollection("work")).find((e) => e.id === `${relatedCaseSlug}/en`)
+  : undefined;
+---
+
+<Essay
+  lang="en"
+  pageTitle={`${title} · Aliou Wade`}
+  headline={title}
+  description={summary}
+  backHref="/"
+  backLabel="← Operator board"
+  date={date}
+  relatedCaseHref={relatedCase ? `/work/${relatedCaseSlug}` : undefined}
+  relatedCaseTitle={relatedCase?.data.title}
+>
+  <Content />
+</Essay>
