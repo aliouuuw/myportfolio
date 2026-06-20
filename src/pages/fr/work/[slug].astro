@@ -1,0 +1,38 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "@/layouts/Base.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("work", (e) => e.id.endsWith("/fr"));
+  return entries.map((entry) => ({
+    params: { slug: entry.id.replace(/\/fr$/, "") },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const data = entry.data;
+const title = data.titleFr ?? data.title;
+const summary = data.summaryFr ?? data.summary;
+const { role, domain, period, stack, outcome } = data;
+---
+
+<Base lang="fr" title={`${title} · Aliou Wade`} description={summary}>
+  <main class="case-study">
+    <a class="case-study__back" href="/fr">← Tableau de bord</a>
+    <header class="case-study__head">
+      <p class="case-study__meta mono">{domain}{period ? ` · ${period}` : ""}</p>
+      <h1 class="case-study__title">{title}</h1>
+      <p class="case-study__summary">{summary}</p>
+      <dl class="case-study__facts">
+        <div><dt>Rôle</dt><dd>{role}</dd></div>
+        {outcome && <div><dt>Résultat</dt><dd>{outcome}</dd></div>}
+        {stack.length > 0 && <div><dt>Stack</dt><dd>{stack.join(" · ")}</dd></div>}
+      </dl>
+    </header>
+    <article class="case-study__body">
+      <Content />
+    </article>
+  </main>
+</Base>

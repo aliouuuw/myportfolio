@@ -1,0 +1,46 @@
+---
+import "@/styles/operator-board.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: "en" | "fr";
+}
+
+const {
+  title = "Aliou Wade · Operator Board",
+  description = "Single-viewport operator board — live proof, comms, and ledger for a Product Systems Engineer.",
+  lang = "en",
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script is:inline>
+      (function () {
+        try {
+          var theme = localStorage.getItem("operator-board-theme");
+          if (theme === "dark" || theme === "light") {
+            document.documentElement.setAttribute("data-theme", theme);
+          }
+        } catch (e) {
+          /* ignore */
+        }
+      })();
+    </script>
+  </head>
+  <body class="operator-board">
+    <slot />
+  </body>
+</html>

@@ -13,7 +13,11 @@
 # testing
 /coverage
 
-# next.js
+# astro
+/.astro/
+/dist/
+
+# next.js (archived on branch archive/nextjs-v1)
 /.next/
 /out/
 
