@@ -115,14 +115,14 @@ window.applyFlowLocale({
       web: 'everestfinance.sn',
       logo: 'logos/everest-finance.png',
       role: 'Contractuel → CDI · opérateur technique solo',
-      proof: 'Site public, CRM et Sama Naffa vers un seul modèle opérationnel.',
+      proof: 'Site public avec CMS, épargne Sama Naffa et Formos — trois produits sous un seul opérateur.',
       proofPreview: {
         type: 'case',
         slug: 'everest-finance',
         label: 'Ouvrir l\'étude de cas',
         title: 'Everest Finance',
-        excerpt: 'Trois produits unifiés sur un schéma PostgreSQL — site public, CRM et Sama Naffa.',
-        meta: 'Cas principal · Fintech'
+        excerpt: 'Site corporate avec CMS, app d\'épargne sur Postgres et capture terrain interne.',
+        meta: '3 produits · Fintech'
       }
     },
     {
@@ -331,7 +331,7 @@ window.applyFlowLocale({
       type: 'domain',
       title: 'L\'argent bouge.\nLes systèmes doivent suivre.',
       desc:
-        'Une fintech sénégalaise en zone UEMOA ne peut pas se permettre trois surfaces déconnectées. Site public, CRM interne et app client doivent partager le même modèle de compte.',
+        'Une fintech sénégalaise en zone UEMOA ne peut pas se permettre des surfaces déconnectées. Site public, épargne et capture terrain doivent tenir une ops cohérente — pas forcément une seule base.',
       cases: [
         {
           primary: true,
@@ -340,13 +340,21 @@ window.applyFlowLocale({
           web: 'everestfinance.sn',
           logo: 'logos/everest-finance.png',
           caseStudySlug: 'everest-finance',
-          period: '2024 → présent',
+          period: '2025 → maintenant',
           role: 'Opérateur technique solo',
           summary:
-            'Trois produits, aucune équipe d\'ingénierie. J\'ai unifié le site public, le CRM interne et l\'app client Sama Naffa sur un schéma PostgreSQL et des types TypeScript partagés.',
-          outcome: 'Site public en ligne. CRM utilisé au quotidien. Sama Naffa en durcissement avant déploiement plus large.',
-          meta: ['Next.js', 'React Native', 'PostgreSQL', 'Zod', 'Propriétaire solo'],
-          metric: { value: '3', label: 'produits unifiés' }
+            'Trois produits, sans équipe d\'ingénierie. Site public avec CMS Convex, épargne Sama Naffa sur Postgres, Formos pour la capture terrain — un seul opérateur sur toute la stack.',
+          outcome: 'Site public en ligne. Sama Naffa en production. Formos en interne.',
+          meta: ['Vite', 'Convex', 'Next.js', 'TanStack Start', 'Neon Postgres', 'Propriétaire solo'],
+          metric: { value: '3', label: 'produits' },
+          proofPreview: {
+            type: 'case',
+            slug: 'everest-finance',
+            label: 'Ouvrir l\'étude de cas',
+            title: 'Everest Finance',
+            excerpt: 'Site corporate avec CMS, app d\'épargne sur Postgres et capture terrain interne.',
+            meta: '3 produits · Fintech'
+          }
         },
         {
           primary: false,
@@ -356,9 +364,17 @@ window.applyFlowLocale({
           period: '2023 → T2 2024',
           role: 'Ingénieur logiciel · contrat',
           summary:
-            'APIs open banking pour ALM cloud-native en UEMOA, surfaces bilingues, migration web et mail vers bbafintech.com.',
-          outcome: 'Couche API de niveau réglementaire qui a façonné mon approche de la consolidation Everest.',
-          meta: ['Open banking', 'UEMOA', 'APIs']
+            'Couche API open banking pour ALM cloud-native en UEMOA, surfaces produit bilingues, et migration web et messagerie corporate vers bbafintech.com.',
+          outcome: 'APIs de niveau réglementaire et bascule de domaine — la référence avant la consolidation des produits Everest.',
+          meta: ['APIs open banking', 'ALM UEMOA', 'Migration domaine'],
+          proofPreview: {
+            type: 'link',
+            href: 'https://bbafintech.com',
+            label: 'Voir le site migré',
+            title: 'BankingBook Analytics',
+            excerpt: 'APIs open banking pour ALM UEMOA, surfaces bilingues et migration bbafintech.com / mail — ingénierie de contrat, pas vitrine publique.',
+            meta: 'bbafintech.com · APIs'
+          }
         }
       ]
     },
@@ -378,25 +394,41 @@ window.applyFlowLocale({
           web: 'ergobit.com',
           logo: 'logos/ergobit.png',
           caseStudySlug: 'odoo-testing-toolkit',
-          period: '2024',
+          period: '2024 → T1 2026',
           role: 'Ingénieur logiciel · ERGOBIT',
           summary:
             'Mots-clés Robot Framework lisibles par les consultants fonctionnels. Playwright pilote le client OWL d\'Odoo. Suites smoke sous deux minutes ; validation complète ventes, achats, stock, RH et compta.',
           outcome: '39 tests en 9 suites. Cycle de validation passé d\'une journée entière à moins de quinze minutes.',
           meta: ['Robot Framework', 'Playwright', 'Azure DevOps', '39 tests', '9 suites'],
-          metric: { value: '15m', label: 'cycle de validation' }
+          metric: { value: '15m', label: 'cycle de validation' },
+          proofPreview: {
+            type: 'case',
+            slug: 'odoo-testing-toolkit',
+            label: 'Ouvrir l\'étude de cas',
+            title: 'Kit de tests d\'acceptation Odoo 18',
+            excerpt: 'Kit Robot + Playwright construit pendant les migrations ERGOBIT : 39 tests, 9 suites, smoke sous deux minutes.',
+            meta: 'ERGOBIT · CI Azure DevOps'
+          }
         },
         {
           primary: false,
           title: 'Comptabilité Africa GreenTec',
-          web: 'africagreentec.com',
           logo: 'logos/africagreentec.png',
           period: '2024',
-          role: 'Contrat · module Odoo',
+          role: 'Contrat · module Odoo · ERGOBIT',
           summary:
-            'Automatisation comptable pour ERP de production : écritures récurrentes encodées, contrôles opérationnels, piste d\'audit sans ponts tableur.',
+            'Module d\'automatisation comptable pour un ERP de production : écritures récurrentes encodées, contrôles opérationnels et piste d\'audit sans ponts tableur.',
           outcome: 'Environ 80 % de saisie manuelle en moins. Plus de 10 000 enregistrements traités par jour en production.',
-          meta: ['Odoo', 'Python', 'BI']
+          meta: ['Compta Odoo', 'Automatisation journaux', 'ERGOBIT'],
+          metric: { value: '80%', label: 'saisie en moins' },
+          proofPreview: {
+            type: 'report',
+            href: '/fr/work/odoo-testing-toolkit',
+            label: 'Voir le module dans l\'étude de cas',
+            title: 'Africa GreenTec — automatisation comptable',
+            excerpt: 'Module Odoo livré via ERGOBIT : journaux récurrents, contrôles opérationnels, ~80 % de saisie manuelle en moins à 10k+ enregistrements/jour.',
+            meta: 'Module Odoo · contrat ERGOBIT'
+          }
         }
       ]
     },
@@ -421,19 +453,36 @@ window.applyFlowLocale({
           outcome: 'Codebase gelée. Leçons appliquées à la structure repo Everest et aux conventions agent-ready.',
           meta: ['Bun', 'TypeScript', 'PostgreSQL', 'RLS'],
           metric: { value: '0', label: 'utilisateurs externes' },
-          essaySlug: 'why-systems-over-frameworks'
+          essaySlug: 'why-systems-over-frameworks',
+          web: 'github.com/aliouuuw/bocalbun',
+          proofPreview: {
+            type: 'case',
+            slug: 'bocalbun-retrospective',
+            label: 'Ouvrir la rétrospective',
+            title: 'BocalBun',
+            excerpt: 'Toolkit Bun gelé — moteur d\'entités, RLS, pistes d\'audit. Un arrêt délibéré quand les abstractions me servaient, pas un client.',
+            meta: 'Archivé · GitHub'
+          }
         },
         {
           primary: false,
           title: 'Purolator Digital Lab',
-          web: 'purolator.com',
           logo: 'logos/purolator.png',
           period: '2023 · Ottawa',
-          role: 'COOP + contractuel à temps partiel',
+          role: 'COOP + contractuel à temps partiel · Université d\'Ottawa',
           summary:
-            'Migration CI/CD sur trois projets logistiques, outillage Power Automate et Azure DevOps, SDK tri de colis pour entrepôts.',
-          outcome: 'Rythme de livraison enterprise avant les contrats fintech et ERP en Afrique de l\'Ouest.',
-          meta: ['Azure DevOps', 'CI/CD', 'Logistique']
+            'COOP universitaire au Purolator Digital Lab : CI/CD Azure DevOps sur trois codebases logistiques, outillage d\'approbation Power Automate et intégration SDK tri de colis pour entrepôts.',
+          outcome: 'Rythme de livraison enterprise — pipelines, automatisation et intégration proche du matériel avant les contrats fintech et ERP à Dakar.',
+          meta: ['Azure DevOps', 'Power Automate', 'SDK tri colis'],
+          metric: { value: '3', label: 'dépôts CI/CD' },
+          proofPreview: {
+            type: 'report',
+            href: '#purolator-coop-report',
+            label: 'Ouvrir le rapport COOP',
+            title: 'Purolator Digital Lab — dossier COOP',
+            excerpt: 'Rapport COOP Université d\'Ottawa : déploiement CI/CD sur trois projets logistiques, flux Power Automate et notes d\'intégration SDK tri de colis.',
+            meta: 'PDF · 18 pages · EN'
+          }
         }
       ]
     },

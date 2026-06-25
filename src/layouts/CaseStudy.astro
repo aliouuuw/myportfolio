@@ -1,13 +1,58 @@
 ---
 import "@/styles/case-study.css";
 
+interface NavItem {
+  slug: string;
+  title: string;
+  current?: boolean;
+}
+
+interface Adjacent {
+  slug: string;
+  title: string;
+}
+
+interface Heading {
+  slug: string;
+  text: string;
+}
+
 interface Props {
   title: string;
   description: string;
   lang?: "en" | "fr";
+  slug: string;
+  docTitle: string;
+  headings?: Heading[];
+  navItems?: NavItem[];
+  prev?: Adjacent | null;
+  next?: Adjacent | null;
 }
 
-const { title, description, lang = "en" } = Astro.props;
+const {
+  title,
+  description,
+  lang = "en",
+  slug,
+  docTitle,
+  headings = [],
+  navItems = [],
+  prev = null,
+  next = null,
+} = Astro.props;
+
+const isFr = lang === "fr";
+const homeHref = isFr ? "/fr" : "/";
+const workBase = isFr ? "/fr/work" : "/work";
+const localeHref = isFr ? `/work/${slug}` : `/fr/work/${slug}`;
+const localeLabel = isFr ? "EN" : "FR";
+const localeAria = isFr ? "Switch to English" : "Passer en français";
+const boardLabel = isFr ? "Tableau de bord" : "Operator board";
+const workLabel = isFr ? "Études de cas" : "Case studies";
+const onPageLabel = isFr ? "Sur cette page" : "On this page";
+const allCasesLabel = isFr ? "Toutes les études" : "All case studies";
+const prevLabel = isFr ? "Précédent" : "Previous";
+const nextLabel = isFr ? "Suivant" : "Next";
 ---
 
 <!DOCTYPE html>
@@ -37,7 +82,117 @@ const { title, description, lang = "en" } = Astro.props;
     </script>
   </head>
   <body class="case-study-page">
-    <slot />
+    <header class="doc-header">
+      <div class="doc-header__inner">
+        <div class="doc-header__brand">
+          <a class="doc-header__name" href={homeHref}>Aliou Wade</a>
+          <span class="doc-header__sep" aria-hidden="true">/</span>
+          <a class="doc-header__crumb" href={workBase}>{workLabel}</a>
+          <span class="doc-header__sep" aria-hidden="true">/</span>
+          <span class="doc-header__current">{docTitle}</span>
+        </div>
+        <div class="doc-header__actions">
+          <a class="doc-header__link" href={homeHref}>{boardLabel}</a>
+          <a class="doc-header__link doc-header__locale" href={localeHref} hreflang={isFr ? "en" : "fr"} lang={isFr ? "en" : "fr"} aria-label={localeAria}>{localeLabel}</a>
+          <button
+            type="button"
+            class="theme-toggle theme-toggle--article"
+            id="caseThemeToggle"
+            aria-label={isFr ? "Basculer le thème" : "Toggle theme"}
+            aria-pressed="false"
+          >
+            <svg class="theme-toggle__sun" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="3.25" stroke="currentColor" stroke-width="1.5"></circle>
+              <path
+                d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.05 3.05l1.06 1.06M11.89 11.89l1.06 1.06M3.05 12.95l1.06-1.06M11.89 4.11l1.06-1.06"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"></path>
+            </svg>
+            <svg class="theme-toggle__moon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path
+                d="M7.2 2.2a5.8 5.8 0 1 0 6.6 9.4A6.2 6.2 0 0 1 7.2 2.2z"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linejoin="round"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="doc-layout">
+      <aside class="doc-sidebar" aria-label={isFr ? "Navigation documentation" : "Documentation navigation"}>
+        {
+          headings.length > 0 && (
+            <nav class="doc-nav doc-nav--toc">
+              <p class="doc-nav__label">{onPageLabel}</p>
+              <ul class="doc-nav__list">
+                {headings.map((h) => (
+                  <li>
+                    <a class="doc-nav__link" href={`#${h.slug}`}>
+                      {h.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )
+        }
+        {
+          navItems.length > 0 && (
+            <nav class="doc-nav doc-nav--cases">
+              <p class="doc-nav__label">{allCasesLabel}</p>
+              <ul class="doc-nav__list">
+                {navItems.map((item) => (
+                  <li>
+                    <a
+                      class:list={["doc-nav__link", item.current && "doc-nav__link--current"]}
+                      href={`${workBase}/${item.slug}`}
+                      aria-current={item.current ? "page" : undefined}
+                    >
+                      {item.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )
+        }
+      </aside>
+
+      <div class="doc-main">
+        <slot />
+
+        {
+          (prev || next) && (
+            <nav class="doc-pager" aria-label={isFr ? "Navigation entre études" : "Case study navigation"}>
+              {
+                prev ? (
+                  <a class="doc-pager__link doc-pager__link--prev" href={`${workBase}/${prev.slug}`}>
+                    <span class="doc-pager__dir">{prevLabel}</span>
+                    <span class="doc-pager__title">{prev.title}</span>
+                  </a>
+                ) : (
+                  <span class="doc-pager__spacer" />
+                )
+              }
+              {
+                next ? (
+                  <a class="doc-pager__link doc-pager__link--next" href={`${workBase}/${next.slug}`}>
+                    <span class="doc-pager__dir">{nextLabel}</span>
+                    <span class="doc-pager__title">{next.title}</span>
+                  </a>
+                ) : (
+                  <span class="doc-pager__spacer" />
+                )
+              }
+            </nav>
+          )
+        }
+      </div>
+    </div>
+
     <script is:inline>
       (function () {
         var toggle = document.getElementById("caseThemeToggle");

@@ -22,6 +22,26 @@ const work = defineCollection({
     period: z.string().optional(),
     proofClaim: z.string().optional(),
     outcome: z.string().optional(),
+    // Surfaces = the shippable products behind a case study. Rendered as a
+    // proof-first grid (live link + demo video) above the long-form prose.
+    surfaces: z
+      .array(
+        z.object({
+          name: z.string(),
+          nameFr: z.string().optional(),
+          blurb: z.string(),
+          blurbFr: z.string().optional(),
+          status: z.string(),
+          statusFr: z.string().optional(),
+          url: z.string().optional(),
+          urlLabel: z.string().optional(),
+          urlLabelFr: z.string().optional(),
+          video: z.string().optional(),
+          poster: z.string().optional(),
+          stack: z.array(z.string()).default([]),
+        }),
+      )
+      .default([]),
   }),
 });
 

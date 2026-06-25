@@ -34,15 +34,15 @@ What changed my orientation wasn't a blog post or a conference talk. It was work
 
 At ERGOBIT, I was deploying Odoo ERP modules for companies that needed their operations to work tomorrow, not next quarter. These weren't greenfield projects with room for architectural elegance. They were messy environments where a testing toolkit that caught regressions before deployment was worth more than any abstraction I could design. So I built that toolkit. It wasn't glamorous. It didn't have a landing page. But it prevented real failures in production systems that real businesses depended on.
 
-At Everest Finance, the lesson sharpened further. I joined as the sole technical operator for a Senegalese fintech with three disconnected digital surfaces: a public website, an internal CRM, and a customer-facing app. The temptation was enormous — three products, one engineer, surely this calls for a unifying framework?
+At Everest Finance, the lesson sharpened further. I joined as the sole technical operator for a Senegalese fintech with several disconnected digital surfaces: a public website and CMS, a customer-facing savings app, and internal lead-capture tooling. The temptation was enormous — multiple products, one engineer, surely this calls for a unifying framework?
 
-It didn't. It called for a system. A shared database schema. Consistent type definitions. A deployment pipeline that worked for each surface independently. The difference is subtle but important: a framework is something you build so that future work is easier. A system is something that works today and can be extended tomorrow. I needed the latter.
+It didn't. It called for a system. Consistent conventions across repos. Type-safe schemas as the contract. A backend chosen to match each surface — Convex where editorial velocity matters, Postgres where financial correctness matters — and a deployment pipeline that worked for each surface independently. The difference is subtle but important: a framework is something you build so that future work is easier. A system is something that works today and can be extended tomorrow. I needed the latter.
 
 ## What "shipping systems" actually means
 
 When I say I ship systems now, I mean something specific. I mean software that:
 
-- **Has users who depend on it.** The Everest CRM is used daily by an operations team processing real financial transactions. If it breaks, people notice within minutes, not months.
+- **Has users who depend on it.** The Sama Naffa back-office is used daily by an operations team processing real financial transactions. If it breaks, people notice within minutes, not months.
 - **Solves a business problem, not a technical one.** The ERGOBIT testing toolkit didn't exist because testing is interesting. It existed because deployments were failing and clients were losing confidence.
 - **Can be operated by someone other than its creator.** A framework I built for myself can be as idiosyncratic as I want. A system that a business depends on needs to be legible, documented, and predictable.
 - **Prioritizes correctness over elegance.** In fintech, a transaction that processes incorrectly is not a bug — it's a compliance incident. The code that handles it should be boring and correct, not clever and compact.

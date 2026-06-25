@@ -1128,7 +1128,7 @@ body.is-booted .case-row {
 }
 
 /* Anchor-case marker — a small lime tick before the primary case tab */
-.case-tab--primary::after {
+.case-tab[aria-selected="true"]::after {
   content: '';
   flex-shrink: 0;
   width: 4px;

@@ -40,7 +40,7 @@ window.FLOW_DATA = {
     heroDesc:
       'Operational software for fintechs and operations-heavy businesses: internal tools, CRM consolidation, ERP modules, and domain-specific workflows. From Dakar, bilingual FR/EN.',
     heroSecondary:
-      'Currently consolidating Everest Finance (public site, CRM, Sama Naffa). Previously ERGOBIT Odoo 18 localization and acceptance testing.',
+      'Currently consolidating Everest Finance (public site + CMS, Sama Naffa savings app, Formos). Previously ERGOBIT Odoo 18 localization and acceptance testing.',
     domains: [
       { label: 'Fintech', sectionId: 'fintech' },
       { label: 'ERP / QA', sectionId: 'erp' },
@@ -99,14 +99,19 @@ window.FLOW_DATA = {
       web: 'everestfinance.sn',
       logo: 'logos/everest-finance.png',
       role: 'Contractor → full-time · solo technical operator',
-      proof: 'Public site, CRM, and Sama Naffa toward one operating model.',
+      proof: 'Public site with CMS, Sama Naffa savings app, and Formos — three products under one operator.',
       proofPreview: {
         type: 'case',
         slug: 'everest-finance',
         label: 'Open case study',
         title: 'Everest Finance',
-        excerpt: 'Three products unified on one PostgreSQL schema — public site, CRM, and Sama Naffa.',
-        meta: 'Anchor case · Fintech'
+        excerpt: 'Corporate site with CMS, savings app on Postgres, and internal campaign capture.',
+        meta: '3 surfaces · Fintech',
+        surfaces: [
+          { label: 'Site + CMS', poster: '/media/case-studies/everest-finance/website.jpg', video: '/media/case-studies/everest-finance/website.mp4' },
+          { label: 'Sama Naffa', poster: '/media/case-studies/everest-finance/sama-naffa.jpg', video: '/media/case-studies/everest-finance/sama-naffa.mp4' },
+          { label: 'Formos', poster: '/media/case-studies/everest-finance/formos.jpg', video: '/media/case-studies/everest-finance/formos.mp4' }
+        ]
       }
     },
     {
@@ -354,20 +359,33 @@ window.FLOW_DATA = {
       type: 'domain',
       title: 'Money moves.\nSystems should keep up.',
       desc:
-        'Senegalese fintech in the UEMOA zone cannot afford three disconnected surfaces. Public site, internal CRM, and customer app each need the same account model.',
+        'Senegalese fintech in the UEMOA zone cannot afford disconnected surfaces. Public site, savings app, and internal intake each need coherent ops — not necessarily one database.',
       cases: [
         {
           primary: true,
           label: 'Anchor case',
           title: 'Everest Finance',
           caseStudySlug: 'everest-finance',
-          period: '2024 → present',
+          period: '2025 → now',
           role: 'Solo technical operator',
           summary:
-            'Three products, no engineering team. I unified the public website, internal CRM, and Sama Naffa customer app on one PostgreSQL schema and shared TypeScript types.',
-          outcome: 'Public site live. CRM in daily use. Sama Naffa in hardening before wider rollout.',
-          meta: ['Next.js', 'React Native', 'PostgreSQL', 'Zod', 'Solo owner'],
-          metric: { value: '3', label: 'unified products' }
+            'Three products, no engineering team. Public site with Convex CMS, Sama Naffa savings on Postgres, Formos for campaign capture — one operator holding the full stack.',
+          outcome: 'Public site live. Sama Naffa in production. Formos internal.',
+          meta: ['Vite', 'Convex', 'Next.js', 'TanStack Start', 'Neon Postgres', 'Solo owner'],
+          metric: { value: '3', label: 'products' },
+          proofPreview: {
+            type: 'case',
+            slug: 'everest-finance',
+            label: 'Open case study',
+            title: 'Everest Finance',
+            excerpt: 'Corporate site with CMS, savings app on Postgres, and internal campaign capture.',
+            meta: '3 surfaces · Fintech',
+            surfaces: [
+              { label: 'Site + CMS', poster: '/media/case-studies/everest-finance/website.jpg', video: '/media/case-studies/everest-finance/website.mp4' },
+              { label: 'Sama Naffa', poster: '/media/case-studies/everest-finance/sama-naffa.jpg', video: '/media/case-studies/everest-finance/sama-naffa.mp4' },
+              { label: 'Formos', poster: '/media/case-studies/everest-finance/formos.jpg', video: '/media/case-studies/everest-finance/formos.mp4' }
+            ]
+          }
         },
         {
           primary: false,
@@ -395,7 +413,7 @@ window.FLOW_DATA = {
           label: 'Anchor case',
           title: 'Odoo 18 Acceptance Testing Kit',
           caseStudySlug: 'odoo-testing-toolkit',
-          period: '2024',
+          period: '2024 → Q1 2026',
           role: 'Software engineer · ERGOBIT',
           summary:
             'Robot Framework keywords functional consultants can read. Playwright drives Odoo\'s OWL client. Smoke suites under two minutes; full validation across sales, purchase, inventory, HR, and accounting.',
@@ -478,7 +496,7 @@ window.FLOW_DATA = {
       type: 'domain',
       title: 'Money moves.\nSystems should keep up.',
       desc:
-        'Senegalese fintech in the UEMOA zone cannot afford three disconnected surfaces. Public site, internal CRM, and customer app each need the same account model.',
+        'Senegalese fintech in the UEMOA zone cannot afford disconnected surfaces. Public site, savings app, and internal intake each need coherent ops — not necessarily one database.',
       cases: [
         {
           primary: true,
@@ -487,13 +505,26 @@ window.FLOW_DATA = {
           web: 'everestfinance.sn',
           logo: 'logos/everest-finance.png',
           caseStudySlug: 'everest-finance',
-          period: '2024 → present',
+          period: '2025 → now',
           role: 'Solo technical operator',
           summary:
-            'Three products, no engineering team. I unified the public website, internal CRM, and Sama Naffa customer app on one PostgreSQL schema and shared TypeScript types.',
-          outcome: 'Public site live. CRM in daily use. Sama Naffa in hardening before wider rollout.',
-          meta: ['Next.js', 'React Native', 'PostgreSQL', 'Zod', 'Solo owner'],
-          metric: { value: '3', label: 'unified products' }
+            'Three products, no engineering team. Public site with Convex CMS, Sama Naffa savings on Postgres, Formos for campaign capture — one operator holding the full stack.',
+          outcome: 'Public site live. Sama Naffa in production. Formos internal.',
+          meta: ['Vite', 'Convex', 'Next.js', 'TanStack Start', 'Neon Postgres', 'Solo owner'],
+          metric: { value: '3', label: 'products' },
+          proofPreview: {
+            type: 'case',
+            slug: 'everest-finance',
+            label: 'Open case study',
+            title: 'Everest Finance',
+            excerpt: 'Corporate site with CMS, savings app on Postgres, and internal campaign capture.',
+            meta: '3 surfaces · Fintech',
+            surfaces: [
+              { label: 'Site + CMS', poster: '/media/case-studies/everest-finance/website.jpg', video: '/media/case-studies/everest-finance/website.mp4' },
+              { label: 'Sama Naffa', poster: '/media/case-studies/everest-finance/sama-naffa.jpg', video: '/media/case-studies/everest-finance/sama-naffa.mp4' },
+              { label: 'Formos', poster: '/media/case-studies/everest-finance/formos.jpg', video: '/media/case-studies/everest-finance/formos.mp4' }
+            ]
+          }
         },
         {
           primary: false,
@@ -525,7 +556,7 @@ window.FLOW_DATA = {
           web: 'ergobit.com',
           logo: 'logos/ergobit.png',
           caseStudySlug: 'odoo-testing-toolkit',
-          period: '2024',
+          period: '2024 → Q1 2026',
           role: 'Software engineer · ERGOBIT',
           summary:
             'Robot Framework keywords functional consultants can read. Playwright drives Odoo\'s OWL client. Smoke suites under two minutes; full validation across sales, purchase, inventory, HR, and accounting.',

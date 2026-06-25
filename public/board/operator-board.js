@@ -5,7 +5,6 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 
 const DOMAIN_IDS = ['fintech', 'erp', 'systems'];
 const SPRING = 'back.out(1.2)';
-const SPRING_BACK = 'back.out(1.7)';
 const BOOT_LINES = () => data.ui?.bootLines ?? ['session ok', 'ledger synced · record indexed', 'proof surface online'];
 
 function proofTypeLabel(type) {
@@ -44,7 +43,7 @@ function clearProofAnchorMotion() {
   if (!proofAnchor || typeof gsap === 'undefined') return;
   gsap.killTweensOf([proofAnchor, proofPeeks]);
   gsap.set(proofAnchor, { clearProps: 'opacity,transform' });
-  proofAnchor.querySelectorAll('.anchor-head, .anchor-metric, .anchor-outcome-card, .anchor-body').forEach((el) => {
+  proofAnchor.querySelectorAll('.anchor-head, .anchor-metric, .anchor-proof, .anchor-foot').forEach((el) => {
     gsap.set(el, { clearProps: 'opacity,transform' });
   });
 }
@@ -239,9 +238,67 @@ function externalUrl(web) {
   return web.startsWith('http') ? web : `https://${web}`;
 }
 
+function withProofMedia(preview, slugKey) {
+  if (!preview) return preview;
+  if (preview.surfaces?.length) return preview;
+  const key = slugKey || preview.slug;
+  const media = key ? data.proofMedia?.[key] : null;
+  if (!media?.surfaces?.length) return preview;
+  return { ...preview, surfaces: media.surfaces };
+}
+
+function resolveCaseProofPreview(caseItem) {
+  if (caseItem.proofPreview) {
+    let preview = { ...caseItem.proofPreview };
+    preview = withProofMedia(preview, preview.slug || caseItem.caseStudySlug);
+    if (preview.type === 'case' && preview.slug && !preview.href) {
+      preview.href = workUrl(preview.slug);
+    }
+    if (preview.href?.match(/^\/(?:fr\/)?work\//)) {
+      const slug = preview.href.replace(/^\/(?:fr\/)?work\//, '');
+      preview.href = workUrl(slug);
+    }
+    if (!preview.href && preview.web) {
+      preview.href = externalUrl(preview.web);
+    }
+    if (!preview.title) preview.title = caseItem.title;
+    if (!preview.excerpt) preview.excerpt = caseItem.summary || caseItem.outcome || '';
+    return preview;
+  }
+
+  if (caseItem.caseStudySlug) {
+    return withProofMedia(
+      {
+        type: 'case',
+        slug: caseItem.caseStudySlug,
+        href: workUrl(caseItem.caseStudySlug),
+        label: data.ui?.openCaseStudy ?? 'Open case study',
+        title: caseItem.title,
+        excerpt: caseItem.summary || caseItem.outcome || '',
+        meta: caseItem.meta?.slice(0, 2).join(' · ') || undefined
+      },
+      caseItem.caseStudySlug
+    );
+  }
+
+  if (caseItem.web) {
+    return {
+      type: 'link',
+      href: externalUrl(caseItem.web),
+      label: data.ui?.visitLiveProject ?? 'Visit live project',
+      title: caseItem.title,
+      excerpt: caseItem.summary || caseItem.scope || '',
+      meta: caseItem.web
+    };
+  }
+
+  return null;
+}
+
 function resolveProofPreview(record) {
   if (record.proofPreview) {
-    const preview = { ...record.proofPreview };
+    let preview = { ...record.proofPreview };
+    preview = withProofMedia(preview, preview.slug || data.caseStudySlugs?.[record.name]);
     if (preview.type === 'case' && preview.slug && !preview.href) {
       preview.href = workUrl(preview.slug);
     }
@@ -255,13 +312,17 @@ function resolveProofPreview(record) {
 
   const slug = data.caseStudySlugs?.[record.name];
   if (slug) {
-    return {
-      type: 'case',
-      href: workUrl(slug),
-      label: data.ui?.openCaseStudy ?? 'Open case study',
-      title: record.name,
-      excerpt: record.proof || record.scope || ''
-    };
+    return withProofMedia(
+      {
+        type: 'case',
+        slug,
+        href: workUrl(slug),
+        label: data.ui?.openCaseStudy ?? 'Open case study',
+        title: record.name,
+        excerpt: record.proof || record.scope || ''
+      },
+      slug
+    );
   }
 
   if (record.web) {
@@ -299,20 +360,102 @@ function proofPreviewCardHTML(preview) {
   `;
 }
 
-/* Mock thumbnail for the hover preview.
-   Reports render as a document page; case/live render as a browser window. */
+function pauseProofCardVideos() {
+  if (!proofCardEl) return;
+  proofCardEl.querySelectorAll('video').forEach((video) => {
+    video.pause();
+    video.currentTime = 0;
+  });
+}
+
+function playProofCardVideos() {
+  if (!proofCardEl) return;
+  proofCardEl.querySelectorAll('video').forEach((video) => {
+    const playAttempt = video.play();
+    if (playAttempt && typeof playAttempt.catch === 'function') {
+      playAttempt.catch(() => {});
+    }
+  });
+}
+
+/* Multi-surface video gallery — used inline on the proof anchor and in ledger hovercards. */
+function proofDocHTML() {
+  return `
+    <div class="proof-doc">
+      <span class="proof-doc__bar"></span>
+      <span class="proof-doc__line proof-doc__line--lg"></span>
+      <span class="proof-doc__line"></span>
+      <span class="proof-doc__line"></span>
+      <span class="proof-doc__line proof-doc__line--sm"></span>
+      <span class="proof-doc__fold"></span>
+    </div>
+  `;
+}
+
+function proofWebHTML(host) {
+  return `
+    <div class="proof-web">
+      <div class="proof-web__chrome">
+        <span class="proof-web__dot"></span><span class="proof-web__dot"></span><span class="proof-web__dot"></span>
+        <span class="proof-web__url mono">${escapeHtml(host)}</span>
+      </div>
+      <div class="proof-web__viewport">
+        <span class="proof-web__block proof-web__block--hero"></span>
+        <span class="proof-web__block proof-web__block--a"></span>
+        <span class="proof-web__block proof-web__block--b"></span>
+      </div>
+    </div>
+  `;
+}
+
+function proofGalleryHTML(preview, { autoplay = false } = {}) {
+  if (!preview?.surfaces?.length) return '';
+  const preload = autoplay ? 'auto' : 'metadata';
+  const tiles = preview.surfaces
+    .slice(0, 3)
+    .map((surface) => {
+      const label = surface.label ? `<span class="proof-gallery__label mono">${escapeHtml(surface.label)}</span>` : '';
+      const media = surface.video
+        ? `<video class="proof-gallery__video" muted loop playsinline preload="${preload}"${surface.poster ? ` poster="${escapeHtml(surface.poster)}"` : ''} src="${escapeHtml(surface.video)}"></video>`
+        : surface.poster
+          ? `<img class="proof-gallery__img" src="${escapeHtml(surface.poster)}" alt="" loading="lazy" decoding="async" />`
+          : `<span class="proof-gallery__placeholder" aria-hidden="true"></span>`;
+      return `<div class="proof-gallery__tile">${media}${label}</div>`;
+    })
+    .join('');
+  return `<div class="proof-gallery proof-gallery--video">${tiles}</div>`;
+}
+
 function proofThumb(preview) {
+  const gallery = proofGalleryHTML(preview);
+  if (gallery) {
+    return `
+      <div class="proof-card__thumb proof-card__thumb--gallery" aria-hidden="true">
+        ${gallery}
+      </div>
+    `;
+  }
+
+  if (preview.video) {
+    return `
+      <div class="proof-card__thumb proof-card__thumb--media" aria-hidden="true">
+        <video class="proof-card__video" muted loop playsinline preload="metadata"${preview.poster ? ` poster="${escapeHtml(preview.poster)}"` : ''} src="${escapeHtml(preview.video)}"></video>
+      </div>
+    `;
+  }
+
+  if (preview.poster) {
+    return `
+      <div class="proof-card__thumb proof-card__thumb--media" aria-hidden="true">
+        <img class="proof-card__poster" src="${escapeHtml(preview.poster)}" alt="" loading="lazy" decoding="async" />
+      </div>
+    `;
+  }
+
   if (preview.type === 'report') {
     return `
       <div class="proof-card__thumb proof-card__thumb--doc" aria-hidden="true">
-        <div class="proof-doc">
-          <span class="proof-doc__bar"></span>
-          <span class="proof-doc__line proof-doc__line--lg"></span>
-          <span class="proof-doc__line"></span>
-          <span class="proof-doc__line"></span>
-          <span class="proof-doc__line proof-doc__line--sm"></span>
-          <span class="proof-doc__fold"></span>
-        </div>
+        ${proofDocHTML()}
       </div>
     `;
   }
@@ -320,19 +463,82 @@ function proofThumb(preview) {
   const host = preview.meta && preview.type === 'link' ? preview.meta : preview.title;
   return `
     <div class="proof-card__thumb proof-card__thumb--web" aria-hidden="true">
-      <div class="proof-web">
-        <div class="proof-web__chrome">
-          <span class="proof-web__dot"></span><span class="proof-web__dot"></span><span class="proof-web__dot"></span>
-          <span class="proof-web__url mono">${escapeHtml(host)}</span>
-        </div>
-        <div class="proof-web__viewport">
-          <span class="proof-web__block proof-web__block--hero"></span>
-          <span class="proof-web__block proof-web__block--a"></span>
-          <span class="proof-web__block proof-web__block--b"></span>
-        </div>
-      </div>
+      ${proofWebHTML(host)}
     </div>
   `;
+}
+
+function anchorProofInnerHTML(preview, domainId, { autoplay = true, webHost = null } = {}) {
+  const gallery = proofGalleryHTML(preview, { autoplay });
+  if (gallery) return gallery;
+
+  const preload = autoplay ? 'auto' : 'metadata';
+
+  if (preview?.video) {
+    return `
+      <div class="proof-gallery proof-gallery--single">
+        <div class="proof-gallery__tile">
+          <video class="proof-gallery__video anchor-proof__video" muted loop playsinline preload="${preload}"${preview.poster ? ` poster="${escapeHtml(preview.poster)}"` : ''} src="${escapeHtml(preview.video)}"></video>
+        </div>
+      </div>
+    `;
+  }
+
+  if (preview?.poster) {
+    return `
+      <div class="proof-gallery proof-gallery--single">
+        <div class="proof-gallery__tile">
+          <img class="proof-gallery__img" src="${escapeHtml(preview.poster)}" alt="" loading="lazy" decoding="async" />
+        </div>
+      </div>
+    `;
+  }
+
+  if (preview?.type === 'report') {
+    return `<div class="anchor-proof-mock anchor-proof-mock--doc">${proofDocHTML()}</div>`;
+  }
+
+  if (preview) {
+    const host =
+      preview.meta && preview.type === 'link'
+        ? preview.meta
+        : webHost || preview.title;
+    return `<div class="anchor-proof-mock anchor-proof-mock--web">${proofWebHTML(host)}</div>`;
+  }
+
+  return `<div class="anchor-proof-viz" aria-hidden="true">${domainViz(domainId)}</div>`;
+}
+
+function renderAnchorProofPanel(preview, domainId, webHost = null) {
+  const variant = preview?.surfaces?.length
+    ? 'gallery'
+    : preview?.video || preview?.poster
+      ? 'media'
+      : preview?.type === 'report'
+        ? 'doc'
+        : preview
+          ? 'web'
+          : 'viz';
+  return `<div class="anchor-proof anchor-proof--${variant}">${anchorProofInnerHTML(preview, domainId, { webHost })}</div>`;
+}
+
+function renderAnchorFootCta(caseItem, preview) {
+  if (caseItem.caseStudySlug) {
+    return `<a class="anchor-foot-cta hw-btn hw-btn--primary" href="${escapeHtml(workUrl(caseItem.caseStudySlug))}">${data.ui?.openCaseStudy ?? 'Read case study'} <span aria-hidden="true">↗</span></a>`;
+  }
+  if (caseItem.essaySlug) {
+    return `<a class="anchor-foot-cta hw-btn" href="${escapeHtml(writingUrl(caseItem.essaySlug))}">Essay →</a>`;
+  }
+  if (preview?.href && !preview.href.startsWith('#')) {
+    const label = preview.label || (data.ui?.visitLiveProject ?? 'Visit live project');
+    const external = preview.href.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : '';
+    return `<a class="anchor-foot-cta hw-btn hw-btn--primary" href="${escapeHtml(preview.href)}"${external}>${escapeHtml(label)} <span aria-hidden="true">↗</span></a>`;
+  }
+  if (preview?.href?.startsWith('#')) {
+    const label = preview.label || `${data.ui?.openPrefix ?? 'Open'} report`;
+    return `<a class="anchor-foot-cta hw-btn" href="${escapeHtml(preview.href)}">${escapeHtml(label)} <span aria-hidden="true">→</span></a>`;
+  }
+  return `<button type="button" class="anchor-foot-cta hw-btn" data-action="open-ledger">View in work record <span aria-hidden="true">↓</span></button>`;
 }
 
 let proofPreviewRegistry = {};
@@ -341,6 +547,11 @@ function registerProofPreview(id, preview) {
   if (!preview) return '';
   proofPreviewRegistry[id] = preview;
   return id;
+}
+
+function proofHoverAttrs(id) {
+  if (!id) return '';
+  return ` data-proof-id="${escapeHtml(id)}"`;
 }
 
 function proofRowAttrs(id, preview) {
@@ -393,35 +604,69 @@ function showProofCard(row) {
   if (!preview) return;
   clearTimeout(proofHideTimer);
   const card = ensureProofCard();
-  card.className = `proof-card proof-card--${preview.type}`;
+  const galleryClass = preview.surfaces?.length ? ' proof-card--gallery' : '';
+  card.className = `proof-card proof-card--${preview.type}${galleryClass}`;
   card.innerHTML = proofPreviewCardHTML(preview);
   card.hidden = false;
-  // Measure then position, then reveal.
   positionProofCard(row);
-  requestAnimationFrame(() => card.classList.add('is-visible'));
+  requestAnimationFrame(() => {
+    card.classList.add('is-visible');
+    playProofCardVideos();
+  });
 }
 
 function hideProofCard() {
   if (!proofCardEl) return;
+  pauseProofCardVideos();
   proofCardEl.classList.remove('is-visible');
   proofHideTimer = setTimeout(() => {
     if (proofCardEl) proofCardEl.hidden = true;
   }, 180);
 }
 
-function bindProofPreview() {
-  if (!ledgerExpanded) return;
+function clearProofPreviewKeys(prefix) {
+  Object.keys(proofPreviewRegistry).forEach((key) => {
+    if (key.startsWith(prefix)) delete proofPreviewRegistry[key];
+  });
+}
 
-  ledgerExpanded.addEventListener('pointerover', (event) => {
-    const row = event.target.closest('.record-row--has-proof');
+function bindProofPreview() {
+  if (ledgerExpanded) bindProofPreviewRoot(ledgerExpanded, { navigateOnClick: true });
+  window.addEventListener('scroll', () => proofCardEl?._row && positionProofCard(proofCardEl._row), true);
+}
+
+function playAnchorProofVideos() {
+  if (!proofAnchor) return;
+  proofAnchor.querySelectorAll('.proof-gallery__video, .anchor-proof__video').forEach((video) => {
+    const playAttempt = video.play();
+    if (playAttempt && typeof playAttempt.catch === 'function') {
+      playAttempt.catch(() => {});
+    }
+  });
+}
+
+function pauseAnchorProofVideos() {
+  if (!proofAnchor) return;
+  proofAnchor.querySelectorAll('.proof-gallery__video, .anchor-proof__video').forEach((video) => {
+    video.pause();
+    video.currentTime = 0;
+  });
+}
+
+function bindProofPreviewRoot(root, { navigateOnClick = true } = {}) {
+  if (!root || root._proofBound) return;
+  root._proofBound = true;
+
+  root.addEventListener('pointerover', (event) => {
+    const row = event.target.closest('[data-proof-id]');
     if (!row || row === proofCardEl?._row) return;
     if (proofCardEl) proofCardEl._row = row;
     else ensureProofCard()._row = row;
     showProofCard(row);
   });
 
-  ledgerExpanded.addEventListener('pointerout', (event) => {
-    const row = event.target.closest('.record-row--has-proof');
+  root.addEventListener('pointerout', (event) => {
+    const row = event.target.closest('[data-proof-id]');
     if (!row) return;
     if (!row.contains(event.relatedTarget)) {
       if (proofCardEl) proofCardEl._row = null;
@@ -429,17 +674,19 @@ function bindProofPreview() {
     }
   });
 
-  ledgerExpanded.addEventListener('focusin', (event) => {
-    const row = event.target.closest('.record-row--has-proof');
+  root.addEventListener('focusin', (event) => {
+    const row = event.target.closest('[data-proof-id]');
     if (!row) return;
     ensureProofCard()._row = row;
     showProofCard(row);
   });
 
-  ledgerExpanded.addEventListener('focusout', (event) => {
-    const row = event.target.closest('.record-row--has-proof');
+  root.addEventListener('focusout', (event) => {
+    const row = event.target.closest('[data-proof-id]');
     if (row && !row.contains(event.relatedTarget)) hideProofCard();
   });
+
+  if (!navigateOnClick) return;
 
   const navigate = (row) => {
     const href = row.dataset.proofHref;
@@ -448,12 +695,12 @@ function bindProofPreview() {
     else window.location.href = href;
   };
 
-  ledgerExpanded.addEventListener('click', (event) => {
+  root.addEventListener('click', (event) => {
     const row = event.target.closest('.record-row--has-proof');
     if (row) navigate(row);
   });
 
-  ledgerExpanded.addEventListener('keydown', (event) => {
+  root.addEventListener('keydown', (event) => {
     if (event.key !== 'Enter' && event.key !== ' ') return;
     const row = event.target.closest('.record-row--has-proof');
     if (row) {
@@ -461,8 +708,6 @@ function bindProofPreview() {
       navigate(row);
     }
   });
-
-  window.addEventListener('scroll', () => proofCardEl?._row && positionProofCard(proofCardEl._row), true);
 }
 
 function getDomainSection(id) {
@@ -480,8 +725,9 @@ function getCases() {
   return cases;
 }
 
-function renderAnchor(caseItem, context = {}) {
-  const meta = caseItem.meta?.map((item) => `<span>${escapeHtml(item)}</span>`).join('') ?? '';
+function renderAnchor(caseItem, context = {}, preview = null) {
+  const resolvedPreview = preview ?? resolveCaseProofPreview(caseItem);
+  const meta = caseItem.meta?.slice(0, 4).map((item) => `<span>${escapeHtml(item)}</span>`).join('') ?? '';
   const kicker = caseItem.label ?? (context.total > 1 ? `Proof ${context.index + 1} of ${context.total}` : null);
   const metricHtml = caseItem.metric
     ? `<div class="anchor-metric" aria-label="${escapeHtml(caseItem.metric.label)}">
@@ -489,19 +735,9 @@ function renderAnchor(caseItem, context = {}) {
         <span class="anchor-metric-label">${escapeHtml(caseItem.metric.label)}</span>
       </div>`
     : '';
-  const vizHtml = `<div class="anchor-viz" aria-hidden="true">${domainViz(context.domainId)}</div>`;
-  const caseStudyLink =
-    caseItem.caseStudySlug
-      ? `<a class="case-study-link hw-btn hw-btn--primary" href="${escapeHtml(workUrl(caseItem.caseStudySlug))}">Read case study <span aria-hidden="true">↗</span></a>`
-      : '';
-  const essayLink = caseItem.essaySlug
-    ? `<a class="essay-link hw-btn" href="${escapeHtml(writingUrl(caseItem.essaySlug))}">Essay →</a>`
-    : '';
-  const recordLink =
-    !caseItem.caseStudySlug
-      ? `<button type="button" class="record-link hw-btn" data-action="open-ledger">View in work record <span aria-hidden="true">↓</span></button>`
-      : '';
+  const mediaHtml = renderAnchorProofPanel(resolvedPreview, context.domainId, caseItem.web);
   const logoHtml = recordLogo({ name: caseItem.title, web: caseItem.web, logo: caseItem.logo }, 40, 'anchor-logo');
+  const ctaHtml = renderAnchorFootCta(caseItem, resolvedPreview);
 
   return `
     <div class="anchor-hero">
@@ -516,18 +752,11 @@ function renderAnchor(caseItem, context = {}) {
         </div>
       </header>
       ${metricHtml}
-      ${vizHtml}
-      <div class="anchor-body">
-        <p class="anchor-summary">${escapeHtml(caseItem.summary)}</p>
-        ${meta ? `<div class="anchor-meta">${meta}</div>` : ''}
-      </div>
-      <aside class="anchor-outcome-card">
-        ${caseItem.outcome ? `
-          <p class="anchor-outcome-label">Outcome</p>
-          <p class="anchor-outcome-text">${escapeHtml(caseItem.outcome)}</p>
-        ` : ''}
-        ${caseStudyLink || essayLink || recordLink ? `<div class="anchor-actions">${caseStudyLink}${essayLink}${recordLink}</div>` : ''}
-      </aside>
+      ${mediaHtml}
+      <footer class="anchor-foot">
+        ${meta ? `<div class="anchor-meta anchor-meta--foot">${meta}</div>` : ''}
+        ${ctaHtml}
+      </footer>
     </div>
   `;
 }
@@ -550,7 +779,7 @@ function renderCaseTab(caseItem, originalIndex, isActive) {
   return `
     <button
       type="button"
-      class="case-tab${caseItem.primary ? ' case-tab--primary' : ''}"
+      class="case-tab"
       role="tab"
       data-case-index="${originalIndex}"
       aria-selected="${isActive ? 'true' : 'false'}"
@@ -568,21 +797,29 @@ function renderProofStage(animate = false) {
   const anchor = cases[0];
 
   const update = () => {
-    proofAnchor.innerHTML = anchor
-      ? renderAnchor(anchor, {
-          domainId: section.id,
-          domain: section.domain,
-          index: state.anchorIndex,
-          total: section.cases.length
-        })
-      : '';
-    proofAnchor.className = `proof-anchor domain-wash-${section.id}`;
-
     const allCases = section.cases;
+    pauseAnchorProofVideos();
+    const anchorPreview = anchor ? resolveCaseProofPreview(anchor) : null;
+
+    proofAnchor.innerHTML = anchor
+      ? renderAnchor(
+          anchor,
+          {
+            domainId: section.id,
+            domain: section.domain,
+            index: state.anchorIndex,
+            total: section.cases.length
+          },
+          anchorPreview
+        )
+      : '';
+    proofAnchor.className = `proof-anchor domain-wash-${section.id} proof-anchor--compact`;
+
     proofPeeks.innerHTML = allCases
       .map((item, index) => renderCaseTab(item, index, index === state.anchorIndex))
       .join('');
     hydrateLogos(proofAnchor);
+    playAnchorProofVideos();
 
     if (caseRow) caseRow.hidden = allCases.length <= 1;
     document.title = `${anchor?.title ?? section.domain} · Aliou Wade · Operator Board`;
@@ -637,7 +874,7 @@ function renderDomainTabs() {
           aria-controls="proofStage"
           aria-label="${escapeHtml(`${section.domain}, ${count} proof ${count === 1 ? 'case' : 'cases'}`)}"
           data-domain="${escapeHtml(section.id)}"
-        ><span>${escapeHtml(section.domain)}</span><span class="domain-tab-count mono" aria-hidden="true">${count}</span></button>
+        ><span class="domain-tab-label">${escapeHtml(section.domain)}</span><span class="domain-tab-count mono" aria-hidden="true">${count}</span></button>
       `;
       }
     )
@@ -653,12 +890,13 @@ function positionTabIndicator(animate = true) {
   if (!active || !tabIndicator) return;
 
   const tabsRect = domainTabsEl.getBoundingClientRect();
-  const activeRect = active.getBoundingClientRect();
-  const left = activeRect.left - tabsRect.left;
-  const width = activeRect.width;
+  const label = active.querySelector('.domain-tab-label') ?? active.firstElementChild;
+  const labelRect = label.getBoundingClientRect();
+  const left = labelRect.left - tabsRect.left;
+  const width = labelRect.width;
 
   if (animate && !reduceMotion && typeof gsap !== 'undefined') {
-    gsap.to(tabIndicator, { left, width, opacity: 1, duration: 0.5, ease: SPRING_BACK });
+    gsap.to(tabIndicator, { left, width, opacity: 1, duration: 0.26, ease: 'power3.out' });
   } else {
     tabIndicator.style.left = `${left}px`;
     tabIndicator.style.width = `${width}px`;
@@ -797,7 +1035,8 @@ function renderLedgerExpanded() {
       .replace('{clients}', data.clients.length);
   }
 
-  proofPreviewRegistry = {};
+  clearProofPreviewKeys('emp-');
+  clearProofPreviewKeys('cli-');
 
   if (employerList) {
     employerList.innerHTML = data.employers

@@ -1,140 +1,185 @@
 ---
-title: "Everest Finance — consolidating three surfaces into one operational system"
-titleFr: "Everest Finance — consolider trois surfaces en un système opérationnel"
-summary: "Solo technical operator consolidating a public website, internal CRM, and customer-facing app into a coherent fintech operational spine."
-summaryFr: "Opérateur technique solo consolidant un site web public, un CRM interne et une application client en une colonne vertébrale opérationnelle fintech."
+title: "Everest Finance — three products, one operator"
+titleFr: "Everest Finance — trois produits, un opérateur"
+summary: "Solo technical operator for a Senegalese SGI — public site with editorial CMS, Sama Naffa savings app, and Formos campaign tooling shipped as three products under one operating model."
+summaryFr: "Opérateur technique solo pour une SGI sénégalaise — site public avec CMS éditorial, app épargne Sama Naffa et outillage Formos, livrés comme trois produits sous un même modèle opérationnel."
 role: "Solo technical operator"
 domain: "Fintech operations"
 stack:
   - "TypeScript"
+  - "Vite"
+  - "TanStack Router"
+  - "Convex"
   - "Next.js"
-  - "React Native"
-  - "Node.js"
-  - "PostgreSQL"
-date: "2026-05"
+  - "TanStack Start"
+  - "Drizzle ORM"
+  - "Neon Postgres"
+date: "2026-06"
 featured: true
 confidential: true
 status: active
-period: "2024 — present"
+period: "2025 — present"
 proofClaim: "Can this person own and ship a real fintech stack solo?"
-outcome: "One stack across web, CRM, and customer app"
+outcome: "Public site live · Sama Naffa ops in production · Formos internal"
+surfaces:
+  - name: "Public site + CMS"
+    nameFr: "Site public + CMS"
+    status: "Live"
+    statusFr: "En ligne"
+    url: "https://dev-everest-new.vercel.app/"
+    urlLabel: "dev-everest-new.vercel.app"
+    blurb: "Corporate site, editorial CMS, and the Everest Profiler lead engine. Vite + TanStack Router with a Convex backend for publications, media, and investor leads."
+    blurbFr: "Site corporate, CMS éditorial et le moteur de leads Everest Profiler. Vite + TanStack Router avec un backend Convex pour publications, médias et leads investisseurs."
+    video: "/media/case-studies/everest-finance/website.mp4"
+    poster: "/media/case-studies/everest-finance/website.jpg"
+    stack: ["Vite", "TanStack Router", "Convex", "Cloudflare R2"]
+  - name: "Sama Naffa — savings app"
+    nameFr: "Sama Naffa — app épargne"
+    status: "Production"
+    statusFr: "Production"
+    url: "https://dev.samanaffa.com/"
+    urlLabel: "dev.samanaffa.com"
+    blurb: "Client onboarding, Didit KYC, SAMA_NAFFA accounts, and Intouch deposit intents with an admin back-office. Next.js 16 on Neon Postgres via Drizzle."
+    blurbFr: "Onboarding client, KYC Didit, comptes SAMA_NAFFA et intents de dépôt Intouch avec back-office admin. Next.js 16 sur Neon Postgres via Drizzle."
+    video: "/media/case-studies/everest-finance/sama-naffa.mp4"
+    poster: "/media/case-studies/everest-finance/sama-naffa.jpg"
+    stack: ["Next.js 16", "Drizzle", "Neon Postgres", "Didit KYC", "Intouch"]
+  - name: "Formos — internal capture"
+    nameFr: "Formos — capture interne"
+    status: "Demo"
+    statusFr: "Démo"
+    urlLabel: "Not yet deployed"
+    urlLabelFr: "Pas encore déployé"
+    blurb: "Typeform-style form builder for campaign intake: versioned form definitions, public multi-step forms, and a lead pipeline. TanStack Start + oRPC with Inngest jobs."
+    blurbFr: "Constructeur de formulaires type Typeform pour la capture campagne : définitions versionnées, formulaires publics multi-étapes et pipeline de leads. TanStack Start + oRPC avec jobs Inngest."
+    video: "/media/case-studies/everest-finance/formos.mp4"
+    poster: "/media/case-studies/everest-finance/formos.jpg"
+    stack: ["TanStack Start", "oRPC", "Drizzle", "Inngest", "Better Auth"]
 ---
 
 ## Context
 
-I joined Everest Finance as the sole technical operator, reporting directly to the CEO. Everest is a Senegalese fintech company serving retail clients in the UEMOA zone. My mandate: take three disconnected digital surfaces — a public website, an internal CRM, and a customer-facing app called Sama Naffa — and turn them into a single coherent operational system.
+Everest Finance is a Senegalese SGI serving retail clients in the UEMOA zone. I joined as the sole technical operator, reporting directly to the CEO, with a clear mandate: stop the drift between disconnected digital surfaces and ship production software the operations team can actually run.
 
-There is no engineering team. No legacy codebase to inherit. No dedicated DevOps function. The constraint is straightforward: one person, three products, a CEO who needs velocity, and a regulatory environment that does not tolerate sloppiness with financial data.
+There is no engineering team, no inherited platform, and no dedicated DevOps function. The constraint is one person, multiple products, a CEO who needs velocity, and a regulatory environment that does not tolerate sloppiness with financial data.
 
-My prior experience at BankingBook Analytics — building open banking APIs for UEMOA markets — gave me familiarity with the regulatory landscape. My time at ERGOBIT deploying Odoo ERP modules taught me how operational tools fail when they're built in isolation. Both experiences shaped how I approached this engagement.
+The work spans **three products**:
+
+| Product | Where it lives |
+|---------|----------------|
+| Public website + editorial CMS | [dev-everest-new.vercel.app](https://dev-everest-new.vercel.app/) |
+| Sama Naffa — customer savings app + admin | [dev.samanaffa.com](https://dev.samanaffa.com/) |
+| Formos — internal campaign capture | Demo only (not yet deployed) |
+
+Digital account opening is linked from public CTAs as a separate deployment — not counted as a fourth product; the CMS and corporate site ship as one.
 
 ## Problem
 
-When I arrived, Everest's digital presence was fragmented in a way that created real operational pain:
+When I arrived, Everest's digital presence was fragmented in ways that created real operational pain:
 
-- The **public website** was a static marketing page with no connection to the product. It couldn't communicate what Everest actually does for its clients.
-- The **internal CRM** was a patchwork of spreadsheets and ad-hoc tools. The team had no single view of customer status, no structured workflow for onboarding, and no audit trail.
-- **Sama Naffa**, the customer-facing app, existed as a concept with partial implementation. Clients had no self-service interface for their accounts.
+- The **public website** was a static marketing shell. It could not publish market commentary, capture qualified leads with structure, or route prospects into product flows.
+- **Operations** relied on spreadsheets and ad-hoc tools. No single view of onboarding status, no structured lead pipeline for campaigns, no audit trail tied to digital intake.
+- **Sama Naffa** existed as a partial implementation spanning legacy product lines (APE and PEE). The business needed a focused savings product — accounts, KYC, deposits — not three half-overlapping product lines.
 
-The deeper problem was not that these surfaces were incomplete — it's that they were evolving independently. Three separate mental models, three separate data assumptions, no shared schema. Every new feature risked creating inconsistency between what the website promised, what the CRM tracked, and what clients actually experienced.
+The deeper problem was independent evolution: separate mental models, separate data stores, no shared conventions. Every new feature risked inconsistency between what the website promised and what clients experienced in the app.
 
-For a fintech handling real money in a regulated market, that kind of drift is not technical debt — it's operational risk.
+For a regulated financial institution, that drift is operational risk — not technical debt.
 
 ## Approach
 
-I made a few early architecture decisions that constrain the system in useful ways:
+I did not force a premature monolith. Each surface ships on the stack that matches its risk profile:
 
-- **Single TypeScript stack across all surfaces.** The website, the CRM admin interface, and the Sama Naffa web client all run on Next.js. The mobile layer uses React Native. Shared types and validation logic live in a common package.
-- **PostgreSQL as the single source of truth.** One relational database with a schema designed around business entities (accounts, transactions, workflows) rather than UI screens. Each surface reads from and writes to the same data model.
-- **Incremental delivery, surface by surface.** I shipped the public website first (lowest risk, fastest feedback), then the CRM (highest internal leverage), then hardened Sama Naffa. Each phase informed the next.
-- **Convention over configuration.** Rather than building a bespoke framework, I adopted strict conventions: file structure mirrors domain concepts, API routes follow REST semantics, state management uses server components where possible.
-- **AI-native development workflow.** Agent-ready repository structure, architecture decision records for every non-trivial choice, automated linting and type checking as the primary quality gate.
+- **Right-sized backend per surface.** The public site uses **Convex** for real-time CMS, publications, media metadata, and investor-profiler leads — fast iteration for marketing without running Postgres ops for editorial content. Sama Naffa and Formos use **Neon Postgres + Drizzle** where relational integrity, KYC state, and transaction intents matter.
+- **TypeScript everywhere, frameworks chosen per job.** The public site runs on Vite + TanStack Router. Sama Naffa on Next.js 16 App Router. Formos on TanStack Start with oRPC. Same language and discipline; different runtimes where they fit.
+- **Incremental delivery by leverage.** Public site and CMS first (visible progress, publications workflow). Sama Naffa ops stack next (real money paths). Formos for internal campaign capture without blocking on the product roadmap.
+- **Clear product scope.** Sama Naffa épargne is the only active operations line. Legacy APE and PEE routes remain for historical data but receive no new engineering investment.
+- **Quality gates as contract.** Drizzle schemas, Zod validation at API boundaries, automated typecheck and lint across every codebase.
 
-The tradeoff I accepted: this approach is slower at the start. Setting up shared infrastructure for one person feels over-engineered until the second and third surfaces benefit from it. I bet that the compounding returns would justify the upfront investment.
+The tradeoff: more surfaces to hold in one head. The win: each ships correctly instead of bending everything into one framework.
 
 ## System diagram
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    Shared Infrastructure                  │
-│  ┌───────────────────────────────────────────────────┐  │
-│  │         PostgreSQL (single source of truth)        │  │
-│  └──────────────┬──────────────────┬─────────────────┘  │
-│                 │                  │                      │
-│  ┌──────────────▼───┐  ┌──────────▼────────┐           │
-│  │   API Layer       │  │  Shared Types &    │           │
-│  │   (Node.js)       │  │  Validation Logic  │           │
-│  └──┬─────┬─────┬───┘  └──────────────────-─┘           │
-│     │     │     │                                        │
-└─────┼─────┼─────┼───────────────────────────────────────┘
-      │     │     │
-┌─────▼──┐ ┌▼─────────┐ ┌──▼──────────────┐
-│ Public  │ │ Internal  │ │  Sama Naffa     │
-│ Website │ │ CRM       │ │  (Web + Mobile) │
-│ Next.js │ │ Next.js   │ │  Next.js + RN   │
-└─────────┘ └───────────┘ └─────────────────┘
+┌──────────────────────────────────────────────────────────────────────┐
+│                     Everest products (2026)                           │
+├────────────────────────────┬─────────────────────────────────────────┤
+│  Public site + CMS         │  Sama Naffa — savings app               │
+│  Vite · TanStack Router    │  Next.js 16 · Drizzle · Neon Postgres   │
+│  Convex (CMS, leads, media)│  Didit KYC · Intouch deposits · Admin   │
+│  Cloudflare R2 media       │  Client portal · transaction intents    │
+├────────────────────────────┴─────────────────────────────────────────┤
+│  Formos — internal capture                                           │
+│  TanStack Start · Drizzle · Neon · Better Auth · Inngest jobs        │
+│  Multi-step forms · admin lead pipeline · publishable /f/:slug         │
+├──────────────────────────────────────────────────────────────────────┤
+│  Digital account opening (linked from public CTAs)                   │
+└──────────────────────────────────────────────────────────────────────┘
 ```
 
-The key insight: all three surfaces consume the same API layer and share type definitions. A change to the account data model propagates consistently. The CRM cannot show a field that Sama Naffa doesn't know about.
+Convex and Postgres coexist deliberately. Marketing velocity and financial ledger correctness do not belong in the same database.
 
 ## What shipped
 
-**Public website & acquisition (live):**
-- Company presentation with clear product messaging
-- Digital account-opening workflow for retail onboarding (guided steps, document capture, status tracking)
-- Product landings and campaign pages for Sama Naffa and related offers
-- Responsive, performant, SEO-ready — proving ground for the shared component library
+**Public website + CMS (live):**
 
-**Internal CRM (deployed internally):**
-- Customer management with structured onboarding workflows
-- Transaction tracking and status dashboards
-- Role-based access for the operations team
-- Audit logging for compliance requirements
+- Full corporate site: services, expertises, capital markets, publications, FAQ, contact
+- Editorial CMS: publications with categories, rich text, media on R2, role-based admin
+- Inline content editing for marketing copy without redeploys
+- **Everest Profiler**: investor questionnaire → lead capture → automated Resend email with profile report
+- CTAs routing to digital account opening and Sama Naffa journeys
 
-**Sama Naffa — customer app (in hardening):**
-- Account overview and transaction history
-- Self-service operations for common client actions
-- Push notification infrastructure
-- React Native mobile client sharing business logic with the web version
+**Sama Naffa — savings app (production):**
+
+- Client onboarding (phone OTP, multi-step registration, post-login profile completion)
+- KYC via **Didit** with portal resume and admin exception handling
+- **SAMA_NAFFA** account creation and client portal (balances, deposit intents)
+- Deposits through **Intouch** with PENDING → PROCESSING → COMPLETED intent tracking
+- Admin back-office: users, transactions, KYC status, notification settings, balance recalculation
+
+**Formos — internal lead capture (demo):**
+
+- Admin-authenticated form builder with versioned JSON definitions
+- Public multi-step forms at `/f/:slug`
+- Lead pipeline in `/admin/leads`
+- Submission events to **Inngest** for async processing
 
 **Cross-cutting:**
-- Shared TypeScript type definitions across all surfaces
-- CI pipeline with automated type checking and linting
-- Architecture decision records for all non-trivial choices
-- Deployment automation for each surface independently
+
+- Independent Vercel and Convex Cloud deployments per surface
+- Drizzle migrations and schema-as-contract on Postgres surfaces
+- Mobile web first for the savings product (no native app in scope)
 
 ## Technical depth
 
-The most interesting technical challenge has been managing state consistency across three frontends backed by one database. In a team environment, you'd solve this with dedicated backend engineers owning the API contract. As a solo operator, I needed a different approach.
+The hardest problem is holding operational truth across surfaces that will never share one database.
 
-I settled on a pattern where the database schema is the contract. Shared Zod schemas validate data at the API boundary, and those same schemas generate TypeScript types consumed by all three frontends. When I add a field to the account model, the type system forces me to handle it everywhere. This eliminates an entire class of drift bugs that would otherwise accumulate silently.
+On the public site, Convex gives real-time CMS mutations and scheduled actions (profiler follow-up emails) without standing up API infrastructure for editorial workflows. Investor profiler leads are first-class records with audit fields, not a Mailchimp export.
 
-The CRM presented a different challenge: operational workflows. A customer onboarding process has states, transitions, and side effects (send an email, flag for review, update a ledger). I implemented this as a lightweight state machine in the API layer rather than encoding workflow logic in the frontend. The CRM UI renders current state and available transitions — it doesn't decide what transitions are valid. This means the same workflow logic could be exposed through Sama Naffa or triggered via API integration without duplicating business rules.
+On Sama Naffa, the database schema is the contract: users, accounts, deposit intents, KYC enums, notification settings. Transaction state machines live server-side; the admin UI renders state and allowed transitions — it does not invent business rules. Rate limiting, session versioning, and phone normalization exist because production ops surfaced real edge cases.
 
-For the mobile layer, the decision to use React Native was pragmatic: it lets me share validation logic and API client code with the web surfaces. I'm not building a consumer app competing on UX polish — I'm building an operational tool where correctness and reliability matter more than animation smoothness.
+Formos solves a different problem: marketing and compliance need campaign-specific intake without engineering a new form page every week. Versioned form definitions in Postgres, publish workflow, and background jobs on submission keep intake structured without coupling to the savings app schema.
 
 ## Outcome
 
-As of mid-2026, the system is in a mixed state:
+As of mid-2026:
 
-- **Public website:** Live and serving its purpose. It communicates what Everest does and funnels interested parties toward contact.
-- **Internal CRM:** Deployed and in active daily use by the operations team. Onboarding workflows are functioning. The team has visibility they didn't have before.
-- **Sama Naffa:** In hardening phase. Core functionality works, but I'm stress-testing edge cases around transaction flows before wider client rollout.
+- **Public website:** Live. Publications workflow in use. Profiler generating qualified leads with automated follow-up.
+- **Sama Naffa:** Active ops on savings — onboarding, KYC, deposits, admin back-office. Hardening edge cases on transaction flows before wider marketing push.
+- **Formos:** Internal tool for structured campaign capture and lead review.
+- **Account opening:** Linked from public site; separate deployment on the consolidation roadmap.
 
-This is not a finished project. It's a system that's been designed to evolve without accumulating the kind of fragmentation that created the original problem. The architecture supports adding new surfaces (a partner portal, a reporting dashboard) without rethinking the foundation.
-
-The honest assessment: I underestimated the time cost of being the sole operator across all three surfaces simultaneously. Context-switching between "marketing site polish" and "financial transaction correctness" imposes real cognitive overhead. The shared infrastructure investment has paid off — but it didn't eliminate the fundamental challenge of one person holding the entire system in their head.
+This is not a finished unified platform. It is three products with honest boundaries between marketing data (Convex), client money data (Neon), and internal intake (Formos).
 
 ## Lessons
 
 **What I'd do differently:**
 
-- **Ship the CRM first, not the website.** The website was psychologically easier to ship, but the CRM generated more learning about the real data model. Starting with the CRM would have given me better shared schemas earlier.
-- **Invest in automated testing sooner.** I relied heavily on TypeScript's type system as a correctness guarantee. It catches structural errors but misses behavioral bugs. A proper test suite for the workflow state machine would have saved debugging time.
-- **Document the "why" more aggressively.** Architecture decision records help, but I still find myself re-deriving decisions I made three months ago. The solo operator context makes institutional memory fragile — it's all in one head.
+- **Define active product scope on day one.** Sama Naffa carried legacy APE/PEE scope that diluted engineering for months. A clear scope document would have saved significant rework.
+- **Set accurate expectations with stakeholders early.** "One unified platform" sounds reassuring; "three products, one operator" sets honest expectations about velocity and risk.
+- **More behavioral tests on money paths.** TypeScript and Drizzle catch structural drift; they do not catch a deposit intent stuck between statuses.
 
-**What worked well:**
+**What worked:**
 
-- The single-database, shared-types approach has been the right call. Drift between surfaces is the failure mode I was most worried about, and the architecture makes it structurally difficult.
-- Incremental delivery kept stakeholder confidence high. The CEO saw tangible progress at each phase rather than waiting for a big reveal.
-- AI-assisted development workflows meaningfully increased my throughput. Agent-ready repo structure, clear conventions, and automated quality gates let me delegate implementation details while retaining architectural control.
+- Matching backend to surface risk (Convex for CMS, Postgres for money) avoided over-engineering the marketing stack.
+- Shipping the visible public site first kept stakeholder confidence while the harder Sama Naffa ops work continued underneath.
+- Formos as a small internal product removed "can we spin up a campaign form this week?" from the critical path.

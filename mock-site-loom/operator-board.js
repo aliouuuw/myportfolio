@@ -552,7 +552,7 @@ function renderCaseTab(caseItem, originalIndex, isActive) {
   return `
     <button
       type="button"
-      class="case-tab${caseItem.primary ? ' case-tab--primary' : ''}"
+      class="case-tab"
       role="tab"
       data-case-index="${originalIndex}"
       aria-selected="${isActive ? 'true' : 'false'}"
