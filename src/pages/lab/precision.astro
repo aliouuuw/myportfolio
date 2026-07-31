@@ -268,10 +268,12 @@ const everestSurfaces = [
           </p>
 
           <div class="contact-row">
-            <a href="mailto:wadealiou00@gmail.com">wadealiou00@gmail.com</a>
-            <a href="https://www.linkedin.com/in/aliouuuw">LinkedIn</a>
-            <a href="https://github.com/aliouuuw">GitHub</a>
-            <a href="https://wa.me/221777228845">WhatsApp</a>
+            <a class="contact-primary" href="mailto:wadealiou00@gmail.com">wadealiou00@gmail.com</a>
+            <span class="contact-secondary">
+              <a href="https://www.linkedin.com/in/aliouuuw">LinkedIn</a>
+              <a href="https://github.com/aliouuuw">GitHub</a>
+              <a href="https://wa.me/221777228845">WhatsApp</a>
+            </span>
           </div>
           <p class="location-meta">Dakar, Senegal</p>
           <button class="profile-link" type="button" data-mode="about">
@@ -310,30 +312,25 @@ const everestSurfaces = [
                   "data-media": entry.media,
                   "data-caption": entry.caption,
                   "data-href": entry.href,
+                  "data-period": entry.period,
+                  "data-builds": `${entry.builds} ${entry.builds === 1 ? "build" : "builds"}`,
                 };
-                const inner = (
-                  <>
+                /* Select always stays on the board. Case studies open only via the CTA. */
+                return (
+                  <button
+                    class:list={["row", { "is-selected": entry.name === "Everest Finance" }]}
+                    type="button"
+                    {...attrs}
+                  >
                     <span class="row-main">
                       <span class="row-name">{entry.name}</span>
                       <span class="row-note">{entry.detail}</span>
                       <span class="row-meta">
-                        {entry.domain} / {entry.builds} {entry.builds === 1 ? "build" : "builds"}
+                        {entry.domain} / {entry.builds}{" "}
+                        {entry.builds === 1 ? "build" : "builds"}
                       </span>
                     </span>
                     <span class="row-period">{entry.period}</span>
-                  </>
-                );
-                return entry.href ? (
-                  <a
-                    class:list={["row", { "is-selected": entry.name === "Everest Finance" }]}
-                    href={entry.href}
-                    {...attrs}
-                  >
-                    {inner}
-                  </a>
-                ) : (
-                  <button class="row" type="button" {...attrs}>
-                    {inner}
                   </button>
                 );
               })
@@ -353,42 +350,90 @@ const everestSurfaces = [
           >
         </div>
 
-        <div class="proof-visual">
-          <div class="proof-media" id="proof-media">
-            <video
-              id="proof-video"
-              src={`${media}/sama-naffa.mp4`}
-              poster={`${media}/sama-naffa.jpg`}
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="metadata"></video>
+        <div class="instrument">
+          <div class="proof-visual">
+            <div class="proof-media" id="proof-media">
+              <video
+                id="proof-video"
+                src={`${media}/sama-naffa.mp4`}
+                poster={`${media}/sama-naffa.jpg`}
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"></video>
+            </div>
+            <div class="proof-type" id="proof-type" hidden>
+              <p class="proof-type-kicker">Spec · no preview recorded</p>
+              <div class="proof-type-body">
+                <h3 id="proof-type-name">Everest Finance</h3>
+                <p id="proof-type-note">SGI, site, savings app, campaign tooling</p>
+              </div>
+              <dl class="proof-type-meta">
+                <div>
+                  <dt>Domain</dt>
+                  <dd id="proof-type-domain">Fintech</dd>
+                </div>
+                <div>
+                  <dt>Period</dt>
+                  <dd id="proof-type-period">2025 — now</dd>
+                </div>
+                <div>
+                  <dt>Scope</dt>
+                  <dd id="proof-type-scope">3 builds</dd>
+                </div>
+              </dl>
+            </div>
           </div>
-          <div class="proof-type" id="proof-type" hidden>
-            <p id="proof-type-domain">Fintech</p>
-            <h3 id="proof-type-name">Everest Finance</h3>
-            <p id="proof-type-note">SGI, site, savings app, campaign tooling</p>
-          </div>
-        </div>
 
-        <div class="surface-bar" id="surface-bar">
-          <p>Product surface</p>
-          <div class="surface-selectors" role="group" aria-label="Everest product surfaces">
-            {
-              everestSurfaces.map((surface, index) => (
-                <button
-                  type="button"
-                  data-surface={surface.id}
-                  data-title={surface.title}
-                  data-note={surface.note}
-                  aria-pressed={index === 0 ? "true" : "false"}
-                >
-                  <strong>{surface.label}</strong>
-                  <small>{surface.title}</small>
-                </button>
-              ))
-            }
+          <div class="chin">
+            <div class="chin-controls">
+              <p class="chin-state" id="chin-state" data-state="live">
+                <span class="lamp" aria-hidden="true"></span>
+                <span id="chin-state-text">Live preview</span>
+              </p>
+
+              <button
+                class="media-control"
+                id="media-control"
+                type="button"
+                aria-label="Pause product preview"
+                aria-pressed="true"
+              >
+                <span class="transport-glyph" aria-hidden="true"></span>
+                <span class="media-control-label">Pause</span>
+              </button>
+
+              <div
+                class="surface-selectors"
+                id="surface-bar"
+                role="group"
+                aria-label="Everest product surfaces"
+              >
+                {
+                  everestSurfaces.map((surface, index) => (
+                    <button
+                      type="button"
+                      data-surface={surface.id}
+                      data-title={surface.title}
+                      data-note={surface.note}
+                      aria-pressed={index === 0 ? "true" : "false"}
+                    >
+                      {surface.label}
+                    </button>
+                  ))
+                }
+              </div>
+            </div>
+
+            <dl class="chin-plate" id="chin-plate">
+              <div><dt>Domain</dt><dd id="plate-domain">Fintech</dd></div>
+              <div><dt>Period</dt><dd id="plate-period">2025 — now</dd></div>
+              <div><dt>Scope</dt><dd id="plate-scope">3 builds</dd></div>
+              <div class="plate-wide">
+                <dt>Engagement</dt><dd id="plate-note">SGI · site, savings app, campaign tooling</dd>
+              </div>
+            </dl>
           </div>
         </div>
       </section>
@@ -406,12 +451,21 @@ const everestSurfaces = [
         </p>
 
         <div class="contact-row">
-          <a href="mailto:wadealiou00@gmail.com">wadealiou00@gmail.com</a>
-          <a href="https://www.linkedin.com/in/aliouuuw">LinkedIn</a>
+          <a class="contact-primary" href="mailto:wadealiou00@gmail.com">wadealiou00@gmail.com</a>
+          <span class="contact-secondary">
+            <a href="https://www.linkedin.com/in/aliouuuw">LinkedIn</a>
+            <a href="https://github.com/aliouuuw">GitHub</a>
+            <a href="https://wa.me/221777228845">WhatsApp</a>
+          </span>
         </div>
         <button class="profile-link" type="button" data-mode="work">
           <span aria-hidden="true">&larr;</span> Return to work
         </button>
+
+        <div class="off-clock">
+          <h2>Off the clock</h2>
+          <p>Competitive chess, around 2043 bullet online. Same discipline as shipping under deadline.</p>
+        </div>
       </section>
 
       <figure class="portrait">
@@ -452,11 +506,6 @@ const everestSurfaces = [
               </div>
             ))
           }
-        </div>
-
-        <div class="off-clock">
-          <h2>Off the clock</h2>
-          <p>Competitive chess, around 2043 bullet online. Same discipline as shipping under deadline.</p>
         </div>
       </section>
     </main>
@@ -535,10 +584,91 @@ const everestSurfaces = [
       const proofTypeDomain = document.getElementById("proof-type-domain");
       const proofTypeName = document.getElementById("proof-type-name");
       const proofTypeNote = document.getElementById("proof-type-note");
+      const proofTypePeriod = document.getElementById("proof-type-period");
+      const proofTypeScope = document.getElementById("proof-type-scope");
       const proofLink = document.getElementById("proof-link") as HTMLAnchorElement | null;
       const surfaceBar = document.getElementById("surface-bar");
       const surfaceButtons = document.querySelectorAll<HTMLButtonElement>("[data-surface]");
+      const proofVisual = document.querySelector<HTMLElement>(".proof-visual");
+      const mediaControl = document.getElementById("media-control") as HTMLButtonElement | null;
+      const mediaControlLabel = mediaControl?.querySelector<HTMLElement>(".media-control-label");
+      const chinState = document.getElementById("chin-state");
+      const chinStateText = document.getElementById("chin-state-text");
+      const plateDomain = document.getElementById("plate-domain");
+      const platePeriod = document.getElementById("plate-period");
+      const plateScope = document.getElementById("plate-scope");
+      const plateNote = document.getElementById("plate-note");
       const mediaRoot = "/media/case-studies/everest-finance";
+
+      const setPlate = (row: HTMLElement) => {
+        if (plateDomain) plateDomain.textContent = row.dataset.domain ?? "—";
+        if (platePeriod) platePeriod.textContent = row.dataset.period ?? "—";
+        if (plateScope) plateScope.textContent = row.dataset.builds ?? "—";
+        if (plateNote) plateNote.textContent = row.dataset.note ?? "—";
+      };
+
+      const setChinState = (state: "live" | "paused" | "idle", label: string) => {
+        chinState?.setAttribute("data-state", state);
+        if (chinStateText) chinStateText.textContent = label;
+      };
+
+      const syncMediaControl = () => {
+        if (!proofVideo || !mediaControl) return;
+        const playing = !proofVideo.paused;
+        mediaControl.setAttribute("aria-pressed", playing ? "true" : "false");
+        mediaControl.setAttribute("aria-label", playing ? "Pause product preview" : "Play product preview");
+        if (mediaControlLabel) mediaControlLabel.textContent = playing ? "Pause" : "Play";
+        if (!mediaControl.hidden) {
+          setChinState(playing ? "live" : "paused", playing ? "Live preview" : "Paused");
+        }
+      };
+
+      mediaControl?.addEventListener("click", () => {
+        if (!proofVideo) return;
+        if (proofVideo.paused) {
+          void proofVideo.play();
+        } else {
+          proofVideo.pause();
+        }
+        syncMediaControl();
+      });
+      proofVideo?.addEventListener("play", syncMediaControl);
+      proofVideo?.addEventListener("pause", syncMediaControl);
+      syncMediaControl();
+
+      if (!reduced && window.matchMedia("(pointer: fine)").matches) {
+        proofStage?.addEventListener("pointermove", (event) => {
+          if (!proofStage) return;
+          const rect = proofStage.getBoundingClientRect();
+          proofStage.style.setProperty("--pointer-x", `${event.clientX - rect.left}px`);
+          proofStage.style.setProperty("--pointer-y", `${event.clientY - rect.top}px`);
+        });
+        proofStage?.addEventListener("pointerleave", () => {
+          proofStage.style.removeProperty("--pointer-x");
+          proofStage.style.removeProperty("--pointer-y");
+        });
+      }
+
+      /* Switching input settles the screen the way a real panel does:
+         it comes up bright and unfocused, then resolves. The bezel never moves. */
+      const revealProof = () => {
+        if (!proofVisual || reduced) return;
+        proofVisual.getAnimations().forEach((animation) => animation.cancel());
+        proofVisual.animate(
+          [
+            { opacity: 0.45, filter: "brightness(1.4) contrast(0.86) blur(6px)" },
+            { opacity: 1, filter: "brightness(1.06) contrast(0.98) blur(1px)", offset: 0.34 },
+            { opacity: 1, filter: "brightness(1) contrast(1) blur(0px)" },
+          ],
+          { duration: 520, easing: "cubic-bezier(0.16, 1, 0.3, 1)" },
+        );
+        const lamp = chinState?.querySelector<HTMLElement>(".lamp");
+        lamp?.getAnimations().forEach((animation) => animation.cancel());
+        lamp?.animate([{ opacity: 0.2 }, { opacity: 1 }], {
+          duration: 460,
+          easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+        });
+      };
 
       const showSurface = (button: HTMLButtonElement) => {
         const surface = button.dataset.surface;
@@ -551,6 +681,7 @@ const everestSurfaces = [
         if (!reduced) void proofVideo.play();
         if (proofClient) proofClient.textContent = button.dataset.note ?? "Everest Finance";
         if (proofTitle) proofTitle.textContent = button.dataset.title ?? "";
+        revealProof();
       };
 
       surfaceButtons.forEach((button) => {
@@ -560,18 +691,20 @@ const everestSurfaces = [
       rows.forEach((row) => {
         const activate = () => {
           rows.forEach((entry) => entry.classList.toggle("is-selected", entry === row));
+          setPlate(row);
           if (row.dataset.media) {
             proofStage?.classList.remove("is-type");
             if (proofMedia) proofMedia.hidden = false;
             if (proofType) proofType.hidden = true;
             if (surfaceBar) surfaceBar.hidden = false;
+            if (mediaControl) mediaControl.hidden = false;
             const defaultSurface = document.querySelector<HTMLButtonElement>(
               '[data-surface="sama-naffa"]',
             );
             if (defaultSurface) showSurface(defaultSurface);
-            if (proofLink && row.dataset.href) {
-              proofLink.hidden = false;
-              proofLink.href = row.dataset.href;
+            if (proofLink) {
+              proofLink.hidden = !row.dataset.href;
+              if (row.dataset.href) proofLink.href = row.dataset.href;
             }
           } else {
             proofStage?.classList.add("is-type");
@@ -583,15 +716,20 @@ const everestSurfaces = [
             if (proofTypeDomain) proofTypeDomain.textContent = row.dataset.domain ?? "";
             if (proofTypeName) proofTypeName.textContent = row.dataset.name ?? "";
             if (proofTypeNote) proofTypeNote.textContent = row.dataset.note ?? "";
+            if (proofTypePeriod) proofTypePeriod.textContent = row.dataset.period ?? "—";
+            if (proofTypeScope) proofTypeScope.textContent = row.dataset.builds ?? "—";
             if (proofLink) {
               proofLink.hidden = !row.dataset.href;
               if (row.dataset.href) proofLink.href = row.dataset.href;
             }
+            if (mediaControl) mediaControl.hidden = true;
+            setChinState("idle", "No preview recorded");
+            revealProof();
           }
         };
         row.addEventListener("mouseenter", activate);
         row.addEventListener("focus", activate);
-        if (row.tagName === "BUTTON") row.addEventListener("click", activate);
+        row.addEventListener("click", activate);
       });
     </script>
   </body>
