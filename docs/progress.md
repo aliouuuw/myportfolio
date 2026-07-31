@@ -4,46 +4,74 @@ Living checkpoint log for myportfolio. Task graph: `docs/backlog.json` (T001–T
 
 ---
 
-## 2026-07-31 — checkpoint
+## 2026-07-31 (afternoon) — checkpoint
 
 ### Product state
 
-Production surface unchanged (Astro 5 + Operator Board, see 2026-07-29 entry).
-New this session: a standalone exploratory mock, not wired to production.
+Production home still **Operator Board** (`/`, `/fr`). Parallel mock at `/lab/precision` is the active design track.
 
 | Surface | Status |
 |---------|--------|
-| `/lab/precision` | New "Precision Minimalism" homepage direction — Polestar/Porsche/Apple-inspired. Own stylesheet (`src/styles/lab-precision.css`), not shared with `Base.astro` or the board. |
-| IA | **Locked** — single-viewport work/about mode toggle, engagement-level index (client rows with build counts, not flat per-surface rows), 4-domain filter (Fintech / ERP & QA / Systems / Operations). |
-| Direction doc | `docs/lab-precision-direction.md` — full rationale, locked decisions, open questions. |
+| `/lab/precision` | IA locked + craft pass in progress (~580 / ~687 lines astro/css) |
+| Direction | `docs/lab-precision-direction.md` — palette, type, motion, engagement index, 4 domains |
+| Living refs | `docs/profile.md`, `docs/bocal-direction.md` committed in `860317e` |
 
-### Recent shipped (this session, uncommitted → about to commit)
+### Shipped (committed)
 
-- `src/pages/lab/precision.astro` + `src/styles/lab-precision.css` — new mock
-- `docs/lab-precision-direction.md` — design direction and IA record
+- `860317e` — lock lab/precision IA, direction doc, progress + living refs
 
-### Open questions (see direction doc for detail)
+### Working tree (uncommitted)
 
-1. About-mode journey format: storytelling prose vs. git-branch model — undecided, needs its own pass
-2. Portrait treatment (dither/glass/magnetic) — placeholder frame only
-3. Engagement pages that enumerate all builds per client (Everest has 3, only 1 case study today)
-4. Everest/ERGOBIT naming + screenshot permissions — same blocker as production, applies to mock media too
+- **Craft:** dither portrait canvas (pointer-reactive accent core), magnetic engagement rows, preview-frame tilt, theme material crossfade, ink-faint contrast tweak
+- **Leftover:** deleted mock assets `mock-site-loom/Aliou.png`, `everest-finance.png` (still unstaged)
+
+### Grill decisions still in force (2026-07-29)
+
+| Decision | Call |
+|----------|------|
+| Judge | You + one non-designer; 30s protocol |
+| First judge | **Aug 1** |
+| Hard stop | **Aug 4** (one 3-day iteration max), then board stays / CEO conversation |
+| Material | Real product UI, synthetic data as default |
+| Motion | CSS + IntersectionObserver; no GSAP in mock; quiet page-in only |
+
+### Open (design)
+
+1. Journey format (storytelling vs git-branch) — still undecided
+2. Portrait: dither field landed as craft experiment; real photo / dither-of-photo not yet
+3. Engagement pages that list all builds per client (Everest ×3 promise)
+4. Promotion: board vs precision — no call until Aug 1 judge
 
 ### Backlog
 
-- **P0–P5 (T001–T038):** all `done` — describes pre-Astro work; do not treat as current runnable queue
-- **No pending code tasks** in `backlog.json` — `/lab/precision` is exploratory, not tracked as a backlog phase yet
-
-### Blockers (human, not code)
-
-1. Everest CEO — naming / screenshots / redaction
-2. ERGOBIT CEO — Odoo publish path + public repo URL
-3. Launch ops — domain DNS, Resend prod key, case imagery, LinkedIn FR+EN
-4. `/lab/precision` promotion decision — no call made yet on replacing the operator board
+- P0–P5 done; `/lab/precision` not yet a backlog phase
+- Human launch gates unchanged (Everest/ERGOBIT CEOs, DNS, Resend, LinkedIn)
 
 ---
 
-*Next checkpoint: after journey-format decision, or when `/lab/precision` UI craft pass begins.*
+*Next: commit craft pass if stable → Aug 1 30s judge → either promote craft or one more iteration (cap Aug 4).*
+
+---
+
+## 2026-07-31 (morning) — checkpoint
+
+### Product state
+
+Production surface unchanged (Astro 5 + Operator Board).
+New: standalone exploratory mock at `/lab/precision`.
+
+| Surface | Status |
+|---------|--------|
+| `/lab/precision` | Precision Minimalism homepage direction. Own stylesheet. |
+| IA | **Locked** — work/about mode toggle, engagement-level index, 4-domain filter. |
+| Direction doc | `docs/lab-precision-direction.md` |
+
+### Open questions (see direction doc)
+
+1. About-mode journey format
+2. Portrait treatment (was placeholder at this checkpoint)
+3. Engagement pages for multi-build clients
+4. Everest/ERGOBIT permissions
 
 ---
 

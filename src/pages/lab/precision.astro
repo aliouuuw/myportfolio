@@ -184,6 +184,27 @@ const credentials = [
   { item: "Front-End Developer Professional", detail: "Meta" },
   { item: "Python Data Science", detail: "Datacamp" },
 ];
+
+const everestSurfaces = [
+  {
+    id: "sama-naffa",
+    label: "Sama Naffa",
+    title: "Savings platform",
+    note: "Everest Finance",
+  },
+  {
+    id: "website",
+    label: "Website",
+    title: "Public site + CMS",
+    note: "Everest Finance",
+  },
+  {
+    id: "formos",
+    label: "Formos",
+    title: "Internal lead capture",
+    note: "Everest Finance",
+  },
+];
 ---
 
 <!doctype html>
@@ -222,127 +243,162 @@ const credentials = [
   </head>
   <body>
     <header class="site-head wrap">
-      <span class="mono">Aliou Wade</span>
-      <div class="head-right">
-        <p class="mono status">Two client slots from Q3 2026</p>
-        <button id="theme-toggle" class="mono" type="button">Light</button>
+      <a class="wordmark" href="/lab/precision" aria-label="Aliou Wade, precision portfolio"
+        >Aliou Wade</a
+      >
+      <nav class="mode-nav" aria-label="Portfolio view">
+        <button type="button" data-mode="work" aria-pressed="true">Work</button>
+        <button type="button" data-mode="about" aria-pressed="false">About</button>
+        <a class="essay-link" href="/writing/why-systems-over-frameworks">Essay</a>
+      </nav>
+      <div class="head-tools">
+        <p class="availability"><span aria-hidden="true"></span>Two client slots from Q3 2026</p>
+        <button id="theme-toggle" type="button">Light</button>
       </div>
     </header>
 
     <!-- WORK MODE -->
-    <main class="board wrap" data-mode-panel="work">
-      <div class="identity">
-        <h1>Aliou Wade</h1>
-        <p class="positioning">
-          I build operational software for fintechs and operations-heavy businesses.
-        </p>
+    <main class="work-board wrap" data-mode-panel="work">
+      <div class="work-sidebar">
+        <section class="identity" aria-labelledby="work-title">
+          <p class="role">Product Systems Engineer</p>
+          <h1 id="work-title">Aliou Wade</h1>
+          <p class="positioning">
+            I build operational software for fintechs and operations-heavy businesses.
+          </p>
 
-        <div class="contact-row">
-          <a href="mailto:wadealiou00@gmail.com">wadealiou00@gmail.com</a>
-          <a href="https://www.linkedin.com/in/aliouuuw">LinkedIn</a>
-          <a href="https://github.com/aliouuuw">GitHub</a>
-          <a href="https://wa.me/221777228845">WhatsApp</a>
-        </div>
-
-        <button class="mono profile-link" type="button" data-mode="about">
-          About me <span aria-hidden="true">&rarr;</span>
-        </button>
-
-        <div class="preview" id="preview">
-          <div class="frame">
-            <div class="preview-media">
-              <video
-                src={`${media}/website.mp4`}
-                poster={`${media}/website.jpg`}
-                autoplay
-                muted
-                loop
-                playsinline
-                preload="metadata"></video>
-            </div>
-            <div class="preview-type">
-              <span class="type-name" id="preview-type-name"></span>
-              <span class="type-note" id="preview-type-note"></span>
-            </div>
+          <div class="contact-row">
+            <a href="mailto:wadealiou00@gmail.com">wadealiou00@gmail.com</a>
+            <a href="https://www.linkedin.com/in/aliouuuw">LinkedIn</a>
+            <a href="https://github.com/aliouuuw">GitHub</a>
+            <a href="https://wa.me/221777228845">WhatsApp</a>
           </div>
-          <p class="mono preview-caption" id="preview-caption">Everest · public site + CMS</p>
-        </div>
+          <p class="location-meta">Dakar, Senegal</p>
+          <button class="profile-link" type="button" data-mode="about">
+            Read my background <span aria-hidden="true">&rarr;</span>
+          </button>
+        </section>
+
+        <section class="registry" aria-labelledby="registry-title">
+          <div class="registry-head">
+            <h2 id="registry-title">Engagements</h2>
+            <span class="registry-count">{engagements.length}</span>
+          </div>
+          <div class="filters" role="group" aria-label="Filter by domain">
+            {
+              filters.map((filter) => (
+                <button
+                  type="button"
+                  class="filter"
+                  data-filter={filter.value}
+                  aria-pressed={filter.value === "all" ? "true" : "false"}
+                >
+                  <span>{filter.label}</span>
+                  <span class="filter-count">{filter.count}</span>
+                </button>
+              ))
+            }
+          </div>
+
+          <div class="rows" id="rows">
+            {
+              engagements.map((entry) => {
+                const attrs = {
+                  "data-name": entry.name,
+                  "data-domain": entry.domain,
+                  "data-note": entry.detail,
+                  "data-media": entry.media,
+                  "data-caption": entry.caption,
+                  "data-href": entry.href,
+                };
+                const inner = (
+                  <>
+                    <span class="row-main">
+                      <span class="row-name">{entry.name}</span>
+                      <span class="row-note">{entry.detail}</span>
+                      <span class="row-meta">
+                        {entry.domain} / {entry.builds} {entry.builds === 1 ? "build" : "builds"}
+                      </span>
+                    </span>
+                    <span class="row-period">{entry.period}</span>
+                  </>
+                );
+                return entry.href ? (
+                  <a
+                    class:list={["row", { "is-selected": entry.name === "Everest Finance" }]}
+                    href={entry.href}
+                    {...attrs}
+                  >
+                    {inner}
+                  </a>
+                ) : (
+                  <button class="row" type="button" {...attrs}>
+                    {inner}
+                  </button>
+                );
+              })
+            }
+          </div>
+        </section>
       </div>
 
-      <div class="index">
-        <div class="filters" role="group" aria-label="Filter by domain">
-          {
-            filters.map((filter) => (
-              <button
-                type="button"
-                class="filter"
-                data-filter={filter.value}
-                aria-pressed={filter.value === "all" ? "true" : "false"}
-              >
-                <span class="mono">{filter.label}</span>
-                <span class="mono filter-count">{filter.count}</span>
-              </button>
-            ))
-          }
+      <section class="proof-stage" id="proof-stage" aria-live="polite">
+        <div class="proof-head">
+          <div>
+            <p class="proof-client" id="proof-client">Everest Finance</p>
+            <h2 id="proof-title">Savings platform</h2>
+          </div>
+          <a id="proof-link" href="/work/everest-finance"
+            >Open case study <span aria-hidden="true">&nearr;</span></a
+          >
         </div>
 
-        <div class="index-head mono">
-          <span>Engagement</span>
-          <span>Domain</span>
-          <span>Scope</span>
-          <span style="text-align: right">Builds</span>
-          <span style="text-align: right">Period</span>
+        <div class="proof-visual">
+          <div class="proof-media" id="proof-media">
+            <video
+              id="proof-video"
+              src={`${media}/sama-naffa.mp4`}
+              poster={`${media}/sama-naffa.jpg`}
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"></video>
+          </div>
+          <div class="proof-type" id="proof-type" hidden>
+            <p id="proof-type-domain">Fintech</p>
+            <h3 id="proof-type-name">Everest Finance</h3>
+            <p id="proof-type-note">SGI, site, savings app, campaign tooling</p>
+          </div>
         </div>
 
-        <div class="rows" id="rows">
-          {
-            engagements.map((entry) => {
-              const attrs = {
-                "data-name": entry.name,
-                "data-domain": entry.domain,
-                "data-note": entry.detail,
-                "data-media": entry.media,
-                "data-caption": entry.caption,
-              };
-              const inner = (
-                <>
-                  <span class="row-name">{entry.name}</span>
-                  <span class="row-domain">{entry.domain}</span>
-                  <span class="row-note">{entry.detail}</span>
-                  <span class="mono row-builds">
-                    {entry.builds} {entry.builds === 1 ? "build" : "builds"}
-                  </span>
-                  <span class="mono row-period">{entry.period}</span>
-                </>
-              );
-              return entry.href ? (
-                <a class="row" href={entry.href} {...attrs}>
-                  {inner}
-                </a>
-              ) : (
-                <div class="row" {...attrs}>
-                  {inner}
-                </div>
-              );
-            })
-          }
+        <div class="surface-bar" id="surface-bar">
+          <p>Product surface</p>
+          <div class="surface-selectors" role="group" aria-label="Everest product surfaces">
+            {
+              everestSurfaces.map((surface, index) => (
+                <button
+                  type="button"
+                  data-surface={surface.id}
+                  data-title={surface.title}
+                  data-note={surface.note}
+                  aria-pressed={index === 0 ? "true" : "false"}
+                >
+                  <strong>{surface.label}</strong>
+                  <small>{surface.title}</small>
+                </button>
+              ))
+            }
+          </div>
         </div>
-      </div>
+      </section>
     </main>
 
     <!-- ABOUT MODE -->
-    <main class="board wrap" data-mode-panel="about" hidden>
-      <div class="identity about-identity">
-        <button class="mono profile-link back" type="button" data-mode="work">
-          <span aria-hidden="true">&larr;</span> Work
-        </button>
-
-        <div class="portrait">
-          <div class="portrait-frame">
-            <span class="mono portrait-note">Portrait</span>
-          </div>
-        </div>
-
+    <main class="about-board wrap" data-mode-panel="about" hidden>
+      <section class="about-intro">
+        <p class="role">Background</p>
+        <h1>Engineering with operational context.</h1>
         <p class="about-bio">
           Six years building operational software across fintech, ERP, logistics, and education.
           Ottawa to Dakar, bilingual French and English. I work on the systems businesses actually
@@ -353,15 +409,26 @@ const credentials = [
           <a href="mailto:wadealiou00@gmail.com">wadealiou00@gmail.com</a>
           <a href="https://www.linkedin.com/in/aliouuuw">LinkedIn</a>
         </div>
-      </div>
+        <button class="profile-link" type="button" data-mode="work">
+          <span aria-hidden="true">&larr;</span> Return to work
+        </button>
+      </section>
 
-      <div class="index">
-        <p class="mono about-group first">Journey</p>
+      <figure class="portrait">
+        <img src="/Aliou.png" alt="Portrait of Aliou Wade" width="795" height="1024" />
+        <figcaption>Aliou Wade, Dakar</figcaption>
+      </figure>
+
+      <section class="journey" aria-labelledby="journey-title">
+        <div class="about-section-head">
+          <h2 id="journey-title">Journey</h2>
+          <span>2019 - now</span>
+        </div>
         <div class="jrows">
           {
             journey.map((entry) => (
               <div class="jrow">
-                <span class="mono jrow-period">{entry.period}</span>
+                <span class="jrow-period">{entry.period}</span>
                 <span class="jrow-body">
                   <span class="jrow-role">{entry.role}</span>
                   <span class="jrow-org">{entry.org}</span>
@@ -372,11 +439,14 @@ const credentials = [
           }
         </div>
 
-        <p class="mono about-group">Education and certifications</p>
-        <div class="jrows">
+        <div class="about-section-head credentials-head">
+          <h2>Education and certifications</h2>
+          <span>{credentials.length} records</span>
+        </div>
+        <div class="credential-grid">
           {
             credentials.map((entry) => (
-              <div class="jrow jrow-simple">
+              <div class="credential">
                 <span class="jrow-role">{entry.item}</span>
                 <span class="jrow-note">{entry.detail}</span>
               </div>
@@ -384,19 +454,12 @@ const credentials = [
           }
         </div>
 
-        <p class="mono about-group">Off the clock</p>
-        <p class="about-note">
-          Competitive chess, around 2043 bullet online. Same discipline as shipping under deadline.
-        </p>
-      </div>
+        <div class="off-clock">
+          <h2>Off the clock</h2>
+          <p>Competitive chess, around 2043 bullet online. Same discipline as shipping under deadline.</p>
+        </div>
+      </section>
     </main>
-
-    <footer class="site-foot wrap">
-      <span class="mono">Dakar, Senegal</span>
-      <a class="mono" href="/writing/why-systems-over-frameworks"
-        >Essay: why systems over frameworks</a
-      >
-    </footer>
 
     <script>
       const root = document.documentElement;
@@ -427,13 +490,22 @@ const credentials = [
         });
       }
 
-      /* Board mode: work <-> about */
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      /* Board mode */
       const modePanels = document.querySelectorAll<HTMLElement>("[data-mode-panel]");
+      const modeButtons = document.querySelectorAll<HTMLButtonElement>("[data-mode]");
       document.querySelectorAll<HTMLButtonElement>("[data-mode]").forEach((button) => {
         button.addEventListener("click", () => {
           const mode = button.dataset.mode;
           modePanels.forEach((panel) => {
             panel.hidden = panel.dataset.modePanel !== mode;
+          });
+          modeButtons.forEach((control) => {
+            control.setAttribute(
+              "aria-pressed",
+              control.dataset.mode === mode ? "true" : "false",
+            );
           });
         });
       });
@@ -453,27 +525,73 @@ const credentials = [
         });
       });
 
-      /* Preview swap */
-      const preview = document.getElementById("preview");
-      const previewTypeName = document.getElementById("preview-type-name");
-      const previewTypeNote = document.getElementById("preview-type-note");
-      const previewCaption = document.getElementById("preview-caption");
+      /* Selected engagement and product surface */
+      const proofStage = document.getElementById("proof-stage");
+      const proofMedia = document.getElementById("proof-media");
+      const proofType = document.getElementById("proof-type");
+      const proofVideo = document.getElementById("proof-video") as HTMLVideoElement | null;
+      const proofClient = document.getElementById("proof-client");
+      const proofTitle = document.getElementById("proof-title");
+      const proofTypeDomain = document.getElementById("proof-type-domain");
+      const proofTypeName = document.getElementById("proof-type-name");
+      const proofTypeNote = document.getElementById("proof-type-note");
+      const proofLink = document.getElementById("proof-link") as HTMLAnchorElement | null;
+      const surfaceBar = document.getElementById("surface-bar");
+      const surfaceButtons = document.querySelectorAll<HTMLButtonElement>("[data-surface]");
+      const mediaRoot = "/media/case-studies/everest-finance";
+
+      const showSurface = (button: HTMLButtonElement) => {
+        const surface = button.dataset.surface;
+        if (!surface || !proofVideo) return;
+        surfaceButtons.forEach((control) =>
+          control.setAttribute("aria-pressed", control === button ? "true" : "false"),
+        );
+        proofVideo.poster = `${mediaRoot}/${surface}.jpg`;
+        proofVideo.src = `${mediaRoot}/${surface}.mp4`;
+        if (!reduced) void proofVideo.play();
+        if (proofClient) proofClient.textContent = button.dataset.note ?? "Everest Finance";
+        if (proofTitle) proofTitle.textContent = button.dataset.title ?? "";
+      };
+
+      surfaceButtons.forEach((button) => {
+        button.addEventListener("click", () => showSurface(button));
+      });
 
       rows.forEach((row) => {
         const activate = () => {
-          if (!preview || !previewCaption) return;
+          rows.forEach((entry) => entry.classList.toggle("is-selected", entry === row));
           if (row.dataset.media) {
-            preview.classList.remove("is-type");
-            previewCaption.textContent = row.dataset.caption ?? "";
+            proofStage?.classList.remove("is-type");
+            if (proofMedia) proofMedia.hidden = false;
+            if (proofType) proofType.hidden = true;
+            if (surfaceBar) surfaceBar.hidden = false;
+            const defaultSurface = document.querySelector<HTMLButtonElement>(
+              '[data-surface="sama-naffa"]',
+            );
+            if (defaultSurface) showSurface(defaultSurface);
+            if (proofLink && row.dataset.href) {
+              proofLink.hidden = false;
+              proofLink.href = row.dataset.href;
+            }
           } else {
-            preview.classList.add("is-type");
-            if (previewTypeName) previewTypeName.textContent = row.dataset.name ?? "";
-            if (previewTypeNote) previewTypeNote.textContent = row.dataset.note ?? "";
-            previewCaption.textContent = `${row.dataset.name ?? ""} · ${row.dataset.domain ?? ""}`;
+            proofStage?.classList.add("is-type");
+            if (proofMedia) proofMedia.hidden = true;
+            if (proofType) proofType.hidden = false;
+            if (surfaceBar) surfaceBar.hidden = true;
+            if (proofClient) proofClient.textContent = row.dataset.domain ?? "";
+            if (proofTitle) proofTitle.textContent = row.dataset.name ?? "";
+            if (proofTypeDomain) proofTypeDomain.textContent = row.dataset.domain ?? "";
+            if (proofTypeName) proofTypeName.textContent = row.dataset.name ?? "";
+            if (proofTypeNote) proofTypeNote.textContent = row.dataset.note ?? "";
+            if (proofLink) {
+              proofLink.hidden = !row.dataset.href;
+              if (row.dataset.href) proofLink.href = row.dataset.href;
+            }
           }
         };
         row.addEventListener("mouseenter", activate);
         row.addEventListener("focus", activate);
+        if (row.tagName === "BUTTON") row.addEventListener("click", activate);
       });
     </script>
   </body>
