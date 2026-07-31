@@ -17,6 +17,8 @@ The operator board is the shipped production surface. This mock is a parallel
 exploration of a calmer, more restrained visual language — closer to how
 Polestar, Porsche, Audi, Nomos, Braun, and Apple communicate competence: through
 restraint and precision, not motion or decoration.
+Note again:
+Polestar, porsche, audi,nomos glaschutte, Theory, Arcteryx Veilance, Lamy, Apple, Sony
 
 Target reaction from a visitor:
 
@@ -97,19 +99,25 @@ Operations`); the original specific label survives as row detail text (e.g.
 
 ## Open questions (not yet decided)
 
-1. **Journey format in About mode.** Currently a plain chronological rail
+1. **Simpler IA for the soft-UI instrument (especially mobile).** Desktop craft
+   (bezel + chin + engagement index) is ahead of the information architecture.
+   Phone today is still a stacked scale-down. Target rethink (not yet shipped):
+   compact identity → featured instrument → Top 4–5 engagements with “Show all”
+   + filter sheet; About = portrait → bio → progressive journey/credentials.
+   Touch targets and scroll-to-proof on select are the interim adapt pass.
+2. **Journey format in About mode.** Currently a plain chronological rail
    (placeholder). Two real directions on the table:
    - **Storytelling** — narrative prose, chapter-like.
    - **Git-branch model** — journey rendered as commits/branches (what counts
      as a branch? employers? domains? is the BocalBun freeze an abandoned
      branch, a merge, or a tag?). This is a genuinely different IA, not a
      skin — needs its own design pass.
-2. **Portrait treatment.** Frame is a labeled placeholder today. Target: dither
+3. **Portrait treatment.** Frame is a labeled placeholder today. Target: dither
    effect, glass/magnetic interaction, subtle animation. Craft work, deferred.
-3. **Engagement pages.** Need a page template that lists every build for a
+4. **Engagement pages.** Need a page template that lists every build for a
    client (starting with Everest's 3) instead of routing to a single-scope
    case study.
-4. **Everest/ERGOBIT naming and screenshot permissions** — same open item as
+5. **Everest/ERGOBIT naming and screenshot permissions** — same open item as
    production (`docs/launch-prerequisites.md`), applies here too since the mock
    reuses the same case-study media.
 
@@ -119,9 +127,9 @@ Operations`); the original specific label survives as row detail text (e.g.
   this direction to production.
 - Not the place to resolve Everest/ERGOBIT CEO permission blockers — tracked in
   `docs/launch-prerequisites.md`.
-- UI polish (shadows-vs-none edge cases, exact spacing scale, dark/light
-  contrast pass) intentionally rough — "we'll plan this carefully later."
+- Full mobile IA rethink (featured tier / filter sheet) — tracked under Open
+  questions #1; interim adapt only until that pass.
 
 ---
 
-*Last updated: 2026-07-31 — IA locked, UI craft pass not yet scheduled.*
+*Last updated: 2026-07-31 — soft-UI instrument shipped; simpler mobile IA pending.*

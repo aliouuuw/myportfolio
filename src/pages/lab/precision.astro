@@ -689,6 +689,11 @@ const everestSurfaces = [
       });
 
       rows.forEach((row) => {
+        const bringProofIntoView = () => {
+          if (!proofStage || window.matchMedia("(min-width: 1101px)").matches) return;
+          proofStage.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+        };
+
         const activate = () => {
           rows.forEach((entry) => entry.classList.toggle("is-selected", entry === row));
           setPlate(row);
@@ -727,9 +732,16 @@ const everestSurfaces = [
             revealProof();
           }
         };
+        /* Hover updates the stage without stealing scroll. Click/focus return to it. */
         row.addEventListener("mouseenter", activate);
-        row.addEventListener("focus", activate);
-        row.addEventListener("click", activate);
+        row.addEventListener("focus", () => {
+          activate();
+          bringProofIntoView();
+        });
+        row.addEventListener("click", () => {
+          activate();
+          bringProofIntoView();
+        });
       });
     </script>
   </body>

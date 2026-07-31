@@ -1472,11 +1472,17 @@ a:focus-visible {
     display: none;
   }
 
+  /*
+   * Phone Work IA (adapt, not scale):
+   * compact identity → instrument (artifact leads) → engagements index.
+   * Chin plate duplicates the stage; drop it so the preview stays primary.
+   */
   .work-board,
   .about-board {
     display: flex;
     flex-direction: column;
-    padding-block: 28px 42px;
+    padding-block: 20px 48px;
+    gap: 0;
   }
 
   .work-sidebar {
@@ -1486,6 +1492,25 @@ a:focus-visible {
   .identity {
     order: 1;
     min-height: 0;
+    padding: 14px 14px 12px;
+  }
+
+  .identity .contact-secondary,
+  .identity .location-meta {
+    display: none;
+  }
+
+  .identity .positioning {
+    margin-top: 8px;
+    font-size: 0.86rem;
+    max-width: 32ch;
+  }
+
+  .identity .profile-link {
+    margin-top: 8px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 
   .about-intro {
@@ -1493,26 +1518,32 @@ a:focus-visible {
   }
 
   .identity h1 {
-    font-size: clamp(1.5rem, 7vw, 1.85rem);
+    font-size: clamp(1.35rem, 6vw, 1.6rem);
   }
 
   .about-intro h1 {
     font-size: clamp(2.65rem, 15vw, 4rem);
   }
 
-  .positioning {
-    max-width: 27ch;
-  }
-
   .proof-stage {
     order: 2;
     min-height: 0;
-    padding: 34px 0 0;
+    padding: 18px 0 0;
     border-right: 0;
+    scroll-margin-top: 12px;
   }
 
   .proof-head {
     min-height: 0;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .proof-head a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 
   .proof-visual {
@@ -1520,9 +1551,17 @@ a:focus-visible {
     aspect-ratio: 4 / 3;
   }
 
+  .chin {
+    gap: 10px;
+  }
+
   .chin-controls {
     flex-wrap: wrap;
     gap: 10px;
+  }
+
+  .chin-plate {
+    display: none;
   }
 
   .surface-selectors {
@@ -1536,20 +1575,23 @@ a:focus-visible {
     display: none;
   }
 
-  .chin-plate {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px 20px;
+  .surface-selectors button,
+  .media-control,
+  .filter {
+    min-height: 44px;
+    height: auto;
+    padding-block: 10px;
   }
 
-  .plate-wide {
-    grid-column: 1 / -1;
-    justify-self: start;
-    text-align: left;
+  .mode-nav button,
+  .mode-nav .essay-link,
+  #theme-toggle {
+    min-height: 44px;
   }
 
   .registry {
     order: 3;
-    margin-top: 18px;
+    margin-top: 22px;
     padding: 16px;
     border-radius: var(--radius-panel);
     background: var(--surface);
@@ -1561,12 +1603,20 @@ a:focus-visible {
   }
 
   .row {
+    min-height: 52px;
     padding-block: 14px;
+    align-items: center;
+  }
+
+  /* About phone: face first, then story — Experience leads with the person. */
+  .about-intro {
+    order: 2;
+    margin-top: 12px;
   }
 
   .portrait {
-    order: 2;
-    margin-top: 12px;
+    order: 1;
+    margin-top: 0;
   }
 
   .portrait img {
