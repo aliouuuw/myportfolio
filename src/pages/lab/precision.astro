@@ -257,93 +257,30 @@ const everestSurfaces = [
       </div>
     </header>
 
-    <!-- WORK MODE -->
+    <!-- WORK MODE: one proof-first column, same order at every size. -->
     <main class="work-board wrap" data-mode-panel="work">
-      <div class="work-sidebar">
-        <section class="identity" aria-labelledby="work-title">
+      <section class="identity" aria-labelledby="work-title">
+        <div class="identity-main">
           <p class="role">Product Systems Engineer</p>
           <h1 id="work-title">Aliou Wade</h1>
           <p class="positioning">
             I build operational software for fintechs and operations-heavy businesses.
           </p>
-
-          <div class="contact-row">
-            <a class="contact-primary" href="mailto:wadealiou00@gmail.com">wadealiou00@gmail.com</a>
-            <span class="contact-secondary">
-              <a href="https://www.linkedin.com/in/aliouuuw">LinkedIn</a>
-              <a href="https://github.com/aliouuuw">GitHub</a>
-              <a href="https://wa.me/221777228845">WhatsApp</a>
-            </span>
-          </div>
-          <p class="location-meta">Dakar, Senegal</p>
+        </div>
+        <div class="identity-side">
+          <a class="contact-primary" href="mailto:wadealiou00@gmail.com">wadealiou00@gmail.com</a>
           <button class="profile-link" type="button" data-mode="about">
-            Read my background <span aria-hidden="true">&rarr;</span>
+            Background <span aria-hidden="true">&rarr;</span>
           </button>
-        </section>
-
-        <section class="registry" aria-labelledby="registry-title">
-          <div class="registry-head">
-            <h2 id="registry-title">Engagements</h2>
-            <span class="registry-count">{engagements.length}</span>
-          </div>
-          <div class="filters" role="group" aria-label="Filter by domain">
-            {
-              filters.map((filter) => (
-                <button
-                  type="button"
-                  class="filter"
-                  data-filter={filter.value}
-                  aria-pressed={filter.value === "all" ? "true" : "false"}
-                >
-                  <span>{filter.label}</span>
-                  <span class="filter-count">{filter.count}</span>
-                </button>
-              ))
-            }
-          </div>
-
-          <div class="rows" id="rows">
-            {
-              engagements.map((entry) => {
-                const attrs = {
-                  "data-name": entry.name,
-                  "data-domain": entry.domain,
-                  "data-note": entry.detail,
-                  "data-media": entry.media,
-                  "data-caption": entry.caption,
-                  "data-href": entry.href,
-                  "data-period": entry.period,
-                  "data-builds": `${entry.builds} ${entry.builds === 1 ? "build" : "builds"}`,
-                };
-                /* Select always stays on the board. Case studies open only via the CTA. */
-                return (
-                  <button
-                    class:list={["row", { "is-selected": entry.name === "Everest Finance" }]}
-                    type="button"
-                    {...attrs}
-                  >
-                    <span class="row-main">
-                      <span class="row-name">{entry.name}</span>
-                      <span class="row-note">{entry.detail}</span>
-                      <span class="row-meta">
-                        {entry.domain} / {entry.builds}{" "}
-                        {entry.builds === 1 ? "build" : "builds"}
-                      </span>
-                    </span>
-                    <span class="row-period">{entry.period}</span>
-                  </button>
-                );
-              })
-            }
-          </div>
-        </section>
-      </div>
+        </div>
+      </section>
 
       <section class="proof-stage" id="proof-stage" aria-live="polite">
         <div class="proof-head">
-          <div>
+          <div class="proof-heading">
             <p class="proof-client" id="proof-client">Everest Finance</p>
             <h2 id="proof-title">Savings platform</h2>
+            <p class="proof-meta" id="proof-meta">Fintech · 2025 — now · 3 builds</p>
           </div>
           <a id="proof-link" href="/work/everest-finance"
             >Open case study <span aria-hidden="true">&nearr;</span></a
@@ -425,53 +362,96 @@ const everestSurfaces = [
                 }
               </div>
             </div>
-
-            <dl class="chin-plate" id="chin-plate">
-              <div><dt>Domain</dt><dd id="plate-domain">Fintech</dd></div>
-              <div><dt>Period</dt><dd id="plate-period">2025 — now</dd></div>
-              <div><dt>Scope</dt><dd id="plate-scope">3 builds</dd></div>
-              <div class="plate-wide">
-                <dt>Engagement</dt><dd id="plate-note">SGI · site, savings app, campaign tooling</dd>
-              </div>
-            </dl>
           </div>
+        </div>
+      </section>
+
+      <section class="registry" aria-labelledby="registry-title">
+        <div class="registry-head">
+          <h2 id="registry-title">Index of engagements</h2>
+          <div class="registry-tools">
+            <label class="domain-filter">
+              <span class="domain-filter-label">Domain</span>
+              <select id="domain-filter" aria-label="Filter engagements by domain">
+                {
+                  filters.map((filter) => (
+                    <option value={filter.value}>
+                      {filter.label} · {filter.count}
+                    </option>
+                  ))
+                }
+              </select>
+            </label>
+            <span class="registry-count">{engagements.length}</span>
+          </div>
+        </div>
+
+        <div class="rows" id="rows">
+          {
+            engagements.map((entry, index) => {
+              const attrs = {
+                "data-name": entry.name,
+                "data-domain": entry.domain,
+                "data-note": entry.detail,
+                "data-media": entry.media,
+                "data-caption": entry.caption,
+                "data-href": entry.href,
+                "data-period": entry.period,
+                "data-builds": `${entry.builds} ${entry.builds === 1 ? "build" : "builds"}`,
+              };
+              /* Select always stays on the board. Case studies open only via the CTA. */
+              return (
+                <button
+                  class:list={["row", { "is-selected": entry.name === "Everest Finance" }]}
+                  type="button"
+                  {...attrs}
+                >
+                  <span class="row-index">{String(index + 1).padStart(3, "0")}</span>
+                  <span class="row-main">
+                    <span class="row-name">{entry.name}</span>
+                    <span class="row-note">{entry.detail}</span>
+                  </span>
+                  <span class="row-meta">
+                    {entry.domain} · {entry.builds} {entry.builds === 1 ? "build" : "builds"}
+                  </span>
+                  <span class="row-period">{entry.period}</span>
+                </button>
+              );
+            })
+          }
         </div>
       </section>
     </main>
 
-    <!-- ABOUT MODE -->
+    <!-- ABOUT MODE: portrait → story → record. Same column as Work. -->
     <main class="about-board wrap" data-mode-panel="about" hidden>
-      <section class="about-intro">
-        <p class="role">Background</p>
-        <h1>Engineering with operational context.</h1>
-        <p class="about-bio">
-          Six years building operational software across fintech, ERP, logistics, and education.
-          Ottawa to Dakar, bilingual French and English. I work on the systems businesses actually
-          run on, not the ones that demo well.
-        </p>
-
-        <div class="contact-row">
-          <a class="contact-primary" href="mailto:wadealiou00@gmail.com">wadealiou00@gmail.com</a>
-          <span class="contact-secondary">
-            <a href="https://www.linkedin.com/in/aliouuuw">LinkedIn</a>
-            <a href="https://github.com/aliouuuw">GitHub</a>
-            <a href="https://wa.me/221777228845">WhatsApp</a>
-          </span>
-        </div>
-        <button class="profile-link" type="button" data-mode="work">
-          <span aria-hidden="true">&larr;</span> Return to work
-        </button>
-
-        <div class="off-clock">
-          <h2>Off the clock</h2>
-          <p>Competitive chess, around 2043 bullet online. Same discipline as shipping under deadline.</p>
+      <section class="about-hero">
+        <figure class="portrait">
+          <img src="/Aliou.png" alt="Portrait of Aliou Wade" width="795" height="1024" />
+          <figcaption>Aliou Wade, Dakar</figcaption>
+        </figure>
+        <div class="about-intro">
+          <p class="role">Background</p>
+          <h1>Engineering with operational context.</h1>
+          <p class="about-bio">
+            Six years building operational software across fintech, ERP, logistics, and education.
+            Ottawa to Dakar, bilingual French and English. I work on the systems businesses actually
+            run on, not the ones that demo well.
+          </p>
+          <div class="contact-row">
+            <a class="contact-primary" href="mailto:wadealiou00@gmail.com">wadealiou00@gmail.com</a>
+            <span class="contact-secondary">
+              <a href="https://www.linkedin.com/in/aliouuuw">LinkedIn</a>
+              <a href="https://github.com/aliouuuw">GitHub</a>
+              <a href="https://wa.me/221777228845">WhatsApp</a>
+            </span>
+          </div>
+          <div class="off-clock">
+            <h2>Off the clock</h2>
+            <p>Competitive chess, around 2043 bullet online. Same discipline as shipping under deadline.</p>
+          </div>
         </div>
       </section>
-
-      <figure class="portrait">
-        <img src="/Aliou.png" alt="Portrait of Aliou Wade" width="795" height="1024" />
-        <figcaption>Aliou Wade, Dakar</figcaption>
-      </figure>
 
       <section class="journey" aria-labelledby="journey-title">
         <div class="about-section-head">
@@ -492,9 +472,11 @@ const everestSurfaces = [
             ))
           }
         </div>
+      </section>
 
-        <div class="about-section-head credentials-head">
-          <h2>Education and certifications</h2>
+      <section class="credentials" aria-labelledby="credentials-title">
+        <div class="about-section-head">
+          <h2 id="credentials-title">Education and certifications</h2>
           <span>{credentials.length} records</span>
         </div>
         <div class="credential-grid">
@@ -559,19 +541,19 @@ const everestSurfaces = [
         });
       });
 
-      /* Domain filter */
-      const filterButtons = document.querySelectorAll<HTMLButtonElement>("[data-filter]");
+      /* Domain filter: one select control, not a chip rail. */
+      const domainFilter = document.getElementById("domain-filter") as HTMLSelectElement | null;
+      const registryCount = document.querySelector<HTMLElement>(".registry-count");
       const rows = document.querySelectorAll<HTMLElement>(".row[data-domain]");
-      filterButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          const value = button.dataset.filter;
-          filterButtons.forEach((b) =>
-            b.setAttribute("aria-pressed", b === button ? "true" : "false"),
-          );
-          rows.forEach((row) => {
-            row.hidden = value !== "all" && row.dataset.domain !== value;
-          });
+      domainFilter?.addEventListener("change", () => {
+        const value = domainFilter.value;
+        let visible = 0;
+        rows.forEach((row) => {
+          const show = value === "all" || row.dataset.domain === value;
+          row.hidden = !show;
+          if (show) visible += 1;
         });
+        if (registryCount) registryCount.textContent = String(visible);
       });
 
       /* Selected engagement and product surface */
@@ -594,17 +576,14 @@ const everestSurfaces = [
       const mediaControlLabel = mediaControl?.querySelector<HTMLElement>(".media-control-label");
       const chinState = document.getElementById("chin-state");
       const chinStateText = document.getElementById("chin-state-text");
-      const plateDomain = document.getElementById("plate-domain");
-      const platePeriod = document.getElementById("plate-period");
-      const plateScope = document.getElementById("plate-scope");
-      const plateNote = document.getElementById("plate-note");
+      const proofMeta = document.getElementById("proof-meta");
       const mediaRoot = "/media/case-studies/everest-finance";
 
-      const setPlate = (row: HTMLElement) => {
-        if (plateDomain) plateDomain.textContent = row.dataset.domain ?? "—";
-        if (platePeriod) platePeriod.textContent = row.dataset.period ?? "—";
-        if (plateScope) plateScope.textContent = row.dataset.builds ?? "—";
-        if (plateNote) plateNote.textContent = row.dataset.note ?? "—";
+      /* Engagement facts sit on the proof head now that the chin plate is gone. */
+      const setProofMeta = (row: HTMLElement) => {
+        if (!proofMeta) return;
+        const parts = [row.dataset.domain, row.dataset.period, row.dataset.builds].filter(Boolean);
+        proofMeta.textContent = parts.join(" · ");
       };
 
       const setChinState = (state: "live" | "paused" | "idle", label: string) => {
@@ -689,6 +668,7 @@ const everestSurfaces = [
       });
 
       rows.forEach((row) => {
+        /* On flowing layouts the instrument sits above the index: return to it on select. */
         const bringProofIntoView = () => {
           if (!proofStage || window.matchMedia("(min-width: 1101px)").matches) return;
           proofStage.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
@@ -696,7 +676,7 @@ const everestSurfaces = [
 
         const activate = () => {
           rows.forEach((entry) => entry.classList.toggle("is-selected", entry === row));
-          setPlate(row);
+          setProofMeta(row);
           if (row.dataset.media) {
             proofStage?.classList.remove("is-type");
             if (proofMedia) proofMedia.hidden = false;
@@ -732,7 +712,7 @@ const everestSurfaces = [
             revealProof();
           }
         };
-        /* Hover updates the stage without stealing scroll. Click/focus return to it. */
+        /* Hover previews on fine pointers; click/focus commit and scroll to proof. */
         row.addEventListener("mouseenter", activate);
         row.addEventListener("focus", () => {
           activate();

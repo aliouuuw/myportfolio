@@ -6,8 +6,9 @@ production board (`/`, `/fr`) or `Base.astro`. It has its own stylesheet
 (`src/styles/lab-precision.css`) so it can be iterated on without touching the
 shipped operator board.
 
-Status: **IA locked** (2026-07-31). UI craft, portrait treatment, and journey
-format are explicitly deferred — see Open questions below.
+Status: **Single-column IA shipped** (2026-07-31). One proof-first column at
+every size; UI craft, portrait treatment, and journey format remain deferred —
+see Open questions below.
 
 ---
 
@@ -44,23 +45,34 @@ Not:
 - **Content philosophy**: show the engineering (test counts, CI pipelines,
   architecture decisions, trade-offs) instead of narrating skills.
 
-## Information architecture (locked 2026-07-31)
+## Information architecture (re-locked 2026-07-31, single column)
 
-### Single viewport, two modes
+### One column, same order at every size
 
-The page is exactly `100dvh`, no scroll, on desktop (≥1100px). Below that it
-becomes a normal flowing page. There are two board **modes**, toggled by a
-button, not a route:
+The old two-column IA (sidebar identity + registry | proof stage) forced mobile
+into a reordered stack that never matched desktop. Replaced with a single
+proof-first column whose order never changes — only density does:
 
-| | **Work mode** (default) | **About mode** |
-|---|---|---|
-| Left column | Name, positioning line, contact row, `About me →` entry, media preview pane | Portrait frame, bio, contact row, `← Work` |
-| Right column | Domain filters + engagement index (table) | Journey rail, education/certifications, "off the clock" |
+**Work mode (default):**
 
-Rationale: About was originally a tab inside the work index (a peer of the
-project list). That undersold it. About is about *the person*, so it now lives
-on the profile side and takes the full board — giving it room for the portrait
-treatment and journey storytelling that's still to be designed.
+1. **Identity strip** — role, name, one-line positioning, email, `Background →`.
+   Flat, no panel.
+2. **Proof instrument** — the featured engagement (bezel + chin + SPEC type
+   state), full column width. Engagement facts (`domain · period · builds`)
+   live on the proof head; the chin plate is gone.
+3. **Index of engagements** — a flat mono ledger (numbered rows, hairline
+   rules, no cards). One `Domain` select filters it; selecting a row swaps the
+   instrument above. On desktop the ledger scrolls inside the 100dvh board;
+   on mobile the page flows and select scrolls back to the instrument.
+
+**About mode:** portrait → name + bio + contact + off-the-clock → journey rail
+→ credentials grid. Same single column.
+
+Desktop is still exactly `100dvh` (≥1100px); below that the page flows. The
+mode toggle (Work / About) is unchanged.
+
+References for the ledger: moritzpetersen.com, p5aholic.me, harrygeorge.design
+— radical, flat, mono-index minimalism against the skeuomorphic instrument.
 
 ### Index rows are engagements, not individual builds
 
@@ -99,25 +111,19 @@ Operations`); the original specific label survives as row detail text (e.g.
 
 ## Open questions (not yet decided)
 
-1. **Simpler IA for the soft-UI instrument (especially mobile).** Desktop craft
-   (bezel + chin + engagement index) is ahead of the information architecture.
-   Phone today is still a stacked scale-down. Target rethink (not yet shipped):
-   compact identity → featured instrument → Top 4–5 engagements with “Show all”
-   + filter sheet; About = portrait → bio → progressive journey/credentials.
-   Touch targets and scroll-to-proof on select are the interim adapt pass.
-2. **Journey format in About mode.** Currently a plain chronological rail
+1. **Journey format in About mode.** Currently a plain chronological rail
    (placeholder). Two real directions on the table:
    - **Storytelling** — narrative prose, chapter-like.
    - **Git-branch model** — journey rendered as commits/branches (what counts
      as a branch? employers? domains? is the BocalBun freeze an abandoned
      branch, a merge, or a tag?). This is a genuinely different IA, not a
      skin — needs its own design pass.
-3. **Portrait treatment.** Frame is a labeled placeholder today. Target: dither
+2. **Portrait treatment.** Frame is a labeled placeholder today. Target: dither
    effect, glass/magnetic interaction, subtle animation. Craft work, deferred.
-4. **Engagement pages.** Need a page template that lists every build for a
+3. **Engagement pages.** Need a page template that lists every build for a
    client (starting with Everest's 3) instead of routing to a single-scope
    case study.
-5. **Everest/ERGOBIT naming and screenshot permissions** — same open item as
+4. **Everest/ERGOBIT naming and screenshot permissions** — same open item as
    production (`docs/launch-prerequisites.md`), applies here too since the mock
    reuses the same case-study media.
 
@@ -127,9 +133,8 @@ Operations`); the original specific label survives as row detail text (e.g.
   this direction to production.
 - Not the place to resolve Everest/ERGOBIT CEO permission blockers — tracked in
   `docs/launch-prerequisites.md`.
-- Full mobile IA rethink (featured tier / filter sheet) — tracked under Open
-  questions #1; interim adapt only until that pass.
 
 ---
 
-*Last updated: 2026-07-31 — soft-UI instrument shipped; simpler mobile IA pending.*
+*Last updated: 2026-07-31 — single proof-first column IA shipped at every size;
+soft-UI instrument retained; journey/portrait craft pending.*

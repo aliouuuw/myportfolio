@@ -283,37 +283,34 @@ a:focus-visible {
   color: var(--ink);
 }
 
-/* Work composition */
+/* Work composition — one proof-first column, same order at every size. */
 
 .work-board {
   min-height: 0;
   height: 100%;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2.2vh, 26px);
   padding-block: clamp(16px, 2.2vh, 28px);
 }
 
-.work-sidebar {
-  grid-column: 1 / span 3;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  margin-right: 8px;
-  padding: 14px 14px 10px;
-  border-right: 0;
-  border-radius: var(--radius-panel);
-  background: var(--surface);
-  box-shadow: var(--lift-panel);
-}
-
+/* Identity is a single flat strip, not a sidebar panel. */
 .identity {
   flex: 0 0 auto;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 28px;
   min-width: 0;
-  padding: 0 2px 12px;
-  border-bottom: 1px solid var(--line);
+  padding-bottom: clamp(12px, 1.6vh, 18px);
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.identity-main {
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: clamp(16px, 2vw, 28px);
 }
 
 .role {
@@ -325,13 +322,46 @@ a:focus-visible {
   text-transform: uppercase;
 }
 
-/* Header already owns the brand. Sidebar name is a confirmation, not a second hero. */
+/* Header owns the wordmark; here the name leads the proof strip. */
 .identity h1 {
   margin: 0;
-  font-size: clamp(1.35rem, 1.7vw, 1.7rem);
+  font-size: clamp(1.5rem, 2vw, 2rem);
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1.05;
+  white-space: nowrap;
+}
+
+.positioning {
+  margin: 0;
+  max-width: 34ch;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  line-height: 1.4;
+}
+
+.identity-side {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.identity-side .contact-primary {
+  color: var(--ink);
+  font-size: 0.8rem;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--line-strong);
+  transition:
+    color var(--duration) var(--ease),
+    text-decoration-color var(--duration) var(--ease);
+}
+
+.identity-side .contact-primary:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
 }
 
 .about-intro h1 {
@@ -340,16 +370,6 @@ a:focus-visible {
   font-weight: 500;
   letter-spacing: -0.038em;
   line-height: 0.94;
-}
-
-.positioning {
-  margin: 10px 0 0;
-  max-width: 30ch;
-  color: var(--ink-soft);
-  font-size: 0.88rem;
-  font-weight: 400;
-  letter-spacing: -0.012em;
-  line-height: 1.4;
 }
 
 /* Two deliberate lines beat four links wrapping into a ragged block. */
@@ -390,24 +410,14 @@ a:focus-visible {
   text-decoration-color: var(--accent);
 }
 
-.location-meta {
-  margin: 10px 0 0;
-  color: var(--ink-faint);
-  font-family: var(--mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
 .profile-link {
   width: max-content;
-  margin-top: 10px;
   padding: 0;
   border: 0;
   background: transparent;
   color: var(--ink-soft);
   cursor: pointer;
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   text-align: left;
   text-decoration: underline;
   text-decoration-color: var(--line-strong);
@@ -426,19 +436,18 @@ a:focus-visible {
   color: var(--ink);
 }
 
-/* Product proof — skeuomorphic instrument */
+/* Product proof — skeuomorphic instrument, full-width in the single column. */
 
 .proof-stage {
   --pointer-x: 62%;
   --pointer-y: 42%;
-  grid-column: 4 / span 9;
   position: relative;
   isolation: isolate;
   min-width: 0;
   min-height: 0;
+  flex: 0 0 auto;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
-  padding-left: clamp(18px, 1.6vw, 26px);
+  grid-template-rows: auto auto;
 }
 
 /* The pointer-follow glow was forbidden by the direction doc ("no glow").
@@ -452,9 +461,21 @@ a:focus-visible {
   min-height: 0;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: flex-end;
   gap: 24px;
   padding-bottom: 12px;
+}
+
+.proof-heading {
+  min-width: 0;
+}
+
+.proof-meta {
+  margin: 7px 0 0;
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
 }
 
 .proof-client {
@@ -502,14 +523,12 @@ a:focus-visible {
 
 /* One object: bezel, screen well, machined chin. */
 
-/* The chin takes the height 16:9 cannot use, so both columns land on one baseline. */
-
 .instrument {
   align-self: stretch;
   width: 100%;
   min-height: 0;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto;
   gap: 13px;
   padding: 13px;
   border-radius: var(--radius-bezel);
@@ -577,43 +596,7 @@ a:focus-visible {
   min-height: 26px;
 }
 
-/* Engraved plate: engagement facts, not decoration. */
-
-.chin-plate {
-  display: grid;
-  grid-template-columns: auto auto auto minmax(0, 1fr);
-  gap: 0 clamp(20px, 2.6vw, 44px);
-  margin: 0;
-  padding-top: 12px;
-  border-top: 1px solid var(--line);
-}
-
-.chin-plate div {
-  min-width: 0;
-}
-
-.plate-wide {
-  justify-self: end;
-  text-align: right;
-}
-
-.chin-plate dt {
-  color: var(--ink-faint);
-  font-family: var(--mono);
-  font-size: 0.55rem;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-}
-
-.chin-plate dd {
-  margin: 3px 0 0;
-  overflow: hidden;
-  color: var(--ink-soft);
-  font-size: 0.8rem;
-  letter-spacing: -0.01em;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+/* Chin plate removed: engagement facts live on the proof head + selected row now. */
 
 .chin-state {
   display: inline-flex;
@@ -870,23 +853,36 @@ a:focus-visible {
   box-shadow: var(--press);
 }
 
-/* Secondary engagement selector */
+/* Index of engagements — a flat mono ledger, not a card wall. */
 
 .registry {
   flex: 1 1 auto;
   min-width: 0;
   min-height: 0;
-  display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr);
-  padding: 14px 4px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The ledger owns the leftover viewport: it scrolls inside the board. */
+@media (min-width: 1101px) {
+  .rows {
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .rows::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .registry-head {
   min-height: 0;
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 8px;
+  align-items: center;
+  gap: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line-strong);
 }
 
 .registry-head h2,
@@ -898,8 +894,53 @@ a:focus-visible {
   letter-spacing: -0.01em;
 }
 
+.registry-tools {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.domain-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.domain-filter-label {
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.domain-filter select {
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  padding: 6px 28px 6px 12px;
+  background:
+    linear-gradient(45deg, transparent 50%, var(--ink-soft) 50%) right 12px center / 6px 6px no-repeat,
+    linear-gradient(135deg, var(--ink-soft) 50%, transparent 50%) right 8px center / 6px 6px no-repeat,
+    var(--surface-raised);
+  box-shadow: var(--lift-key);
+  color: var(--ink);
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+}
+
+.domain-filter select:hover {
+  color: var(--ink);
+}
+
+.domain-filter select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 .registry-count,
-.filter-count,
+.row-index,
 .row-meta,
 .row-period,
 .about-section-head span,
@@ -914,158 +955,69 @@ a:focus-visible {
   color: var(--ink-faint);
 }
 
-/* One rail, never two ragged lines: it scrolls past the edge instead of wrapping. */
-
-/* All five domains stay in view: denser chips, no fade-crop. */
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--line);
-}
-
-.filters::-webkit-scrollbar {
-  display: none;
-}
-
-.filter {
-  position: relative;
-  flex: 0 0 auto;
-  display: inline-flex;
-  align-items: baseline;
-  gap: 4px;
-  height: 24px;
-  padding: 0 8px;
-  border: 0;
-  border-radius: 999px;
-  background: transparent;
-  color: var(--ink-faint);
-  cursor: pointer;
-  font-size: 0.66rem;
-  white-space: nowrap;
-  transition:
-    color var(--duration) var(--ease),
-    background-color var(--duration) var(--ease),
-    box-shadow var(--duration) var(--ease);
-}
-
-.filter::after {
-  display: none;
-}
-
-.filter:hover {
-  color: var(--ink-soft);
-}
-
-.filter[aria-pressed="true"] {
-  color: var(--ink);
-  font-weight: 600;
-  background: color-mix(in srgb, var(--accent) 14%, var(--surface-raised));
-  box-shadow: var(--lift-key);
-}
-
-.filter:active {
-  box-shadow: var(--press);
-}
-
-.filter-count {
-  color: inherit;
-  font-family: var(--mono);
-  font-size: 0.58rem;
-  font-variant-numeric: tabular-nums;
-  opacity: 0.62;
-}
-
-/* The list runs past the panel: fade the cut so it reads as depth, not a crop. */
+/* The ledger scrolls with the page; rows stay hairline-flat like the references. */
 .rows {
   min-height: 0;
-  overflow-y: auto;
-  scrollbar-width: none;
-  padding-top: 8px;
-  -webkit-mask-image: linear-gradient(
-    180deg,
-    transparent 0,
-    #000 10px,
-    #000 calc(100% - 34px),
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    180deg,
-    transparent 0,
-    #000 10px,
-    #000 calc(100% - 34px),
-    transparent 100%
-  );
-}
-
-.rows::-webkit-scrollbar {
-  display: none;
+  display: flex;
+  flex-direction: column;
 }
 
 .row {
   position: relative;
   width: 100%;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 10px;
-  align-items: start;
-  padding: 8px 10px;
-  margin-bottom: 3px;
+  grid-template-columns: 3ch minmax(0, 1.5fr) minmax(0, 1fr) auto;
+  gap: 10px clamp(14px, 2vw, 30px);
+  align-items: baseline;
+  padding: 12px 2px;
   border: 0;
-  border-bottom: 0;
+  border-bottom: 1px solid var(--line);
   background: transparent;
   color: inherit;
   cursor: pointer;
   text-align: left;
   text-decoration: none;
-  border-radius: 10px;
   transition:
     color var(--duration) var(--ease),
-    background-color var(--duration) var(--ease),
-    transform var(--duration) var(--ease),
-    box-shadow var(--duration) var(--ease);
-}
-
-.row::before {
-  display: none;
+    background-color var(--duration) var(--ease);
 }
 
 .row:hover {
-  color: var(--ink-soft);
   background: color-mix(in srgb, var(--ink) 3%, transparent);
 }
 
+/* Selected = accent tick at the left edge; nothing else moves. */
 .row.is-selected {
-  position: relative;
   color: var(--ink);
-  background: var(--surface-sunken);
-  box-shadow: var(--well-shallow);
 }
 
-/* The selected row is the only row that moves — and the only place the accent
-   touches the list. A 2px edge reads as "engaged," the way a pressed key does. */
 .row.is-selected::before {
   content: "";
   position: absolute;
-  left: 0;
-  top: 10px;
-  bottom: 10px;
+  left: -13px;
+  top: 14px;
+  bottom: 14px;
   width: 2px;
   border-radius: 0 1px 1px 0;
   background: var(--accent);
 }
 
+.row-index {
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
 .row-main {
   min-width: 0;
   display: flex;
-  flex-direction: column;
+  align-items: baseline;
+  gap: 14px;
 }
 
 .row-name {
   overflow: hidden;
   color: var(--ink);
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   font-weight: 500;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1073,23 +1025,18 @@ a:focus-visible {
 
 .row-note {
   overflow: hidden;
-  margin-top: 2px;
   color: var(--ink-soft);
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-/* Fourteen of these on screen at once: they stay flat so the panel keeps one
-   elevation, and the selected row is the only thing that moves. */
 .row-meta {
-  display: inline-flex;
-  align-self: flex-start;
-  margin-top: 7px;
+  overflow: hidden;
   color: var(--ink-faint);
-  font-size: 0.6rem;
-  font-family: var(--mono);
-  letter-spacing: 0.03em;
+  font-size: 0.62rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .row-period {
@@ -1118,86 +1065,79 @@ a:focus-visible {
 .about-board {
   min-height: 0;
   height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 4vh, 44px);
+  padding-block: clamp(16px, 2.2vh, 28px) clamp(40px, 6vh, 72px);
+  scrollbar-width: none;
+}
+
+.about-board::-webkit-scrollbar {
+  display: none;
+}
+
+/* Portrait beside the intro on wide screens; the record stacks below. */
+.about-hero {
+  flex: 0 0 auto;
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 12px;
-  padding-block: clamp(16px, 2.2vh, 28px);
+  grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: start;
 }
 
 .about-intro {
-  grid-column: 1 / span 4;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  padding: 18px 22px;
-  border-right: 0;
-  border-radius: var(--radius-panel);
-  background: var(--surface);
-  box-shadow: var(--lift-panel);
 }
 
 .about-intro h1 {
-  max-width: 9ch;
-  font-size: clamp(2.4rem, 3.6vw, 4rem);
+  max-width: 12ch;
+  font-size: clamp(2.2rem, 3.4vw, 3.6rem);
 }
 
 .about-bio {
-  margin: 26px 0 0;
-  max-width: 42ch;
+  margin: 22px 0 0;
+  max-width: 46ch;
   color: var(--ink-soft);
   font-size: 0.95rem;
   line-height: 1.62;
 }
 
 .portrait {
-  grid-column: 5 / span 3;
   min-width: 0;
-  min-height: 0;
   margin: 0;
-  padding: 13px;
   display: flex;
   flex-direction: column;
-  border-right: 0;
-  border-radius: var(--radius-panel);
-  background: var(--surface);
-  box-shadow: var(--lift-panel);
 }
 
 /* The portrait fills its panel: no void under the caption. */
 .portrait img {
   display: block;
-  flex: 1 1 auto;
   width: 100%;
-  min-height: 0;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: center 26%;
   border: 0;
-  border-radius: 9px;
+  border-radius: var(--radius-panel);
+  background: var(--surface-sunken);
   filter: grayscale(1) contrast(1.06);
 }
 
 .portrait figcaption {
-  flex: 0 0 auto;
   padding-top: 11px;
   color: var(--ink-faint);
   text-transform: uppercase;
 }
 
 .journey {
-  grid-column: 8 / span 5;
+  flex: 0 0 auto;
   min-height: 0;
-  overflow-y: auto;
-  padding: 18px 20px 0;
-  border-radius: var(--radius-panel);
-  background: var(--surface);
-  box-shadow: var(--lift-panel);
-  scrollbar-width: none;
-  -webkit-mask-image: linear-gradient(180deg, #000 0, #000 calc(100% - 40px), transparent 100%);
-  mask-image: linear-gradient(180deg, #000 0, #000 calc(100% - 40px), transparent 100%);
 }
 
-.journey::-webkit-scrollbar {
-  display: none;
+.credentials {
+  flex: 0 0 auto;
 }
 
 .about-section-head {
@@ -1271,10 +1211,6 @@ a:focus-visible {
   font-size: 0.76rem;
 }
 
-.credentials-head {
-  margin-top: 30px;
-}
-
 /* Bento by weight: the degree in progress leads, the rest pair off beneath it. */
 
 .credential-grid {
@@ -1308,7 +1244,7 @@ a:focus-visible {
 }
 
 .off-clock {
-  margin-top: auto;
+  margin-top: 34px;
   padding-top: 22px;
   border-top: 1px solid var(--line);
 }
@@ -1341,7 +1277,10 @@ a:focus-visible {
 }
 
 
-/* Flowing layout with proof retained */
+/*
+ * One IA at every size. Below desktop the fixed 100dvh board becomes a
+ * flowing page; the order never changes, only the density.
+ */
 
 @media (max-width: 1100px) {
   body {
@@ -1356,87 +1295,32 @@ a:focus-visible {
     flex: 0 0 auto;
   }
 
-  .work-board,
-  .about-board {
-    display: grid;
-    grid-template-columns: repeat(8, minmax(0, 1fr));
-    padding-block: 34px 52px;
+  .work-board {
+    height: auto;
+    min-height: 0;
+    padding-block: 26px 48px;
   }
 
-  .work-sidebar {
-    display: contents;
+  .about-board {
+    height: auto;
+    overflow: visible;
   }
 
   .identity {
-    grid-column: 1 / span 3;
-    min-height: 0;
-    margin: 0;
-    padding: 16px;
-    border-bottom: 0;
-    border-right: 0;
-    border-radius: var(--radius-panel);
-    background: var(--surface);
-    box-shadow: var(--lift-panel);
+    flex-wrap: wrap;
+    row-gap: 14px;
   }
 
   .proof-stage {
-    grid-column: 4 / span 5;
-    padding-left: clamp(16px, 2vw, 28px);
-    border-right: 0;
+    flex: 0 0 auto;
   }
 
   .proof-visual {
     aspect-ratio: 16 / 10;
   }
 
-  .registry {
-    grid-column: 1 / -1;
-    margin-top: 24px;
-    padding: 18px;
-    border-top: 0;
-    border-radius: var(--radius-panel);
-    background: var(--surface);
-    box-shadow: var(--lift-panel);
-  }
-
-  /* These lists scroll with the page here, so the fade would dim real content. */
-  .rows,
-  .journey {
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-
-  .rows {
-    overflow: visible;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 24px;
-  }
-
-  .journey {
-    padding-bottom: 18px;
-  }
-
-  .about-board {
-    gap: 16px;
-  }
-
-  .about-intro {
-    grid-column: 1 / span 4;
-  }
-
-  .portrait {
-    grid-column: 5 / span 4;
-  }
-
-  .journey {
-    grid-column: 1 / -1;
-    margin-top: 8px;
-    overflow: visible;
-  }
-
-  .portrait img {
-    height: 520px;
+  .about-hero {
+    grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
   }
 }
 
@@ -1472,69 +1356,49 @@ a:focus-visible {
     display: none;
   }
 
-  /*
-   * Phone Work IA (adapt, not scale):
-   * compact identity → instrument (artifact leads) → engagements index.
-   * Chin plate duplicates the stage; drop it so the preview stays primary.
-   */
-  .work-board,
-  .about-board {
-    display: flex;
-    flex-direction: column;
+  .work-board {
+    gap: 22px;
     padding-block: 20px 48px;
-    gap: 0;
   }
 
-  .work-sidebar {
-    display: contents;
-  }
-
+  /* Identity strip stacks; proof stays right below it, same as desktop. */
   .identity {
-    order: 1;
-    min-height: 0;
-    padding: 14px 14px 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
 
-  .identity .contact-secondary,
-  .identity .location-meta {
-    display: none;
+  .identity-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .identity h1 {
+    font-size: clamp(1.6rem, 7vw, 2rem);
   }
 
   .identity .positioning {
-    margin-top: 8px;
-    font-size: 0.86rem;
     max-width: 32ch;
   }
 
-  .identity .profile-link {
-    margin-top: 8px;
+  .identity-side {
+    width: 100%;
+    justify-content: space-between;
+    min-height: 44px;
+  }
+
+  .identity-side .profile-link {
     min-height: 44px;
     display: inline-flex;
     align-items: center;
   }
 
-  .about-intro {
-    min-height: 0;
-  }
-
-  .identity h1 {
-    font-size: clamp(1.35rem, 6vw, 1.6rem);
-  }
-
-  .about-intro h1 {
-    font-size: clamp(2.65rem, 15vw, 4rem);
-  }
-
   .proof-stage {
-    order: 2;
-    min-height: 0;
-    padding: 18px 0 0;
-    border-right: 0;
     scroll-margin-top: 12px;
   }
 
   .proof-head {
-    min-height: 0;
     flex-wrap: wrap;
     gap: 12px;
     align-items: center;
@@ -1547,21 +1411,12 @@ a:focus-visible {
   }
 
   .proof-visual {
-    min-height: 0;
     aspect-ratio: 4 / 3;
-  }
-
-  .chin {
-    gap: 10px;
   }
 
   .chin-controls {
     flex-wrap: wrap;
     gap: 10px;
-  }
-
-  .chin-plate {
-    display: none;
   }
 
   .surface-selectors {
@@ -1577,56 +1432,68 @@ a:focus-visible {
 
   .surface-selectors button,
   .media-control,
-  .filter {
+  .mode-nav button,
+  .mode-nav .essay-link,
+  #theme-toggle,
+  .domain-filter select {
     min-height: 44px;
-    height: auto;
+  }
+
+  .domain-filter select {
     padding-block: 10px;
   }
 
-  .mode-nav button,
-  .mode-nav .essay-link,
-  #theme-toggle {
-    min-height: 44px;
+  .registry-head {
+    flex-wrap: wrap;
+    gap: 10px;
   }
 
-  .registry {
-    order: 3;
-    margin-top: 22px;
-    padding: 16px;
-    border-radius: var(--radius-panel);
-    background: var(--surface);
-    box-shadow: var(--lift-panel);
-  }
-
-  .rows {
-    display: block;
-  }
-
+  /* Ledger rows collapse to two lines; meta drops to its own row. */
   .row {
-    min-height: 52px;
+    grid-template-columns: 3ch minmax(0, 1fr) auto;
+    grid-template-areas:
+      "idx main period"
+      "idx meta period";
+    row-gap: 3px;
     padding-block: 14px;
-    align-items: center;
+    min-height: 52px;
   }
 
-  /* About phone: face first, then story — Experience leads with the person. */
-  .about-intro {
-    order: 2;
-    margin-top: 12px;
+  .row-index {
+    grid-area: idx;
+  }
+
+  .row-main {
+    grid-area: main;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .row-meta {
+    grid-area: meta;
+  }
+
+  .row-period {
+    grid-area: period;
+  }
+
+  .row.is-selected::before {
+    left: -9px;
+  }
+
+  /* About phone: face above the story, then the record. */
+  .about-hero {
+    grid-template-columns: 1fr;
+    gap: 22px;
   }
 
   .portrait {
-    order: 1;
-    margin-top: 0;
+    max-width: 320px;
   }
 
-  .portrait img {
-    height: auto;
-    aspect-ratio: 4 / 5;
-  }
-
-  .journey {
-    order: 3;
-    margin-top: 12px;
+  .about-intro h1 {
+    font-size: clamp(2.2rem, 10vw, 3rem);
   }
 
   .jrow {
@@ -1645,11 +1512,6 @@ a:focus-visible {
   .credential:first-child {
     grid-row: auto;
   }
-
-  .off-clock {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1667,7 +1529,6 @@ a:focus-visible {
   .surface-selectors button::after,
   .media-control,
   .proof-media video,
-  .filter,
   .row,
   .row::before,
   .jrow::before {
