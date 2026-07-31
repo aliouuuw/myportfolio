@@ -1,7 +1,8 @@
 # Launch prerequisites
 
-Human and content gates before treating the portfolio as **public launch ready**.  
-Technical migration tasks live in `docs/backlog.json` phase **P5** and `docs/mock-to-production-plan.md`.
+Human and content gates before treating the portfolio as **public launch ready**.
+
+**Stack note (2026-07):** Production site is **Astro 5 + Operator Board** (`main`). Next.js ledger migration (backlog P5 / T031–T038) is complete and archived on `archive/nextjs-v1`. See `docs/progress.md` for the current product checkpoint.
 
 ---
 
@@ -9,15 +10,14 @@ Technical migration tasks live in `docs/backlog.json` phase **P5** and `docs/moc
 
 | Item | Status |
 |------|--------|
+| Astro migration + operator board home | Done — `/`, `/fr`, board runtime in `public/board/` |
+| Writing routes EN+FR | Done |
+| Case study pages + MDX collections | Done — `content/work/` |
 | BocalBun case study MDX EN+FR | Done — `content/work/bocalbun-retrospective/` |
 | Essay ↔ BocalBun cross-links | Done — slug `why-systems-over-frameworks` |
-| Ledger frontmatter + `lib/work-ledger.ts` | Done — T032 |
-| EduPlan excluded from v1 featured set | Done — `featured: false` |
-| Migration backlog P5 (T031–T038) | Done |
-| Post-migration review fixes | Done — ScrollTrigger, join CTA, i18n status, client nav |
-| Homepage systems map (`#systems`) | Done — `SystemsMapSection` + supporting work MDX |
-| Three.js / R3F removed | Done — unused deps pruned |
-| `metadataBase` on root layout | Done — OG/Twitter absolute URLs |
+| Next.js backlog P0–P5 (T001–T038) | Done — historical; no pending tasks |
+| Next.js app archived | Done — branch/tag `archive/nextjs-v1` |
+| Contact API (Resend) | Done — `src/pages/api/contact.ts` (needs prod key) |
 
 ---
 
@@ -50,17 +50,19 @@ Technical migration tasks live in `docs/backlog.json` phase **P5** and `docs/moc
 
 ### Launch ops (portfolio-plan §16)
 
-- [ ] Production URL + `NEXT_PUBLIC_SITE_URL`
+- [ ] Production URL + site URL env (`SITE_URL` / Astro site config — not `NEXT_PUBLIC_*`)
 - [ ] Resend production key for contact form
-- [ ] Case study images in `public/images/case-studies/`
+- [ ] Case study imagery / media under `public/media/case-studies/` (after CEO sign-off)
 - [ ] LinkedIn posts FR + EN; share with Everest CEO, ERGOBIT CEO, education contact
 - [ ] Resume alignment: site uses **Product Systems Engineer**; update PDF separately
+- [ ] Commit living refs: `docs/profile.md`, `docs/bocal-direction.md`
 
 ### Strategic parallel track (not code)
 
 - Phase 1.5 network conversations — `strategic-plan.md`
 - GitHub repo hygiene (push/archive) — `strategic-plan.md` Phase 1
+- Bocal / Gerpain substrate direction — `docs/bocal-direction.md` (build docs live in gerpain repo)
 
 ---
 
-*Last updated: 2026-05-27*
+*Last updated: 2026-07-29*
