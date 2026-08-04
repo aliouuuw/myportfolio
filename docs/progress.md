@@ -4,6 +4,44 @@ Living checkpoint log for myportfolio. Task graph: `docs/backlog.json` (T001–T
 
 ---
 
+## 2026-08-03 — checkpoint
+
+### Product state
+
+Production home still **Operator Board** (`/`, `/fr`). Parallel mock at
+`/lab/precision` is the active redesign track; direction is comfortable enough
+to lock in docs, with known craft debt.
+
+| Surface | Status |
+|---------|--------|
+| `/lab/precision` | Work/Background layered IA; instrument header; domain directory engagements |
+| `/fr/lab/precision` | FR chrome (nav / locale / availability); body copy still mostly EN |
+| Direction | `docs/lab-precision-direction.md` refreshed to match mock |
+
+### Direction locked (for now)
+
+- One page, two views: Work foreground + Background layer (`#background`)
+- Header: content-hugging island — Available · Work|Background · EN/FR · theme (no wordmark)
+- Visitor-first engagements (no import-map / slug-first UI on Work)
+- Slate Signal palette, soft-UI material, Switzer + JetBrains Mono
+
+### Still needs work (explicit)
+
+1. **Engagements directory** — density, hierarchy, peeks, build disclosure
+2. **Background · Journey** — git-log experiment may stay or be replaced
+3. **Background · Education and certifications** — presentation polish
+
+### Backlog / launch
+
+- `/lab/precision` still not a backlog phase; production board unchanged
+- Human launch gates unchanged (Everest/ERGOBIT CEOs, DNS, Resend, LinkedIn)
+
+---
+
+*Next: craft pass on engagements + Background journey/credentials → then judge whether to promote or iterate once more.*
+
+---
+
 ## 2026-07-31 (afternoon) — checkpoint
 
 ### Product state

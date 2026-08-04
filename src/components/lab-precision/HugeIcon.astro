@@ -1,0 +1,46 @@
+---
+/** Minimal Hugeicons stroke icon tuple (24×24 grid). */
+type HugeIconTuple = readonly [
+  string,
+  Readonly<Record<string, string | number>>,
+];
+
+interface Props {
+  icon: readonly HugeIconTuple[];
+  class?: string;
+  size?: number;
+}
+
+const { icon, class: className, size = 24 } = Astro.props;
+---
+
+<svg
+  class={className}
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  aria-hidden="true"
+>
+  {
+    icon.map(([tag, attrs]) => {
+      const { key: _key, ...rest } = attrs;
+      if (tag === "path") {
+        return <path {...rest} />;
+      }
+      if (tag === "circle") {
+        return <circle {...rest} />;
+      }
+      if (tag === "line") {
+        return <line {...rest} />;
+      }
+      if (tag === "polyline") {
+        return <polyline {...rest} />;
+      }
+      if (tag === "rect") {
+        return <rect {...rest} />;
+      }
+      return null;
+    })
+  }
+</svg>

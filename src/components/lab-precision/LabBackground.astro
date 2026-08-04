@@ -1,0 +1,89 @@
+---
+import { credentials, journey } from "@/data/lab-precision";
+---
+
+<div class="lp-about">
+  <section class="lp-about-hero">
+    <figure class="lp-portrait">
+      <div class="lp-bezel">
+        <div class="lp-bezel-inner">
+          <img src="/Aliou.png" alt="Portrait of Aliou Wade" width="795" height="1024" />
+        </div>
+      </div>
+      <figcaption>Aliou Wade, Dakar</figcaption>
+    </figure>
+    <div class="lp-about-intro">
+      <p class="lp-bio-role">Background</p>
+      <h1 class="lp-bio-name">Engineering with operational context.</h1>
+      <p class="lp-bio-line">
+        Six years building operational software across fintech, ERP, logistics, and education. Ottawa
+        to Dakar, bilingual French and English. I work on the systems businesses actually run on, not
+        the ones that demo well.
+      </p>
+      <ul class="lp-bio-links">
+        <li>
+          <a href="mailto:wadealiou00@gmail.com">wadealiou00@gmail.com</a>
+        </li>
+        <li><a href="https://www.linkedin.com/in/aliouuuw">LinkedIn</a></li>
+        <li><a href="https://github.com/aliouuuw">GitHub</a></li>
+        <li><a href="https://wa.me/221777228845">WhatsApp</a></li>
+      </ul>
+      <div class="lp-off-clock">
+        <h2>Off the clock</h2>
+        <p>
+          Competitive chess, around 2043 bullet online. Same discipline as shipping under deadline.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-journey lp-git-journey" aria-labelledby="journey-title">
+    <div class="lp-section-head">
+      <h2 id="journey-title">Journey</h2>
+      <span class="lp-git-ref">main · {journey.length} commits</span>
+    </div>
+    <ol class="lp-git-log">
+      {
+        journey.map((entry, index) => (
+          <li class="lp-git-commit" style={`--git-i: ${index}`}>
+            <div class="lp-git-graph" aria-hidden="true">
+              <span class="lp-git-track"></span>
+              <span class="lp-git-node"></span>
+            </div>
+            <details class="lp-git-details">
+              <summary class="lp-git-summary">
+                <span class="lp-git-summary-caret" aria-hidden="true"></span>
+                <span class="lp-git-summary-main">
+                  <code class="lp-git-branch">{entry.branch}</code>
+                  <span class="lp-git-title">{entry.role}</span>
+                  <span class="lp-git-meta">
+                    <span class="lp-git-org">{entry.org}</span>
+                    <span class="lp-git-period">{entry.period}</span>
+                  </span>
+                </span>
+              </summary>
+              <p class="lp-git-note">{entry.note}</p>
+            </details>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="lp-creds" aria-labelledby="credentials-title">
+    <div class="lp-section-head">
+      <h2 id="credentials-title">Education and certifications</h2>
+      <span>{credentials.length} records</span>
+    </div>
+    <ul class="lp-cred-list">
+      {
+        credentials.map((entry) => (
+          <li>
+            <strong>{entry.item}</strong>
+            <span>{entry.detail}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</div>

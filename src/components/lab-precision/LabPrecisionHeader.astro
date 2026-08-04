@@ -1,0 +1,96 @@
+---
+import { Moon02Icon, Sun01Icon } from "@hugeicons/core-free-icons";
+import HugeIcon from "./HugeIcon.astro";
+
+interface Props {
+  locale?: "en" | "fr";
+}
+
+const locale = Astro.props.locale ?? "en";
+const isFr = locale === "fr";
+const base = isFr ? "/fr/lab/precision" : "/lab/precision";
+
+const ui = isFr
+  ? {
+      nav: "Vue du portfolio",
+      work: "Travail",
+      background: "Parcours",
+      available: "Disponible",
+      availTitle: "Deux créneaux client dès le T3 2026",
+      lang: "Langue",
+      langEn: "Anglais",
+      langFr: "Français",
+    }
+  : {
+      nav: "Portfolio view",
+      work: "Work",
+      background: "Background",
+      available: "Available",
+      availTitle: "Two client slots from Q3 2026",
+      lang: "Language",
+      langEn: "English",
+      langFr: "French",
+    };
+---
+
+<div class="lp-nav-shell">
+  <header class="lp-header">
+    <p class="lp-header-status" title={ui.availTitle}>
+      <span class="lp-avail-dot" aria-hidden="true"></span>
+      <span class="lp-avail-text">{ui.available}</span>
+    </p>
+
+    <span class="lp-header-rule" aria-hidden="true"></span>
+
+    <nav class="lp-modes" aria-label={ui.nav}>
+      <a
+        class="lp-mode is-active"
+        href={base}
+        data-view-mode="work"
+        data-view-trigger="work"
+        aria-current="page">{ui.work}</a>
+      <a
+        class="lp-mode"
+        href={`${base}#background`}
+        data-view-mode="background"
+        data-view-trigger="background">{ui.background}</a>
+    </nav>
+
+    <span class="lp-header-rule" aria-hidden="true"></span>
+
+    <div class="lp-header-tools">
+      <div class="lp-locales" role="group" aria-label={ui.lang}>
+        <a
+          class:list={["lp-locale", { "is-active": !isFr }]}
+          href="/lab/precision"
+          data-locale-link="/lab/precision"
+          hreflang="en"
+          lang="en"
+          aria-label={ui.langEn}
+          aria-current={!isFr ? "true" : undefined}>EN</a>
+        <span class="lp-locale-sep" aria-hidden="true">/</span>
+        <a
+          class:list={["lp-locale", { "is-active": isFr }]}
+          href="/fr/lab/precision"
+          data-locale-link="/fr/lab/precision"
+          hreflang="fr"
+          lang="fr"
+          aria-label={ui.langFr}
+          aria-current={isFr ? "true" : undefined}>FR</a>
+      </div>
+
+      <button
+        id="theme-toggle"
+        class="lp-theme"
+        type="button"
+        aria-label="Switch to dark mode"
+        aria-pressed="false"
+      >
+        <span class="lp-theme-icon">
+          <HugeIcon icon={Sun01Icon} class="lp-theme-sun" size={15} />
+          <HugeIcon icon={Moon02Icon} class="lp-theme-moon" size={15} />
+        </span>
+      </button>
+    </div>
+  </header>
+</div>
