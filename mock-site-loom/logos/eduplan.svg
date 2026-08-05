@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="EduPlan">
-  <rect width="64" height="64" rx="14" fill="#e4fff0"/>
-  <rect x="16" y="18" width="32" height="28" rx="4" fill="#1a7a4a"/>
-  <path stroke="#fff" stroke-width="2.5" stroke-linecap="round" d="M24 28h16M24 34h12M24 40h8"/>
-  <path fill="#1a7a4a" d="M32 14 44 20v4H20v-4l12-6Z"/>
-</svg>
