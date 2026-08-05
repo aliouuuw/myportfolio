@@ -2,7 +2,10 @@
 import "@/styles/lab-precision.css";
 import LabBackground from "@/components/lab-precision/LabBackground.astro";
 import LabPrecisionHeader from "@/components/lab-precision/LabPrecisionHeader.astro";
-import { engagements, engagementsByDomain, directoryColumns, domainSlug } from "@/data/lab-precision";
+import { getEngagements, getEngagementsByDomain, directoryColumns, domainSlug } from "@/lib/work-registry";
+
+const engagements = await getEngagements();
+const engagementsByDomain = await getEngagementsByDomain();
 ---
 
 <!doctype html>
