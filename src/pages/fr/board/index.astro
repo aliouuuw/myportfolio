@@ -1,0 +1,14 @@
+---
+import Base from "@/layouts/Base.astro";
+import OperatorBoard from "@/components/OperatorBoard.astro";
+
+const ENABLE_BOARD = import.meta.env.PUBLIC_ENABLE_BOARD === "true";
+
+if (!ENABLE_BOARD) {
+  return Astro.redirect("/fr/404");
+}
+---
+
+<Base lang="fr" title="Aliou Wade · Tableau opérateur" description="Tableau opérateur monopage — preuve vivante, comms et journal pour un ingénieur systèmes produit.">
+  <OperatorBoard locale="fr" />
+</Base>

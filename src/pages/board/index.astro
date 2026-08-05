@@ -1,0 +1,14 @@
+---
+import Base from "@/layouts/Base.astro";
+import OperatorBoard from "@/components/OperatorBoard.astro";
+
+const ENABLE_BOARD = import.meta.env.PUBLIC_ENABLE_BOARD === "true";
+
+if (!ENABLE_BOARD) {
+  return Astro.redirect("/404");
+}
+---
+
+<Base lang="en" title="Aliou Wade · Operator Board" description="Single-viewport operator board — live proof, comms, and ledger for a Product Systems Engineer.">
+  <OperatorBoard locale="en" />
+</Base>
