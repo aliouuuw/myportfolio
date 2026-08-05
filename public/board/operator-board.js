@@ -1161,7 +1161,7 @@ function setCommsOpen(open) {
 
 function getStoredTheme() {
   try {
-    const stored = localStorage.getItem('operator-board-theme');
+    const stored = localStorage.getItem('portfolio-theme');
     return stored === 'dark' ? 'dark' : 'light';
   } catch {
     return 'light';
@@ -1183,7 +1183,7 @@ function setTheme(theme, persist = true) {
   document.documentElement.setAttribute('data-theme', state.theme);
   if (persist) {
     try {
-      localStorage.setItem('operator-board-theme', state.theme);
+      localStorage.setItem('portfolio-theme', state.theme);
     } catch { /* ignore */ }
   }
   updateThemeSwitchUI();

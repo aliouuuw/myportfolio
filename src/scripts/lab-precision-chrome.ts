@@ -1,4 +1,6 @@
 /** Shared theme chrome for /lab/precision pages. */
+import { syncThemeToggle, toggleTheme } from "@/scripts/theme";
+
 export function syncLocaleLinks(): void {
   const hash = window.location.hash;
   document.querySelectorAll<HTMLAnchorElement>("[data-locale-link]").forEach((el) => {
@@ -8,32 +10,15 @@ export function syncLocaleLinks(): void {
 }
 
 export function initLabPrecisionChrome(): void {
-  const root = document.documentElement;
-  const themeToggle = document.getElementById("theme-toggle");
+  const themeToggle = document.getElementById("theme-toggle") as HTMLButtonElement | null;
 
-  const syncThemeControl = () => {
-    if (!themeToggle) return;
-    const isDark = root.getAttribute("data-theme") === "dark";
-    themeToggle.setAttribute("aria-pressed", isDark ? "true" : "false");
-    themeToggle.setAttribute(
-      "aria-label",
-      isDark ? "Switch to light mode" : "Switch to dark mode",
-    );
-  };
-
-  syncThemeControl();
+  syncThemeToggle(themeToggle);
   syncLocaleLinks();
 
   window.addEventListener("hashchange", syncLocaleLinks);
 
   themeToggle?.addEventListener("click", () => {
-    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-    root.setAttribute("data-theme", next);
-    try {
-      localStorage.setItem("lab-precision-theme", next);
-    } catch {
-      /* ignore */
-    }
-    syncThemeControl();
+    toggleTheme();
+    syncThemeToggle(themeToggle);
   });
 }

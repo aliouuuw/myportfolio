@@ -30,15 +30,8 @@ const engagementsByDomain = await getEngagementsByDomain();
       rel="stylesheet"
     />
     <script is:inline>
-      (function () {
-        try {
-          if (localStorage.getItem("lab-precision-theme") === "dark") {
-            document.documentElement.setAttribute("data-theme", "dark");
-          }
-        } catch (e) {
-          /* ignore */
-        }
-      })();
+      import { initTheme } from "@/scripts/theme";
+      initTheme();
     </script>
   </head>
   <body class="lp" data-view="work">

@@ -28,16 +28,8 @@ const {
       rel="stylesheet"
     />
     <script is:inline>
-      (function () {
-        try {
-          var theme = localStorage.getItem("operator-board-theme");
-          if (theme === "dark" || theme === "light") {
-            document.documentElement.setAttribute("data-theme", theme);
-          }
-        } catch (e) {
-          /* ignore */
-        }
-      })();
+      import { initTheme } from "@/scripts/theme";
+      initTheme();
     </script>
   </head>
   <body class="operator-board">
