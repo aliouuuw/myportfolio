@@ -168,151 +168,16 @@ import { engagements, engagementsByDomain, directoryColumns, domainSlug } from "
 
     <script>
       import { initLabPrecisionChrome } from "@/scripts/lab-precision-chrome";
-      import { initLabPrecisionView } from "@/scripts/lab-precision-view";
+      import { createLabPrecisionController } from "@/scripts/lab-precision-controller";
 
       initLabPrecisionChrome();
 
-      const mediaRoot = "/media/case-studies/everest-finance";
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-      const coarse = window.matchMedia("(hover: none), (pointer: coarse)");
-
-      const rows = document.querySelectorAll<HTMLElement>(".lp-row");
-      const preview = document.getElementById("lp-preview");
-      const previewVideo = document.getElementById("lp-preview-video") as HTMLVideoElement | null;
-      const previewEmpty = document.getElementById("lp-preview-empty");
-      const previewEmptyName = document.getElementById("lp-preview-empty-name");
-      const previewCap = document.getElementById("lp-preview-cap");
-
-      let activeName = "";
-
-      function showPreview(row: HTMLElement) {
-        if (document.body.classList.contains("is-background")) return;
-        if (!preview || !previewVideo || !previewEmpty || !previewCap) return;
-        const name = row.getAttribute("data-name") ?? "";
-        const has = row.getAttribute("data-has-media") === "true";
-        const surface = row.getAttribute("data-media") || "";
-        const caption = row.getAttribute("data-caption") || name;
-
-        activeName = name;
-        previewCap.textContent = caption;
-        previewVideo.pause();
-        previewVideo.removeAttribute("src");
-        previewVideo.load();
-        previewVideo.hidden = true;
-        previewEmpty.hidden = true;
-
-        if (has && surface) {
-          previewVideo.hidden = false;
-          previewVideo.poster = `${mediaRoot}/${surface}.jpg`;
-          previewVideo.src = `${mediaRoot}/${surface}.mp4`;
-          if (!reduceMotion.matches) {
-            void previewVideo.play().catch(() => {});
-          }
-        } else {
-          previewEmpty.hidden = false;
-          if (previewEmptyName) previewEmptyName.textContent = name;
-        }
-
-        preview.hidden = false;
-        preview.dataset.active = "true";
-        requestAnimationFrame(() => {
-          preview?.classList.add("is-open");
-        });
-        row.classList.add("is-peek");
-        rows.forEach((r) => {
-          if (r !== row) r.classList.remove("is-peek");
-        });
-      }
-
-      function hidePreview() {
-        if (!preview || !previewVideo) return;
-        preview.classList.remove("is-open");
-        preview.dataset.active = "false";
-        activeName = "";
-        previewVideo.pause();
-        previewVideo.removeAttribute("src");
-        previewVideo.load();
-        rows.forEach((r) => r.classList.remove("is-peek"));
-        window.setTimeout(
-          () => {
-            if (preview.dataset.active === "true") return;
-            preview.hidden = true;
-          },
-          reduceMotion.matches ? 0 : 200,
-        );
-      }
-
-      initLabPrecisionView({ onBackground: hidePreview });
-
-      rows.forEach((row) => {
-        const peekable = row.classList.contains("lp-row--peekable");
-
-        row.addEventListener("pointerenter", (e) => {
-          if (!peekable || coarse.matches) return;
-          if ((e as PointerEvent).pointerType === "touch") return;
-          showPreview(row);
-        });
-
-        row.addEventListener("pointerleave", () => {
-          if (!peekable || coarse.matches) return;
-          hidePreview();
-        });
-
-        row.addEventListener("focusin", () => {
-          if (!peekable) return;
-          showPreview(row);
-        });
-
-        row.addEventListener("focusout", (e) => {
-          if (coarse.matches || !peekable) return;
-          const next = (e as FocusEvent).relatedTarget;
-          if (next && row.contains(next as Node)) return;
-          hidePreview();
-        });
-
-        row.addEventListener("click", (e) => {
-          if (!coarse.matches || !peekable) return;
-          const open = preview?.dataset.active === "true" && !preview.hidden;
-          const same = activeName === (row.getAttribute("data-name") ?? "");
-          if (!open || !same) {
-            e.preventDefault();
-            showPreview(row);
-          }
-        });
+      createLabPrecisionController({
+        mediaRoot: "/media/case-studies/everest-finance",
+        onBackground: () => {
+          // Preview auto-hidden by controller when view switches to background
+        },
       });
-
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && !document.body.classList.contains("is-background")) {
-          hidePreview();
-        }
-      });
-
-      document.addEventListener("pointerdown", (e) => {
-        if (!preview || preview.hidden) return;
-        const target = e.target as Node & { closest?: (s: string) => Element | null };
-        if (preview.contains(target)) return;
-        if (typeof target.closest === "function" && target.closest(".lp-row")) return;
-        hidePreview();
-      });
-
-      const reduceReveal = window.matchMedia("(prefers-reduced-motion: reduce)");
-      if (!reduceReveal.matches) {
-        const revealEls = document.querySelectorAll<HTMLElement>(".lp-reveal");
-        const io = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("is-visible");
-                io.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
-        );
-        revealEls.forEach((el) => io.observe(el));
-      } else {
-        document.querySelectorAll(".lp-reveal").forEach((el) => el.classList.add("is-visible"));
-      }
     </script>
   </body>
 </html>
