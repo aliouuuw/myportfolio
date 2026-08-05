@@ -8,7 +8,7 @@ interface Props {
 
 const locale = Astro.props.locale ?? "en";
 const isFr = locale === "fr";
-const base = isFr ? "/fr/lab/precision" : "/lab/precision";
+const base = isFr ? "/fr/" : "/";
 
 const ui = isFr
   ? {
@@ -62,8 +62,8 @@ const ui = isFr
       <div class="lp-locales" role="group" aria-label={ui.lang}>
         <a
           class:list={["lp-locale", { "is-active": !isFr }]}
-          href="/lab/precision"
-          data-locale-link="/lab/precision"
+          href="/"
+          data-locale-link="/"
           hreflang="en"
           lang="en"
           aria-label={ui.langEn}
@@ -71,8 +71,8 @@ const ui = isFr
         <span class="lp-locale-sep" aria-hidden="true">/</span>
         <a
           class:list={["lp-locale", { "is-active": isFr }]}
-          href="/fr/lab/precision"
-          data-locale-link="/fr/lab/precision"
+          href="/fr/"
+          data-locale-link="/fr/"
           hreflang="fr"
           lang="fr"
           aria-label={ui.langFr}

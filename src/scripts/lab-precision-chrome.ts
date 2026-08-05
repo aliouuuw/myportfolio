@@ -1,4 +1,4 @@
-/** Shared theme chrome for /lab/precision pages. */
+/** Shared theme chrome for Lab Precision pages (root routes). */
 import { syncThemeToggle, toggleTheme } from "@/scripts/theme";
 
 export function syncLocaleLinks(): void {
