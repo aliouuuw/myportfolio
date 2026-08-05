@@ -10,6 +10,19 @@ export const domainSlug = (domain: Domain): string => {
   return map[domain];
 };
 
+export interface Surface {
+  name: string;
+  nameFr?: string;
+  blurb: string;
+  blurbFr?: string;
+  url?: string;
+  urlLabel?: string;
+  urlLabelFr?: string;
+  video?: string;
+  poster?: string;
+  stack: string[];
+}
+
 export interface Engagement {
   name: string;
   slug: string;
@@ -21,6 +34,7 @@ export interface Engagement {
   /** Everest surface id under /media/case-studies/everest-finance/ */
   media?: string;
   caption?: string;
+  surfaces: Surface[];
 }
 
 export interface JourneyEntry {

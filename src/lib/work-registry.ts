@@ -3,7 +3,7 @@
  */
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
-import { type Domain, type Engagement } from "@/data/lab-precision";
+import { type Domain, type Engagement, type Surface } from "@/data/lab-precision";
 import { domainSlug } from "@/data/lab-precision";
 
 export type WorkEntry = CollectionEntry<"work">;
@@ -19,13 +19,30 @@ function normalizeDomain(raw: string): Domain {
   return "Operations";
 }
 
+function mapSurface(s: WorkEntry["data"]["surfaces"][number]): Surface {
+  return {
+    name: s.name,
+    nameFr: s.nameFr,
+    blurb: s.blurb,
+    blurbFr: s.blurbFr,
+    url: s.url,
+    urlLabel: s.urlLabel,
+    urlLabelFr: s.urlLabelFr,
+    video: s.video,
+    poster: s.poster,
+    stack: s.stack ?? [],
+  };
+}
+
 function mapWorkEntryToEngagement(entry: WorkEntry): Engagement {
   const data = entry.data;
   const slug = entry.id.replace(/\/(en|fr)$/, "");
   const domain = normalizeDomain(data.domain);
 
+  const surfaces = (data.surfaces ?? []).map(mapSurface);
+
   // Find the first surface with a video for preview media
-  const primarySurface = data.surfaces?.[0];
+  const primarySurface = surfaces[0];
   const media = primarySurface?.video
     ? primarySurface.video.replace("/media/case-studies/everest-finance/", "").replace(".mp4", "")
     : undefined;
@@ -35,11 +52,12 @@ function mapWorkEntryToEngagement(entry: WorkEntry): Engagement {
     slug,
     domain,
     detail: data.summary,
-    builds: data.surfaces?.length ?? 1,
+    builds: surfaces.length ?? 1,
     period: data.period ?? data.date,
     href: `/work/${slug}`,
     media,
     caption: primarySurface?.name ?? data.title,
+    surfaces,
   };
 }
 

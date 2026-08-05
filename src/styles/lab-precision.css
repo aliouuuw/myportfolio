@@ -1659,3 +1659,118 @@ span.lp-roster-name {
     animation-duration: 0.01ms !important;
   }
 }
+
+/* —— Expandable row details —— */
+.lp-row-details {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.lp-row-summary {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  list-style: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.lp-row-summary::-webkit-details-marker {
+  display: none;
+}
+
+.lp-row-toggle {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--ink-faint);
+  transition: transform var(--duration) var(--ease), color var(--duration) var(--ease);
+}
+
+.lp-row-details[open] .lp-row-toggle {
+  transform: rotate(180deg);
+  color: var(--accent);
+}
+
+.lp-row-details[open] .lp-roster-row {
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
+
+.lp-row-surfaces {
+  padding: 0.75rem 0.5rem 0.5rem;
+  margin: 0 -0.5rem;
+  border-top: 1px solid var(--hairline-soft);
+  background: color-mix(in srgb, var(--surface-muted) 50%, transparent);
+  animation: lp-surfaces-in 0.25s var(--ease) both;
+}
+
+@keyframes lp-surfaces-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.lp-surface {
+  margin-bottom: 0.75rem;
+}
+
+.lp-surface:last-child {
+  margin-bottom: 0;
+}
+
+.lp-surface-name {
+  margin: 0 0 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+.lp-surface-blurb {
+  margin: 0 0 0.4rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.lp-surface-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--duration) var(--ease), gap var(--duration) var(--ease);
+}
+
+.lp-surface-link:hover {
+  color: var(--ink);
+  gap: 0.5rem;
+}
+
+.lp-surface-stack {
+  margin: 0.35rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  color: var(--ink-faint);
+}
+
+.lp-bio-subtitle {
+  margin: 0 0 0.65rem;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  max-width: 34rem;
+}
