@@ -1,0 +1,372 @@
+{
+  "contrast": {
+    "dark": [
+      {
+        "label": "positioning",
+        "text": "I build operational software for fintechs and op",
+        "selector": ".positioning",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 15.66,
+        "pass45": true,
+        "fontFamily": "Switzer, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "ariaPressed": null
+      },
+      {
+        "label": "row-meta",
+        "text": "Fintech / 3 builds",
+        "selector": ".row-meta",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(16, 16, 16)",
+        "ratio": 5.58,
+        "pass45": true,
+        "fontFamily": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
+        "ariaPressed": null
+      },
+      {
+        "label": "location-meta",
+        "text": "Dakar, Senegal",
+        "selector": ".location-meta",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "pass45": true,
+        "fontFamily": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
+        "ariaPressed": null
+      },
+      {
+        "label": "filter-idle",
+        "text": "Fintech 2",
+        "selector": ".filter",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "pass45": true,
+        "fontFamily": "Switzer, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "ariaPressed": "false"
+      },
+      {
+        "label": "chin-state",
+        "text": "Live preview",
+        "selector": "#chin-state-text",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(19, 19, 19)",
+        "ratio": 5.45,
+        "pass45": true,
+        "fontFamily": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
+        "ariaPressed": null
+      },
+      {
+        "label": "chin-dt",
+        "text": "Domain",
+        "selector": "dt",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(19, 19, 19)",
+        "ratio": 5.45,
+        "pass45": true,
+        "fontFamily": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
+        "ariaPressed": null
+      },
+      {
+        "label": "surface-key-idle",
+        "text": "Website",
+        "selector": "button",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "color(srgb 0.0627451 0.0627451 0.0627451 / 0.55)",
+        "ratio": 8,
+        "pass45": true,
+        "fontFamily": "Switzer, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "ariaPressed": "false"
+      },
+      {
+        "label": "surface-key-pressed",
+        "text": "Sama Naffa",
+        "selector": "button",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(35, 35, 35)",
+        "ratio": 14.29,
+        "pass45": true,
+        "fontFamily": "Switzer, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "ariaPressed": "true"
+      },
+      {
+        "label": "availability",
+        "text": "Two client slots from Q3 2026",
+        "selector": ".availability",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(19, 19, 19)",
+        "ratio": 7.81,
+        "pass45": true,
+        "fontFamily": "Switzer, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "ariaPressed": null
+      },
+      {
+        "label": "mode-nav-idle",
+        "text": "About",
+        "selector": "button",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(19, 19, 19)",
+        "ratio": 5.45,
+        "pass45": true,
+        "fontFamily": "Switzer, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "ariaPressed": "false"
+      }
+    ],
+    "light": [
+      {
+        "label": "positioning",
+        "text": "I build operational software for fintechs and op",
+        "selector": ".positioning",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 15.71,
+        "pass45": true,
+        "fontFamily": "Switzer, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "ariaPressed": null
+      },
+      {
+        "label": "row-meta",
+        "text": "Fintech / 3 builds",
+        "selector": ".row-meta",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(210, 210, 210)",
+        "ratio": 4.85,
+        "pass45": true,
+        "fontFamily": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
+        "ariaPressed": null
+      },
+      {
+        "label": "location-meta",
+        "text": "Dakar, Senegal",
+        "selector": ".location-meta",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "pass45": true,
+        "fontFamily": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
+        "ariaPressed": null
+      },
+      {
+        "label": "filter-idle",
+        "text": "Fintech 2",
+        "selector": ".filter",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "pass45": true,
+        "fontFamily": "Switzer, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "ariaPressed": "false"
+      },
+      {
+        "label": "chin-state",
+        "text": "Live preview",
+        "selector": "#chin-state-text",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(222, 222, 222)",
+        "ratio": 5.46,
+        "pass45": true,
+        "fontFamily": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
+        "ariaPressed": null
+      },
+      {
+        "label": "chin-dt",
+        "text": "Domain",
+        "selector": "dt",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(222, 222, 222)",
+        "ratio": 5.46,
+        "pass45": true,
+        "fontFamily": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
+        "ariaPressed": null
+      },
+      {
+        "label": "surface-key-idle",
+        "text": "Website",
+        "selector": "button",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "color(srgb 0.823529 0.823529 0.823529 / 0.55)",
+        "ratio": 5.95,
+        "pass45": true,
+        "fontFamily": "Switzer, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "ariaPressed": "false"
+      },
+      {
+        "label": "surface-key-pressed",
+        "text": "Sama Naffa",
+        "selector": "button",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(245, 245, 245)",
+        "ratio": 17.18,
+        "pass45": true,
+        "fontFamily": "Switzer, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "ariaPressed": "true"
+      },
+      {
+        "label": "availability",
+        "text": "Two client slots from Q3 2026",
+        "selector": ".availability",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(222, 222, 222)",
+        "ratio": 6.69,
+        "pass45": true,
+        "fontFamily": "Switzer, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "ariaPressed": null
+      },
+      {
+        "label": "mode-nav-idle",
+        "text": "About",
+        "selector": "button",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(222, 222, 222)",
+        "ratio": 5.46,
+        "pass45": true,
+        "fontFamily": "Switzer, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "ariaPressed": "false"
+      }
+    ]
+  },
+  "layout1440": {
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "scrollHeight": 900,
+    "clientHeight": 900,
+    "pageScrolls": false,
+    "proofVisual": {
+      "w": 994.97,
+      "h": 559.66,
+      "ratio": 1.778,
+      "selector": "proof-visual"
+    },
+    "filterLines": 1,
+    "controlOverScreen": {
+      "overlaps": false,
+      "controlInChin": true,
+      "controlHidden": false,
+      "controlRect": {
+        "x": 517,
+        "y": 728,
+        "w": 67,
+        "h": 26
+      },
+      "mediaRect": {
+        "x": 408,
+        "y": 150,
+        "w": 995,
+        "h": 560
+      }
+    },
+    "horizontalOverflowCount": 0,
+    "horizontalOverflowSample": [],
+    "fonts": {
+      "linkHrefs": [
+        "https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap",
+        "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+      ],
+      "bodyFamily": "Switzer, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "monoSample": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
+      "sansSample": "Switzer, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif"
+    }
+  },
+  "layout390": {
+    "viewport": {
+      "w": 390,
+      "h": 844
+    },
+    "scrollHeight": 2529,
+    "clientHeight": 844,
+    "pageScrolls": true,
+    "proofVisual": {
+      "w": 336,
+      "h": 252,
+      "ratio": 1.333,
+      "selector": "proof-visual"
+    },
+    "filterLines": 1,
+    "controlOverScreen": {
+      "overlaps": false,
+      "controlInChin": true,
+      "controlHidden": false,
+      "controlRect": {
+        "x": 132,
+        "y": 841,
+        "w": 67,
+        "h": 26
+      },
+      "mediaRect": {
+        "x": 27,
+        "y": 574,
+        "w": 336,
+        "h": 252
+      }
+    },
+    "horizontalOverflowCount": 3,
+    "horizontalOverflowSample": [
+      {
+        "tag": "button",
+        "id": null,
+        "className": "filter",
+        "left": 326,
+        "right": 416,
+        "vw": 390
+      },
+      {
+        "tag": "span",
+        "id": null,
+        "className": "",
+        "left": 336,
+        "right": 395,
+        "vw": 390
+      },
+      {
+        "tag": "span",
+        "id": null,
+        "className": "filter-count",
+        "left": 400,
+        "right": 406,
+        "vw": 390
+      }
+    ],
+    "fonts": {
+      "linkHrefs": [
+        "https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap",
+        "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+      ],
+      "bodyFamily": "Switzer, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+      "monoSample": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
+      "sansSample": "Switzer, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif"
+    }
+  },
+  "overlay": {
+    "status": "succeeded",
+    "reason": null,
+    "liveServerStarted": true,
+    "livePort": 8400,
+    "consoleMessages": [
+      {
+        "type": "startGroup",
+        "text": "%c[impeccable] 65 anti-patterns found color: oklch(84% 0.19 80.46); font-weight: bold"
+      }
+    ],
+    "cleanup": {
+      "ok": true,
+      "stopOut": "Stopped live server on port 8400.\n"
+    }
+  },
+  "falsePositives": [
+    {
+      "antipattern": "single-font",
+      "reason": "CLI flagged single-font (jetbrains mono only), but page loads Switzer (Fontshare) + JetBrains Mono (Google Fonts); body/positioning uses Switzer, row-meta uses JetBrains Mono.",
+      "evidence": {
+        "linkHrefs": [
+          "https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap",
+          "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+        ],
+        "bodyFamily": "Switzer, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "monoSample": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
+        "sansSample": "Switzer, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif"
+      }
+    }
+  ]
+}

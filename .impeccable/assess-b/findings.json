@@ -1,0 +1,2275 @@
+{
+  "contrast": {
+    "dark": [
+      {
+        "selector": "body > header.site-head.wrap > a.wordmark",
+        "text": "Aliou Wade",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(19, 19, 19)",
+        "ratio": 16.89,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > header.site-head.wrap > nav.mode-nav > button:nth-of-type(1)",
+        "text": "Work",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(19, 19, 19)",
+        "ratio": 16.89,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > header.site-head.wrap > nav.mode-nav > button:nth-of-type(2)",
+        "text": "About",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(19, 19, 19)",
+        "ratio": 5.45,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > header.site-head.wrap > nav.mode-nav > a.essay-link",
+        "text": "Essay",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(19, 19, 19)",
+        "ratio": 5.45,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > header.site-head.wrap > div.head-tools > p.availability",
+        "text": "Two client slots from Q3 2026",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(19, 19, 19)",
+        "ratio": 7.81,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > header.site-head.wrap > div.head-tools > button#theme-toggle",
+        "text": "Light",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(19, 19, 19)",
+        "ratio": 5.45,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.identity:nth-of-type(1) > p.role:nth-of-type(1)",
+        "text": "Product Systems Engineer",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.identity:nth-of-type(1) > h1#work-title",
+        "text": "Aliou Wade",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 15.66,
+        "threshold": 3,
+        "large": true,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.identity:nth-of-type(1) > p.positioning:nth-of-type(2)",
+        "text": "I build operational software for fintech",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 15.66,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.identity:nth-of-type(1) > div.contact-row > a.contact-primary",
+        "text": "wadealiou00@gmail.com",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 15.66,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.identity:nth-of-type(1) > div.contact-row > span.contact-secondary > a:nth-of-type(1)",
+        "text": "LinkedIn",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 7.24,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.identity:nth-of-type(1) > div.contact-row > span.contact-secondary > a:nth-of-type(2)",
+        "text": "GitHub",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 7.24,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.identity:nth-of-type(1) > div.contact-row > span.contact-secondary > a:nth-of-type(3)",
+        "text": "WhatsApp",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 7.24,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.identity:nth-of-type(1) > p.location-meta:nth-of-type(3)",
+        "text": "Dakar, Senegal",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.identity:nth-of-type(1) > button.profile-link",
+        "text": "Read my background",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(35, 35, 35)",
+        "ratio": 6.61,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.identity:nth-of-type(1) > button.profile-link > span",
+        "text": "→",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(35, 35, 35)",
+        "ratio": 6.61,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.registry-head:nth-of-type(1) > h2#registry-title",
+        "text": "Engagements",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 15.66,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.registry-head:nth-of-type(1) > span.registry-count",
+        "text": "14",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.filters:nth-of-type(2) > button.filter:nth-of-type(1) > span:nth-of-type(1)",
+        "text": "All",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(35, 35, 35)",
+        "ratio": 14.29,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.filters:nth-of-type(2) > button.filter:nth-of-type(1) > span.filter-count:nth-of-type(2)",
+        "text": "14",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(35, 35, 35)",
+        "ratio": 14.29,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.filters:nth-of-type(2) > button.filter:nth-of-type(2) > span:nth-of-type(1)",
+        "text": "Fintech",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.filters:nth-of-type(2) > button.filter:nth-of-type(2) > span.filter-count:nth-of-type(2)",
+        "text": "2",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.filters:nth-of-type(2) > button.filter:nth-of-type(3) > span:nth-of-type(1)",
+        "text": "ERP & QA",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.filters:nth-of-type(2) > button.filter:nth-of-type(3) > span.filter-count:nth-of-type(2)",
+        "text": "1",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.filters:nth-of-type(2) > button.filter:nth-of-type(4) > span:nth-of-type(1)",
+        "text": "Systems",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.filters:nth-of-type(2) > button.filter:nth-of-type(4) > span.filter-count:nth-of-type(2)",
+        "text": "4",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.filters:nth-of-type(2) > button.filter:nth-of-type(5) > span:nth-of-type(1)",
+        "text": "Operations",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.filters:nth-of-type(2) > button.filter:nth-of-type(5) > span.filter-count:nth-of-type(2)",
+        "text": "7",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row.is-selected:nth-of-type(1) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "Everest Finance",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(16, 16, 16)",
+        "ratio": 17.3,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row.is-selected:nth-of-type(1) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "SGI · site, savings app, campaign toolin",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(16, 16, 16)",
+        "ratio": 8,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row.is-selected:nth-of-type(1) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Fintech / 3 builds",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(16, 16, 16)",
+        "ratio": 5.58,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row.is-selected:nth-of-type(1) > span.row-period:nth-of-type(2)",
+        "text": "2025 - now",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(16, 16, 16)",
+        "ratio": 5.58,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(2) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "ERGOBIT",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 15.66,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(2) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Odoo integrator · test toolkit, client m",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 7.24,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(2) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "ERP & QA / 2 builds",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(2) > span.row-period:nth-of-type(2)",
+        "text": "2024 - 26",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(1) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "BankingBook Analytics",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 15.66,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(1) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Open-banking API, domain cutover",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 7.24,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(1) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Fintech / 2 builds",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(1) > span.row-period:nth-of-type(2)",
+        "text": "2023 - 24",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(2) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "Purolator Digital Lab",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 15.66,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(2) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "CI/CD, approval tooling, warehouse SDK",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 7.24,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(2) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Systems / 3 builds",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(2) > span.row-period:nth-of-type(2)",
+        "text": "2023",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(3) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "BocalBun",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 15.66,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(3) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Bun toolkit, frozen deliberately",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 7.24,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(3) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Systems / 1 build",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(3) > span.row-period:nth-of-type(2)",
+        "text": "2022",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(4) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "Mansour Holding",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 15.66,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(4) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Automotive · dealership site, inventory",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 7.24,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(4) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Operations / 2 builds",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(4) > span.row-period:nth-of-type(2)",
+        "text": "Live",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(5) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "Ndouckmane Transit",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 15.66,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(5) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Logistics · freight ops, customs",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 7.24,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(5) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Operations / 1 build",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(5) > span.row-period:nth-of-type(2)",
+        "text": "Active",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(3) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "Mamebimo",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 15.66,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(3) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Marketplace · home-services booking",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 7.24,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(3) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Operations / 1 build",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(3) > span.row-period:nth-of-type(2)",
+        "text": "Live",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(4) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "Gerpain",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 15.66,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(4) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Multi-bakery inventory, RBAC",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 7.24,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(4) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Operations / 1 build",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(4) > span.row-period:nth-of-type(2)",
+        "text": "Shipped",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(6) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "EduPlan",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 15.66,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(6) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Education · courses, schedule, grading",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 7.24,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(6) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Operations / 1 build",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(6) > span.row-period:nth-of-type(2)",
+        "text": "Shipped",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(5) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "Les Hirondelles",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 15.66,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(5) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Education · school site, Convex CMS",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 7.24,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(5) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Operations / 1 build",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(5) > span.row-period:nth-of-type(2)",
+        "text": "Live",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(6) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "Asaaman",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 15.66,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(6) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Drone / AI · semantic video search",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 7.24,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(6) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Systems / 1 build",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(6) > span.row-period:nth-of-type(2)",
+        "text": "Live",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(7) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "Dakar Sport",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 15.66,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(7) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Retail · commerce and community",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 7.24,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(7) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Operations / 1 build",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(7) > span.row-period:nth-of-type(2)",
+        "text": "Shipped",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(7) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "Orange Digital Lab",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 15.66,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(7) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "React Native fitness community app",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 7.24,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(7) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Systems / 1 build",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(7) > span.row-period:nth-of-type(2)",
+        "text": "2022",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 5.06,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.proof-head:nth-of-type(1) > div > p#proof-client.proof-client",
+        "text": "Everest Finance",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(19, 19, 19)",
+        "ratio": 7.81,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.proof-head:nth-of-type(1) > div > h2#proof-title",
+        "text": "Savings platform",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(19, 19, 19)",
+        "ratio": 16.89,
+        "threshold": 3,
+        "large": true,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.proof-head:nth-of-type(1) > a#proof-link",
+        "text": "Open case study",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 7.24,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.proof-head:nth-of-type(1) > a#proof-link > span",
+        "text": "↗",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(27, 27, 27)",
+        "ratio": 7.24,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > div.chin-controls > p#chin-state.chin-state > span#chin-state-text:nth-of-type(2)",
+        "text": "Live preview",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(19, 19, 19)",
+        "ratio": 5.45,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > div.chin-controls > button#media-control.media-control > span.media-control-label:nth-of-type(2)",
+        "text": "Pause",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(35, 35, 35)",
+        "ratio": 6.61,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > div.chin-controls > div#surface-bar.surface-selectors > button:nth-of-type(1)",
+        "text": "Sama Naffa",
+        "fg": "rgb(244, 244, 244)",
+        "bg": "rgb(35, 35, 35)",
+        "ratio": 14.29,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > div.chin-controls > div#surface-bar.surface-selectors > button:nth-of-type(2)",
+        "text": "Website",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "color(srgb 0.0627451 0.0627451 0.0627451 / 0.55)",
+        "ratio": 8,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > div.chin-controls > div#surface-bar.surface-selectors > button:nth-of-type(3)",
+        "text": "Formos",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "color(srgb 0.0627451 0.0627451 0.0627451 / 0.55)",
+        "ratio": 8,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > dl#chin-plate.chin-plate > div:nth-of-type(1) > dt",
+        "text": "Domain",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(19, 19, 19)",
+        "ratio": 5.45,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > dl#chin-plate.chin-plate > div:nth-of-type(1) > dd#plate-domain",
+        "text": "Fintech",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(19, 19, 19)",
+        "ratio": 7.81,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > dl#chin-plate.chin-plate > div:nth-of-type(2) > dt",
+        "text": "Period",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(19, 19, 19)",
+        "ratio": 5.45,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > dl#chin-plate.chin-plate > div:nth-of-type(2) > dd#plate-period",
+        "text": "2025 — now",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(19, 19, 19)",
+        "ratio": 7.81,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > dl#chin-plate.chin-plate > div:nth-of-type(3) > dt",
+        "text": "Scope",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(19, 19, 19)",
+        "ratio": 5.45,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > dl#chin-plate.chin-plate > div:nth-of-type(3) > dd#plate-scope",
+        "text": "3 builds",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(19, 19, 19)",
+        "ratio": 7.81,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > dl#chin-plate.chin-plate > div.plate-wide:nth-of-type(4) > dt",
+        "text": "Engagement",
+        "fg": "rgb(139, 139, 139)",
+        "bg": "rgb(19, 19, 19)",
+        "ratio": 5.45,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > dl#chin-plate.chin-plate > div.plate-wide:nth-of-type(4) > dd#plate-note",
+        "text": "SGI · site, savings app, campaign toolin",
+        "fg": "rgb(168, 168, 168)",
+        "bg": "rgb(19, 19, 19)",
+        "ratio": 7.81,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      }
+    ],
+    "light": [
+      {
+        "selector": "body > header.site-head.wrap > a.wordmark",
+        "text": "Aliou Wade",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(222, 222, 222)",
+        "ratio": 13.92,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > header.site-head.wrap > nav.mode-nav > button:nth-of-type(1)",
+        "text": "Work",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(222, 222, 222)",
+        "ratio": 13.92,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > header.site-head.wrap > nav.mode-nav > button:nth-of-type(2)",
+        "text": "About",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(222, 222, 222)",
+        "ratio": 5.46,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > header.site-head.wrap > nav.mode-nav > a.essay-link",
+        "text": "Essay",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(222, 222, 222)",
+        "ratio": 5.46,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > header.site-head.wrap > div.head-tools > p.availability",
+        "text": "Two client slots from Q3 2026",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(222, 222, 222)",
+        "ratio": 6.69,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > header.site-head.wrap > div.head-tools > button#theme-toggle",
+        "text": "Dark",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(222, 222, 222)",
+        "ratio": 13.92,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.identity:nth-of-type(1) > p.role:nth-of-type(1)",
+        "text": "Product Systems Engineer",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.identity:nth-of-type(1) > h1#work-title",
+        "text": "Aliou Wade",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 15.71,
+        "threshold": 3,
+        "large": true,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.identity:nth-of-type(1) > p.positioning:nth-of-type(2)",
+        "text": "I build operational software for fintech",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 15.71,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.identity:nth-of-type(1) > div.contact-row > a.contact-primary",
+        "text": "wadealiou00@gmail.com",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 15.71,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.identity:nth-of-type(1) > div.contact-row > span.contact-secondary > a:nth-of-type(1)",
+        "text": "LinkedIn",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 7.55,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.identity:nth-of-type(1) > div.contact-row > span.contact-secondary > a:nth-of-type(2)",
+        "text": "GitHub",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 7.55,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.identity:nth-of-type(1) > div.contact-row > span.contact-secondary > a:nth-of-type(3)",
+        "text": "WhatsApp",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 7.55,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.identity:nth-of-type(1) > p.location-meta:nth-of-type(3)",
+        "text": "Dakar, Senegal",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.identity:nth-of-type(1) > button.profile-link",
+        "text": "Read my background",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(245, 245, 245)",
+        "ratio": 8.26,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.identity:nth-of-type(1) > button.profile-link > span",
+        "text": "→",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(245, 245, 245)",
+        "ratio": 8.26,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.registry-head:nth-of-type(1) > h2#registry-title",
+        "text": "Engagements",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 15.71,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.registry-head:nth-of-type(1) > span.registry-count",
+        "text": "14",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.filters:nth-of-type(2) > button.filter:nth-of-type(1) > span:nth-of-type(1)",
+        "text": "All",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(245, 245, 245)",
+        "ratio": 17.18,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.filters:nth-of-type(2) > button.filter:nth-of-type(1) > span.filter-count:nth-of-type(2)",
+        "text": "14",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(245, 245, 245)",
+        "ratio": 17.18,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.filters:nth-of-type(2) > button.filter:nth-of-type(2) > span:nth-of-type(1)",
+        "text": "Fintech",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.filters:nth-of-type(2) > button.filter:nth-of-type(2) > span.filter-count:nth-of-type(2)",
+        "text": "2",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.filters:nth-of-type(2) > button.filter:nth-of-type(3) > span:nth-of-type(1)",
+        "text": "ERP & QA",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.filters:nth-of-type(2) > button.filter:nth-of-type(3) > span.filter-count:nth-of-type(2)",
+        "text": "1",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.filters:nth-of-type(2) > button.filter:nth-of-type(4) > span:nth-of-type(1)",
+        "text": "Systems",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.filters:nth-of-type(2) > button.filter:nth-of-type(4) > span.filter-count:nth-of-type(2)",
+        "text": "4",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.filters:nth-of-type(2) > button.filter:nth-of-type(5) > span:nth-of-type(1)",
+        "text": "Operations",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div.filters:nth-of-type(2) > button.filter:nth-of-type(5) > span.filter-count:nth-of-type(2)",
+        "text": "7",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row.is-selected:nth-of-type(1) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "Everest Finance",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(210, 210, 210)",
+        "ratio": 12.39,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row.is-selected:nth-of-type(1) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "SGI · site, savings app, campaign toolin",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(210, 210, 210)",
+        "ratio": 5.95,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row.is-selected:nth-of-type(1) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Fintech / 3 builds",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(210, 210, 210)",
+        "ratio": 4.85,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row.is-selected:nth-of-type(1) > span.row-period:nth-of-type(2)",
+        "text": "2025 - now",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(210, 210, 210)",
+        "ratio": 4.85,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(2) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "ERGOBIT",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 15.71,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(2) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Odoo integrator · test toolkit, client m",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 7.55,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(2) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "ERP & QA / 2 builds",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(2) > span.row-period:nth-of-type(2)",
+        "text": "2024 - 26",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(1) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "BankingBook Analytics",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 15.71,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(1) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Open-banking API, domain cutover",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 7.55,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(1) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Fintech / 2 builds",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(1) > span.row-period:nth-of-type(2)",
+        "text": "2023 - 24",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(2) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "Purolator Digital Lab",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 15.71,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(2) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "CI/CD, approval tooling, warehouse SDK",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 7.55,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(2) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Systems / 3 builds",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(2) > span.row-period:nth-of-type(2)",
+        "text": "2023",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(3) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "BocalBun",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 15.71,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(3) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Bun toolkit, frozen deliberately",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 7.55,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(3) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Systems / 1 build",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(3) > span.row-period:nth-of-type(2)",
+        "text": "2022",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(4) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "Mansour Holding",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 15.71,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(4) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Automotive · dealership site, inventory",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 7.55,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(4) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Operations / 2 builds",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(4) > span.row-period:nth-of-type(2)",
+        "text": "Live",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(5) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "Ndouckmane Transit",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 15.71,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(5) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Logistics · freight ops, customs",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 7.55,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(5) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Operations / 1 build",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(5) > span.row-period:nth-of-type(2)",
+        "text": "Active",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(3) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "Mamebimo",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 15.71,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(3) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Marketplace · home-services booking",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 7.55,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(3) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Operations / 1 build",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(3) > span.row-period:nth-of-type(2)",
+        "text": "Live",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(4) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "Gerpain",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 15.71,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(4) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Multi-bakery inventory, RBAC",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 7.55,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(4) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Operations / 1 build",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(4) > span.row-period:nth-of-type(2)",
+        "text": "Shipped",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(6) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "EduPlan",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 15.71,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(6) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Education · courses, schedule, grading",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 7.55,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(6) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Operations / 1 build",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(6) > span.row-period:nth-of-type(2)",
+        "text": "Shipped",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(5) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "Les Hirondelles",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 15.71,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(5) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Education · school site, Convex CMS",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 7.55,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(5) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Operations / 1 build",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(5) > span.row-period:nth-of-type(2)",
+        "text": "Live",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(6) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "Asaaman",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 15.71,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(6) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Drone / AI · semantic video search",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 7.55,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(6) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Systems / 1 build",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(6) > span.row-period:nth-of-type(2)",
+        "text": "Live",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(7) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "Dakar Sport",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 15.71,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(7) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "Retail · commerce and community",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 7.55,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(7) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Operations / 1 build",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > a.row:nth-of-type(7) > span.row-period:nth-of-type(2)",
+        "text": "Shipped",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(7) > span.row-main:nth-of-type(1) > span.row-name:nth-of-type(1)",
+        "text": "Orange Digital Lab",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 15.71,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(7) > span.row-main:nth-of-type(1) > span.row-note:nth-of-type(2)",
+        "text": "React Native fitness community app",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 7.55,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(7) > span.row-main:nth-of-type(1) > span.row-meta:nth-of-type(3)",
+        "text": "Systems / 1 build",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > div.work-sidebar > section.registry:nth-of-type(2) > div#rows.rows:nth-of-type(3) > button.row:nth-of-type(7) > span.row-period:nth-of-type(2)",
+        "text": "2022",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 6.16,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.proof-head:nth-of-type(1) > div > p#proof-client.proof-client",
+        "text": "Everest Finance",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(222, 222, 222)",
+        "ratio": 6.69,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.proof-head:nth-of-type(1) > div > h2#proof-title",
+        "text": "Savings platform",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(222, 222, 222)",
+        "ratio": 13.92,
+        "threshold": 3,
+        "large": true,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.proof-head:nth-of-type(1) > a#proof-link",
+        "text": "Open case study",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 7.55,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.proof-head:nth-of-type(1) > a#proof-link > span",
+        "text": "↗",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(235, 235, 235)",
+        "ratio": 7.55,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > div.chin-controls > p#chin-state.chin-state > span#chin-state-text:nth-of-type(2)",
+        "text": "Live preview",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(222, 222, 222)",
+        "ratio": 5.46,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > div.chin-controls > button#media-control.media-control > span.media-control-label:nth-of-type(2)",
+        "text": "Pause",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(245, 245, 245)",
+        "ratio": 8.26,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > div.chin-controls > div#surface-bar.surface-selectors > button:nth-of-type(1)",
+        "text": "Sama Naffa",
+        "fg": "rgb(18, 18, 18)",
+        "bg": "rgb(245, 245, 245)",
+        "ratio": 17.18,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > div.chin-controls > div#surface-bar.surface-selectors > button:nth-of-type(2)",
+        "text": "Website",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "color(srgb 0.823529 0.823529 0.823529 / 0.55)",
+        "ratio": 5.95,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > div.chin-controls > div#surface-bar.surface-selectors > button:nth-of-type(3)",
+        "text": "Formos",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "color(srgb 0.823529 0.823529 0.823529 / 0.55)",
+        "ratio": 5.95,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > dl#chin-plate.chin-plate > div:nth-of-type(1) > dt",
+        "text": "Domain",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(222, 222, 222)",
+        "ratio": 5.46,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > dl#chin-plate.chin-plate > div:nth-of-type(1) > dd#plate-domain",
+        "text": "Fintech",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(222, 222, 222)",
+        "ratio": 6.69,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > dl#chin-plate.chin-plate > div:nth-of-type(2) > dt",
+        "text": "Period",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(222, 222, 222)",
+        "ratio": 5.46,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > dl#chin-plate.chin-plate > div:nth-of-type(2) > dd#plate-period",
+        "text": "2025 — now",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(222, 222, 222)",
+        "ratio": 6.69,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > dl#chin-plate.chin-plate > div:nth-of-type(3) > dt",
+        "text": "Scope",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(222, 222, 222)",
+        "ratio": 5.46,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > dl#chin-plate.chin-plate > div:nth-of-type(3) > dd#plate-scope",
+        "text": "3 builds",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(222, 222, 222)",
+        "ratio": 6.69,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > dl#chin-plate.chin-plate > div.plate-wide:nth-of-type(4) > dt",
+        "text": "Engagement",
+        "fg": "rgb(86, 86, 86)",
+        "bg": "rgb(222, 222, 222)",
+        "ratio": 5.46,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      },
+      {
+        "selector": "body > main.work-board.wrap:nth-of-type(1) > section#proof-stage.proof-stage > div.instrument:nth-of-type(2) > div.chin:nth-of-type(2) > dl#chin-plate.chin-plate > div.plate-wide:nth-of-type(4) > dd#plate-note",
+        "text": "SGI · site, savings app, campaign toolin",
+        "fg": "rgb(73, 73, 73)",
+        "bg": "rgb(222, 222, 222)",
+        "ratio": 6.69,
+        "threshold": 4.5,
+        "large": false,
+        "pass": true
+      }
+    ]
+  },
+  "focus": [
+    {
+      "tag": "a",
+      "id": null,
+      "text": "Aliou Wade",
+      "selector": "a.wordmark",
+      "outlineWidth": "2px",
+      "outlineStyle": "solid",
+      "outlineColor": "rgb(244, 244, 244)",
+      "outlineOffset": "3px",
+      "borderWidth": "0px",
+      "borderStyle": "none",
+      "borderColor": "rgb(244, 244, 244)",
+      "boxShadow": "none",
+      "rect": {
+        "x": 24,
+        "y": 14,
+        "w": 80,
+        "h": 26
+      }
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "text": "Work",
+      "selector": "button",
+      "outlineWidth": "2px",
+      "outlineStyle": "solid",
+      "outlineColor": "rgb(244, 244, 244)",
+      "outlineOffset": "3px",
+      "borderWidth": "0px",
+      "borderStyle": "none",
+      "borderColor": "rgb(244, 244, 244)",
+      "boxShadow": "none",
+      "rect": {
+        "x": 645,
+        "y": 13,
+        "w": 31,
+        "h": 27
+      }
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "text": "About",
+      "selector": "button",
+      "outlineWidth": "2px",
+      "outlineStyle": "solid",
+      "outlineColor": "rgb(244, 244, 244)",
+      "outlineOffset": "3px",
+      "borderWidth": "0px",
+      "borderStyle": "none",
+      "borderColor": "rgb(139, 139, 139)",
+      "boxShadow": "none",
+      "rect": {
+        "x": 700,
+        "y": 13,
+        "w": 36,
+        "h": 27
+      }
+    },
+    {
+      "tag": "a",
+      "id": null,
+      "text": "Essay",
+      "selector": "a.essay-link",
+      "outlineWidth": "2px",
+      "outlineStyle": "solid",
+      "outlineColor": "rgb(244, 244, 244)",
+      "outlineOffset": "3px",
+      "borderWidth": "0px",
+      "borderStyle": "none",
+      "borderColor": "rgb(139, 139, 139)",
+      "boxShadow": "none",
+      "rect": {
+        "x": 760,
+        "y": 13,
+        "w": 34,
+        "h": 27
+      }
+    },
+    {
+      "tag": "button",
+      "id": "theme-toggle",
+      "text": "Light",
+      "selector": "#theme-toggle",
+      "outlineWidth": "2px",
+      "outlineStyle": "solid",
+      "outlineColor": "rgb(244, 244, 244)",
+      "outlineOffset": "3px",
+      "borderWidth": "0px",
+      "borderStyle": "none",
+      "borderColor": "rgb(139, 139, 139)",
+      "boxShadow": "none",
+      "rect": {
+        "x": 1383,
+        "y": 11,
+        "w": 33,
+        "h": 30
+      }
+    },
+    {
+      "tag": "a",
+      "id": null,
+      "text": "wadealiou00@gmail.com",
+      "selector": "a.contact-primary",
+      "outlineWidth": "2px",
+      "outlineStyle": "solid",
+      "outlineColor": "rgb(244, 244, 244)",
+      "outlineOffset": "3px",
+      "borderWidth": "0px",
+      "borderStyle": "none",
+      "borderColor": "rgb(244, 244, 244)",
+      "boxShadow": "none",
+      "rect": {
+        "x": 42,
+        "y": 232,
+        "w": 141,
+        "h": 24
+      }
+    },
+    {
+      "tag": "a",
+      "id": null,
+      "text": "LinkedIn",
+      "selector": "a",
+      "outlineWidth": "2px",
+      "outlineStyle": "solid",
+      "outlineColor": "rgb(244, 244, 244)",
+      "outlineOffset": "3px",
+      "borderWidth": "0px",
+      "borderStyle": "none",
+      "borderColor": "rgb(168, 168, 168)",
+      "boxShadow": "none",
+      "rect": {
+        "x": 42,
+        "y": 261,
+        "w": 47,
+        "h": 24
+      }
+    },
+    {
+      "tag": "a",
+      "id": null,
+      "text": "GitHub",
+      "selector": "a",
+      "outlineWidth": "2px",
+      "outlineStyle": "solid",
+      "outlineColor": "rgb(244, 244, 244)",
+      "outlineOffset": "3px",
+      "borderWidth": "0px",
+      "borderStyle": "none",
+      "borderColor": "rgb(168, 168, 168)",
+      "boxShadow": "none",
+      "rect": {
+        "x": 102,
+        "y": 261,
+        "w": 40,
+        "h": 24
+      }
+    }
+  ],
+  "colorOnly": [
+    {
+      "element": "filter[aria-pressed=true]",
+      "text": "All 14",
+      "bg": "rgb(35, 35, 35)",
+      "color": "rgb(244, 244, 244)",
+      "borderColor": "rgb(244, 244, 244)",
+      "fontWeight": "400",
+      "nonColorCues": {
+        "ariaPressed": true,
+        "fontWeightBold": false,
+        "borderDifference": false
+      }
+    },
+    {
+      "element": "chin-state .lamp",
+      "bg": "rgba(0, 0, 0, 0)",
+      "boxShadow": "rgba(0, 0, 0, 0.42) 0px 1px 5px 0px inset, rgba(255, 255, 255, 0.07) 0px -1px 0px 0px inset",
+      "borderRadius": "50%",
+      "size": "6px x 6px",
+      "nonColorCues": {
+        "textLabel": "No preview recorded",
+        "dataState": "idle"
+      }
+    },
+    {
+      "element": "mode-btn[data-mode=work]",
+      "text": "Work",
+      "ariaPressed": "true",
+      "color": "rgb(244, 244, 244)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "fontWeight": "400"
+    },
+    {
+      "element": "mode-btn[data-mode=about]",
+      "text": "About",
+      "ariaPressed": "false",
+      "color": "rgb(139, 139, 139)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "fontWeight": "400"
+    },
+    {
+      "element": "mode-btn[data-mode=about]",
+      "text": "Read my background →",
+      "ariaPressed": null,
+      "color": "rgb(168, 168, 168)",
+      "bg": "rgb(35, 35, 35)",
+      "fontWeight": "400"
+    },
+    {
+      "element": "mode-btn[data-mode=work]",
+      "text": "← Return to work",
+      "ariaPressed": null,
+      "color": "rgb(168, 168, 168)",
+      "bg": "rgb(35, 35, 35)",
+      "fontWeight": "400"
+    }
+  ],
+  "reducedMotion": {
+    "videoPaused": true,
+    "videoAutoplayAttr": false,
+    "videoDisplay": "block",
+    "animationsRunning": 0,
+    "proofVisualAnimations": 0,
+    "lampAnimations": 0
+  },
+  "typeState": {
+    "hoveredRow": "ERGOBIT",
+    "lampColor": "rgba(0, 0, 0, 0)",
+    "lampBoxShadow": "rgba(0, 0, 0, 0.42) 0px 1px 5px 0px inset, rgba(255, 255, 255, 0.07) 0px -1px 0px 0px inset",
+    "chinState": "idle",
+    "chinStateText": "No preview recorded",
+    "chinColor": "rgb(139, 139, 139)",
+    "plateValues": [
+      "ERP & QA",
+      "2024 - 26",
+      "2 builds",
+      "Odoo integrator · test toolkit, client modules"
+    ],
+    "proofTypeHidden": false,
+    "proofMediaHidden": true,
+    "surfaceBarHidden": true,
+    "mediaControlHidden": true
+  },
+  "failedSteps": []
+}
