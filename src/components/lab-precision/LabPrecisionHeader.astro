@@ -20,8 +20,6 @@ const ui = isFr
       lang: "Langue",
       langEn: "Anglais",
       langFr: "Français",
-      title: "Ingénieur logiciel",
-      subtitle: "Systèmes opérationnels pour fintechs et entreprises à forte charge opérationnelle",
     }
   : {
       nav: "Portfolio view",
@@ -32,14 +30,12 @@ const ui = isFr
       lang: "Language",
       langEn: "English",
       langFr: "French",
-      title: "Software Engineer",
-      subtitle: "Operational systems for fintechs & ops-heavy businesses",
     };
 ---
 
 <div class="lp-nav-shell">
   <header class="lp-header">
-    <p class="lp-header-status" title={ui.availTitle}>
+    <p class="lp-header-status" title={ui.availTitle} aria-label={`${ui.available}. ${ui.availTitle}`}>
       <span class="lp-avail-dot" aria-hidden="true"></span>
       <span class="lp-avail-text">{ui.available}</span>
     </p>
@@ -72,7 +68,6 @@ const ui = isFr
           lang="en"
           aria-label={ui.langEn}
           aria-current={!isFr ? "true" : undefined}>EN</a>
-        <span class="lp-locale-sep" aria-hidden="true">/</span>
         <a
           class:list={["lp-locale", { "is-active": isFr }]}
           href="/fr/"
