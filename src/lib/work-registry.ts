@@ -3,10 +3,17 @@
  */
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
-import { type Domain, type Engagement, type Surface, type CapabilityGroup } from "@/data/lab-precision";
+import {
+  ANCHOR_SLUGS,
+  type Domain,
+  type Engagement,
+  type Surface,
+  type CapabilityGroup,
+} from "@/data/lab-precision";
 import { domainSlug, capabilitySlug } from "@/data/lab-precision";
 
 export type WorkEntry = CollectionEntry<"work">;
+export type WorkLocale = "en" | "fr";
 
 const DOMAINS: Domain[] = ["Fintech", "ERP & QA", "Systems", "Operations"];
 
@@ -18,14 +25,24 @@ function normalizeDomain(raw: string): Domain {
   return "Operations";
 }
 
-function mapSurface(s: WorkEntry["data"]["surfaces"][number]): Surface {
+/** Rail / dossier title: text before an em/en dash subtitle. */
+function shortName(title: string): string {
+  const parts = title.split(/\s+[—–]\s+/);
+  return (parts[0] ?? title).trim() || title;
+}
+
+function mapSurface(
+  s: WorkEntry["data"]["surfaces"][number],
+  locale: WorkLocale,
+): Surface {
+  const isFr = locale === "fr";
   return {
-    name: s.name,
+    name: isFr ? (s.nameFr ?? s.name) : s.name,
     nameFr: s.nameFr,
-    blurb: s.blurb,
+    blurb: isFr ? (s.blurbFr ?? s.blurb) : s.blurb,
     blurbFr: s.blurbFr,
     url: s.url,
-    urlLabel: s.urlLabel,
+    urlLabel: isFr ? (s.urlLabelFr ?? s.urlLabel) : s.urlLabel,
     urlLabelFr: s.urlLabelFr,
     video: s.video,
     poster: s.poster,
@@ -33,12 +50,15 @@ function mapSurface(s: WorkEntry["data"]["surfaces"][number]): Surface {
   };
 }
 
-function mapWorkEntryToEngagement(entry: WorkEntry): Engagement {
+function mapWorkEntryToEngagement(entry: WorkEntry, locale: WorkLocale = "en"): Engagement {
   const data = entry.data;
   const slug = entry.id.replace(/\/(en|fr)$/, "");
   const domain = normalizeDomain(data.domain);
+  const isFr = locale === "fr";
 
-  const surfaces = (data.surfaces ?? []).map(mapSurface);
+  const title = isFr ? (data.titleFr ?? data.title) : data.title;
+  const summary = isFr ? (data.summaryFr ?? data.summary) : data.summary;
+  const surfaces = (data.surfaces ?? []).map((s) => mapSurface(s, locale));
 
   // Find the first surface with a video for preview media
   const primarySurface = surfaces[0];
@@ -47,35 +67,59 @@ function mapWorkEntryToEngagement(entry: WorkEntry): Engagement {
     : undefined;
 
   return {
-    name: data.title,
+    name: shortName(title),
     slug,
     domain,
-    detail: data.summary,
-    builds: surfaces.length ?? 1,
+    detail: summary,
+    builds: surfaces.length || 1,
     period: data.period ?? data.date,
-    href: `/work/${slug}`,
+    featured: data.featured,
+    href: locale === "fr" ? `/fr/work/${slug}` : `/work/${slug}`,
     media,
-    caption: primarySurface?.name ?? data.title,
+    caption: primarySurface?.name ?? shortName(title),
     surfaces,
   };
 }
 
+/** Featured anchors first (fixed order), then supporting by period year desc. */
+export function sortEngagements(engagements: Engagement[]): Engagement[] {
+  return [...engagements].sort((a, b) => {
+    const ai = (ANCHOR_SLUGS as readonly string[]).indexOf(a.slug);
+    const bi = (ANCHOR_SLUGS as readonly string[]).indexOf(b.slug);
+    const aAnchor = ai !== -1;
+    const bAnchor = bi !== -1;
+
+    if (aAnchor && bAnchor) return ai - bi;
+    if (aAnchor !== bAnchor) return aAnchor ? -1 : 1;
+
+    const yearA = parseInt(a.period?.slice(0, 4) ?? "0", 10);
+    const yearB = parseInt(b.period?.slice(0, 4) ?? "0", 10);
+    if (yearA !== yearB) return yearB - yearA;
+    return a.slug.localeCompare(b.slug);
+  });
+}
+
 /** Fetch all work entries and adapt to Engagement shape. */
-export async function getEngagements(): Promise<Engagement[]> {
+export async function getEngagements(locale: WorkLocale = "en"): Promise<Engagement[]> {
   const entries = await getCollection("work", (entry) => entry.id.endsWith("/en"));
-  return entries.map(mapWorkEntryToEngagement);
+  return sortEngagements(entries.map((entry) => mapWorkEntryToEngagement(entry, locale)));
 }
 
 /** Get a single engagement by slug. */
-export async function getEngagement(slug: string): Promise<Engagement | null> {
+export async function getEngagement(
+  slug: string,
+  locale: WorkLocale = "en",
+): Promise<Engagement | null> {
   const entries = await getCollection("work", (entry) => entry.id.endsWith("/en"));
   const entry = entries.find((e) => e.id.replace(/\/(en|fr)$/, "") === slug);
-  return entry ? mapWorkEntryToEngagement(entry) : null;
+  return entry ? mapWorkEntryToEngagement(entry, locale) : null;
 }
 
 /** Engagements grouped by domain for directory-style indexes. */
-export async function getEngagementsByDomain(): Promise<{ domain: Domain; entries: Engagement[] }[]> {
-  const engagements = await getEngagements();
+export async function getEngagementsByDomain(
+  locale: WorkLocale = "en",
+): Promise<{ domain: Domain; entries: Engagement[] }[]> {
+  const engagements = await getEngagements(locale);
   return DOMAINS
     .map((domain) => ({
       domain,
@@ -90,7 +134,7 @@ const CAPABILITY_MAP: Record<string, { en: string; fr: string }[]> = {
     { en: "KYC & compliance", fr: "KYC & conformité" },
     { en: "Dashboards & reporting", fr: "Tableaux de bord & reporting" },
   ],
-  ergobit: [
+  "odoo-testing-toolkit": [
     { en: "ERP customization", fr: "Personnalisation ERP" },
     { en: "Test automation & QA", fr: "Automatisation des tests & QA" },
   ],
@@ -121,9 +165,9 @@ const CAPABILITY_MAP: Record<string, { en: string; fr: string }[]> = {
 
 /** Engagements grouped by capability for the console IA. */
 export async function getEngagementsByCapability(
-  locale: "en" | "fr" = "en",
+  locale: WorkLocale = "en",
 ): Promise<CapabilityGroup[]> {
-  const engagements = await getEngagements();
+  const engagements = await getEngagements(locale);
   const map = new Map<string, { label: string; slug: string; engagements: Engagement[] }>();
 
   for (const eng of engagements) {

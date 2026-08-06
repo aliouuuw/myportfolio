@@ -1113,6 +1113,35 @@ span.lp-roster-name {
   color: var(--ink-soft);
 }
 
+/* Single-surface dossiers: more weight so the panel doesn't feel empty */
+.lp-dossier--solo .lp-dossier-surfaces {
+  gap: 0;
+  margin-bottom: 1.5rem;
+}
+
+.lp-dossier--solo .lp-dossier-surface {
+  padding: 1.125rem 0 1.125rem 1.25rem;
+  border-left-width: 3px;
+  border-left-color: color-mix(in srgb, var(--accent) 40%, var(--hairline));
+}
+
+.lp-dossier--solo .lp-dossier-surface-name {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.lp-dossier--solo .lp-dossier-surface-blurb {
+  font-size: 0.875rem;
+  max-width: 36rem;
+  line-height: 1.55;
+}
+
+.lp-dossier--solo .lp-dossier-surface-stack {
+  margin-top: 0.45rem;
+  font-size: 0.75rem;
+}
+
 .lp-dossier-surface-stack {
   margin: 0.25rem 0 0;
   font-family: var(--mono);

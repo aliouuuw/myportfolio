@@ -30,12 +30,21 @@ export interface Engagement {
   detail: string;
   builds: number;
   period: string;
+  /** Homepage conversion anchors (Everest, ERGOBIT toolkit, BocalBun). */
+  featured: boolean;
   href?: string;
   /** Everest surface id under /media/case-studies/everest-finance/ */
   media?: string;
   caption?: string;
   surfaces: Surface[];
 }
+
+/** Fixed rail order for featured anchors — founders/CTOs see proof depth first. */
+export const ANCHOR_SLUGS = [
+  "everest-finance",
+  "odoo-testing-toolkit",
+  "bocalbun-retrospective",
+] as const;
 
 export interface CapabilityGroup {
   capability: string;

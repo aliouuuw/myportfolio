@@ -137,19 +137,22 @@ interface Surface {
 ## 7. Open work (for next agent)
 
 ### High priority
-- [ ] **Surface copy** — most blurbs are placeholders; need real content per engagement
-- [ ] **Case study links** — `surface.url` mostly empty; wire to real URLs when available
+- [x] **Surface copy** — real flow/outcome blurbs EN+FR (2026-08-06 refinement)
+- [x] **Case study links** — wired public URLs (Everest staging, mansourmotors.sn, dakarsport.net); omitted when not public
 - [ ] **Everest video peek** — `engagement.media` exists but not wired to preview controller
 
 ### Medium priority
-- [ ] **Single-engagement visual weight** — dossiers with 1 surface feel light; consider tighter layout
-- [ ] **FR surface copy** — `nameFr`, `blurbFr`, `urlLabelFr` mostly fall back to EN
+- [x] **Single-engagement visual weight** — `.lp-dossier--solo` denser surface block
+- [x] **FR surface copy** — `nameFr` / `blurbFr` / `urlLabelFr` filled; locale-aware `getEngagements("fr")`
 - [ ] **Domain badge colors** — verify dark mode tints are legible
 
 ### Low priority
-- [ ] **Keyboard nav** — arrow keys between rail items (currently only click)
-- [ ] **Deep link** — `#engagement-{slug}` to open specific dossier on load
+- [x] **Keyboard nav** — arrow keys / Home / End between rail items
+- [x] **Deep link** — `#engagement-{slug}` opens specific dossier on load
 - [ ] **Scroll sync** — if dossier is tall, rail should stay sticky (currently not)
+
+### Ordering (shipped)
+Anchors first: Everest → Odoo toolkit → BocalBun, then supporting by period year desc (`sortEngagements` in `work-registry.ts`).
 
 ---
 

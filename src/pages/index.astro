@@ -4,11 +4,8 @@ import LabBackground from "@/components/lab-precision/LabBackground.astro";
 import LabPrecisionHeader from "@/components/lab-precision/LabPrecisionHeader.astro";
 import { getEngagements, domainSlug } from "@/lib/work-registry";
 
-const engagements = (await getEngagements()).sort((a, b) => {
-  const yearA = parseInt(a.period?.slice(0, 4) ?? "0", 10);
-  const yearB = parseInt(b.period?.slice(0, 4) ?? "0", 10);
-  return yearB - yearA;
-});
+/* Anchors first (Everest → Odoo toolkit → BocalBun), then supporting by period. */
+const engagements = await getEngagements("en");
 ---
 
 <!doctype html>
@@ -96,11 +93,13 @@ const engagements = (await getEngagements()).sort((a, b) => {
 
               <div class="lp-console" id="engagement-console">
                 <nav class="lp-console-rail" aria-label="Engagements">
-                  <ul class="lp-console-cap-list">
+                  <ul class="lp-console-cap-list" role="list">
                     {engagements.map((eng) => (
                       <li>
                         <button
                           class="lp-console-cap"
+                          type="button"
+                          id={`engagement-${eng.slug}`}
                           data-eng={eng.slug}
                           aria-controls={`dossier-${eng.slug}`}
                           aria-expanded="false"
@@ -115,7 +114,12 @@ const engagements = (await getEngagements()).sort((a, b) => {
 
                 <div class="lp-console-dossier">
                   {engagements.map((eng) => (
-                    <div class="lp-dossier" id={`dossier-${eng.slug}`}>
+                    <div
+                      class:list={["lp-dossier", eng.surfaces.length === 1 && "lp-dossier--solo"]}
+                      id={`dossier-${eng.slug}`}
+                      role="region"
+                      aria-labelledby={`engagement-${eng.slug}`}
+                    >
                       <h3 class="lp-dossier-title">{eng.name}</h3>
                       <p class="lp-dossier-sub">{eng.detail}</p>
                       <div class="lp-dossier-meta-row">
