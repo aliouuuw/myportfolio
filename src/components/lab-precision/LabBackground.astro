@@ -1,5 +1,42 @@
 ---
 import { credentials, journey } from "@/data/lab-precision";
+
+interface Props {
+  locale?: "en" | "fr";
+}
+
+const locale = Astro.props.locale ?? "en";
+const isFr = locale === "fr";
+
+const ui = isFr
+  ? {
+      portraitAlt: "Portrait d'Aliou Wade",
+      portraitCaption: "Aliou Wade, Dakar",
+      role: "Parcours",
+      headline: "De l'ingénierie avec du contexte opérationnel.",
+      bio: "Six ans à construire des logiciels opérationnels en fintech, ERP, logistique et éducation. Ottawa à Dakar, bilingue français et anglais. Je travaille sur les systèmes que les entreprises font réellement tourner, pas ceux qui font joli en démo.",
+      offClockTitle: "Hors du bureau",
+      offClock:
+        "Échecs compétitifs, environ 2043 en bullet en ligne. La même discipline que livrer sous deadline.",
+      journeyTitle: "Parcours",
+      journeyRef: (n: number) => `main · ${n} commits`,
+      credsTitle: "Formation et certifications",
+      credsRef: (n: number) => `${n} enregistrements`,
+    }
+  : {
+      portraitAlt: "Portrait of Aliou Wade",
+      portraitCaption: "Aliou Wade, Dakar",
+      role: "Background",
+      headline: "Engineering with operational context.",
+      bio: "Six years building operational software across fintech, ERP, logistics, and education. Ottawa to Dakar, bilingual French and English. I work on the systems businesses actually run on, not the ones that demo well.",
+      offClockTitle: "Off the clock",
+      offClock:
+        "Competitive chess, around 2043 bullet online. Same discipline as shipping under deadline.",
+      journeyTitle: "Journey",
+      journeyRef: (n: number) => `main · ${n} commits`,
+      credsTitle: "Education and certifications",
+      credsRef: (n: number) => `${n} records`,
+    };
 ---
 
 <div class="lp-about">
@@ -7,19 +44,15 @@ import { credentials, journey } from "@/data/lab-precision";
     <figure class="lp-portrait">
       <div class="lp-bezel">
         <div class="lp-bezel-inner">
-          <img src="/Aliou.png" alt="Portrait of Aliou Wade" width="795" height="1024" />
+          <img src="/Aliou.png" alt={ui.portraitAlt} width="795" height="1024" />
         </div>
       </div>
-      <figcaption>Aliou Wade, Dakar</figcaption>
+      <figcaption>{ui.portraitCaption}</figcaption>
     </figure>
     <div class="lp-about-intro">
-      <p class="lp-bio-role">Background</p>
-      <h1 class="lp-bio-name">Engineering with operational context.</h1>
-      <p class="lp-bio-line">
-        Six years building operational software across fintech, ERP, logistics, and education. Ottawa
-        to Dakar, bilingual French and English. I work on the systems businesses actually run on, not
-        the ones that demo well.
-      </p>
+      <p class="lp-bio-role">{ui.role}</p>
+      <h1 class="lp-bio-name">{ui.headline}</h1>
+      <p class="lp-bio-line">{ui.bio}</p>
       <ul class="lp-bio-links">
         <li>
           <a href="mailto:wadealiou00@gmail.com">wadealiou00@gmail.com</a>
@@ -29,18 +62,16 @@ import { credentials, journey } from "@/data/lab-precision";
         <li><a href="https://wa.me/221777228845">WhatsApp</a></li>
       </ul>
       <div class="lp-off-clock">
-        <h2>Off the clock</h2>
-        <p>
-          Competitive chess, around 2043 bullet online. Same discipline as shipping under deadline.
-        </p>
+        <h2>{ui.offClockTitle}</h2>
+        <p>{ui.offClock}</p>
       </div>
     </div>
   </section>
 
   <section class="lp-journey lp-git-journey" aria-labelledby="journey-title">
     <div class="lp-section-head">
-      <h2 id="journey-title">Journey</h2>
-      <span class="lp-git-ref">main · {journey.length} commits</span>
+      <h2 id="journey-title">{ui.journeyTitle}</h2>
+      <span class="lp-git-ref">{ui.journeyRef(journey.length)}</span>
     </div>
     <ol class="lp-git-log">
       {
@@ -55,14 +86,14 @@ import { credentials, journey } from "@/data/lab-precision";
                 <span class="lp-git-summary-caret" aria-hidden="true"></span>
                 <span class="lp-git-summary-main">
                   <code class="lp-git-branch">{entry.branch}</code>
-                  <span class="lp-git-title">{entry.role}</span>
+                  <span class="lp-git-title">{isFr ? (entry.roleFr ?? entry.role) : entry.role}</span>
                   <span class="lp-git-meta">
-                    <span class="lp-git-org">{entry.org}</span>
-                    <span class="lp-git-period">{entry.period}</span>
+                    <span class="lp-git-org">{isFr ? (entry.orgFr ?? entry.org) : entry.org}</span>
+                    <span class="lp-git-period">{isFr ? (entry.periodFr ?? entry.period) : entry.period}</span>
                   </span>
                 </span>
               </summary>
-              <p class="lp-git-note">{entry.note}</p>
+              <p class="lp-git-note">{isFr ? (entry.noteFr ?? entry.note) : entry.note}</p>
             </details>
           </li>
         ))
@@ -72,15 +103,15 @@ import { credentials, journey } from "@/data/lab-precision";
 
   <section class="lp-creds" aria-labelledby="credentials-title">
     <div class="lp-section-head">
-      <h2 id="credentials-title">Education and certifications</h2>
-      <span>{credentials.length} records</span>
+      <h2 id="credentials-title">{ui.credsTitle}</h2>
+      <span>{ui.credsRef(credentials.length)}</span>
     </div>
     <ul class="lp-cred-list">
       {
         credentials.map((entry) => (
           <li>
-            <strong>{entry.item}</strong>
-            <span>{entry.detail}</span>
+            <strong>{isFr ? (entry.itemFr ?? entry.item) : entry.item}</strong>
+            <span>{isFr ? (entry.detailFr ?? entry.detail) : entry.detail}</span>
           </li>
         ))
       }

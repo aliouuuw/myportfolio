@@ -44,7 +44,7 @@ function mapSurface(
   return {
     name: uiDash(isFr ? (s.nameFr ?? s.name) : s.name),
     nameFr: s.nameFr,
-    blurb: isFr ? (s.blurbFr ?? s.blurb) : s.blurb,
+    blurb: uiDash(isFr ? (s.blurbFr ?? s.blurb) : s.blurb),
     blurbFr: s.blurbFr,
     url: s.url,
     urlLabel: isFr ? (s.urlLabelFr ?? s.urlLabel) : s.urlLabel,
@@ -75,7 +75,7 @@ function mapWorkEntryToEngagement(entry: WorkEntry, locale: WorkLocale = "en"): 
     name: shortName(title),
     slug,
     domain,
-    detail: summary,
+    detail: uiDash(summary),
     builds: surfaces.length || 1,
     period: uiDash(data.period ?? data.date),
     featured: data.featured,

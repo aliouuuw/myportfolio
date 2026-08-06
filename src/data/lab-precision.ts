@@ -58,15 +58,21 @@ export function capabilitySlug(capability: string): string {
 
 export interface JourneyEntry {
   period: string;
+  periodFr?: string;
   branch: string;
   role: string;
+  roleFr?: string;
   org: string;
+  orgFr?: string;
   note: string;
+  noteFr?: string;
 }
 
 export interface Credential {
   item: string;
+  itemFr?: string;
   detail: string;
+  detailFr?: string;
 }
 
 const domains: Domain[] = ["Fintech", "ERP & QA", "Systems", "Operations"];
@@ -89,54 +95,103 @@ export function directoryColumns<T>(items: T[], columnCount = 2): T[][] {
 export const journey: JourneyEntry[] = [
   {
     period: "2025 - now",
+    periodFr: "2025 - présent",
     branch: "everest-finance",
     role: "Senior technical operator",
+    roleFr: "Opérateur technique senior",
     org: "Everest Finance, Dakar",
+    orgFr: "Everest Finance, Dakar",
     note: "Solo across three fintech products.",
+    noteFr: "Solo sur trois produits fintech.",
   },
   {
     period: "2024 - 26",
+    periodFr: "2024 - 26",
     branch: "ergobit",
     role: "Software engineer",
+    roleFr: "Ingénieur logiciel",
     org: "ERGOBIT, Dakar",
+    orgFr: "ERGOBIT, Dakar",
     note: "Odoo modules and migration test discipline.",
+    noteFr: "Modules Odoo et discipline de tests de migration.",
   },
   {
     period: "2023 - 24",
+    periodFr: "2023 - 24",
     branch: "bankingbook",
     role: "Contract engineer",
+    roleFr: "Ingénieur en contrat",
     org: "BankingBook Analytics",
+    orgFr: "BankingBook Analytics",
     note: "Open-banking API layer for UEMOA ALM.",
+    noteFr: "Couche API open banking pour l'ALM UEMOA.",
   },
   {
     period: "2023",
+    periodFr: "2023",
     branch: "purolator-lab",
     role: "COOP engineer",
+    roleFr: "Ingénieur COOP",
     org: "Purolator Digital Lab, Ottawa",
+    orgFr: "Purolator Digital Lab, Ottawa",
     note: "CI/CD across three logistics codebases.",
+    noteFr: "CI/CD sur trois bases de code logistique.",
   },
   {
     period: "2022",
+    periodFr: "2022",
     branch: "orange-dlab",
     role: "COOP developer",
+    roleFr: "Développeur COOP",
     org: "Orange Digital Lab",
+    orgFr: "Orange Digital Lab",
     note: "Fitness community app, 1,000+ members.",
+    noteFr: "App communauté fitness, plus de 1 000 membres.",
   },
   {
     period: "2019",
+    periodFr: "2019",
     branch: "itech-afrique",
     role: "Intern",
+    roleFr: "Stagiaire",
     org: "ITech Solutions Afrique",
+    orgFr: "ITech Solutions Afrique",
     note: "Azure geolocation IoT.",
+    noteFr: "IoT de géolocalisation Azure.",
   },
 ];
 
 export const credentials: Credential[] = [
-  { item: "B.Sc. Software Engineering", detail: "University of Ottawa" },
-  { item: "B.Sc. Computer Science", detail: "DAUST" },
-  { item: "Odoo 18 Functional", detail: "Odoo" },
-  { item: "Front-End Developer Professional", detail: "Meta" },
-  { item: "Python Data Science", detail: "Datacamp" },
+  {
+    item: "B.Sc. Software Engineering",
+    itemFr: "B.Sc. Génie logiciel",
+    detail: "University of Ottawa",
+    detailFr: "Université d'Ottawa",
+  },
+  {
+    item: "B.Sc. Computer Science",
+    itemFr: "B.Sc. Informatique",
+    detail: "DAUST",
+    detailFr: "DAUST",
+  },
+  {
+    item: "Odoo 18 Functional",
+    itemFr: "Odoo 18 Functional",
+    detail: "Odoo",
+    detailFr: "Odoo",
+  },
+  {
+    item: "Front-End Developer Professional",
+    itemFr: "Front-End Developer Professional",
+    detail: "Meta",
+    detailFr: "Meta",
+  },
+  {
+    item: "Python Data Science",
+    itemFr: "Python Data Science",
+    detail: "Datacamp",
+    detailFr: "Datacamp",
+  },
 ];
 
 export const mediaRoot = "/media/case-studies/everest-finance";
