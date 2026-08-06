@@ -11,13 +11,27 @@ export function initEngagementConsole(): void {
   const dossiers = Array.from(root.querySelectorAll<HTMLElement>(".lp-dossier"));
   if (caps.length === 0 || dossiers.length === 0) return;
 
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   const hashSlug = (): string | null => {
     const match = window.location.hash.match(/^#engagement-(.+)$/);
     return match?.[1] ?? null;
   };
 
-  const activate = (slug: string, opts: { syncHash?: boolean; focus?: boolean } = {}): void => {
-    const { syncHash = true, focus = false } = opts;
+  const flashCap = (cap: HTMLButtonElement): void => {
+    if (reduceMotion) return;
+    cap.classList.remove("is-flash");
+    // Restart CSS animation
+    void cap.offsetWidth;
+    cap.classList.add("is-flash");
+    window.setTimeout(() => cap.classList.remove("is-flash"), 900);
+  };
+
+  const activate = (
+    slug: string,
+    opts: { syncHash?: boolean; focus?: boolean; flash?: boolean } = {},
+  ): void => {
+    const { syncHash = true, focus = false, flash = false } = opts;
     const target = caps.find((c) => c.getAttribute("data-eng") === slug);
     if (!target) return;
 
@@ -29,10 +43,17 @@ export function initEngagementConsole(): void {
     });
 
     dossiers.forEach((d) => {
-      d.hidden = d.id !== `dossier-${slug}`;
+      const show = d.id === `dossier-${slug}`;
+      d.hidden = !show;
+      if (show && !reduceMotion) {
+        d.classList.remove("is-entering");
+        void d.offsetWidth;
+        d.classList.add("is-entering");
+      }
     });
 
     if (focus) target.focus();
+    if (flash) flashCap(target);
 
     if (syncHash) {
       const next = `#engagement-${slug}`;
@@ -109,11 +130,16 @@ export function initEngagementConsole(): void {
     });
   });
 
+  if (fromHash) {
+    const deep = caps.find((c) => c.getAttribute("data-eng") === fromHash);
+    if (deep) flashCap(deep);
+  }
+
   // Deep link after load / back-forward if hash changes
   window.addEventListener("hashchange", () => {
     const slug = hashSlug();
     if (slug && caps.some((c) => c.getAttribute("data-eng") === slug)) {
-      activate(slug, { syncHash: false });
+      activate(slug, { syncHash: false, flash: true });
     }
   });
 }

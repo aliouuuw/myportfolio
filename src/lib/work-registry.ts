@@ -31,13 +31,18 @@ function shortName(title: string): string {
   return (parts[0] ?? title).trim() || title;
 }
 
+/** Visible UI copy: no em/en dashes (hyphen only). */
+function uiDash(value: string): string {
+  return value.replace(/\s*[—–]\s*/g, " - ");
+}
+
 function mapSurface(
   s: WorkEntry["data"]["surfaces"][number],
   locale: WorkLocale,
 ): Surface {
   const isFr = locale === "fr";
   return {
-    name: isFr ? (s.nameFr ?? s.name) : s.name,
+    name: uiDash(isFr ? (s.nameFr ?? s.name) : s.name),
     nameFr: s.nameFr,
     blurb: isFr ? (s.blurbFr ?? s.blurb) : s.blurb,
     blurbFr: s.blurbFr,
@@ -72,7 +77,7 @@ function mapWorkEntryToEngagement(entry: WorkEntry, locale: WorkLocale = "en"): 
     domain,
     detail: summary,
     builds: surfaces.length || 1,
-    period: data.period ?? data.date,
+    period: uiDash(data.period ?? data.date),
     featured: data.featured,
     href: locale === "fr" ? `/fr/work/${slug}` : `/work/${slug}`,
     media,
