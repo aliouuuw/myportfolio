@@ -9,7 +9,7 @@ Bilingual (FR/EN) portfolio and case-study site for a Product Systems Engineer. 
 - **Database**: None (MDX content in repo)
 - **Auth**: None
 - **Styling**: Hand-tuned CSS (`src/styles/`) — no Tailwind
-- **Motion**: GSAP (bundled via Vite, not CDN)
+- **Motion**: CSS transitions + light vanilla JS (no GSAP on the live home)
 - **i18n**: Astro built-in routing (`en` default, `fr` prefixed)
 - **Content**: MDX in `content/work/` via Content Collections + Zod
 - **Hosting**: Vercel (`@astrojs/vercel`)
@@ -17,26 +17,30 @@ Bilingual (FR/EN) portfolio and case-study site for a Product Systems Engineer. 
 - **CI**: None yet
 
 The previous Next.js 16 app is archived on branch/tag `archive/nextjs-v1`.
+The Operator Board is retired — `/board` and `/fr/board` 301 to home.
 
 ## Structure
 
 ```
 src/
   components/
-    OperatorBoard.astro   ← single-viewport home surface
+    lab-precision/        ← header, background, icons
   layouts/
-    Base.astro            ← operator board shell
     CaseStudy.astro       ← proof / case-study pages
+    Essay.astro           ← writing pages
   pages/
-    index.astro           ← EN home (operator board)
+    index.astro           ← EN home (Editorial + Ember Trace)
     fr/index.astro        ← FR home
     work/[slug].astro     ← EN case studies
     fr/work/[slug].astro  ← FR case studies
+    board/index.astro     ← 301 → /
+    fr/board/index.astro  ← 301 → /fr/
     api/contact.ts        ← Resend contact (server route)
   scripts/
-    board-boot.ts         ← loads GSAP + board runtime
+    capability-console.ts ← engagement console panel switching
+    theme.ts              ← shared light/dark theme
   styles/
-    operator-board.css    ← board UI (large, hand-tuned)
+    lab-precision.css     ← home surface (Editorial + Ember Trace)
     case-study.css        ← proof page typography
     tokens.css            ← shared design tokens
   content.config.ts       ← Zod schema for proofs
@@ -44,13 +48,9 @@ content/
   work/<slug>/
     en.mdx
     fr.mdx
-public/
-  board/                  ← flow-data.js + operator-board.js (board runtime)
-  logos/
-  media/case-studies/
-mock-site-loom/           ← reference mock (not served in prod)
 docs/
   backlog.json
+  lab-precision-direction.md
 ```
 
 ## Astro conventions
@@ -65,44 +65,16 @@ docs/
 | Path alias | `@/*` → `src/*` |
 | i18n | EN at `/`, FR at `/fr`. Case studies at `/work/<slug>` and `/fr/work/<slug>` |
 
-Example content collection entry:
-
-```ts
-// src/content.config.ts
-const work = defineCollection({
-  loader: glob({ pattern: "**/*.mdx", base: "content/work" }),
-  schema: z.object({
-    title: z.string(),
-    titleFr: z.string().optional(),
-  }),
-});
-```
-
-Example static path:
-
-```astro
----
-import { getCollection, render } from "astro:content";
-
-export async function getStaticPaths() {
-  const entries = await getCollection("work", (e) => e.id.endsWith("/en"));
-  return entries.map((entry) => ({
-    params: { slug: entry.id.replace(/\/en$/, "") },
-    props: { entry },
-  }));
-}
----
-```
-
 ## Key conventions
 
-- **Home surface**: The operator board is vanilla JS (`public/board/`) orchestrated by `board-boot.ts`. Do not rewrite it in React unless explicitly tasked.
+- **Home surface**: Lab Precision Engagement Console (`lab-precision.css` + `capability-console.ts`). Soft-UI instrument panel — not a project grid.
+- **Palette**: Editorial + Ember Trace — canvas `#f5f5f5` / `#0c0a09`, ink `#292524`, accent `#c2410c` (status/links only; CTAs stay ink pills).
 - **Adding a proof**: Create `content/work/<slug>/en.mdx` + `fr.mdx` with valid frontmatter. Build validates via Zod.
 - **Content files**: MDX with YAML frontmatter. Bilingual fields: `title` / `titleFr`, `summary` / `summaryFr`.
 - **No `any` types**: use proper TypeScript types throughout
-- **Design direction**: Premium fintech calm — hairline borders, serious typography, warm off-white or deep graphite base. No glassmorphism, no gradient text, no SaaS template patterns.
+- **Design direction**: Premium fintech calm — hairline borders, serious typography, editorial off-white or stone dark. No glassmorphism, no gradient text, no SaaS template patterns.
 - **First person**: Do not write about the author in third person
-- **Theme**: `localStorage` key `operator-board-theme` (`light` | `dark`), shared across board and case-study pages
+- **Theme**: `localStorage` key `portfolio-theme` (`light` | `dark`), shared across home and case-study pages
 
 ## What NOT to do
 
@@ -114,8 +86,7 @@ export async function getStaticPaths() {
 | Do not add `/services` page | Too agency-template |
 | Do not use glassmorphism, gradient text, animated mesh | Violates design direction |
 | Do not add interactive 3D or heavy animations | Performance cost, wrong signal |
-| Do not rewrite operator board in React without explicit task | The handcrafted CSS/GSAP surface is the product signature |
-| Do not load GSAP from CDN | Bundle via `board-boot.ts` |
+| Do not resurrect the Operator Board without an explicit task | Retired; home is the Engagement Console |
 | Do not edit `astro.config.mjs` without explicit task permission | Foundation file |
 | Do not commit `.env` or credentials | Security |
 | Do not add a fourth anchor case study before the first three are live | Strategic plan rule |

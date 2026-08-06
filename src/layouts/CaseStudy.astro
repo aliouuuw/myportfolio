@@ -47,7 +47,7 @@ const workBase = isFr ? "/fr/work" : "/work";
 const localeHref = isFr ? `/work/${slug}` : `/fr/work/${slug}`;
 const localeLabel = isFr ? "EN" : "FR";
 const localeAria = isFr ? "Switch to English" : "Passer en français";
-const boardLabel = isFr ? "Tableau de bord" : "Operator board";
+const homeLabel = isFr ? "Accueil" : "Home";
 const workLabel = isFr ? "Études de cas" : "Case studies";
 const onPageLabel = isFr ? "Sur cette page" : "On this page";
 const allCasesLabel = isFr ? "Toutes les études" : "All case studies";
@@ -92,7 +92,7 @@ const nextLabel = isFr ? "Suivant" : "Next";
           <span class="doc-header__current">{docTitle}</span>
         </div>
         <div class="doc-header__actions">
-          <a class="doc-header__link" href={homeHref}>{boardLabel}</a>
+          <a class="doc-header__link" href={homeHref}>{homeLabel}</a>
           <a class="doc-header__link doc-header__locale" href={localeHref} hreflang={isFr ? "en" : "fr"} lang={isFr ? "en" : "fr"} aria-label={localeAria}>{localeLabel}</a>
           <button
             type="button"
