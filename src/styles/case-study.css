@@ -59,7 +59,7 @@ body.case-study-page {
 }
 
 .doc-header__name:hover {
-  color: var(--accent-secondary);
+  color: var(--accent);
 }
 
 .doc-header__crumb {

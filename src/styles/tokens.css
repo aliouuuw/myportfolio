@@ -1,32 +1,30 @@
-/* Shared design tokens — operator board + case studies */
+/* Shared design tokens — Editorial + Ember Trace
+ * Source of truth for case studies + essays (home uses lab-precision.css). */
 
 :root {
-  --accent: #b8d92e;
-  --accent-hover: #c8e845;
-  --accent-secondary: #2e6bff;
+  --accent: #c2410c;
+  --accent-hover: #9a3412;
+  --accent-soft: color-mix(in srgb, var(--accent) 12%, transparent);
+  --accent-secondary: #c2410c;
 
-  --graphite-1: #1a1815;
-  --graphite-2: #24221f;
-  --graphite-3: #6b6760;
-  --graphite-4: #9a958c;
-  --graphite-6: #d1d0cc;
-
-  --paper: #f5f3ef;
-  --paper-2: #f0efea;
+  --paper: #f5f5f5;
+  --paper-2: #ececec;
   --surface: #ffffff;
   --wash: #fafafa;
+  --surface-sunken: #ebebeb;
+  --surface-muted: #ececec;
 
-  --sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --ink: #292524;
+  --ink-soft: #696969;
+  --ink-faint: #8a8580;
+
+  --sans: "Switzer", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
 
-  --ink: var(--graphite-1);
-  --ink-soft: var(--graphite-3);
-  --ink-faint: var(--graphite-4);
-
-  --line: rgba(0, 0, 0, 0.06);
-  --line-strong: rgba(0, 0, 0, 0.1);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.06);
+  --line: rgba(41, 37, 36, 0.08);
+  --line-strong: rgba(41, 37, 36, 0.14);
+  --shadow-sm: 0 2px 8px rgba(41, 37, 36, 0.04);
+  --shadow-md: 0 12px 32px rgba(41, 37, 36, 0.08);
 
   --sp-2: 8px;
   --sp-3: 12px;
@@ -38,44 +36,57 @@
   --sp-12: 48px;
   --sp-16: 64px;
 
-  --radius-outer: 20px;
-  --radius-inner: 16px;
+  --radius-outer: 16px;
+  --radius-inner: 12px;
   --r-md: 8px;
   --r-pill: 999px;
 
-  --ease: cubic-bezier(0.2, 1, 0.2, 1);
-  --dur-micro: 0.2s;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-micro: 0.18s;
   --focus-ring: 0 0 0 2px var(--paper), 0 0 0 4px var(--accent);
 
-  --hw-bg: rgba(255, 255, 255, 0.85);
-  --hw-border: rgba(0, 0, 0, 0.06);
-  --hw-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --hw-bg: rgba(255, 255, 255, 0.92);
+  --hw-border: rgba(41, 37, 36, 0.1);
+  --hw-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 2px rgba(41, 37, 36, 0.04),
+    0 8px 20px -12px rgba(41, 37, 36, 0.1);
   --hw-primary-bg: var(--ink);
-  --hw-primary-fg: #fff;
+  --hw-primary-fg: #f5f5f5;
+
+  color-scheme: light;
 }
 
 html[data-theme="dark"] {
   color-scheme: dark;
 
-  --graphite-1: #f3f1ec;
-  --graphite-2: #e8e5df;
-  --graphite-3: #a8a39a;
-  --graphite-4: #7a756d;
-  --graphite-6: #3d3a36;
+  --accent: #fb923c;
+  --accent-hover: #fdba74;
+  --accent-soft: color-mix(in srgb, var(--accent) 18%, transparent);
+  --accent-secondary: #fb923c;
 
-  --paper: #181614;
-  --paper-2: #12100e;
-  --surface: #211f1c;
-  --wash: #1e1c19;
+  --paper: #0c0a09;
+  --paper-2: #161412;
+  --surface: #161412;
+  --wash: #1a1714;
+  --surface-sunken: #080706;
+  --surface-muted: #1a1714;
 
-  --line: rgba(255, 255, 255, 0.08);
-  --line-strong: rgba(255, 255, 255, 0.14);
+  --ink: #f5f5f4;
+  --ink-soft: #b8b0a8;
+  --ink-faint: #8a8278;
+
+  --line: rgba(245, 245, 244, 0.08);
+  --line-strong: rgba(245, 245, 244, 0.14);
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.22);
   --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.28);
 
-  --hw-bg: rgba(33, 31, 28, 0.88);
-  --hw-border: rgba(255, 255, 255, 0.08);
-  --hw-shadow: 0 4px 12px rgba(0, 0, 0, 0.24);
-  --hw-primary-bg: #f3f1ec;
-  --hw-primary-fg: #181614;
+  --hw-bg: rgba(22, 20, 18, 0.92);
+  --hw-border: rgba(245, 245, 244, 0.1);
+  --hw-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    0 14px 28px -16px rgba(0, 0, 0, 0.65);
+  --hw-primary-bg: #f5f5f4;
+  --hw-primary-fg: #0c0a09;
 }

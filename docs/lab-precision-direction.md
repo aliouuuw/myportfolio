@@ -145,4 +145,4 @@ Portrait + short positioning + contacts + off the clock are in place.
 
 ---
 
-*Last updated: 2026-08-06 — Palette: Editorial + Ember Trace (`#f5f5f5` + `#c2410c`); Engagement Console soft-UI live; Journey + credentials still open.*
+*Last updated: 2026-08-06 — Operator Board retired; palette Editorial + Ember Trace; case-study tokens aligned; Journey + credentials still open.*

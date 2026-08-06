@@ -36,9 +36,9 @@
   --cta-ink: #f5f5f5;
   --cta-hover: #14110f;
   --domain-fintech: color-mix(in srgb, #f5f5f5 82%, #c2410c 18%);
-  --domain-erp: #ece8e4;
-  --domain-systems: #e8e8ea;
-  --domain-ops: #e6ebe6;
+  --domain-erp: color-mix(in srgb, #f5f5f5 88%, #a16207 12%);
+  --domain-systems: color-mix(in srgb, #f5f5f5 90%, #57534e 10%);
+  --domain-ops: color-mix(in srgb, #f5f5f5 88%, #78716c 12%);
 
   --edge-hi: rgba(255, 255, 255, 0.92);
   --edge-lo: rgba(41, 37, 36, 0.06);
@@ -79,9 +79,9 @@ html[data-theme="dark"] {
   --cta-ink: #0c0a09;
   --cta-hover: #ffffff;
   --domain-fintech: color-mix(in srgb, var(--surface) 80%, #c2410c 20%);
-  --domain-erp: color-mix(in srgb, var(--surface) 86%, #a89078 14%);
-  --domain-systems: color-mix(in srgb, var(--surface) 88%, #8898a8 12%);
-  --domain-ops: color-mix(in srgb, var(--surface) 88%, #8a9a90 12%);
+  --domain-erp: color-mix(in srgb, var(--surface) 86%, #a16207 14%);
+  --domain-systems: color-mix(in srgb, var(--surface) 88%, #a8a29e 12%);
+  --domain-ops: color-mix(in srgb, var(--surface) 88%, #a8a29e 12%);
 
   --edge-hi: rgba(255, 255, 255, 0.07);
   --edge-lo: rgba(0, 0, 0, 0.55);
@@ -573,15 +573,25 @@ html[data-theme="dark"] .lp-theme-moon {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--ink-soft);
+}
+
+.lp-bio-subtitle {
+  margin: 0 0 1.1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  max-width: 28rem;
 }
 
 .lp-bio-name {
   margin: 0 0 0.85rem;
-  font-size: clamp(2.85rem, 6.5vw, 4.75rem);
-  font-weight: 300;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
+  font-size: clamp(3rem, 7vw, 5rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
   color: var(--ink);
   max-width: 14ch;
 }
@@ -1128,12 +1138,18 @@ span.lp-roster-name {
 }
 
 .lp-dossier-domain--fintech { color: #9a3412; background: var(--domain-fintech); }
-.lp-dossier-domain--erp { color: #8a6540; background: var(--domain-erp); }
-.lp-dossier-domain--systems { color: #5c564e; background: var(--domain-systems); }
-.lp-dossier-domain--ops { color: #4a6a52; background: var(--domain-ops); }
+.lp-dossier-domain--erp { color: #92400e; background: var(--domain-erp); }
+.lp-dossier-domain--systems { color: #57534e; background: var(--domain-systems); }
+.lp-dossier-domain--ops { color: #44403c; background: var(--domain-ops); }
 
-html[data-theme="dark"] .lp-dossier-domain--fintech {
+html[data-theme="dark"] .lp-dossier-domain--fintech,
+html[data-theme="dark"] .lp-dossier-domain--erp {
   color: var(--accent);
+}
+
+html[data-theme="dark"] .lp-dossier-domain--systems,
+html[data-theme="dark"] .lp-dossier-domain--ops {
+  color: var(--ink-soft);
 }
 
 /* Surfaces — soft inset cards */
@@ -1150,6 +1166,16 @@ html[data-theme="dark"] .lp-dossier-domain--fintech {
   border-radius: var(--radius-sm);
   background: color-mix(in srgb, var(--surface-muted) 40%, var(--surface));
   box-shadow: inset 0 1px 0 var(--edge-hi);
+  transition:
+    border-color var(--duration) var(--ease),
+    box-shadow var(--duration) var(--ease),
+    transform var(--duration) var(--ease);
+}
+
+.lp-dossier-surface:hover {
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--hairline));
+  box-shadow: var(--lift);
+  transform: translateY(-1px);
 }
 
 .lp-dossier-surface-name {
@@ -1614,9 +1640,10 @@ html[data-theme="dark"] .lp-dossier-domain--fintech {
 }
 
 .lp-work-hero .lp-bio-name {
-  font-size: clamp(2.85rem, 6.5vw, 4.75rem);
+  font-size: clamp(3rem, 7vw, 5rem);
+  font-weight: 500;
   max-width: none;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.04em;
 }
 
 .lp-work-hero .lp-bio-line {
@@ -1659,18 +1686,18 @@ html[data-theme="dark"] .lp-dossier-domain--fintech {
   align-items: baseline;
   justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 1.15rem;
-  padding-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
   border-bottom: 1px solid var(--hairline);
 }
 
 .lp-section-head h2 {
   margin: 0;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--ink);
 }
 
 .lp-section-head span {
@@ -2140,13 +2167,4 @@ html[data-theme="dark"] .lp-dossier-domain--fintech {
   font-family: var(--mono);
   font-size: 0.6875rem;
   color: var(--ink-faint);
-}
-
-.lp-bio-subtitle {
-  margin: 0 0 0.65rem;
-  font-size: 0.9375rem;
-  font-weight: 400;
-  color: var(--ink-soft);
-  line-height: 1.5;
-  max-width: 34rem;
 }

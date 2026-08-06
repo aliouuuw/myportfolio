@@ -39,18 +39,26 @@ const themeLabel = lang === "fr" ? "Basculer le thème" : "Toggle theme";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <script is:inline>
       (function () {
         try {
-          var theme = localStorage.getItem("operator-board-theme");
+          var theme =
+            localStorage.getItem("portfolio-theme") ||
+            localStorage.getItem("operator-board-theme");
           if (theme === "dark" || theme === "light") {
             document.documentElement.setAttribute("data-theme", theme);
+            localStorage.setItem("portfolio-theme", theme);
           }
         } catch (e) {
           /* ignore */
@@ -122,7 +130,7 @@ const themeLabel = lang === "fr" ? "Basculer le thème" : "Toggle theme";
           var next = isDark ? "light" : "dark";
           document.documentElement.setAttribute("data-theme", next);
           try {
-            localStorage.setItem("operator-board-theme", next);
+            localStorage.setItem("portfolio-theme", next);
           } catch (e) {
             /* ignore */
           }

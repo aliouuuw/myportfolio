@@ -1,16 +1,23 @@
 /** Unified theme management — single localStorage key for all pages. */
 const THEME_KEY = "portfolio-theme";
+const LEGACY_THEME_KEY = "operator-board-theme";
 
 export type Theme = "light" | "dark";
 
-/** Read stored theme, defaulting to light. */
+/** Read stored theme, defaulting to light. Migrates legacy board key once. */
 export function getStoredTheme(): Theme {
   try {
-    const stored = localStorage.getItem(THEME_KEY);
-    return stored === "dark" ? "dark" : "light";
+    const stored = localStorage.getItem(THEME_KEY) ?? localStorage.getItem(LEGACY_THEME_KEY);
+    if (stored === "dark" || stored === "light") {
+      if (!localStorage.getItem(THEME_KEY)) {
+        localStorage.setItem(THEME_KEY, stored);
+      }
+      return stored;
+    }
   } catch {
-    return "light";
+    /* ignore */
   }
+  return "light";
 }
 
 /** Apply theme to document root. */
