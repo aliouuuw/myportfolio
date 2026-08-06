@@ -1,8 +1,9 @@
 # Evidence Loom — Portfolio Handover
 
-**Last updated:** 2026-06-06  
-**Status:** Active design exploration in `mock-site-loom/`  
-**IA:** Source of Truth / Execution Ledger (claims route to proof)
+**Last updated:** 2026-08-06  
+**Status:** Production site uses **Engagement Console (Direction A)**; `mock-site-loom/` is a separate design exploration  
+**Production IA:** Master-Detail Dossier Console (engagements by recency → surfaces)  
+**Mock IA:** Source of Truth / Execution Ledger (claims route to proof)
 
 ---
 
@@ -11,6 +12,20 @@
 A portfolio for **Aliou Wade — Product Systems Engineer** targeting founders, CTOs, and network referrals. The site is a **conversion tool** (30s test: what you do, what shipped, how to contact) wrapped in **Awwwards-level craft** without looking like a template.
 
 **Not a project gallery.** Not a resume scroll. Not a dashboard. It is an **editorial proof machine** where positioning claims connect visibly to evidence.
+
+---
+
+## 1.1 Production vs Mock
+
+| Aspect | Production (`src/pages/index.astro`) | Mock (`mock-site-loom/`) |
+|--------|--------------------------------------|--------------------------|
+| **IA** | Engagement Console (Direction A) — master-detail dossier | Evidence Loom — claim board → proof card |
+| **Visual** | Soft Structuralism (Slate Signal, Switzer + JetBrains Mono) | Hardware UI (Space Grotesk + Inter, brutalist) |
+| **Status** | Live on Vercel (main branch) | Local exploration only |
+| **Engagements** | 8 sorted by recency, surfaces expandable | 3 anchor cases + record strip |
+| **Next step** | Surface copy, case study links, video peek | Visual proof assets (Sprint 4) |
+
+**Do not conflate the two.** The mock is a design exploration for a potential future direction. The production site is the current shippable artifact.
 
 ---
 

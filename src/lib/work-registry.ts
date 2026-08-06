@@ -3,8 +3,8 @@
  */
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
-import { type Domain, type Engagement, type Surface } from "@/data/lab-precision";
-import { domainSlug } from "@/data/lab-precision";
+import { type Domain, type Engagement, type Surface, type CapabilityGroup } from "@/data/lab-precision";
+import { domainSlug, capabilitySlug } from "@/data/lab-precision";
 
 export type WorkEntry = CollectionEntry<"work">;
 
@@ -82,6 +82,65 @@ export async function getEngagementsByDomain(): Promise<{ domain: Domain; entrie
       entries: engagements.filter((entry) => entry.domain === domain),
     }))
     .filter((group) => group.entries.length > 0);
+}
+
+const CAPABILITY_MAP: Record<string, { en: string; fr: string }[]> = {
+  "everest-finance": [
+    { en: "Payment & financial systems", fr: "Systèmes de paiement & financiers" },
+    { en: "KYC & compliance", fr: "KYC & conformité" },
+    { en: "Dashboards & reporting", fr: "Tableaux de bord & reporting" },
+  ],
+  ergobit: [
+    { en: "ERP customization", fr: "Personnalisation ERP" },
+    { en: "Test automation & QA", fr: "Automatisation des tests & QA" },
+  ],
+  bankingbook: [
+    { en: "Payment & financial systems", fr: "Systèmes de paiement & financiers" },
+    { en: "API architecture", fr: "Architecture d'API" },
+  ],
+  "ndouckmane-transit": [
+    { en: "Customs & logistics", fr: "Douane & logistique" },
+    { en: "Payment & financial systems", fr: "Systèmes de paiement & financiers" },
+    { en: "Auth & multi-tenancy", fr: "Auth & multi-locataire" },
+  ],
+  "mansour-holding": [
+    { en: "Dashboards & reporting", fr: "Tableaux de bord & reporting" },
+    { en: "API architecture", fr: "Architecture d'API" },
+  ],
+  eduplan: [
+    { en: "Education platforms", fr: "Plateformes éducatives" },
+    { en: "Dashboards & reporting", fr: "Tableaux de bord & reporting" },
+  ],
+  "dakar-sport-shop": [
+    { en: "E-commerce platforms", fr: "Plateformes e-commerce" },
+  ],
+  "bocalbun-retrospective": [
+    { en: "Developer tooling", fr: "Outillage développeur" },
+  ],
+};
+
+/** Engagements grouped by capability for the console IA. */
+export async function getEngagementsByCapability(
+  locale: "en" | "fr" = "en",
+): Promise<CapabilityGroup[]> {
+  const engagements = await getEngagements();
+  const map = new Map<string, { label: string; slug: string; engagements: Engagement[] }>();
+
+  for (const eng of engagements) {
+    const caps = CAPABILITY_MAP[eng.slug] ?? [];
+    for (const cap of caps) {
+      const label = cap[locale];
+      const slug = capabilitySlug(cap.en);
+      if (!map.has(slug)) {
+        map.set(slug, { label, slug, engagements: [] });
+      }
+      map.get(slug)!.engagements.push(eng);
+    }
+  }
+
+  return Array.from(map.values())
+    .map(({ label, slug, engagements }) => ({ capability: label, slug, engagements }))
+    .sort((a, b) => a.capability.localeCompare(b.capability));
 }
 
 /** Split entries into N columns (fill top-to-bottom per column). */

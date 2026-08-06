@@ -5,9 +5,8 @@ Living reference for the precision portfolio direction, prototyped at
 not wired into the production Operator Board. Stylesheet:
 `src/styles/lab-precision.css`. Data: `src/data/lab-precision.ts`.
 
-Status: **direction comfortable enough to document** (2026-08-03).
-Engagements directory and Background journey / credentials still need craft
-work before any promotion call.
+Status: **Engagement Console (Direction A) implemented** (2026-08-06).
+Background journey / credentials still need craft work before any promotion call.
 
 Target reaction:
 
@@ -56,8 +55,8 @@ primary path (`/lab/precision/about` redirects to `#background`).
   Header island (content-hugging):
     ● Available | Work · Background | EN / FR · theme
   Work (foreground):
-    Centered hero — role, name, bio, contact, “Check my background”
-    Engagements directory — full-width, grouped by domain
+    Centered hero — role, name, bio, contact, "Check my background"
+    Engagements Console — master-detail: left rail (engagements by recency) → right dossier (surfaces + CTA)
   Background (layer behind → crisp when active):
     Portrait · intro · off the clock
     Journey (git-log experiment — needs refinement)
@@ -76,21 +75,23 @@ synced in `lab-precision-view.ts`.
 - Locale is quiet mono `EN / FR`; theme is a Hugeicons sun/moon ghost button.
 - Availability is a lamp + short label (full detail in `title`).
 
-### Work — engagements
+### Work — engagements console (Direction A)
 
-Index rows are **client engagements**, not individual builds.
+**Engagement Console** — master-detail panel replacing the domain directory.
 
-Current shape: telephone-book / directory by domain (Fintech, ERP & QA,
-Systems, Operations), two columns on desktop, dotted leaders between name and
-period, detail under the name. Everest keeps centered video peek on
-hover/focus/(touch) first tap.
+- **Left rail (260px)**: engagements sorted by recency (most recent first). Each row shows engagement name + period in mono. Active row gets left-edge accent bar (3px) + subtle wash.
+- **Right dossier**: clicking an engagement reveals its full dossier — name, role/summary, period + domain badge, surfaces (name, blurb, stack, link), and "View case study" CTA.
+- **Progressive enhancement**: without JS, all dossiers are visible. With JS, only the first is shown; rail buttons switch panels.
+- **Mobile (<760px)**: rail becomes horizontal pill tabs above the dossier; period hidden; dossier stacks with reduced padding.
+
+**Data flow**: `src/lib/work-registry.ts` → `getEngagements()` sorted by period desc → `src/scripts/capability-console.ts` (renamed to `initEngagementConsole`) handles panel switching via `data-eng` attributes.
 
 **Still open / needs work:**
 
-- Directory density, hierarchy, and whether two columns always help
-- How (or whether) build counts surface without coding jargon
-- Multi-build client drill-down (e.g. Everest ×3)
-- Which rows deserve peeks / case-study links vs plain entries
+- Surface copy quality (blurbs, stack labels) — some are placeholders
+- Case study links — most are TBD
+- Video peek integration for Everest (media field exists, not yet wired to preview)
+- Whether single-engagement dossiers need a different visual weight
 
 ### Background
 
@@ -101,7 +102,7 @@ Portrait + short positioning + contacts + off the clock are in place.
 - **Journey** — git-log / branch metaphor is an experiment; may stay, soften,
   or be replaced with a clearer visitor-readable timeline
 - **Education and certifications** — list exists; presentation needs a polish
-  pass to match the Work directory’s calm
+  pass to match the Work directory's calm
 - Portrait craft (dither / magnetic) still optional
 
 ---
@@ -118,7 +119,7 @@ Portrait + short positioning + contacts + off the clock are in place.
 ## Open questions
 
 1. Journey format (keep git-log, soften, or replace with timeline).
-2. Engagements directory craft (density, peeks, build disclosure).
+2. Surface copy quality — blurbs need real content, not placeholders.
 3. Education / credentials presentation.
 4. Portrait craft (dither / magnetic) — optional.
 5. Engagement pages that list every build (Everest ×3).
@@ -135,5 +136,4 @@ Portrait + short positioning + contacts + off the clock are in place.
 
 ---
 
-*Last updated: 2026-08-03 — instrument header, Work/Background layer IA,
-domain directory engagements; Journey + credentials + engagements craft still open.*
+*Last updated: 2026-08-06 — Engagement Console (Direction A) implemented; Journey + credentials + surface copy still open.*

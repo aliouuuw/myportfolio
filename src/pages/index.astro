@@ -2,10 +2,13 @@
 import "@/styles/lab-precision.css";
 import LabBackground from "@/components/lab-precision/LabBackground.astro";
 import LabPrecisionHeader from "@/components/lab-precision/LabPrecisionHeader.astro";
-import { getEngagements, getEngagementsByDomain, directoryColumns, domainSlug } from "@/lib/work-registry";
+import { getEngagements, domainSlug } from "@/lib/work-registry";
 
-const engagements = await getEngagements();
-const engagementsByDomain = await getEngagementsByDomain();
+const engagements = (await getEngagements()).sort((a, b) => {
+  const yearA = parseInt(a.period?.slice(0, 4) ?? "0", 10);
+  const yearB = parseInt(b.period?.slice(0, 4) ?? "0", 10);
+  return yearB - yearA;
+});
 ---
 
 <!doctype html>
@@ -88,85 +91,69 @@ const engagementsByDomain = await getEngagementsByDomain();
             <section class="lp-roster lp-reveal" aria-labelledby="engagements-title">
               <div class="lp-section-head lp-roster-head">
                 <h2 id="engagements-title">Engagements</h2>
-                <span class="lp-roster-ref">{engagements.length} clients · by domain</span>
+                <span class="lp-roster-ref">{engagements.length} clients</span>
               </div>
 
-              <div class="lp-directory" id="rows">
-                {
-                  engagementsByDomain.map((group) => {
-                    const columns = directoryColumns(group.entries, 2);
-                    return (
-                      <div class={`lp-dir-group lp-dir-group--${domainSlug(group.domain)}`}>
-                        <header class="lp-dir-heading">
-                          <h3 class="lp-dir-title">{group.domain}</h3>
-                        </header>
-                        <div class="lp-dir-list">
-                          {columns.map((column) => (
-                            <ul class="lp-dir-col">
-                              {column.map((entry) => (
-                                <li
-                                  class:list={[
-                                    "lp-roster-item",
-                                    "lp-row",
-                                    { "lp-row--peekable": entry.media },
-                                  ]}
-                                  data-has-media={entry.media ? "true" : "false"}
-                                  data-media={entry.media ?? ""}
-                                  data-caption={entry.caption ?? ""}
-                                  data-name={entry.name}
-                                  tabindex={entry.media ? 0 : undefined}
-                                >
-                                  <details class="lp-row-details">
-                                    <summary class="lp-row-summary">
-                                      <div class="lp-roster-row">
-                                        <div class="lp-roster-main">
-                                          {entry.href ? (
-                                            <a class="lp-roster-name" href={entry.href}>{entry.name}</a>
-                                          ) : (
-                                            <span class="lp-roster-name">{entry.name}</span>
-                                          )}
-                                          <p class="lp-roster-detail">{entry.detail}</p>
-                                        </div>
-                                        <span class="lp-roster-lead" aria-hidden="true"></span>
-                                        <span class="lp-roster-period">{entry.period}</span>
-                                      </div>
-                                      <span class="lp-row-toggle" aria-hidden="true">
-                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                                          <path d="M4 5.5L7 8.5L10 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                      </span>
-                                    </summary>
-                                    {entry.surfaces && entry.surfaces.length > 0 && (
-                                      <div class="lp-row-surfaces">
-                                        {entry.surfaces.map((surface) => (
-                                          <div class="lp-surface">
-                                            <h4 class="lp-surface-name">{surface.name}</h4>
-                                            <p class="lp-surface-blurb">{surface.blurb}</p>
-                                            {surface.url && (
-                                              <a class="lp-surface-link" href={surface.url} target="_blank" rel="noopener">
-                                                {surface.urlLabel ?? "View project"}
-                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                                                  <path d="M3 9L9 3M9 3H4.5M9 3V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
-                                              </a>
-                                            )}
-                                            {surface.stack.length > 0 && (
-                                              <p class="lp-surface-stack">{surface.stack.join(" · ")}</p>
-                                            )}
-                                          </div>
-                                        ))}
-                                      </div>
-                                    )}
-                                  </details>
-                                </li>
-                              ))}
-                            </ul>
+              <div class="lp-console" id="engagement-console">
+                <nav class="lp-console-rail" aria-label="Engagements">
+                  <ul class="lp-console-cap-list">
+                    {engagements.map((eng) => (
+                      <li>
+                        <button
+                          class="lp-console-cap"
+                          data-eng={eng.slug}
+                          aria-controls={`dossier-${eng.slug}`}
+                          aria-expanded="false"
+                        >
+                          <span class="lp-console-cap-name">{eng.name}</span>
+                          <span class="lp-console-cap-period">{eng.period}</span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+
+                <div class="lp-console-dossier">
+                  {engagements.map((eng) => (
+                    <div class="lp-dossier" id={`dossier-${eng.slug}`}>
+                      <h3 class="lp-dossier-title">{eng.name}</h3>
+                      <p class="lp-dossier-sub">{eng.detail}</p>
+                      <div class="lp-dossier-meta-row">
+                        <span class="lp-dossier-period">{eng.period}</span>
+                        <span class={`lp-dossier-domain lp-dossier-domain--${domainSlug(eng.domain)}`}>{eng.domain}</span>
+                      </div>
+                      {eng.surfaces.length > 0 && (
+                        <div class="lp-dossier-surfaces">
+                          {eng.surfaces.map((surface) => (
+                            <div class="lp-dossier-surface">
+                              <h5 class="lp-dossier-surface-name">{surface.name}</h5>
+                              <p class="lp-dossier-surface-blurb">{surface.blurb}</p>
+                              {surface.stack.length > 0 && (
+                                <p class="lp-dossier-surface-stack">{surface.stack.join(" · ")}</p>
+                              )}
+                              {surface.url && (
+                                <a class="lp-dossier-surface-link" href={surface.url} target="_blank" rel="noopener">
+                                  {surface.urlLabel ?? "View project"}
+                                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                                    <path d="M3 9L9 3M9 3H4.5M9 3V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                  </svg>
+                                </a>
+                              )}
+                            </div>
                           ))}
                         </div>
-                      </div>
-                    );
-                  })
-                }
+                      )}
+                      {eng.href && (
+                        <a class="lp-dossier-link" href={eng.href}>
+                          View case study
+                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                            <path d="M3.5 10.5L10.5 3.5M10.5 3.5H4.75M10.5 3.5V9.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </a>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
             </section>
           </div>
@@ -196,8 +183,10 @@ const engagementsByDomain = await getEngagementsByDomain();
     <script>
       import { initLabPrecisionChrome } from "@/scripts/lab-precision-chrome";
       import { createLabPrecisionController } from "@/scripts/lab-precision-controller";
+      import { initEngagementConsole } from "@/scripts/capability-console";
 
       initLabPrecisionChrome();
+      initEngagementConsole();
 
       createLabPrecisionController({
         mediaRoot: "/media/case-studies/everest-finance",

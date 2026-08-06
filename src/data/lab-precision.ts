@@ -37,6 +37,16 @@ export interface Engagement {
   surfaces: Surface[];
 }
 
+export interface CapabilityGroup {
+  capability: string;
+  slug: string;
+  engagements: Engagement[];
+}
+
+export function capabilitySlug(capability: string): string {
+  return capability.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
 export interface JourneyEntry {
   period: string;
   branch: string;
