@@ -1,5 +1,6 @@
 /* / (root) — ElevenLabs editorial structure × soft-UI material.
- * Palette: Slate Signal. CTAs stay ink pills. Accent = status, peek, wash only. */
+ * Palette: Editorial + Ember Trace — off-white canvas + sparse ember accent.
+ * CTAs stay ink pills. Accent = status, peek, links, domain wash only. */
 
 :root {
   --radius: 12px;
@@ -14,71 +15,73 @@
   --max: 72rem;
   --section: clamp(2.5rem, 5vw, 3.5rem);
 
-  --bg: #f4f6f8;
+  /* Editorial + Ember Trace — light */
+  --bg: #f5f5f5;
   --surface: #ffffff;
   --surface-raised: #ffffff;
-  --surface-sunken: #e8ecf0;
-  --surface-muted: #e9eef3;
-  --ink: #0f1419;
-  --ink-soft: #4a5560;
-  --ink-faint: #6b7580;
-  --line: rgba(15, 20, 25, 0.08);
-  --line-strong: rgba(15, 20, 25, 0.14);
-  --hairline: #dde3e8;
-  --hairline-soft: #e8ecf0;
-  --hairline-strong: #c8d1da;
-  --accent: #3d6b8c;
-  --accent-soft: color-mix(in srgb, var(--accent) 16%, transparent);
-  --wash-strength: 7%;
-  --cta: #0f1419;
-  --cta-ink: #f4f6f8;
-  --cta-hover: #060809;
-  --domain-fintech: #e4ecf4;
-  --domain-erp: #f0ebe4;
-  --domain-systems: #e8ecef;
-  --domain-ops: #eaeeec;
+  --surface-sunken: #ebebeb;
+  --surface-muted: #ececec;
+  --ink: #292524;
+  --ink-soft: #696969;
+  --ink-faint: #8a8580;
+  --line: rgba(41, 37, 36, 0.08);
+  --line-strong: rgba(41, 37, 36, 0.14);
+  --hairline: #e0e0e0;
+  --hairline-soft: #ebebeb;
+  --hairline-strong: #d4d4d4;
+  --accent: #c2410c;
+  --accent-soft: color-mix(in srgb, var(--accent) 12%, transparent);
+  --wash-strength: 5%;
+  --cta: #292524;
+  --cta-ink: #f5f5f5;
+  --cta-hover: #14110f;
+  --domain-fintech: color-mix(in srgb, #f5f5f5 82%, #c2410c 18%);
+  --domain-erp: #ece8e4;
+  --domain-systems: #e8e8ea;
+  --domain-ops: #e6ebe6;
 
-  --edge-hi: rgba(255, 255, 255, 0.9);
-  --edge-lo: rgba(0, 0, 0, 0.06);
+  --edge-hi: rgba(255, 255, 255, 0.92);
+  --edge-lo: rgba(41, 37, 36, 0.06);
   --lift:
     inset 0 1px 0 var(--edge-hi),
-    0 1px 2px rgba(0, 0, 0, 0.04),
-    0 10px 24px -12px rgba(0, 0, 0, 0.12);
+    0 1px 2px rgba(41, 37, 36, 0.04),
+    0 10px 24px -12px rgba(41, 37, 36, 0.1);
   --lift-preview:
     inset 0 1px 0 var(--edge-hi),
-    0 4px 16px rgba(0, 0, 0, 0.06),
-    0 22px 48px -16px rgba(0, 0, 0, 0.18);
+    0 4px 16px rgba(41, 37, 36, 0.05),
+    0 22px 48px -16px rgba(41, 37, 36, 0.14);
   --well:
-    inset 0 1px 4px rgba(0, 0, 0, 0.06),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.5);
-  --press: inset 0 2px 5px rgba(0, 0, 0, 0.18);
+    inset 0 1px 4px rgba(41, 37, 36, 0.06),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.55);
+  --press: inset 0 2px 5px rgba(41, 37, 36, 0.14);
   color-scheme: light;
 }
 
 html[data-theme="dark"] {
-  --bg: #0e1114;
-  --surface: #161a1f;
-  --surface-raised: #1c2128;
-  --surface-sunken: #0a0c0f;
-  --surface-muted: #1a2026;
-  --ink: #eef1f4;
-  --ink-soft: #a8b0b8;
-  --ink-faint: #7a848e;
-  --line: rgba(200, 220, 235, 0.08);
-  --line-strong: rgba(200, 220, 235, 0.16);
-  --hairline: rgba(200, 220, 235, 0.12);
-  --hairline-soft: rgba(200, 220, 235, 0.06);
-  --hairline-strong: rgba(200, 220, 235, 0.22);
-  --accent: #7eb3d4;
-  --accent-soft: color-mix(in srgb, var(--accent) 22%, transparent);
-  --wash-strength: 10%;
-  --cta: #eef1f4;
-  --cta-ink: #0e1114;
+  /* Editorial + Ember Trace — stone dark */
+  --bg: #0c0a09;
+  --surface: #161412;
+  --surface-raised: #1c1917;
+  --surface-sunken: #080706;
+  --surface-muted: #1a1714;
+  --ink: #f5f5f4;
+  --ink-soft: #b8b0a8;
+  --ink-faint: #8a8278;
+  --line: rgba(245, 245, 244, 0.08);
+  --line-strong: rgba(245, 245, 244, 0.14);
+  --hairline: rgba(245, 245, 244, 0.1);
+  --hairline-soft: rgba(245, 245, 244, 0.06);
+  --hairline-strong: rgba(245, 245, 244, 0.18);
+  --accent: #fb923c;
+  --accent-soft: color-mix(in srgb, var(--accent) 18%, transparent);
+  --wash-strength: 7%;
+  --cta: #f5f5f4;
+  --cta-ink: #0c0a09;
   --cta-hover: #ffffff;
-  --domain-fintech: color-mix(in srgb, var(--surface) 82%, #3d6b8c 18%);
-  --domain-erp: color-mix(in srgb, var(--surface) 88%, #a89078 12%);
-  --domain-systems: color-mix(in srgb, var(--surface) 90%, #8898a8 10%);
-  --domain-ops: color-mix(in srgb, var(--surface) 90%, #8a9a90 10%);
+  --domain-fintech: color-mix(in srgb, var(--surface) 80%, #c2410c 20%);
+  --domain-erp: color-mix(in srgb, var(--surface) 86%, #a89078 14%);
+  --domain-systems: color-mix(in srgb, var(--surface) 88%, #8898a8 12%);
+  --domain-ops: color-mix(in srgb, var(--surface) 88%, #8a9a90 12%);
 
   --edge-hi: rgba(255, 255, 255, 0.07);
   --edge-lo: rgba(0, 0, 0, 0.55);
@@ -755,19 +758,27 @@ html[data-theme="dark"] .lp-theme-moon {
   width: 100%;
   max-width: var(--max);
   margin-top: clamp(2.25rem, 5vw, 3.25rem);
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--hairline);
+  padding-top: 0;
+  border-top: none;
   text-align: left;
 }
 
 .lp-roster-head {
-  margin-bottom: 1.35rem;
+  margin-bottom: 1.15rem;
 }
 
 .lp-roster-ref {
   font-family: var(--mono);
-  font-size: 0.6875rem;
-  color: var(--ink-faint);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding: 0.28rem 0.65rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--surface-muted) 80%, transparent);
+  border: 1px solid var(--hairline-soft);
+  box-shadow: inset 0 1px 0 var(--edge-hi);
 }
 
 .lp-directory {
@@ -954,56 +965,80 @@ span.lp-roster-name {
   }
 }
 
-/* —— Engagement Console —— */
+/* —— Engagement Console (soft-UI instrument panel) —— */
 .lp-console {
   display: grid;
-  grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 272px) minmax(0, 1fr);
   gap: 0;
-  border-top: 1px solid var(--hairline);
-  border-bottom: 1px solid var(--hairline);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--surface) 94%, var(--bg));
+  box-shadow: var(--lift);
+  overflow: hidden;
 }
 
-/* Rail (left) */
+/* Rail — recessed well, mode-track language */
 .lp-console-rail {
-  border-right: 1px solid var(--hairline);
-  padding: 0.5rem 0;
-  background: var(--surface);
+  padding: 0.7rem;
+  background: color-mix(in srgb, var(--surface-muted) 45%, transparent);
+  border-right: 1px solid var(--hairline-soft);
 }
 
 .lp-console-cap-list {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--surface-muted) 78%, transparent);
+  border: 1px solid var(--hairline-soft);
+  box-shadow: inset 0 1px 2px color-mix(in srgb, var(--ink) 4%, transparent);
 }
 
 .lp-console-cap {
+  appearance: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 0.5rem;
   width: 100%;
-  padding: 0.625rem 0.875rem;
-  border: none;
-  border-left: 3px solid transparent;
-  background: none;
+  padding: 0.55rem 0.7rem;
+  border: 0;
+  border-radius: calc(var(--radius) - 2px);
+  background: transparent;
   font-family: var(--sans);
-  font-size: 0.875rem;
-  font-weight: 400;
-  color: var(--ink-soft);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-faint);
   text-align: left;
   cursor: pointer;
-  transition: color var(--duration) var(--ease), border-color var(--duration) var(--ease), background var(--duration) var(--ease);
+  line-height: 1.25;
+  transition:
+    color var(--duration) var(--ease),
+    background var(--duration) var(--ease),
+    box-shadow var(--duration) var(--ease),
+    transform var(--duration) var(--ease);
 }
 
 .lp-console-cap:hover {
   color: var(--ink);
-  background: color-mix(in srgb, var(--surface-muted) 50%, transparent);
+}
+
+.lp-console-cap:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  outline-offset: 2px;
 }
 
 .lp-console-cap.is-active {
   color: var(--ink);
-  font-weight: 500;
-  border-left-color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 5%, transparent);
+  background: var(--surface);
+  box-shadow: var(--lift);
+}
+
+.lp-console-cap:active:not(.is-active) {
+  transform: scale(0.985);
 }
 
 .lp-console-cap-name {
@@ -1015,22 +1050,28 @@ span.lp-roster-name {
 
 .lp-console-cap-period {
   flex-shrink: 0;
-  margin-left: 0.75rem;
+  margin-left: 0.35rem;
   font-family: var(--mono);
-  font-size: 0.625rem;
+  font-size: 0.5625rem;
+  font-weight: 500;
   font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
   white-space: nowrap;
   color: var(--ink-faint);
+  opacity: 0.85;
 }
 
 .lp-console-cap.is-active .lp-console-cap-period {
   color: var(--ink-soft);
+  opacity: 1;
 }
 
-/* Dossier panel (right) */
+/* Dossier panel — raised surface */
 .lp-console-dossier {
-  padding: 2rem 2.25rem;
-  min-height: 320px;
+  padding: 1.75rem 2rem;
+  min-height: 340px;
+  background: var(--surface);
+  box-shadow: inset 1px 0 0 color-mix(in srgb, var(--edge-hi) 55%, transparent);
 }
 
 .lp-dossier[hidden] {
@@ -1056,50 +1097,63 @@ span.lp-roster-name {
 .lp-dossier-meta-row {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  gap: 0.55rem;
+  margin-bottom: 1.35rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline-soft);
 }
 
 .lp-dossier-meta-row .lp-dossier-period {
   font-family: var(--mono);
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
+  font-weight: 500;
   font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--ink-faint);
 }
 
 .lp-dossier-meta-row .lp-dossier-domain {
   font-family: var(--mono);
   font-size: 0.625rem;
+  font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 0.15rem 0.5rem;
+  padding: 0.2rem 0.55rem;
   border-radius: var(--radius-pill);
   color: var(--ink-faint);
-  background: var(--surface-muted);
+  background: color-mix(in srgb, var(--surface-muted) 85%, transparent);
+  border: 1px solid var(--hairline-soft);
+  box-shadow: inset 0 1px 0 var(--edge-hi);
 }
 
-.lp-dossier-domain--fintech { color: #3d6b8c; background: var(--domain-fintech); }
-.lp-dossier-domain--erp { color: #8a7050; background: var(--domain-erp); }
-.lp-dossier-domain--systems { color: #5a6878; background: var(--domain-systems); }
-.lp-dossier-domain--ops { color: #5a7a60; background: var(--domain-ops); }
+.lp-dossier-domain--fintech { color: #9a3412; background: var(--domain-fintech); }
+.lp-dossier-domain--erp { color: #8a6540; background: var(--domain-erp); }
+.lp-dossier-domain--systems { color: #5c564e; background: var(--domain-systems); }
+.lp-dossier-domain--ops { color: #4a6a52; background: var(--domain-ops); }
 
-/* Surfaces inside dossier */
+html[data-theme="dark"] .lp-dossier-domain--fintech {
+  color: var(--accent);
+}
+
+/* Surfaces — soft inset cards */
 .lp-dossier-surfaces {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 1.25rem;
+  gap: 0.55rem;
+  margin-bottom: 1.35rem;
 }
 
 .lp-dossier-surface {
-  padding-left: 1rem;
-  border-left: 2px solid var(--hairline);
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--hairline-soft);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--surface-muted) 40%, var(--surface));
+  box-shadow: inset 0 1px 0 var(--edge-hi);
 }
 
 .lp-dossier-surface-name {
-  margin: 0 0 0.2rem;
+  margin: 0 0 0.25rem;
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--ink);
@@ -1120,9 +1174,9 @@ span.lp-roster-name {
 }
 
 .lp-dossier--solo .lp-dossier-surface {
-  padding: 1.125rem 0 1.125rem 1.25rem;
-  border-left-width: 3px;
-  border-left-color: color-mix(in srgb, var(--accent) 40%, var(--hairline));
+  padding: 1.15rem 1.25rem;
+  border-color: color-mix(in srgb, var(--accent) 20%, var(--hairline));
+  background: color-mix(in srgb, var(--accent) 5%, var(--surface));
 }
 
 .lp-dossier--solo .lp-dossier-surface-name {
@@ -1143,7 +1197,7 @@ span.lp-roster-name {
 }
 
 .lp-dossier-surface-stack {
-  margin: 0.25rem 0 0;
+  margin: 0.3rem 0 0;
   font-family: var(--mono);
   font-size: 0.6875rem;
   color: var(--ink-faint);
@@ -1153,6 +1207,7 @@ span.lp-roster-name {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
+  margin-top: 0.35rem;
   font-size: 0.8125rem;
   font-weight: 500;
   color: var(--accent);
@@ -1165,24 +1220,59 @@ span.lp-roster-name {
   gap: 0.5rem;
 }
 
-/* Case study CTA */
+/* Case study CTA — ink pill (matches hero soft-UI) */
 .lp-dossier-link {
+  appearance: none;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.55rem;
+  margin-top: 0.25rem;
+  padding: 0.4rem 0.4rem 0.4rem 1.1rem;
+  min-height: 2.4rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--cta);
+  color: var(--cta-ink);
+  font: inherit;
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--ink);
   text-decoration: none;
-  padding: 0.5rem 0;
-  border-top: 1px solid var(--hairline);
-  margin-top: 0.5rem;
-  transition: gap var(--duration) var(--ease), color var(--duration) var(--ease);
+  box-shadow: var(--lift);
+  transition:
+    background var(--duration) var(--ease),
+    box-shadow var(--duration) var(--ease),
+    transform var(--duration) var(--ease);
 }
 
 .lp-dossier-link:hover {
-  gap: 0.6rem;
-  color: var(--accent);
+  background: var(--cta-hover);
+  color: var(--cta-ink);
+}
+
+.lp-dossier-link:hover .lp-dossier-link-icon {
+  transform: translate(1px, -1px);
+}
+
+.lp-dossier-link:active {
+  box-shadow: var(--press);
+  transform: translateY(1px);
+}
+
+.lp-dossier-link:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  outline-offset: 3px;
+}
+
+.lp-dossier-link-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--cta-ink) 14%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 280ms var(--ease);
 }
 
 /* Responsive: stack rail above dossier on mobile */
@@ -1193,28 +1283,22 @@ span.lp-roster-name {
 
   .lp-console-rail {
     border-right: none;
-    border-bottom: 1px solid var(--hairline);
-    padding: 0.25rem 0;
+    border-bottom: 1px solid var(--hairline-soft);
+    padding: 0.55rem;
   }
 
   .lp-console-cap-list {
-    display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
-    gap: 0.25rem;
-    padding: 0 0.5rem;
+    gap: 0.2rem;
+    padding: 0.2rem;
+    border-radius: var(--radius-pill);
   }
 
   .lp-console-cap {
-    border-left: none;
-    border-bottom: 2px solid transparent;
-    padding: 0.4rem 0.6rem;
-    border-radius: var(--radius-sm);
-  }
-
-  .lp-console-cap.is-active {
-    border-left-color: transparent;
-    border-bottom-color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 5%, transparent);
+    width: auto;
+    padding: 0.4rem 0.75rem;
+    border-radius: var(--radius-pill);
   }
 
   .lp-console-cap-period {
@@ -1222,7 +1306,8 @@ span.lp-roster-name {
   }
 
   .lp-console-dossier {
-    padding: 1.25rem 0.75rem;
+    padding: 1.25rem 1rem;
+    box-shadow: none;
   }
 
   .lp-dossier-title {

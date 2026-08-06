@@ -19,28 +19,37 @@ Sony — material is soft-UI, not pastel marketing orbs.
 
 ## Theme
 
-- **Default: light editorial** — cool off-white canvas, warm-near-black ink,
-  soft-UI lift on peeks / pills / mode track. No pastel gradient orbs.
-- **True dark alternate** — cool graphite soft-UI (full token swap), same
-  structure. Toggle persists via `lab-precision-theme`.
-- **Palette: Slate Signal** — steel blue accent `#3d6b8c` light / `#7eb3d4` dark;
-  canvas `#f4f6f8` / `#0e1114`.
-- **Accent**: steel blue for status lamp, peek wash, domain tints only.
-  CTAs stay ink pills (ElevenLabs rule: no saturated CTA color).
+- **Default: light editorial** — ElevenLabs off-white canvas (`#f5f5f5`),
+  warm near-black ink (`#292524`), soft-UI lift on peeks / pills / mode track.
+  No pastel orbs.
+- **True dark alternate** — stone-black soft-UI (`#0c0a09`), same structure.
+  Toggle persists via theme localStorage.
+- **Palette: Editorial + Ember Trace** — cool editorial grey + sparse ember.
+  - Canvas: `#f5f5f5` / `#0c0a09`
+  - Ink: `#292524` / `#f5f5f4`
+  - Accent: `#c2410c` light / `#fb923c` dark
+  - Ink CTAs: `#292524` on off-white / `#f5f5f4` on stone
+- **Accent discipline:** ember is for status lamp, active signal, links, peek
+  wash, domain tint — never primary CTA fills, never full-panel washes.
+  Voltage stays rare on purpose (instrument heat, not alert chrome).
 
 ## Design language
 
 **Take from ElevenLabs:** type ladder (light display / quiet body), ink pill
 CTAs, outline secondary pills, voice-row / directory list DNA, ~96px section
-rhythm, badge-pill availability, single soft elevation for peeks.
+rhythm, badge-pill availability, single soft elevation for peeks, warm
+near-black ink on quiet off-white (`#f5f5f5`).
+
+**Accent (ours):** Ember Trace — neo-futurist heat without browser blue or
+AI-purple. Sparse use only.
 
 **Keep ours:** Switzer + JetBrains Mono, soft-UI machined lift/well depth,
-slate accent for status/peek, product media as brand voltage on hover — not
-atmospheric orbs.
+Engagement Console instrument panel, product media as brand voltage on hover
+— not atmospheric orbs.
 
 **Don't take:** mint/peach/lavender orbs, white card grids, Inter/Waldenburg,
-saturated action greens, coding-theatre UI aimed at visitors (import maps,
-slug chips as primary labels).
+saturated action greens, coding-theatre UI, blue-filled CTAs, Arc cream,
+Arc royal blue as brand voltage.
 
 ---
 
@@ -136,4 +145,4 @@ Portrait + short positioning + contacts + off the clock are in place.
 
 ---
 
-*Last updated: 2026-08-06 — Engagement Console (Direction A) implemented; Journey + credentials + surface copy still open.*
+*Last updated: 2026-08-06 — Palette: Editorial + Ember Trace (`#f5f5f5` + `#c2410c`); Engagement Console soft-UI live; Journey + credentials still open.*
