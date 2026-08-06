@@ -11,11 +11,10 @@ export type WorkEntry = CollectionEntry<"work">;
 const DOMAINS: Domain[] = ["Fintech", "ERP & QA", "Systems", "Operations"];
 
 function normalizeDomain(raw: string): Domain {
-  const normalized = raw.trim();
-  if (normalized === "Fintech operations" || normalized === "Fintech") return "Fintech";
-  if (normalized === "ERP & QA" || normalized === "ERP") return "ERP & QA";
-  if (normalized === "Systems") return "Systems";
-  if (normalized === "Operations") return "Operations";
+  const lower = raw.toLowerCase();
+  if (lower.includes("fintech")) return "Fintech";
+  if (lower.includes("erp")) return "ERP & QA";
+  if (lower.includes("judgment") || lower === "systems") return "Systems";
   return "Operations";
 }
 

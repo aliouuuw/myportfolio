@@ -773,27 +773,50 @@ html[data-theme="dark"] .lp-theme-moon {
 .lp-directory {
   display: flex;
   flex-direction: column;
-  gap: clamp(2.25rem, 5vw, 3.5rem);
+  gap: clamp(1.35rem, 3vw, 1.9rem);
 }
 
 .lp-dir-group {
   min-width: 0;
+  padding: clamp(1rem, 2.5vw, 1.45rem);
+  background: var(--surface-raised);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--lift);
 }
 
 .lp-dir-heading {
-  margin-bottom: 0.5rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 1px solid var(--hairline);
+  margin-bottom: 0.85rem;
 }
 
 .lp-dir-title {
+  display: inline-flex;
+  align-items: center;
   margin: 0;
+  padding: 0.22rem 0.65rem;
+  border-radius: var(--radius-pill);
   font-family: var(--mono);
   font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--ink-soft);
+  background: var(--surface-muted);
+}
+
+.lp-dir-group--fintech .lp-dir-title {
+  background: var(--domain-fintech);
+}
+
+.lp-dir-group--erp .lp-dir-title {
+  background: var(--domain-erp);
+}
+
+.lp-dir-group--systems .lp-dir-title {
+  background: var(--domain-systems);
+}
+
+.lp-dir-group--ops .lp-dir-title {
+  background: var(--domain-ops);
 }
 
 .lp-dir-list {
@@ -830,12 +853,12 @@ html[data-theme="dark"] .lp-theme-moon {
 
 .lp-roster-row {
   display: grid;
-  grid-template-columns: minmax(0, auto) minmax(1rem, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   grid-template-areas:
-    "name lead period"
-    "detail detail detail";
+    "name period"
+    "detail detail";
   align-items: baseline;
-  column-gap: 0.45rem;
+  column-gap: 0.75rem;
   row-gap: 0.1rem;
   padding: 0.55rem 0.5rem;
   margin: 0 -0.5rem;
@@ -909,12 +932,7 @@ span.lp-roster-name {
 }
 
 .lp-roster-lead {
-  grid-area: lead;
-  height: 0;
-  margin-bottom: 0.32rem;
-  border-bottom: 1px dotted color-mix(in srgb, var(--ink-faint) 50%, transparent);
-  min-width: 0.75rem;
-  align-self: end;
+  display: none;
 }
 
 .lp-roster-period {
@@ -1702,10 +1720,11 @@ span.lp-roster-name {
 }
 
 .lp-row-surfaces {
-  padding: 0.75rem 0.5rem 0.5rem;
-  margin: 0 -0.5rem;
-  border-top: 1px solid var(--hairline-soft);
-  background: color-mix(in srgb, var(--surface-muted) 50%, transparent);
+  margin: 0.15rem 0 0.35rem;
+  padding: 0.9rem 1rem 0.85rem;
+  border-radius: var(--radius);
+  background: var(--surface-sunken);
+  box-shadow: var(--well);
   animation: lp-surfaces-in 0.25s var(--ease) both;
 }
 
@@ -1721,11 +1740,19 @@ span.lp-roster-name {
 }
 
 .lp-surface {
-  margin-bottom: 0.75rem;
+  padding: 0.8rem 0;
+}
+
+.lp-surface + .lp-surface {
+  border-top: 1px solid var(--hairline);
+}
+
+.lp-surface:first-child {
+  padding-top: 0.1rem;
 }
 
 .lp-surface:last-child {
-  margin-bottom: 0;
+  padding-bottom: 0.1rem;
 }
 
 .lp-surface-name {
