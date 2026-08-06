@@ -10,6 +10,18 @@ export const domainSlug = (domain: Domain): string => {
   return map[domain];
 };
 
+/** Locale-facing domain badge label (canonical Domain stays English for CSS hooks). */
+export const domainLabel = (domain: Domain, locale: "en" | "fr" = "en"): string => {
+  if (locale === "en") return domain;
+  const fr: Record<Domain, string> = {
+    Fintech: "Fintech",
+    "ERP & QA": "ERP & QA",
+    Systems: "Systèmes",
+    Operations: "Opérations",
+  };
+  return fr[domain];
+};
+
 export interface Surface {
   name: string;
   nameFr?: string;

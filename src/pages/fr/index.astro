@@ -2,10 +2,11 @@
 import "@/styles/lab-precision.css";
 import LabBackground from "@/components/lab-precision/LabBackground.astro";
 import LabPrecisionHeader from "@/components/lab-precision/LabPrecisionHeader.astro";
-import { getEngagements, domainSlug } from "@/lib/work-registry";
+import { getEngagements, domainSlug, domainLabel } from "@/lib/work-registry";
 
 /* Ancres d'abord (Everest → toolkit Odoo → BocalBun), puis le reste par période. */
 const engagements = await getEngagements("fr");
+const locale = "fr" as const;
 ---
 
 <!doctype html>
@@ -86,12 +87,12 @@ const engagements = await getEngagements("fr");
 
             <section class="lp-roster lp-reveal" aria-labelledby="engagements-title">
               <div class="lp-section-head lp-roster-head">
-                <h2 id="engagements-title">Engagements</h2>
+                <h2 id="engagements-title">Mandats</h2>
                 <span class="lp-roster-ref">{engagements.length} clients</span>
               </div>
 
               <div class="lp-console" id="engagement-console">
-                <nav class="lp-console-rail" aria-label="Engagements">
+                <nav class="lp-console-rail" aria-label="Mandats">
                   <ul class="lp-console-cap-list" role="list">
                     {engagements.map((eng) => (
                       <li>
@@ -123,7 +124,7 @@ const engagements = await getEngagements("fr");
                       <p class="lp-dossier-sub">{eng.detail}</p>
                       <div class="lp-dossier-meta-row">
                         <span class="lp-dossier-period">{eng.period}</span>
-                        <span class={`lp-dossier-domain lp-dossier-domain--${domainSlug(eng.domain)}`}>{eng.domain}</span>
+                        <span class={`lp-dossier-domain lp-dossier-domain--${domainSlug(eng.domain)}`}>{domainLabel(eng.domain, locale)}</span>
                       </div>
                       {eng.surfaces.length > 0 && (
                         <div class="lp-dossier-surfaces">
@@ -166,25 +167,6 @@ const engagements = await getEngagements("fr");
       </main>
     </div>
 
-    <div
-      class="lp-preview"
-      id="lp-preview"
-      hidden
-      role="dialog"
-      aria-label="Aperçu du projet"
-    >
-      <div class="lp-bezel lp-preview-bezel">
-        <div class="lp-bezel-inner lp-preview-frame">
-          <video id="lp-preview-video" muted playsinline loop preload="none"></video>
-          <div class="lp-preview-empty" id="lp-preview-empty" hidden>
-            <span class="lp-preview-empty-kicker">Spec</span>
-            <span id="lp-preview-empty-name">No preview</span>
-          </div>
-        </div>
-      </div>
-      <p class="lp-preview-cap" id="lp-preview-cap"></p>
-    </div>
-
     <script>
       import { initLabPrecisionChrome } from "@/scripts/lab-precision-chrome";
       import { createLabPrecisionController } from "@/scripts/lab-precision-controller";
@@ -192,13 +174,7 @@ const engagements = await getEngagements("fr");
 
       initLabPrecisionChrome();
       initEngagementConsole();
-
-      createLabPrecisionController({
-        mediaRoot: "/media/case-studies/everest-finance",
-        onBackground: () => {
-          // Preview auto-hidden by controller when view switches to background
-        },
-      });
+      createLabPrecisionController();
     </script>
   </body>
 </html>

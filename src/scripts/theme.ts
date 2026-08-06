@@ -51,6 +51,14 @@ export function getCurrentTheme(): Theme {
 export function syncThemeToggle(button: HTMLButtonElement | null): void {
   if (!button) return;
   const isDark = getCurrentTheme() === "dark";
+  const isFr = document.documentElement.lang?.toLowerCase().startsWith("fr");
   button.setAttribute("aria-pressed", String(isDark));
-  button.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+  if (isFr) {
+    button.setAttribute(
+      "aria-label",
+      isDark ? "Passer en mode clair" : "Passer en mode sombre",
+    );
+  } else {
+    button.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+  }
 }

@@ -1,5 +1,7 @@
 /* Shared design tokens — Editorial + Ember Trace
- * Source of truth for case studies + essays (home uses lab-precision.css). */
+ * Case studies + essays import this file.
+ * Home (`lab-precision.css`) mirrors the same palette; aliases below keep
+ * vocabulary aligned (`--bg` ↔ `--paper`, `--cta` ↔ `--hw-primary-*`). */
 
 :root {
   --accent: #c2410c;
@@ -8,6 +10,7 @@
   --accent-secondary: #c2410c;
 
   --paper: #f5f5f5;
+  --bg: var(--paper);
   --paper-2: #ececec;
   --surface: #ffffff;
   --wash: #fafafa;
@@ -25,6 +28,8 @@
   --line-strong: rgba(41, 37, 36, 0.14);
   --shadow-sm: 0 2px 8px rgba(41, 37, 36, 0.04);
   --shadow-md: 0 12px 32px rgba(41, 37, 36, 0.08);
+  --lift: var(--shadow-sm);
+  --lift-preview: var(--shadow-md);
 
   --sp-2: 8px;
   --sp-3: 12px;
@@ -40,9 +45,14 @@
   --radius-inner: 12px;
   --r-md: 8px;
   --r-pill: 999px;
+  --radius: var(--radius-inner);
+  --radius-sm: var(--r-md);
+  --radius-lg: var(--radius-outer);
+  --radius-pill: var(--r-pill);
 
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --dur-micro: 0.18s;
+  --duration: 180ms;
   --focus-ring: 0 0 0 2px var(--paper), 0 0 0 4px var(--accent);
 
   --hw-bg: rgba(255, 255, 255, 0.92);
@@ -53,6 +63,9 @@
     0 8px 20px -12px rgba(41, 37, 36, 0.1);
   --hw-primary-bg: var(--ink);
   --hw-primary-fg: #f5f5f5;
+  --cta: var(--hw-primary-bg);
+  --cta-ink: var(--hw-primary-fg);
+  --cta-hover: #14110f;
 
   color-scheme: light;
 }
@@ -66,6 +79,7 @@ html[data-theme="dark"] {
   --accent-secondary: #fb923c;
 
   --paper: #0c0a09;
+  --bg: var(--paper);
   --paper-2: #161412;
   --surface: #161412;
   --wash: #1a1714;
@@ -80,6 +94,8 @@ html[data-theme="dark"] {
   --line-strong: rgba(245, 245, 244, 0.14);
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.22);
   --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.28);
+  --lift: var(--shadow-sm);
+  --lift-preview: var(--shadow-md);
 
   --hw-bg: rgba(22, 20, 18, 0.92);
   --hw-border: rgba(245, 245, 244, 0.1);
@@ -89,4 +105,7 @@ html[data-theme="dark"] {
     0 14px 28px -16px rgba(0, 0, 0, 0.65);
   --hw-primary-bg: #f5f5f4;
   --hw-primary-fg: #0c0a09;
+  --cta: var(--hw-primary-bg);
+  --cta-ink: var(--hw-primary-fg);
+  --cta-hover: #ffffff;
 }

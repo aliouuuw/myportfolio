@@ -187,6 +187,9 @@ function createViewManager(config: Required<LabPrecisionConfig>) {
   const backgroundNav = document.querySelector<HTMLElement>("[data-view-mode='background']");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
+  /** Last `#engagement-*` hash before entering Background — restored on return to Work. */
+  let lastWorkHash = "";
+
   const viewChangeCallbacks = new Set<(view: LabView) => void>();
 
   const syncNav = (view: LabView) => {
@@ -218,13 +221,23 @@ function createViewManager(config: Required<LabPrecisionConfig>) {
 
   const syncHash = (view: LabView) => {
     const path = window.location.pathname;
+    const hash = window.location.hash;
+
     if (view === "background") {
-      if (window.location.hash !== "#background") {
+      if (hash.startsWith("#engagement-")) {
+        lastWorkHash = hash;
+      }
+      if (hash !== "#background") {
         history.replaceState(null, "", `${path}#background`);
       }
-    } else if (window.location.hash) {
+    } else if (lastWorkHash) {
+      if (hash !== lastWorkHash) {
+        history.replaceState(null, "", `${path}${lastWorkHash}`);
+      }
+    } else if (hash === "#background") {
       history.replaceState(null, "", path);
     }
+
     syncLocaleLinks();
   };
 

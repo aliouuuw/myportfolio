@@ -10,7 +10,7 @@ import {
   type Surface,
   type CapabilityGroup,
 } from "@/data/lab-precision";
-import { domainSlug, capabilitySlug } from "@/data/lab-precision";
+import { domainSlug, domainLabel, capabilitySlug } from "@/data/lab-precision";
 
 export type WorkEntry = CollectionEntry<"work">;
 export type WorkLocale = "en" | "fr";
@@ -34,6 +34,16 @@ function shortName(title: string): string {
 /** Visible UI copy: no em/en dashes (hyphen only). */
 function uiDash(value: string): string {
   return value.replace(/\s*[—–]\s*/g, " - ");
+}
+
+/** Localize common English period suffixes for FR home chrome. */
+function localizePeriod(period: string, locale: WorkLocale): string {
+  const dashed = uiDash(period);
+  if (locale !== "fr") return dashed;
+  return dashed
+    .replace(/\bpresent\b/gi, "présent")
+    .replace(/\bnow\b/gi, "présent")
+    .replace(/\bstopped\b/gi, "arrêté");
 }
 
 function mapSurface(
@@ -77,7 +87,7 @@ function mapWorkEntryToEngagement(entry: WorkEntry, locale: WorkLocale = "en"): 
     domain,
     detail: uiDash(summary),
     builds: surfaces.length || 1,
-    period: uiDash(data.period ?? data.date),
+    period: localizePeriod(data.period ?? data.date, locale),
     featured: data.featured,
     href: locale === "fr" ? `/fr/work/${slug}` : `/work/${slug}`,
     media,
@@ -219,4 +229,4 @@ export async function getFilters(): Promise<{ label: string; value: string; coun
 }
 
 /** Domain slug utility. */
-export { domainSlug };
+export { domainSlug, domainLabel };

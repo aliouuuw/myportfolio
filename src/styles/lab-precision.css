@@ -17,6 +17,7 @@
 
   /* Editorial + Ember Trace — light */
   --bg: #f5f5f5;
+  --paper: var(--bg);
   --surface: #ffffff;
   --surface-raised: #ffffff;
   --surface-sunken: #ebebeb;
@@ -60,6 +61,7 @@
 html[data-theme="dark"] {
   /* Editorial + Ember Trace — stone dark */
   --bg: #0c0a09;
+  --paper: var(--bg);
   --surface: #161412;
   --surface-raised: #1c1917;
   --surface-sunken: #080706;
@@ -1182,13 +1184,17 @@ span.lp-roster-name {
 .lp-dossier-domain--ops { color: #44403c; background: var(--domain-ops); }
 
 html[data-theme="dark"] .lp-dossier-domain--fintech,
-html[data-theme="dark"] .lp-dossier-domain--erp {
-  color: var(--accent);
-}
-
+html[data-theme="dark"] .lp-dossier-domain--erp,
 html[data-theme="dark"] .lp-dossier-domain--systems,
 html[data-theme="dark"] .lp-dossier-domain--ops {
   color: var(--ink-soft);
+  background: color-mix(in srgb, var(--surface-muted) 70%, transparent);
+  border-color: var(--hairline-soft);
+}
+
+html[data-theme="dark"] .lp-dossier-domain--fintech,
+html[data-theme="dark"] .lp-dossier-domain--erp {
+  color: color-mix(in srgb, var(--accent) 85%, var(--ink));
 }
 
 /* Surfaces — soft inset cards */
@@ -1935,13 +1941,15 @@ html[data-theme="dark"] .lp-dossier-domain--ops {
   font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.02em;
-  color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 11%, var(--surface-muted));
-  border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+  color: var(--ink-soft);
+  background: color-mix(in srgb, var(--surface-muted) 88%, transparent);
+  border: 1px solid var(--hairline-soft);
   padding: 0.12rem 0.45rem;
   border-radius: var(--radius-sm);
   align-self: flex-start;
+  box-shadow: inset 0 1px 0 var(--edge-hi);
   transition:
+    color var(--duration) var(--ease),
     background var(--duration) var(--ease),
     border-color var(--duration) var(--ease);
 }
@@ -2002,36 +2010,37 @@ html[data-theme="dark"] .lp-dossier-domain--ops {
 
 .lp-git-commit:hover .lp-git-node,
 .lp-git-commit:has(.lp-git-details[open]) .lp-git-node {
-  border-color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 18%, var(--surface));
-  box-shadow: 0 0 0 4px var(--accent-soft);
-  transform: scale(1.08);
+  border-color: var(--ink-soft);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ink) 6%, transparent);
+  transform: scale(1.05);
 }
 
 .lp-git-commit:hover .lp-git-track,
 .lp-git-commit:has(.lp-git-details[open]) .lp-git-track {
-  background: color-mix(in srgb, var(--accent) 45%, var(--hairline-strong));
+  background: color-mix(in srgb, var(--ink) 28%, var(--hairline-strong));
 }
 
 .lp-git-summary:hover {
   border-color: var(--line-strong);
-  transform: translateX(2px);
+  transform: translateX(1px);
 }
 
 .lp-git-details[open] .lp-git-summary {
-  border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
-  background: color-mix(in srgb, var(--accent) 5%, var(--surface));
+  border-color: var(--line-strong);
+  background: var(--surface);
   box-shadow: var(--lift-preview);
 }
 
 .lp-git-details[open] .lp-git-summary-caret {
   transform: rotate(90deg);
-  color: var(--accent);
+  color: var(--ink-soft);
 }
 
 .lp-git-details[open] .lp-git-branch {
-  background: color-mix(in srgb, var(--accent) 16%, var(--surface-muted));
-  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+  color: var(--ink);
+  background: color-mix(in srgb, var(--surface-muted) 70%, var(--surface));
+  border-color: var(--hairline-strong);
 }
 
 .lp-git-summary:focus-visible {
@@ -2054,18 +2063,18 @@ html[data-theme="dark"] .lp-dossier-domain--ops {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  padding: 1.1rem 1.2rem;
+  padding: 1rem 1.15rem;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--lift);
   transition:
-    transform var(--duration) var(--ease),
+    border-color var(--duration) var(--ease),
     box-shadow var(--duration) var(--ease);
 }
 
 .lp-cred-list li:hover {
-  transform: translateY(-1px);
+  border-color: var(--line-strong);
   box-shadow: var(--lift-preview);
 }
 
