@@ -8,25 +8,16 @@ interface Props {
 
 const locale = Astro.props.locale ?? "en";
 const isFr = locale === "fr";
-const base = isFr ? "/fr/" : "/";
 
 const ui = isFr
   ? {
-      nav: "Vue du portfolio",
-      work: "Travail",
-      background: "Parcours",
-      available: "Disponible",
-      availTitle: "Sélectif — capacité client limitée",
+      backToWork: "Retour au travail",
       lang: "Langue",
       langEn: "Anglais",
       langFr: "Français",
     }
   : {
-      nav: "Portfolio view",
-      work: "Work",
-      background: "Background",
-      available: "Available",
-      availTitle: "Selective — limited client capacity",
+      backToWork: "Back to work",
       lang: "Language",
       langEn: "English",
       langFr: "French",
@@ -35,28 +26,17 @@ const ui = isFr
 
 <div class="lp-nav-shell">
   <header class="lp-header">
-    <p class="lp-header-status" title={ui.availTitle} aria-label={`${ui.available}. ${ui.availTitle}`}>
-      <span class="lp-avail-dot" aria-hidden="true"></span>
-      <span class="lp-avail-text">{ui.available}</span>
-    </p>
-
-    <span class="lp-header-rule" aria-hidden="true"></span>
-
-    <nav class="lp-modes" aria-label={ui.nav}>
-      <a
-        class="lp-mode is-active"
-        href={base}
-        data-view-mode="work"
-        data-view-trigger="work"
-        aria-current="page">{ui.work}</a>
-      <a
-        class="lp-mode"
-        href={`${base}#background`}
-        data-view-mode="background"
-        data-view-trigger="background">{ui.background}</a>
-    </nav>
-
-    <span class="lp-header-rule" aria-hidden="true"></span>
+    <button class="lp-back-to-work" type="button" data-view-trigger="work" aria-hidden="true">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path
+          d="M10.5 3.5L3.5 10.5M3.5 10.5V4.75M3.5 10.5H9.25"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+      <span>{ui.backToWork}</span>
+    </button>
 
     <div class="lp-header-tools">
       <div class="lp-locales" role="group" aria-label={ui.lang}>
