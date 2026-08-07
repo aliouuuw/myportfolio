@@ -534,6 +534,11 @@ html:not([data-theme="dark"]) .theme-toggle--article .theme-toggle__moon {
   color: var(--ink-faint);
 }
 
+.surface__link--pending {
+  color: var(--ink-faint);
+  cursor: default;
+}
+
 .surface__media {
   margin: 0;
 }

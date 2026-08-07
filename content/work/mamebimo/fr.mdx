@@ -1,0 +1,66 @@
+---
+title: "Mamebimo — home services marketplace for Dakar"
+titleFr: "Mamebimo — marketplace de services à domicile à Dakar"
+summary: "Marketplace connecting Dakar households with verified providers for home cleaning and at-home cooking — booking, messaging, payouts, and admin ops on a PWA-ready stack."
+summaryFr: "Marketplace reliant foyers dakaroises et prestataires vérifiés pour ménage et cuisine à domicile — réservation, messagerie, paiements et ops admin sur une stack PWA."
+role: "Opérateur technique solo"
+domain: "Opérations marketplace"
+stack:
+  - "TypeScript"
+  - "React"
+  - "Vite"
+  - "Supabase"
+  - "Tailwind CSS"
+  - "i18next"
+date: "2026-04"
+featured: false
+confidential: false
+status: shipped
+period: "2026"
+outcome: "Marketplace en ligne sur mamebimo.com"
+surfaces:
+  - name: "Marketplace app"
+    nameFr: "App marketplace"
+    status: "Shipped"
+    statusFr: "Livré"
+    url: "https://mamebimo.com"
+    urlLabel: "mamebimo.com"
+    urlLabelFr: "mamebimo.com"
+    blurb: "French-first booking flows for cleaning and cooking — provider verification, household requests, messaging, and Mapbox-assisted logistics."
+    blurbFr: "Parcours de réservation FR d'abord pour ménage et cuisine — vérification prestataires, demandes foyers, messagerie et logistique assistée Mapbox."
+    stack: ["React", "Vite", "TypeScript", "Supabase", "Mapbox"]
+  - name: "Admin operations"
+    nameFr: "Opérations admin"
+    status: "Shipped"
+    statusFr: "Livré"
+    url: "https://mamebimo.com/admin*"
+    urlLabel: "mamebimo.com/admin*"
+    urlLabelFr: "mamebimo.com/admin*"
+    blurb: "Ops back-office for provider review, booking oversight, and payout coordination — the surface that keeps marketplace trust enforceable."
+    blurbFr: "Back-office ops pour revue prestataires, suivi des réservations et coordination des paiements — la surface qui rend la confiance marketplace exécutoire."
+    stack: ["Supabase", "Edge Functions", "TypeScript"]
+---
+
+## Contexte
+
+Mamebimo est un produit adjacent à Everest : une marketplace dakaroise qui relie foyers et prestataires vérifiés pour le ménage et la cuisine à domicile. J'ai porté l'app web de bout en bout — réservation, messagerie, flux de paiement et opérations admin — sur une stack React + Supabase prête PWA.
+
+## Problème
+
+Les marketplaces de services locaux échouent quand la confiance et les ops sont des après-coups. Les foyers ont besoin de prestataires vérifiés et d'états de réservation clairs ; les prestataires ont besoin de paiements et d'une messagerie qui tienne sur mobile. Une jolie grille d'annonces sans colonne vertébrale ops ne survit pas au premier contact avec le terrain.
+
+## Approche
+
+- **Supabase comme cœur ops** — Postgres, Auth et Edge Functions pour réservation et messagerie.
+- **UI FR d'abord** avec anglais via i18next — alignée sur la communication réelle à Dakar.
+- **Ops admin dès le jour un** — revue prestataires et suivi des réservations, pas ajoutés après lancement.
+
+## Résultat
+
+Marketplace livrée sur [mamebimo.com](https://mamebimo.com). Route admin marquée `*` jusqu'à confirmation du chemin public.
+
+## Leçons
+
+**La confiance marketplace est un produit ops.** Vérification, messagerie et paiements sont le produit ; la grille d'annonces est l'emballage.
+
+**Un mandat adjacent à Everest exige quand même une propriété solo claire.** L'origine en referral ne réduit pas le besoin d'un modèle opérationnel.

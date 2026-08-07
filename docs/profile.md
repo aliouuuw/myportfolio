@@ -1,6 +1,6 @@
 # Aliou Wade — profile (living reference)
 
-**Last updated:** June 2026  
+**Last updated:** August 2026  
 **Purpose:** Current facts about who I am, what I ship, and what I am working on now. Use this for portfolio copy, agent context, and network intros. For build/IA strategy see `portfolio-plan.md`; for career direction see `strategic-plan.md`.
 
 ---
@@ -10,15 +10,15 @@
 | Field | Value |
 |-------|--------|
 | **Name** | Aliou Wade |
-| **Role** | Product Systems Engineer |
-| **Current engagement** | Senior technical operator · Everest Finance (solo) |
+| **Role (public)** | Software Engineer |
+| **Role (Everest / Journey)** | Senior technical operator · Everest Finance (solo) |
 | **Location** | Dakar, Senegal (WAT) |
 | **Arc** | Ottawa → Dakar |
 | **Languages** | French / English — bilingual site and client work |
-| **Availability** | Selective — two client slots from Q3 2026 |
+| **Availability** | Selective — limited client capacity |
 | **Best fit** | Founders and teams replacing spreadsheet operations with focused internal software |
 
-**Positioning (one line):** I build operational software for fintechs and operations-heavy businesses — internal tools, workflows, ERP modules, and domain-specific systems — from Dakar, bilingual FR/EN.
+**Positioning (one line):** Solo operator for production systems — fintech, ERP migrations, and ops software businesses actually run — from Dakar, bilingual FR/EN.
 
 **What I am not selling:** generic web dev, React/Next.js for hire, agency retainers, or “I built a framework” as the headline.
 
@@ -76,9 +76,9 @@ Odoo integrator in Dakar. Two tracks:
 **Case study:** `/work/odoo-testing-toolkit`  
 **Publication gate:** ERGOBIT conversation on solo vs co-brand publish path and public GitHub URL.
 
-### BankingBook Analytics — contract engineer (2023 → Q2 2024)
+### BankingBook Analytics — contract engineer (2024 → 2025)
 
-Open-banking API layer for cloud-native ALM in UEMOA; bilingual product surfaces; web and corporate mail migration to [bbafintech.com](https://bbafintech.com). Contract engineering — APIs and domain cutover, not a marketing-site project.
+Open-banking API layer for cloud-native ALM in UEMOA; bilingual product surfaces; web and corporate mail migration to [bbafintech.com](https://bbafintech.com). Contract engineering — APIs and domain cutover, not a marketing-site project. (Git evidence on `bba-webapp` starts Feb 2024; confirm if engagement began in 2023.)
 
 ### Purolator Digital Lab — COOP + part-time contractor (2023 · Ottawa)
 
@@ -111,7 +111,7 @@ These three are the conversion proof on the site homepage (operator board):
 
 **Flagship essay:** [Why I stopped building frameworks and started shipping systems](/writing/why-systems-over-frameworks) — cross-links BocalBun.
 
-**BocalBun (2022 → stopped):** Bun-native toolkit with entity engine, RLS, audit trails. Frozen with zero external users; lessons applied to Everest repo structure and agent-ready conventions. Repo: [github.com/aliouuuw/bocalbun](https://github.com/aliouuuw/bocalbun).
+**BocalBun (2026-05 → stopped):** Bun-native toolkit with entity engine, RLS, audit trails. Frozen with zero external users after a short build sprint; lessons applied to Everest repo structure and agent-ready conventions. Repo: [github.com/aliouuuw/bocalbun](https://github.com/aliouuuw/bocalbun).
 
 ---
 
@@ -129,18 +129,19 @@ These three are the conversion proof on the site homepage (operator board):
 
 Supporting evidence — not homepage anchors:
 
-| Client | Domain | Scope |
-|--------|--------|--------|
-| Ndouckmane Transit | Logistics | Freight ops: shipments, customs, dashboards (MVP in progress) |
-| EduPlan | Education | K-12: courses, schedule, grading |
-| Gerpain | Operations | Multi-bakery: inventory, deliveries, RBAC |
-| Mansour Motors | Automotive | Dealership site + vehicle inventory — [mansourmotors.sn](https://mansourmotors.sn) |
-| Mamebimo | Marketplace | Home-services booking (Everest-adjacent product) — [mamebimo.com](https://mamebimo.com) |
-| Asaaman | Drone / AI | Semantic video search — [asaaman.com](https://asaaman.com) |
-| Les Hirondelles | Institution | School site + Convex CMS |
-| Dakar Sport | Retail | Retail and community surfaces |
+| Client | Domain | Scope | Case study |
+|--------|--------|--------|------------|
+| Ndouckmane Transit | Logistics | Freight ops: shipments, customs, dashboards (MVP) | `/work/ndouckmane-transit` |
+| EduPlan | Education | K-12 enrollment / records / reporting (Hirondelles pilot) | `/work/eduplan` |
+| Les Hirondelles | Institution | School site + Convex CMS | `/work/les-hirondelles` |
+| Gerpain | Operations | Multi-bakery: inventory, deliveries, Bocal ledger | `/work/gerpain` |
+| Mansour Motors | Automotive | Dealership site + vehicle inventory | `/work/mansour-holding` |
+| Mamebimo | Marketplace | Home-services booking (Everest-adjacent) | `/work/mamebimo` |
+| Asaaman | Drone / AI | Semantic video search | `/work/asaaman` |
+| Dakar Sport | Retail | Catalog storefront | `/work/dakar-sport-shop` |
+| BankingBook Analytics | Fintech | Open-banking API + bbafintech.com | `/work/bankingbook-analytics` |
 
-Case study MDX exists for several of these under `content/work/`; not all are featured on the homepage trio.
+Not on the console (Journey / reports only): Purolator, Orange Digital Lab, ITech. Prescriptos deferred until revive/archive decision.
 
 ---
 
@@ -165,17 +166,18 @@ Case study MDX exists for several of these under `content/work/`; not all are fe
 
 ---
 
-## This portfolio site (June 2026)
+## This portfolio site (August 2026)
 
 | Item | Detail |
 |------|--------|
 | **Framework** | Astro 5 — static pages + selective server routes (contact API) |
-| **Homepage** | Operator board — domain tabs, proof stage, comms strip, expandable work record |
+| **Homepage** | Lab Precision Engagement Console — Work / Background views, master–detail dossiers |
 | **Content** | MDX in `content/work/` and `content/writing/` (EN + FR) |
+| **Placeholder URLs** | Surface `url` values ending in `*` render as non-clickable until public links land |
 | **Archive** | Previous Next.js 16 app on branch/tag `archive/nextjs-v1` |
 | **Hosting** | Vercel |
 
-Routes live today: `/`, `/fr`, `/work/[slug]`, `/writing/[slug]`, `/api/contact`. No separate `/about` or `/contact` pages — those live on the board (Operate + Connect zones).
+Routes live today: `/`, `/fr`, `/work/[slug]`, `/fr/work/[slug]`, `/writing/[slug]`, `/api/contact`. No separate `/about` or `/contact` pages — contact lives in the Work hero; Background holds journey + credentials. `/board` 301s to home.
 
 ---
 
@@ -194,9 +196,10 @@ Not a client list — people who shape next opportunities:
 
 ## Open before public launch
 
-- [ ] Everest CEO — name, screenshots, redaction
-- [ ] ERGOBIT CEO — Odoo toolkit publish path + GitHub
-- [ ] Wire COOP PDFs (Purolator, Orange, ITech) from work-record CTAs
+- [ ] Everest CEO — name, screenshots, redaction; swap staging URLs for production
+- [ ] ERGOBIT CEO — Odoo toolkit publish path + GitHub (replace `odoo-18-acceptance*` placeholder)
+- [ ] Replace remaining `*` surface URLs (Formos, EduPlan, Ndouckmane, Mansour ops/API)
+- [ ] Wire COOP PDFs (Purolator, Orange, ITech) from Background / case CTAs
 - [ ] Production domain DNS (`aliouwade.com`)
 - [ ] Resend production key for contact form
 
@@ -206,7 +209,8 @@ Not a client list — people who shape next opportunities:
 
 | Need | File |
 |------|------|
-| Board copy + work record data | `public/board/flow-data.js`, `flow-data-fr.js` |
+| Home chrome + Background copy | `src/pages/index.astro`, `LabBackground.astro`, `lab-precision.ts` |
+| Engagement Console | `EngagementConsole.astro`, `work-registry.ts` |
 | Case studies | `content/work/<slug>/{en,fr}.mdx` |
 | Agent/build conventions | `AGENTS.md` |
 | Launch gates | `docs/launch-prerequisites.md` |

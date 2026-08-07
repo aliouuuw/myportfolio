@@ -108,8 +108,9 @@ Escape returns to Work. View state: `lab-precision-controller.ts`.
 
 **Still open / needs work:**
 
-- Surface copy quality (blurbs, stack labels) — some still thin
+- Surface copy quality (blurbs, stack labels) — tightened Aug 2026; swap `*` URLs when public
 - Everest video peek — media exists; preview shell removed until wired
+- Placeholder URL convention: `url` values containing `*` render as non-clickable “coming soon”
 
 ### Background
 

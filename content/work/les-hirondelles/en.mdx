@@ -1,0 +1,65 @@
+---
+title: "Les Hirondelles — school site and editorial CMS"
+titleFr: "Les Hirondelles — site d'école et CMS éditorial"
+summary: "Institutional website for Les Hirondelles school in Dakar — news, events, and staff-editable content on a Convex-backed CMS, the relationship that later opened the EduPlan ops pilot."
+summaryFr: "Site institutionnel de l'école Les Hirondelles à Dakar — actualités, événements et contenu éditable par l'équipe sur un CMS Convex, la relation qui a ensuite ouvert le pilote ops EduPlan."
+role: "Solo technical operator"
+domain: "Education systems"
+stack:
+  - "TypeScript"
+  - "React"
+  - "Vite"
+  - "Convex"
+  - "TipTap"
+date: "2025-07"
+featured: false
+confidential: false
+status: shipped
+period: "2025 — 2026"
+outcome: "School site live at leshirondelles.sn"
+surfaces:
+  - name: "Public school site"
+    nameFr: "Site public de l'école"
+    status: "Shipped"
+    statusFr: "Livré"
+    url: "https://leshirondelles.sn"
+    urlLabel: "leshirondelles.sn"
+    urlLabelFr: "leshirondelles.sn"
+    blurb: "Public pages for the school — programs, contact, and institutional presence tuned for parents and visitors in Dakar."
+    blurbFr: "Pages publiques de l'école — programmes, contact et présence institutionnelle pensées pour parents et visiteurs à Dakar."
+    stack: ["React", "Vite", "TypeScript"]
+  - name: "Editorial CMS"
+    nameFr: "CMS éditorial"
+    status: "Shipped"
+    statusFr: "Livré"
+    url: "https://leshirondelles.sn/admin*"
+    urlLabel: "leshirondelles.sn/admin*"
+    urlLabelFr: "leshirondelles.sn/admin*"
+    blurb: "Convex-backed editorial workflow with TipTap — staff publish news and events without developer dependency for routine updates."
+    blurbFr: "Workflow éditorial sur Convex avec TipTap — l'équipe publie actualités et événements sans dépendance développeur pour les mises à jour courantes."
+    stack: ["Convex", "TipTap", "React"]
+---
+
+## Context
+
+Les Hirondelles needed a credible institutional site and a way for staff to publish without calling a developer for every news post. I shipped a Vite + React front end with a Convex-backed CMS (TipTap editing, media on R2). That delivery relationship is what later opened the EduPlan enrollment pilot — same school network, deeper operational pain.
+
+## Problem
+
+School sites often freeze after launch because content tooling is missing or too heavy. Without a lightweight CMS, news and events rot, and the institution looks abandoned online even when it is active on the ground.
+
+## Approach
+
+- **Lightweight CMS on Convex** — staff can update without a deploy cycle.
+- **TipTap for editorial** — familiar document editing for non-technical staff.
+- **Ship the public surface first** — trust and visibility before internal ops software.
+
+## Outcome
+
+Site live at [leshirondelles.sn](https://leshirondelles.sn). Admin path marked `*` until the public CMS URL is confirmed. Direct lineage into the EduPlan case study.
+
+## Lessons
+
+**Institutional trust is a content operations problem.** A polished homepage without publish tools dies in a month.
+
+**Relationships compound.** The CMS delivery created the channel for EduPlan — public site work is sometimes the door to operational systems.

@@ -3,6 +3,8 @@
 // Shows each shippable product with a live link + lightweight demo video,
 // before the long-form prose. Videos use preload="none" + poster so nothing
 // downloads until the visitor opts in.
+import { isPendingUrl } from "@/data/lab-precision";
+
 interface Surface {
   name: string;
   nameFr?: string;
@@ -28,6 +30,7 @@ const { surfaces, lang = "en", heading } = Astro.props;
 const isFr = lang === "fr";
 const title = heading ?? (isFr ? "Surfaces livrées" : "Shipped surfaces");
 const demoLabel = isFr ? "Démo" : "Demo";
+const pendingTitle = isFr ? "Lien public à venir" : "Public URL coming soon";
 
 const pick = (en: string | undefined, fr: string | undefined) =>
   (isFr ? fr : en) ?? en ?? fr ?? "";
@@ -50,13 +53,15 @@ const pick = (en: string | undefined, fr: string | undefined) =>
                   <span class="surface__name">{name}</span>
                   <span class="surface__status">{status}</span>
                 </div>
-                {s.url ? (
+                {s.url && !isPendingUrl(s.url) ? (
                   <a class="surface__link" href={s.url} target="_blank" rel="noopener noreferrer">
                     {urlLabel}
                     <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" width="12" height="12">
                       <path d="M5 11L11 5M11 5H6M11 5V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                   </a>
+                ) : s.url && isPendingUrl(s.url) ? (
+                  <span class="surface__link surface__link--pending" title={pendingTitle}>{urlLabel}</span>
                 ) : (
                   <span class="surface__link surface__link--none">{urlLabel || (isFr ? "Non déployé" : "Not deployed")}</span>
                 )}

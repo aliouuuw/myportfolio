@@ -1,8 +1,8 @@
 ---
 title: "EduPlan — school operations software from CMS lessons"
 titleFr: "EduPlan — logiciel de gestion scolaire tiré des leçons d'un CMS"
-summary: "Building school operations software informed by a lightweight CMS deployment, with lessons about scope discipline and operational reality."
-summaryFr: "Construction d'un logiciel de gestion scolaire informé par un déploiement CMS léger, avec des leçons sur la discipline de scope et la réalité opérationnelle."
+summary: "Pilot school operations at Les Hirondelles — enrollment (~80 applications for 2025–2026), student records, and reporting — grown from an earlier lightweight CMS delivery."
+summaryFr: "Opérations scolaires en pilote aux Hirondelles — inscriptions (~80 dossiers pour 2025–2026), dossiers élèves et reporting — issues d'un CMS léger livré plus tôt."
 role: "Solo technical operator"
 domain: "Education systems"
 stack:
@@ -10,15 +10,19 @@ stack:
   - "Next.js"
   - "PostgreSQL"
   - "Internal tooling"
-date: "2025-08"
+date: "2025-10"
 featured: false
 confidential: false
-period: "2025 — present"
+period: "2025-10 — present"
+outcome: "Hirondelles pilot live · ~80 enrollment applications processed"
 surfaces:
   - name: "Enrollment module"
     nameFr: "Module inscriptions"
     status: "Pilot"
     statusFr: "Pilote"
+    url: "https://eduplan.app*"
+    urlLabel: "eduplan.app*"
+    urlLabelFr: "eduplan.app*"
     blurb: "Family applies online → staff reviews → enrollment confirmed or waitlisted. Pilot at Les Hirondelles for 2025–2026 (~80 applications)."
     blurbFr: "La famille postule en ligne → l'équipe révise → inscription confirmée ou mise en liste d'attente. Pilote aux Hirondelles pour 2025–2026 (~80 dossiers)."
     stack: ["Next.js", "TypeScript", "PostgreSQL"]
@@ -26,6 +30,9 @@ surfaces:
     nameFr: "Dossiers élèves"
     status: "Pilot"
     statusFr: "Pilote"
+    url: "https://eduplan.app/records*"
+    urlLabel: "eduplan.app/records*"
+    urlLabelFr: "eduplan.app/records*"
     blurb: "Student profiles with academic history, family/guardian links, document attachments, and validated spreadsheet import from legacy years."
     blurbFr: "Profils élèves avec historique académique, liens famille/tuteurs, pièces jointes, et import validé des feuilles de calcul des années legacy."
     stack: ["Next.js", "TypeScript", "PostgreSQL"]
@@ -33,6 +40,9 @@ surfaces:
     nameFr: "Tableau de bord reporting"
     status: "Pilot"
     statusFr: "Pilote"
+    url: "https://eduplan.app/reporting*"
+    urlLabel: "eduplan.app/reporting*"
+    urlLabelFr: "eduplan.app/reporting*"
     blurb: "Enrollment counts by grade/year, demographic breakdowns, export for authority filings, and audit logging on sensitive changes."
     blurbFr: "Effectifs par niveau/année, ventilations démographiques, export pour dépôts auprès des autorités, et pistes d'audit sur les changements sensibles."
     stack: ["Next.js", "TypeScript", "PostgreSQL"]

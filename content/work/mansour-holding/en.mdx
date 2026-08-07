@@ -1,8 +1,8 @@
 ---
 title: "Mansour Holding — public platform and internal operations dashboard"
 titleFr: "Mansour Holding — plateforme publique et tableau de bord opérationnel"
-summary: "Monorepo for Mansour Motors: marketing surfaces, vehicle inventory, and an authenticated internal dashboard on a shared API and data model."
-summaryFr: "Monorepo Mansour Motors : vitrines marketing, stock véhicules et tableau de bord interne authentifié sur une API et un modèle de données partagés."
+summary: "Shared inventory truth for Mansour Motors — public dealership surfaces and an authenticated ops dashboard on one API and data model."
+summaryFr: "Une vérité stock partagée pour Mansour Motors — vitrines concession et tableau de bord ops authentifié sur une seule API et un modèle de données."
 role: "Solo technical operator"
 domain: "Automotive & holding operations"
 stack:
@@ -12,11 +12,12 @@ stack:
   - "PostgreSQL"
   - "Drizzle ORM"
   - "Cloudflare R2"
-date: "2025-11"
+date: "2026-02"
 featured: false
 confidential: false
 status: shipped
-period: "2025"
+period: "2026"
+outcome: "Public site live · internal inventory dashboard shipped"
 surfaces:
   - name: "Public web"
     nameFr: "Site public"
@@ -32,6 +33,9 @@ surfaces:
     nameFr: "Tableau de bord interne"
     status: "Shipped"
     statusFr: "Livré"
+    url: "https://ops.mansourmotors.sn*"
+    urlLabel: "ops.mansourmotors.sn*"
+    urlLabelFr: "ops.mansourmotors.sn*"
     blurb: "Authenticated ops surface: vehicle inventory CRUD, Cloudflare R2 media uploads, role-based access, audit-friendly updates."
     blurbFr: "Surface ops authentifiée : CRUD stock véhicules, uploads médias Cloudflare R2, accès par rôles, mises à jour auditables."
     stack: ["React", "TypeScript", "Hono", "Drizzle", "Cloudflare R2"]
@@ -39,6 +43,9 @@ surfaces:
     nameFr: "API"
     status: "Shipped"
     statusFr: "Livré"
+    url: "https://api.mansourmotors.sn*"
+    urlLabel: "api.mansourmotors.sn*"
+    urlLabelFr: "api.mansourmotors.sn*"
     blurb: "Hono on Bun owns business rules and Zod-validated contracts; Neon Postgres via Drizzle is the system of record the dashboard renders."
     blurbFr: "Hono sur Bun possède les règles métier et les contrats validés Zod ; Neon Postgres via Drizzle est la source de vérité que le dashboard affiche."
     stack: ["Hono", "Bun", "Drizzle", "Neon PostgreSQL", "Zod"]

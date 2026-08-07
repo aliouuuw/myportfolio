@@ -40,6 +40,10 @@ export interface Engagement {
   slug: string;
   domain: Domain;
   detail: string;
+  /** Compact outcome line from case frontmatter (shown in dossier). */
+  outcome?: string;
+  /** Local logo path under /logos/ when available from the board asset set. */
+  logo?: string;
   builds: number;
   period: string;
   /** Homepage conversion anchors (Everest, ERGOBIT toolkit, BocalBun). */
@@ -49,6 +53,55 @@ export interface Engagement {
   media?: string;
   caption?: string;
   surfaces: Surface[];
+}
+
+/** Board-era logos reused on the Engagement Console (slug → public path). */
+export const ENGAGEMENT_LOGOS: Record<string, string> = {
+  "everest-finance": "/logos/everest-finance.png",
+  "odoo-testing-toolkit": "/logos/ergobit.png",
+  "bankingbook-analytics": "/logos/bbafintech.png",
+  "ndouckmane-transit": "/logos/ndouckmane.svg",
+  eduplan: "/logos/eduplan.svg",
+  "les-hirondelles": "/logos/les-hirondelles.svg",
+  gerpain: "/logos/gerpain.svg",
+  "mansour-holding": "/logos/mansour.png",
+  mamebimo: "/logos/mamebimo.png",
+  asaaman: "/logos/asaaman.svg",
+  "dakar-sport-shop": "/logos/dakar-sport.jpg",
+};
+
+/** Journey branch → logo (employers still on Background timeline). */
+export const JOURNEY_LOGOS: Record<string, string> = {
+  "everest-finance": "/logos/everest-finance.png",
+  ergobit: "/logos/ergobit.png",
+  bankingbook: "/logos/bbafintech.png",
+  "purolator-lab": "/logos/purolator.png",
+  "orange-dlab": "/logos/orange-dc.jpg",
+  "itech-afrique": "/logos/itech-solutions.png",
+};
+
+/** Two-letter monogram when no logo asset exists. */
+export function engagementMonogram(name: string): string {
+  const parts = name
+    .replace(/[—–].*$/, "")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+  if (parts.length >= 2) {
+    return `${parts[0]![0] ?? ""}${parts[1]![0] ?? ""}`.toUpperCase();
+  }
+  return name.slice(0, 2).toUpperCase();
+}
+
+/** Placeholder URLs end with `*` until the real public link is known. */
+export function isPendingUrl(url?: string): boolean {
+  return Boolean(url?.includes("*"));
+}
+
+/** Strip trailing asterisk used as a “URL TBD” marker. */
+export function pendingUrlLabel(url?: string, label?: string): string {
+  const raw = label || url?.replace(/^https?:\/\//, "") || "";
+  return raw;
 }
 
 /** Fixed rail order for featured anchors — founders/CTOs see proof depth first. */
@@ -113,8 +166,8 @@ export const journey: JourneyEntry[] = [
     roleFr: "Opérateur technique senior",
     org: "Everest Finance, Dakar",
     orgFr: "Everest Finance, Dakar",
-    note: "Solo across three fintech products.",
-    noteFr: "Solo sur trois produits fintech.",
+    note: "Solo across three fintech products — two in production, Formos in demo.",
+    noteFr: "Solo sur trois produits fintech — deux en production, Formos en démo.",
   },
   {
     period: "2024 - 26",
@@ -128,8 +181,8 @@ export const journey: JourneyEntry[] = [
     noteFr: "Modules Odoo et discipline de tests de migration.",
   },
   {
-    period: "2023 - 24",
-    periodFr: "2023 - 24",
+    period: "2024 - 25",
+    periodFr: "2024 - 25",
     branch: "bankingbook",
     role: "Contract engineer",
     roleFr: "Ingénieur en contrat",

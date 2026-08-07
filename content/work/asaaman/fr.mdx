@@ -1,0 +1,64 @@
+---
+title: "Asaaman — semantic video search for drone footage"
+titleFr: "Asaaman — recherche sémantique vidéo pour images drone"
+summary: "Product and web surfaces for semantic search over drone video — finding relevant moments in long aerial footage without scrubbing frame by frame."
+summaryFr: "Surfaces produit et web pour la recherche sémantique sur vidéo drone — retrouver les moments pertinents dans de longs rushes aériens sans scrub frame par frame."
+role: "Opérateur technique solo"
+domain: "IA / systèmes vidéo"
+stack:
+  - "TypeScript"
+  - "Next.js"
+  - "Video pipelines"
+  - "Semantic search"
+date: "2024-10"
+featured: false
+confidential: false
+status: shipped
+period: "2024"
+outcome: "Site produit en ligne sur asaaman.com"
+surfaces:
+  - name: "Product site"
+    nameFr: "Site produit"
+    status: "Shipped"
+    statusFr: "Livré"
+    url: "https://asaaman.com"
+    urlLabel: "asaaman.com"
+    urlLabelFr: "asaaman.com"
+    blurb: "Public product presence explaining semantic video search for drone and surveillance-oriented footage — the conversion surface for demos and partners."
+    blurbFr: "Présence produit publique pour la recherche sémantique vidéo (drone / surveillance) — surface de conversion pour démos et partenaires."
+    stack: ["TypeScript", "Next.js"]
+  - name: "Search experience"
+    nameFr: "Expérience de recherche"
+    status: "Shipped"
+    statusFr: "Livré"
+    url: "https://app.asaaman.com*"
+    urlLabel: "app.asaaman.com*"
+    urlLabelFr: "app.asaaman.com*"
+    blurb: "Query-to-clip workflow over long video corpora — semantic retrieval instead of manual timeline scrubbing for operators reviewing aerial footage."
+    blurbFr: "Parcours requête → clip sur de longs corpus vidéo — retrieval sémantique au lieu du scrub manuel pour les opérateurs qui reviennent des rushes aériens."
+    stack: ["Semantic search", "Video pipelines", "TypeScript"]
+---
+
+## Contexte
+
+Asaaman traite une douleur ops concrète : les longues vidéos drone / aériennes coûtent cher à revoir à la main. La direction produit est la recherche sémantique — demander ce dont on a besoin, atterrir sur le clip pertinent — avec un site public sur asaaman.com et une surface app pour l'expérience de recherche.
+
+## Problème
+
+La revue frame par frame ne scale pas. Les équipes qui collectent des rushes aériens ont besoin d'un retrieval qui comprend le contenu, pas seulement timestamps et noms de fichiers. Sans ça, les rushes s'accumulent inutilisés ou les revues brûlent des heures.
+
+## Approche
+
+- **Retrieval sémantique plutôt que scrub** — accès par requête à de longs corpus vidéo.
+- **Surface produit publique** — asaaman.com comme récit et porte d'entrée partenaires.
+- **Chemin app pour opérateurs** — expérience de recherche séparée du marketing (URL publique à confirmer).
+
+## Résultat
+
+Site produit en ligne sur [asaaman.com](https://asaaman.com). URL app marquée `*` jusqu'à confirmation du déploiement production.
+
+## Leçons
+
+**Les produits IA ont encore besoin d'une histoire ops.** La recherche sémantique ne compte que si les opérateurs font assez confiance aux résultats pour sauter le scrub.
+
+**Séparer marketing et instrument.** Le site vend l'idée ; l'app doit survivre au volume réel des rushes.

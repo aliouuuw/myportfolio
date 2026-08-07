@@ -2,6 +2,9 @@
 import {
   domainSlug,
   domainLabel,
+  engagementMonogram,
+  isPendingUrl,
+  pendingUrlLabel,
   type Engagement,
 } from "@/data/lab-precision";
 
@@ -15,95 +18,145 @@ const isFr = locale === "fr";
 const railLabel = isFr ? "Mandats" : "Engagements";
 const caseStudyLabel = isFr ? "Voir l'étude de cas" : "View case study";
 const viewProjectFallback = isFr ? "Voir le projet" : "View project";
+const pendingTitle = isFr ? "Lien public à venir" : "Public URL coming soon";
 ---
 
 <div class="lp-console" id="engagement-console">
   <nav class="lp-console-rail">
     <ul class="lp-console-list" role="list" aria-label={railLabel}>
       {
-        engagements.map((eng) => (
-          <li class="lp-console-item" data-eng={eng.slug}>
-            <button
-              class="lp-console-cap"
-              type="button"
-              id={`engagement-${eng.slug}`}
-              data-eng={eng.slug}
-              aria-controls={`dossier-${eng.slug}`}
-              aria-expanded="false"
-            >
-              <span class="lp-console-cap-text">
-                <span class="lp-console-cap-name">{eng.name}</span>
-                <span class="lp-console-cap-period">{eng.period}</span>
-              </span>
-              <span class="lp-console-cap-chevron" aria-hidden="true" />
-            </button>
-            <div
-              class:list={["lp-dossier", eng.surfaces.length === 1 && "lp-dossier--solo"]}
-              id={`dossier-${eng.slug}`}
-              role="region"
-              aria-labelledby={`engagement-${eng.slug}`}
-            >
-              <h3 class="lp-dossier-title">{eng.name}</h3>
-              <p class="lp-dossier-sub">{eng.detail}</p>
-              <div class="lp-dossier-meta-row">
-                <span class="lp-dossier-period">{eng.period}</span>
-                <span
-                  class={`lp-dossier-domain lp-dossier-domain--${domainSlug(eng.domain)}`}
-                >
-                  {domainLabel(eng.domain, locale)}
+        engagements.map((eng) => {
+          const mono = engagementMonogram(eng.name);
+          return (
+            <li class="lp-console-item" data-eng={eng.slug}>
+              <button
+                class="lp-console-cap"
+                type="button"
+                id={`engagement-${eng.slug}`}
+                data-eng={eng.slug}
+                aria-controls={`dossier-${eng.slug}`}
+                aria-expanded="false"
+              >
+                <span class="lp-mark" aria-hidden="true">
+                  {eng.logo ? (
+                    <img
+                      class="lp-mark-img"
+                      src={eng.logo}
+                      alt=""
+                      width="28"
+                      height="28"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <span class="lp-mark-mono">{mono}</span>
+                  )}
                 </span>
-              </div>
-              {eng.surfaces.length > 0 && (
-                <div class="lp-dossier-surfaces">
-                  {eng.surfaces.map((surface) => (
-                    <div class="lp-dossier-surface">
-                      <h5 class="lp-dossier-surface-name">{surface.name}</h5>
-                      <p class="lp-dossier-surface-blurb">{surface.blurb}</p>
-                      {surface.stack.length > 0 && (
-                        <p class="lp-dossier-surface-stack">{surface.stack.join(" · ")}</p>
-                      )}
-                      {surface.url && (
-                        <a
-                          class="lp-dossier-surface-link"
-                          href={surface.url}
-                          target="_blank"
-                          rel="noopener"
-                        >
-                          {surface.urlLabel ?? viewProjectFallback}
-                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                            <path
-                              d="M3 9L9 3M9 3H4.5M9 3V7.5"
-                              stroke="currentColor"
-                              stroke-width="1.5"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            />
-                          </svg>
-                        </a>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
-              {eng.href && (
-                <a class="lp-dossier-link" href={eng.href}>
-                  <span>{caseStudyLabel}</span>
-                  <span class="lp-dossier-link-icon" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <path
-                        d="M3.5 10.5L10.5 3.5M10.5 3.5H4.75M10.5 3.5V9.25"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                <span class="lp-console-cap-text">
+                  <span class="lp-console-cap-name">{eng.name}</span>
+                  <span class="lp-console-cap-period">{eng.period}</span>
+                </span>
+                <span class="lp-console-cap-chevron" aria-hidden="true" />
+              </button>
+              <div
+                class:list={["lp-dossier", eng.surfaces.length === 1 && "lp-dossier--solo"]}
+                id={`dossier-${eng.slug}`}
+                role="region"
+                aria-labelledby={`engagement-${eng.slug}`}
+              >
+                <div class="lp-dossier-head">
+                  <span class="lp-mark lp-mark--lg" aria-hidden="true">
+                    {eng.logo ? (
+                      <img
+                        class="lp-mark-img"
+                        src={eng.logo}
+                        alt=""
+                        width="40"
+                        height="40"
+                        loading="lazy"
+                        decoding="async"
                       />
-                    </svg>
+                    ) : (
+                      <span class="lp-mark-mono">{mono}</span>
+                    )}
                   </span>
-                </a>
-              )}
-            </div>
-          </li>
-        ))
+                  <h3 class="lp-dossier-title">{eng.name}</h3>
+                </div>
+                <p class="lp-dossier-sub">{eng.detail}</p>
+                {eng.outcome && <p class="lp-dossier-outcome">{eng.outcome}</p>}
+                <div class="lp-dossier-meta-row">
+                  <span class="lp-dossier-period">{eng.period}</span>
+                  <span
+                    class={`lp-dossier-domain lp-dossier-domain--${domainSlug(eng.domain)}`}
+                  >
+                    {domainLabel(eng.domain, locale)}
+                  </span>
+                </div>
+                {eng.surfaces.length > 0 && (
+                  <div class="lp-dossier-surfaces">
+                    {eng.surfaces.map((surface) => {
+                      const label =
+                        pendingUrlLabel(surface.url, surface.urlLabel) || viewProjectFallback;
+                      const pending = isPendingUrl(surface.url);
+                      return (
+                        <div class="lp-dossier-surface">
+                          <h5 class="lp-dossier-surface-name">{surface.name}</h5>
+                          <p class="lp-dossier-surface-blurb">{surface.blurb}</p>
+                          {surface.stack.length > 0 && (
+                            <p class="lp-dossier-surface-stack">{surface.stack.join(" · ")}</p>
+                          )}
+                          {surface.url && !pending && (
+                            <a
+                              class="lp-dossier-surface-link"
+                              href={surface.url}
+                              target="_blank"
+                              rel="noopener"
+                            >
+                              {label}
+                              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                                <path
+                                  d="M3 9L9 3M9 3H4.5M9 3V7.5"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                />
+                              </svg>
+                            </a>
+                          )}
+                          {surface.url && pending && (
+                            <span
+                              class="lp-dossier-surface-link lp-dossier-surface-link--pending"
+                              title={pendingTitle}
+                            >
+                              {label}
+                            </span>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+                {eng.href && (
+                  <a class="lp-dossier-link" href={eng.href}>
+                    <span>{caseStudyLabel}</span>
+                    <span class="lp-dossier-link-icon" aria-hidden="true">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path
+                          d="M3.5 10.5L10.5 3.5M10.5 3.5H4.75M10.5 3.5V9.25"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </span>
+                  </a>
+                )}
+              </div>
+            </li>
+          );
+        })
       }
     </ul>
   </nav>

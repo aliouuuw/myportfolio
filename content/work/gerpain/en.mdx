@@ -1,0 +1,79 @@
+---
+title: "Gerpain — bakery distribution operations and ledger truth"
+titleFr: "Gerpain — opérations de distribution boulangère et vérité ledger"
+summary: "Multi-bakery distribution software — deliveries, cash collections, settlement, commissions, inventory — with an append-only Bocal ledger as the financial source of truth."
+summaryFr: "Logiciel de distribution multi-boulangeries — livraisons, encaissements, règlement, commissions, stock — avec un ledger Bocal append-only comme source de vérité financière."
+role: "Solo technical operator"
+domain: "Operations"
+stack:
+  - "TypeScript"
+  - "TanStack Start"
+  - "oRPC"
+  - "Drizzle ORM"
+  - "Neon Postgres"
+  - "Better Auth"
+  - "Bocal ledger"
+date: "2025-11"
+featured: false
+confidential: false
+status: active
+period: "2025-11 — present"
+outcome: "Operator workflows + Bocal ledger substrate in active build"
+surfaces:
+  - name: "Operator console"
+    nameFr: "Console opérateur"
+    status: "Active"
+    statusFr: "Actif"
+    url: "https://app.gerpain.sn*"
+    urlLabel: "app.gerpain.sn*"
+    urlLabelFr: "app.gerpain.sn*"
+    blurb: "FR-first multi-tenant ops UI for deliveries, cash collections, settlement, and commissions across bakeries — workflow status separate from ledger truth."
+    blurbFr: "UI ops multi-locataire FR d'abord : livraisons, encaissements, règlement et commissions entre boulangeries — statut workflow séparé de la vérité ledger."
+    stack: ["TanStack Start", "oRPC", "Better Auth", "TanStack Query"]
+  - name: "Bocal ledger"
+    nameFr: "Ledger Bocal"
+    status: "Active"
+    statusFr: "Actif"
+    url: "https://app.gerpain.sn/ledger*"
+    urlLabel: "app.gerpain.sn/ledger*"
+    urlLabelFr: "app.gerpain.sn/ledger*"
+    blurb: "Append-only balanced movements with derived balances — money mutations post atomically when a collection is validated; no in-place rewrites of financial truth."
+    blurbFr: "Mouvements équilibrés append-only avec soldes dérivés — les mutations d'argent se postent atomiquement à la validation d'un encaissement ; pas de réécriture in-place de la vérité financière."
+    stack: ["Bocal", "Drizzle", "Neon Postgres"]
+  - name: "Inventory & deliveries"
+    nameFr: "Stock & livraisons"
+    status: "Active"
+    statusFr: "Actif"
+    url: "https://app.gerpain.sn/ops*"
+    urlLabel: "app.gerpain.sn/ops*"
+    urlLabelFr: "app.gerpain.sn/ops*"
+    blurb: "Bakery-scoped inventory and delivery workflows with RBAC — the operational spine that feeds settlement and commission calculations."
+    blurbFr: "Stock et livraisons scoped boulangerie avec RBAC — colonne vertébrale ops qui alimente règlement et commissions."
+    stack: ["Drizzle", "TypeScript", "Better Auth"]
+---
+
+## Context
+
+Gerpain is bakery distribution software for multi-bakery operations in Senegal — deliveries, cash collections, settlement, commissions, and inventory. It is also the proving ground for **Bocal**: an append-only ledger substrate meant to travel unchanged into other domains (EduPlan fees next).
+
+The stack is migrating from a split Hono + Next.js app toward a unified TanStack Start + oRPC + Drizzle + Better Auth base, with Bocal as a framework-free package.
+
+## Problem
+
+Bakery distribution money work fails when workflow tables become the financial record. Operators need mutable statuses (`pending → validated`); finance needs immutable, balanced history. Mixing the two produces silent drift and unverifiable commissions.
+
+## Approach
+
+- **Dual-layer money model** — workflow tables for operator UX; Bocal ledger for financial truth; atomic post on validate.
+- **Multi-tenant by default** — every tenant query scoped by organization and bakery.
+- **Repeatable base** — same typed full-stack shape intended for the next ops product, not a one-off bakery app.
+
+## Outcome
+
+Active build: operator workflows plus Bocal as the money substrate. Public deploy pending — URLs marked `*` until production DNS lands.
+
+## Lessons
+
+**Money needs a substrate, not more CRUD.** Agents make screens cheap; balanced append-only movements are the hard part worth owning.
+
+**Gerpain validates Bocal in the field.** If EduPlan can drop in the same ledger unchanged, the thesis is proven — not just documented.

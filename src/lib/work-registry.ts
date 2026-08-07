@@ -5,6 +5,7 @@ import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import {
   ANCHOR_SLUGS,
+  ENGAGEMENT_LOGOS,
   type Domain,
   type Engagement,
   type Surface,
@@ -86,6 +87,8 @@ function mapWorkEntryToEngagement(entry: WorkEntry, locale: WorkLocale = "en"): 
     slug,
     domain,
     detail: uiDash(summary),
+    outcome: data.outcome ? uiDash(data.outcome) : undefined,
+    logo: ENGAGEMENT_LOGOS[slug],
     builds: surfaces.length || 1,
     period: localizePeriod(data.period ?? data.date, locale),
     featured: data.featured,
@@ -153,7 +156,7 @@ const CAPABILITY_MAP: Record<string, { en: string; fr: string }[]> = {
     { en: "ERP customization", fr: "Personnalisation ERP" },
     { en: "Test automation & QA", fr: "Automatisation des tests & QA" },
   ],
-  bankingbook: [
+  "bankingbook-analytics": [
     { en: "Payment & financial systems", fr: "Systèmes de paiement & financiers" },
     { en: "API architecture", fr: "Architecture d'API" },
   ],
@@ -170,8 +173,22 @@ const CAPABILITY_MAP: Record<string, { en: string; fr: string }[]> = {
     { en: "Education platforms", fr: "Plateformes éducatives" },
     { en: "Dashboards & reporting", fr: "Tableaux de bord & reporting" },
   ],
+  "les-hirondelles": [
+    { en: "Education platforms", fr: "Plateformes éducatives" },
+  ],
   "dakar-sport-shop": [
     { en: "E-commerce platforms", fr: "Plateformes e-commerce" },
+  ],
+  gerpain: [
+    { en: "Payment & financial systems", fr: "Systèmes de paiement & financiers" },
+    { en: "Auth & multi-tenancy", fr: "Auth & multi-locataire" },
+  ],
+  mamebimo: [
+    { en: "E-commerce platforms", fr: "Plateformes e-commerce" },
+    { en: "Auth & multi-tenancy", fr: "Auth & multi-locataire" },
+  ],
+  asaaman: [
+    { en: "Dashboards & reporting", fr: "Tableaux de bord & reporting" },
   ],
   "bocalbun-retrospective": [
     { en: "Developer tooling", fr: "Outillage développeur" },

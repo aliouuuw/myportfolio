@@ -37,7 +37,8 @@ Visitor reaction to earn: “This person probably writes excellent software.”
 
 Operational systems for fintechs and ops-heavy businesses — internal tools,
 workflows, ERP modules, and domain-specific systems — shipped from Dakar,
-bilingual FR/EN.
+bilingual FR/EN. Public one-liner: solo operator for production systems
+(fintech, ERP migrations, ops software).
 
 Not selling: generic web/React-for-hire, agency retainers, or “I built a
 framework” as the headline.
@@ -55,7 +56,9 @@ Canonical role title on the product: **Software Engineer**.
 - Contact is direct channels (email, LinkedIn, GitHub, WhatsApp); replies within
   48h weekdays.
 - Author works from Dakar (WAT); currently solo technical operator at Everest
-  Finance; selective availability.
+  Finance; selective availability (limited client capacity).
+- Surface URLs ending in `*` are placeholders until the public link is known —
+  rendered as non-clickable “coming soon” labels.
 
 ## Capabilities and Constraints
 
