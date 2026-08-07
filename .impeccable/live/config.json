@@ -1,0 +1,11 @@
+{
+  "files": [
+    "src/pages/index.astro",
+    "src/pages/fr/index.astro",
+    "src/layouts/CaseStudy.astro",
+    "src/layouts/Essay.astro"
+  ],
+  "insertBefore": "</body>",
+  "commentSyntax": "html",
+  "cspChecked": true
+}

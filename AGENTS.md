@@ -29,7 +29,7 @@ src/
     CaseStudy.astro       ← proof / case-study pages
     Essay.astro           ← writing pages
   pages/
-    index.astro           ← EN home (Editorial + Ember Trace)
+    index.astro           ← EN home (Editorial + Google Blue)
     fr/index.astro        ← FR home
     work/[slug].astro     ← EN case studies
     fr/work/[slug].astro  ← FR case studies
@@ -40,7 +40,7 @@ src/
     capability-console.ts ← engagement console panel switching
     theme.ts              ← shared light/dark theme
   styles/
-    lab-precision.css     ← home surface (Editorial + Ember Trace)
+    lab-precision.css     ← home surface (Editorial + Google Blue)
     case-study.css        ← proof page typography
     tokens.css            ← shared design tokens
   content.config.ts       ← Zod schema for proofs
@@ -68,7 +68,7 @@ docs/
 ## Key conventions
 
 - **Home surface**: Lab Precision Engagement Console (`lab-precision.css` + `capability-console.ts`). Soft-UI instrument panel — not a project grid.
-- **Palette**: Editorial + Ember Trace — canvas `#f5f5f5` / `#0c0a09`, ink `#292524`, accent `#c2410c` (status/links only; CTAs stay ink pills).
+- **Palette**: Editorial + Google Blue — canvas `#f8f9fa` / `#202124`, accent `#4285f4` (CTAs + surface tint), status green lamp, quiet shared chips.
 - **Adding a proof**: Create `content/work/<slug>/en.mdx` + `fr.mdx` with valid frontmatter. Build validates via Zod.
 - **Content files**: MDX with YAML frontmatter. Bilingual fields: `title` / `titleFr`, `summary` / `summaryFr`.
 - **No `any` types**: use proper TypeScript types throughout

@@ -2,6 +2,9 @@
 import "@/styles/lab-precision.css";
 import LabBackground from "@/components/lab-precision/LabBackground.astro";
 import LabPrecisionHeader from "@/components/lab-precision/LabPrecisionHeader.astro";
+import HugeIcon from "@/components/lab-precision/HugeIcon.astro";
+import ThemeBoot from "@/components/ThemeBoot.astro";
+import { ArrowDown01Icon } from "@hugeicons/core-free-icons";
 import { getEngagements, domainSlug, domainLabel } from "@/lib/work-registry";
 
 /* Ancres d'abord (Everest → toolkit Odoo → BocalBun), puis le reste par période. */
@@ -10,10 +13,10 @@ const locale = "fr" as const;
 ---
 
 <!doctype html>
-<html lang="fr" data-theme="light">
+<html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Aliou Wade · Ingénieur logiciel</title>
     <meta
       name="description"
@@ -30,10 +33,7 @@ const locale = "fr" as const;
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <script is:inline>
-      import { initTheme } from "@/scripts/theme";
-      initTheme();
-    </script>
+    <ThemeBoot />
   </head>
   <body class="lp" data-view="work">
     <a class="lp-skip" href="#lp-foreground">Aller au contenu</a>
@@ -110,6 +110,10 @@ const locale = "fr" as const;
                       </li>
                     ))}
                   </ul>
+                  <span class="lp-console-scroll-hint" aria-hidden="true">
+                    <HugeIcon icon={ArrowDown01Icon} size={13} />
+                    <HugeIcon icon={ArrowDown01Icon} size={16} />
+                  </span>
                 </nav>
 
                 <div class="lp-console-dossier">

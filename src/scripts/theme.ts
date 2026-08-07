@@ -30,9 +30,9 @@ export function initTheme(): void {
   applyTheme(getStoredTheme());
 }
 
-/** Toggle theme and persist. */
+/** Toggle theme and persist. Uses DOM state so the control stays in sync even if boot failed. */
 export function toggleTheme(): Theme {
-  const next = getStoredTheme() === "dark" ? "light" : "dark";
+  const next = getCurrentTheme() === "dark" ? "light" : "dark";
   try {
     localStorage.setItem(THEME_KEY, next);
   } catch {

@@ -18,38 +18,47 @@ Sony — material is soft-UI, not pastel marketing orbs.
 
 ## Theme
 
-- **Default: light editorial** — ElevenLabs off-white canvas (`#f5f5f5`),
-  warm near-black ink (`#292524`), soft-UI lift on peeks / pills / mode track.
+- **Default: light editorial** — Material grey canvas (`#f8f9fa`),
+  Google ink (`#202124`), soft-UI lift on peeks / pills / mode track.
   No pastel orbs.
-- **True dark alternate** — stone-black soft-UI (`#0c0a09`), same structure.
+- **True dark alternate** — Material grey-900 soft-UI (`#202124`), same structure.
   Toggle persists via `portfolio-theme` localStorage.
-- **Palette: Editorial + Ember Trace** — cool editorial grey + sparse ember.
-  - Canvas: `#f5f5f5` / `#0c0a09`
-  - Ink: `#292524` / `#f5f5f4`
-  - Accent: `#c2410c` light / `#fb923c` dark
-  - Ink CTAs: `#292524` on off-white / `#f5f5f4` on stone
-- **Accent discipline:** ember is for status lamp, active signal, links, peek
-  wash, domain tint — never primary CTA fills, never full-panel washes.
-  Voltage stays rare on purpose (instrument heat, not alert chrome).
+- **Palette: Editorial + Google Blue** — Google brand, restrained.
+  - Canvas: `#f8f9fa` / `#202124`
+  - Ink: `#202124` / `#e8eaed`
+  - Accent: `#4285f4` light / `#8ab4f8` dark (Google Blue)
+  - Status green on lamp; dossier surfaces use soft blue tint
+  - CTAs: Google Blue pills (`#4285f4` / `#8ab4f8`)
+  - Chips: shared muted language (not rainbow)
+- **Accent discipline:** polished roles, one system.
+  - Green (`--status`): availability lamp only
+  - Blue (`--accent` / `--cta`): primary CTAs, links, focus, soft console selection
+  - Blue wash (`--surface-tint`): dossier surface cards for panel contrast
+  - Chips (`--chip-*`): one quiet muted language for roster counts + domain badges
+  - Selection chrome: soft-UI lift (modes/locales) — no side bars, no chip rainbow
+  Skipped: yellow meta chips, domain color taxonomy, multi-corner washes.
+- **Mobile:** stacked console shows ~2⅔ client rows with a bottom fade/blur
+  cue (fade clears at end); intrinsic CTA pills; journey cards share
+  `--surface-tint`; safe-area + coarse-pointer targets on chrome.
 - **Token aliases:** case-study `tokens.css` exposes `--bg`/`--cta`/`--lift`
   aliases aligned with home vocabulary (full merge still optional).
 
 ## Design language
 
-**Take from ElevenLabs:** type ladder (light display / quiet body), ink pill
+**Take from ElevenLabs:** type ladder (light display / quiet body), pill
 CTAs, outline secondary pills, voice-row / directory list DNA, ~96px section
-rhythm, badge-pill availability, single soft elevation for peeks, warm
-near-black ink on quiet off-white (`#f5f5f5`).
+rhythm, badge-pill availability, single soft elevation for peeks, Google
+ink on Material grey canvas (`#f8f9fa`).
 
-**Accent (ours):** Ember Trace — neo-futurist heat without browser blue or
-AI-purple. Sparse use only.
+**Accent (ours):** Google Blue for action and surface tint; green for live
+status. Chips stay quiet and consistent. Red/yellow stay off chrome.
 
 **Keep ours:** Switzer + JetBrains Mono, soft-UI machined lift/well depth,
 Engagement Console instrument panel — not atmospheric orbs.
 
 **Don't take:** mint/peach/lavender orbs, white card grids, Inter/Waldenburg,
-saturated action greens, coding-theatre UI, blue-filled CTAs, Arc cream,
-Arc royal blue as brand voltage.
+red as CTA fills, Material four-color rainbow chrome, coding-theatre UI,
+Arc cream, yellow as global brand voltage.
 
 ---
 
@@ -106,7 +115,7 @@ Escape returns to Work. View state: `lab-precision-controller.ts`.
 
 Portrait + positioning + contacts + off the clock are localized EN/FR.
 
-Journey uses a quiet timeline metaphor (branch chips in ink, not ember wash).
+Journey uses a quiet timeline metaphor (branch chips in ink, not accent wash).
 Credentials use the same soft-UI card lift as console surfaces.
 
 ---

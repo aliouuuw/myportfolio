@@ -1,0 +1,19 @@
+---
+/** Blocking inline theme boot — must stay unbundled to avoid flash. */
+---
+
+<script is:inline>
+  (function () {
+    try {
+      var theme =
+        localStorage.getItem("portfolio-theme") ||
+        localStorage.getItem("operator-board-theme");
+      if (theme === "dark" || theme === "light") {
+        document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem("portfolio-theme", theme);
+      }
+    } catch (e) {
+      /* ignore */
+    }
+  })();
+</script>

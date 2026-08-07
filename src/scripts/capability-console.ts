@@ -27,6 +27,17 @@ export function initEngagementConsole(): void {
     window.setTimeout(() => cap.classList.remove("is-flash"), 900);
   };
 
+  const rail = root.querySelector<HTMLElement>(".lp-console-rail");
+  const capList = root.querySelector<HTMLElement>(".lp-console-cap-list");
+
+  const syncRailFade = (): void => {
+    if (!rail || !capList) return;
+    const canScroll = capList.scrollHeight > capList.clientHeight + 1;
+    const atEnd =
+      capList.scrollTop + capList.clientHeight >= capList.scrollHeight - 2;
+    rail.classList.toggle("is-at-end", !canScroll || atEnd);
+  };
+
   const activate = (
     slug: string,
     opts: { syncHash?: boolean; focus?: boolean; flash?: boolean } = {},
@@ -51,6 +62,14 @@ export function initEngagementConsole(): void {
         d.classList.add("is-entering");
       }
     });
+
+    /* Keep the active client visible in the mobile vertical rail */
+    target.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "nearest",
+      inline: "nearest",
+    });
+    syncRailFade();
 
     if (focus) target.focus();
     if (flash) flashCap(target);
@@ -132,8 +151,20 @@ export function initEngagementConsole(): void {
 
   if (fromHash) {
     const deep = caps.find((c) => c.getAttribute("data-eng") === fromHash);
-    if (deep) flashCap(deep);
+    if (deep) {
+      flashCap(deep);
+      deep.scrollIntoView({ behavior: "auto", block: "nearest", inline: "nearest" });
+    }
+  } else {
+    const first = caps.find((c) => c.classList.contains("is-active"));
+    first?.scrollIntoView({ behavior: "auto", block: "nearest", inline: "nearest" });
   }
+
+  if (capList) {
+    capList.addEventListener("scroll", syncRailFade, { passive: true });
+  }
+  window.addEventListener("resize", syncRailFade);
+  syncRailFade();
 
   // Deep link after load / back-forward if hash changes
   window.addEventListener("hashchange", () => {

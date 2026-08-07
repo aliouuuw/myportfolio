@@ -1,6 +1,10 @@
 /* / (root) — ElevenLabs editorial structure × soft-UI material.
- * Palette: Editorial + Ember Trace — off-white canvas + sparse ember accent.
- * CTAs stay ink pills. Accent = status, peek, links, domain wash only. */
+ * Palette: Editorial + Google Blue — Material greys + polished Google roles.
+ * Consistent roles (avoid chip/button rainbow slop):
+ *   green  = live status lamp only
+ *   blue   = CTAs, links, focus, selection, dossier surface wash
+ *   chips  = one quiet muted language (no yellow/green/blue badge rainbow)
+ * Selection = soft-UI lift — no side accent bars. */
 
 :root {
   --radius: 12px;
@@ -15,75 +19,97 @@
   --max: 72rem;
   --section: clamp(2.5rem, 5vw, 3.5rem);
 
-  /* Editorial + Ember Trace — light */
-  --bg: #f5f5f5;
+  /* Editorial + Google Blue — light (Material grey) */
+  --g-blue: #4285f4;
+  --g-red: #ea4335;
+  --g-yellow: #fbbc04;
+  --g-green: #34a853;
+  --bg: #f8f9fa;
   --paper: var(--bg);
   --surface: #ffffff;
   --surface-raised: #ffffff;
-  --surface-sunken: #ebebeb;
-  --surface-muted: #ececec;
-  --ink: #292524;
-  --ink-soft: #696969;
-  --ink-faint: #8a8580;
-  --line: rgba(41, 37, 36, 0.08);
-  --line-strong: rgba(41, 37, 36, 0.14);
-  --hairline: #e0e0e0;
-  --hairline-soft: #ebebeb;
-  --hairline-strong: #d4d4d4;
-  --accent: #c2410c;
-  --accent-soft: color-mix(in srgb, var(--accent) 12%, transparent);
-  --wash-strength: 5%;
-  --cta: #292524;
-  --cta-ink: #f5f5f5;
-  --cta-hover: #14110f;
-  --domain-fintech: color-mix(in srgb, #f5f5f5 82%, #c2410c 18%);
-  --domain-erp: color-mix(in srgb, #f5f5f5 88%, #a16207 12%);
-  --domain-systems: color-mix(in srgb, #f5f5f5 90%, #57534e 10%);
-  --domain-ops: color-mix(in srgb, #f5f5f5 88%, #78716c 12%);
+  --surface-sunken: #e8eaed;
+  --surface-muted: #f1f3f4;
+  --ink: #202124;
+  --ink-soft: #5f6368;
+  --ink-faint: #80868b;
+  --line: rgba(32, 33, 36, 0.08);
+  --line-strong: rgba(32, 33, 36, 0.14);
+  --hairline: #dadce0;
+  --hairline-soft: #e8eaed;
+  --hairline-strong: #bdc1c6;
+  --accent: var(--g-blue);
+  --accent-soft: color-mix(in srgb, var(--accent) 14%, transparent);
+  --status: var(--g-green);
+  --status-soft: color-mix(in srgb, var(--status) 18%, transparent);
+  --chip-bg: color-mix(in srgb, var(--surface-muted) 88%, transparent);
+  --chip-border: var(--hairline-soft);
+  --chip-ink: var(--ink-soft);
+  --wash-strength: 6%;
+  --cta: var(--g-blue);
+  --cta-ink: #ffffff;
+  --cta-hover: #1a73e8;
+  --domain-fintech: var(--chip-bg);
+  --domain-erp: var(--chip-bg);
+  --domain-systems: var(--chip-bg);
+  --domain-ops: var(--chip-bg);
+  --surface-tint: color-mix(in srgb, var(--surface) 90%, var(--g-blue) 10%);
+  --surface-tint-border: color-mix(in srgb, var(--g-blue) 16%, var(--hairline-soft));
 
   --edge-hi: rgba(255, 255, 255, 0.92);
-  --edge-lo: rgba(41, 37, 36, 0.06);
+  --edge-lo: rgba(32, 33, 36, 0.06);
   --lift:
     inset 0 1px 0 var(--edge-hi),
-    0 1px 2px rgba(41, 37, 36, 0.04),
-    0 10px 24px -12px rgba(41, 37, 36, 0.1);
+    0 1px 2px rgba(32, 33, 36, 0.04),
+    0 10px 24px -12px rgba(32, 33, 36, 0.1);
   --lift-preview:
     inset 0 1px 0 var(--edge-hi),
-    0 4px 16px rgba(41, 37, 36, 0.05),
-    0 22px 48px -16px rgba(41, 37, 36, 0.14);
+    0 4px 16px rgba(32, 33, 36, 0.05),
+    0 22px 48px -16px rgba(32, 33, 36, 0.14);
   --well:
-    inset 0 1px 4px rgba(41, 37, 36, 0.06),
+    inset 0 1px 4px rgba(32, 33, 36, 0.06),
     inset 0 -1px 0 rgba(255, 255, 255, 0.55);
-  --press: inset 0 2px 5px rgba(41, 37, 36, 0.14);
+  --press: inset 0 2px 5px rgba(32, 33, 36, 0.14);
   color-scheme: light;
 }
 
 html[data-theme="dark"] {
-  /* Editorial + Ember Trace — stone dark */
-  --bg: #0c0a09;
+  /* Editorial + Google Blue — Material dark grey */
+  --g-blue: #8ab4f8;
+  --g-red: #f28b82;
+  --g-yellow: #fdd663;
+  --g-green: #81c995;
+  --bg: #202124;
   --paper: var(--bg);
-  --surface: #161412;
-  --surface-raised: #1c1917;
-  --surface-sunken: #080706;
-  --surface-muted: #1a1714;
-  --ink: #f5f5f4;
-  --ink-soft: #b8b0a8;
-  --ink-faint: #8a8278;
-  --line: rgba(245, 245, 244, 0.08);
-  --line-strong: rgba(245, 245, 244, 0.14);
-  --hairline: rgba(245, 245, 244, 0.1);
-  --hairline-soft: rgba(245, 245, 244, 0.06);
-  --hairline-strong: rgba(245, 245, 244, 0.18);
-  --accent: #fb923c;
+  --surface: #292a2d;
+  --surface-raised: #303134;
+  --surface-sunken: #171717;
+  --surface-muted: #3c4043;
+  --ink: #e8eaed;
+  --ink-soft: #9aa0a6;
+  --ink-faint: #80868b;
+  --line: rgba(232, 234, 237, 0.08);
+  --line-strong: rgba(232, 234, 237, 0.14);
+  --hairline: rgba(232, 234, 237, 0.1);
+  --hairline-soft: rgba(232, 234, 237, 0.06);
+  --hairline-strong: rgba(232, 234, 237, 0.18);
+  --accent: var(--g-blue);
   --accent-soft: color-mix(in srgb, var(--accent) 18%, transparent);
-  --wash-strength: 7%;
-  --cta: #f5f5f4;
-  --cta-ink: #0c0a09;
-  --cta-hover: #ffffff;
-  --domain-fintech: color-mix(in srgb, var(--surface) 80%, #c2410c 20%);
-  --domain-erp: color-mix(in srgb, var(--surface) 86%, #a16207 14%);
-  --domain-systems: color-mix(in srgb, var(--surface) 88%, #a8a29e 12%);
-  --domain-ops: color-mix(in srgb, var(--surface) 88%, #a8a29e 12%);
+  --status: var(--g-green);
+  --status-soft: color-mix(in srgb, var(--status) 22%, transparent);
+  --chip-bg: color-mix(in srgb, var(--surface-muted) 70%, transparent);
+  --chip-border: var(--hairline-soft);
+  --chip-ink: var(--ink-soft);
+  --wash-strength: 8%;
+  --cta: var(--g-blue);
+  --cta-ink: #202124;
+  --cta-hover: #aecbfa;
+  --domain-fintech: var(--chip-bg);
+  --domain-erp: var(--chip-bg);
+  --domain-systems: var(--chip-bg);
+  --domain-ops: var(--chip-bg);
+  --surface-tint: color-mix(in srgb, var(--surface) 86%, var(--g-blue) 14%);
+  --surface-tint-border: color-mix(in srgb, var(--g-blue) 22%, var(--hairline-soft));
 
   --edge-hi: rgba(255, 255, 255, 0.07);
   --edge-lo: rgba(0, 0, 0, 0.55);
@@ -123,17 +149,14 @@ body.lp {
   color: var(--ink);
   background:
     radial-gradient(
-      88% 50% at 8% -6%,
-      color-mix(in srgb, var(--surface) 75%, transparent),
-      transparent 55%
-    ),
-    radial-gradient(
-      60% 40% at 92% 4%,
+      70% 42% at 100% 0%,
       color-mix(in srgb, var(--accent) var(--wash-strength), transparent),
-      transparent 50%
+      transparent 55%
     ),
     var(--bg);
   -webkit-font-smoothing: antialiased;
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
 }
 
 .lp-skip {
@@ -155,7 +178,7 @@ body.lp {
 /* —— Floating instrument island —— */
 .lp-nav-shell {
   position: sticky;
-  top: 0.75rem;
+  top: max(0.75rem, env(safe-area-inset-top, 0px));
   z-index: 30;
   display: flex;
   justify-content: center;
@@ -341,8 +364,8 @@ body.lp {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft);
+  background: var(--status);
+  box-shadow: 0 0 0 3px var(--status-soft);
   animation: lp-lamp 2.8s var(--ease) infinite;
 }
 
@@ -359,12 +382,16 @@ body.lp {
 @keyframes lp-lamp {
   0%,
   100% {
-    box-shadow: 0 0 0 3px var(--accent-soft);
+    box-shadow:
+      0 0 0 3px var(--status-soft),
+      0 0 10px color-mix(in srgb, var(--status) 28%, transparent);
     transform: scale(1);
   }
   50% {
-    box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 12%, transparent);
-    transform: scale(1.08);
+    box-shadow:
+      0 0 0 6px color-mix(in srgb, var(--status) 14%, transparent),
+      0 0 14px color-mix(in srgb, var(--status) 36%, transparent);
+    transform: scale(1.12);
   }
 }
 
@@ -589,7 +616,7 @@ html[data-theme="dark"] .lp-theme-moon {
 
 .lp-work-hero .lp-bio-role {
   margin-bottom: 0.85rem;
-  color: color-mix(in srgb, var(--ink-soft) 88%, var(--accent));
+  color: var(--ink-soft);
 }
 
 .lp-bio-subtitle {
@@ -663,7 +690,9 @@ html[data-theme="dark"] .lp-theme-moon {
   cursor: pointer;
   text-decoration: none;
   min-height: 2.75rem;
-  box-shadow: var(--lift);
+  box-shadow:
+    var(--lift),
+    0 1px 0 color-mix(in srgb, var(--cta-ink) 12%, transparent) inset;
   transition:
     background var(--duration) var(--ease),
     box-shadow var(--duration) var(--ease),
@@ -679,12 +708,15 @@ html[data-theme="dark"] .lp-theme-moon {
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--cta-ink) 14%, transparent);
+  background: color-mix(in srgb, var(--cta-ink) 18%, transparent);
+  color: var(--cta-ink);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: transform 280ms var(--ease);
+  transition:
+    transform 280ms var(--ease),
+    background var(--duration) var(--ease);
 }
 
 .lp-bio-more:hover {
@@ -693,6 +725,7 @@ html[data-theme="dark"] .lp-theme-moon {
 
 .lp-bio-more:hover .lp-btn-icon {
   transform: translate(2px, -2px);
+  background: color-mix(in srgb, var(--cta-ink) 24%, transparent);
 }
 
 .lp-bio-more:active {
@@ -731,8 +764,9 @@ html[data-theme="dark"] .lp-theme-moon {
 }
 
 .lp-btn-outline:hover {
-  border-color: var(--ink-faint);
-  background: color-mix(in srgb, var(--surface-muted) 60%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--hairline-strong));
+  color: var(--ink);
+  background: var(--accent-soft);
 }
 
 .lp-btn-outline:active {
@@ -751,8 +785,9 @@ html[data-theme="dark"] .lp-theme-moon {
   line-height: 1.35;
   padding: 0.2rem 0.55rem;
   border-radius: var(--radius-pill);
-  background: var(--surface-muted);
-  color: var(--ink);
+  background: var(--chip-bg);
+  color: var(--chip-ink);
+  border: 1px solid var(--chip-border);
   white-space: nowrap;
 }
 
@@ -802,11 +837,11 @@ html[data-theme="dark"] .lp-theme-moon {
   font-weight: 500;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--chip-ink);
   padding: 0.28rem 0.65rem;
   border-radius: var(--radius-pill);
-  background: color-mix(in srgb, var(--surface-muted) 80%, transparent);
-  border: 1px solid var(--hairline-soft);
+  background: var(--chip-bg);
+  border: 1px solid var(--chip-border);
   box-shadow: inset 0 1px 0 var(--edge-hi);
 }
 
@@ -823,23 +858,14 @@ html[data-theme="dark"] .lp-theme-moon {
 .lp-dir-heading {
   margin-bottom: 0.75rem;
   padding-left: 0.75rem;
-  border-left: 3px solid var(--hairline);
+  border-left: 1px solid var(--hairline-strong);
 }
 
-.lp-dir-group--fintech .lp-dir-heading {
-  border-left-color: var(--domain-fintech);
-}
-
-.lp-dir-group--erp .lp-dir-heading {
-  border-left-color: var(--domain-erp);
-}
-
-.lp-dir-group--systems .lp-dir-heading {
-  border-left-color: var(--domain-systems);
-}
-
+.lp-dir-group--fintech .lp-dir-heading,
+.lp-dir-group--erp .lp-dir-heading,
+.lp-dir-group--systems .lp-dir-heading,
 .lp-dir-group--ops .lp-dir-heading {
-  border-left-color: var(--domain-ops);
+  border-left-color: var(--hairline-strong);
 }
 
 .lp-dir-title {
@@ -905,7 +931,7 @@ html[data-theme="dark"] .lp-theme-moon {
 }
 
 .lp-roster-item.is-peek .lp-roster-row {
-  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
 }
 
 .lp-roster-main {
@@ -1004,6 +1030,8 @@ span.lp-roster-name {
   background: color-mix(in srgb, var(--surface) 94%, var(--bg));
   box-shadow: var(--lift);
   overflow: hidden;
+  min-width: 0;
+  width: 100%;
 }
 
 /* Rail — recessed well, mode-track language */
@@ -1024,6 +1052,11 @@ span.lp-roster-name {
   background: color-mix(in srgb, var(--surface-muted) 78%, transparent);
   border: 1px solid var(--hairline-soft);
   box-shadow: inset 0 1px 2px color-mix(in srgb, var(--ink) 4%, transparent);
+}
+
+/* Mobile-only; shown inside the fade via the ≤759px block */
+.lp-console-scroll-hint {
+  display: none;
 }
 
 .lp-console-cap {
@@ -1062,8 +1095,17 @@ span.lp-roster-name {
 
 .lp-console-cap.is-active {
   color: var(--ink);
-  background: var(--surface);
+  background: color-mix(in srgb, var(--surface) 92%, var(--accent-soft));
   box-shadow: var(--lift);
+}
+
+.lp-console-cap.is-active .lp-console-cap-name {
+  color: var(--ink);
+}
+
+.lp-console-cap.is-active .lp-console-cap-period {
+  color: var(--ink-soft);
+  opacity: 1;
 }
 
 .lp-console-cap.is-flash {
@@ -1079,6 +1121,18 @@ span.lp-roster-name {
   }
   100% {
     box-shadow: var(--lift);
+  }
+}
+
+@keyframes lp-scroll-hint {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 0.72;
+  }
+  50% {
+    transform: translateX(-50%) translateY(4px);
+    opacity: 1;
   }
 }
 
@@ -1104,11 +1158,6 @@ span.lp-roster-name {
   white-space: nowrap;
   color: var(--ink-faint);
   opacity: 0.85;
-}
-
-.lp-console-cap.is-active .lp-console-cap-period {
-  color: var(--ink-soft);
-  opacity: 1;
 }
 
 /* Dossier panel — raised surface */
@@ -1181,32 +1230,22 @@ span.lp-roster-name {
   text-transform: uppercase;
   padding: 0.2rem 0.55rem;
   border-radius: var(--radius-pill);
-  color: var(--ink-faint);
-  background: color-mix(in srgb, var(--surface-muted) 85%, transparent);
-  border: 1px solid var(--hairline-soft);
+  color: var(--chip-ink);
+  background: var(--chip-bg);
+  border: 1px solid var(--chip-border);
   box-shadow: inset 0 1px 0 var(--edge-hi);
 }
 
-.lp-dossier-domain--fintech { color: #9a3412; background: var(--domain-fintech); }
-.lp-dossier-domain--erp { color: #92400e; background: var(--domain-erp); }
-.lp-dossier-domain--systems { color: #57534e; background: var(--domain-systems); }
-.lp-dossier-domain--ops { color: #44403c; background: var(--domain-ops); }
-
-html[data-theme="dark"] .lp-dossier-domain--fintech,
-html[data-theme="dark"] .lp-dossier-domain--erp,
-html[data-theme="dark"] .lp-dossier-domain--systems,
-html[data-theme="dark"] .lp-dossier-domain--ops {
-  color: var(--ink-soft);
-  background: color-mix(in srgb, var(--surface-muted) 70%, transparent);
-  border-color: var(--hairline-soft);
+.lp-dossier-domain--fintech,
+.lp-dossier-domain--erp,
+.lp-dossier-domain--systems,
+.lp-dossier-domain--ops {
+  color: var(--chip-ink);
+  background: var(--chip-bg);
+  border-color: var(--chip-border);
 }
 
-html[data-theme="dark"] .lp-dossier-domain--fintech,
-html[data-theme="dark"] .lp-dossier-domain--erp {
-  color: color-mix(in srgb, var(--accent) 85%, var(--ink));
-}
-
-/* Surfaces — soft inset cards */
+/* Surfaces — soft accent-tinted cards for dossier contrast */
 .lp-dossier-surfaces {
   display: flex;
   flex-direction: column;
@@ -1216,18 +1255,20 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
 
 .lp-dossier-surface {
   padding: 0.85rem 1rem;
-  border: 1px solid var(--hairline-soft);
+  border: 1px solid var(--surface-tint-border);
   border-radius: var(--radius-sm);
-  background: color-mix(in srgb, var(--surface-muted) 40%, var(--surface));
+  background: var(--surface-tint);
   box-shadow: inset 0 1px 0 var(--edge-hi);
   transition:
     border-color var(--duration) var(--ease),
     box-shadow var(--duration) var(--ease),
+    background var(--duration) var(--ease),
     transform var(--duration) var(--ease);
 }
 
 .lp-dossier-surface:hover {
-  border-color: color-mix(in srgb, var(--accent) 28%, var(--hairline));
+  border-color: color-mix(in srgb, var(--accent) 32%, var(--hairline));
+  background: color-mix(in srgb, var(--surface) 84%, var(--accent) 16%);
   box-shadow: var(--lift);
   transform: translateY(-1px);
 }
@@ -1255,8 +1296,8 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
 
 .lp-dossier--solo .lp-dossier-surface {
   padding: 1.15rem 1.25rem;
-  border-color: var(--line-strong);
-  background: var(--surface);
+  border-color: var(--surface-tint-border);
+  background: var(--surface-tint);
   box-shadow: var(--lift);
 }
 
@@ -1282,6 +1323,7 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
   font-family: var(--mono);
   font-size: 0.6875rem;
   color: var(--ink-faint);
+  overflow-wrap: anywhere;
 }
 
 .lp-dossier-surface-link {
@@ -1289,10 +1331,12 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
   align-items: center;
   gap: 0.35rem;
   margin-top: 0.35rem;
+  max-width: 100%;
   font-size: 0.8125rem;
   font-weight: 500;
   color: var(--accent);
   text-decoration: none;
+  overflow-wrap: anywhere;
   transition: color var(--duration) var(--ease), gap var(--duration) var(--ease);
 }
 
@@ -1301,7 +1345,7 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
   gap: 0.5rem;
 }
 
-/* Case study CTA — ink pill (matches hero soft-UI) */
+/* Case study CTA — Google Blue pill (matches hero) */
 .lp-dossier-link {
   appearance: none;
   display: inline-flex;
@@ -1318,7 +1362,9 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
   font-size: 0.875rem;
   font-weight: 500;
   text-decoration: none;
-  box-shadow: var(--lift);
+  box-shadow:
+    var(--lift),
+    0 1px 0 color-mix(in srgb, var(--cta-ink) 12%, transparent) inset;
   transition:
     background var(--duration) var(--ease),
     box-shadow var(--duration) var(--ease),
@@ -1348,7 +1394,8 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
   width: 1.75rem;
   height: 1.75rem;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--cta-ink) 14%, transparent);
+  background: color-mix(in srgb, var(--cta-ink) 18%, transparent);
+  color: var(--cta-ink);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1356,39 +1403,139 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
   transition: transform 280ms var(--ease);
 }
 
-/* Responsive: stack rail above dossier on mobile */
+/* Responsive: stack rail above dossier.
+ * Mobile IA: vertical client list — show ~2⅔ rows + bottom fade to invite scroll. */
 @media (max-width: 759px) {
   .lp-console {
     grid-template-columns: 1fr;
+    min-width: 0;
   }
 
   .lp-console-rail {
+    position: relative;
     border-right: none;
     border-bottom: 1px solid var(--hairline-soft);
     padding: 0.55rem;
+    min-width: 0;
   }
 
   .lp-console-cap-list {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0.2rem;
-    padding: 0.2rem;
-    border-radius: var(--radius-pill);
+    --lp-cap-row: 2.5rem;
+    --lp-cap-gap: 0.15rem;
+    --lp-cap-pad: 0.2rem;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: var(--lp-cap-gap);
+    /* 2 full rows + ⅔ of the next + gaps before the peek row */
+    max-height: calc(
+      (2 * var(--lp-cap-pad))
+      + (2 * var(--lp-cap-row))
+      + (var(--lp-cap-row) * 2 / 3)
+      + (2 * var(--lp-cap-gap))
+    );
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
 
-  .lp-console-cap {
-    width: auto;
-    padding: 0.4rem 0.75rem;
-    border-radius: var(--radius-pill);
-  }
-
-  .lp-console-cap-period {
+  .lp-console-cap-list::-webkit-scrollbar {
     display: none;
   }
 
+  /* Bottom fade — soft ink veil; long transparent ramp so the top edge disappears */
+  .lp-console-rail::after {
+    content: "";
+    position: absolute;
+    left: 0.55rem;
+    right: 0.55rem;
+    bottom: 0.55rem;
+    height: 2.15rem;
+    border-radius: 0 0 calc(var(--radius) - 2px) calc(var(--radius) - 2px);
+    pointer-events: none;
+    z-index: 2;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 28%,
+      color-mix(in srgb, var(--ink) 3%, transparent) 48%,
+      color-mix(in srgb, var(--ink) 9%, transparent) 72%,
+      color-mix(in srgb, var(--ink) 18%, transparent) 100%
+    );
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    opacity: 1;
+    transition: opacity var(--duration) var(--ease);
+  }
+
+  .lp-console-rail.is-at-end::after {
+    opacity: 0;
+  }
+
+  .lp-console-scroll-hint {
+    display: flex;
+    position: absolute;
+    left: 50%;
+    bottom: calc(0.55rem + 0.08rem);
+    z-index: 3;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    /* Inverted: ink icons (dark on light / light on dark) */
+    color: var(--ink);
+    filter: drop-shadow(0 0 1px color-mix(in srgb, var(--surface) 70%, transparent));
+    pointer-events: none;
+    transform: translateX(-50%);
+    opacity: 1;
+    transition: opacity var(--duration) var(--ease);
+    animation: lp-scroll-hint 2.2s var(--ease) infinite;
+  }
+
+  .lp-console-scroll-hint svg {
+    display: block;
+    width: 0.8rem;
+    height: 0.8rem;
+    opacity: 0.85;
+  }
+
+  .lp-console-scroll-hint svg path {
+    stroke-width: 3.5;
+  }
+
+  .lp-console-scroll-hint svg + svg {
+    margin-top: -0.52rem;
+    width: 0.95rem;
+    height: 0.95rem;
+    opacity: 1;
+  }
+
+  .lp-console-rail.is-at-end .lp-console-scroll-hint {
+    opacity: 0;
+    animation: none;
+  }
+
+  .lp-console-cap {
+    width: 100%;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    padding: 0.55rem 0.7rem;
+    min-height: var(--lp-cap-row, 2.5rem);
+    height: var(--lp-cap-row, 2.5rem);
+    border-radius: calc(var(--radius) - 2px);
+  }
+
+  .lp-console-cap-period {
+    display: inline;
+    font-size: 0.625rem;
+  }
+
   .lp-console-dossier {
-    padding: 1.25rem 1rem;
+    padding: 1.15rem 1rem 1.35rem;
     box-shadow: none;
+    min-width: 0;
   }
 
   .lp-dossier-title {
@@ -1398,6 +1545,14 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
   .lp-dossier-meta-row {
     flex-wrap: wrap;
     gap: 0.5rem;
+  }
+
+  .lp-dossier-surfaces {
+    gap: 0.65rem;
+  }
+
+  .lp-dossier-surface {
+    padding: 0.95rem 1rem;
   }
 }
 
@@ -1467,18 +1622,24 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
   }
 }
 
-/* Mobile: same instrument, smaller type — never stretch full bleed */
+/* Mobile: denser pad, safer chrome — keep pills balanced (not vertically oblong) */
 @media (max-width: 640px) {
+  :root {
+    --pad: 1rem;
+  }
+
   .lp-nav-shell {
-    padding-inline: 0.85rem;
-    top: 0.4rem;
+    padding-inline: var(--pad);
+    top: max(0.4rem, env(safe-area-inset-top, 0px));
   }
 
   .lp-header {
-    gap: 0.3rem;
-    max-width: calc(100vw - 1.7rem);
-    min-height: 2.4rem;
-    padding: 0.22rem 0.28rem 0.22rem 0.55rem;
+    width: 100%;
+    max-width: 100%;
+    gap: 0.4rem;
+    min-height: 2.65rem;
+    padding: 0.28rem 0.35rem 0.28rem 0.55rem;
+    justify-content: space-between;
   }
 
   .lp-header-status .lp-avail-text {
@@ -1486,23 +1647,120 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
   }
 
   .lp-header-status {
-    padding-right: 0.1rem;
+    padding-right: 0.05rem;
+    flex-shrink: 0;
+  }
+
+  .lp-modes {
+    flex: 1 1 auto;
+    justify-content: center;
+    gap: 0.1rem;
+    padding: 0.15rem;
+    min-width: 0;
   }
 
   .lp-mode {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 auto;
     font-size: 0.75rem;
-    padding: 0.32rem 0.65rem;
+    /* Horizontal padding keeps the pill wider than tall */
+    padding: 0.45rem 0.85rem;
+    min-height: 0;
+    line-height: 1;
+  }
+
+  .lp-locales {
+    padding: 0.15rem;
   }
 
   .lp-locale {
-    min-height: 1.45rem;
-    min-width: 1.4rem;
-    padding: 0.18rem 0.35rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* Near-circle, not a tall capsule */
+    width: 2rem;
+    height: 2rem;
+    min-width: 2rem;
+    min-height: 2rem;
+    padding: 0;
   }
 
   .lp-theme {
-    width: 1.7rem;
-    height: 1.7rem;
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .lp-main {
+    padding-top: clamp(1.15rem, 3.5vw, 1.75rem);
+    padding-bottom: max(2.5rem, env(safe-area-inset-bottom, 0px) + 1.5rem);
+  }
+
+  .lp-main.lp-background-main {
+    padding-top: clamp(4.25rem, 12vw, 5.5rem);
+  }
+
+  .lp-work-hero {
+    max-width: none;
+  }
+
+  .lp-work-hero .lp-bio-name {
+    font-size: clamp(2.5rem, 11vw, 3.5rem);
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+  }
+
+  .lp-work-hero .lp-bio-line {
+    margin: 0 auto 1rem;
+    font-size: 1rem;
+  }
+
+  .lp-bio-links {
+    gap: 0.65rem 1rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .lp-bio-links a {
+    font-size: 0.875rem;
+    min-height: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .lp-roster {
+    margin-top: clamp(1.75rem, 5vw, 2.5rem);
+  }
+
+  .lp-roster-head {
+    margin-bottom: 0.85rem;
+  }
+
+  .lp-about {
+    gap: clamp(2rem, 6vw, 2.75rem);
+  }
+
+  .lp-about-hero {
+    gap: 1.35rem;
+  }
+
+  .lp-about-intro .lp-bio-name {
+    font-size: clamp(1.85rem, 8vw, 2.35rem);
+    max-width: none;
+  }
+
+  .lp-off-clock {
+    margin-top: 1.15rem;
+    padding-top: 1.1rem;
+  }
+
+  .lp-section-head {
+    margin-bottom: 1rem;
+    padding-bottom: 0.7rem;
+  }
+
+  .lp-footer {
+    padding-bottom: max(2rem, env(safe-area-inset-bottom, 0px) + 1.25rem);
   }
 }
 
@@ -1515,6 +1773,17 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
   .lp-header-status {
     display: inline-flex;
     padding-right: 0.15rem;
+  }
+
+  .lp-mode {
+    padding-inline: 0.65rem;
+  }
+}
+
+/* Coarse pointers: enlarge list targets; keep header pills proportioned via padding */
+@media (pointer: coarse) {
+  .lp-console-cap {
+    min-height: 2.75rem;
   }
 }
 
@@ -1618,6 +1887,11 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
   .lp-preview:not(.is-open) {
     transform: translate(-50%, calc(-50% + 10px)) scale(0.98);
   }
+
+  .lp-dossier-surface:hover,
+  .lp-git-summary:hover {
+    transform: none;
+  }
 }
 
 /* —— About page —— */
@@ -1661,16 +1935,16 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
 
 @media (max-width: 799px) {
   .lp-portrait {
-    width: min(11.5rem, 42vw);
-    max-width: 11.5rem;
+    width: min(9.5rem, 38vw);
+    max-width: 9.5rem;
   }
 
   .lp-portrait .lp-bezel-inner {
-    padding: 0.3rem;
+    padding: 0.28rem;
   }
 
   .lp-portrait figcaption {
-    margin-top: 0.45rem;
+    margin-top: 0.5rem;
     font-size: 0.625rem;
   }
 }
@@ -1740,7 +2014,7 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
   font-size: clamp(3.15rem, 7.5vw, 5.25rem);
   font-weight: 500;
   max-width: none;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.035em;
 }
 
 .lp-work-hero .lp-bio-line {
@@ -1768,7 +2042,8 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
   }
 
   .lp-dossier.is-entering,
-  .lp-console-cap.is-flash {
+  .lp-console-cap.is-flash,
+  .lp-console-scroll-hint {
     animation: none;
   }
 }
@@ -1823,7 +2098,7 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
 .lp-git-ref {
   font-family: var(--mono);
   font-size: 0.6875rem;
-  color: var(--accent);
+  color: var(--ink-faint);
   letter-spacing: 0.02em;
 }
 
@@ -1912,10 +2187,10 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
   list-style: none;
   cursor: pointer;
   padding: 0.8rem 0.95rem;
-  border: 1px solid var(--line);
+  border: 1px solid var(--surface-tint-border);
   border-radius: var(--radius);
-  background: var(--surface);
-  box-shadow: var(--lift);
+  background: var(--surface-tint);
+  box-shadow: inset 0 1px 0 var(--edge-hi);
   transition:
     border-color var(--duration) var(--ease),
     background var(--duration) var(--ease),
@@ -1954,9 +2229,9 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
   font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.02em;
-  color: var(--ink-soft);
-  background: color-mix(in srgb, var(--surface-muted) 88%, transparent);
-  border: 1px solid var(--hairline-soft);
+  color: var(--chip-ink);
+  background: var(--chip-bg);
+  border: 1px solid var(--chip-border);
   padding: 0.12rem 0.45rem;
   border-radius: var(--radius-sm);
   align-self: flex-start;
@@ -2035,14 +2310,16 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
 }
 
 .lp-git-summary:hover {
-  border-color: var(--line-strong);
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--surface-tint-border));
+  background: color-mix(in srgb, var(--surface) 82%, var(--accent) 18%);
+  box-shadow: var(--lift);
   transform: translateX(1px);
 }
 
 .lp-git-details[open] .lp-git-summary {
-  border-color: var(--line-strong);
-  background: var(--surface);
-  box-shadow: var(--lift-preview);
+  border-color: color-mix(in srgb, var(--accent) 32%, var(--surface-tint-border));
+  background: color-mix(in srgb, var(--surface) 80%, var(--accent) 20%);
+  box-shadow: var(--lift);
 }
 
 .lp-git-details[open] .lp-git-summary-caret {
@@ -2051,9 +2328,9 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
 }
 
 .lp-git-details[open] .lp-git-branch {
-  color: var(--ink);
-  background: color-mix(in srgb, var(--surface-muted) 70%, var(--surface));
-  border-color: var(--hairline-strong);
+  color: var(--chip-ink);
+  background: var(--chip-bg);
+  border-color: var(--chip-border);
 }
 
 .lp-git-summary:focus-visible {
@@ -2116,12 +2393,32 @@ html[data-theme="dark"] .lp-dossier-domain--erp {
   }
 
   .lp-git-commit {
-    grid-template-columns: 1.1rem minmax(0, 1fr);
-    gap: 0 0.75rem;
+    grid-template-columns: 0.85rem minmax(0, 1fr);
+    gap: 0 0.65rem;
+  }
+
+  .lp-git-node {
+    width: 0.55rem;
+    height: 0.55rem;
+    margin-top: 1.15rem;
   }
 
   .lp-git-summary {
-    padding: 0.75rem 0.85rem;
+    padding: 0.85rem 0.9rem;
+    gap: 0.55rem;
+  }
+
+  .lp-git-details {
+    margin-bottom: 0.7rem;
+  }
+
+  .lp-git-title {
+    font-size: 0.9375rem;
+  }
+
+  .lp-git-meta {
+    font-size: 0.8125rem;
+    gap: 0.25rem 0.5rem;
   }
 }
 
