@@ -377,7 +377,7 @@ html[data-theme="dark"] .lp-theme-moon {
 
 .lp-back-to-work:hover {
   border-color: var(--accent);
-  color: var(--ink);
+  color: var(--accent);
 }
 
 .lp-back-to-work:focus-visible {
@@ -600,7 +600,7 @@ html[data-theme="dark"] .lp-theme-moon {
 
 .lp-bio-links a:hover {
   border-color: var(--accent);
-  color: var(--ink);
+  color: var(--accent);
 }
 
 .lp-bio-more {
