@@ -2,14 +2,12 @@
 import "@/styles/lab-precision.css";
 import LabBackground from "@/components/lab-precision/LabBackground.astro";
 import LabPrecisionHeader from "@/components/lab-precision/LabPrecisionHeader.astro";
-import HugeIcon from "@/components/lab-precision/HugeIcon.astro";
+import EngagementConsole from "@/components/lab-precision/EngagementConsole.astro";
 import ThemeBoot from "@/components/ThemeBoot.astro";
-import { ArrowDown01Icon } from "@hugeicons/core-free-icons";
-import { getEngagements, domainSlug, domainLabel } from "@/lib/work-registry";
+import { getEngagements } from "@/lib/work-registry";
 
 /* Ancres d'abord (Everest → toolkit Odoo → BocalBun), puis le reste par période. */
 const engagements = await getEngagements("fr");
-const locale = "fr" as const;
 ---
 
 <!doctype html>
@@ -91,80 +89,7 @@ const locale = "fr" as const;
                 <span class="lp-roster-ref">{engagements.length} clients</span>
               </div>
 
-              <div class="lp-console" id="engagement-console">
-                <nav class="lp-console-rail" aria-label="Mandats">
-                  <ul class="lp-console-cap-list" role="list">
-                    {engagements.map((eng) => (
-                      <li>
-                        <button
-                          class="lp-console-cap"
-                          type="button"
-                          id={`engagement-${eng.slug}`}
-                          data-eng={eng.slug}
-                          aria-controls={`dossier-${eng.slug}`}
-                          aria-expanded="false"
-                        >
-                          <span class="lp-console-cap-name">{eng.name}</span>
-                          <span class="lp-console-cap-period">{eng.period}</span>
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                  <span class="lp-console-scroll-hint" aria-hidden="true">
-                    <HugeIcon icon={ArrowDown01Icon} size={13} />
-                    <HugeIcon icon={ArrowDown01Icon} size={16} />
-                  </span>
-                </nav>
-
-                <div class="lp-console-dossier">
-                  {engagements.map((eng) => (
-                    <div
-                      class:list={["lp-dossier", eng.surfaces.length === 1 && "lp-dossier--solo"]}
-                      id={`dossier-${eng.slug}`}
-                      role="region"
-                      aria-labelledby={`engagement-${eng.slug}`}
-                    >
-                      <h3 class="lp-dossier-title">{eng.name}</h3>
-                      <p class="lp-dossier-sub">{eng.detail}</p>
-                      <div class="lp-dossier-meta-row">
-                        <span class="lp-dossier-period">{eng.period}</span>
-                        <span class={`lp-dossier-domain lp-dossier-domain--${domainSlug(eng.domain)}`}>{domainLabel(eng.domain, locale)}</span>
-                      </div>
-                      {eng.surfaces.length > 0 && (
-                        <div class="lp-dossier-surfaces">
-                          {eng.surfaces.map((surface) => (
-                            <div class="lp-dossier-surface">
-                              <h5 class="lp-dossier-surface-name">{surface.name}</h5>
-                              <p class="lp-dossier-surface-blurb">{surface.blurb}</p>
-                              {surface.stack.length > 0 && (
-                                <p class="lp-dossier-surface-stack">{surface.stack.join(" · ")}</p>
-                              )}
-                              {surface.url && (
-                                <a class="lp-dossier-surface-link" href={surface.url} target="_blank" rel="noopener">
-                                  {surface.urlLabel ?? "Voir le projet"}
-                                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                                    <path d="M3 9L9 3M9 3H4.5M9 3V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                  </svg>
-                                </a>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                      {eng.href && (
-                        <a class="lp-dossier-link" href={eng.href}>
-                          <span>Voir l'étude de cas</span>
-                          <span class="lp-dossier-link-icon" aria-hidden="true">
-                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                              <path d="M3.5 10.5L10.5 3.5M10.5 3.5H4.75M10.5 3.5V9.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                          </span>
-                        </a>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <EngagementConsole engagements={engagements} locale="fr" />
             </section>
           </div>
         </div>

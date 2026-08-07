@@ -37,9 +37,9 @@ Sony — material is soft-UI, not pastel marketing orbs.
   - Chips (`--chip-*`): one quiet muted language for roster counts + domain badges
   - Selection chrome: soft-UI lift (modes/locales) — no side bars, no chip rainbow
   Skipped: yellow meta chips, domain color taxonomy, multi-corner washes.
-- **Mobile:** stacked console shows ~2⅔ client rows with a bottom fade/blur
-  cue (fade clears at end); intrinsic CTA pills; journey cards share
-  `--surface-tint`; safe-area + coarse-pointer targets on chrome.
+- **Mobile:** engagement accordion (all closed by default; expand under the
+  client row). Desktop keeps master-detail rail + dossier. Journey cards share
+  `--surface-tint`; safe-area + proportioned header chrome.
 - **Token aliases:** case-study `tokens.css` exposes `--bg`/`--cta`/`--lift`
   aliases aligned with home vocabulary (full merge still optional).
 
@@ -73,7 +73,7 @@ layer behind it and sharpens when selected. No separate About page.
     ● Available | Work · Background | EN / FR · theme
   Work (foreground):
     Centered hero — role, name, bio, contact, background CTA
-    Engagements Console — master-detail: left rail → right dossier
+    Engagements Console — desktop master-detail; mobile accordion
   Background (layer behind → crisp when active):
     Portrait · intro · off the clock
     Journey (quiet git-log timeline)
@@ -95,16 +95,16 @@ Escape returns to Work. View state: `lab-precision-controller.ts`.
 
 ### Work — engagements console (Direction A)
 
-**Engagement Console** — master-detail panel.
+**Engagement Console** — soft-UI instrument panel with responsive IA.
 
-- **Left rail (~272px)**: engagements (anchors first, then by period). Each row
-  shows name + period in mono. Active row uses soft-UI raised pill (mode-track
-  language), not a left accent bar.
-- **Right dossier**: name, summary, period + domain badge, surfaces, case-study CTA.
-- **Progressive enhancement**: without JS, all dossiers visible.
-- **Mobile (<760px)**: rail becomes horizontal pill tabs; period hidden.
+- **Desktop (≥760px)**: master-detail — left rail of clients, right dossier panel.
+  One selected at a time (hash or first). Chevron hidden.
+- **Mobile (<760px)**: accordion — dossier expands under the client row. All
+  closed by default (sections are lengthy); click to open, click again to close.
+- **Progressive enhancement**: without JS, dossiers stay visible.
+- **Deep links**: `#engagement-{slug}` opens the matching client.
 
-**Data flow**: `getEngagements()` → `initEngagementConsole`.
+**Data flow**: `getEngagements()` → `EngagementConsole.astro` + `initEngagementConsole`.
 
 **Still open / needs work:**
 

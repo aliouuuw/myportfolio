@@ -1020,11 +1020,11 @@ span.lp-roster-name {
   }
 }
 
-/* —— Engagement Console (soft-UI instrument panel) —— */
+/* —— Engagement Console ——
+ * Mobile (<760): accordion — dossier under each client row.
+ * Desktop (≥760): classic master-detail — one continuous rail + one dossier panel. */
 .lp-console {
-  display: grid;
-  grid-template-columns: minmax(0, 272px) minmax(0, 1fr);
-  gap: 0;
+  position: relative;
   border: 1px solid var(--line-strong);
   border-radius: var(--radius-lg);
   background: color-mix(in srgb, var(--surface) 94%, var(--bg));
@@ -1034,29 +1034,42 @@ span.lp-roster-name {
   width: 100%;
 }
 
-/* Rail — recessed well, mode-track language */
 .lp-console-rail {
-  padding: 0.7rem;
-  background: color-mix(in srgb, var(--surface-muted) 45%, transparent);
-  border-right: 1px solid var(--hairline-soft);
+  min-width: 0;
 }
 
-.lp-console-cap-list {
+/* Desktop host only — hidden on mobile (dossiers stay under each item) */
+.lp-console-panel {
+  display: none;
+}
+
+.lp-console-list {
   list-style: none;
   margin: 0;
-  padding: 0.2rem;
+  padding: 0.4rem;
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
-  border-radius: var(--radius);
-  background: color-mix(in srgb, var(--surface-muted) 78%, transparent);
-  border: 1px solid var(--hairline-soft);
-  box-shadow: inset 0 1px 2px color-mix(in srgb, var(--ink) 4%, transparent);
+  gap: 0.2rem;
+  background: color-mix(in srgb, var(--surface-muted) 55%, transparent);
 }
 
-/* Mobile-only; shown inside the fade via the ≤759px block */
-.lp-console-scroll-hint {
-  display: none;
+.lp-console-item {
+  min-width: 0;
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--surface-muted) 70%, transparent);
+  border: 1px solid var(--hairline-soft);
+  box-shadow: inset 0 1px 2px color-mix(in srgb, var(--ink) 4%, transparent);
+  overflow: hidden;
+  transition:
+    border-color var(--duration) var(--ease),
+    background var(--duration) var(--ease),
+    box-shadow var(--duration) var(--ease);
+}
+
+.lp-console-item.is-open {
+  background: var(--surface);
+  border-color: var(--line-strong);
+  box-shadow: var(--lift);
 }
 
 .lp-console-cap {
@@ -1064,14 +1077,14 @@ span.lp-roster-name {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 0.75rem;
   width: 100%;
-  padding: 0.55rem 0.7rem;
+  padding: 0.75rem 0.85rem;
   border: 0;
-  border-radius: calc(var(--radius) - 2px);
+  border-radius: var(--radius);
   background: transparent;
   font-family: var(--sans);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 500;
   color: var(--ink-faint);
   text-align: left;
@@ -1090,13 +1103,12 @@ span.lp-roster-name {
 
 .lp-console-cap:focus-visible {
   outline: 2px solid color-mix(in srgb, var(--accent) 45%, transparent);
-  outline-offset: 2px;
+  outline-offset: -2px;
 }
 
 .lp-console-cap.is-active {
   color: var(--ink);
-  background: color-mix(in srgb, var(--surface) 92%, var(--accent-soft));
-  box-shadow: var(--lift);
+  background: color-mix(in srgb, var(--surface) 88%, var(--accent-soft));
 }
 
 .lp-console-cap.is-active .lp-console-cap-name {
@@ -1114,30 +1126,27 @@ span.lp-roster-name {
 
 @keyframes lp-cap-flash {
   0% {
-    box-shadow: var(--lift), 0 0 0 0 color-mix(in srgb, var(--accent) 35%, transparent);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 35%, transparent);
   }
   40% {
-    box-shadow: var(--lift), 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
   }
   100% {
-    box-shadow: var(--lift);
-  }
-}
-
-@keyframes lp-scroll-hint {
-  0%,
-  100% {
-    transform: translateX(-50%) translateY(0);
-    opacity: 0.72;
-  }
-  50% {
-    transform: translateX(-50%) translateY(4px);
-    opacity: 1;
+    box-shadow: none;
   }
 }
 
 .lp-console-cap:active:not(.is-active) {
-  transform: scale(0.985);
+  transform: scale(0.99);
+}
+
+.lp-console-cap-text {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 .lp-console-cap-name {
@@ -1149,9 +1158,8 @@ span.lp-roster-name {
 
 .lp-console-cap-period {
   flex-shrink: 0;
-  margin-left: 0.35rem;
   font-family: var(--mono);
-  font-size: 0.5625rem;
+  font-size: 0.625rem;
   font-weight: 500;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.02em;
@@ -1160,12 +1168,24 @@ span.lp-roster-name {
   opacity: 0.85;
 }
 
-/* Dossier panel — raised surface */
-.lp-console-dossier {
-  padding: 1.75rem 2rem;
-  min-height: 340px;
-  background: var(--surface);
-  box-shadow: inset 1px 0 0 color-mix(in srgb, var(--edge-hi) 55%, transparent);
+.lp-console-cap-chevron {
+  flex-shrink: 0;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  opacity: 0.45;
+  transition: transform var(--duration) var(--ease), opacity var(--duration) var(--ease);
+}
+
+.lp-console-cap.is-active .lp-console-cap-chevron {
+  transform: rotate(225deg);
+  opacity: 0.7;
+}
+
+.lp-dossier {
+  padding: 0 0.95rem 1.1rem;
 }
 
 .lp-dossier[hidden] {
@@ -1179,7 +1199,7 @@ span.lp-roster-name {
 @keyframes lp-dossier-in {
   from {
     opacity: 0.01;
-    transform: translateY(8px);
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
@@ -1187,16 +1207,13 @@ span.lp-roster-name {
   }
 }
 
+/* Accordion: name is already in the row — hide duplicate title */
 .lp-dossier-title {
-  margin: 0 0 0.35rem;
-  font-size: 1.25rem;
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  color: var(--ink);
+  display: none;
 }
 
 .lp-dossier-sub {
-  margin: 0 0 1rem;
+  margin: 0 0 0.85rem;
   font-size: 0.9375rem;
   line-height: 1.55;
   color: var(--ink-soft);
@@ -1403,143 +1420,20 @@ span.lp-roster-name {
   transition: transform 280ms var(--ease);
 }
 
-/* Responsive: stack rail above dossier.
- * Mobile IA: vertical client list — show ~2⅔ rows + bottom fade to invite scroll. */
+/* Accordion denser on narrow phones */
 @media (max-width: 759px) {
-  .lp-console {
-    grid-template-columns: 1fr;
-    min-width: 0;
-  }
-
-  .lp-console-rail {
-    position: relative;
-    border-right: none;
-    border-bottom: 1px solid var(--hairline-soft);
-    padding: 0.55rem;
-    min-width: 0;
-  }
-
-  .lp-console-cap-list {
-    --lp-cap-row: 2.5rem;
-    --lp-cap-gap: 0.15rem;
-    --lp-cap-pad: 0.2rem;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    gap: var(--lp-cap-gap);
-    /* 2 full rows + ⅔ of the next + gaps before the peek row */
-    max-height: calc(
-      (2 * var(--lp-cap-pad))
-      + (2 * var(--lp-cap-row))
-      + (var(--lp-cap-row) * 2 / 3)
-      + (2 * var(--lp-cap-gap))
-    );
-    overflow-x: hidden;
-    overflow-y: auto;
-    overscroll-behavior-y: contain;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-
-  .lp-console-cap-list::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Bottom fade — soft ink veil; long transparent ramp so the top edge disappears */
-  .lp-console-rail::after {
-    content: "";
-    position: absolute;
-    left: 0.55rem;
-    right: 0.55rem;
-    bottom: 0.55rem;
-    height: 2.15rem;
-    border-radius: 0 0 calc(var(--radius) - 2px) calc(var(--radius) - 2px);
-    pointer-events: none;
-    z-index: 2;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      transparent 28%,
-      color-mix(in srgb, var(--ink) 3%, transparent) 48%,
-      color-mix(in srgb, var(--ink) 9%, transparent) 72%,
-      color-mix(in srgb, var(--ink) 18%, transparent) 100%
-    );
-    backdrop-filter: blur(1px);
-    -webkit-backdrop-filter: blur(1px);
-    opacity: 1;
-    transition: opacity var(--duration) var(--ease);
-  }
-
-  .lp-console-rail.is-at-end::after {
-    opacity: 0;
-  }
-
-  .lp-console-scroll-hint {
-    display: flex;
-    position: absolute;
-    left: 50%;
-    bottom: calc(0.55rem + 0.08rem);
-    z-index: 3;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-    margin: 0;
-    padding: 0;
-    /* Inverted: ink icons (dark on light / light on dark) */
-    color: var(--ink);
-    filter: drop-shadow(0 0 1px color-mix(in srgb, var(--surface) 70%, transparent));
-    pointer-events: none;
-    transform: translateX(-50%);
-    opacity: 1;
-    transition: opacity var(--duration) var(--ease);
-    animation: lp-scroll-hint 2.2s var(--ease) infinite;
-  }
-
-  .lp-console-scroll-hint svg {
-    display: block;
-    width: 0.8rem;
-    height: 0.8rem;
-    opacity: 0.85;
-  }
-
-  .lp-console-scroll-hint svg path {
-    stroke-width: 3.5;
-  }
-
-  .lp-console-scroll-hint svg + svg {
-    margin-top: -0.52rem;
-    width: 0.95rem;
-    height: 0.95rem;
-    opacity: 1;
-  }
-
-  .lp-console-rail.is-at-end .lp-console-scroll-hint {
-    opacity: 0;
-    animation: none;
+  .lp-console-list {
+    padding: 0.3rem;
+    gap: 0.15rem;
   }
 
   .lp-console-cap {
-    width: 100%;
-    flex: 0 0 auto;
-    box-sizing: border-box;
-    padding: 0.55rem 0.7rem;
-    min-height: var(--lp-cap-row, 2.5rem);
-    height: var(--lp-cap-row, 2.5rem);
-    border-radius: calc(var(--radius) - 2px);
+    padding: 0.7rem 0.75rem;
+    min-height: 2.75rem;
   }
 
-  .lp-console-cap-period {
-    display: inline;
-    font-size: 0.625rem;
-  }
-
-  .lp-console-dossier {
-    padding: 1.15rem 1rem 1.35rem;
-    box-shadow: none;
-    min-width: 0;
-  }
-
-  .lp-dossier-title {
-    font-size: 1.125rem;
+  .lp-dossier {
+    padding: 0 0.8rem 1rem;
   }
 
   .lp-dossier-meta-row {
@@ -1553,6 +1447,105 @@ span.lp-roster-name {
 
   .lp-dossier-surface {
     padding: 0.95rem 1rem;
+  }
+}
+
+/* Desktop: classic master-detail — continuous rail well + in-flow dossier panel */
+@media (min-width: 760px) {
+  .lp-console {
+    display: grid;
+    grid-template-columns: 272px minmax(0, 1fr);
+    align-items: stretch;
+    min-height: 340px;
+  }
+
+  .lp-console-rail {
+    grid-column: 1;
+    padding: 0.7rem;
+    background: color-mix(in srgb, var(--surface-muted) 45%, transparent);
+    border-right: 1px solid var(--hairline-soft);
+  }
+
+  .lp-console-list {
+    padding: 0.2rem;
+    gap: 0.15rem;
+    background: color-mix(in srgb, var(--surface-muted) 78%, transparent);
+    border: 1px solid var(--hairline-soft);
+    border-radius: var(--radius);
+    box-shadow: inset 0 1px 2px color-mix(in srgb, var(--ink) 4%, transparent);
+  }
+
+  .lp-console-item {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .lp-console-item.is-open {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .lp-console-cap {
+    padding: 0.55rem 0.7rem;
+    border-radius: calc(var(--radius) - 2px);
+    font-size: 0.8125rem;
+  }
+
+  .lp-console-cap.is-active {
+    background: color-mix(in srgb, var(--surface) 92%, var(--accent-soft));
+    box-shadow: var(--lift);
+  }
+
+  .lp-console-cap-chevron {
+    display: none;
+  }
+
+  .lp-console-cap-period {
+    font-size: 0.5625rem;
+  }
+
+  /* Hide dossiers still nested in the rail until JS teleports them */
+  .lp-console-item > .lp-dossier {
+    display: none !important;
+  }
+
+  /* In-flow panel — grows with dossier content (full section height) */
+  .lp-console-panel {
+    grid-column: 2;
+    display: block;
+    min-width: 0;
+    min-height: 100%;
+    background: var(--surface);
+    box-shadow: inset 1px 0 0 color-mix(in srgb, var(--edge-hi) 55%, transparent);
+  }
+
+  .lp-console-panel .lp-dossier {
+    position: static;
+    inset: auto;
+    margin: 0;
+    padding: 1.75rem 2rem;
+    overflow: visible;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .lp-console-panel .lp-dossier-title {
+    display: block;
+    margin: 0 0 0.35rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+
+  .lp-console-panel .lp-dossier-sub {
+    margin-bottom: 1rem;
   }
 }
 
@@ -2042,8 +2035,7 @@ span.lp-roster-name {
   }
 
   .lp-dossier.is-entering,
-  .lp-console-cap.is-flash,
-  .lp-console-scroll-hint {
+  .lp-console-cap.is-flash {
     animation: none;
   }
 }

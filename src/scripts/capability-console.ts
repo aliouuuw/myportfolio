@@ -1,17 +1,50 @@
-/** Engagement Console — master-detail panel switching.
- *  Progressive enhancement: without JS, all dossiers are visible.
- *  With JS, only one dossier is shown; the rail controls navigation.
- *  Supports arrow-key rail navigation and `#engagement-{slug}` deep links.
+/** Engagement Console — responsive IA.
+ *  Desktop (≥760px): master-detail (rail + dossier panel in flow); one selected.
+ *  Mobile (<760px): accordion under each client; all closed by default.
+ *  Dossiers teleport between item (mobile) and panel (desktop) so each layout
+ *  keeps natural height — desktop panel grows with content.
+ *  Supports arrow-key navigation and `#engagement-{slug}` deep links.
  */
 export function initEngagementConsole(): void {
   const root = document.getElementById("engagement-console");
   if (!root) return;
 
+  const items = Array.from(root.querySelectorAll<HTMLElement>(".lp-console-item"));
   const caps = Array.from(root.querySelectorAll<HTMLButtonElement>(".lp-console-cap"));
-  const dossiers = Array.from(root.querySelectorAll<HTMLElement>(".lp-dossier"));
-  if (caps.length === 0 || dossiers.length === 0) return;
+  const panel = root.querySelector<HTMLElement>("[data-console-panel]");
+  if (caps.length === 0 || items.length === 0 || !panel) return;
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const accordionQuery = window.matchMedia("(max-width: 759px)");
+
+  const isAccordion = (): boolean => accordionQuery.matches;
+
+  const dossierBySlug = (slug: string): HTMLElement | null =>
+    root.querySelector<HTMLElement>(`#dossier-${CSS.escape(slug)}`);
+
+  /** Place dossiers in the item (accordion) or shared panel (master-detail). */
+  const placeDossiers = (): void => {
+    if (isAccordion()) {
+      items.forEach((item) => {
+        const slug = item.getAttribute("data-eng");
+        if (!slug) return;
+        const dossier = dossierBySlug(slug);
+        if (dossier && dossier.parentElement !== item) {
+          item.appendChild(dossier);
+        }
+      });
+      return;
+    }
+
+    items.forEach((item) => {
+      const slug = item.getAttribute("data-eng");
+      if (!slug) return;
+      const dossier = dossierBySlug(slug);
+      if (dossier && dossier.parentElement !== panel) {
+        panel.appendChild(dossier);
+      }
+    });
+  };
 
   const hashSlug = (): string | null => {
     const match = window.location.hash.match(/^#engagement-(.+)$/);
@@ -21,100 +54,111 @@ export function initEngagementConsole(): void {
   const flashCap = (cap: HTMLButtonElement): void => {
     if (reduceMotion) return;
     cap.classList.remove("is-flash");
-    // Restart CSS animation
     void cap.offsetWidth;
     cap.classList.add("is-flash");
     window.setTimeout(() => cap.classList.remove("is-flash"), 900);
   };
 
-  const rail = root.querySelector<HTMLElement>(".lp-console-rail");
-  const capList = root.querySelector<HTMLElement>(".lp-console-cap-list");
-
-  const syncRailFade = (): void => {
-    if (!rail || !capList) return;
-    const canScroll = capList.scrollHeight > capList.clientHeight + 1;
-    const atEnd =
-      capList.scrollTop + capList.clientHeight >= capList.scrollHeight - 2;
-    rail.classList.toggle("is-at-end", !canScroll || atEnd);
-  };
-
-  const activate = (
-    slug: string,
-    opts: { syncHash?: boolean; focus?: boolean; flash?: boolean } = {},
+  const setOpen = (
+    slug: string | null,
+    opts: { syncHash?: boolean; focus?: boolean; flash?: boolean; scroll?: boolean } = {},
   ): void => {
-    const { syncHash = true, focus = false, flash = false } = opts;
-    const target = caps.find((c) => c.getAttribute("data-eng") === slug);
-    if (!target) return;
+    const { syncHash = true, focus = false, flash = false, scroll = true } = opts;
 
-    caps.forEach((c) => {
-      const active = c === target;
-      c.classList.toggle("is-active", active);
-      c.setAttribute("aria-expanded", active ? "true" : "false");
-      c.setAttribute("tabindex", active ? "0" : "-1");
-    });
+    /* Desktop master-detail never leaves an empty panel */
+    let nextSlug = slug;
+    if (!isAccordion() && nextSlug === null) {
+      nextSlug = caps[0]?.getAttribute("data-eng") ?? null;
+    }
 
-    dossiers.forEach((d) => {
-      const show = d.id === `dossier-${slug}`;
-      d.hidden = !show;
-      if (show && !reduceMotion) {
-        d.classList.remove("is-entering");
-        void d.offsetWidth;
-        d.classList.add("is-entering");
+    items.forEach((item) => {
+      const itemSlug = item.getAttribute("data-eng");
+      const open = itemSlug !== null && itemSlug === nextSlug;
+      const cap = item.querySelector<HTMLButtonElement>(".lp-console-cap");
+      if (!cap || !itemSlug) return;
+
+      const dossier = dossierBySlug(itemSlug);
+      if (!dossier) return;
+
+      item.classList.toggle("is-open", open);
+      cap.classList.toggle("is-active", open);
+      cap.setAttribute("aria-expanded", open ? "true" : "false");
+      cap.setAttribute("tabindex", "0");
+      dossier.hidden = !open;
+
+      if (open && !reduceMotion) {
+        dossier.classList.remove("is-entering");
+        void dossier.offsetWidth;
+        dossier.classList.add("is-entering");
       }
     });
 
-    /* Keep the active client visible in the mobile vertical rail */
-    target.scrollIntoView({
-      behavior: reduceMotion ? "auto" : "smooth",
-      block: "nearest",
-      inline: "nearest",
-    });
-    syncRailFade();
+    root.classList.toggle("is-empty", nextSlug === null);
 
-    if (focus) target.focus();
-    if (flash) flashCap(target);
-
-    if (syncHash) {
-      const next = `#engagement-${slug}`;
-      if (window.location.hash !== next) {
-        history.replaceState(null, "", next);
+    if (nextSlug) {
+      const target = caps.find((c) => c.getAttribute("data-eng") === nextSlug);
+      if (target) {
+        if (scroll && isAccordion()) {
+          target.scrollIntoView({
+            behavior: reduceMotion ? "auto" : "smooth",
+            block: "nearest",
+          });
+        }
+        if (focus) target.focus();
+        if (flash) flashCap(target);
       }
+
+      if (syncHash) {
+        const next = `#engagement-${nextSlug}`;
+        if (window.location.hash !== next) {
+          history.replaceState(null, "", next);
+        }
+      }
+    } else if (syncHash && window.location.hash.startsWith("#engagement-")) {
+      history.replaceState(null, "", window.location.pathname + window.location.search);
     }
   };
 
-  const indexOfActive = (): number => {
-    const i = caps.findIndex((c) => c.classList.contains("is-active"));
+  const indexOfOpen = (): number => {
+    const i = items.findIndex((item) => item.classList.contains("is-open"));
     return i >= 0 ? i : 0;
   };
 
   const move = (delta: number): void => {
-    const next = (indexOfActive() + delta + caps.length) % caps.length;
+    const next = (indexOfOpen() + delta + caps.length) % caps.length;
     const slug = caps[next]?.getAttribute("data-eng");
-    if (slug) activate(slug, { focus: true });
+    if (slug) setOpen(slug, { focus: true });
   };
 
-  // Progressive enhancement: hide all but the initial dossier
+  placeDossiers();
+
   const fromHash = hashSlug();
-  const initial =
-    (fromHash && caps.some((c) => c.getAttribute("data-eng") === fromHash) ? fromHash : null) ??
-    caps[0]?.getAttribute("data-eng");
+  const hashValid =
+    fromHash && caps.some((c) => c.getAttribute("data-eng") === fromHash) ? fromHash : null;
 
-  if (!initial) return;
+  /* Mobile accordion: all closed unless deep-linked.
+   * Desktop master-detail: open hash or first client. */
+  const initial = hashValid ?? (isAccordion() ? null : (caps[0]?.getAttribute("data-eng") ?? null));
 
-  dossiers.forEach((d) => {
-    d.hidden = d.id !== `dossier-${initial}`;
+  setOpen(initial, {
+    syncHash: Boolean(hashValid),
+    scroll: Boolean(hashValid),
+    flash: Boolean(hashValid),
   });
 
   caps.forEach((cap) => {
     const slug = cap.getAttribute("data-eng");
-    const active = slug === initial;
-    cap.classList.toggle("is-active", active);
-    cap.setAttribute("aria-expanded", active ? "true" : "false");
-    cap.setAttribute("tabindex", active ? "0" : "-1");
 
     cap.addEventListener("click", () => {
       if (!slug) return;
-      activate(slug);
+      const item = cap.closest(".lp-console-item");
+      const alreadyOpen = item?.classList.contains("is-open") ?? false;
+
+      if (isAccordion()) {
+        setOpen(alreadyOpen ? null : slug);
+      } else {
+        setOpen(slug);
+      }
     });
 
     cap.addEventListener("keydown", (event) => {
@@ -133,14 +177,14 @@ export function initEngagementConsole(): void {
           event.preventDefault();
           {
             const first = caps[0]?.getAttribute("data-eng");
-            if (first) activate(first, { focus: true });
+            if (first) setOpen(first, { focus: true });
           }
           break;
         case "End":
           event.preventDefault();
           {
             const last = caps[caps.length - 1]?.getAttribute("data-eng");
-            if (last) activate(last, { focus: true });
+            if (last) setOpen(last, { focus: true });
           }
           break;
         default:
@@ -149,28 +193,30 @@ export function initEngagementConsole(): void {
     });
   });
 
-  if (fromHash) {
-    const deep = caps.find((c) => c.getAttribute("data-eng") === fromHash);
-    if (deep) {
-      flashCap(deep);
-      deep.scrollIntoView({ behavior: "auto", block: "nearest", inline: "nearest" });
+  const onBreakpointChange = (): void => {
+    const openSlug =
+      items.find((item) => item.classList.contains("is-open"))?.getAttribute("data-eng") ?? null;
+    placeDossiers();
+    if (isAccordion()) {
+      setOpen(openSlug, { syncHash: false, scroll: false });
+    } else {
+      setOpen(openSlug ?? caps[0]?.getAttribute("data-eng") ?? null, {
+        syncHash: false,
+        scroll: false,
+      });
     }
+  };
+
+  if (typeof accordionQuery.addEventListener === "function") {
+    accordionQuery.addEventListener("change", onBreakpointChange);
   } else {
-    const first = caps.find((c) => c.classList.contains("is-active"));
-    first?.scrollIntoView({ behavior: "auto", block: "nearest", inline: "nearest" });
+    accordionQuery.addListener(onBreakpointChange);
   }
 
-  if (capList) {
-    capList.addEventListener("scroll", syncRailFade, { passive: true });
-  }
-  window.addEventListener("resize", syncRailFade);
-  syncRailFade();
-
-  // Deep link after load / back-forward if hash changes
   window.addEventListener("hashchange", () => {
     const slug = hashSlug();
     if (slug && caps.some((c) => c.getAttribute("data-eng") === slug)) {
-      activate(slug, { syncHash: false, flash: true });
+      setOpen(slug, { syncHash: false, flash: true });
     }
   });
 }

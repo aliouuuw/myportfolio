@@ -37,7 +37,7 @@ src/
     fr/board/index.astro  ← 301 → /fr/
     api/contact.ts        ← Resend contact (server route)
   scripts/
-    capability-console.ts ← engagement console panel switching
+    capability-console.ts ← engagement accordion open/close + deep links
     theme.ts              ← shared light/dark theme
   styles/
     lab-precision.css     ← home surface (Editorial + Google Blue)
@@ -67,7 +67,7 @@ docs/
 
 ## Key conventions
 
-- **Home surface**: Lab Precision Engagement Console (`lab-precision.css` + `capability-console.ts`). Soft-UI instrument panel — not a project grid.
+- **Home surface**: Lab Precision Engagement Console (`lab-precision.css` + `capability-console.ts`). Soft-UI instrument panel — desktop master-detail, mobile accordion.
 - **Palette**: Editorial + Google Blue — canvas `#f8f9fa` / `#202124`, accent `#4285f4` (CTAs + surface tint), status green lamp, quiet shared chips.
 - **Adding a proof**: Create `content/work/<slug>/en.mdx` + `fr.mdx` with valid frontmatter. Build validates via Zod.
 - **Content files**: MDX with YAML frontmatter. Bilingual fields: `title` / `titleFr`, `summary` / `summaryFr`.
