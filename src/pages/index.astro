@@ -100,9 +100,11 @@ const engagements = await getEngagements("en");
       import { initLabPrecisionChrome } from "@/scripts/lab-precision-chrome";
       import { createLabPrecisionController } from "@/scripts/lab-precision-controller";
       import { initEngagementConsole } from "@/scripts/capability-console";
+      import { initCareerGraph } from "@/scripts/career-graph";
 
       initLabPrecisionChrome();
       initEngagementConsole();
+      initCareerGraph();
       createLabPrecisionController();
     </script>
   </body>

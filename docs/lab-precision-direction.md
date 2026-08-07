@@ -75,9 +75,10 @@ layer behind it and sharpens when selected. No separate About page.
     Centered hero — role, name, bio, contact, background CTA
     Engagements Console — desktop master-detail; mobile accordion
   Background (layer behind → crisp when active):
-    Portrait · intro · off the clock
-    Journey (quiet git-log timeline)
-    Education and certifications (soft-UI cards)
+    Portrait · intro · proof bullets · primary CTA
+    Journey (horizontal git-branch career graph)
+    Education (featured) + quieter cert disclosure
+    Conversion close (email / WhatsApp)
 ```
 
 Hash `#background` opens Background; `#engagement-{slug}` deep-links a
@@ -116,8 +117,10 @@ Escape returns to Work. View state: `lab-precision-controller.ts`.
 
 Portrait + positioning + contacts + off the clock are localized EN/FR.
 
-Journey uses a quiet timeline metaphor (branch chips in ink, not accent wash).
-Credentials use the same soft-UI card lift as console surfaces.
+Journey uses the horizontal git-branch career graph (Next.js synthesis port),
+retuned to Editorial + Google Blue lane colors — not a rainbow VCS costume.
+Featured credentials lead; Meta/DataCamp sit behind a disclosure.
+Background ends with a conversion close (email / WhatsApp).
 
 ---
 
@@ -133,6 +136,5 @@ Credentials use the same soft-UI card lift as console surfaces.
 
 ## Open questions
 
-- Whether Journey keeps the git-log metaphor long-term or becomes a plain timeline
 - When (if) to wire Everest video peek into the console
 - Whether dual token files should fully merge into one shared sheet

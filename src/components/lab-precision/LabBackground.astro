@@ -1,5 +1,6 @@
 ---
-import { credentials, journey, JOURNEY_LOGOS } from "@/data/lab-precision";
+import CareerGraph from "@/components/lab-precision/CareerGraph.astro";
+import { credentials } from "@/data/lab-precision";
 
 interface Props {
   locale?: "en" | "fr";
@@ -8,20 +9,34 @@ interface Props {
 const locale = Astro.props.locale ?? "en";
 const isFr = locale === "fr";
 
+const primaryCreds = credentials.filter((c) => c.featured === true);
+const secondaryCreds = credentials.filter((c) => c.featured !== true);
+
 const ui = isFr
   ? {
       portraitAlt: "Portrait d'Aliou Wade",
       portraitCaption: "Aliou Wade, Dakar",
-      role: "Parcours",
+      role: "Profil",
       headline: "De l'ingénierie avec du contexte opérationnel.",
       bio: "Six ans à construire des logiciels opérationnels en fintech, ERP, logistique et éducation. Ottawa à Dakar, bilingue français et anglais. Opérateur solo sur les systèmes que les entreprises font vraiment tourner — pas ceux qui font joli en démo.",
+      proof: [
+        "Solo sur trois produits fintech chez Everest Finance",
+        "Kit de tests d'acceptation Odoo 18 pour migrations ERP",
+        "Répond sous 48 h les jours ouvrables",
+      ],
       offClockTitle: "Hors du bureau",
       offClock:
         "Échecs compétitifs, environ 2043 en bullet en ligne. La même discipline que livrer sous deadline.",
       journeyTitle: "Parcours",
-      journeyRef: (n: number) => `main · ${n} commits`,
-      credsTitle: "Formation et certifications",
-      credsRef: (n: number) => `${n} enregistrements`,
+      journeyLead: "Employeurs et contrats de 2018 à aujourd'hui — sélectionnez un nœud.",
+      journeyRef: "career/main",
+      credsTitle: "Formation",
+      credsRef: (n: number) => `${n} titres`,
+      moreCreds: "Autres certifications",
+      closeTitle: "Discutons",
+      closeLine: "Disponible pour un mandat sélectif. Réponse sous 48 h les jours ouvrables.",
+      ctaPrimary: "Écrire un e-mail",
+      ctaWhatsApp: "WhatsApp",
     }
   : {
       portraitAlt: "Portrait of Aliou Wade",
@@ -29,13 +44,24 @@ const ui = isFr
       role: "Background",
       headline: "Engineering with operational context.",
       bio: "Six years building operational software across fintech, ERP, logistics, and education. Ottawa to Dakar, bilingual French and English. Solo operator on the systems businesses actually run — not the ones that demo well.",
+      proof: [
+        "Solo across three fintech products at Everest Finance",
+        "Odoo 18 acceptance-testing kit for ERP migrations",
+        "Replies within 48h on weekdays",
+      ],
       offClockTitle: "Off the clock",
       offClock:
         "Competitive chess, around 2043 bullet online. Same discipline as shipping under deadline.",
       journeyTitle: "Journey",
-      journeyRef: (n: number) => `main · ${n} commits`,
-      credsTitle: "Education and certifications",
+      journeyLead: "Employers and contracts from 2018 to today — select a node for detail.",
+      journeyRef: "career/main",
+      credsTitle: "Education",
       credsRef: (n: number) => `${n} records`,
+      moreCreds: "Other certifications",
+      closeTitle: "Let's talk",
+      closeLine: "Selective capacity for the right mandate. Replies within 48h on weekdays.",
+      ctaPrimary: "Email me",
+      ctaWhatsApp: "WhatsApp",
     };
 ---
 
@@ -53,14 +79,17 @@ const ui = isFr
       <p class="lp-bio-role">{ui.role}</p>
       <h1 class="lp-bio-name">{ui.headline}</h1>
       <p class="lp-bio-line">{ui.bio}</p>
-      <ul class="lp-bio-links">
-        <li>
-          <a href="mailto:wadealiou00@gmail.com">wadealiou00@gmail.com</a>
-        </li>
-        <li><a href="https://www.linkedin.com/in/aliouuuw">LinkedIn</a></li>
-        <li><a href="https://github.com/aliouuuw">GitHub</a></li>
-        <li><a href="https://wa.me/221777228845">WhatsApp</a></li>
+      <ul class="lp-about-proof">
+        {ui.proof.map((line) => <li>{line}</li>)}
       </ul>
+      <div class="lp-about-cta">
+        <a class="lp-about-cta-primary" href="mailto:wadealiou00@gmail.com">{ui.ctaPrimary}</a>
+        <ul class="lp-bio-links lp-bio-links--quiet">
+          <li><a href="https://www.linkedin.com/in/aliouuuw">LinkedIn</a></li>
+          <li><a href="https://github.com/aliouuuw">GitHub</a></li>
+          <li><a href="https://wa.me/221777228845">WhatsApp</a></li>
+        </ul>
+      </div>
       <div class="lp-off-clock">
         <h2>{ui.offClockTitle}</h2>
         <p>{ui.offClock}</p>
@@ -68,63 +97,25 @@ const ui = isFr
     </div>
   </section>
 
-  <section class="lp-journey lp-git-journey" aria-labelledby="journey-title">
+  <section class="lp-journey" aria-labelledby="journey-title">
     <div class="lp-section-head">
-      <h2 id="journey-title">{ui.journeyTitle}</h2>
-      <span class="lp-git-ref">{ui.journeyRef(journey.length)}</span>
+      <div class="lp-section-head-copy">
+        <h2 id="journey-title">{ui.journeyTitle}</h2>
+        <p class="lp-section-lead">{ui.journeyLead}</p>
+      </div>
+      <span class="lp-git-ref">{ui.journeyRef}</span>
     </div>
-    <ol class="lp-git-log">
-      {
-        journey.map((entry, index) => {
-          const logo = JOURNEY_LOGOS[entry.branch];
-          return (
-            <li class="lp-git-commit" style={`--git-i: ${index}`}>
-              <div class="lp-git-graph" aria-hidden="true">
-                <span class="lp-git-track"></span>
-                <span class="lp-git-node"></span>
-              </div>
-              <details class="lp-git-details">
-                <summary class="lp-git-summary">
-                  <span class="lp-git-summary-caret" aria-hidden="true"></span>
-                  {logo && (
-                    <span class="lp-mark lp-mark--git" aria-hidden="true">
-                      <img
-                        class="lp-mark-img"
-                        src={logo}
-                        alt=""
-                        width="24"
-                        height="24"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </span>
-                  )}
-                  <span class="lp-git-summary-main">
-                    <code class="lp-git-branch">{entry.branch}</code>
-                    <span class="lp-git-title">{isFr ? (entry.roleFr ?? entry.role) : entry.role}</span>
-                    <span class="lp-git-meta">
-                      <span class="lp-git-org">{isFr ? (entry.orgFr ?? entry.org) : entry.org}</span>
-                      <span class="lp-git-period">{isFr ? (entry.periodFr ?? entry.period) : entry.period}</span>
-                    </span>
-                  </span>
-                </summary>
-                <p class="lp-git-note">{isFr ? (entry.noteFr ?? entry.note) : entry.note}</p>
-              </details>
-            </li>
-          );
-        })
-      }
-    </ol>
+    <CareerGraph locale={locale} />
   </section>
 
   <section class="lp-creds" aria-labelledby="credentials-title">
     <div class="lp-section-head">
       <h2 id="credentials-title">{ui.credsTitle}</h2>
-      <span>{ui.credsRef(credentials.length)}</span>
+      <span>{ui.credsRef(primaryCreds.length)}</span>
     </div>
     <ul class="lp-cred-list">
       {
-        credentials.map((entry) => (
+        primaryCreds.map((entry) => (
           <li>
             <strong>{isFr ? (entry.itemFr ?? entry.item) : entry.item}</strong>
             <span>{isFr ? (entry.detailFr ?? entry.detail) : entry.detail}</span>
@@ -132,5 +123,29 @@ const ui = isFr
         ))
       }
     </ul>
+    {
+      secondaryCreds.length > 0 && (
+        <details class="lp-creds-more">
+          <summary>{ui.moreCreds}</summary>
+          <ul class="lp-cred-list lp-cred-list--quiet">
+            {secondaryCreds.map((entry) => (
+              <li>
+                <strong>{isFr ? (entry.itemFr ?? entry.item) : entry.item}</strong>
+                <span>{isFr ? (entry.detailFr ?? entry.detail) : entry.detail}</span>
+              </li>
+            ))}
+          </ul>
+        </details>
+      )
+    }
+  </section>
+
+  <section class="lp-about-close" aria-labelledby="about-close-title">
+    <h2 id="about-close-title">{ui.closeTitle}</h2>
+    <p>{ui.closeLine}</p>
+    <div class="lp-about-close-actions">
+      <a class="lp-about-cta-primary" href="mailto:wadealiou00@gmail.com">{ui.ctaPrimary}</a>
+      <a class="lp-about-cta-secondary" href="https://wa.me/221777228845">{ui.ctaWhatsApp}</a>
+    </div>
   </section>
 </div>

@@ -1,0 +1,151 @@
+---
+import {
+  careerAxisYears,
+  careerGraphEdges,
+  careerStints,
+} from "@/data/lab-precision";
+
+interface Props {
+  locale?: "en" | "fr";
+}
+
+const locale = Astro.props.locale ?? "en";
+const isFr = locale === "fr";
+const workBase = isFr ? "/fr/work" : "/work";
+
+const ui = isFr
+  ? {
+      graphAria: "Parcours en graphe git horizontal, 2018 à 2026",
+      cmd: "git log --graph --oneline --decorate career/main",
+      currentBadge: "HEAD",
+      scrollHint: "Glisser pour les rôles antérieurs",
+      caseLink: "Lire le dossier",
+      selectHint: "Sélectionnez un nœud pour le détail du rôle.",
+    }
+  : {
+      graphAria: "Career timeline as a horizontal git branch graph, 2018 to 2026",
+      cmd: "git log --graph --oneline --decorate career/main",
+      currentBadge: "HEAD",
+      scrollHint: "Swipe for earlier roles",
+      caseLink: "Open case study",
+      selectHint: "Select a node for role detail.",
+    };
+
+const defaultKey = careerStints.find((s) => s.current)?.key ?? careerStints[careerStints.length - 1]!.key;
+---
+
+<div
+  class="lp-cgraph"
+  data-career-graph
+  data-locale={locale}
+  data-default-key={defaultKey}
+  data-edges={JSON.stringify(careerGraphEdges)}
+>
+  <div class="lp-cgraph__terminal" aria-hidden="true">
+    <span class="lp-cgraph__dots"><i></i><i></i><i></i></span>
+    <span class="lp-cgraph__prompt">$</span>
+    <span class="lp-cgraph__cmd">{ui.cmd}</span>
+    <span class="lp-cgraph__cursor"></span>
+  </div>
+
+  <div class="lp-cgraph__track-wrap">
+    <div class="lp-cgraph__track" data-cgraph-track tabindex="0">
+      <div class="lp-cgraph__chart" data-cgraph-chart aria-label={ui.graphAria}>
+        <svg class="lp-cgraph__wires" data-cgraph-wires aria-hidden="true"></svg>
+
+        <ol class="lp-cgraph__commits">
+          {
+            careerStints.map((stint, index) => {
+              const label = isFr ? stint.labelFr : stint.label;
+              const name = isFr ? (stint.nameFr ?? stint.name) : stint.name;
+              const period = isFr ? (stint.periodFr ?? stint.period) : stint.period;
+              const role = isFr ? (stint.roleFr ?? stint.role) : stint.role;
+              const proof = isFr ? (stint.proofFr ?? stint.proof) : stint.proof;
+              const caseHref = stint.caseSlug ? `${workBase}/${stint.caseSlug}` : "";
+              const isDefault = stint.key === defaultKey;
+
+              return (
+                <li>
+                  <button
+                    type="button"
+                    class:list={["lp-cgraph__card", { "is-active": isDefault }]}
+                    style={`--i: ${index}`}
+                    data-cgraph-card
+                    data-key={stint.key}
+                    data-lane={stint.lane}
+                    data-label={label}
+                    data-name={name}
+                    data-role={role}
+                    data-period={period}
+                    data-proof={proof}
+                    data-case-href={caseHref}
+                    data-case-label={ui.caseLink}
+                    aria-pressed={isDefault ? "true" : "false"}
+                  >
+                    <span class="lp-cgraph__card-rail">
+                      <span class="lp-cgraph__node" data-cgraph-node>
+                        {stint.current && <span class="lp-cgraph__node-pulse" aria-hidden="true" />}
+                      </span>
+                    </span>
+                    <span class="lp-cgraph__label">{label}</span>
+                    <span class="lp-cgraph__name">{name}</span>
+                    <span class="lp-cgraph__period">{period}</span>
+                    {stint.current && <span class="lp-cgraph__head">{ui.currentBadge}</span>}
+                  </button>
+                </li>
+              );
+            })
+          }
+        </ol>
+
+        <div class="lp-cgraph__years" aria-hidden="true">
+          {careerAxisYears.map((year) => <span class="lp-cgraph__year">{year}</span>)}
+        </div>
+      </div>
+    </div>
+
+    <div class="lp-cgraph__fade lp-cgraph__fade--left" data-cgraph-fade-left aria-hidden="true"></div>
+    <div class="lp-cgraph__fade lp-cgraph__fade--right" data-cgraph-fade-right aria-hidden="true"></div>
+
+    <p class="lp-cgraph__scroll-hint" data-cgraph-scroll-hint hidden role="status">
+      <span class="lp-cgraph__scroll-hint-arrows" aria-hidden="true">
+        <span>‹</span><span>‹</span><span>‹</span>
+      </span>
+      {ui.scrollHint}
+    </p>
+  </div>
+
+  <div class="lp-cgraph__detail" data-cgraph-detail aria-live="polite" aria-atomic="true">
+    {
+      (() => {
+        const stint = careerStints.find((s) => s.key === defaultKey)!;
+        const label = isFr ? stint.labelFr : stint.label;
+        const name = isFr ? (stint.nameFr ?? stint.name) : stint.name;
+        const period = isFr ? (stint.periodFr ?? stint.period) : stint.period;
+        const role = isFr ? (stint.roleFr ?? stint.role) : stint.role;
+        const proof = isFr ? (stint.proofFr ?? stint.proof) : stint.proof;
+        const caseHref = stint.caseSlug ? `${workBase}/${stint.caseSlug}` : undefined;
+
+        return (
+          <div class="lp-cgraph__detail-inner" data-lane={stint.lane}>
+            <div class="lp-cgraph__detail-head">
+              <span class="lp-cgraph__detail-dot" aria-hidden="true"></span>
+              <span class="lp-cgraph__detail-label">{label}</span>
+              <span class="lp-cgraph__detail-period">{period}</span>
+            </div>
+            <p class="lp-cgraph__detail-name">{name}</p>
+            <p class="lp-cgraph__detail-role">{role}</p>
+            <p class="lp-cgraph__detail-proof">{proof}</p>
+            {caseHref ? (
+              <a class="lp-cgraph__detail-case" href={caseHref}>
+                {ui.caseLink} →
+              </a>
+            ) : null}
+          </div>
+        );
+      })()
+    }
+  </div>
+
+  <p class="lp-cgraph__sr-hint">{ui.selectHint}</p>
+</div>

@@ -133,11 +133,32 @@ export interface JourneyEntry {
   noteFr?: string;
 }
 
+/** Career git-graph stint (horizontal branch timeline). */
+export interface CareerStint {
+  key: string;
+  lane: number;
+  label: string;
+  labelFr: string;
+  name: string;
+  nameFr?: string;
+  role: string;
+  roleFr?: string;
+  period: string;
+  periodFr?: string;
+  proof: string;
+  proofFr?: string;
+  current?: boolean;
+  /** Case-study slug under /work/ when public proof exists. */
+  caseSlug?: string;
+}
+
 export interface Credential {
   item: string;
   itemFr?: string;
   detail: string;
   detailFr?: string;
+  /** Primary credentials shown first; others demoted. */
+  featured?: boolean;
 }
 
 const domains: Domain[] = ["Fintech", "ERP & QA", "Systems", "Operations"];
@@ -157,6 +178,7 @@ export function directoryColumns<T>(items: T[], columnCount = 2): T[][] {
   return columns;
 }
 
+/** @deprecated Prefer careerStints for the Background graph. Kept for any residual callers. */
 export const journey: JourneyEntry[] = [
   {
     period: "2025 - now",
@@ -226,24 +248,152 @@ export const journey: JourneyEntry[] = [
   },
 ];
 
+/**
+ * Horizontal git-branch career graph — chronological left→right.
+ * Topology adapted from myportfolio-nextjs synthesis career graph.
+ */
+export const careerStints: CareerStint[] = [
+  {
+    key: "daust",
+    lane: 0,
+    label: "Education",
+    labelFr: "Formation",
+    name: "DAUST",
+    role: "Python tutoring & teaching assistant",
+    roleFr: "Tutorat Python et assistant d'enseignement",
+    period: "2018",
+    proof: "OOP mentoring for undergraduates and self-authored course material.",
+    proofFr: "Mentorat OOP pour undergrads et matériel de cours auto-écrit.",
+  },
+  {
+    key: "itech",
+    lane: 0,
+    label: "Internship",
+    labelFr: "Stage",
+    name: "ITech Solutions Afrique",
+    role: "IoT development internship — Arduino geolocation",
+    roleFr: "Stage IoT — géolocalisation Arduino",
+    period: "2019",
+    proof: "Geolocation system on Azure; planning rework cut system costs by ~20%.",
+    proofFr: "Système de géolocalisation sur Azure ; la replanification a réduit les coûts d'environ 20 %.",
+  },
+  {
+    key: "orange",
+    lane: 0,
+    label: "COOP",
+    labelFr: "COOP",
+    name: "Orange Digital Lab",
+    role: "Mobile development — COOP internship",
+    roleFr: "Développement mobile — stage COOP",
+    period: "2022",
+    proof: "React Native fitness community app (1,000+ members) and impact reports for decision-makers.",
+    proofFr: "App communauté fitness React Native (1 000+ membres) et rapports d'impact pour décideurs.",
+  },
+  {
+    key: "ergobit-fe",
+    lane: 1,
+    label: "COOP",
+    labelFr: "COOP",
+    name: "ERGOBIT",
+    role: "Frontend development — Q1 COOP internship",
+    roleFr: "Développement frontend — stage COOP Q1",
+    period: "2023 · Q1",
+    proof: "Frontend COOP deliverables on client ERP-facing surfaces.",
+    proofFr: "Livrables frontend COOP sur des surfaces ERP client.",
+  },
+  {
+    key: "bankingbook",
+    lane: 2,
+    label: "Contract",
+    labelFr: "Contrat",
+    name: "BankingBook Analytics",
+    role: "Software engineer — full-time contract",
+    roleFr: "Ingénieur logiciel — contrat temps plein",
+    period: "2023 → Q2 2024",
+    periodFr: "2023 → T2 2024",
+    proof: "Open-banking APIs for cloud-native ALM, UEMOA i18n, web and mail migration to bbafintech.com.",
+    proofFr: "APIs open banking pour ALM cloud-native, i18n UEMOA, migration web et mail vers bbafintech.com.",
+    caseSlug: "bankingbook-analytics",
+  },
+  {
+    key: "purolator",
+    lane: 0,
+    label: "COOP · PT",
+    labelFr: "COOP · TP",
+    name: "Purolator Digital Lab",
+    role: "Software engineering — Q3 COOP + Q4 part-time contractor",
+    roleFr: "Génie logiciel — COOP T3 + contrat temps partiel T4",
+    period: "2023 · Q3–Q4",
+    periodFr: "2023 · T3–T4",
+    proof: "CI/CD migration across three projects, internal Power Automate / Azure DevOps tooling, package-sorter SDK.",
+    proofFr: "Migration CI/CD sur trois projets, outillage Power Automate / Azure DevOps, SDK trieuse de colis.",
+  },
+  {
+    key: "ergobit-se",
+    lane: 1,
+    label: "Contract",
+    labelFr: "Contrat",
+    name: "ERGOBIT",
+    role: "Software engineering — ERP development & infra",
+    roleFr: "Génie logiciel — ERP et infra",
+    period: "Q3 2024 → Q1 2026",
+    periodFr: "T3 2024 → T1 2026",
+    proof: "Custom ERP/BI modules, Azure DevOps CI/CD, Odoo 18 acceptance-testing kit for migration teams.",
+    proofFr: "Modules ERP/BI custom, CI/CD Azure DevOps, kit de tests d'acceptation Odoo 18 pour équipes de migration.",
+    caseSlug: "odoo-testing-toolkit",
+  },
+  {
+    key: "everest",
+    lane: 2,
+    label: "Contract",
+    labelFr: "Contrat",
+    name: "Everest Finance",
+    role: "Senior technical operator — solo across three fintech products",
+    roleFr: "Opérateur technique senior — solo sur trois produits fintech",
+    period: "Q3 2025 → Now",
+    periodFr: "T3 2025 → présent",
+    proof: "Public site, internal CRM, and Sama Naffa customer app toward one operating model — two in production, Formos in demo.",
+    proofFr: "Site public, CRM interne et app client Sama Naffa vers un seul modèle d'exploitation — deux en production, Formos en démo.",
+    current: true,
+    caseSlug: "everest-finance",
+  },
+];
+
+/** Parent → child edges (merge at ergobit-se). */
+export const careerGraphEdges: { from: string; to: string }[] = [
+  { from: "daust", to: "itech" },
+  { from: "itech", to: "orange" },
+  { from: "orange", to: "ergobit-fe" },
+  { from: "ergobit-fe", to: "purolator" },
+  { from: "ergobit-fe", to: "bankingbook" },
+  { from: "purolator", to: "ergobit-se" },
+  { from: "bankingbook", to: "ergobit-se" },
+  { from: "ergobit-se", to: "everest" },
+];
+
+export const careerAxisYears = [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026] as const;
+
 export const credentials: Credential[] = [
   {
     item: "B.Sc. Software Engineering",
     itemFr: "B.Sc. Génie logiciel",
     detail: "University of Ottawa",
     detailFr: "Université d'Ottawa",
+    featured: true,
   },
   {
     item: "B.Sc. Computer Science",
     itemFr: "B.Sc. Informatique",
     detail: "DAUST",
     detailFr: "DAUST",
+    featured: true,
   },
   {
     item: "Odoo 18 Functional",
     itemFr: "Odoo 18 Functional",
     detail: "Odoo",
     detailFr: "Odoo",
+    featured: true,
   },
   {
     item: "Front-End Developer Professional",
