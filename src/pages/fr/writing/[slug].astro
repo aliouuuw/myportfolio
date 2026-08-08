@@ -30,8 +30,9 @@ const relatedCaseTitle = relatedCase ? (relatedCase.data.titleFr ?? relatedCase.
   backHref="/fr"
   backLabel="← Accueil"
   date={date}
-  relatedCaseHref={relatedCase ? `/fr/work/${relatedCaseSlug}` : undefined}
+  relatedCaseHref={relatedCase ? `/fr/#engagement-${relatedCaseSlug}` : undefined}
   relatedCaseTitle={relatedCaseTitle}
+  relatedCaseLabel="Dossier lié"
 >
   <Content />
 </Essay>

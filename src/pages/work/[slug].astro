@@ -1,65 +1,38 @@
 ---
-import { getCollection, render } from "astro:content";
-import CaseStudy from "@/layouts/CaseStudy.astro";
-import SurfaceProof from "@/components/SurfaceProof.astro";
-import { adjacentWork, sortWorkEntries, workSlug, workTitle } from "@/lib/work-nav";
+/**
+ * Soft-deprecated: long-form /work/[slug] pages redirect to the home
+ * Engagement Console dossier (`/#engagement-<slug>`).
+ */
+import { getCollection } from "astro:content";
+import { workSlug } from "@/lib/work-nav";
 
 export async function getStaticPaths() {
   const entries = await getCollection("work", (e) => e.id.endsWith("/en"));
   return entries.map((entry) => ({
     params: { slug: workSlug(entry) },
-    props: { entry },
   }));
 }
 
-const { entry } = Astro.props;
-const slug = workSlug(entry);
-const allEntries = await getCollection("work", (e) => e.id.endsWith("/en"));
-const sorted = sortWorkEntries(allEntries);
-const { prev, next } = adjacentWork(allEntries, slug);
-const { Content, headings } = await render(entry);
-const { title, summary, role, domain, period, stack, outcome, surfaces } = entry.data;
-
-const navItems = sorted.map((e) => ({
-  slug: workSlug(e),
-  title: workTitle(e, "en"),
-  current: workSlug(e) === slug,
-}));
-
-const h2Headings = headings.filter((h) => h.depth === 2);
-const tocHeadings = [
-  ...(surfaces.length > 0 ? [{ slug: "proof", depth: 2 as const, text: "Shipped surfaces" }] : []),
-  ...h2Headings,
-];
-const prevNav = prev ? { slug: workSlug(prev), title: workTitle(prev, "en") } : null;
-const nextNav = next ? { slug: workSlug(next), title: workTitle(next, "en") } : null;
+const slug = Astro.params.slug!;
+const target = `/#engagement-${slug}`;
+const title = "Aliou Wade";
 ---
 
-<CaseStudy
-  lang="en"
-  slug={slug}
-  docTitle={title}
-  title={`${title} · Aliou Wade`}
-  description={summary}
-  headings={tocHeadings}
-  navItems={navItems}
-  prev={prevNav}
-  next={nextNav}
->
-  <main class="case-study">
-    <header class="case-study__head">
-      <p class="case-study__meta">{domain}{period ? ` · ${period}` : ""}</p>
-      <h1 class="case-study__title">{title}</h1>
-      <p class="case-study__summary">{summary}</p>
-      <dl class="case-study__facts">
-        <div><dt>Role</dt><dd>{role}</dd></div>
-        {outcome && <div><dt>Outcome</dt><dd>{outcome}</dd></div>}
-        {stack.length > 0 && <div><dt>Stack</dt><dd>{stack.join(" · ")}</dd></div>}
-      </dl>
-    </header>
-    <SurfaceProof surfaces={surfaces} lang="en" />
-    <article class="case-study__body">
-      <Content />
-    </article>
-  </main>
-</CaseStudy>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <link rel="canonical" href="/" />
+    <script is:inline define:vars={{ target }}>
+      location.replace(target);
+    </script>
+  </head>
+  <body>
+    <p>
+      <a href={target}>Open work dossier</a>
+    </p>
+  </body>
+</html>

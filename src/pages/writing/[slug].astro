@@ -26,8 +26,9 @@ const relatedCase = relatedCaseSlug
   backHref="/"
   backLabel="← Home"
   date={date}
-  relatedCaseHref={relatedCase ? `/work/${relatedCaseSlug}` : undefined}
+  relatedCaseHref={relatedCase ? `/#engagement-${relatedCaseSlug}` : undefined}
   relatedCaseTitle={relatedCase?.data.title}
+  relatedCaseLabel="Related work"
 >
   <Content />
 </Essay>
