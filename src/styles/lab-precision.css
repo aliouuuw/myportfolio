@@ -182,8 +182,20 @@ body.lp {
   z-index: 30;
   display: flex;
   justify-content: flex-end;
-  padding: 0.75rem var(--pad) 0;
+  padding: 0.75rem var(--pad) 0.55rem;
   pointer-events: none;
+  /* Scrim + blur: Background/Work copy scrolls under chrome without colliding */
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(16px) saturate(1.12);
+  -webkit-backdrop-filter: blur(16px) saturate(1.12);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .lp-nav-shell {
+    background: var(--bg);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
 
 .lp-header {
