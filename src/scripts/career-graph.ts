@@ -8,7 +8,7 @@ type NodePos = { x: number; y: number; lane: number };
 
 const SCROLL_HINT_KEY = "lp-cgraph-scroll-hint-seen";
 const LANE_OFFSET = 28;
-const SPINE_KEYS = ["daust", "itech", "orange", "ergobit-fe", "purolator"];
+const SPINE_KEYS = ["itech", "orange", "ergobit-fe", "purolator"];
 
 function edgeKey(edge: Edge): string {
   if (edge.between) return `${edge.from}|${edge.between}->${edge.to}`;
@@ -23,15 +23,58 @@ function orthogonalLink(ax: number, ay: number, bx: number, by: number): string 
   return ` L ${ax} ${by} L ${bx} ${by}`;
 }
 
+function snapLaneBaselines(positions: Record<string, NodePos>): Record<string, NodePos> {
+  const laneYs = new Map<number, number>();
+  for (const lane of new Set(Object.values(positions).map((p) => p.lane))) {
+    const ys = Object.values(positions)
+      .filter((p) => p.lane === lane)
+      .map((p) => p.y);
+    if (ys.length > 0) {
+      laneYs.set(lane, ys.reduce((sum, y) => sum + y, 0) / ys.length);
+    }
+  }
+
+  const snapped: Record<string, NodePos> = {};
+  for (const [key, pos] of Object.entries(positions)) {
+    const y = laneYs.get(pos.lane) ?? pos.y;
+    snapped[key] = { ...pos, y };
+  }
+  return snapped;
+}
+
 function horizontalEdgePath(px: number, py: number, cx: number, cy: number): string {
   if (Math.abs(cy - py) < 2) {
     return `M ${px} ${py} L ${cx} ${cy}`;
   }
+  // Vertical at parent, then horizontal into child (works up or down).
   return `M ${px} ${py} L ${px} ${cy} L ${cx} ${cy}`;
 }
 
-function branchEdgePath(jx: number, jy: number, cx: number, cy: number): string {
-  return horizontalEdgePath(jx, jy, cx, cy);
+function wirePath(parent: NodePos, child: NodePos): string {
+  if (parent.lane === child.lane) {
+    return `M ${parent.x} ${parent.y} L ${child.x} ${parent.y}`;
+  }
+  return horizontalEdgePath(parent.x, parent.y, child.x, child.y);
+}
+
+function branchEdgePath(jx: number, mainY: number, contractY: number, cx: number): string {
+  if (Math.abs(mainY - contractY) < 2) {
+    return `M ${jx} ${mainY} L ${cx} ${contractY}`;
+  }
+  const dropY = Math.max(mainY, contractY);
+  return `M ${jx} ${mainY} L ${jx} ${dropY} L ${cx} ${dropY}`;
+}
+
+function mainLaneY(positions: Record<string, NodePos>): number {
+  const main = Object.values(positions).filter((p) => p.lane === 0);
+  if (main.length === 0) return 0;
+  return main.reduce((sum, p) => sum + p.y, 0) / main.length;
+}
+
+function contractLaneY(positions: Record<string, NodePos>): number {
+  const contract = Object.values(positions).filter((p) => p.lane === 1);
+  if (contract.length === 0) return mainLaneY(positions);
+  return contract.reduce((sum, p) => sum + p.y, 0) / contract.length;
 }
 
 function parseEdges(raw: string | null): Edge[] {
@@ -155,7 +198,7 @@ function initOne(root: HTMLElement): void {
 
   function layoutWires(): void {
     ensureGeometry();
-    const positions = measure();
+    const positions = snapLaneBaselines(measure());
     const chartW = Object.values(positions).reduce((m, p) => Math.max(m, p.x), 0) + 48;
     const chartH = Object.values(positions).reduce((m, p) => Math.max(m, p.y), 0) + 56;
     const w = Math.max(chartW, 1);
@@ -200,14 +243,15 @@ function initOne(root: HTMLElement): void {
         const anchorB = positions[edge.between];
         if (!anchorA || !anchorB) continue;
         const jx = (anchorA.x + anchorB.x) / 2;
-        const jy = anchorA.y;
-        path.setAttribute("d", branchEdgePath(jx, jy, child.x, child.y));
+        const jy = mainLaneY(positions);
+        const contractY = contractLaneY(positions);
+        path.setAttribute("d", branchEdgePath(jx, jy, contractY, child.x));
         continue;
       }
 
       const parent = positions[from];
       if (!parent) continue;
-      path.setAttribute("d", horizontalEdgePath(parent.x, parent.y, child.x, child.y));
+      path.setAttribute("d", wirePath(parent, child));
     }
 
     syncWireHot();
