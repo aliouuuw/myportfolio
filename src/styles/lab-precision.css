@@ -348,27 +348,46 @@ body.lp {
   display: block;
   transition:
     opacity 280ms var(--ease),
-    transform 280ms var(--ease);
+    transform 280ms var(--ease),
+    color 280ms var(--ease);
 }
 
+/* Light mode: gray moon (same inactive chrome as locale) */
 .lp-theme-sun {
+  opacity: 0;
+  transform: rotate(40deg) scale(0.82);
+  color: var(--g-yellow);
+}
+
+.lp-theme-sun path {
+  fill: var(--g-yellow);
+  stroke: var(--g-yellow);
+}
+
+.lp-theme-moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+  color: var(--ink-soft);
+}
+
+.lp-theme-moon path {
+  fill: none;
+  stroke: currentColor;
+}
+
+/* Dark mode: Google yellow sun */
+html[data-theme="dark"] .lp-theme-sun {
   opacity: 1;
   transform: rotate(0deg) scale(1);
 }
 
-.lp-theme-moon {
+html[data-theme="dark"] .lp-theme-moon {
   opacity: 0;
   transform: rotate(-40deg) scale(0.82);
 }
 
-html[data-theme="dark"] .lp-theme-sun {
-  opacity: 0;
-  transform: rotate(40deg) scale(0.82);
-}
-
-html[data-theme="dark"] .lp-theme-moon {
-  opacity: 1;
-  transform: rotate(0deg) scale(1);
+html[data-theme="dark"] .lp-theme:hover {
+  color: var(--g-yellow);
 }
 
 /* —— Back to work (background view only) —— */
