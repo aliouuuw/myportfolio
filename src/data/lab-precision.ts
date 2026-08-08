@@ -148,8 +148,27 @@ export interface CareerStint {
   proof: string;
   proofFr?: string;
   current?: boolean;
-  /** Case-study slug under /work/ when public proof exists. */
+  /** When true, the Journey graph detail panel shows no outbound CTA. */
+  noOutboundLink?: boolean;
+  /** Public dossier under /work/<slug> when a proof page exists. */
   caseSlug?: string;
+  /**
+   * Internship / COOP report URL (Google Drive or PDF).
+   * CTA label: “Open case study”. Leave unset (and noOutboundLink) when none exists.
+   */
+  reportHref?: string;
+}
+
+/** True when the stint is internship / COOP (“Open case study” CTA). */
+export function isCoopOrInternshipStint(stint: Pick<CareerStint, "label">): boolean {
+  const key = stint.label.toLowerCase();
+  return (
+    key === "internship" ||
+    key === "coop" ||
+    key.startsWith("coop ") ||
+    key.startsWith("coop ·") ||
+    key.startsWith("coop·")
+  );
 }
 
 export interface Credential {
@@ -264,6 +283,7 @@ export const careerStints: CareerStint[] = [
     period: "2018",
     proof: "OOP mentoring for undergraduates and self-authored course material.",
     proofFr: "Mentorat OOP pour étudiants de premier cycle et matériel de cours auto-écrit.",
+    noOutboundLink: true,
   },
   {
     key: "itech",
@@ -276,6 +296,7 @@ export const careerStints: CareerStint[] = [
     period: "2019",
     proof: "Geolocation system on Azure; planning rework cut system costs by ~20%.",
     proofFr: "Système de géolocalisation sur Azure ; la replanification a réduit les coûts d'environ 20 %.",
+    noOutboundLink: true,
   },
   {
     key: "orange",
@@ -288,6 +309,8 @@ export const careerStints: CareerStint[] = [
     period: "2022",
     proof: "React Native fitness community app (1,000+ members) and impact reports for decision-makers.",
     proofFr: "App communauté fitness React Native (1 000+ membres) et rapports d'impact pour décideurs.",
+    // TODO: paste Google Drive share URL for the Orange COOP report
+    reportHref: "#",
   },
   {
     key: "ergobit-fe",
@@ -300,6 +323,8 @@ export const careerStints: CareerStint[] = [
     period: "2023 · Q1",
     proof: "Frontend COOP deliverables on client ERP-facing surfaces.",
     proofFr: "Livrables frontend COOP sur des surfaces ERP client.",
+    // TODO: paste Google Drive share URL for the ERGOBIT FE COOP report
+    reportHref: "#",
   },
   {
     key: "purolator",
@@ -313,6 +338,8 @@ export const careerStints: CareerStint[] = [
     periodFr: "2023 · T3–T4",
     proof: "CI/CD migration across three projects, internal Power Automate / Azure DevOps tooling, package-sorter SDK.",
     proofFr: "Migration CI/CD sur trois projets, outillage Power Automate / Azure DevOps, SDK trieuse de colis.",
+    // TODO: paste Google Drive share URL for the Purolator COOP report
+    reportHref: "#",
   },
   {
     key: "bankingbook",

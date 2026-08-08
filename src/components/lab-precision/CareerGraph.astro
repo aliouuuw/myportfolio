@@ -1,8 +1,10 @@
 ---
+import { getCollection } from "astro:content";
 import {
   careerAxisYears,
   careerGraphEdges,
   careerStints,
+  isCoopOrInternshipStint,
 } from "@/data/lab-precision";
 
 interface Props {
@@ -13,13 +15,17 @@ const locale = Astro.props.locale ?? "en";
 const isFr = locale === "fr";
 const workBase = isFr ? "/fr/work" : "/work";
 
+const workEntries = await getCollection("work", (entry) => entry.id.endsWith("/en"));
+const workSlugs = new Set(workEntries.map((entry) => entry.id.replace(/\/en$/, "")));
+
 const ui = isFr
   ? {
       graphAria: "Parcours en graphe git horizontal, 2018 à 2026",
       cmd: "git log --graph --oneline --decorate career/main",
       currentBadge: "HEAD",
       scrollHint: "Glisser pour les rôles antérieurs",
-      caseLink: "Lire le dossier",
+      caseStudyLink: "Voir l'étude de cas",
+      proofLink: "Voir le dossier",
       selectHint: "Sélectionnez un nœud pour le détail du rôle.",
     }
   : {
@@ -27,9 +33,28 @@ const ui = isFr
       cmd: "git log --graph --oneline --decorate career/main",
       currentBadge: "HEAD",
       scrollHint: "Swipe for earlier roles",
-      caseLink: "Open case study",
+      caseStudyLink: "Open case study",
+      proofLink: "Open proof",
       selectHint: "Select a node for role detail.",
     };
+
+function stintOutbound(stint: (typeof careerStints)[number]): {
+  href: string;
+  label: string;
+  external: boolean;
+} | null {
+  if (stint.noOutboundLink) return null;
+
+  // Internship / COOP → report (Google Drive / PDF), labeled “Open case study”
+  if (isCoopOrInternshipStint(stint)) {
+    if (!stint.reportHref) return null;
+    return { href: stint.reportHref, label: ui.caseStudyLink, external: true };
+  }
+
+  // Contracts / other → /work proof when the entry exists
+  if (!stint.caseSlug || !workSlugs.has(stint.caseSlug)) return null;
+  return { href: `${workBase}/${stint.caseSlug}`, label: ui.proofLink, external: false };
+}
 
 const defaultKey = careerStints.find((s) => s.current)?.key ?? careerStints[careerStints.length - 1]!.key;
 ---
@@ -61,7 +86,7 @@ const defaultKey = careerStints.find((s) => s.current)?.key ?? careerStints[care
               const period = isFr ? (stint.periodFr ?? stint.period) : stint.period;
               const role = isFr ? (stint.roleFr ?? stint.role) : stint.role;
               const proof = isFr ? (stint.proofFr ?? stint.proof) : stint.proof;
-              const caseHref = stint.caseSlug ? `${workBase}/${stint.caseSlug}` : "";
+              const outbound = stintOutbound(stint);
               const isDefault = stint.key === defaultKey;
 
               return (
@@ -78,8 +103,9 @@ const defaultKey = careerStints.find((s) => s.current)?.key ?? careerStints[care
                     data-role={role}
                     data-period={period}
                     data-proof={proof}
-                    data-case-href={caseHref}
-                    data-case-label={ui.caseLink}
+                    data-case-href={outbound?.href ?? ""}
+                    data-case-label={outbound?.label ?? ""}
+                    data-case-external={outbound?.external ? "true" : "false"}
                     aria-pressed={isDefault ? "true" : "false"}
                   >
                     <span class="lp-cgraph__card-rail">
@@ -124,7 +150,7 @@ const defaultKey = careerStints.find((s) => s.current)?.key ?? careerStints[care
         const period = isFr ? (stint.periodFr ?? stint.period) : stint.period;
         const role = isFr ? (stint.roleFr ?? stint.role) : stint.role;
         const proof = isFr ? (stint.proofFr ?? stint.proof) : stint.proof;
-        const caseHref = stint.caseSlug ? `${workBase}/${stint.caseSlug}` : undefined;
+        const outbound = stintOutbound(stint);
 
         return (
           <div class="lp-cgraph__detail-inner" data-lane={stint.lane}>
@@ -136,9 +162,15 @@ const defaultKey = careerStints.find((s) => s.current)?.key ?? careerStints[care
             <p class="lp-cgraph__detail-name">{name}</p>
             <p class="lp-cgraph__detail-role">{role}</p>
             <p class="lp-cgraph__detail-proof">{proof}</p>
-            {caseHref ? (
-              <a class="lp-cgraph__detail-case" href={caseHref}>
-                {ui.caseLink} →
+            {outbound ? (
+              <a
+                class="lp-cgraph__detail-case"
+                href={outbound.href}
+                {...(outbound.external
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+              >
+                {outbound.label} →
               </a>
             ) : null}
           </div>

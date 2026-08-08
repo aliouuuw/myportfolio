@@ -50,9 +50,20 @@ function horizontalEdgePath(px: number, py: number, cx: number, cy: number): str
   return `M ${px} ${py} L ${px} ${cy} L ${cx} ${cy}`;
 }
 
+/** Contract lane → main timeline: horizontal under child, then vertical into node. */
+function mergeUpEdgePath(px: number, py: number, cx: number, cy: number): string {
+  if (Math.abs(cx - px) < 2) {
+    return `M ${px} ${py} L ${cx} ${cy}`;
+  }
+  return `M ${px} ${py} L ${cx} ${py} L ${cx} ${cy}`;
+}
+
 function wirePath(parent: NodePos, child: NodePos): string {
   if (parent.lane === child.lane) {
     return `M ${parent.x} ${parent.y} L ${child.x} ${parent.y}`;
+  }
+  if (parent.lane === 1 && child.lane === 0) {
+    return mergeUpEdgePath(parent.x, parent.y, child.x, child.y);
   }
   return horizontalEdgePath(parent.x, parent.y, child.x, child.y);
 }
@@ -284,6 +295,7 @@ function initOne(root: HTMLElement): void {
     const lane = card.dataset.lane ?? "0";
     const caseHref = card.dataset.caseHref ?? "";
     const caseLabel = card.dataset.caseLabel ?? "Open case study";
+    const caseExternal = card.dataset.caseExternal === "true";
 
     detailInner.dataset.lane = lane;
     detailLabel.textContent = card.dataset.label ?? "";
@@ -300,10 +312,20 @@ function initOne(root: HTMLElement): void {
       }
       detailCase.href = caseHref;
       detailCase.textContent = `${caseLabel} →`;
+      if (caseExternal) {
+        detailCase.target = "_blank";
+        detailCase.rel = "noopener noreferrer";
+      } else {
+        detailCase.removeAttribute("target");
+        detailCase.removeAttribute("rel");
+      }
       detailCase.hidden = false;
     } else if (detailCase) {
       detailCase.hidden = true;
       detailCase.removeAttribute("href");
+      detailCase.removeAttribute("target");
+      detailCase.removeAttribute("rel");
+      detailCase.textContent = "";
     }
 
     if (!animate) {
