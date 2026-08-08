@@ -2389,6 +2389,15 @@ span.lp-roster-name {
   font-weight: 500;
 }
 
+.lp-off-clock-piece {
+  display: inline-block;
+  vertical-align: -0.12em;
+  width: 0.95em;
+  height: 0.95em;
+  margin: 0 0.1em;
+  color: var(--ink-soft);
+}
+
 .lp-off-clock p {
   margin: 0;
   font-size: 0.875rem;

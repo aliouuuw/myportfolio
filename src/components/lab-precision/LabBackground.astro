@@ -1,6 +1,7 @@
 ---
 import CareerGraph from "@/components/lab-precision/CareerGraph.astro";
 import BioContactLinks from "@/components/lab-precision/BioContactLinks.astro";
+import ChessKnightMark from "@/components/lab-precision/ChessKnightMark.astro";
 import { credentials } from "@/data/lab-precision";
 
 interface Props {
@@ -26,7 +27,8 @@ const ui = isFr
         "Basé à Dakar. Français et anglais. Je réponds sous 48 h, du lundi au vendredi.",
       ],
       offClockTitle: "Hors du bureau",
-      offClock: "Échecs compétitifs. Je tourne autour de 2043 en bullet en ligne.",
+      offClockBefore: "Échecs",
+      offClockAfter: " compétitifs. Je tourne autour de 2043 en bullet en ligne.",
       journeyTitle: "Parcours",
       journeyLead: "Où j'ai bossé depuis 2018.",
       journeyRef: "career/main",
@@ -46,7 +48,8 @@ const ui = isFr
         "Based in Dakar. French and English. I reply within 48h, Monday to Friday.",
       ],
       offClockTitle: "Off the clock",
-      offClock: "Competitive chess. I hover around 2043 bullet online.",
+      offClockBefore: "Competitive chess",
+      offClockAfter: ". I hover around 2043 bullet online.",
       journeyTitle: "Journey",
       journeyLead: "Where I've worked since 2018.",
       journeyRef: "career/main",
@@ -79,7 +82,11 @@ const ui = isFr
       </div>
       <div class="lp-off-clock">
         <h2>{ui.offClockTitle}</h2>
-        <p>{ui.offClock}</p>
+        <p>
+          {ui.offClockBefore}
+          <ChessKnightMark class="lp-off-clock-piece" />
+          {ui.offClockAfter}
+        </p>
       </div>
     </div>
   </section>
