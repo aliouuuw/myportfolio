@@ -48,6 +48,7 @@ export interface Engagement {
   period: string;
   /** Homepage conversion anchors (Everest, ERGOBIT toolkit, BocalBun). */
   featured: boolean;
+  /** @deprecated /work case-study routes — dossiers use surface URLs instead. */
   href?: string;
   /** Everest surface id under /media/case-studies/everest-finance/ */
   media?: string;
@@ -150,7 +151,7 @@ export interface CareerStint {
   current?: boolean;
   /** When true, the Journey graph detail panel shows no outbound CTA. */
   noOutboundLink?: boolean;
-  /** Public dossier under /work/<slug> when a proof page exists. */
+  /** Engagement Console slug (`#engagement-<slug>` on the home Work surface). */
   caseSlug?: string;
   /**
    * Internship / COOP report URL (Google Drive or PDF).

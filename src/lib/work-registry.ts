@@ -100,7 +100,6 @@ function mapWorkEntryToEngagement(
     builds: surfaces.length || 1,
     period: localizePeriod(data.period ?? data.date, locale),
     featured: data.featured,
-    href: locale === "fr" ? `/fr/work/${slug}` : `/work/${slug}`,
     media,
     caption: primarySurface?.name ?? shortName(title),
     surfaces,

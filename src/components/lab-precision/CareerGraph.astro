@@ -13,7 +13,7 @@ interface Props {
 
 const locale = Astro.props.locale ?? "en";
 const isFr = locale === "fr";
-const workBase = isFr ? "/fr/work" : "/work";
+const homePath = isFr ? "/fr/" : "/";
 
 const workEntries = await getCollection("work", (entry) => entry.id.endsWith("/en"));
 const workSlugs = new Set(workEntries.map((entry) => entry.id.replace(/\/en$/, "")));
@@ -51,9 +51,13 @@ function stintOutbound(stint: (typeof careerStints)[number]): {
     return { href: stint.reportHref, label: ui.caseStudyLink, external: true };
   }
 
-  // Contracts / other → /work proof when the entry exists
+  // Contracts → Engagement Console deep link on the home Work surface
   if (!stint.caseSlug || !workSlugs.has(stint.caseSlug)) return null;
-  return { href: `${workBase}/${stint.caseSlug}`, label: ui.proofLink, external: false };
+  return {
+    href: `${homePath}#engagement-${stint.caseSlug}`,
+    label: ui.proofLink,
+    external: false,
+  };
 }
 
 const defaultKey = careerStints.find((s) => s.current)?.key ?? careerStints[careerStints.length - 1]!.key;

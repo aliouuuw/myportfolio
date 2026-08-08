@@ -230,10 +230,11 @@ function createViewManager(config: Required<LabPrecisionConfig>) {
       if (hash !== "#background") {
         history.replaceState(null, "", `${path}#background`);
       }
+    } else if (hash.startsWith("#engagement-")) {
+      // Prefer an explicit engagement deep link (e.g. Open proof from Journey)
+      lastWorkHash = hash;
     } else if (lastWorkHash) {
-      if (hash !== lastWorkHash) {
-        history.replaceState(null, "", `${path}${lastWorkHash}`);
-      }
+      history.replaceState(null, "", `${path}${lastWorkHash}`);
     } else if (hash === "#background") {
       history.replaceState(null, "", path);
     }
