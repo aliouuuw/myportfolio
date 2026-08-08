@@ -1946,14 +1946,53 @@ span.lp-roster-name {
     gap: 1.35rem;
   }
 
-  .lp-about-intro .lp-bio-name {
-    font-size: clamp(1.85rem, 8vw, 2.35rem);
-    max-width: none;
+  .lp-about-hero .lp-bio-name {
+    font-size: clamp(1.6rem, 7.2vw, 2rem);
+  }
+
+  .lp-about-hero .lp-bio-line {
+    font-size: 1rem;
+    line-height: 1.58;
+  }
+
+  .lp-about-hero .lp-bio-line:last-of-type {
+    font-size: 0.875rem;
+  }
+
+  .lp-about-cta {
+    margin-top: 1.15rem;
+  }
+
+  .lp-about-cta-primary {
+    min-height: 2.75rem;
+    font-size: 0.9375rem;
+  }
+
+  .lp-about-footer .lp-bio-links {
+    gap: 0.65rem;
   }
 
   .lp-off-clock {
     margin-top: 1.15rem;
     padding-top: 1.1rem;
+  }
+
+  .lp-about .lp-section-head {
+    gap: 0.65rem;
+    align-items: flex-start;
+  }
+
+  .lp-about .lp-section-head .lp-git-ref {
+    margin-top: 0.15rem;
+  }
+
+  .lp-about .lp-section-lead {
+    max-width: none;
+    font-size: 0.8125rem;
+  }
+
+  .lp-cred-list li {
+    padding: 0.9rem 1rem;
   }
 
   .lp-section-head {
@@ -2120,9 +2159,22 @@ span.lp-roster-name {
 }
 
 @media (max-width: 799px) {
+  .lp-about-hero {
+    grid-template-columns: minmax(5.25rem, 30vw) 1fr;
+    gap: 0.85rem 1rem;
+    align-items: start;
+  }
+
+  .lp-about-intro {
+    display: contents;
+  }
+
   .lp-portrait {
-    width: min(9.5rem, 38vw);
-    max-width: 9.5rem;
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    width: 100%;
+    max-width: none;
+    margin: 0;
   }
 
   .lp-portrait .lp-bezel-inner {
@@ -2133,24 +2185,81 @@ span.lp-roster-name {
     margin-top: 0.5rem;
     font-size: 0.625rem;
   }
+
+  .lp-about-hero .lp-bio-role {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0 0 0.35rem;
+    align-self: end;
+  }
+
+  .lp-about-hero .lp-bio-name {
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+    align-self: start;
+    font-size: clamp(1.65rem, 7.5vw, 2.15rem);
+    max-width: none;
+  }
+
+  .lp-about-hero .lp-bio-line {
+    grid-column: 1 / -1;
+    max-width: none;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .lp-about-hero .lp-bio-line:first-of-type {
+    margin-top: 0.6rem;
+  }
+
+  .lp-about-hero .lp-about-cta {
+    grid-column: 1 / -1;
+    margin-top: 1.1rem;
+  }
+
+  .lp-about-hero .lp-off-clock {
+    grid-column: 1 / -1;
+  }
 }
 
 .lp-about-intro {
   animation: lp-settle-in 0.6s var(--ease) 60ms both;
 }
 
+.lp-about-intro .lp-bio-role {
+  margin-bottom: 0.5rem;
+}
+
 .lp-about-intro .lp-bio-name {
   font-size: clamp(2.15rem, 5vw, 3.35rem);
   max-width: 16ch;
   letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 
 .lp-about-intro .lp-bio-line {
-  max-width: 36rem;
+  margin: 0;
+  max-width: 42rem;
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  letter-spacing: 0.005em;
+  text-wrap: pretty;
 }
 
 .lp-about-intro .lp-bio-line + .lp-bio-line {
-  margin-top: -0.55rem;
+  margin-top: 0.8rem;
+}
+
+.lp-about-intro .lp-bio-line:first-of-type {
+  margin-top: 0.25rem;
+}
+
+.lp-about-intro .lp-bio-line:last-of-type {
+  margin-top: 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ink-faint);
 }
 
 .lp-work-hero {
