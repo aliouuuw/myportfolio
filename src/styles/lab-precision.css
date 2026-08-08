@@ -1890,6 +1890,10 @@ span.lp-roster-name {
     justify-content: center;
   }
 
+  .lp-work-footer .lp-bio-links {
+    margin-bottom: 0;
+  }
+
   .lp-bio-link {
     width: 2.15rem;
     height: 2.15rem;
@@ -2196,13 +2200,28 @@ span.lp-roster-name {
   font-size: 0.98em;
 }
 
-.lp-work-hero .lp-bio-links {
-  margin-bottom: 1.2rem;
+.lp-work-hero .lp-bio-actions {
   justify-content: center;
 }
 
-.lp-work-hero .lp-bio-actions {
+.lp-work-footer {
+  width: 100%;
+  max-width: var(--max);
+  margin-top: clamp(2.5rem, 6vw, 3.75rem);
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--hairline);
+  display: flex;
   justify-content: center;
+}
+
+.lp-work-footer .lp-bio-links {
+  margin: 0;
+  justify-content: center;
+}
+
+.lp-about-footer {
+  margin-top: clamp(2rem, 5vw, 3rem);
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,5 +1,6 @@
 ---
 import CareerGraph from "@/components/lab-precision/CareerGraph.astro";
+import BioContactLinks from "@/components/lab-precision/BioContactLinks.astro";
 import { credentials } from "@/data/lab-precision";
 
 interface Props {
@@ -16,7 +17,7 @@ const ui = isFr
   ? {
       portraitAlt: "Portrait d'Aliou Wade",
       portraitCaption: "Aliou Wade, Dakar",
-      role: "Profil",
+      role: "Background",
       headline: "De l'ingénierie avec du contexte opérationnel.",
       bio: "Six ans à construire des logiciels opérationnels en fintech, ERP, logistique et éducation. Ottawa à Dakar, bilingue français et anglais. Opérateur solo sur les systèmes que les entreprises font vraiment tourner — pas ceux qui font joli en démo.",
       proof: [
@@ -33,10 +34,6 @@ const ui = isFr
       credsTitle: "Formation & certifications",
       credsRef: (n: number) => `${n} entrées`,
       moreCreds: "Autres certifications",
-      closeTitle: "Discutons",
-      closeLine: "Capacité sélective pour le bon mandat. Réponse sous 48 h les jours ouvrables.",
-      ctaPrimary: "Écrire un e-mail",
-      ctaWhatsApp: "WhatsApp",
     }
   : {
       portraitAlt: "Portrait of Aliou Wade",
@@ -58,10 +55,6 @@ const ui = isFr
       credsTitle: "Credentials",
       credsRef: (n: number) => `${n} entries`,
       moreCreds: "Other certifications",
-      closeTitle: "Let's talk",
-      closeLine: "Selective capacity for the right mandate. Replies within 48h on weekdays.",
-      ctaPrimary: "Email me",
-      ctaWhatsApp: "WhatsApp",
     };
 ---
 
@@ -83,12 +76,9 @@ const ui = isFr
         {ui.proof.map((line) => <li>{line}</li>)}
       </ul>
       <div class="lp-about-cta">
-        <a class="lp-about-cta-primary" href="mailto:wadealiou00@gmail.com">{ui.ctaPrimary}</a>
-        <ul class="lp-bio-links lp-bio-links--quiet">
-          <li><a href="https://www.linkedin.com/in/aliouuuw">LinkedIn</a></li>
-          <li><a href="https://github.com/aliouuuw">GitHub</a></li>
-          <li><a href="https://wa.me/221777228845">WhatsApp</a></li>
-        </ul>
+        <a class="lp-about-cta-primary" href="mailto:wadealiou00@gmail.com">
+          {isFr ? "Écrire un e-mail" : "Email me"}
+        </a>
       </div>
       <div class="lp-off-clock">
         <h2>{ui.offClockTitle}</h2>
@@ -140,12 +130,7 @@ const ui = isFr
     }
   </section>
 
-  <section class="lp-about-close" aria-labelledby="about-close-title">
-    <h2 id="about-close-title">{ui.closeTitle}</h2>
-    <p>{ui.closeLine}</p>
-    <div class="lp-about-close-actions">
-      <a class="lp-about-cta-primary" href="mailto:wadealiou00@gmail.com">{ui.ctaPrimary}</a>
-      <a class="lp-about-cta-secondary" href="https://wa.me/221777228845">{ui.ctaWhatsApp}</a>
-    </div>
-  </section>
+  <footer class="lp-work-footer lp-about-footer">
+    <BioContactLinks locale={locale} />
+  </footer>
 </div>
