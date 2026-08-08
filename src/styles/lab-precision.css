@@ -1695,20 +1695,30 @@ span.lp-roster-name {
     max-width: none;
   }
 
+  .lp-work-hero .lp-bio-role {
+    margin-bottom: 1.05rem;
+  }
+
   .lp-work-hero .lp-bio-name {
-    font-size: clamp(2.5rem, 11vw, 3.5rem);
-    letter-spacing: -0.035em;
-    line-height: 1.05;
+    margin: 0 0 1.2rem;
+    font-size: clamp(2.85rem, 12.5vw, 3.85rem);
+    letter-spacing: -0.04em;
+    line-height: 1.02;
   }
 
   .lp-work-hero .lp-bio-line {
-    margin: 0 auto 1rem;
-    font-size: 1rem;
+    margin: 0 auto 1.25rem;
+    font-size: 1.0625rem;
+    line-height: 1.5;
+  }
+
+  .lp-work-hero .lp-bio-aside {
+    margin-top: 0.4rem;
   }
 
   .lp-bio-links {
     gap: 0.65rem 1rem;
-    margin-bottom: 1.1rem;
+    margin-bottom: 1.25rem;
   }
 
   .lp-bio-links li {
