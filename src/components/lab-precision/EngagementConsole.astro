@@ -15,7 +15,7 @@ interface Props {
 
 const { engagements, locale } = Astro.props;
 const isFr = locale === "fr";
-const railLabel = isFr ? "Mandats" : "Engagements";
+const railLabel = isFr ? "Dossiers" : "Work";
 const caseStudyLabel = isFr ? "Voir l'étude de cas" : "View case study";
 const viewProjectFallback = isFr ? "Voir le projet" : "View project";
 const pendingTitle = isFr ? "Lien public à venir" : "Public URL coming soon";
