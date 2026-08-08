@@ -17,19 +17,18 @@ const ui = isFr
   ? {
       portraitAlt: "Portrait d'Aliou Wade",
       portraitCaption: "Aliou Wade, Dakar",
-      role: "Background",
-      headline: "De l'ingénierie avec du contexte opérationnel.",
-      bio: "Six ans à construire des logiciels opérationnels en fintech, ERP, logistique et éducation. Ottawa à Dakar, bilingue français et anglais. Opérateur solo sur les systèmes que les entreprises font vraiment tourner — pas ceux qui font joli en démo.",
-      proof: [
-        "Solo sur trois produits fintech chez Everest Finance",
-        "Kit de tests d'acceptation Odoo 18 pour migrations ERP",
-        "Répond sous 48 h les jours ouvrables",
+      role: "Bio",
+      headline: "Principalement des systèmes.",
+      bioParagraphs: [
+        "Chez Everest Finance, je gère trois produits fintech, principalement en solo. Je m'occupe aussi bien des applications et des données que des intégrations, du déploiement et de la production.",
+        "Avant ça, j'ai travaillé sur des ERP et des migrations chez ERGOBIT, avec des modules sur mesure en RH, paie et compta, et le kit de tests d'acceptation Odoo 18.",
+        "Au fil des années, j'ai travaillé dans la fintech, la logistique, le mobile, l'IoT et l'éducation. Je transforme souvent du travail manuel compliqué en logiciel sur lequel les équipes comptent.",
+        "Basé à Dakar. Français et anglais. Je réponds sous 48 h, du lundi au vendredi.",
       ],
       offClockTitle: "Hors du bureau",
-      offClock:
-        "Échecs compétitifs, environ 2043 en bullet en ligne. La même discipline que livrer sous deadline.",
+      offClock: "Échecs compétitifs. Je tourne autour de 2043 en bullet en ligne.",
       journeyTitle: "Parcours",
-      journeyLead: "Employeurs et contrats de 2018 à aujourd'hui — sélectionnez un nœud.",
+      journeyLead: "Où j'ai bossé depuis 2018.",
       journeyRef: "career/main",
       credsTitle: "Formation & certifications",
       credsRef: (n: number) => `${n} entrées`,
@@ -38,19 +37,18 @@ const ui = isFr
   : {
       portraitAlt: "Portrait of Aliou Wade",
       portraitCaption: "Aliou Wade, Dakar",
-      role: "Background",
-      headline: "Engineering with operational context.",
-      bio: "Six years building operational software across fintech, ERP, logistics, and education. Ottawa to Dakar, bilingual French and English. Solo operator on the systems businesses actually run — not the ones that demo well.",
-      proof: [
-        "Solo across three fintech products at Everest Finance",
-        "Odoo 18 acceptance-testing kit for ERP migrations",
-        "Replies within 48h on weekdays",
+      role: "Bio",
+      headline: "Mostly systems work.",
+      bioParagraphs: [
+        "At Everest Finance, I run three fintech products, mostly on my own. I handle everything from the applications and data to integrations, deployment, and production.",
+        "Before that, I worked on ERP and migrations at ERGOBIT, with custom HR, payroll, and accounting modules, and the Odoo 18 acceptance testing kit.",
+        "Over the years, I've worked across fintech, logistics, mobile, IoT, and education. I usually turn messy manual work into software people can rely on.",
+        "Based in Dakar. French and English. I reply within 48h, Monday to Friday.",
       ],
       offClockTitle: "Off the clock",
-      offClock:
-        "Competitive chess, around 2043 bullet online. Same discipline as shipping under deadline.",
+      offClock: "Competitive chess. I hover around 2043 bullet online.",
       journeyTitle: "Journey",
-      journeyLead: "Employers and contracts from 2018 to today — select a node for detail.",
+      journeyLead: "Where I've worked since 2018.",
       journeyRef: "career/main",
       credsTitle: "Credentials",
       credsRef: (n: number) => `${n} entries`,
@@ -71,13 +69,12 @@ const ui = isFr
     <div class="lp-about-intro">
       <p class="lp-bio-role">{ui.role}</p>
       <h1 class="lp-bio-name">{ui.headline}</h1>
-      <p class="lp-bio-line">{ui.bio}</p>
-      <ul class="lp-about-proof">
-        {ui.proof.map((line) => <li>{line}</li>)}
-      </ul>
+      {ui.bioParagraphs.map((paragraph) => (
+        <p class="lp-bio-line">{paragraph}</p>
+      ))}
       <div class="lp-about-cta">
         <a class="lp-about-cta-primary" href="mailto:wadealiou00@gmail.com">
-          {isFr ? "Écrire un e-mail" : "Email me"}
+          {isFr ? "M'écrire" : "Email me"}
         </a>
       </div>
       <div class="lp-off-clock">

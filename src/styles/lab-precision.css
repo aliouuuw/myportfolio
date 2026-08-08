@@ -2145,6 +2145,14 @@ span.lp-roster-name {
   letter-spacing: -0.03em;
 }
 
+.lp-about-intro .lp-bio-line {
+  max-width: 36rem;
+}
+
+.lp-about-intro .lp-bio-line + .lp-bio-line {
+  margin-top: -0.55rem;
+}
+
 .lp-work-hero {
   width: 100%;
   max-width: 36rem;
