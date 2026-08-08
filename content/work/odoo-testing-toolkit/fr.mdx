@@ -1,9 +1,9 @@
 ---
 title: "ERGOBIT — Odoo 18 acceptance testing toolkit"
-titleFr: "ERGOBIT — toolkit de tests d'acceptance Odoo 18"
+titleFr: "ERGOBIT — toolkit de tests d'acceptation Odoo 18"
 summary: "A Robot Framework + Playwright starter kit for structured acceptance testing of Odoo 18 migrations, built during production ERP work at ERGOBIT."
-summaryFr: "Un starter kit Robot Framework + Playwright pour les tests d'acceptance structurés des migrations Odoo 18, construit pendant un travail ERP en production chez ERGOBIT."
-role: "Software engineer"
+summaryFr: "Un starter kit Robot Framework + Playwright pour les tests d'acceptation structurés des migrations Odoo 18, construit pendant un travail ERP en production chez ERGOBIT."
+role: "Ingénieur logiciel"
 domain: "ERP / QA"
 stack:
   - "Robot Framework"
@@ -20,7 +20,7 @@ proofClaim: "Cette personne a-t-elle fait du vrai travail ERP, pas des tutoriels
 outcome: "39 tests · 9 suites pour les migrations Odoo 18"
 surfaces:
   - name: "Acceptance testing toolkit"
-    nameFr: "Toolkit de tests d'acceptance"
+    nameFr: "Toolkit de tests d'acceptation"
     status: "Shipped"
     statusFr: "Livré"
     url: "https://github.com/aliouuuw/odoo-18-acceptance*"
@@ -57,7 +57,7 @@ Le problème plus profond est culturel. Les intégrateurs ERP ne sont pas des at
 
 ## Approche
 
-J'ai construit un starter kit conçu pour rendre le testing d'acceptance structuré le chemin de moindre résistance pour les migrations Odoo. Les décisions d'architecture étaient délibérées :
+J'ai construit un starter kit conçu pour rendre les tests d'acceptation structurés le chemin de moindre résistance pour les migrations Odoo. Les décisions d'architecture étaient délibérées :
 
 - **Robot Framework pour les tests keyword-driven.** L'abstraction keyword de Robot Framework permet aux consultants fonctionnels de lire et éventuellement contribuer aux définitions de tests sans écrire de Python. Un cas de test se lit comme une checklist : "Naviguer vers Commande Client, Créer Nouvelle Commande, Vérifier Calcul Total." C'était non-négociable — le toolkit devait être accessible au-delà de l'équipe d'ingénierie.
 - **Playwright pour l'automatisation du navigateur.** Le client web Odoo est une application single-page complexe. Playwright gère le rendu dynamique, l'attente et la gestion d'état avec lesquels des outils plus simples luttent. Il nous donne aussi une couverture multi-navigateurs sans infrastructure supplémentaire.
@@ -73,7 +73,7 @@ J'ai construit un starter kit conçu pour rendre le testing d'acceptance structu
 │  │        Robot Framework Runner          │  │
 │  │  ┌──────────┐  ┌───────────────────┐  │  │
 │  │  │  Smoke   │  │  Validation       │  │  │
-│  │  │ (9 min)  │  │    Complète       │  │  │
+│  │  │ (<2 min) │  │    Complète       │  │  │
 │  │  │          │  │    (39 tests)     │  │  │
 │  │  └────┬─────┘  └────────┬──────────┘  │  │
 │  │       └────────┬────────┘             │  │
@@ -95,7 +95,7 @@ J'ai construit un starter kit conçu pour rendre le testing d'acceptance structu
 
 ## Profondeur technique
 
-L'architecture keyword de Robot Framework était la bonne couche d'abstraction pour ce problème. Chaque fichier de test se lit comme un scénario d'acceptance structuré écrit en langage quasi-naturel, mais en dessous, les keywords se résolvent en librairies Python qui pilotent Playwright. J'ai organisé les keywords en trois couches : keywords métier ("Créer Commande Client"), keywords de navigation ("Naviguer vers Module"), et keywords d'assertion ("Vérifier Valeur Champ"). Ce layering signifie qu'un changement à l'interface Odoo nécessite de mettre à jour les keywords de navigation, pas de réécrire chaque test.
+L'architecture keyword de Robot Framework était la bonne couche d'abstraction pour ce problème. Chaque fichier de test se lit comme un scénario d'acceptation structuré écrit en langage quasi-naturel, mais en dessous, les keywords se résolvent en librairies Python qui pilotent Playwright. J'ai organisé les keywords en trois couches : keywords métier ("Créer Commande Client"), keywords de navigation ("Naviguer vers Module"), et keywords d'assertion ("Vérifier Valeur Champ"). Ce layering signifie qu'un changement à l'interface Odoo nécessite de mettre à jour les keywords de navigation, pas de réécrire chaque test.
 
 La stratégie de sélecteurs mérite sa propre note. Odoo rend son interface à travers un framework OWL avec des noms de classes générés dynamiquement. Les sélecteurs construits sur les noms de classes cassent d'une version à l'autre — exactement le scénario contre lequel vous essayez de tester. J'ai établi une convention d'utilisation des attributs `data-field`, `name` et des rôles ARIA comme sélecteurs primaires, avec les sélecteurs de classes CSS uniquement comme fallbacks avec des commentaires explicites les marquant comme fragiles. Le document de guidelines de sélecteurs est devenu l'un des artefacts les plus référencés de l'équipe.
 
@@ -111,7 +111,7 @@ Je maintiens une relation forte avec le leadership d'ERGOBIT. Le toolkit est un 
 
 **Ce que je referais différemment :**
 
-- **Commencer avec les critères d'acceptance avant d'écrire du code de test.** J'ai commencé par automatiser les workflows évidents et ai rempli les critères après. Commencer avec une matrice d'acceptance formelle — signée par les consultants fonctionnels — aurait produit une meilleure couverture et une adhésion plus rapide.
+- **Commencer avec les critères d'acceptation avant d'écrire du code de test.** J'ai commencé par automatiser les workflows évidents et ai rempli les critères après. Commencer avec une matrice d'acceptation formelle — signée par les consultants fonctionnels — aurait produit une meilleure couverture et une adhésion plus rapide.
 - **Impliquer les consultants fonctionnels dès le premier jour.** L'approche keyword-driven était conçue pour leur participation, mais j'ai construit la première version seul et l'ai présentée. Co-créer les suites initiales aurait fait remonter des cas limites de domaine que j'ai manqués et aurait construit l'appropriation plus tôt.
 
 **Ce qui a bien fonctionné :**

@@ -11,7 +11,7 @@
 |-------|--------|
 | **Name** | Aliou Wade |
 | **Role (public)** | Software Engineer |
-| **Role (Everest / Journey)** | Senior technical operator · Everest Finance (solo) |
+| **Role (Everest / Journey)** | Solo technical operator · Everest Finance |
 | **Location** | Dakar, Senegal (WAT) |
 | **Arc** | Ottawa → Dakar |
 | **Languages** | French / English — bilingual site and client work |

@@ -66,7 +66,12 @@ function mapSurface(
   };
 }
 
-function mapWorkEntryToEngagement(entry: WorkEntry, locale: WorkLocale = "en"): Engagement {
+function mapWorkEntryToEngagement(
+  entry: WorkEntry,
+  locale: WorkLocale = "en",
+  /** FR MDX twin — supplies localized `outcome` (and future FR-only fields). */
+  frEntry?: WorkEntry,
+): Engagement {
   const data = entry.data;
   const slug = entry.id.replace(/\/(en|fr)$/, "");
   const domain = normalizeDomain(data.domain);
@@ -75,6 +80,9 @@ function mapWorkEntryToEngagement(entry: WorkEntry, locale: WorkLocale = "en"): 
   const title = isFr ? (data.titleFr ?? data.title) : data.title;
   const summary = isFr ? (data.summaryFr ?? data.summary) : data.summary;
   const surfaces = (data.surfaces ?? []).map((s) => mapSurface(s, locale));
+  const outcomeRaw = isFr
+    ? (frEntry?.data.outcome ?? data.outcome)
+    : data.outcome;
 
   // Find the first surface with a video for preview media
   const primarySurface = surfaces[0];
@@ -87,7 +95,7 @@ function mapWorkEntryToEngagement(entry: WorkEntry, locale: WorkLocale = "en"): 
     slug,
     domain,
     detail: uiDash(summary),
-    outcome: data.outcome ? uiDash(data.outcome) : undefined,
+    outcome: outcomeRaw ? uiDash(outcomeRaw) : undefined,
     logo: ENGAGEMENT_LOGOS[slug],
     builds: surfaces.length || 1,
     period: localizePeriod(data.period ?? data.date, locale),
@@ -97,6 +105,13 @@ function mapWorkEntryToEngagement(entry: WorkEntry, locale: WorkLocale = "en"): 
     caption: primarySurface?.name ?? shortName(title),
     surfaces,
   };
+}
+
+async function frEntriesBySlug(): Promise<Map<string, WorkEntry>> {
+  const frEntries = await getCollection("work", (entry) => entry.id.endsWith("/fr"));
+  return new Map(
+    frEntries.map((entry) => [entry.id.replace(/\/(en|fr)$/, ""), entry] as const),
+  );
 }
 
 /** Featured anchors first (fixed order), then supporting by period year desc. */
@@ -120,7 +135,13 @@ export function sortEngagements(engagements: Engagement[]): Engagement[] {
 /** Fetch all work entries and adapt to Engagement shape. */
 export async function getEngagements(locale: WorkLocale = "en"): Promise<Engagement[]> {
   const entries = await getCollection("work", (entry) => entry.id.endsWith("/en"));
-  return sortEngagements(entries.map((entry) => mapWorkEntryToEngagement(entry, locale)));
+  const frBySlug = locale === "fr" ? await frEntriesBySlug() : null;
+  return sortEngagements(
+    entries.map((entry) => {
+      const slug = entry.id.replace(/\/(en|fr)$/, "");
+      return mapWorkEntryToEngagement(entry, locale, frBySlug?.get(slug));
+    }),
+  );
 }
 
 /** Get a single engagement by slug. */
@@ -130,7 +151,10 @@ export async function getEngagement(
 ): Promise<Engagement | null> {
   const entries = await getCollection("work", (entry) => entry.id.endsWith("/en"));
   const entry = entries.find((e) => e.id.replace(/\/(en|fr)$/, "") === slug);
-  return entry ? mapWorkEntryToEngagement(entry, locale) : null;
+  if (!entry) return null;
+  const frEntry =
+    locale === "fr" ? (await frEntriesBySlug()).get(slug) : undefined;
+  return mapWorkEntryToEngagement(entry, locale, frEntry);
 }
 
 /** Engagements grouped by domain for directory-style indexes. */
