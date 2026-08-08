@@ -3,6 +3,7 @@ import "@/styles/lab-precision.css";
 import LabBackground from "@/components/lab-precision/LabBackground.astro";
 import LabPrecisionHeader from "@/components/lab-precision/LabPrecisionHeader.astro";
 import EngagementConsole from "@/components/lab-precision/EngagementConsole.astro";
+import BioContactLinks from "@/components/lab-precision/BioContactLinks.astro";
 import ThemeBoot from "@/components/ThemeBoot.astro";
 import { getEngagements } from "@/lib/work-registry";
 
@@ -58,14 +59,7 @@ const engagements = await getEngagements("en");
                   Building mostly operational systems: payments, ERP, internal tools.
                   <span class="lp-bio-aside">And websites when needed.</span>
                 </p>
-                <ul class="lp-bio-links">
-                  <li>
-                    <a href="mailto:wadealiou00@gmail.com">wadealiou00@gmail.com</a>
-                  </li>
-                  <li><a href="https://www.linkedin.com/in/aliouuuw">LinkedIn</a></li>
-                  <li><a href="https://github.com/aliouuuw">GitHub</a></li>
-                  <li><a href="https://wa.me/221777228845">WhatsApp</a></li>
-                </ul>
+                <BioContactLinks locale="en" />
                 <div class="lp-bio-actions">
                   <button class="lp-bio-more" type="button" data-view-trigger="background">
                     <span>Check my background</span>

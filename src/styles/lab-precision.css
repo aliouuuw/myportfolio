@@ -607,13 +607,52 @@ html[data-theme="dark"] .lp-theme-moon {
 .lp-bio-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 1.15rem;
+  align-items: center;
+  gap: 0.35rem;
   list-style: none;
   margin: 0 0 1.25rem;
   padding: 0;
 }
 
-.lp-bio-links a {
+.lp-bio-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.85rem;
+  height: 1.85rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--ink-soft);
+  text-decoration: none;
+  box-shadow: none;
+  transition:
+    color var(--duration) var(--ease),
+    background var(--duration) var(--ease);
+}
+
+.lp-bio-link:hover {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--surface-muted) 80%, transparent);
+}
+
+.lp-bio-link:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 50%, transparent);
+  outline-offset: 2px;
+}
+
+.lp-bio-link:active {
+  transform: scale(0.94);
+}
+
+.lp-bio-link svg {
+  display: block;
+}
+
+/* Legacy text links (Background quiet row) */
+.lp-bio-links a:not(.lp-bio-link) {
   color: var(--ink);
   font-size: 0.9375rem;
   font-weight: 500;
@@ -625,7 +664,7 @@ html[data-theme="dark"] .lp-theme-moon {
     color var(--duration) var(--ease);
 }
 
-.lp-bio-links a:hover {
+.lp-bio-links a:not(.lp-bio-link):hover {
   border-color: var(--accent);
   color: var(--accent);
 }
@@ -1717,18 +1756,26 @@ span.lp-roster-name {
   }
 
   .lp-bio-links {
-    gap: 0.65rem 1rem;
+    gap: 0.5rem;
     margin-bottom: 1.25rem;
+    justify-content: center;
+  }
+
+  .lp-bio-link {
+    width: 2.15rem;
+    height: 2.15rem;
   }
 
   .lp-bio-links li {
     display: flex;
     align-items: center;
-    min-height: 2.5rem;
   }
 
-  .lp-bio-links a {
+  .lp-bio-links a:not(.lp-bio-link) {
     font-size: 0.875rem;
+    min-height: 2.5rem;
+    display: inline-flex;
+    align-items: center;
   }
 
   .lp-roster {

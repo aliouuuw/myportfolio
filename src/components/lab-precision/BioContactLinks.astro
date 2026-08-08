@@ -1,0 +1,51 @@
+---
+import {
+  GithubIcon,
+  Linkedin01Icon,
+  Mail01Icon,
+  WhatsappIcon,
+} from "@hugeicons/core-free-icons";
+import HugeIcon from "./HugeIcon.astro";
+
+interface Props {
+  locale?: "en" | "fr";
+}
+
+const locale = Astro.props.locale ?? "en";
+const isFr = locale === "fr";
+
+const links = [
+  {
+    href: "mailto:wadealiou00@gmail.com",
+    label: isFr ? "Envoyer un e-mail" : "Email",
+    icon: Mail01Icon,
+  },
+  {
+    href: "https://www.linkedin.com/in/aliouuuw",
+    label: "LinkedIn",
+    icon: Linkedin01Icon,
+  },
+  {
+    href: "https://github.com/aliouuuw",
+    label: "GitHub",
+    icon: GithubIcon,
+  },
+  {
+    href: "https://wa.me/221777228845",
+    label: "WhatsApp",
+    icon: WhatsappIcon,
+  },
+] as const;
+---
+
+<ul class="lp-bio-links">
+  {
+    links.map((link) => (
+      <li>
+        <a class="lp-bio-link" href={link.href} aria-label={link.label} title={link.label}>
+          <HugeIcon icon={link.icon} size={15} />
+        </a>
+      </li>
+    ))
+  }
+</ul>
