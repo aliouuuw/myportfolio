@@ -2,7 +2,7 @@
 
 Human and content gates before treating the portfolio as **public launch ready**.
 
-**Stack note (2026-07):** Production site is **Astro 5 + Operator Board** (`main`). Next.js ledger migration (backlog P5 / T031–T038) is complete and archived on `archive/nextjs-v1`. See `docs/progress.md` for the current product checkpoint.
+**Stack note (2026-08):** Production site is **Astro 5 + Lab Precision** (Engagement Console on `/` / `/fr`). Operator Board and Next.js ledger are archived (`/board` 301s home; `archive/nextjs-v1`). See `docs/progress.md` for the current product checkpoint.
 
 ---
 
@@ -10,14 +10,15 @@ Human and content gates before treating the portfolio as **public launch ready**
 
 | Item | Status |
 |------|--------|
-| Astro migration + operator board home | Done — `/`, `/fr`, board runtime in `public/board/` |
+| Astro migration + Lab Precision home | Done — `/`, `/fr`, Work / Background views |
+| Engagement Console + featured filter | Done — `#engagement-<slug>` deep links |
 | Writing routes EN+FR | Done |
-| Case study pages + MDX collections | Done — `content/work/` |
-| BocalBun case study MDX EN+FR | Done — `content/work/bocalbun-retrospective/` |
-| Essay ↔ BocalBun cross-links | Done — slug `why-systems-over-frameworks` |
-| Next.js backlog P0–P5 (T001–T038) | Done — historical; no pending tasks |
-| Next.js app archived | Done — branch/tag `archive/nextjs-v1` |
+| Work MDX collections (dossier data) | Done — `content/work/` feeds console via registry |
+| Soft-deprecate long-form `/work/[slug]` | Done — redirects to `/#engagement-<slug>` |
+| Essay ↔ BocalBun cross-links | Done — points at Engagement Console hash |
+| Next.js backlog P0–P5 (T001–T038) | Done — historical; archived on `archive/nextjs-v1` |
 | Contact API (Resend) | Done — `src/pages/api/contact.ts` (needs prod key) |
+| Journey career graph (2-lane, orthogonal) | Done — Background Journey |
 
 ---
 
@@ -26,17 +27,17 @@ Human and content gates before treating the portfolio as **public launch ready**
 ### Permissions
 
 - [ ] **Everest CEO** — company name on site, anonymization level, screenshot redaction rules
-- [ ] **ERGOBIT CEO** — Odoo toolkit publish path (solo vs co-brand), public GitHub URL for case study CTA
+- [ ] **ERGOBIT CEO** — Odoo toolkit publish path (solo vs co-brand), public GitHub URL for console surface link
 
-### Product decisions (mock-to-production §13)
+### Product decisions
 
-| # | Question | Recommendation |
+| # | Question | Current choice |
 |---|----------|----------------|
-| 1 | `/work` route | Keep **full index** (portfolio-plan §5); homepage ledger is primary |
-| 2 | Join block on homepage | **Static placeholders v1** or cut — do not block on API |
-| 3 | Live signal + keyboard hints | **Defer** until a11y review; mock-only for now |
-| 4 | Case images | Gather per `public/images/case-studies/README.md` after CEO sign-off |
-| 5 | EduPlan in v1 nav | **Exclude** (month 2 per strategic plan) |
+| 1 | `/work` long-form routes | **Soft-deprecated** — redirect to Engagement Console; MDX kept as data |
+| 2 | Proof CTAs on home | Console = surface URLs only; Journey contracts = `#engagement-…`; COOP = `reportHref` |
+| 3 | Everest video peek | Defer until wired in console |
+| 4 | Case images / media | Gather under `public/media/case-studies/` after CEO sign-off |
+| 5 | EduPlan in featured filter | Supporting only (not an anchor) |
 
 ### Portfolio plan §19
 
@@ -46,16 +47,20 @@ Human and content gates before treating the portfolio as **public launch ready**
 | Everest naming | Full name / anonymized | **Full name** in MDX today — confirm with CEO |
 | Odoo toolkit repo | Personal / ERGOBIT org | Pending ERGOBIT conversation |
 | Calendly vs email-only | Both / email only | **Email + WhatsApp v1**; calendar in v1.1 |
-| Dakar Sport Shop in v1 | Yes / No | **Not homepage hero** — case study on `/work` only |
+| Dakar Sport Shop in v1 | Yes / No | **Not homepage hero** — supporting engagement only |
 
-### Launch ops (portfolio-plan §16)
+### Content wiring
 
-- [ ] Production URL + site URL env (`SITE_URL` / Astro site config — not `NEXT_PUBLIC_*`)
+- [ ] COOP Google Drive reports — Orange, ERGOBIT FE, Purolator (`reportHref` in `lab-precision.ts`; still `#` placeholders). DAUST / ITech: no Journey CTA.
+- [ ] Replace remaining `*` surface URLs (Formos, EduPlan, Ndouckmane, Mansour ops/API, …)
+
+### Launch ops
+
+- [ ] Production URL + site URL env (`SITE_URL` / Astro site config)
 - [ ] Resend production key for contact form
 - [ ] Case study imagery / media under `public/media/case-studies/` (after CEO sign-off)
 - [ ] LinkedIn posts FR + EN; share with Everest CEO, ERGOBIT CEO, education contact
-- [ ] Resume alignment: site uses **Product Systems Engineer**; update PDF separately
-- [ ] Commit living refs: `docs/profile.md`, `docs/bocal-direction.md`
+- [ ] Resume alignment: site uses **Software Engineer** / solo operator framing; update PDF separately
 
 ### Strategic parallel track (not code)
 
@@ -65,4 +70,4 @@ Human and content gates before treating the portfolio as **public launch ready**
 
 ---
 
-*Last updated: 2026-07-29*
+*Last updated: 2026-08-08*

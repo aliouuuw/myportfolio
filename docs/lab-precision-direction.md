@@ -5,7 +5,8 @@ Stylesheet: `src/styles/lab-precision.css`. Data: `src/data/lab-precision.ts`
 + Content Collections via `src/lib/work-registry.ts`.
 
 Status: **Engagement Console (Direction A) is production home** (board retired).
-Background journey / credentials softened to match Work calm (2026-08-06).
+Background journey / credentials softened to match Work calm.
+`/work/[slug]` soft-deprecated (2026-08-08) — proof lives in console dossiers + surface URLs.
 
 Target reaction:
 
@@ -82,7 +83,8 @@ layer behind it and sharpens when selected. No separate About page.
 ```
 
 Hash `#background` opens Background; `#engagement-{slug}` deep-links a
-dossier. Returning from Background restores the last engagement hash.
+dossier. Journey **Open proof** uses the same engagement hashes. Returning from
+Background restores the last engagement hash (explicit deep links win).
 Escape returns to Work. View state: `lab-precision-controller.ts`.
 
 ### Header
@@ -104,21 +106,24 @@ Escape returns to Work. View state: `lab-precision-controller.ts`.
   closed by default (sections are lengthy); click to open, click again to close.
 - **Progressive enhancement**: without JS, dossiers stay visible.
 - **Deep links**: `#engagement-{slug}` opens the matching client.
+- **Proof links**: surface product / GitHub / pending URLs only — no `/work` case CTA.
 
 **Data flow**: `getEngagements()` → `EngagementConsole.astro` + `initEngagementConsole`.
 
 **Still open / needs work:**
 
-- Surface copy quality (blurbs, stack labels) — tightened Aug 2026; swap `*` URLs when public
-- Everest video peek — media exists; preview shell removed until wired
+- Swap `*` surface URLs when public; wire Everest video peek if desired
 - Placeholder URL convention: `url` values containing `*` render as non-clickable “coming soon”
 
 ### Background
 
-Portrait + positioning + contacts + off the clock are localized EN/FR.
+Portrait + positioning + contacts + off the clock are localized EN/FR
+(chess knight mark inline in Off the clock).
 
-Journey uses the horizontal git-branch career graph (Next.js synthesis port),
-retuned to Editorial + Google Blue lane colors — not a rainbow VCS costume.
+Journey is a two-lane orthogonal git-branch graph (main = internship/COOP;
+lane 1 = contracts). CTAs: COOP `reportHref` (Open case study); contracts
+`#engagement-*` (Open proof); DAUST + ITech have no outbound link.
+
 Featured credentials lead; Meta/DataCamp sit behind a disclosure.
 Background ends with a conversion close (email / WhatsApp).
 
@@ -128,7 +133,7 @@ Background ends with a conversion close (email / WhatsApp).
 
 - EN at `/`; FR at `/fr`.
 - Header chrome is bilingual (nav, availability, locale, theme aria).
-- Locale links preserve `#background` when switching.
+- Locale links preserve `#background` / engagement hashes when switching.
 - Background body copy is localized (hero, journey, credentials).
 - Work FR section title: Mandats; domain badges localized (Systèmes / Opérations).
 
@@ -138,3 +143,4 @@ Background ends with a conversion close (email / WhatsApp).
 
 - When (if) to wire Everest video peek into the console
 - Whether dual token files should fully merge into one shared sheet
+- When to delete unused `CaseStudy.astro` / `SurfaceProof.astro`

@@ -56,7 +56,7 @@ Senegalese SGI in the UEMOA zone. No engineering team — I own the full stack a
 - Site: [dev-everest-new.vercel.app](https://dev-everest-new.vercel.app/)
 - Sama Naffa: [dev.samanaffa.com](https://dev.samanaffa.com/)
 
-**Case study:** `/work/everest-finance` — includes surface proof videos on the operator board.
+**Case study / proof:** `/#engagement-everest-finance` (Engagement Console). Surface videos live under `public/media/case-studies/everest-finance/`.
 
 **Publication gate:** CEO sign-off still needed on naming, screenshots, and redaction rules before full public launch.
 
@@ -73,7 +73,7 @@ Odoo integrator in Dakar. Two tracks:
 
 **Toolkit outcomes:** 39 tests, 9 suites; smoke under ~2 minutes; validation cycle from ~1 day to under 15 minutes.
 
-**Case study:** `/work/odoo-testing-toolkit`  
+**Proof:** `/#engagement-odoo-testing-toolkit` (Engagement Console).  
 **Publication gate:** ERGOBIT conversation on solo vs co-brand publish path and public GitHub URL.
 
 ### BankingBook Analytics — contract engineer (2024 → 2025)
@@ -101,15 +101,15 @@ Proof type on portfolio: **COOP report** (18-page dossier), not a live product U
 
 ## Anchor portfolio cases (depth, not breadth)
 
-These three are the conversion proof on the site homepage (operator board):
+These three are the conversion proof on the homepage Engagement Console (featured anchors):
 
-| # | Case | Claim it answers |
-|---|------|------------------|
-| 1 | **Everest Finance** | Can I own and ship a real fintech stack solo? |
-| 2 | **Odoo 18 Acceptance Testing Kit** | Have I done real ERP work, not tutorials? |
-| 3 | **BocalBun retrospective** | Do I know when to stop? |
+| # | Case | Claim it answers | Deep link |
+|---|------|------------------|-----------|
+| 1 | **Everest Finance** | Can I own and ship a real fintech stack solo? | `/#engagement-everest-finance` |
+| 2 | **Odoo 18 Acceptance Testing Kit** | Have I done real ERP work, not tutorials? | `/#engagement-odoo-testing-toolkit` |
+| 3 | **BocalBun retrospective** | Do I know when to stop? | `/#engagement-bocalbun-retrospective` |
 
-**Flagship essay:** [Why I stopped building frameworks and started shipping systems](/writing/why-systems-over-frameworks) — cross-links BocalBun.
+**Flagship essay:** [Why I stopped building frameworks and started shipping systems](/writing/why-systems-over-frameworks) — cross-links BocalBun via Engagement Console hash.
 
 **BocalBun (2026-05 → stopped):** Bun-native toolkit with entity engine, RLS, audit trails. Frozen with zero external users after a short build sprint; lessons applied to Everest repo structure and agent-ready conventions. Repo: [github.com/aliouuuw/bocalbun](https://github.com/aliouuuw/bocalbun).
 
@@ -129,19 +129,19 @@ These three are the conversion proof on the site homepage (operator board):
 
 Supporting evidence — not homepage anchors:
 
-| Client | Domain | Scope | Case study |
-|--------|--------|--------|------------|
-| Ndouckmane Transit | Logistics | Freight ops: shipments, customs, dashboards (MVP) | `/work/ndouckmane-transit` |
-| EduPlan | Education | K-12 enrollment / records / reporting (Hirondelles pilot) | `/work/eduplan` |
-| Les Hirondelles | Institution | School site + Convex CMS | `/work/les-hirondelles` |
-| Gerpain | Operations | Multi-bakery: inventory, deliveries, Bocal ledger | `/work/gerpain` |
-| Mansour Motors | Automotive | Dealership site + vehicle inventory | `/work/mansour-holding` |
-| Mamebimo | Marketplace | Home-services booking (Everest-adjacent) | `/work/mamebimo` |
-| Asaaman | Drone / AI | Semantic video search | `/work/asaaman` |
-| Dakar Sport | Retail | Catalog storefront | `/work/dakar-sport-shop` |
-| BankingBook Analytics | Fintech | Open-banking API + bbafintech.com | `/work/bankingbook-analytics` |
+| Client | Domain | Scope | Console deep link |
+|--------|--------|--------|-------------------|
+| Ndouckmane Transit | Logistics | Freight ops: shipments, customs, dashboards (MVP) | `/#engagement-ndouckmane-transit` |
+| EduPlan | Education | K-12 enrollment / records / reporting (Hirondelles pilot) | `/#engagement-eduplan` |
+| Les Hirondelles | Institution | School site + Convex CMS | `/#engagement-les-hirondelles` |
+| Gerpain | Operations | Multi-bakery: inventory, deliveries, Bocal ledger | `/#engagement-gerpain` |
+| Mansour Motors | Automotive | Dealership site + vehicle inventory | `/#engagement-mansour-holding` |
+| Mamebimo | Marketplace | Home-services booking (Everest-adjacent) | `/#engagement-mamebimo` |
+| Asaaman | Drone / AI | Semantic video search | `/#engagement-asaaman` |
+| Dakar Sport | Retail | Catalog storefront | `/#engagement-dakar-sport-shop` |
+| BankingBook Analytics | Fintech | Open-banking API + bbafintech.com | `/#engagement-bankingbook-analytics` |
 
-Not on the console (Journey / reports only): Purolator, Orange Digital Lab, ITech. Prescriptos deferred until revive/archive decision.
+Journey-only (no console dossier): DAUST, ITech. COOP reports (Orange, ERGOBIT FE, Purolator) use Journey **Open case study** → `reportHref` (Google Drive TBD). Prescriptos deferred until revive/archive decision.
 
 ---
 
@@ -177,7 +177,7 @@ Not on the console (Journey / reports only): Purolator, Orange Digital Lab, ITec
 | **Archive** | Previous Next.js 16 app on branch/tag `archive/nextjs-v1` |
 | **Hosting** | Vercel |
 
-Routes live today: `/`, `/fr`, `/work/[slug]`, `/fr/work/[slug]`, `/writing/[slug]`, `/api/contact`. No separate `/about` or `/contact` pages — contact lives in the Work hero; Background holds journey + credentials. `/board` 301s to home.
+Routes live today: `/`, `/fr`, `/writing/[slug]`, `/api/contact`. Deep links: `#background`, `#engagement-<slug>`. Soft-deprecated: `/work/[slug]` and `/fr/work/[slug]` redirect into the console. No separate `/about` or `/contact` pages — contact lives in the Work hero; Background holds journey + credentials. `/board` 301s to home.
 
 ---
 
@@ -199,7 +199,7 @@ Not a client list — people who shape next opportunities:
 - [ ] Everest CEO — name, screenshots, redaction; swap staging URLs for production
 - [ ] ERGOBIT CEO — Odoo toolkit publish path + GitHub (replace `odoo-18-acceptance*` placeholder)
 - [ ] Replace remaining `*` surface URLs (Formos, EduPlan, Ndouckmane, Mansour ops/API)
-- [ ] Wire COOP PDFs (Purolator, Orange, ITech) from Background / case CTAs
+- [ ] Wire COOP Google Drive reports — Orange, ERGOBIT FE, Purolator (`reportHref` in `lab-precision.ts`; still `#`). Not ITech / DAUST.
 - [ ] Production domain DNS (`aliouwade.com`)
 - [ ] Resend production key for contact form
 
@@ -211,7 +211,8 @@ Not a client list — people who shape next opportunities:
 |------|------|
 | Home chrome + Background copy | `src/pages/index.astro`, `LabBackground.astro`, `lab-precision.ts` |
 | Engagement Console | `EngagementConsole.astro`, `work-registry.ts` |
-| Case studies | `content/work/<slug>/{en,fr}.mdx` |
+| Case studies (MDX data) | `content/work/<slug>/{en,fr}.mdx` |
+| Product checkpoint | `docs/progress.md` |
 | Agent/build conventions | `AGENTS.md` |
 | Launch gates | `docs/launch-prerequisites.md` |
 
