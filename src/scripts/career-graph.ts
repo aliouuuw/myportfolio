@@ -1,20 +1,37 @@
 /** Horizontal git-branch career graph — wires, selection, scroll fades. */
 
-type Edge = { from: string; to: string };
+type Edge =
+  | { from: string; to: string; between?: undefined }
+  | { from: string; between: string; to: string };
+
 type NodePos = { x: number; y: number; lane: number };
 
 const SCROLL_HINT_KEY = "lp-cgraph-scroll-hint-seen";
 const LANE_OFFSET = 28;
-const SPINE_KEYS = ["daust", "itech", "orange", "ergobit-fe", "purolator", "ergobit-se", "everest"];
+const SPINE_KEYS = ["daust", "itech", "orange", "ergobit-fe", "purolator"];
+
+function edgeKey(edge: Edge): string {
+  if (edge.between) return `${edge.from}|${edge.between}->${edge.to}`;
+  return `${edge.from}->${edge.to}`;
+}
+
+/** Perpendicular break: vertical from parent, then horizontal to child (git-style). */
+function orthogonalLink(ax: number, ay: number, bx: number, by: number): string {
+  if (Math.abs(ay - by) < 2) {
+    return ` L ${bx} ${by}`;
+  }
+  return ` L ${ax} ${by} L ${bx} ${by}`;
+}
 
 function horizontalEdgePath(px: number, py: number, cx: number, cy: number): string {
   if (Math.abs(cy - py) < 2) {
     return `M ${px} ${py} L ${cx} ${cy}`;
   }
-  const span = cx - px;
-  const bend = Math.min(36, Math.max(12, span * 0.42));
-  const midX = px + bend;
-  return `M ${px} ${py} L ${midX} ${py} C ${midX + bend * 0.5} ${py} ${cx - bend} ${cy} ${cx} ${cy}`;
+  return `M ${px} ${py} L ${px} ${cy} L ${cx} ${cy}`;
+}
+
+function branchEdgePath(jx: number, jy: number, cx: number, cy: number): string {
+  return horizontalEdgePath(jx, jy, cx, cy);
 }
 
 function parseEdges(raw: string | null): Edge[] {
@@ -22,13 +39,13 @@ function parseEdges(raw: string | null): Edge[] {
   try {
     const parsed: unknown = JSON.parse(raw);
     if (!Array.isArray(parsed)) return [];
-    return parsed.filter(
-      (e): e is Edge =>
-        typeof e === "object" &&
-        e !== null &&
-        typeof (e as Edge).from === "string" &&
-        typeof (e as Edge).to === "string",
-    );
+    return parsed.filter((e): e is Edge => {
+      if (typeof e !== "object" || e === null) return false;
+      const edge = e as Edge;
+      if (typeof edge.from !== "string" || typeof edge.to !== "string") return false;
+      if (edge.between !== undefined && typeof edge.between !== "string") return false;
+      return true;
+    });
   } catch {
     return [];
   }
@@ -117,17 +134,20 @@ function initOne(root: HTMLElement): void {
     runner.style.display = "none";
     wires!.append(runner);
 
-    for (const { from, to } of edges) {
+    for (const edge of edges) {
+      const { from, to } = edge;
       const child = cardByKey.get(to);
-      const path = svgEl("path", {
+      const attrs: Record<string, string> = {
         class: "lp-cgraph__wire",
         pathLength: "1",
         "data-from": from,
         "data-to": to,
         "data-lane": child?.dataset.lane ?? "0",
-      });
+      };
+      if (edge.between) attrs["data-between"] = edge.between;
+      const path = svgEl("path", attrs);
       wires!.append(path);
-      wirePaths.set(`${from}->${to}`, path);
+      wirePaths.set(edgeKey(edge), path);
     }
 
     geometryBuilt = true;
@@ -147,10 +167,12 @@ function initOne(root: HTMLElement): void {
     const spinePts = SPINE_KEYS.map((k) => positions[k]).filter((p): p is NodePos => Boolean(p));
     let spineD = "";
     if (spinePts.length >= 2) {
-      spineD = spinePts.reduce(
-        (acc, p, i) => (i === 0 ? `M ${p.x} ${p.y}` : `${acc} L ${p.x} ${p.y}`),
-        "",
-      );
+      spineD = `M ${spinePts[0]!.x} ${spinePts[0]!.y}`;
+      for (let i = 1; i < spinePts.length; i++) {
+        const prev = spinePts[i - 1]!;
+        const cur = spinePts[i]!;
+        spineD += orthogonalLink(prev.x, prev.y, cur.x, cur.y);
+      }
     }
 
     if (spinePath) {
@@ -167,11 +189,24 @@ function initOne(root: HTMLElement): void {
       }
     }
 
-    for (const { from, to } of edges) {
-      const parent = positions[from];
+    for (const edge of edges) {
+      const { from, to } = edge;
       const child = positions[to];
-      const path = wirePaths.get(`${from}->${to}`);
-      if (!path || !parent || !child) continue;
+      const path = wirePaths.get(edgeKey(edge));
+      if (!path || !child) continue;
+
+      if (edge.between) {
+        const anchorA = positions[from];
+        const anchorB = positions[edge.between];
+        if (!anchorA || !anchorB) continue;
+        const jx = (anchorA.x + anchorB.x) / 2;
+        const jy = anchorA.y;
+        path.setAttribute("d", branchEdgePath(jx, jy, child.x, child.y));
+        continue;
+      }
+
+      const parent = positions[from];
+      if (!parent) continue;
       path.setAttribute("d", horizontalEdgePath(parent.x, parent.y, child.x, child.y));
     }
 
@@ -190,8 +225,9 @@ function initOne(root: HTMLElement): void {
   function syncWireHot(): void {
     for (const path of wirePaths.values()) {
       const from = path.getAttribute("data-from");
+      const between = path.getAttribute("data-between");
       const to = path.getAttribute("data-to");
-      const hot = to === activeKey || from === activeKey;
+      const hot = to === activeKey || from === activeKey || between === activeKey;
       path.classList.toggle("is-hot", hot);
     }
   }

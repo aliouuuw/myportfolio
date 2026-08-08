@@ -291,7 +291,7 @@ export const careerStints: CareerStint[] = [
   },
   {
     key: "ergobit-fe",
-    lane: 1,
+    lane: 0,
     label: "COOP",
     labelFr: "COOP",
     name: "ERGOBIT",
@@ -303,7 +303,7 @@ export const careerStints: CareerStint[] = [
   },
   {
     key: "bankingbook",
-    lane: 2,
+    lane: 1,
     label: "Contract",
     labelFr: "Contrat",
     name: "BankingBook Analytics",
@@ -344,7 +344,7 @@ export const careerStints: CareerStint[] = [
   },
   {
     key: "everest",
-    lane: 2,
+    lane: 1,
     label: "Contract",
     labelFr: "Contrat",
     name: "Everest Finance",
@@ -359,13 +359,18 @@ export const careerStints: CareerStint[] = [
   },
 ];
 
+/** Parent → child edges. Use `between` to branch from the segment on the main line. */
+export type CareerGraphEdge =
+  | { from: string; to: string }
+  | { from: string; between: string; to: string };
+
 /** Parent → child edges (merge at ergobit-se). */
-export const careerGraphEdges: { from: string; to: string }[] = [
+export const careerGraphEdges: CareerGraphEdge[] = [
   { from: "daust", to: "itech" },
   { from: "itech", to: "orange" },
   { from: "orange", to: "ergobit-fe" },
   { from: "ergobit-fe", to: "purolator" },
-  { from: "ergobit-fe", to: "bankingbook" },
+  { from: "ergobit-fe", between: "purolator", to: "bankingbook" },
   { from: "purolator", to: "ergobit-se" },
   { from: "bankingbook", to: "ergobit-se" },
   { from: "ergobit-se", to: "everest" },

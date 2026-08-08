@@ -2763,6 +2763,8 @@ span.lp-roster-name {
   fill: none;
   stroke: color-mix(in srgb, var(--accent) 16%, transparent);
   stroke-width: 1.5;
+  stroke-linecap: butt;
+  stroke-linejoin: miter;
   stroke-dasharray: 0.04 0.03;
   opacity: 0.55;
 }
@@ -2786,8 +2788,8 @@ span.lp-roster-name {
   fill: none;
   stroke: var(--cgraph-lane-0);
   stroke-width: 2.25;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  stroke-linecap: butt;
+  stroke-linejoin: miter;
   opacity: 0.45;
   stroke-dasharray: 0.08 0.04;
   transition: opacity 0.16s var(--ease), stroke-width 0.16s var(--ease);
