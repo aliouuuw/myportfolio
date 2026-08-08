@@ -4,11 +4,13 @@ import LabBackground from "@/components/lab-precision/LabBackground.astro";
 import LabPrecisionHeader from "@/components/lab-precision/LabPrecisionHeader.astro";
 import EngagementConsole from "@/components/lab-precision/EngagementConsole.astro";
 import BioContactLinks from "@/components/lab-precision/BioContactLinks.astro";
+import RosterFilter from "@/components/lab-precision/RosterFilter.astro";
 import ThemeBoot from "@/components/ThemeBoot.astro";
 import { getEngagements } from "@/lib/work-registry";
 
 /* Ancres d'abord (Everest → toolkit Odoo → BocalBun), puis le reste par période. */
 const engagements = await getEngagements("fr");
+const featuredCount = engagements.filter((e) => e.featured).length;
 ---
 
 <!doctype html>
@@ -81,7 +83,11 @@ const engagements = await getEngagements("fr");
             <section class="lp-roster lp-reveal" aria-labelledby="engagements-title">
               <div class="lp-section-head lp-roster-head">
                 <h2 id="engagements-title">Dossiers</h2>
-                <span class="lp-roster-ref">{engagements.length} dossiers</span>
+                <RosterFilter
+                  locale="fr"
+                  featuredCount={featuredCount}
+                  totalCount={engagements.length}
+                />
               </div>
 
               <EngagementConsole engagements={engagements} locale="fr" />

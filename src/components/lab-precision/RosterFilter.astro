@@ -1,0 +1,46 @@
+---
+import { StarIcon } from "@hugeicons/core-free-icons";
+import HugeIcon from "./HugeIcon.astro";
+
+interface Props {
+  locale?: "en" | "fr";
+  featuredCount: number;
+  totalCount: number;
+}
+
+const locale = Astro.props.locale ?? "en";
+const { featuredCount, totalCount } = Astro.props;
+const isFr = locale === "fr";
+
+const groupAria = isFr ? "Filtrer les dossiers" : "Filter work";
+const featuredLabel = isFr ? "Sélection" : "Highlighted";
+const allLabel = isFr ? "Tout" : "All";
+const featuredAria = isFr
+  ? `Sélection · ${featuredCount} dossiers`
+  : `Highlighted · ${featuredCount} entries`;
+const allAria = isFr ? `Tout · ${totalCount} dossiers` : `All · ${totalCount} entries`;
+---
+
+<div class="lp-roster-switch" role="group" aria-label={groupAria}>
+  <button
+    type="button"
+    class="lp-roster-switch__btn lp-roster-switch__btn--star"
+    aria-pressed="true"
+    aria-controls="engagement-console"
+    aria-label={featuredAria}
+    data-roster-filter="featured"
+  >
+    <HugeIcon icon={StarIcon} size={15} />
+    <span>{featuredLabel}</span>
+  </button>
+  <button
+    type="button"
+    class="lp-roster-switch__btn"
+    aria-pressed="false"
+    aria-controls="engagement-console"
+    aria-label={allAria}
+    data-roster-filter="all"
+  >
+    <span>{allLabel}</span>
+  </button>
+</div>

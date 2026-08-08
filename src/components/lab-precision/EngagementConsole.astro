@@ -19,16 +19,18 @@ const railLabel = isFr ? "Dossiers" : "Work";
 const caseStudyLabel = isFr ? "Voir l'étude de cas" : "View case study";
 const viewProjectFallback = isFr ? "Voir le projet" : "View project";
 const pendingTitle = isFr ? "Lien public à venir" : "Public URL coming soon";
+const seeAllLabel = isFr ? "Voir tout" : "See all";
+const hiddenCount = engagements.filter((e) => !e.featured).length;
 ---
 
-<div class="lp-console" id="engagement-console">
+<div class="lp-console is-filtered" id="engagement-console">
   <nav class="lp-console-rail">
     <ul class="lp-console-list" role="list" aria-label={railLabel}>
       {
         engagements.map((eng) => {
           const mono = engagementMonogram(eng.name);
           return (
-            <li class="lp-console-item" data-eng={eng.slug}>
+            <li class="lp-console-item" data-eng={eng.slug} data-featured={eng.featured ? "true" : "false"}>
               <button
                 class="lp-console-cap"
                 type="button"
@@ -158,6 +160,12 @@ const pendingTitle = isFr ? "Lien public à venir" : "Public URL coming soon";
           );
         })
       }
+      <li class="lp-console-more" data-roster-more>
+        <button type="button" class="lp-console-more-btn" data-roster-filter="all">
+          <span>{seeAllLabel}</span>
+          {hiddenCount > 0 && <span class="lp-console-more-count">+{hiddenCount}</span>}
+        </button>
+      </li>
     </ul>
   </nav>
   <!-- Desktop host: dossiers are moved here so the panel grows with content -->

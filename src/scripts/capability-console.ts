@@ -3,7 +3,8 @@
  *  Mobile (<760px): accordion under each client; all closed by default.
  *  Dossiers teleport between item (mobile) and panel (desktop) so each layout
  *  keeps natural height — desktop panel grows with content.
- *  Supports arrow-key navigation and `#engagement-{slug}` deep links.
+ *  Supports arrow-key navigation, `#engagement-{slug}` deep links, and a
+ *  highlighted (featured) roster filter.
  */
 export function initEngagementConsole(): void {
   const root = document.getElementById("engagement-console");
@@ -12,6 +13,10 @@ export function initEngagementConsole(): void {
   const items = Array.from(root.querySelectorAll<HTMLElement>(".lp-console-item"));
   const caps = Array.from(root.querySelectorAll<HTMLButtonElement>(".lp-console-cap"));
   const panel = root.querySelector<HTMLElement>("[data-console-panel]");
+  const filterBtns = Array.from(
+    document.querySelectorAll<HTMLButtonElement>("[data-roster-filter]"),
+  );
+  const hasFilter = filterBtns.some((btn) => btn.getAttribute("data-roster-filter") === "featured");
   if (caps.length === 0 || items.length === 0 || !panel) return;
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -21,6 +26,24 @@ export function initEngagementConsole(): void {
 
   const dossierBySlug = (slug: string): HTMLElement | null =>
     root.querySelector<HTMLElement>(`#dossier-${CSS.escape(slug)}`);
+
+  const itemBySlug = (slug: string): HTMLElement | undefined =>
+    items.find((item) => item.getAttribute("data-eng") === slug);
+
+  const isFeaturedOnly = (): boolean => root.classList.contains("is-filtered");
+
+  const isItemVisible = (item: HTMLElement): boolean =>
+    !item.hasAttribute("hidden") && item.getAttribute("data-filter-hidden") !== "true";
+
+  const visibleItems = (): HTMLElement[] => items.filter(isItemVisible);
+
+  const visibleCaps = (): HTMLButtonElement[] =>
+    visibleItems()
+      .map((item) => item.querySelector<HTMLButtonElement>(".lp-console-cap"))
+      .filter((cap): cap is HTMLButtonElement => Boolean(cap));
+
+  const firstVisibleSlug = (): string | null =>
+    visibleCaps()[0]?.getAttribute("data-eng") ?? null;
 
   /** Place dossiers in the item (accordion) or shared panel (master-detail). */
   const placeDossiers = (): void => {
@@ -59,6 +82,30 @@ export function initEngagementConsole(): void {
     window.setTimeout(() => cap.classList.remove("is-flash"), 900);
   };
 
+  const syncFilterChrome = (on: boolean): void => {
+    root.classList.toggle("is-filtered", on);
+    filterBtns.forEach((btn) => {
+      const mode = btn.getAttribute("data-roster-filter");
+      if (mode === "featured") {
+        btn.setAttribute("aria-pressed", on ? "true" : "false");
+      } else if (mode === "all") {
+        btn.setAttribute("aria-pressed", on ? "false" : "true");
+      }
+    });
+  };
+
+  const setFeaturedOnly = (on: boolean): void => {
+    if (!hasFilter) return;
+    syncFilterChrome(on);
+
+    items.forEach((item) => {
+      const featured = item.getAttribute("data-featured") === "true";
+      const hide = on && !featured;
+      item.toggleAttribute("hidden", hide);
+      item.setAttribute("data-filter-hidden", hide ? "true" : "false");
+    });
+  };
+
   const setOpen = (
     slug: string | null,
     opts: { syncHash?: boolean; focus?: boolean; flash?: boolean; scroll?: boolean } = {},
@@ -67,8 +114,11 @@ export function initEngagementConsole(): void {
 
     /* Desktop master-detail never leaves an empty panel */
     let nextSlug = slug;
+    if (nextSlug && itemBySlug(nextSlug) && !isItemVisible(itemBySlug(nextSlug)!)) {
+      nextSlug = null;
+    }
     if (!isAccordion() && nextSlug === null) {
-      nextSlug = caps[0]?.getAttribute("data-eng") ?? null;
+      nextSlug = firstVisibleSlug();
     }
 
     items.forEach((item) => {
@@ -119,15 +169,37 @@ export function initEngagementConsole(): void {
     }
   };
 
-  const indexOfOpen = (): number => {
-    const i = items.findIndex((item) => item.classList.contains("is-open"));
+  const visibleIndexOfOpen = (): number => {
+    const openSlug =
+      items.find((item) => item.classList.contains("is-open"))?.getAttribute("data-eng") ?? null;
+    const vis = visibleCaps();
+    const i = vis.findIndex((cap) => cap.getAttribute("data-eng") === openSlug);
     return i >= 0 ? i : 0;
   };
 
   const move = (delta: number): void => {
-    const next = (indexOfOpen() + delta + caps.length) % caps.length;
-    const slug = caps[next]?.getAttribute("data-eng");
+    const vis = visibleCaps();
+    if (vis.length === 0) return;
+    const next = (visibleIndexOfOpen() + delta + vis.length) % vis.length;
+    const slug = vis[next]?.getAttribute("data-eng");
     if (slug) setOpen(slug, { focus: true });
+  };
+
+  const applyFilter = (on: boolean, preferSlug: string | null = null): void => {
+    const openSlug =
+      preferSlug ??
+      items.find((item) => item.classList.contains("is-open"))?.getAttribute("data-eng") ??
+      null;
+    setFeaturedOnly(on);
+    const keep =
+      openSlug && itemBySlug(openSlug) && isItemVisible(itemBySlug(openSlug)!)
+        ? openSlug
+        : null;
+    if (isAccordion()) {
+      setOpen(keep, { syncHash: Boolean(keep), scroll: false });
+    } else {
+      setOpen(keep ?? firstVisibleSlug(), { syncHash: Boolean(keep), scroll: false });
+    }
   };
 
   placeDossiers();
@@ -135,15 +207,29 @@ export function initEngagementConsole(): void {
   const fromHash = hashSlug();
   const hashValid =
     fromHash && caps.some((c) => c.getAttribute("data-eng") === fromHash) ? fromHash : null;
+  const hashItem = hashValid ? itemBySlug(hashValid) : undefined;
+  const hashIsFeatured = hashItem?.getAttribute("data-featured") === "true";
+
+  /* Default: highlighted filter on. Deep links to non-featured work clear it. */
+  const startFiltered = hasFilter && !(hashValid && !hashIsFeatured);
+  setFeaturedOnly(startFiltered);
 
   /* Mobile accordion: all closed unless deep-linked.
-   * Desktop master-detail: open hash or first client. */
-  const initial = hashValid ?? (isAccordion() ? null : (caps[0]?.getAttribute("data-eng") ?? null));
+   * Desktop master-detail: open hash or first visible client. */
+  const initial =
+    hashValid ?? (isAccordion() ? null : firstVisibleSlug());
 
   setOpen(initial, {
     syncHash: Boolean(hashValid),
     scroll: Boolean(hashValid),
     flash: Boolean(hashValid),
+  });
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const mode = btn.getAttribute("data-roster-filter");
+      applyFilter(mode === "featured");
+    });
   });
 
   caps.forEach((cap) => {
@@ -152,6 +238,7 @@ export function initEngagementConsole(): void {
     cap.addEventListener("click", () => {
       if (!slug) return;
       const item = cap.closest(".lp-console-item");
+      if (item && !isItemVisible(item as HTMLElement)) return;
       const alreadyOpen = item?.classList.contains("is-open") ?? false;
 
       if (isAccordion()) {
@@ -176,14 +263,15 @@ export function initEngagementConsole(): void {
         case "Home":
           event.preventDefault();
           {
-            const first = caps[0]?.getAttribute("data-eng");
+            const first = firstVisibleSlug();
             if (first) setOpen(first, { focus: true });
           }
           break;
         case "End":
           event.preventDefault();
           {
-            const last = caps[caps.length - 1]?.getAttribute("data-eng");
+            const vis = visibleCaps();
+            const last = vis[vis.length - 1]?.getAttribute("data-eng");
             if (last) setOpen(last, { focus: true });
           }
           break;
@@ -200,7 +288,7 @@ export function initEngagementConsole(): void {
     if (isAccordion()) {
       setOpen(openSlug, { syncHash: false, scroll: false });
     } else {
-      setOpen(openSlug ?? caps[0]?.getAttribute("data-eng") ?? null, {
+      setOpen(openSlug ?? firstVisibleSlug(), {
         syncHash: false,
         scroll: false,
       });
@@ -215,8 +303,11 @@ export function initEngagementConsole(): void {
 
   window.addEventListener("hashchange", () => {
     const slug = hashSlug();
-    if (slug && caps.some((c) => c.getAttribute("data-eng") === slug)) {
-      setOpen(slug, { syncHash: false, flash: true });
+    if (!slug || !caps.some((c) => c.getAttribute("data-eng") === slug)) return;
+    const item = itemBySlug(slug);
+    if (item && isFeaturedOnly() && item.getAttribute("data-featured") !== "true") {
+      setFeaturedOnly(false);
     }
+    setOpen(slug, { syncHash: false, flash: true });
   });
 }
