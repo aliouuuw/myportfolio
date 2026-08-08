@@ -1996,10 +1996,18 @@ span.lp-roster-name {
 
 .lp-work-hero .lp-bio-line {
   margin: 0 auto 1.15rem;
-  max-width: 28rem;
+  max-width: 26rem;
   font-size: 1.0625rem;
   font-weight: 400;
   color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+.lp-bio-aside {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--ink-faint);
+  font-size: 0.98em;
 }
 
 .lp-work-hero .lp-bio-links {
