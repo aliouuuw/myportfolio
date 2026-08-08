@@ -12,15 +12,19 @@ const isFr = locale === "fr";
 const ui = isFr
   ? {
       backToWork: "Retour aux mandats",
-      lang: "Langue",
-      langEn: "Anglais",
-      langFr: "Français",
+      switchHref: "/",
+      switchBase: "/",
+      switchLabel: "EN",
+      switchAria: "Passer en anglais",
+      themeAria: "Passer en mode sombre",
     }
   : {
       backToWork: "Back to engagements",
-      lang: "Language",
-      langEn: "English",
-      langFr: "French",
+      switchHref: "/fr/",
+      switchBase: "/fr/",
+      switchLabel: "FR",
+      switchAria: "Switch to French",
+      themeAria: "Switch to dark mode",
     };
 ---
 
@@ -39,30 +43,19 @@ const ui = isFr
     </button>
 
     <div class="lp-header-tools">
-      <div class="lp-locales" role="group" aria-label={ui.lang}>
-        <a
-          class:list={["lp-locale", { "is-active": !isFr }]}
-          href="/"
-          data-locale-link="/"
-          hreflang="en"
-          lang="en"
-          aria-label={ui.langEn}
-          aria-current={!isFr ? "true" : undefined}>EN</a>
-        <a
-          class:list={["lp-locale", { "is-active": isFr }]}
-          href="/fr/"
-          data-locale-link="/fr/"
-          hreflang="fr"
-          lang="fr"
-          aria-label={ui.langFr}
-          aria-current={isFr ? "true" : undefined}>FR</a>
-      </div>
+      <a
+        class="lp-locale"
+        href={ui.switchHref}
+        data-locale-link={ui.switchBase}
+        hreflang={isFr ? "en" : "fr"}
+        lang={isFr ? "en" : "fr"}
+        aria-label={ui.switchAria}>{ui.switchLabel}</a>
 
       <button
         id="theme-toggle"
         class="lp-theme"
         type="button"
-        aria-label={isFr ? "Passer en mode sombre" : "Switch to dark mode"}
+        aria-label={ui.themeAria}
         aria-pressed="false"
       >
         <span class="lp-theme-icon">

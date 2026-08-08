@@ -184,18 +184,6 @@ body.lp {
   justify-content: flex-end;
   padding: 0.75rem var(--pad) 0.55rem;
   pointer-events: none;
-  /* Scrim + blur: Background/Work copy scrolls under chrome without colliding */
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
-  backdrop-filter: blur(16px) saturate(1.12);
-  -webkit-backdrop-filter: blur(16px) saturate(1.12);
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .lp-nav-shell {
-    background: var(--bg);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
 }
 
 .lp-header {
@@ -224,46 +212,78 @@ body.lp {
 .lp-header-tools {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.35rem;
   flex-shrink: 0;
-  padding: 0;
+  padding: 0.15rem;
   border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition:
+    background 0.28s var(--ease),
+    backdrop-filter 0.28s var(--ease),
+    -webkit-backdrop-filter 0.28s var(--ease);
 }
 
-.lp-locales {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  background: transparent;
-  box-shadow: none;
+/* Frost only under chrome controls after scroll — not a full-width bar */
+.lp-nav-shell.is-scrolled .lp-header-tools {
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(14px) saturate(1.12);
+  -webkit-backdrop-filter: blur(14px) saturate(1.12);
+}
+
+.lp-nav-shell.is-scrolled .lp-back-to-work {
+  padding: 0.35rem 0.7rem;
+  border-bottom-color: transparent;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(14px) saturate(1.12);
+  -webkit-backdrop-filter: blur(14px) saturate(1.12);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .lp-nav-shell.is-scrolled .lp-header-tools,
+  .lp-nav-shell.is-scrolled .lp-back-to-work {
+    background: var(--bg);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-header-tools,
+  .lp-back-to-work {
+    transition-duration: 0.01ms;
+  }
 }
 
 .lp-locale {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 0;
-  min-height: 0;
-  padding: 0.2rem 0;
-  border-radius: 0;
+  min-width: 1.85rem;
+  min-height: 1.85rem;
+  padding: 0.2rem 0.35rem;
+  border-radius: var(--radius-pill);
   font-family: var(--mono);
-  font-size: 0.6875rem;
-  font-weight: 500;
+  font-size: 0.75rem;
+  font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--ink-soft);
   text-decoration: none;
   line-height: 1;
   background: transparent;
   box-shadow: none;
-  transition: color var(--duration) var(--ease);
+  transition:
+    color var(--duration) var(--ease),
+    background var(--duration) var(--ease);
 }
 
 .lp-locale:hover {
   color: var(--ink);
+  background: color-mix(in srgb, var(--surface-muted) 80%, transparent);
 }
 
 .lp-locale:focus-visible {
@@ -271,17 +291,8 @@ body.lp {
   outline-offset: 2px;
 }
 
-.lp-locale.is-active {
+.lp-locale:active {
   color: var(--ink);
-  font-weight: 600;
-}
-
-.lp-locale:active:not(.is-active) {
-  color: var(--ink-soft);
-}
-
-.lp-locale-sep {
-  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -302,7 +313,7 @@ body.lp {
   border: 0;
   background: transparent;
   color: var(--ink-soft);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-pill);
   cursor: pointer;
   transition:
     color var(--duration) var(--ease),
@@ -384,7 +395,11 @@ html[data-theme="dark"] .lp-theme-moon {
   transition:
     opacity var(--duration) var(--ease),
     border-color var(--duration) var(--ease),
-    color var(--duration) var(--ease);
+    color var(--duration) var(--ease),
+    background 0.28s var(--ease),
+    backdrop-filter 0.28s var(--ease),
+    -webkit-backdrop-filter 0.28s var(--ease),
+    padding 0.28s var(--ease);
 }
 
 .lp-back-to-work:hover {
@@ -1651,12 +1666,11 @@ span.lp-roster-name {
     gap: 0.5rem;
   }
 
-  .lp-locales {
-    gap: 0.25rem;
-  }
-
   .lp-locale {
-    font-size: 0.625rem;
+    font-size: 0.875rem;
+    min-width: 2.15rem;
+    min-height: 2.15rem;
+    padding: 0.35rem 0.4rem;
   }
 
   .lp-theme {
