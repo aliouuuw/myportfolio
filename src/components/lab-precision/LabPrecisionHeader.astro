@@ -1,6 +1,7 @@
 ---
 import { Moon02Icon, Sun01Icon } from "@hugeicons/core-free-icons";
 import HugeIcon from "./HugeIcon.astro";
+import SiteUpdateNotice from "./SiteUpdateNotice.astro";
 
 interface Props {
   locale?: "en" | "fr";
@@ -66,3 +67,5 @@ const ui = isFr
     </div>
   </header>
 </div>
+
+<SiteUpdateNotice locale={locale} />

@@ -35,6 +35,23 @@ function initNavScrollScrim(): void {
   update();
 }
 
+const NOTICE_STORAGE_KEY = "lp-update-notice";
+
+function initUpdateNotice(): void {
+  const notice = document.querySelector<HTMLElement>("[data-update-notice]");
+  const dismiss = document.querySelector<HTMLButtonElement>("[data-update-notice-dismiss]");
+  if (!notice || !dismiss) return;
+
+  dismiss.addEventListener("click", () => {
+    notice.hidden = true;
+    try {
+      sessionStorage.setItem(NOTICE_STORAGE_KEY, "1");
+    } catch {
+      /* ignore */
+    }
+  });
+}
+
 export function initLabPrecisionChrome(): void {
   const themeToggle = document.getElementById("theme-toggle") as HTMLButtonElement | null;
 
@@ -42,6 +59,7 @@ export function initLabPrecisionChrome(): void {
   syncThemeToggle(themeToggle);
   syncLocaleLinks();
   initNavScrollScrim();
+  initUpdateNotice();
 
   window.addEventListener("hashchange", syncLocaleLinks);
 

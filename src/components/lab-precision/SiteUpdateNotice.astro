@@ -1,0 +1,60 @@
+---
+interface Props {
+  locale?: "en" | "fr";
+}
+
+const locale = Astro.props.locale ?? "en";
+const isFr = locale === "fr";
+
+const copy = isFr
+  ? {
+      kicker: "En cours",
+      title: "Mise à jour du site",
+      body: "Les preuves ne sont pas toutes en place: certains liens produit, dépôts GitHub et médias arrivent encore.",
+      dismiss: "Fermer l'avis",
+    }
+  : {
+      kicker: "In progress",
+      title: "Updating the site",
+      body: "Proofs are still landing. Some product links, GitHub URLs, and media aren't wired yet.",
+      dismiss: "Dismiss notice",
+    };
+---
+
+<aside
+  class="lp-notice"
+  id="lp-update-notice"
+  data-update-notice
+  role="status"
+  aria-live="polite"
+  aria-labelledby="lp-notice-title"
+>
+  <span class="lp-notice__lamp" aria-hidden="true"></span>
+  <div class="lp-notice__copy">
+    <p class="lp-notice__kicker">{copy.kicker}</p>
+    <p class="lp-notice__title" id="lp-notice-title">{copy.title}</p>
+    <p class="lp-notice__body">{copy.body}</p>
+  </div>
+  <button class="lp-notice__close" type="button" data-update-notice-dismiss aria-label={copy.dismiss}>
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+      <path
+        d="M2.5 2.5l7 7M9.5 2.5l-7 7"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"></path>
+    </svg>
+  </button>
+</aside>
+
+<script is:inline>
+  (function () {
+    try {
+      if (sessionStorage.getItem("lp-update-notice") === "1") {
+        var n = document.getElementById("lp-update-notice");
+        if (n) n.hidden = true;
+      }
+    } catch (e) {
+      /* ignore */
+    }
+  })();
+</script>
