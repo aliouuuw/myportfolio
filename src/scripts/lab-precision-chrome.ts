@@ -11,6 +11,16 @@ export function syncLocaleLinks(): void {
   });
 }
 
+function lockLocaleDetection(): void {
+  document.cookie = "portfolio-locale-detected=1; Path=/; Max-Age=31536000; SameSite=Lax";
+}
+
+function initLocaleSwitchLock(): void {
+  document.querySelectorAll<HTMLAnchorElement>("[data-locale-link]").forEach((el) => {
+    el.addEventListener("click", lockLocaleDetection);
+  });
+}
+
 /** Frost sticky nav only after the active surface has scrolled. */
 function initNavScrollScrim(): void {
   const shell = document.querySelector<HTMLElement>(".lp-nav-shell");
@@ -58,6 +68,7 @@ export function initLabPrecisionChrome(): void {
   applyTheme(getStoredTheme());
   syncThemeToggle(themeToggle);
   syncLocaleLinks();
+  initLocaleSwitchLock();
   initNavScrollScrim();
   initUpdateNotice();
 
