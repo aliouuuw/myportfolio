@@ -2,7 +2,7 @@
 title: "Ndouckmane Transit — freight forwarding operations MVP"
 titleFr: "Ndouckmane Transit — MVP opérations transit et douane"
 summary: "Operational platform for freight forwarding and customs transit in Senegal — dossiers, declarations, agencies, and pilot workflows grounded in real commissionnaire practice."
-summaryFr: "Plateforme opérationnelle pour commissionnaire de transport et transit douanier au Sénégal : dossiers, déclarations, agences et flux pilote ancrés dans la pratique terrain."
+summaryFr: "Plateforme opérationnelle pour commissionnaire de transport et transit douanier au Sénégal: dossiers, déclarations, agences et flux pilote ancrés dans la pratique terrain."
 role: "Opérateur technique solo"
 domain: "Logistique & transit douanier"
 stack:
@@ -26,7 +26,7 @@ surfaces:
     urlLabel: "app.ndouckmane.sn*"
     urlLabelFr: "app.ndouckmane.sn*"
     blurb: "Dossier lifecycle for a commissionnaire: open file → track declaration status → agency handoff → document trail in one timeline."
-    blurbFr: "Cycle de vie dossier pour un commissionnaire : ouverture → suivi déclaration → relais agence → piste documentaire sur une seule timeline."
+    blurbFr: "Cycle de vie dossier pour un commissionnaire: ouverture → suivi déclaration → relais agence → piste documentaire sur une seule timeline."
     stack: ["Next.js", "TypeScript", "PostgreSQL", "Drizzle"]
   - name: "Money movements"
     nameFr: "Flux financiers"
@@ -52,13 +52,13 @@ surfaces:
 
 ## Contexte
 
-Les commissionnaires et opérateurs de transit en Afrique de l'Ouest font encore tourner l'essentiel sur tableurs, messagerie et papier. Ndouckmane Transit est un MVP que je construis pour donner à un commissionnaire dakarois une colonne vertébrale unique : dossiers, déclarations, agences et mouvements financiers avec historique auditable.
+Les commissionnaires et opérateurs de transit en Afrique de l'Ouest font encore tourner l'essentiel sur tableurs, messagerie et papier. Ndouckmane Transit est un MVP que je construis pour donner à un commissionnaire dakarois une colonne vertébrale unique: dossiers, déclarations, agences et mouvements financiers avec historique auditable.
 
 La documentation produit prend un client pilote comme contrat — vocabulaire, rapports débit/crédit et flux agences viennent du terrain, pas d'un TMS générique.
 
 ## Problème
 
-La douleur opérationnelle se concentre sur quelques échecs récurrents :
+La douleur opérationnelle se concentre sur quelques échecs récurrents:
 
 - **Fragmentation des dossiers** — données BL, statut déclaration et relais agences dans des endroits différents sans timeline commune.
 - **Argent sans traçabilité** — mouvements débit/crédit doivent se rattacher aux dossiers ; les tableurs masquent les erreurs jusqu'à la clôture.

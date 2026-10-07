@@ -11,42 +11,42 @@ Bilingual (FR/EN) portfolio for a Software Engineer / solo technical operator. C
 - **Styling**: Hand-tuned CSS (`src/styles/`) — no Tailwind
 - **Motion**: CSS transitions + light vanilla JS (no GSAP on the live home)
 - **i18n**: Astro built-in routing (`en` default, `fr` prefixed)
-- **Content**: MDX in `content/work/` via Content Collections + Zod (feeds Engagement Console)
+- **Content**: MDX in `content/work/` via Content Collections + Zod (older rows on the home Work list)
 - **Hosting**: Vercel (`@astrojs/vercel`)
 - **Typecheck**: `astro check` (no ESLint suite yet)
 - **CI**: None yet
 
 The previous Next.js 16 app is archived on branch/tag `archive/nextjs-v1`.
 The Operator Board is retired — `/board` and `/fr/board` 301 to home.
-Long-form `/work/[slug]` is soft-deprecated — redirects to `/#engagement-<slug>`.
+Long-form `/work/[slug]` is soft-deprecated — redirects to `/#engagement-<slug>` (the row on the home Work list).
+The Lab Precision Engagement Console is retired; the home is the Zeffet-language instrument home (2026-10).
 
 ## Structure
 
 ```
 src/
   components/
-    lab-precision/        ← header, background, engagement console, career graph
+    home/Home.astro       ← home: Work view + Background view (career/main graph)
+    lab-precision/        ← HugeIcon, ChessKnightMark (shared icons)
   layouts/
     Essay.astro           ← writing pages
-    CaseStudy.astro       ← unused by routes (soft-deprecated /work); safe to delete later
   pages/
-    index.astro           ← EN home (Editorial + Google Blue)
-    fr/index.astro        ← FR home
+    index.astro           ← EN home (<Home locale="en" />)
+    fr/index.astro        ← FR home (<Home locale="fr" />)
     work/[slug].astro     ← soft-redirect → /#engagement-<slug>
     fr/work/[slug].astro  ← soft-redirect → /fr/#engagement-<slug>
     board/index.astro     ← 301 → /
     fr/board/index.astro  ← 301 → /fr/
     api/contact.ts        ← Resend contact (server route)
   scripts/
-    capability-console.ts ← engagement open/close + deep links
-    career-graph.ts       ← Background Journey wires
-    lab-precision-controller.ts ← Work / Background view + hash
-    theme.ts              ← shared light/dark theme
+    home.ts               ← theme, views + checkout transition, career/main graph, Work filter/sort/more
   styles/
-    lab-precision.css     ← home surface (Editorial + Google Blue)
+    home.css              ← home surface (Zeffet language: warm silver / near-black, one ink)
     case-study.css        ← essay / legacy case typography
     tokens.css            ← shared design tokens
   content.config.ts       ← Zod schema for work + writing
+  data/projects.ts        ← current projects (top of Work); older rows come from content/work MDX
+  lib/work-registry.ts    ← getWorkRows(): current projects + older MDX proofs
 content/
   work/<slug>/
     en.mdx
@@ -72,10 +72,11 @@ docs/
 
 ## Key conventions
 
-- **Home surface**: Lab Precision Engagement Console (`lab-precision.css` + `capability-console.ts`). Soft-UI instrument panel — desktop master-detail, mobile accordion.
-- **Proof on home**: Dossiers expose **surface links only** (product / GitHub / pending `*`). No “View case study” to `/work`.
-- **Journey CTAs**: COOP → Open case study (`reportHref`); contracts with console entries → Open proof (`#engagement-…`); DAUST / ITech → no outbound link.
-- **Palette**: Editorial + Google Blue — canvas `#f8f9fa` / `#202124`, accent `#4285f4` (CTAs + surface tint), status green lamp, quiet shared chips.
+- **Home surface**: `Home.astro` + `home.css` + `home.ts`. Work view: short description, every project as one link (domain filter, Selected / Recent / A–Z sort, show more). Background view (`#background`): bio, career/main commit graph drawn on scroll, credentials, writing, contact. Views switch with CSS `:target`; JS adds the checkout transition.
+- **Proof on home**: Rows expose **one public link only**, no previews. Pending `*` URLs show “Not public yet”. Rows keep the id `engagement-<slug>` so old deep links land on them.
+- **Adding a current project**: append to `currentProjects` in `src/data/projects.ts` (bilingual `what` / `whatFr`). An MDX proof with the same slug is hidden from the list.
+- **Journey graph lanes**: hand-placed in `Home.astro` (`lane` map). A new career stint needs one entry there.
+- **Palette**: Zeffet language — canvas `#e6e6e2` / `#121211`, one ink (`#0d0d0c` / `#f1f1ee`), no accent colour. System font stack.
 - **Adding a proof**: Create `content/work/<slug>/en.mdx` + `fr.mdx` with valid frontmatter. Build validates via Zod. Wire Journey via `caseSlug` on the stint when needed.
 - **Content files**: MDX with YAML frontmatter. Bilingual fields: `title` / `titleFr`, `summary` / `summaryFr`.
 - **No `any` types**: use proper TypeScript types throughout
@@ -93,7 +94,7 @@ docs/
 | Do not add `/services` page | Too agency-template |
 | Do not use glassmorphism, gradient text, animated mesh | Violates design direction |
 | Do not add interactive 3D or heavy animations | Performance cost, wrong signal |
-| Do not resurrect the Operator Board without an explicit task | Retired; home is the Engagement Console |
+| Do not resurrect the Operator Board or the Engagement Console without an explicit task | Retired; home is the instrument home |
 | Do not revive long-form `/work` pages without an explicit task | Soft-deprecated in favor of console dossiers |
 | Do not edit `astro.config.mjs` without explicit task permission | Foundation file |
 | Do not commit `.env` or credentials | Security |

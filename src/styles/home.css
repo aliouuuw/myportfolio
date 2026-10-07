@@ -1,0 +1,424 @@
+/* Home: Zeffet's design language (warm silver / near-black, one ink, light display type, rows), the portfolio's own motion. */
+:root {
+  color-scheme: light;
+  --canvas: #e6e6e2;
+  --ink: #0d0d0c; --ink-hover: #2a2a28; --on-ink: #fafaf8;
+  --grey: #5d5d59; --grey-2: #74746f;
+  --line: #d4d4cf; --edge: #c6c6c1; --white: #fbfbfa; --well: #dcdcd7; --card-edge: rgba(13, 13, 12, 0.07); --hover: color-mix(in srgb, #fbfbfa 70%, transparent);
+  --staging: #8e8e89;
+  /* Ink blue: the one accent. Only where something is live, moving, or actionable. 5.3:1 on canvas. */
+  --accent: #2f5d9e;
+  --lip: rgba(255, 255, 255, 0.14); --press: rgba(13, 13, 12, 0.28);
+  --glow: rgba(255, 255, 255, 0.22);
+  /* Theme switch ray, in the colour of the state it switches to. Light shows the moon: a cool ray, multiplied. */
+  --ray: #8fa4d4; --ray-icon: #4f68a3; --ray-blend: multiply;
+  --sans: ui-sans-serif, system-ui, -apple-system, "SF Pro Text", "Helvetica Neue", sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, monospace;
+  --out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --canvas: #121211;
+    --ink: #f1f1ee; --ink-hover: #d6d6d2; --on-ink: #121211;
+    --grey: #a8a8a2; --grey-2: #93938d;
+    --line: #2b2b29; --edge: #464643; --white: #1b1b1a; --well: #1c1c1b; --card-edge: rgba(255, 255, 255, 0.06); --hover: color-mix(in srgb, #1b1b1a 80%, transparent);
+    --staging: #73736f;
+    --accent: #8fb3e8;
+    --lip: rgba(255, 255, 255, 0.55); --press: rgba(0, 0, 0, 0.35);
+    --glow: rgba(255, 255, 255, 0.9);
+    --ray: #f2c46d; --ray-icon: #f0c062; --ray-blend: screen;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --canvas: #121211;
+  --ink: #f1f1ee; --ink-hover: #d6d6d2; --on-ink: #121211;
+  --grey: #a8a8a2; --grey-2: #93938d;
+  --line: #2b2b29; --edge: #464643; --white: #1b1b1a; --well: #1c1c1b; --card-edge: rgba(255, 255, 255, 0.06); --hover: color-mix(in srgb, #1b1b1a 80%, transparent);
+  --staging: #73736f;
+  --accent: #8fb3e8;
+  --lip: rgba(255, 255, 255, 0.55); --press: rgba(0, 0, 0, 0.35);
+  --glow: rgba(255, 255, 255, 0.9);
+  /* Dark shows the sun: a warm ray, screened. */
+  --ray: #f2c46d; --ray-icon: #f0c062; --ray-blend: screen;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  min-height: 100dvh;
+  overflow-x: clip; /* the theme ray reaches past the viewport; clip keeps the sticky header working */
+  background: var(--canvas);
+  color: var(--ink);
+  font: 15px/1.45 var(--sans);
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+p, h1, h2, ol, ul { margin: 0; }
+ol, ul { list-style: none; padding: 0; }
+code { font: 13px/1.4 var(--mono); }
+::selection { background: var(--accent); color: var(--on-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+.defs { position: absolute; width: 0; height: 0; }
+
+/* Views. Without JS, :target picks the view; with JS, data-view decides and :target is ignored. */
+.view { display: grid; }
+:is(:root[data-view="background"], :root:not([data-view]):has(#background:target)) .view-work { display: none; }
+
+/* On Work, Background waits behind the page: blurred, faded, slightly larger. A hint of what the button opens.
+   Hovering "Check my background" brings it a little closer. */
+.view-work { position: relative; z-index: 1; }
+:is(:root[data-view="work"], :root:not([data-view]):not(:has(#background:target))) .view-bg {
+  position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; user-select: none;
+  align-content: start;
+  padding: 140px max(clamp(16px, 4vw, 56px), calc((100vw - 1120px) / 2 + clamp(16px, 4vw, 56px))) 0;
+  filter: blur(16px); opacity: 0.16; transform: scale(1.05);
+  transition: filter 0.65s var(--out), opacity 0.55s var(--out), transform 0.65s var(--out);
+}
+:is(:root[data-view="work"], :root:not([data-view]):not(:has(#background:target))):has(.checkout:hover, .checkout:focus-visible) .view-bg { filter: blur(8px); opacity: 0.45; transform: scale(1.02); }
+
+.frame { max-width: 1120px; margin: 0 auto; padding: 20px clamp(16px, 4vw, 56px) 96px; }
+
+/* Header: Back (Background only), language, theme. */
+.top {
+  position: sticky; top: 0; z-index: 5;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 40px;
+  margin: -20px -16px 0; padding: 20px 16px 14px;
+  /* The page scrolls under a soft fade, not a hard bar. */
+  background: linear-gradient(var(--canvas) 70%, color-mix(in srgb, var(--canvas) 0%, transparent));
+}
+.tools { display: flex; gap: 4px; margin-left: auto; }
+.act { display: inline-grid; place-items: center; min-width: 40px; min-height: 40px; padding: 0 8px; border-radius: 8px; color: var(--grey); font-weight: 500; font-size: 14px; transition: color 0.2s, background 0.2s; }
+.act:hover { color: var(--ink); background: var(--hover); }
+.act:active { transform: translateY(1px); }
+.theme svg { grid-area: 1 / 1; }
+.theme .sun { display: none; }
+:root[data-theme="dark"] .theme .moon { display: none; }
+:root[data-theme="dark"] .theme .sun { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme .moon { display: none; }
+  :root:not([data-theme="light"]) .theme .sun { display: block; }
+}
+/* Hovering the switch lets the next state's light in: a soft aurora ray falls from it into the page,
+   cool moonlight on light, warm sunlight on dark. The icon takes the same colour. */
+.theme { position: relative; transition: color 0.3s, background 0.2s; }
+@media (hover: hover) {
+  .theme:hover, .theme:focus-visible { color: var(--ray-icon); background: transparent; }
+  /* An axis-aligned box whose top-right corner sits on the switch; the light is drawn with conic gradients
+     from that corner. (A rotated masked box leaves a hairline at its edge in Chrome.) */
+  .theme::after {
+    content: ""; position: absolute; right: 50%; top: 50%; z-index: -1;
+    /* Shorter reach, wider fan — reads as light through a window, not a laser. */
+    width: min(960px, 96vw); height: 260px;
+    transform-origin: 100% 0; transform: scale(0.38);
+    pointer-events: none; opacity: 0;
+    background:
+      /* Fine streaks (drift). */
+      repeating-conic-gradient(from calc(218deg + var(--drift)) at 100% 0,
+        transparent 0deg,
+        color-mix(in srgb, var(--ray) 42%, transparent) 0.55deg,
+        transparent 1.35deg,
+        color-mix(in srgb, var(--ray) 16%, transparent) 1.85deg,
+        transparent 2.5deg 3.2deg),
+      /* Wider, softer secondary streaks — offset phase so it is not one comb. */
+      repeating-conic-gradient(from calc(224deg - var(--drift) * 0.6) at 100% 0,
+        transparent 0deg,
+        color-mix(in srgb, var(--ray) 28%, transparent) 0.85deg,
+        transparent 2deg,
+        color-mix(in srgb, var(--ray) 10%, transparent) 2.65deg,
+        transparent 3.4deg 4.6deg),
+      /* Beam body: wider arc, softer shoulders. */
+      conic-gradient(from 0deg at 100% 0,
+        transparent 0 214deg,
+        color-mix(in srgb, var(--ray) 38%, transparent) 226deg,
+        color-mix(in srgb, var(--ray) 52%, transparent) 236deg 242deg,
+        color-mix(in srgb, var(--ray) 38%, transparent) 252deg,
+        transparent 264deg);
+    /* Wider cone, half the previous falloff distance. */
+    -webkit-mask-image:
+      conic-gradient(from 0deg at 100% 0, transparent 0 212deg, #000 224deg 248deg, transparent 262deg),
+      radial-gradient(farthest-corner at 100% 0, #000 0%, rgba(0, 0, 0, 0.5) 22%, rgba(0, 0, 0, 0.12) 48%, transparent 62%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      conic-gradient(from 0deg at 100% 0, transparent 0 212deg, #000 224deg 248deg, transparent 262deg),
+      radial-gradient(farthest-corner at 100% 0, #000 0%, rgba(0, 0, 0, 0.5) 22%, rgba(0, 0, 0, 0.12) 48%, transparent 62%);
+    mask-composite: intersect;
+    transition: opacity 0.45s var(--out), transform 0.8s var(--out);
+  }
+  .theme:hover::after, .theme:focus-visible::after {
+    opacity: 1; transform: none;
+    animation: aurora 7s linear infinite;
+  }
+}
+@property --drift { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+/* One full streak period, so the loop is seamless. */
+@keyframes aurora { to { --drift: 5deg; } }
+.back { display: none; align-items: center; gap: 6px; min-height: 40px; color: var(--grey); font-weight: 500; transition: color 0.2s; }
+.back svg { width: 14px; height: 14px; transition: transform 0.25s var(--out); }
+.back:hover { color: var(--ink); }
+.back:hover svg { transform: translateX(-3px); }
+.back-name { view-transition-name: name; }
+:is(:root[data-view="background"], :root:not([data-view]):has(#background:target)) .back { display: inline-flex; }
+
+/* Zeffet full-page grammar: big light title, a grey aside on the same line, then rows. */
+.view { gap: 88px; }
+.intro { display: grid; gap: 28px; justify-items: start; padding-top: clamp(40px, 12vh, 120px); }
+.name, .block h2 { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 16px; letter-spacing: -0.035em; }
+.name { font-size: clamp(64px, 15.4vw, 178px); font-weight: 200; letter-spacing: -0.055em; line-height: 0.86; margin-left: -0.06em; gap: 0; flex-wrap: nowrap; white-space: nowrap; }
+/* Each letter swells toward the pointer (home.ts sets --w). The name is the instrument now. */
+.name > span { font-weight: var(--w, 200); transition: font-weight 0.5s var(--out); }
+.name { view-transition-name: name; animation: settle 1.1s var(--out) both; }
+:root.settled .name { animation: none; }
+/* First load: the name settles from hairline to its weight while the letters close up. Visible from frame one. */
+@keyframes settle { from { font-weight: 100; letter-spacing: -0.015em; } }
+.block h2 { font-size: clamp(32px, 4vw, 44px); font-weight: 300; margin-bottom: 20px; }
+.size { font-size: 17px; font-weight: 400; letter-spacing: 0; color: var(--grey); }
+.lead { color: var(--ink); font-size: clamp(22px, 2.6vw, 30px); font-weight: 400; letter-spacing: -0.025em; line-height: 1.3; max-width: 36ch; text-wrap: balance; }
+.nm { font-weight: 500; }
+.how { color: var(--grey); }
+.out { width: 14px; height: 14px; flex: none; color: var(--grey-2); transition: color 0.2s, transform 0.25s var(--out); }
+a:hover .out { color: var(--accent); transform: translate(2px, -2px); }
+
+/* "Check my background": a commit node whose stem grows on hover, the graph waiting below. */
+.intro-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 20px; margin-top: 10px; }
+
+/* Ink buttons: machined ink, lit from the top like Zeffet's tube. A tight shadow at rest; pressing sinks them 1px.
+   On hover a soft light follows the pointer across the surface (home.ts sets --mx / --my). They never move on hover. */
+.checkout, .primary {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: inline-flex; align-items: center; min-height: 44px;
+  border-radius: 9px; color: var(--on-ink); font-weight: 500;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--ink), #fff 16%) 0%, var(--ink) 52%, color-mix(in oklab, var(--ink), #000 8%) 100%);
+  box-shadow: inset 0 1px 0 var(--lip), inset 0 -1px 0 rgba(0, 0, 0, 0.25), 0 1px 1px var(--press), 0 6px 12px -8px var(--press);
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.checkout::before, .primary::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(110px circle at var(--mx, 50%) var(--my, 0%), var(--glow), transparent 70%);
+  opacity: 0; transition: opacity 0.3s var(--out);
+}
+.checkout:hover::before, .primary:hover::before, .checkout:focus-visible::before, .primary:focus-visible::before { opacity: 1; }
+.checkout:active, .primary:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 1px 2px var(--press), inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+.checkout { gap: 12px; padding: 0 16px 0 20px; }
+.checkout-mark { width: 16px; height: 24px; overflow: visible; }
+.checkout-mark circle { fill: none; stroke: currentColor; stroke-width: 1.6; }
+.checkout-mark .stem { stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 14; stroke-dashoffset: 9; transition: stroke-dashoffset 0.4s var(--out); }
+.checkout:hover .stem, .checkout:focus-visible .stem { stroke-dashoffset: 0; }
+.checkout-mark circle, .checkout-mark .stem { transition: stroke-dashoffset 0.4s var(--out), fill 0.15s, stroke 0.15s; }
+.checkout.is-committing .checkout-mark circle { fill: var(--accent); stroke: var(--accent); }
+.checkout.is-committing .stem { stroke: var(--accent); stroke-dashoffset: 0; }
+
+/* Work */
+.sites { margin: 0 -16px; }
+.sites > li { position: relative; }
+/* Flat dividers between visible rows, inset to the text; they step aside for a hovered row. */
+.sites > li:not([hidden]) ~ li:not([hidden])::before { content: ""; position: absolute; top: 0; left: 16px; right: 16px; height: 1px; background: var(--line); transition: opacity 0.2s; }
+.sites > li:has(a:hover)::before, .sites > li:has(a:hover) + li::before { opacity: 0; }
+.site { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) 170px; align-items: center; gap: 24px; padding: 22px 16px; border-radius: 14px; transition: background 0.2s; }
+a.site:hover { background: var(--hover); }
+a.site:hover .site-host { color: var(--accent); }
+.site-host { display: inline-flex; align-items: center; gap: 10px; transition: color 0.2s; font-size: clamp(22px, 2.6vw, 30px); font-weight: 300; letter-spacing: -0.025em; overflow-wrap: anywhere; }
+.site-host .out { width: 16px; height: 16px; }
+.site-host.quiet { color: var(--grey-2); }
+.site-meta { display: grid; gap: 2px; }
+.site-meta .how { color: var(--grey-2); font-size: 14px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.site-side { justify-self: end; display: inline-flex; align-items: center; gap: 16px; }
+.year { color: var(--grey-2); font-size: 14px; }
+.state { display: inline-flex; align-items: center; gap: 6px; color: var(--grey); font-size: 14px; white-space: nowrap; }
+.state::before { content: ""; width: 6px; height: 6px; border-radius: 50%; }
+.state.live { color: var(--ink); }
+.state.live::before { background: var(--accent); }
+.state.staging::before { background: var(--staging); }
+.state.building::before { box-shadow: inset 0 0 0 1.5px var(--grey-2); }
+.state.private::before { box-shadow: inset 0 0 0 1.5px var(--edge); }
+.state.stopped::before { width: 7px; height: 1.5px; border-radius: 1px; background: var(--grey-2); }
+
+/* Work controls: Zeffet's segmented well. Rows glide when the list changes. */
+.work-tools { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.work-tools[hidden] { display: none; }
+.view > *, .work-tools > .seg { min-width: 0; }
+.seg { position: relative; isolation: isolate; display: flex; flex-wrap: wrap; gap: 2px; padding: 3px; border-radius: 10px; background: var(--well); box-shadow: inset 0 1px 1px rgba(11, 12, 14, 0.05); }
+/* The thumb is one surface that slides to the pressed option (home.ts sets --x and --w). */
+.seg::before {
+  content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: 0; width: var(--sw, 100%);
+  clip-path: inset(3px calc(var(--sw, 100%) - var(--x, 0px) - var(--w, 0px)) 3px var(--x, 0px) round 8px);
+  background: var(--white);
+}
+.seg.ready::before { transition: clip-path 0.38s var(--out); }
+.seg button[aria-pressed="true"] { box-shadow: inset 0 0 0 1px var(--card-edge); border-radius: 8px; transition: color 0.2s, box-shadow 0.38s; }
+.seg button { display: inline-flex; align-items: center; gap: 6px; min-height: 34px; padding: 0 12px; border-radius: 8px; color: var(--grey); font-size: 14px; transition: color 0.2s, background 0.2s; }
+.seg button:hover, .seg button[aria-pressed="true"] { color: var(--ink); }
+.seg button:active { transform: translateY(1px); }
+.seg .n { color: var(--grey-2); font-weight: 400; font-size: 13px; }
+.sites.is-moving > li { view-transition-name: var(--vt); }
+/* Show more: a well like the segmented control, its chevron leaning toward the rows it will open. */
+.more-rows {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; min-height: 52px; margin-top: 8px; border-radius: 12px;
+  color: var(--grey); font-weight: 500; background: var(--well);
+  box-shadow: inset 0 1px 1px rgba(11, 12, 14, 0.05);
+  transition: color 0.2s, background 0.2s, transform 0.15s;
+}
+.more-chev { width: 14px; height: 14px; transition: transform 0.35s var(--out); }
+.more-rows:hover { color: var(--ink); background: color-mix(in oklab, var(--well), var(--white) 45%); }
+.more-rows:hover .more-chev { transform: translateY(2px); }
+.more-rows:active { transform: translateY(1px); }
+.more-rows[hidden] { display: none; }
+/* A deep link (#engagement-<slug>) lands on its row: the row lights once, then settles. */
+.sites > li.flash > .site { animation: flash 2.2s var(--out); }
+@keyframes flash { 0%, 35% { background: var(--white); } 100% { background: transparent; } }
+.channels { display: flex; flex-wrap: wrap; gap: 8px 28px; color: var(--grey); }
+.channels a { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; transition: color 0.2s; }
+.channels a:hover { color: var(--accent); }
+
+/* ---------- Background ---------- */
+.bg-hero { display: grid; gap: 48px; padding-top: clamp(32px, 9vh, 96px); }
+.headline .stop { color: var(--accent); }
+.headline { font-size: clamp(52px, 9vw, 6rem); font-weight: 200; letter-spacing: -0.04em; line-height: 0.98; max-width: 14ch; text-wrap: balance; margin-left: -0.04em; hyphens: manual; }
+.about { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 48px; align-items: start; }
+.portrait { width: 100%; height: auto; border-radius: 14px; filter: grayscale(0) contrast(1.05); }
+.about-text {
+  display: grid; gap: 16px; justify-items: stretch; width: 100%; max-width: 62ch;
+  font-size: 17px; line-height: 1.55; text-wrap: pretty;
+}
+.about-text p {
+  text-align: justify;
+  text-align-last: left;
+  hyphens: auto;
+  hyphenate-limit-chars: 6 4 4;
+  -webkit-hyphenate-limit-before: 4;
+  -webkit-hyphenate-limit-after: 4;
+}
+.chess {
+  color: var(--grey); font-size: 15px; line-height: 1.5;
+  text-align: justify; text-align-last: left; text-wrap: pretty; hyphens: auto;
+}
+.primary { padding: 0 22px; }
+.about-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 8px; }
+.copy { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 12px; border-radius: 9px; color: var(--grey); font-weight: 500; transition: color 0.2s, background 0.2s, transform 0.15s; }
+.copy:hover, .copy.is-done { color: var(--accent); background: var(--hover); }
+.copy:active { transform: translateY(1px); }
+.copy .done-icon, .copy.is-done .copy-icon { display: none; }
+.copy.is-done .done-icon { display: block; animation: tick 0.35s var(--out); }
+@keyframes tick { from { transform: scale(0.6); opacity: 0; } }
+
+/* The knight moves like a knight: two up, one across, home. */
+.knight-wrap { display: inline-block; vertical-align: -3px; margin: 0 3px 0 6px; border-radius: 4px; cursor: default; }
+.knight { width: 18px; height: 18px; display: block; color: var(--ink); }
+.knight-wrap:hover .knight, .knight-wrap:focus-visible .knight { animation: hop 0.9s var(--out); }
+@keyframes hop {
+  0% { transform: translate(0, 0); }
+  30% { transform: translate(0, -12px); }
+  55% { transform: translate(7px, -12px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* career/main */
+.cmd { font-size: 14px; letter-spacing: 0; color: var(--grey); align-self: center; }
+.graph { --gutter: 92px; --drawn: 100%; position: relative; padding-left: var(--gutter); }
+.rail { position: absolute; left: 0; top: 0; width: 64px; overflow: visible; pointer-events: none; }
+.rail path { fill: none; stroke-width: 1.75; stroke-linecap: round; }
+.rail.ghost path { stroke: var(--line); }
+.rail.ghost .dot { fill: var(--canvas); stroke: var(--edge); stroke-width: 1.5; }
+.rail.live { clip-path: inset(0 -24px calc(100% - var(--drawn)) -24px); }
+.rail.live path { stroke: var(--ink); }
+.rail.live .dot { fill: var(--canvas); stroke: var(--ink); stroke-width: 1.75; }
+.rail.live .head { fill: var(--canvas); stroke: var(--accent); stroke-width: 1.75; }
+.rail.live .head-dot { fill: var(--accent); }
+.rail.live, .rail.ghost { transition: opacity 0.25s; }
+/* Ancestry: hover or focus a role, and its path back to the initial commit lights up. */
+.rail.trace path { fill: none; stroke: var(--accent); stroke-width: 2.25; stroke-linecap: round; }
+.rail.trace .dot { fill: var(--accent); }
+.graph.is-tracing .rail.live { opacity: 0.25; }
+.commit { transition: opacity 0.25s; }
+.graph.is-tracing .commit:not(.in-trace) { opacity: 0.4; }
+.commit:focus-visible { outline-offset: 4px; }
+/* The tip rides the end of the line while it draws. */
+.tip { position: absolute; left: -4px; top: -4px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.tip.on { opacity: 1; }
+.graph.is-tracing .tip { opacity: 0; }
+.commits { display: grid; }
+.commit { display: grid; grid-template-columns: 170px minmax(0, 1fr) minmax(0, 1.25fr); align-items: baseline; gap: 24px; padding: 16px 0; box-shadow: inset 0 -1px 0 var(--line); }
+.commit:first-child { box-shadow: inset 0 1px 0 var(--line), inset 0 -1px 0 var(--line); }
+.commit .when { color: var(--grey); }
+.commit .who { display: grid; gap: 2px; }
+.commit .who .how { font-size: 14px; }
+.commit .proof { color: var(--grey-2); font-size: 14px; }
+.note { margin-left: 10px; font-size: 12px; font-weight: 400; color: var(--grey-2); transition: color 0.5s var(--out); }
+.commit.reached .note { color: var(--ink); }
+.commit[data-current].reached .note { color: var(--accent); }
+.commit .nm { transition: color 0.5s var(--out); }
+
+/* Ledgers: Credentials, Writing, Contact share one row grammar. */
+.ledger li { box-shadow: inset 0 -1px 0 var(--line); }
+.ledger li:first-child { box-shadow: inset 0 1px 0 var(--line), inset 0 -1px 0 var(--line); }
+.ledger > li:not(:has(a)), .ledger a { display: grid; align-items: baseline; gap: 24px; padding: 16px 0; }
+.ledger .when { display: inline-flex; align-items: center; gap: 10px; color: var(--grey); }
+.ledger.two > li { grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); }
+.ledger.links a { grid-template-columns: 170px minmax(0, 1fr) auto; align-items: center; }
+.ledger.links .nm { font-size: 17px; }
+.ledger.links a:hover .nm { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.glyph { color: var(--ink); }
+.more { margin-top: 12px; }
+.more summary { cursor: pointer; color: var(--grey); min-height: 40px; display: flex; align-items: center; width: fit-content; }
+.more summary:hover { color: var(--ink); }
+.more .ledger { margin-top: 4px; }
+
+/* ---------- Checkout: Work goes out of focus, Background comes into focus, the name folds into Back. ---------- */
+::view-transition-group(*) { animation-duration: 0.55s; animation-timing-function: var(--out); }
+:root.checkout-vt::view-transition-old(root) { animation: unfocus 0.28s ease-in both; }
+:root.checkout-vt::view-transition-new(root) { animation: focus 0.55s var(--out) both; }
+/* Theme: the new theme opens as a circle from the switch (home.ts animates the clip). */
+:root.theme-vt::view-transition-old(root), :root.theme-vt::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+:root.theme-vt .name, :root.theme-vt .back-name { view-transition-name: none; }
+::view-transition-old(name), ::view-transition-new(name) { height: 100%; object-fit: contain; object-position: left center; }
+@keyframes unfocus { to { opacity: 0; filter: blur(8px); } }
+@keyframes focus { from { opacity: 0; filter: blur(10px); } }
+
+@media (max-width: 860px) {
+  .site { grid-template-columns: minmax(0, 1fr); grid-template-areas: "side" "host" "meta"; row-gap: 6px; }
+  .site-host { grid-area: host; }
+  .site-meta { grid-area: meta; margin-top: 2px; }
+  .site .site-side { grid-area: side; justify-self: start; gap: 12px; }
+  .seg { flex-wrap: nowrap; overflow-x: auto; max-width: 100%; scrollbar-width: none; }
+  .seg::-webkit-scrollbar { display: none; }
+  .seg button { flex: none; }
+  .commit { grid-template-columns: 140px minmax(0, 1fr); gap: 4px 20px; }
+  .commit .proof { grid-column: 2; }
+  .about { grid-template-columns: minmax(0, 200px) minmax(0, 1fr); gap: 32px; }
+}
+@media (max-width: 640px) {
+  .view { gap: 64px; }
+  .about-text p, .chess { text-align: left; hyphens: none; }
+  .about { grid-template-columns: 1fr; gap: 24px; }
+  .portrait { width: 160px; }
+  .graph { --gutter: 48px; }
+  .commit { grid-template-columns: 1fr; gap: 2px; }
+  .commit .proof { grid-column: 1; margin-top: 4px; }
+  .note { display: block; margin: 2px 0 0; }
+  .ledger.two > li { grid-template-columns: 1fr; gap: 2px; }
+  .ledger.links a { grid-template-columns: 104px minmax(0, 1fr) auto; gap: 12px; }
+  .ledger.links .nm { font-size: 15px; overflow-wrap: anywhere; }
+  .cmd { flex-basis: 100%; font-size: 13px; }
+  .readout { flex-direction: column; align-items: flex-start; gap: 2px; width: fit-content; max-width: 100%; padding: 10px 14px; }
+  .readout > span + span { margin-left: 0; padding-left: 0; box-shadow: none; }
+  .top { margin: -20px -16px 0; padding: 20px 16px 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none; }
+  .knight-wrap:hover .knight, .knight-wrap:focus-visible .knight { animation: none; }
+  .checkout-mark .stem { transition: none; }
+  .name { animation: none; }
+  .seg.ready::before { transition: none; }
+  .tip { display: none; }
+  .view-bg { transition: none !important; }
+  /* The ray keeps its colour but does not reach out or drift. */
+  .theme::after, .theme:hover::after, .theme:focus-visible::after { transform: none; animation: none; transition: opacity 0.3s; }
+  .more-chev { transition: none; }
+}

@@ -1,0 +1,352 @@
+---
+/**
+ * Home: two views on one page, as before.
+ * Work (#work, default): short description, then every project as a link (filter, sort, show more).
+ * Background (#background): bio, career/main commit graph, credentials, writing, contact.
+ * Views switch with CSS :target, so the page works without JS; home.ts adds the checkout transition,
+ * the graph, and the Work controls.
+ */
+import "@/styles/home.css";
+import { getCollection } from "astro:content";
+import { Moon02Icon, Sun01Icon, GithubIcon, Linkedin01Icon, Mail01Icon, WhatsappIcon, Copy01Icon, Tick02Icon } from "@hugeicons/core-free-icons";
+import ThemeBoot from "@/components/ThemeBoot.astro";
+import HugeIcon from "@/components/lab-precision/HugeIcon.astro";
+import ChessKnightMark from "@/components/lab-precision/ChessKnightMark.astro";
+import { careerStints, careerGraphEdges, credentials, domainLabel, type Domain } from "@/data/lab-precision";
+import type { WorkStatus } from "@/data/projects";
+import { getWorkRows } from "@/lib/work-registry";
+
+interface Props {
+  locale?: "en" | "fr";
+}
+
+const locale = Astro.props.locale ?? "en";
+const isFr = locale === "fr";
+
+const t = isFr
+  ? {
+      title: "Aliou Wade · Ingénieur logiciel",
+      description: "Ingénieur logiciel à Dakar. Systèmes opérationnels : applis web et mobiles, automatisation, IoT, paiements, ERP. Construits avec l'IA, et avec de l'IA dedans.",
+      line: "Je construis des systèmes opérationnels.",
+      lineTail: "Applis web et mobiles, automatisation, IoT. Paiements, ERP, outils internes.",
+      checkout: "Voir mon parcours",
+      work: "Travaux",
+      online: "en ligne",
+      filterAria: "Filtrer par domaine",
+      sortAria: "Trier",
+      all: "Tout",
+      sort: { selected: "Sélection", recent: "Récents", az: "A–Z" },
+      more: "Afficher {n} de plus",
+      soon: "Pas encore public",
+      status: { live: "En ligne", staging: "Préproduction", building: "En cours", private: "Privé", stopped: "Arrêté" },
+      back: "Retour aux travaux",
+      headline: "En gros, je fais marcher ce qui ennuie tout le monde.",
+      bio: [
+        "Moi, c'est Aliou. En ce moment je suis chez Everest Finance, avec trois produits fintech en production. L'équipe est petite, le périmètre large: applis, données, intégrations, et parfois un incident tard le soir.",
+        "Avant, j'ai fait quelques années chez ERGOBIT dans l'univers Odoo: paie, RH, compta, des migrations plus longues que prévu. J'ai aussi écrit les tests d'acceptation que certains clients ont passés pour Odoo 18.",
+        "Entre deux, j'ai touché à des applis web, du mobile, des pipelines CI, des rapports comptables planifiés, et un Arduino qui devait remonter des mesures. Les stacks changent ; le brief revient souvent au même endroit, un process expliqué à la main.",
+        "Depuis un moment je construis avec les outils d'IA que tout le monde apprend à utiliser. Deux des produits ci-dessus ont aussi des modèles dedans: l'agent de Dakar Café Express répond sur le catalogue et la facturation, et Zeffet s'appuie sur une couche d'IA pour juger ce qu'on peut nettoyer.",
+      ],
+      chessBefore: "Hors du bureau: échecs compétitifs",
+      chessAfter: ". Je tourne autour de 2043 en bullet en ligne.",
+      knight: "Cavalier d'échecs",
+      emailMe: "M'écrire",
+      copy: "Copier l'adresse",
+      copied: "Copiée",
+      copyFailed: "Copie impossible",
+      journey: "Parcours",
+      creds: "Formation & certifications",
+      moreCreds: "Autres certifications",
+      writing: "Écrits",
+      contact: "Contact",
+      reply: "Capacité client limitée. Réponse sous 48 h, du lundi au vendredi.",
+      portrait: "Portrait d'Aliou Wade",
+      langLabel: "EN",
+      langAria: "Passer en anglais",
+      langHref: "/",
+      themeAria: "Changer de thème",
+    }
+  : {
+      title: "Aliou Wade · Software Engineer",
+      description: "Software engineer in Dakar. Operational systems: web and mobile apps, automation, IoT, payments, ERP. Built with AI, and with AI inside.",
+      line: "I build operational systems.",
+      lineTail: "Web and mobile apps, automation, IoT. Payments, ERP, internal tools.",
+      checkout: "Check my background",
+      work: "Work",
+      online: "online",
+      filterAria: "Filter by domain",
+      sortAria: "Sort",
+      all: "All",
+      sort: { selected: "Selected", recent: "Recent", az: "A–Z" },
+      more: "Show {n} more",
+      soon: "Not public yet",
+      status: { live: "Live", staging: "Staging", building: "Building", private: "Private", stopped: "Stopped" },
+      back: "Back to work",
+      headline: "Mostly, I make the boring stuff work.",
+      bio: [
+        "I'm Aliou. These days I'm at Everest Finance, looking after three fintech products in production. The team is small, so the work spreads across apps, data, integrations, and whatever breaks after hours.",
+        "I spent a few years before that at ERGOBIT in Odoo ERP work: payroll, HR, accounting, and migrations that took longer than anyone hoped. I also wrote the acceptance tests some clients ran when they upgraded to Odoo 18.",
+        "Other stretches have included full-stack web apps, mobile apps, CI pipelines, scheduled accounting reports, and once an Arduino that had to report to the cloud. The stack changes; the brief is usually someone walking me through a process held together by habit.",
+        "Lately I build and ship with the same AI tools everyone else is learning to use. Two of the products above also embed models—the Dakar Café Express agent handles catalogue and billing questions, and Zeffet uses a layer of AI to decide what's safe to clean up on a Mac.",
+      ],
+      chessBefore: "Off the clock: competitive chess",
+      chessAfter: ". I hover around 2043 bullet online.",
+      knight: "Chess knight",
+      emailMe: "Email me",
+      copy: "Copy address",
+      copied: "Copied",
+      copyFailed: "Copy failed",
+      journey: "Journey",
+      creds: "Credentials",
+      moreCreds: "Other certifications",
+      writing: "Writing",
+      contact: "Contact",
+      reply: "Limited client capacity. Replies within 48 h, Monday to Friday.",
+      portrait: "Portrait of Aliou Wade",
+      langLabel: "FR",
+      langAria: "Switch to French",
+      langHref: "/fr/",
+      themeAria: "Switch theme",
+    };
+
+/* ---------- Work ---------- */
+const rows = await getWorkRows(locale);
+const online = rows.filter((r) => r.url).length;
+const domainOrder: Domain[] = ["Fintech", "ERP & QA", "Operations", "Systems"];
+const filters = domainOrder
+  .map((d) => ({ value: d, label: domainLabel(d, locale), count: rows.filter((r) => r.domain === d).length }))
+  .filter((f) => f.count > 0);
+const statusText = (s: WorkStatus) => t.status[s];
+
+/* ---------- Background ---------- */
+/* ponytail: lanes are hand-placed for these 8 stints (0 main, 1 co-op, 2 side contract).
+   Upgrade path: derive lanes from careerGraphEdges when stints change shape. */
+const lane: Record<string, number> = {
+  everest: 0, "ergobit-se": 0, bankingbook: 2, purolator: 1, "ergobit-fe": 1, orange: 1, itech: 1, daust: 0,
+};
+const gitNote: Record<string, string> = {
+  everest: "HEAD → main",
+  "ergobit-se": "merge",
+  itech: "checkout -b co-op",
+  daust: "initial commit",
+};
+const dash = (s: string) => s.replaceAll(" — ", ", ");
+/* Newest first, like git log. */
+const journey = [...careerStints].reverse().map((s) => ({
+  key: s.key,
+  lane: lane[s.key] ?? 0,
+  note: gitNote[s.key],
+  current: Boolean(s.current),
+  when: isFr ? (s.periodFr ?? s.period) : s.period,
+  org: isFr ? (s.nameFr ?? s.name) : s.name,
+  role: dash(isFr ? (s.roleFr ?? s.role) : s.role),
+  proof: dash(isFr ? (s.proofFr ?? s.proof) : s.proof),
+}));
+const edges = careerGraphEdges.map((e) => ({ from: e.from, to: e.to }));
+const mainCreds = credentials.filter((c) => c.featured);
+const otherCreds = credentials.filter((c) => !c.featured);
+const headlineText = t.headline.replace(/\.$/, "");
+const essays = (await getCollection("writing", (e) => e.id.endsWith("/en"))).map((e) => ({
+  href: `${isFr ? "/fr" : ""}/writing/${e.id.replace(/\/en$/, "")}`,
+  title: isFr ? (e.data.titleFr ?? e.data.title) : e.data.title,
+  date: e.data.date,
+}));
+const contact = [
+  { label: "Email", value: "wadealiou00@gmail.com", href: "mailto:wadealiou00@gmail.com", icon: Mail01Icon },
+  { label: "WhatsApp", value: "+221 777 228 845", href: "https://wa.me/221777228845", icon: WhatsappIcon },
+  { label: "LinkedIn", value: "in/aliouuuw", href: "https://www.linkedin.com/in/aliouuuw", icon: Linkedin01Icon },
+  { label: "GitHub", value: "aliouuuw", href: "https://github.com/aliouuuw", icon: GithubIcon },
+];
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{t.title}</title>
+    <meta name="description" content={t.description} />
+    <link rel="alternate" hreflang="en" href="/" />
+    <link rel="alternate" hreflang="fr" href="/fr/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <ThemeBoot />
+  </head>
+  <body>
+    <svg class="defs" aria-hidden="true" focusable="false">
+      <symbol id="i-out" viewBox="0 0 14 14"><path d="M4 10 10 4M10 4H5M10 4v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></symbol>
+      <symbol id="i-back" viewBox="0 0 14 14"><path d="M8.5 3.5 5 7l3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></symbol>
+    </svg>
+
+    <div class="frame">
+      <header class="top">
+        <a class="back" href="#work" data-go="work" aria-label={t.back}>
+          <svg aria-hidden="true"><use href="#i-back"></use></svg><span class="back-name">Aliou Wade</span>
+        </a>
+        <div class="tools">
+          <a class="act" href={t.langHref} data-locale-link={t.langHref} hreflang={isFr ? "en" : "fr"} lang={isFr ? "en" : "fr"} aria-label={t.langAria}>{t.langLabel}</a>
+          <button type="button" class="act theme" data-action="theme" aria-label={t.themeAria}>
+            <HugeIcon icon={Moon02Icon} class="moon" size={16} />
+            <HugeIcon icon={Sun01Icon} class="sun" size={16} />
+          </button>
+        </div>
+      </header>
+
+      <!-- ==================== Work ==================== -->
+      <main class="view view-work" id="work">
+        <section class="intro">
+          <h1 class="name" data-name aria-label="Aliou Wade">{"Aliou Wade".split("").map((c) => <span aria-hidden="true">{c === " " ? "\u00a0" : c}</span>)}</h1>
+          <p class="lead">{t.line} <span class="how">{t.lineTail}</span></p>
+          <div class="intro-foot">
+            <a class="checkout" href="#background" data-go="background">
+              {t.checkout}
+              <svg class="checkout-mark" viewBox="0 0 16 24" aria-hidden="true"><path class="stem" d="M8 8v14"></path><circle cx="8" cy="7" r="3.25"></circle></svg>
+            </a>
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>{t.work} <span class="size"><span class="online-count" aria-live="polite">{online}</span> {t.online}</span></h2>
+          <div class="work-tools" hidden>
+            <div class="seg" role="group" aria-label={t.filterAria}>
+              <button type="button" data-filter="all" aria-pressed="true">{t.all} <span class="n">{rows.length}</span></button>
+              {filters.map((f) => (
+                <button type="button" data-filter={f.value} aria-pressed="false">{f.label} <span class="n">{f.count}</span></button>
+              ))}
+            </div>
+            <div class="seg" role="group" aria-label={t.sortAria}>
+              {(["selected", "recent", "az"] as const).map((s, i) => (
+                <button type="button" data-sort={s} aria-pressed={i === 0 ? "true" : "false"}>{t.sort[s]}</button>
+              ))}
+            </div>
+          </div>
+          <ul class="sites" data-more-label={t.more}>
+            {rows.map((r, i) => (
+              <li id={`engagement-${r.slug}`} class={r.status} data-domain={r.domain} data-date={r.date} data-name={r.name} data-index={i} data-online={r.url ? "" : undefined} style={`--vt: w-${r.slug}`}>
+                {r.url ? (
+                  <a class="site" href={r.url} target="_blank" rel="noopener">
+                    <span class="site-host">{r.host}<svg class="out" aria-hidden="true"><use href="#i-out"></use></svg></span>
+                    <span class="site-meta"><span class="nm">{r.name}</span><span class="how">{r.what}</span></span>
+                    <span class="site-side"><span class="year">{r.date.slice(0, 4)}</span><span class={`state ${r.status}`}>{statusText(r.status)}</span></span>
+                  </a>
+                ) : (
+                  <div class="site">
+                    <span class="site-host quiet">{t.soon}</span>
+                    <span class="site-meta"><span class="nm">{r.name}</span><span class="how">{r.what}</span></span>
+                    <span class="site-side"><span class="year">{r.date.slice(0, 4)}</span><span class={`state ${r.status}`}>{statusText(r.status)}</span></span>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+          <button type="button" class="more-rows" hidden>
+            <span class="more-label"></span>
+            <svg class="more-chev" viewBox="0 0 14 14" aria-hidden="true"><path d="M3.5 5.5 7 9l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+        </section>
+
+        <footer class="foot">
+          <ul class="channels">
+            {contact.map((c) => (
+              <li><a href={c.href} target="_blank" rel="noopener"><HugeIcon icon={c.icon} size={16} />{c.label}</a></li>
+            ))}
+          </ul>
+        </footer>
+      </main>
+
+      <!-- ==================== Background ==================== -->
+      <main class="view view-bg" id="background">
+        <section class="bg-hero">
+          <h1 class="headline">{headlineText}<span class="stop">.</span></h1>
+          <div class="about">
+            <img class="portrait" src="/Aliou.png" width="795" height="1024" alt={t.portrait} loading="lazy" />
+            <div class="about-text">
+              {t.bio.map((b) => <p>{b}</p>)}
+              <p class="chess">
+                {t.chessBefore}<span class="knight-wrap" tabindex="0" role="img" aria-label={t.knight}><ChessKnightMark class="knight" /></span>{t.chessAfter}
+              </p>
+              <div class="about-actions">
+                <a class="primary" href="mailto:wadealiou00@gmail.com">{t.emailMe}</a>
+                <button type="button" class="copy" data-copy="wadealiou00@gmail.com" data-done={t.copied} data-fail={t.copyFailed}>
+                  <HugeIcon icon={Copy01Icon} class="copy-icon" size={16} /><HugeIcon icon={Tick02Icon} class="done-icon" size={16} /><span class="copy-label" aria-live="polite">{t.copy}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>{t.journey} <code class="cmd">git log --graph career/main</code></h2>
+          <div class="graph" data-edges={JSON.stringify(edges)}>
+            <ol class="commits">
+              {journey.map((j) => (
+                <li class="commit" tabindex="0" data-key={j.key} data-lane={j.lane} data-current={j.current ? "" : undefined}>
+                  <span class="when">{j.when}</span>
+                  <span class="who">
+                    <span class="nm">{j.org}{j.note && <code class="note">{j.note}</code>}</span>
+                    <span class="how">{j.role}</span>
+                  </span>
+                  <span class="proof">{j.proof}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>{t.creds}</h2>
+          <ul class="ledger two">
+            {mainCreds.map((c) => (
+              <li><span class="nm">{isFr ? (c.itemFr ?? c.item) : c.item}</span><span class="how">{isFr ? (c.detailFr ?? c.detail) : c.detail}</span></li>
+            ))}
+          </ul>
+          {otherCreds.length > 0 && (
+            <details class="more">
+              <summary>{t.moreCreds}</summary>
+              <ul class="ledger two">
+                {otherCreds.map((c) => (
+                  <li><span class="nm">{isFr ? (c.itemFr ?? c.item) : c.item}</span><span class="how">{isFr ? (c.detailFr ?? c.detail) : c.detail}</span></li>
+                ))}
+              </ul>
+            </details>
+          )}
+        </section>
+
+        <section class="block">
+          <h2>{t.writing}</h2>
+          <ul class="ledger links">
+            {essays.map((e) => (
+              <li>
+                <a href={e.href}>
+                  <span class="when">{e.date}</span>
+                  <span class="nm">{e.title}</span>
+                  <svg class="out" aria-hidden="true"><use href="#i-out"></use></svg>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section class="block">
+          <h2>{t.contact} <span class="size">{t.reply}</span></h2>
+          <ul class="ledger links">
+            {contact.map((c) => (
+              <li>
+                <a href={c.href} target="_blank" rel="noopener">
+                  <span class="when"><HugeIcon icon={c.icon} class="glyph" size={16} />{c.label}</span>
+                  <span class="nm">{c.value}</span>
+                  <svg class="out" aria-hidden="true"><use href="#i-out"></use></svg>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </main>
+    </div>
+
+
+    <script>
+      import { initHome } from "@/scripts/home";
+      initHome();
+    </script>
+  </body>
+</html>

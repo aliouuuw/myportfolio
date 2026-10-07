@@ -1,16 +1,16 @@
 /* Shared design tokens — Editorial + Google Blue
  * Case studies + essays import this file.
- * Home (`lab-precision.css`) mirrors the same palette; aliases below keep
+ * Home (`home.css`) has its own palette; aliases below keep
  * vocabulary aligned (`--bg` ↔ `--paper`, `--cta` ↔ `--hw-primary-*`).
  * Roles: blue = action/CTA · green = status · chips = quiet muted · R/Y off chrome. */
 
 :root {
-  --g-blue: #4285f4;
+  --g-blue: #2f5d9e;
   --g-red: #ea4335;
   --g-yellow: #fbbc04;
   --g-green: #34a853;
   --accent: var(--g-blue);
-  --accent-hover: #1a73e8;
+  --accent-hover: #244a80;
   --accent-soft: color-mix(in srgb, var(--accent) 14%, transparent);
   --accent-secondary: var(--g-blue);
   --status: var(--g-green);
@@ -87,12 +87,12 @@
 html[data-theme="dark"] {
   color-scheme: dark;
 
-  --g-blue: #8ab4f8;
+  --g-blue: #8fb3e8;
   --g-red: #f28b82;
   --g-yellow: #fdd663;
   --g-green: #81c995;
   --accent: var(--g-blue);
-  --accent-hover: #aecbfa;
+  --accent-hover: #b3cdf0;
   --accent-soft: color-mix(in srgb, var(--accent) 18%, transparent);
   --accent-secondary: var(--g-blue);
   --status: var(--g-green);

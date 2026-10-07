@@ -49,8 +49,9 @@ Canonical role title on the product: **Software Engineer**.
 
 - Home is a one-page, two-view instrument surface (Work / Background), not a
   separate About route.
-- Work centers an Engagement Console (master–detail client dossiers → case
-  studies).
+- Work lists every project as one public link (no previews), with domain
+  filter, sort, and show more. Background carries the bio and the career/main
+  commit graph.
 - Proof lives as MDX case studies under `content/work/` plus a flagship essay
   under writing.
 - Contact is direct channels (email, LinkedIn, GitHub, WhatsApp); replies within
@@ -77,8 +78,8 @@ Canonical role title on the product: **Software Engineer**.
 - Name: Aliou Wade
 - Voice: first person; serious, operational, calm — not agency-template or
   third-person biography
-- Live home identity: Lab Precision Engagement Console (soft-UI instrument
-  panel)
+- Live home identity: instrument home in Zeffet's design language (warm silver
+  / near-black, one ink); bold moments live on Background
 - Binding product docs: `docs/profile.md`, `docs/lab-precision-direction.md`,
   `AGENTS.md`
 - Visual system details belong in design docs / CSS — not redefined here

@@ -23,9 +23,9 @@ surfaces:
     nameFr: "Site public"
     status: "Shipped"
     statusFr: "Livré"
-    url: "https://mansourmotors.sn"
-    urlLabel: "mansourmotors.sn"
-    urlLabelFr: "mansourmotors.sn"
+    url: "https://mansour-holding.vercel.app/mansour-motors"
+    urlLabel: "mansourmotors"
+    urlLabelFr: "mansourmotors"
     blurb: "Dealership marketing surfaces for Mansour Motors brands — inventory-backed pages that share API contracts with the internal dashboard."
     blurbFr: "Vitrines marketing pour les marques Mansour Motors — pages alimentées par le stock, contrats API partagés avec le tableau de bord interne."
     stack: ["React", "Vite", "TypeScript", "Hono"]
@@ -37,7 +37,7 @@ surfaces:
     urlLabel: "ops.mansourmotors.sn*"
     urlLabelFr: "ops.mansourmotors.sn*"
     blurb: "Authenticated ops surface: vehicle inventory CRUD, Cloudflare R2 media uploads, role-based access, audit-friendly updates."
-    blurbFr: "Surface ops authentifiée : CRUD stock véhicules, uploads médias Cloudflare R2, accès par rôles, mises à jour auditables."
+    blurbFr: "Surface ops authentifiée: CRUD stock véhicules, uploads médias Cloudflare R2, accès par rôles, mises à jour auditables."
     stack: ["React", "TypeScript", "Hono", "Drizzle", "Cloudflare R2"]
   - name: "API"
     nameFr: "API"
@@ -53,7 +53,7 @@ surfaces:
 
 ## Contexte
 
-Mansour Holding exploite Mansour Motors et des marques associées au Sénégal. L'entreprise avait besoin de plus que des sites vitrine : une présence digitale cohérente pour le public, plus une surface interne où l'équipe gère les annonces véhicules, les médias et les données opérationnelles sans jongler avec des tableurs.
+Mansour Holding exploite Mansour Motors et des marques associées au Sénégal. L'entreprise avait besoin de plus que des sites vitrine: une présence digitale cohérente pour le public, plus une surface interne où l'équipe gère les annonces véhicules, les médias et les données opérationnelles sans jongler avec des tableurs.
 
 J'ai cadré et construit un monorepo qui sépare le marketing public des opérations authentifiées tout en partageant validateurs, types et schéma base de données.
 
@@ -61,7 +61,7 @@ J'ai cadré et construit un monorepo qui sépare le marketing public des opérat
 
 Avant consolidation, marketing et stock vivaient dans des outils déconnectés. Les pages publiques ne reflétaient pas le stock réel. L'équipe interne manquait d'un tableau de bord unique avec des mises à jour traçables et une gestion d'images pour les fiches véhicules.
 
-La contrainte était familière : un opérateur, des attentes production, et la nécessité de livrer par incréments sans enfermer l'équipe dans un monolithe impossible à maintenir.
+La contrainte était familière: un opérateur, des attentes production, et la nécessité de livrer par incréments sans enfermer l'équipe dans un monolithe impossible à maintenir.
 
 ## Approche
 
@@ -72,7 +72,7 @@ La contrainte était familière : un opérateur, des attentes production, et la 
 
 ## Résultat
 
-La plateforme est livrée en monorepo fonctionnel : site public, API et dashboard interne sur le même schéma. Stock et contenu marketing évoluent ensemble sans double saisie.
+La plateforme est livrée en monorepo fonctionnel: site public, API et dashboard interne sur le même schéma. Stock et contenu marketing évoluent ensemble sans double saisie.
 
 ## Leçons
 

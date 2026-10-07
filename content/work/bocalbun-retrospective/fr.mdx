@@ -2,7 +2,7 @@
 title: "BocalBun — why I stopped building a framework"
 titleFr: "BocalBun — pourquoi j'ai arrêté de construire un framework"
 summary: "A deliberate stop on a Bun development toolkit: clean architecture, no users waiting, and the judgment to redirect energy toward operational software."
-summaryFr: "Un arrêt délibéré sur un toolkit de développement Bun : architecture propre, aucun utilisateur en attente, et le jugement de rediriger l'énergie vers le logiciel opérationnel."
+summaryFr: "Un arrêt délibéré sur un toolkit de développement Bun: architecture propre, aucun utilisateur en attente, et le jugement de rediriger l'énergie vers le logiciel opérationnel."
 role: "Créateur solo"
 domain: "Jugement systémique"
 stack:
@@ -28,7 +28,7 @@ surfaces:
     urlLabel: "github.com/aliouuuw/bocalbun"
     urlLabelFr: "github.com/aliouuuw/bocalbun"
     blurb: "Bun-native toolkit I froze deliberately: entity engine, RLS, audit trails, and CLI scaffolding — clean architecture, no users waiting, energy redirected to operational software."
-    blurbFr: "Toolkit Bun gelé délibérément : moteur d'entités, RLS, pistes d'audit et scaffolding CLI — architecture propre, aucun utilisateur en attente, énergie redirigée vers le logiciel opérationnel."
+    blurbFr: "Toolkit Bun gelé délibérément: moteur d'entités, RLS, pistes d'audit et scaffolding CLI — architecture propre, aucun utilisateur en attente, énergie redirigée vers le logiciel opérationnel."
     stack: ["Bun", "TypeScript", "PostgreSQL", "Entity engine", "RLS"]
 ---
 
@@ -42,13 +42,13 @@ Pour l'essai plus long sur le même virage, voir [Pourquoi j'ai arrêté de cons
 
 ## Problème
 
-Le problème que BocalBun visait était réel dans l'absolu : les projets Bun manquent de l'écosystème de scaffolding mature que Node a accumulé. Démarrer un nouveau service signifie encore réinventer structure, variables d'environnement, migrations et harness de test.
+Le problème que BocalBun visait était réel dans l'absolu: les projets Bun manquent de l'écosystème de scaffolding mature que Node a accumulé. Démarrer un nouveau service signifie encore réinventer structure, variables d'environnement, migrations et harness de test.
 
 Ce que j'ai sous-estimé, c'est **la distribution et l'obligation**. Un framework ne se compose que si d'autres développeurs l'adoptent, ouvrent des issues et vous tiennent au semver. Sans cette boucle, chaque abstraction ajoutée était une dette envers moi seul — pendant que le logiciel opérationnel (déploiements ERP, modules client, outils internes) avait des personnes qui attendaient des résultats.
 
 ## Approche
 
-J'ai conçu BocalBun autour de contraintes auxquelles je croyais alors :
+J'ai conçu BocalBun autour de contraintes auxquelles je croyais alors:
 
 - **Modèle entité d'abord** avec champs typés, relations et hooks plutôt que du SQL ad hoc dans chaque route
 - **RLS intégré** pour que le multi-tenant soit le défaut, pas un ajout tardif
@@ -89,18 +89,18 @@ Rien n'a atteint une adoption externe. Pas de téléchargements npm, pas de comm
 
 ## Profondeur technique
 
-La couche entités était la pièce la plus profonde. Je voulais que le CRUD soit ennuyeux : définir un schéma une fois, obtenir list/detail/create/update avec des formes d'erreur et des contrôles d'accès cohérents. Les hooks permettaient d'injecter la logique métier sans disperser les gardes dans les handlers.
+La couche entités était la pièce la plus profonde. Je voulais que le CRUD soit ennuyeux: définir un schéma une fois, obtenir list/detail/create/update avec des formes d'erreur et des contrôles d'accès cohérents. Les hooks permettaient d'injecter la logique métier sans disperser les gardes dans les handlers.
 
 Le RLS était non négociable parce que j'avais vu trop d'outils internes où « on ajoutera l'isolation locataire plus tard » devenait un incident de production. Intégrer les politiques dans la couche données imposait la discipline tôt — la même discipline appliquée plus tard en consolidant des systèmes fintech où la régulation ne pardonne pas les accès flous.
 
-L'erreur n'était pas la qualité technique. C'était le **séquençage** : j'affinais le cas général pendant qu'ERGOBIT avait des deadlines de migration et qu'Everest aurait bientôt besoin d'un opérateur solo capable de livrer des surfaces, pas de polir des abstractions.
+L'erreur n'était pas la qualité technique. C'était le **séquençage**: j'affinais le cas général pendant qu'ERGOBIT avait des deadlines de migration et qu'Everest aurait bientôt besoin d'un opérateur solo capable de livrer des surfaces, pas de polir des abstractions.
 
 ## Résultat
 
-J'ai **gelé** BocalBun délibérément — archivé le repo, stoppé l'expansion fonctionnelle, et redirigé l'énergie de ce sprint vers :
+J'ai **gelé** BocalBun délibérément — archivé le repo, stoppé l'expansion fonctionnelle, et redirigé l'énergie de ce sprint vers:
 
 - Le travail Odoo en production et le toolkit de tests d'acceptation
-- Plus tard : Everest Finance (site, CRM, app client) comme colonne opérationnelle unique
+- Plus tard: Everest Finance (site, CRM, app client) comme colonne opérationnelle unique
 
 S'arrêter semblait du gaspillage à l'époque. Avec le recul, c'était la décision à plus fort levier de cette période. Le codebase reste une référence sur ma façon de penser entités et audit ; ce n'est pas une roadmap produit.
 
@@ -112,4 +112,4 @@ S'arrêter semblait du gaspillage à l'époque. Avec le recul, c'était la déci
 
 **L'architecture ne se compose que lorsqu'elle est partagée.** L'élégance privée ne crée pas de levier ; les systèmes déployés et les artefacts visibles, oui.
 
-**Ne pas relancer BocalBun comme framework.** Selon mon plan stratégique : extraire les leçons, documenter la rétrospective, éventuellement ouvrir de petits outils composables — pas un autre trou de plateforme.
+**Ne pas relancer BocalBun comme framework.** Selon mon plan stratégique: extraire les leçons, documenter la rétrospective, éventuellement ouvrir de petits outils composables — pas un autre trou de plateforme.
